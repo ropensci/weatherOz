@@ -1,3 +1,4 @@
 ^wrapique\.Rproj$
 ^\.Rproj\.user$
 ^raw$
+^tests/temp_file\.R$
