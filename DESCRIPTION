@@ -21,6 +21,7 @@ Imports:
     ggplot2,
     httr
 Suggests: 
+    fields,
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3

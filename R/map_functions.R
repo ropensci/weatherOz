@@ -7,7 +7,7 @@
 # Note that the 'read logo' function is not included; the DPIRD logo is included
 # in this package as a data object.
 
-# ---- Legend ----
+# Legend ----
 #' Add legend
 #'
 #' Embed a legend in a plot. (vertical legend with top-left at left, top + u/2)
@@ -111,7 +111,7 @@ embed_legend <- function(top,
   }
 }
 
-# ------- Create color data objects  ----
+# Create color data objects  ----
 #' Make colour sets
 #'
 #' Create a colour set for use in \code{map.weather} from a set of n colours
@@ -155,7 +155,7 @@ make_col_set <- function(col,
   return(a)
 }
 
-# -- New Plot ----
+# New Plot ----
 #' Opens a plot device
 #'
 #' Opens the specified type of device to fit a plot of the desired aspect ratio
@@ -231,7 +231,7 @@ weather_plot <- function(type = 0,
   )
 }
 
-# internal functions ----
+# Internal functions ----
 #' Apply colours to vector
 #'
 #' Returns a vector of colours corresponding to the numerical values of input
@@ -303,4 +303,59 @@ convert_krig_to_col <- function(im,
   )
 
   return(b)
+}
+
+#' Internal kriging functions
+#'
+#' A set of internal functions that are called by various mapping functions (as
+#' of writing there is only the one, which does the whole SWWA).
+#'
+#' @param data data frame containing the variable to be krigged (identified by
+#'   'varname') and latitude and longitude variables, which provide the spatial
+#'   structure to the data.
+#' @param varname String indicating which column is to be krigged.
+#' @param lambda Smoothing parameter for the Kriging. Larger values will give
+#'   greater smoothing
+#' @param theta Kriging parameter (from the fields::Krig help file, the 'range
+#'   parameter'). Default is 1.
+#' @param long_lims longitudinal limits of mapping
+#' @param lat_lims latitudinal limits of mapping
+#'
+#' @keywords internal
+
+map_krig <- function(data,
+                     varname,
+                     lambda,
+                     theta = 1,
+                     lat_lims,
+                     long_lims) {
+
+  # standardise names
+  names(data) <- tolower(names(data))
+  varname <- tolower(varname)
+
+  # fit a surface to the 'varname' data
+  fit <- fields::Krig(
+    x = data[, c("longitude", "latitude")],
+    Y = data[[varname]],
+    lambda = lambda,
+    theta = theta
+  )
+# predict for all points in the grid, at 0.025 intervals
+  im <- fields::predictSurface(
+    object = fit,
+    grid.list = list(
+      x = seq(long_lims[1],
+        long_lims[2],
+        by = 0.025
+      ),
+      y = seq(lat_lims[1],
+        lat_lims[2],
+        by = 0.025
+      )
+    ),
+    extrap = TRUE
+  )
+
+  return(im)
 }
