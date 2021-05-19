@@ -6,6 +6,8 @@ As of April 2021, this package has been spun off from the Western Australian Dep
 
 This package allows the user to query one of three DPIRD provided APIs (weather, science, radar) or the SILO API provided by the Queensland government, as well as to parse that data in ways commonly of interest to Agricultural scientists. It is not intended to be comprehensive -- for example, not all exposed endpoints of the APIs have associated functions. Development is ongoing. While we are responsive to user requests, we don't make any commitments about speed of delivery. 
 
+As well as summaries, some basic mapping functionality is included. This produces maps in the style seen at https://www.agric.wa.gov.au/dry-seasons-and-drought/seasonal-climate-information in the soil water and potential yield tabs. 
+
 ## The APIs
 
 More detailed information about the APIs is available at: 
