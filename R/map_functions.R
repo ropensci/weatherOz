@@ -282,17 +282,17 @@ color_df <- function(x,
 #' convert the kriged values to colours
 #'
 #' @param im object created by the 'map_krig' internal function
-#' @param color mapping colour set; should be a data.frame. Can be created using
+#' @param col mapping colour set; should be a data.frame. Can be created using
 #'   \code{make_col_set}
 #'
 #' @keywords internal
 
-convert_krig_to_color <- function(im,
-                                  color) {
+convert_krig_to_col <- function(im,
+                                  col) {
   b <- matrix(
     color_df(
       x = im$z,
-      col_df = color,
+      col_df = col,
       trunc = TRUE
     ),
     nrow = nrow(im$z)
