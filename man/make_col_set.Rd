@@ -20,7 +20,7 @@ be supplied. The default set just uses the break points as the ranges.}
 \item{sep}{Separator between number in key; default is hyphen}
 }
 \description{
-Create a colour set for use in \code{map.weather} from a set of n colours
+Create a colour set for use in \code{map_weather} from a set of n colours
 and a set of n + 1 cut points. It is assumed that the lowest and highest
 values in the break points are set so that the bottom and top segments are <
 the second value and > second last value, respectively. There are multiple
