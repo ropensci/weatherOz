@@ -24,7 +24,7 @@ square with sides 'u' long.}
 be calculated as u/2, for backwards compatibility.}
 
 \item{percent}{Should the legend values be converted to percentages? If true,
-the values are multiplied by 100 and '\\%' added. (Default = FALSE)}
+the values are multiplied by 100 and '\%' added. (Default = FALSE)}
 }
 \description{
 Embed a legend in a plot. (vertical legend with top-left at left, top + u/2)

@@ -24,7 +24,7 @@
 #' @param cex Scaling parameter for the text. If this is not provided, it will
 #'   be calculated as u/2, for backwards compatibility.
 #' @param percent Should the legend values be converted to percentages? If true,
-#'   the values are multiplied by 100 and '\%' added. (Default = FALSE)
+#'   the values are multiplied by 100 and '%' added. (Default = FALSE)
 #'
 #' @export
 
