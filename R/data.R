@@ -1,58 +1,62 @@
 #' DPIRD logo
 #'
-#' Black and white logo for the Department of Primary Industries and Regional Development.
-#' Current as of May 2021.
+#' Black and white logo for the Department of Primary Industries and Regional
+#' Development. Current as of May 2021.
 #'
-#' @name dpird.logo
+#' @name dpird_logo
 #' @docType data
 #' @keywords datasets
 #'
 #' @format raster
 #' @source version in use in the SSF copied; original source forgotten
 
-"dpird.logo"
+"dpird_logo"
 
 # Fiona's map objects ----
 #' Ocean image mask
 #'
 #' Image mask to restrict mapping to land areas of south west Western Australia
 #'
-#' @name coast.img
+#' @name coast_img
 #' @docType data
 #' @keywords datasets
 #'
 #' @format a 381 * 321 matrix consisting of zeroes/ones.
-#' @source copied from the SSF: unknown -- originally sourced or created by Fiona Evans
+#' @source copied from the SSF: unknown -- originally sourced or created by
+#'   Fiona Evans
 
-"coast.img"
+"coast_img"
 
 #' Agricultural areas image mask
 #'
-#' Image mask to restrict mapping to agricultural areas of south west Western Australia,
-#' including both the grainbelt and the lower south-west corner.
+#' Image mask to restrict mapping to agricultural areas of south west Western
+#' Australia, including both the grainbelt and the lower south-west corner.
 #'
-#' @name agregion.img
+#' @name agregion_img
 #' @docType data
 #' @format a 381 * 321 matrix consisting of zeroes/ones.
 #' @keywords datasets
-#' @source copied from the SSF: unknown -- originally sourced or created by Fiona Evans.
+#' @source copied from the SSF: unknown -- originally sourced or created by
+#'   Fiona Evans.
 
-"agregion.img"
+"agregion_img"
 
 # mapping lines ----
 #' South west WA coast line
 #'
 #' Set of line segments that together make up the WA coast line.
-#' ** currently includes some boundary lines on the ocean -- plan is to get rid of those
+#' ** currently includes some boundary lines on the ocean -- plan is to get rid
+#' of those
 #' ** format needs to be sorted, and saved as something else.
 #'
-#' @name coast.lines
+#' @name coast_lines
 #' @docType data
 #' @format  ...
 #' @keywords datasets
-#' @source copied from the SSF: unknown -- originally sourced or created by Fiona Evans.
+#' @source copied from the SSF: unknown -- originally sourced or created by
+#'   Fiona Evans.
 
-"coast.lines"
+"coast_lines"
 
 #' South west shire boundaries
 #'
@@ -60,36 +64,38 @@
 #' ** current version has bits that go outside the agricultural region
 #' ** format needs sorting out
 #'
-#' @name shires.lines
+#' @name shires_lines
 #' @docType data
 #' @format  ...
 #' @keywords datasets
-#' @source copied from the SSF: unknown -- originally sourced or created by Fiona Evans.
+#' @source copied from the SSF: unknown -- originally sourced or created by
+#'   Fiona Evans.
 
-"shires.lines"
+"shires_lines"
 
 #' Grainbelt inland border
 #'
-#' Set of line segments that together make up the inland border of the south-west
-#' WA grainbelt region.
+#' Set of line segments that together make up the inland border of the
+#' south-west WA grainbelt region.
 #' ** format needs sorting out.
 #'
-#' @name agregion.lines
+#' @name agregion_lines
 #' @docType data
 #' @format  ...
 #' @keywords datasets
-#' @source copied from the SSF: unknown -- originally sourced or created by Fiona Evans.
+#' @source copied from the SSF: unknown -- originally sourced or created by
+#'   Fiona Evans.
 
-"agregion.lines"
+"agregion_lines"
 
 # Named locations ----
 #' WA grainbelt towns
 #'
 #' Default set of location names to be added to grainbelt region maps
-#' @name towns.wa.grainbelt
+#' @name towns_wa_grainbelt
 #' @docType data
 #' @format  ...
 #' @keywords datasets
 #' @source copied from the SSF, from the grainbelt stations list.
 
-"towns.wa.grainbelt"
+"towns_wa_grainbelt"
