@@ -114,7 +114,7 @@ embed_legend <- function(top,
 # Create color data objects  ----
 #' Make colour sets
 #'
-#' Create a colour set for use in \code{map.weather} from a set of n colours
+#' Create a colour set for use in \code{map_weather} from a set of n colours
 #' and a set of n + 1 cut points. It is assumed that the lowest and highest
 #' values in the break points are set so that the bottom and top segments are <
 #' the second value and > second last value, respectively. There are multiple
