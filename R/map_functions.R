@@ -288,7 +288,7 @@ color_df <- function(x,
 #' @keywords internal
 
 convert_krig_to_col <- function(im,
-                                  col) {
+                                col) {
   b <- matrix(
     color_df(
       x = im$z,
@@ -358,4 +358,56 @@ map_krig <- function(data,
   )
 
   return(im)
+}
+
+#' wrapper for map.krig
+#'
+#' this is the interim function between map.ssf and map.krig
+#' so that the map layer is generated.
+#'
+#' @inheritParams map_krig
+#' @param col specified colour data set needed to convert the continuous
+#'   values to the categorical colour map
+#' @param agregion required mask to remove mapping of the land outside the
+#'   ag region
+#' @param coast required mask to remove mapping of the ocean
+#'
+#' @export
+
+map_krig_layer <- function(data,
+                           varname,
+                           lambda,
+                           lat_lims,
+                           long_lims,
+                           col,
+                           agregion,
+                           coast) {
+
+  # Interpolate using kriging
+  # Note that this is not intuitively set up in terms of mapping because the
+  # image maps that are added in the next step don't map that way.
+  im <- map_krig(
+    data = data,
+    varname = varname,
+    lambda = lambda,
+    long_lims = long_lims,
+    lat_lims = lat_lims
+  )
+
+  # convert to map
+  # set the edges of the map; convert the Kriged values to colours
+  # x <- unique(im$x)
+  # y <- unique(im$y)
+  b <- convert_krig_to_col(
+    im = im,
+    col = col
+  )
+
+  # Apply masks so that ocean and land outside the mask are not given a colour
+  b[agregion == 1] <- NA
+  b[coast == 1] <- NA
+  # Rotate counter-clockwise 90 degrees
+  b <- t(b)[ncol(b):1, ]
+
+  return(b)
 }
