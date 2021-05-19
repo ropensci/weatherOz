@@ -230,3 +230,77 @@ weather_plot <- function(type = 0,
     message("Type is not supported")
   )
 }
+
+# internal functions ----
+#' Apply colours to vector
+#'
+#' Returns a vector of colours corresponding to the numerical values of input
+#' vector. Colour sets can be one of the inbuilt sets (eg.
+#' \code{mapcol_deciles}) or can be created using \code{make_col_set}
+#'
+#' @param x Input vector
+#' @param col_df Data frame of discrete colours to use
+#' @param trunc Should the range be truncated to within the range of the colour
+#'   data frame? If true (default), values less than the minimum will be mapped
+#'   as the minimum while values greater than the maximum will be mapped as the
+#'   maximum. If false, values below minimum or above maximum will be set to NA.
+#'   This is set to TRUE, to allow for correct implementation of legacy calls to
+#'   the function.
+#'
+#' @keywords internal
+
+color_df <- function(x,
+                     col_df,
+                     trunc = TRUE) {
+
+  # Function for discrete colour table - identify the break points
+  cuts <- sort(
+    unique(
+      c(
+        col_df$min,
+        col_df$max
+    ))
+  )
+
+  # restrict the range of the provided vector, if 'truncate' has been selected.
+  if (trunc) {
+    x[x > max(cuts)] <- max(cuts)
+    x[x < min(cuts)] <- min(cuts)
+  }
+
+  # map the x vector to the colour set
+  indx <- as.numeric(
+    cut(x,
+      breaks = cuts,
+      include.lowest = TRUE
+    )
+  )
+  # convert all the items of x to colour values
+  return(col_df[indx, "col"])
+}
+
+#' convert the kriged values to colours
+#'
+#' @param im object created by the 'map_krig' internal function
+#' @param color mapping colour set; should be a data.frame. Can be created using
+#'   \code{make_col_set}
+#'
+#' @keywords internal
+
+convert_krig_to_color <- function(im,
+                                  color) {
+  b <- matrix(
+    color_df(
+      x = im$z,
+      col_df = color,
+      trunc = TRUE
+    ),
+    nrow = nrow(im$z)
+  )
+  dimnames(b) <- list(
+    unique(im$x),
+    unique(im$y)
+  )
+
+  return(b)
+}
