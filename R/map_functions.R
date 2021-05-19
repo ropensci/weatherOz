@@ -783,3 +783,29 @@ map.ssf <- function(data,
     }
   }
 }
+
+#' Map the SWLD
+#'
+#' Map the weather for the South West Land Division of Western Australia
+#'
+#' @inheritParams map_weather
+#' @param ... other parameters as per \code{map_weather} which will be passed to
+#'   that function. This excludes the masks and lines, which are hard coded in
+#'   this function
+
+map_weather_swld <- function(data,
+                             varname,
+                             col_df,
+                             ...) {
+
+  map_weather(data,
+              varname,
+              col_df,
+              mask_agregion = wrapique::agregion_img,
+              mask_coast = wrapique::coast_img,
+              lines_shire = wrapique::shires_lines,
+              lines_coast = wrapique::coast_lines,
+              lines_agregion = wrapique::agregion_lines,
+              logo = wrapique::dpird_logo,
+              ...)
+
