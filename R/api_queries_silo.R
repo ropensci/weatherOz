@@ -1,6 +1,23 @@
 # functions to query the SILO API to get weather data
 # SILO   - https://silo.longpaddock.qld.gov.au
 
+#' Weather data
+#'
+#' Fill in later
+#'
+#' @param site ...
+#' @param first ...
+#' @param last ...
+#' @param email ...
+#' @param vars_string ...
+#' @param interval ...
+
+weather.data <- function(
+
+) {
+  message("placeholder function ")
+}
+
 #' @describeIn weather.data Daily weather data from BOM owned weather stations,
 #'   \code{bom.data.full} returns all of the provided data from the SILO data
 #'   set. \code{Date} is returned in date format, \code{Date2} is returned as
