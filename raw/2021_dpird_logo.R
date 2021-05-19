@@ -25,11 +25,11 @@ read.logo <- function(
 
 }
 
-dpird.logo <- read.logo(
+dpird_logo <- read.logo(
   filename = "raw/DPIRD_black.png"
   )
 
 # create the file as data file
 usethis::use_data(
-  dpird.logo,
+  dpird_logo,
   overwrite = TRUE)
