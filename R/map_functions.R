@@ -99,3 +99,48 @@ embed.legend <- function(
   }
 }
 
+# ------- Create color data objects  ----
+#' Make colour sets
+#'
+#' Create a colour set for use in \code{map.weather} from a set of n colours
+#' and a set of n + 1 cut points. It is assumed that the lowest and highest
+#' values in the break points are set so that the bottom and top segments are <
+#' the second value and > second last value, respectively. There are multiple
+#' 'default' colour sets available.
+#'
+#' @param col set of colours in any format recognised by R. One colour per
+#'   grouping
+#' @param cuts set of break points. Must contain one more item than the list of
+#'   colours. \code{-Inf} and \code{Inf} are valid options for the minimum and
+#'   maximum values, respectively.
+#' @param key if a non-standard set of labels are required for the key, they can
+#'   be supplied. The default set just uses the break points as the ranges.
+#' @param sep Separator between number in key; default is hyphen
+#'
+#' @export
+
+make.col.set <- function(col,
+                         cuts,
+                         key = NULL,
+                         sep = "-") {
+  n <- length(cuts) - 1
+  a <- data.frame(
+    col = colors,
+    min = cuts[1:n],
+    max = cuts[2:(n + 1)],
+    stringsAsFactors = FALSE
+  )
+
+  # create the labels for each category
+  # if none is provided, the default uses the boundaries of the category
+  if (is.null(key)) {
+    a$label <- paste0(a$min, sep, a$max)
+    a$label[1] <- paste0("< ", a$max[1])
+    a$label[n] <- paste0("> ", a$min[n])
+  } else{
+    a$label <- as.character(key)
+  }
+  return(a)
+}
+
+
