@@ -26,17 +26,14 @@
 #' @param percent Should the legend values be converted to percentages? If true,
 #'   the values are multiplied by 100 and '\%' added. (Default = FALSE)
 #'
-#' @keywords hplot
 #' @export
 
-embed_legend <- function(
-  top,
-  left,
-  col,
-  u       = 0.5,
-  cex     = NULL,
-  percent = FALSE) {
-
+embed_legend <- function(top,
+                         left,
+                         col,
+                         u = 0.5,
+                         cex = NULL,
+                         percent = FALSE) {
   if (percent) {
     colors$min[colors$min == -Inf] <- 0
   }
@@ -47,10 +44,10 @@ embed_legend <- function(
 
   # vertical legend with top-left corner at c(left, top + u/2)
   # the top left corner of the legend is defined by c(left, top + u/2)
-  len    <- nrow(col)             # number of cells in the legend
-  bottom <- top - (len - 1) * u   # position: vertical middle, bottom cell
-  right  <- left + u              # position: right vertical edge
-  lines  <- seq(bottom, top, u)   # position: horizontal middles of the boxes
+  len <- nrow(col) # number of cells in the legend
+  bottom <- top - (len - 1) * u # position: vertical middle, bottom cell
+  right <- left + u # position: right vertical edge
+  lines <- seq(bottom, top, u) # position: horizontal middles of the boxes
 
   # draw the squares of the legend.
   # values for lines are the central horizontal line of the box
@@ -61,46 +58,53 @@ embed_legend <- function(
     right,
     lines + u / 2,
     col    = colors$col,
-    border = "black")
+    border = "black"
+  )
 
-  if (is.null(colors$label)) {# add default labels
-    vals   <- sort(
-      unique(c(colors$min,
-               colors$max)
-             )) # identify and sort unique cut-points
+  if (is.null(colors$label)) { # add default labels
+    vals <- sort(
+      unique(c(
+        colors$min,
+        colors$max
+      ))
+    ) # identify and sort unique cut-points
     y_text <- seq(
       bottom - u / 2,
       top + u / 2,
-      u)
+      u
+    )
 
     # these labels line up with the lines between colours
     # ie. they represent the boundaries between the categories
     if (percent) {
       # Note that this doesn't actually do anything sensible with Inf -> Inf %
       graphics::text(
-        x      = right + u / 4,
-        y      = y_text,
-        pos    = 4,
+        x = right + u / 4,
+        y = y_text,
+        pos = 4,
         labels = paste(100 * vals, "%"),
-        cex    = cex)
+        cex = cex
+      )
     } else {
       # default values which are not percent
       vals[length(vals)] <- paste(">", vals[length(vals)])
       graphics::text(
-        x      = right + u / 4,
-        y      = y_text,
-        pos    = 4,
+        x = right + u / 4,
+        y = y_text,
+        pos = 4,
         labels = vals,
-        cex    = cex)
+        cex = cex
+      )
     }
   } else {
     # add pre-specified labels
     graphics::text(
-      x      = right + u / 4,
-      y      = seq(bottom, top, u),
-      pos    = 4,
+      x = right + u / 4,
+      y = seq(bottom, top, u),
+      pos = 4,
       labels = colors$label,
-      cex    = cex)
+      cex = cex
+    )
   }
 }
 
@@ -124,15 +128,13 @@ embed_legend <- function(
 #'
 #' @export
 
-make_col_set <- function(
-  col,
-  cuts,
-  key = NULL,
-  sep = "-") {
-
+make_col_set <- function(col,
+                         cuts,
+                         key = NULL,
+                         sep = "-") {
   n <- length(cuts) - 1
   a <- data.frame(
-    col = colors,
+    colours = col,
     min = cuts[1:n],
     max = cuts[2:(n + 1)],
     stringsAsFactors = FALSE
@@ -141,10 +143,10 @@ make_col_set <- function(
   # create the labels for each category
   # if none is provided, the default uses the boundaries of the category
   if (is.null(key)) {
-    a$label    <- paste0(a$min, sep, a$max)
+    a$label <- paste0(a$min, sep, a$max)
     a$label[1] <- paste0("< ", a$max[1])
     a$label[n] <- paste0("> ", a$min[n])
-  } else{
+  } else {
     a$label <- as.character(key)
   }
   return(a)
