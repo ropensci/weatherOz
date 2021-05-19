@@ -424,91 +424,88 @@ map_krig_layer <- function(data,
 #'   of the points, and the measurement of \code{varname} at those points. Other
 #'   columns will be ignored.
 #' @param varname Name of variable to map
-#' @param col.dataframe Data frame containing discrete color information. For
-#'   \code{map.ssf.dots} the defaults is NULL. When this is left as NULL, then a
+#' @param col_df Data frame containing discrete colour information. For
+#'   \code{map_ssf_dots} the defaults is NULL. When this is left as NULL, then a
 #'   rainbow of colours is applied to the unique values. Note that this may give
-#'   strange results if the variable to be plotted is factor and the factor
+#'   strange results if the variable to be plotted is a factor and the factor
 #'   order is not in the desired legend order.
-#' @param percent Color scale in percentages? If this is true, the legend values
-#'   will be assumed to be percentages, and the percent symbol appended, unless
-#'   labels are included in the \code{col.dataframe}
+#' @param percent Should the colour scale be displayed in percentages? If this
+#'   is true, the legend values will be assumed to be percentages, and the
+#'   percent symbol appended, unless labels are included in the \code{col_df}
 #' @param title  Main title for the map. This will be the first line of text in
-#'   the finished map (required)
-#' @param subtitle1 The first line of the map subtitle (required). To leave this
-#'   blank, use 'subtitle1 = ""'.
-#' @param subtitle2 The second line of the map subtitle (required). To leave
-#'   this blank, use 'subtitle2 = ""'.
-#' @param subtitle3 Third subtitle for the map
+#'   the finished map. Blank by default
+#' @param subtitle1 The first line of the map subtitle. Blank by default
+#' @param subtitle2 The second line of the map subtitle. Blank by default
+#' @param subtitle3 Third subtitle for the map, if required.
 #' @param dots Data frame containing the latitude and longitude of any points to
-#'   plot. It is assumed that these will have the variable names 'LATITUDE' and
-#'   'LONGITUDE'. (not case sensitive?). If type is 'point' and this parameter
-#'   is provided, then only the points that are in both will be plotted.
-#' @param dots.label Data frame containing the latitude, longitude, and text for
+#'   plot. It is assumed that these will have the variable names
+#'   \code{latitude} and \code{longitude}. (not case sensitive?). If type is
+#'   'point' and this parameter is provided, then only the points that are in
+#'   both will be plotted.
+#' @param dots_label Data frame containing the latitude, longitude, and text for
 #'   any labelled points to plot. Note that this does not have to be the same
 #'   set as the \code{dots}; inclusion of the latitude and longitude here as
 #'   well as for that parameter means that different sub-sets can be plotted.
-#'   (ie. dots without location names, and location names without dots)
-#' @param plot.type Type of plot
+#'   (ie. dots without location names, and location names without dots). A default
+#'   set of WA towns is included in \code{towns_wa_grainbelt}
+#' @param plot_type Type of plot as per \code{weather_plot}
 #' @param name Name of file for output image. Not required if plot.type = 0;
 #'   NULL as default
-#' @param html.path Path for output image file. Not required if plot.type = 0;
+#' @param html_path Path for output image file. Not required if plot.type = 0;
 #'   NULL as default
-#' @param mask.agregion Object indicating the mapping region of interest
-#'   (non-coastal lines). This is a mask for the mapping. Default is the WA
-#'   grainbelt eastern edge
-#' @param mask.coast Object indicating the location of the ocean in the mapping
+#' @param mask_agregion Object indicating the mapping region of interest
+#'   (non-coastal lines). (optional)
+#' @param mask_coast Object indicating the location of the ocean in the mapping
 #'   area of interest. This is a mask for the mapping, so that nothing is
-#'   plotted here. Default is the coast for the WA grainbelt
-#' @param lines.shire Object containing the location of the shire boundaries of
-#'   the mapping area of interest. This adds lines to the map
-#' @param lines.coast Plot object to add the coast line to the map. Default is
-#'   coast line for SW WA
-#' @param lines.agregion Plot object to add a line indicating the
-#'   northern/eastern edge of the grainbelt.
+#'   plotted here. (optional)
+#' @param lines_shire Object containing the location of the shire boundaries of
+#'   the mapping area of interest. This adds lines to the map (optional)
+#' @param lines_coast Plot object to add the coast line to the map. Default is
+#'   coast line for SW WA (optional)
+#' @param lines_agregion Plot object to add a line indicating the
+#'   northern/eastern edge of the grainbelt. (optional)
 #' @param logo image object for the logo to be added to the map (optional).
-#' @param scale Plotting scale, default = 10.
+#' @param scale Plotting scale, default = 10. Changes the resolution of the
+#'   saved file, not the relative sizes of the objects
 #' @param lambda Smoothing parameter for the Kriging. Default is 0.01. Larger
 #'   values (e.g. 0.5) will give greater smoothing.
 #' @param legendx left edge of a vertical legend to be placed using
-#'   'embed.legend'. Will only plot a legend if this is a numeric parameter.
-#'   Should not throw errors.
+#'   \code{embed_legend}. Will only plot a legend if this is a numeric
+#'   parameter. Should not throw errors.
 #' @param transparency Should the background be transparent? If false, the
 #'   background will be white. (default = FALSE)
 #' @param box Should a box be drawn around the plot area? (default = TRUE)
-#' @param type What kind of map are you after? Current options are 'krig' and
+#' @param type What kind of map are you after? Current options are \code{krig} and
 #'   'point', future plans will include options for categorical data (either
-#'   points or interpolated). 'Krig' takes a continuous variable and interpolates
+#'   points or interpolated). \code{krig} takes a continuous variable and interpolates
 #'   to fill the map space with categorical colour; point takes a continuous
 #'   variable and plots just the points with categorical colour. Default value
 #'   is 'krig' for backwards compatibility
 #'
 #' @keywords hplot
+#'
 #' @export
 
 # ** to do
-#    * scale: make option to have a vector. This does dot size, heading size, legend text size,
-#      so allow for three? or if we want to scale the headings differently, five (or six?)
-#      The internal functionality will use a vector of given length; if the vector is not the full
-#      length, then an if statement at the beginning would created one based on what is passed.
 
-map.ssf <- function(data,
+map_weather <- function(data,
                     varname,
-                    col.dataframe,
+                    col_df,
                     percent,
-                    title,
-                    subtitle1,
-                    subtitle2,
+                    title = "",
+                    subtitle1 = "",
+                    subtitle2 = "",
                     subtitle3 = NULL,
                     dots = NULL,
-                    dots.label = NULL,
-                    plot.type = 0,
+                    dots_label = NULL,
+                    plot_type = 0,
                     name = NULL,
-                    html.path = NULL,
-                    mask.agregion = ssf::agregion.img,
-                    mask.coast = ssf::coast.img,
-                    lines.shire = ssf::shires.lines,
-                    lines.coast = ssf::coast.lines,
-                    lines.agregion = ssf::agregion.lines,
+                    html_path = NULL,
+                    mask_agregion = NULL,
+                    mask_coast = NULL,
+                    lines_shire = NULL,
+                    lines_coast = NULL,
+                    lines_agregion = NULL,
                     logo = NULL,
                     scale = 10,
                     lambda = 0.01,
@@ -517,11 +514,12 @@ map.ssf <- function(data,
                     box = TRUE,
                     type = "krig") {
 
-  # if file is to be saved, make sure the directory exists; and that name and html.path are allocated
-  if (plot.type != 0) {
+  # if file is to be saved, make sure the directory exists; and that name and
+  # html.path are allocated
+  if (plot_type != 0) {
     # create directory if required.
-    if (!dir.exists(html.path)) {
-      dir.create(html.path, recursive = TRUE)
+    if (!dir.exists(html_path)) {
+      dir.create(html_path, recursive = TRUE)
     }
     # set opened device to close at the end
     on.exit(grDevices::dev.off())
@@ -534,25 +532,20 @@ map.ssf <- function(data,
   )
 
   # set variables ----
-  # ** if this is going to be generalised, then this will need modifying
-  # ** this is almost but not quite the same as the Kriging grid values
-  # longitude and latitude limits are hard coded at present, but this can be
-  # modified in later versions. Values here are for mapping the WA grainbelt
-  # Do not change unless the masks are modified accordingly.
-  long.lims <- c(114, 123.5)
-  lat.lims <- c(-35.5, -27.5)
+   # Do not change unless the masks are modified accordingly.
+  long_lims <- c(114, 123.5)
+  lat_lims <- c(-35.5, -27.5)
 
   # Plot parameters
   # Original SSF grid cells
-  lon.sw <- seq(long.lims[1],
-    long.lims[2],
+  lon_sw <- seq(long_lims[1],
+    long_lims[2],
     by = 0.5
   ) # length is used for deriving plot parameters; nothing else
-  lat.sw <- seq(lat.lims[1],
-    lat.lims[2],
+  lat_sw <- seq(lat_lims[1],
+    lat_lims[2],
     by = 0.5
   ) # length is used for deriving plot parameters; nothing else
-  # sc <- 0.005
   px1 <- 117.75 # position of text
   py1 <- -28 # for determining positioning of text.
   if (transparency) {
@@ -563,12 +556,12 @@ map.ssf <- function(data,
 
   # create the plot ----
   # open plot device
-  new.ssf.plot(
-    type = plot.type,
-    width = (length(lon.sw) - 1) * scale, # plot width,
-    height = (length(lat.sw) - 1) * scale, # plot height,
+  weather_plot(
+    type = plot_type,
+    width = (length(lon_sw) - 1) * scale, # plot width,
+    height = (length(lat_sw) - 1) * scale, # plot height,
     name = name,
-    path = html.path,
+    path = html_path,
     background = bg
   )
   # set the plot margins so that the plot takes up the full space
@@ -578,8 +571,8 @@ map.ssf <- function(data,
   graphics::plot.new()
   # set limits on window
   graphics::plot.window(
-    xlim = long.lims,
-    ylim = lat.lims,
+    xlim = long_lims,
+    ylim = lat_lims,
     xaxs = "i",
     yaxs = "i"
     # type: internal - pretty labels encompassing the original data range
@@ -593,23 +586,23 @@ map.ssf <- function(data,
   # generate the map layer, if required (map layer required for krig,
   # but not point)
   if (type == "krig") {
-    b <- map.krig.layer(
+    b <- map_krig_layer(
       data = data,
       varname = varname,
       lambda = lambda,
-      long.lims = long.lims,
-      lat.lims = lat.lims,
-      color = col.dataframe,
-      mask.agregion = mask.agregion,
-      mask.coast = mask.coast
+      long_lims = long_lims,
+      lat_lims = lat_lims,
+      col = col_df,
+      agregion = mask_agregion,
+      coast = mask_coast
     )
     # plot the color sections
     graphics::rasterImage(
       b,
-      xleft = min(long.lims), # where is this getting x and y from?
-      ybottom = min(lat.lims),
-      xright = max(long.lims),
-      ytop = max(lat.lims)
+      xleft = min(long_lims),
+      ybottom = min(lat_lims),
+      xright = max(long_lims),
+      ytop = max(lat_lims)
     )
   }
 
@@ -624,25 +617,29 @@ map.ssf <- function(data,
   # outside the grainbelt region; to be omitted
   # ** it would be nice to get this tidied up
   # ** and create the correct object
-  outside.region <- c(
+  outside_region <- c(
     53, 78, 174, 176, 178, 180:181, 482,
     519, 522, 527, 531:532, 537:543, 546, 548, 557, 559:560, 564:567, 576:577,
     611, 616, 620
   )
   # lines that are partially in the region, and not in the region
   # overlaps <- c(520, 525, 544, 545, 547, 553, 563, 573, 583)
-  invisible(lapply(lines.shire[-outside.region], FUN = graphics::lines, lwd = scale / 10))
+  invisible(lapply(lines_shire[-outside_region],
+                   FUN = graphics::lines,
+                   lwd = scale / 10))
   # add coast line
-  graphics::lines(lines.coast, lwd = 2 * scale / 10)
+  graphics::lines(lines_coast,
+                  lwd = 2 * scale / 10)
   # add inland edge of agricultural region
-  graphics::lines(lines.agregion, lwd = 2 * scale / 10)
+  graphics::lines(lines_agregion,
+                  lwd = 2 * scale / 10)
 
   # add legend ----
   if (is.numeric(legendx)) {
-    embed.legend(
+    embed_legend(
       left = legendx,
       top = -29.25,
-      colors = col.dataframe,
+      col = col_df,
       u = 0.375,
       cex = 0.7 * scale / 10,
       percent = percent
@@ -650,10 +647,11 @@ map.ssf <- function(data,
   }
   # Add logo (if supplied) ----
   if (!is.null(logo)) {
+    # logo position is specified from the bottom right corner
     logo_scale <- 0.004 # scale modifies size.
     logo_offset <- 0.2 # distance from the corner
-    logo_x <- max(long.lims) - logo_offset # logo position is specified from the bottom right corner;
-    logo_y <- min(lat.lims) + logo_offset
+    logo_x <- max(long_lims) - logo_offset
+    logo_y <- min(lat_lims) + logo_offset
     graphics::rasterImage(
       logo,
       xright  = logo_x,
@@ -670,33 +668,35 @@ map.ssf <- function(data,
     if (!is.null(dots)) {
       # make sure that dots is a data frame, not a data table
       dots <- data.frame(dots)
-      locations <- merge(data, dots, all.x = FALSE, all.y = FALSE)
-      # once we have used the dots, delete them (why?)
+      locations <- merge(data,
+                         dots,
+                         all.x = FALSE,
+                         all.y = FALSE)
+      # once we have used the dots, delete them so
+      # that the next section doesn't overplot them.
       dots <- NULL
     } else {
       locations <- data
     }
+
     names(locations) <- tolower(names(locations))
 
     # set the colours
-    point.cols <- color.df(locations[[tolower(varname)]],
-      col.df = col.dataframe
+    point.cols <- color_df(
+      locations[[tolower(varname)]],
+      col_df = col_df
     )
     # plot them!
-    graphics::points(locations[["longitude"]],
+    graphics::points(
+      locations[["longitude"]],
       locations[["latitude"]],
       cex = scale * 0.16, # all I have done is double the black dots size
       pch = 20,
       col = point.cols
     )
-    # graphics::points(locations[["longitude"]],
-    #                  locations[["latitude"]],
-    #                  cex = scale * 0.16, # all I have done is double the black dots size
-    #                  pch = 20,
-    #                  col = "red")
   }
 
-
+# dots ----
   if (!is.null(dots)) {
     names(dots) <- tolower(names(dots))
     graphics::points(dots[["longitude"]],
@@ -705,12 +705,12 @@ map.ssf <- function(data,
       pch = 20
     )
   }
-  if (!is.null(dots.label)) {
-    names(dots.label) <- tolower(names(dots.label))
+  if (!is.null(dots_label)) {
+    names(dots_label) <- tolower(names(dots_label))
     graphics::text(
-      x = dots.label[["longitude"]],
-      y = dots.label[["latitude"]],
-      labels = dots.label[["station_name"]],
+      x = dots_label[["longitude"]],
+      y = dots_label[["latitude"]],
+      labels = dots_label[["station_name"]],
       cex = scale / 20,
       pos = 4,
       offset = 0.1
@@ -809,3 +809,4 @@ map_weather_swld <- function(data,
               logo = wrapique::dpird_logo,
               ...)
 
+}
