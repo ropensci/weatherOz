@@ -18,10 +18,11 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
 Imports: 
-    ggplot2,
-    httr
-Suggests: 
     fields,
+    ggplot2,
+    httr,
+    sp
+Suggests: 
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3
