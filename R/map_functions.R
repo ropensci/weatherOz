@@ -60,15 +60,15 @@ embed_legend <- function(top,
     lines - u / 2,
     right,
     lines + u / 2,
-    col    = colors$col,
+    col    = col$col,
     border = "black"
   )
 
-  if (is.null(colors$label)) { # add default labels
+  if (is.null(col$label)) { # add default labels
     vals <- sort(
       unique(c(
-        colors$min,
-        colors$max
+        col$min,
+        col$max
       ))
     ) # identify and sort unique cut-points
     y_text <- seq(
@@ -105,7 +105,7 @@ embed_legend <- function(top,
       x = right + u / 4,
       y = seq(bottom, top, u),
       pos = 4,
-      labels = colors$label,
+      labels = col$label,
       cex = cex
     )
   }
@@ -137,7 +137,7 @@ make_col_set <- function(col,
                          sep = "-") {
   n <- length(cuts) - 1
   a <- data.frame(
-    colours = col,
+    col = col,
     min = cuts[1:n],
     max = cuts[2:(n + 1)],
     stringsAsFactors = FALSE
@@ -252,6 +252,13 @@ weather_plot <- function(type = 0,
 color_df <- function(x,
                      col_df,
                      trunc = TRUE) {
+
+  # identify the colour column; assumption that could be 'col', 'color', 'colour'
+  colour.col <- which(
+    tolower(
+      names(col_df)) %in% c("col", 'color', "colour")
+      )
+  col_df$col <- col_df[[colour.col]]
 
   # Function for discrete colour table - identify the break points
   cuts <- sort(
@@ -486,12 +493,10 @@ map_krig_layer <- function(data,
 #'
 #' @export
 
-# ** to do
-
 map_weather <- function(data,
                     varname,
                     col_df,
-                    percent,
+                    percent = FALSE,
                     title = "",
                     subtitle1 = "",
                     subtitle2 = "",
@@ -682,7 +687,7 @@ map_weather <- function(data,
     names(locations) <- tolower(names(locations))
 
     # set the colours
-    point.cols <- color_df(
+    point_cols <- color_df(
       locations[[tolower(varname)]],
       col_df = col_df
     )
@@ -692,7 +697,7 @@ map_weather <- function(data,
       locations[["latitude"]],
       cex = scale * 0.16, # all I have done is double the black dots size
       pch = 20,
-      col = point.cols
+      col = point_cols
     )
   }
 
@@ -704,6 +709,7 @@ map_weather <- function(data,
       cex = scale * 0.08,
       pch = 20
     )
+
   }
   if (!is.null(dots_label)) {
     names(dots_label) <- tolower(names(dots_label))
@@ -749,7 +755,7 @@ map_weather <- function(data,
       cex = scale * 0.1,
       pos = 4
     )
-    if (!is.null(dots)) {
+    if (type %in% c("krig") & !is.null(dots)) {
       # add stations used
       graphics::points(
         x = px1,
@@ -792,6 +798,8 @@ map_weather <- function(data,
 #' @param ... other parameters as per \code{map_weather} which will be passed to
 #'   that function. This excludes the masks and lines, which are hard coded in
 #'   this function
+#'
+#' @export
 
 map_weather_swld <- function(data,
                              varname,

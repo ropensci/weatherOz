@@ -8,7 +8,7 @@ map_weather(
   data,
   varname,
   col_df,
-  percent,
+  percent = FALSE,
   title = "",
   subtitle1 = "",
   subtitle2 = "",
