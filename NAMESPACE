@@ -3,6 +3,7 @@
 export(bom_data_full)
 export(create_climograph)
 export(embed_legend)
+export(get_weather_list)
 export(make_col_set)
 export(map_krig_layer)
 export(map_weather)

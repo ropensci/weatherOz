@@ -19,8 +19,11 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     fields,
+    furrr,
+    future,
     ggplot2,
     httr,
+    purrr,
     sp
 Suggests: 
     testthat (>= 3.0.0),
