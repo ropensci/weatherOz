@@ -37,7 +37,7 @@
 #'  * rainfall (rain),
 #'  * maximum temperature (max_temp),
 #'  * minimum temperature (min_temp) and
-#'  * \acronym{DPIRD}'s Science 2.0 \acronym{API} station code.
+#'  * \acronym{DPIRD}'s Science \acronym{API} 2.0 station code.
 #'
 #' @author Adam Sparks, adam.sparks@@dpird.wa.gov.au
 #' @export
