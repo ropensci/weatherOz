@@ -23,13 +23,6 @@
 #' @param api.key ...
 #' @param verbose ... Defaults to `FALSE`.
 #'
-#' @section Stations:
-#' \pkg{blackleg.sporacle} contains a list of possible weather stations in the
-#' \acronym{DPIRD} \acronym{API} that can be used, [blackleg_stations].  The
-#' [select_default_stations()] will select only stations that are designated
-#' with a "Y" in the `use_this` field. See the `data-raw` folder for more
-#' details on the provenance of this data object.
-#'
 #' @examples
 #' # set up multisession environment
 #' future::plan("multisession")
@@ -40,11 +33,11 @@
 #' future::plan("sequential")
 #'
 #' @return A `list` object of data frames containing the following columns:
-#'  * location (site),
 #'  * date,
 #'  * rainfall (rain),
-#'  * maximum temperature (max_temp) and
-#'  * minimum temperature (min_temp).
+#'  * maximum temperature (max_temp),
+#'  * minimum temperature (min_temp) and
+#'  * \acronym{DPIRD} science \acronym{API}'s station code.
 #'
 #' @author Adam Sparks, adam.sparks@@dpird.wa.gov.au
 #' @export

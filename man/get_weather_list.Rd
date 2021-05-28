@@ -30,11 +30,11 @@ get_weather_list(
 \value{
 A \code{list} object of data frames containing the following columns:
 \itemize{
-\item location (site),
 \item date,
 \item rainfall (rain),
-\item maximum temperature (max_temp) and
-\item minimum temperature (min_temp).
+\item maximum temperature (max_temp),
+\item minimum temperature (min_temp) and
+\item \acronym{DPIRD} science \acronym{API}'s station code.
 }
 }
 \description{
@@ -45,15 +45,6 @@ Weather data returned will always start on Jan. 1 of the current year and
 carry to the current day or yesterday dependent on data availability in the
 database.
 }
-\section{Stations}{
-
-\pkg{blackleg.sporacle} contains a list of possible weather stations in the
-\acronym{DPIRD} \acronym{API} that can be used, \link{blackleg_stations}.  The
-\code{\link[=select_default_stations]{select_default_stations()}} will select only stations that are designated
-with a "Y" in the \code{use_this} field. See the \code{data-raw} folder for more
-details on the provenance of this data object.
-}
-
 \examples{
 # set up multisession environment
 future::plan("multisession")
