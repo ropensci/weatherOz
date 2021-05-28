@@ -34,7 +34,7 @@ A \code{list} object of data frames containing the following columns:
 \item rainfall (rain),
 \item maximum temperature (max_temp),
 \item minimum temperature (min_temp) and
-\item \acronym{DPIRD} science \acronym{API}'s station code.
+\item \acronym{DPIRD}'s Science 2.0 \acronym{API} station code.
 }
 }
 \description{
