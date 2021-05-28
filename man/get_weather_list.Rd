@@ -5,7 +5,7 @@
 \title{Fetch a list of weather station data from DPIRD Science API}
 \usage{
 get_weather_list(
-  stations,
+  sites,
   first,
   last = Sys.Date(),
   data.type,
@@ -14,7 +14,7 @@ get_weather_list(
 )
 }
 \arguments{
-\item{stations}{A character vector or list of station ID codes from the
+\item{sites}{A character vector or list of station ID codes from the
 \acronym{DPIRD} Science \acronym{API} for which data should be fetched.}
 
 \item{first}{The date on which the weather data should start.}

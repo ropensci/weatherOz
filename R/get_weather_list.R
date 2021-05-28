@@ -15,7 +15,7 @@
 #' carry to the current day or yesterday dependent on data availability in the
 #' database.
 #'
-#' @param stations A character vector or list of station ID codes from the
+#' @param sites A character vector or list of station ID codes from the
 #'  \acronym{DPIRD} Science \acronym{API} for which data should be fetched.
 #' @param first The date on which the weather data should start.
 #' @param last The last date on which the weather data should end.
@@ -42,7 +42,7 @@
 #' @author Adam Sparks, adam.sparks@@dpird.wa.gov.au
 #' @export
 
-get_weather_list <- function(stations,
+get_weather_list <- function(sites,
                              first,
                              last = Sys.Date(),
                              data.type,
