@@ -67,7 +67,7 @@ get_weather_list <- function(sites,
   names(weather_raw) <- sites
 
   # add the location to the weather data
-  weather_raw <- Map(cbind, station_code = names(weather_raw), weather_raw)
+  weather_raw <- Map(cbind, site = names(weather_raw), weather_raw)
 
   return(weather_raw)
 }
