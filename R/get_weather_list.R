@@ -49,7 +49,7 @@ get_weather_list <- function(sites,
                              api.key,
                              verbose = FALSE) {
   weather_raw <- furrr::future_map(
-    .x = stations,
+    .x = sites,
     .f = purrr::possibly(
       ~ FoliarDisease::weather.data(
         site = .x,
@@ -64,7 +64,7 @@ get_weather_list <- function(sites,
     .options = furrr::furrr_options(seed = NULL)
   )
 
-  names(weather_raw) <- stations
+  names(weather_raw) <- sites
 
   # add the location to the weather data
   weather_raw <- Map(cbind, station_code = names(weather_raw), weather_raw)
