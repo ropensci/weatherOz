@@ -1,23 +1,27 @@
 #
 # file: /R/get_weather_as_list.R
 #
-# This file is part of the R-package blackleg.sporacle
+# This file is part of the R-package wrapique
 #
 # Copyright (C) 2021 DPIRD
 #	<https://www.dpird.wa.gov.au>
-#
-# NOT TO BE USED WITHOUT PRIOR PERMISSION
 
 #' Fetch a list of weather station data from DPIRD Science API
 #'
-#' A wrapper function for [FoliarDisease::weather.data] to handle fetching
-#' data for several stations specified in a `list` object from the
-#' \acronym{DPIRD} Science \acronym{API}, see **Stations** section for further
-#' detail.  Weather data returned will always start on Jan. 1 of the current
-#' year and carry to the current day or yesterday dependent on data availability
-#' in the database.
+#' A wrapper function for [weather_data] to handle fetching data for several
+#' stations specified in a `list` object from the \acronym{DPIRD} Science
+#' \acronym{API} in parallel, see **Stations** section for further detail.
+#' Weather data returned will always start on Jan. 1 of the current year and
+#' carry to the current day or yesterday dependent on data availability in the
+#' database.
 #'
-#' @inheritParams weather.data
+#' @param stations A character vector or list of station ID codes from the
+#'  \acronym{DPIRD} Science \acronym{API} for which data should be fetched.
+#' @param first The date on which the weather data should start.
+#' @param last The last date on which the weather data should end.
+#' @param data.type ...
+#' @param api.key ...
+#' @param verbose ... Defaults to `FALSE`.
 #'
 #' @section Stations:
 #' \pkg{blackleg.sporacle} contains a list of possible weather stations in the
@@ -27,7 +31,13 @@
 #' details on the provenance of this data object.
 #'
 #' @examples
+#' # set up multisession environment
+#' future::plan("multisession")
+#'
 #' w <- get_weather_list()
+#'
+#' # revert to sequential processing
+#' future::plan("sequential")
 #'
 #' @return A `list` object of data frames containing the following columns:
 #'  * location (site),
@@ -61,10 +71,10 @@ get_weather_list <- function(stations,
     .options = furrr::furrr_options(seed = NULL)
   )
 
-  names(weather_raw) <- stations$station_name
-  weather_raw <- Map(cbind, location = names(weather_raw), weather_raw)
-  colnames <- c("location", "date", "rain", "max_temp", "min_temp")
-  weather_raw <- lapply(weather_raw, data.table::setnames, colnames)
+  names(weather_raw) <- stations
+
+  # add the location to the weather data
+  weather_raw <- Map(cbind, station_code = names(weather_raw), weather_raw)
 
   return(weather_raw)
 }

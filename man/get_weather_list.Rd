@@ -14,9 +14,18 @@ get_weather_list(
 )
 }
 \arguments{
-\item{first}{...}
+\item{stations}{A character vector or list of station ID codes from the
+\acronym{DPIRD} Science \acronym{API} for which data should be fetched.}
 
-\item{last}{...}
+\item{first}{The date on which the weather data should start.}
+
+\item{last}{The last date on which the weather data should end.}
+
+\item{data.type}{...}
+
+\item{api.key}{...}
+
+\item{verbose}{... Defaults to \code{FALSE}.}
 }
 \value{
 A \code{list} object of data frames containing the following columns:
@@ -29,12 +38,12 @@ A \code{list} object of data frames containing the following columns:
 }
 }
 \description{
-A wrapper function for \link[FoliarDisease:weather.data]{FoliarDisease::weather.data} to handle fetching
-data for several stations specified in a \code{list} object from the
-\acronym{DPIRD} Science \acronym{API}, see \strong{Stations} section for further
-detail.  Weather data returned will always start on Jan. 1 of the current
-year and carry to the current day or yesterday dependent on data availability
-in the database.
+A wrapper function for \link{weather_data} to handle fetching data for several
+stations specified in a \code{list} object from the \acronym{DPIRD} Science
+\acronym{API} in parallel, see \strong{Stations} section for further detail.
+Weather data returned will always start on Jan. 1 of the current year and
+carry to the current day or yesterday dependent on data availability in the
+database.
 }
 \section{Stations}{
 
@@ -46,7 +55,13 @@ details on the provenance of this data object.
 }
 
 \examples{
+# set up multisession environment
+future::plan("multisession")
+
 w <- get_weather_list()
+
+# revert to sequential processing
+future::plan("sequential")
 
 }
 \author{
