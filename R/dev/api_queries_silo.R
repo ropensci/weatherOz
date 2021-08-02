@@ -113,3 +113,23 @@ bom_data_full <- function(site,
 
   return(weather_data)
 }
+
+#' Read SILO files
+#'
+#' Takes a standard SILO weather file and
+#' turns it into the format we require
+#'
+#' needs to be moved from the other version
+#'
+#' @inheritParams weather.data
+#'
+#'
+
+
+parsedata_silo_api <- function(
+  api.data = NULL,
+  interval = NULL,
+  first = NULL
+) {
+  message("placeholder function ")
+}

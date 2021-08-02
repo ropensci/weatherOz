@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^raw$
 ^tests/temp_file\.R$
+^R/dev
