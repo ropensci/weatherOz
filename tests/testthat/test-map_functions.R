@@ -27,7 +27,7 @@ test_that("make_col_set() creates correctly formatted dataframe", {
                   "data.frame")
   expect_named(x, c("col", "min", "max", "label"))
   expect_equal(x$col,
-               c("#FF0000FF", "#FFDB00FF", "#49FF00FF","#00FF92FF","#0092FFFF", "#4900FFFF", "#FF00DBFF"))
+               c("#FF0000", "#FFDB00", "#49FF00","#00FF92","#0092FF", "#4900FF", "#FF00DB"))
   expect_equal(x$min,
                c(-Inf,  -35,  -34,  -33,  -32,  -31,  -30))
   expect_equal(x$max,
@@ -35,6 +35,7 @@ test_that("make_col_set() creates correctly formatted dataframe", {
   expect_equal(x$label,
                c("< -35",   "-35--34", "-34--33", "-33--32", "-32--31", "-31--30", "> -30"))
 })
+
 test_that("make_col_set() key parameter works correctly", {
   # uses a simpler set of numbers
   x <- make_col_set(
@@ -52,6 +53,7 @@ test_that("make_col_set() key parameter works correctly", {
                c("one", "two", "three", "four", "five", "six", "seven")
   )
 })
+
 test_that("make_col_set() sep parameter works correctly", {
   expect_snapshot(
     print(
