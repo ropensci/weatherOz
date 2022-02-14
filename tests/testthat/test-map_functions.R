@@ -153,7 +153,7 @@ test_that("map_krig() throws errors when it should ", {
   expect_error(
     map_krig(
       data = towns_wa_grainbelt,
-      varname = "LATITIDE",
+      varname = "LATITUDE",
       # missing lambda & theta; only one of which has a default value
       lat_lims = c(-35.5, -27.5),
       long_lims = c(114, 123.5)
