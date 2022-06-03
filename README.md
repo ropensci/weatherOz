@@ -17,6 +17,16 @@ More detailed information about the APIs is available at:
 * DPIRD Radar - https://www.agric.wa.gov.au/radar-api-20
 * SILO - https://www.longpaddock.qld.gov.au/silo/api-documentation/guide/
 
-DPIRD APIs require an API key. These can be requested via the form at https://www.agric.wa.gov.au/form/dpird-api-registration. The SILO API does not require an API key, but does require that the user provide a valid email address as part of their request.
+Note  that the first three of these links are to the old `agric` domain; the 
+actual APIs point at the `dpird` domain, but the documentation is at `agric.wa.gov.au`. 
 
-It is also of relevance here that the database behind DPIRD Science includes a mirror of some of the SILO data. Prior to 2021, this was predominantly for locations in the South West Land Division. Going forward, weather data will also be available for rangelands locations. As with the SILO data set, this contains interpolated data for periods where stations were not operating. 
+DPIRD APIs require an API key. These can be requested via the form at
+https://www.agric.wa.gov.au/form/dpird-api-registration. The SILO API does not
+require an API key, but does require that the user provide a valid email address
+as part of their request.
+
+It is also of relevance here that the database behind DPIRD Science includes a
+mirror of some of the SILO data. Prior to 2021, this was predominantly for
+locations in the South West Land Division. Going forward, weather data will also
+be available for rangelands locations. As with the SILO data set, this contains
+interpolated data for periods where stations were not operating.
