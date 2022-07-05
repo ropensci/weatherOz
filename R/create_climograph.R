@@ -21,7 +21,7 @@ create_climograph <- function(weather) {
   b <- diff(ylim.prim) / diff(ylim.sec)
   a <- b * (ylim.prim[1] - ylim.sec[1])
 
-  ggplot2::ggplot(weather, ggplot2::aes(x = as.Date(date), y = RAIN)) +
+  ggplot2::ggplot(weather, ggplot2::aes(x = as.Date(DATE), y = RAIN)) +
     ggplot2::geom_col(fill = "navyblue",
                       colour = "navyblue") +
     ggplot2::geom_line(ggplot2::aes(y = a + MAX_TEMP * b),
