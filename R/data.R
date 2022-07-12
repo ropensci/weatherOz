@@ -99,3 +99,29 @@
 #' @source copied from the SSF, from the grainbelt stations list.
 
 "towns_wa_grainbelt"
+
+# DPIRD office locations ----
+#' Localities with a DPIRD office
+#'
+#' Default set of office locations to be added region maps
+#' @name dpird_office_towns
+#' @docType data
+#' @format  ...
+#' @keywords datasets
+#' @source create based on current office locations
+#' (https://www.agric.wa.gov.au/office-locations).
+
+"dpird_office_towns"
+
+# WA most populous towns ----
+#' List of WA towns by population
+#'
+#' Default set locations to be added region maps
+#' @name wa_populous_towns
+#' @docType data
+#' @format  ...
+#' @keywords datasets
+#' @source create by scrapping list of most populous places in WA from Wikipedia
+#' (https://en.wikipedia.org/wiki/List_of_places_in_Western_Australia_by_population).
+
+"wa_populous_towns"
