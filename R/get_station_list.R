@@ -35,6 +35,7 @@
 #' state = "nsw",
 #' api_key = mykey)
 #'
+#' @author Rodrigo Pires, rodrigo.pires@@dpird.wa.gov.au
 #' @export
 
 get_station_list <- function(api = c("science", "weather"),
@@ -117,7 +118,7 @@ get_station_list <- function(api = c("science", "weather"),
   stations$latitude <- as.numeric(stations$latitude)
   stations$longitude <- as.numeric(stations$longitude)
 
-  for (i in 1:nrow(stations)) stations$stationName[i] <- tolower(stations$stationName[i])
+  stations$stationName <- tolower(stations$stationName)
   stations$links <- NULL
   names(stations) <- tolower(names(stations))
 

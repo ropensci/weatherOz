@@ -33,7 +33,7 @@
 #' wa_stn <- get_nearby_stations(
 #'   site = my_station,
 #'   distance_km = my_distance,
-#'   api_key = mykey,
+#'   api_key = my_key,
 #'   dpird_only = FALSE,
 #'   wa_only = TRUE
 #' )
@@ -43,7 +43,7 @@
 #' lat <- -35.1583
 #' long <- 147.4575
 #'
-#' wa_stn <- get_nearby_stations(
+#' wagga_stn <- get_nearby_stations(
 #'   latitude = lat,
 #'   longitude = long,
 #'   distance_km = my_distance,
