@@ -33,11 +33,11 @@
 #'
 #' # Query multiple stations for all extreme events
 #' # Provide a list of station (as strings)
-#' this_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
+#' these_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
 #'
 #' # Row bind output lists (one for each station)
 #' # together with `data.table::rbindlist`
-#' outputs <- lapply(this_stations,
+#' outputs <- lapply(these_stations,
 #'                   get_extreme_weather,
 #'                   type = "all",
 #'                   api_key = apiKey) |>
