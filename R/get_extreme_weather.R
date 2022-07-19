@@ -11,7 +11,7 @@
 #' @param type A string with the type of extreme weather to return. Can be any
 #' of "frost", "erosion", "heat", a combination of those or "all".
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
-#'  (https://www.agric.wa.gov.au/web-apis)
+#'  (\url{https://www.agric.wa.gov.au/web-apis})
 #'
 #' @return a `data.frame` of one row with stationCode, stationName, latitude,
 #' longitude, dateTime of the query and the extreme weather information
