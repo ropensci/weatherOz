@@ -79,11 +79,15 @@ get_station_list <- function(api = c("science", "weather"),
 
     # Stop if station group is not on the list
      if (!api_group %in% c("all", "rtd", "yellowspot", "yshistory")) {
-       stop("Science API only accepts 'all', 'rtd', 'yellowspot' and 'yshistory' as station groups")
+       stop(call. = FALSE,
+         "Science API only accepts 'all', 'rtd', 'yellowspot'\n",
+            "and 'yshistory' as station groups")
      }
 
-    if (this_state == 'nt') {
-    stop("The Science API has no data for NT stations.\nVisit: https://www.agric.wa.gov.au/web-apis")
+    if (this_state == "nt") {
+    stop(call. = FALSE,
+         "The Science API has no data for NT stations.\n",
+         "Visit: https://www.agric.wa.gov.au/web-apis")
     }
 
     g <- url(paste0("https://api.dpird.wa.gov.au/v2/",
