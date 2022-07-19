@@ -12,14 +12,14 @@
 #' Providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
 #' Water Corporation, Harvey Water and Pardoo Beef Corporation.
 #' @param which_api name of the \acronym{API} to be queried. Needs to match to
-#' one of the existing options (currently 'science' and 'weather')
+#' one of the existing options (currently 'science' or 'weather')
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
-#'  (https://www.agric.wa.gov.au/web-apis)
+#'  (\url{https://www.agric.wa.gov.au/web-apis})
 #' @param station_group
 #' @return a `data.frame` with station code, name, longitude, longitude, owner
 #' and state (for the Science API).
 #' Science \acronym{API} queries return additional details by default
-#' (ie., station model, battery voltage, height of sensors, status and others)
+#' *i.e.*, station model, battery voltage, height of sensors, status and others.
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed
