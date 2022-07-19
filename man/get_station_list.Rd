@@ -44,3 +44,6 @@ state = "nsw",
 api_key = mykey)
 
 }
+\author{
+Rodrigo Pires, rodrigo.pires@dpird.wa.gov.au
+}

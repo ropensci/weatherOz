@@ -1,4 +1,3 @@
-#
 # file: /R/get_station_list.R
 #
 # This file is part of the R-package wrapique

@@ -3,6 +3,8 @@
 export(create_climograph)
 export(date_seq_check)
 export(embed_legend)
+export(get_extreme_weather)
+export(get_nearby_stations)
 export(get_station_list)
 export(get_summaries)
 export(get_weather_list)
