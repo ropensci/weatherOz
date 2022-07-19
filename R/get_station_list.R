@@ -39,13 +39,27 @@
 #' @export
 
 get_station_list <- function(api = c("science", "weather"),
-                             station_group = c("all", 'api' ,'rtd', 'web', "yshistory", "yellowspot"),
-                             state = c("all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt"),
+                             station_group = c("all",
+                                               "api" ,
+                                               "rtd",
+                                               "web",
+                                               "yshistory",
+                                               "yellowspot"),
+                             state = c("all",
+                                       "wa",
+                                       "sa",
+                                       "nsw",
+                                       "vic",
+                                       "qld",
+                                       "tas",
+                                       "nt"),
                              api_key = NULL) {
+
 
   # Error if api key not provided
   if (is.null(api_key)) {
-    stop("If you to provide a valid DPIRD API key. Visit: https://www.agric.wa.gov.au/web-apis")
+    stop("If you to provide a valid DPIRD API key.\n",
+         "Visit: https://www.agric.wa.gov.au/web-apis")
   }
 
   # Set API
@@ -102,7 +116,8 @@ get_station_list <- function(api = c("science", "weather"),
                     this_state))
   } else {
     if (length(this_state != 0)) {
-      message("Weather API only returns queries for WA. Disregarding state selection.")
+      message("Weather API only returns queries for WA.\n",
+              "Disregarding state selection.")
     }
     g <- url(paste0("https://api.dpird.wa.gov.au/v2/",
                     which_api,
