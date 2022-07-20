@@ -67,12 +67,14 @@ get_nearby_stations <- function(latitude = NULL,
 
   # Error if api key not provided
   if (is.null(api_key)) {
-    stop("Provide a valid DPIRD API key.\n",
+    stop(call. = FALSE,
+         "Provide a valid DPIRD API key.\n",
          "Visit: https://www.agric.wa.gov.au/web-apis")
   }
 
   if (isFALSE(wa_only) & isTRUE(dpird_only)) {
-    stop("DPIRD weather stations are only available in Western Australia.
+    stop(call. = FALSE,
+         "DPIRD weather stations are only available in Western Australia.
          Cannot proceed if `wa_only = ", wa_only,
          " and `dpird_only` = ",
          dpird_only,".")
@@ -92,7 +94,8 @@ get_nearby_stations <- function(latitude = NULL,
       .lat <- res$collection$latitude
 
       if ((is.null(.lat)) || (is.null(.long))) {
-        stop("Error collecting the latitude and longitude\n",
+        stop(call. = FALSE,
+             "Error collecting the latitude and longitude\n",
              "details for the station code provided.")
       }
 
@@ -114,7 +117,8 @@ get_nearby_stations <- function(latitude = NULL,
     } else if (is.null(site)) {
 
       if (((is.null(latitude)) || (is.null(longitude))) && (is.null(site))) {
-        stop("Provide valid latitude and longitude\n",
+        stop(call. = FALSE,
+             "Provide valid latitude and longitude\n",
              "coordinates or a valid station code.")
       }
 
@@ -149,7 +153,8 @@ get_nearby_stations <- function(latitude = NULL,
       .lat <- res$collection$latitude
 
       if ((is.null(.lat)) || (is.null(.long))) {
-        stop("Error collecting the latitude and longitude\n",
+        stop(call. = FALSE,
+             "Error collecting the latitude and longitude\n",
              "details for the station code provided.")
       }
 
