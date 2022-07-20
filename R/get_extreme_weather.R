@@ -13,9 +13,9 @@
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
 #'
-#' @return a `data.frame` of one row with stationCode, stationName, latitude,
-#' longitude, dateTime of the query and the extreme weather information
-#' according to the type(s) selected.
+#' @return a `data.frame` of one row with 'stationCode', 'stationName',
+#' 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
+#' information according to the type(s) selected.
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed
@@ -43,7 +43,7 @@
 #'                   api_key = apiKey) |>
 #'  data.table::rbindlist()
 #'
-#' @author Rodrigo Pires, rodrigo.pires@@dpird.wa.gov.au
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
 get_extreme_weather <- function(site,
