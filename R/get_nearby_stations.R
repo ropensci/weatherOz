@@ -176,7 +176,8 @@ get_nearby_stations <- function(latitude = NULL,
     } else if (is.null(site)) {
 
       if (((is.null(latitude)) || (is.null(longitude))) && (is.null(site))) {
-        stop("Provide valid latitude and longitude\n",
+        stop(call. = FALSE,
+             "Provide valid latitude and longitude\n",
              "coordinates or a valid station code.")
       }
 
