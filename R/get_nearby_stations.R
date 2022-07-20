@@ -10,23 +10,23 @@
 #' @param latitude Latitude expressed as decimal degrees (DD) (WGS84).
 #' @param longitude Longitude expressed as decimal degrees (DD) (WGS84).
 #' @param site A string with the station ID code for the station of interest.
-#' Optional and defaults to NULL.
+#' Optional and defaults to `NULL`.
 #' @param distance_km Distance to limit the search from station of interest.
 #' Defaults to 100 km.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (https://www.agric.wa.gov.au/web-apis)
-#' @param wa_only Return stations in Western Australia only. Defaults to TRUE.
-#' @param dpird_only Return only DPIRD owned stations and defaults to FALSE.
+#' @param wa_only Return stations in Western Australia only. Defaults to `TRUE`.
+#' @param dpird_only Return only DPIRD owned stations and defaults to `FALSE`.
 #'
-#' @return a `data.frame` with stationCode, stationName, latitude, longitude,
-#' state, owner and distance. Data is sorted by increasing distance from station
-#' of interest.
+#' @return a `data.frame` with 'stationCode', 'stationName', 'latitude',
+#' 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
+#' sistance from station of interest.
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed
 #' my_key <- rstudioapi::askForSecret()
 #'
-#' # Query WA only stations and return both DPIRDs and BOMs stations.
+#' # Query WA only stations and return both DPIRD's and BOM's stations.
 #' my_station <- "NO"    # Northam
 #' my_distance <- 50    # in km
 #'
