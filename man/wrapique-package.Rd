@@ -6,7 +6,7 @@
 \alias{wrapique-package}
 \title{wrapique: WA Weather API queries and mapping}
 \description{
-Functions to query weather API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) in WA and by [info about SILO] and to manipulate and/or map the resulting data. Currently only set up for the South West Land Division (SWLD) in Western Australia.
+Functions to query weather API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia and by [info about SILO] and to manipulate and/or map the resulting data. Currently only set up for the South West Land Division (SWLD) in Western Australia.
 }
 \author{
 \strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})

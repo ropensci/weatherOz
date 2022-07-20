@@ -14,16 +14,16 @@ get_station_list(
 }
 \arguments{
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
-(https://www.agric.wa.gov.au/web-apis)}
+(\url{https://www.agric.wa.gov.au/web-apis})}
 
 \item{which_api}{name of the \acronym{API} to be queried. Needs to match to
-one of the existing options (currently 'science' and 'weather')}
+one of the existing options (currently 'science' or 'weather')}
 }
 \value{
 a \code{data.frame} with station code, name, longitude, longitude, owner
 and state (for the Science API).
 Science \acronym{API} queries return additional details by default
-(ie., station model, battery voltage, height of sensors, status and others)
+\emph{i.e.}, station model, battery voltage, height of sensors, status and others.
 }
 \description{
 Providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
