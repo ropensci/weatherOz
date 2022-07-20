@@ -14,9 +14,10 @@
 #' @param distance_km Distance to limit the search from station of interest.
 #' Defaults to 100 km.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
-#'  (https://www.agric.wa.gov.au/web-apis)
+#'  (\url{https://www.agric.wa.gov.au/web-apis})
 #' @param wa_only Return stations in Western Australia only. Defaults to `TRUE`.
-#' @param dpird_only Return only DPIRD owned stations and defaults to `FALSE`.
+#' @param dpird_only Return only \acronym{DPIRD} owned stations and defaults to
+#'  `FALSE`.
 #'
 #' @return a `data.frame` with 'stationCode', 'stationName', 'latitude',
 #' 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
@@ -52,7 +53,7 @@
 #'   wa_only = FALSE
 #' )
 #'
-#' @author Rodrigo Pires, rodrigo.pires@@dpird.wa.gov.au
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
 

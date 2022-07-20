@@ -34,7 +34,7 @@
 #' state = "nsw",
 #' api_key = mykey)
 #'
-#' @author Rodrigo Pires, rodrigo.pires@@dpird.wa.gov.au
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
 get_station_list <- function(api = c("science", "weather"),
