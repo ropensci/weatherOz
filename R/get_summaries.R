@@ -65,10 +65,12 @@ get_summaries <- function(
     interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly")) {
 
   if (missing(site))
-    stop("Station ID required.")
+    stop(call. = FALSE,
+         "Station ID required.")
 
   if (missing(first))
-    stop("Need to supply a start date.")
+    stop(call. = FALSE,
+         "Please supply a start date.")
 
   # Match time interval query to user requests
   m_int <- try(match.arg(interval,
@@ -79,17 +81,20 @@ get_summaries <- function(
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past.
   if (m_int %in% c("15min", "30min") && ((as.numeric(format(as.Date(first), "%Y"))) < (as.numeric(format(as.Date(last), "%Y")) - 1))) {
-    stop("Start date is too early. Data in 15 and 30 min intervals are only available from the the 1st day of the previous year")
+    stop(call. = FALSE,
+         "Start date is too early. Data in 15 and 30 min intervals are only available from the the 1st day of the previous year")
   }
 
   # Stop if query is for monthly and interval is wrong
   if (m_int %in% c("monthly") && (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
-    stop("For monthly intervals date difference should be at least one month.")
+    stop(call. = FALSE,
+         "For monthly intervals date difference should be at least one month.")
   }
 
   # Stop if query is for daily and interval is wrong
   if (m_int %in% c("daily") && (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
-    stop("For daily intervals date difference should be at least one day.")
+    stop(call. = FALSE,
+         "For daily intervals date difference should be at least one day.")
   }
 
   # # Stop if query is for monthly and interval is wrong
@@ -100,7 +105,8 @@ get_summaries <- function(
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly, yearly
   if (methods::is(m_int, "try-error"))
-    stop("\"", interval, "\" is not a supported time interval")
+    stop(call. = FALSE,
+         "\"", interval, "\" is not a supported time interval")
 
   # Helper message, tells which variable, date and stations are being queried
   message("Requesting ",
