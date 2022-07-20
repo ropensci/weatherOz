@@ -20,9 +20,9 @@ of "frost", "erosion", "heat", a combination of those or "all".}
 (\url{https://www.agric.wa.gov.au/web-apis})}
 }
 \value{
-a \code{data.frame} of one row with stationCode, stationName, latitude,
-longitude, dateTime of the query and the extreme weather information
-according to the type(s) selected.
+a \code{data.frame} of one row with 'stationCode', 'stationName',
+'latitude', 'longitude', 'dateTime' of the query and the extreme weather
+information according to the type(s) selected.
 }
 \description{
 Get extreme weather event summaries for a single DPIRD station.
@@ -55,5 +55,5 @@ outputs <- lapply(these_stations,
 
 }
 \author{
-Rodrigo Pires, rodrigo.pires@dpird.wa.gov.au
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
