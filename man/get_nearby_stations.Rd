@@ -26,11 +26,12 @@ Optional and defaults to \code{NULL}.}
 Defaults to 100 km.}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
-(https://www.agric.wa.gov.au/web-apis)}
+(\url{https://www.agric.wa.gov.au/web-apis})}
 
 \item{wa_only}{Return stations in Western Australia only. Defaults to \code{TRUE}.}
 
-\item{dpird_only}{Return only DPIRD owned stations and defaults to \code{FALSE}.}
+\item{dpird_only}{Return only \acronym{DPIRD} owned stations and defaults to
+\code{FALSE}.}
 }
 \value{
 a \code{data.frame} with 'stationCode', 'stationName', 'latitude',
@@ -72,5 +73,5 @@ wagga_stn <- get_nearby_stations(
 
 }
 \author{
-Rodrigo Pires, rodrigo.pires@dpird.wa.gov.au
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }

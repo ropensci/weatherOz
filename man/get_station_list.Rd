@@ -45,5 +45,5 @@ api_key = mykey)
 
 }
 \author{
-Rodrigo Pires, rodrigo.pires@dpird.wa.gov.au
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
