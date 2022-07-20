@@ -52,6 +52,7 @@ get_extreme_weather <- function(site,
 {
   if (missing(site)) {
     stop(
+      call. = FALSE,
       "Provide a station ID via the `site` argument. It should take a string
          e.g., `AN001` for Allanooka station."
     )
@@ -65,7 +66,9 @@ get_extreme_weather <- function(site,
   silent = TRUE)
 
   if (length(site) != 1) {
-    stop("Wrong number of sites. This function only handles one site per query.")
+    stop(call. = FALSE,
+         "Wrong number of sites.\n",
+         "This function only handles one site per query.")
   }
 
   httr::set_config(httr::config(ssl_verifypeer = 0L))
