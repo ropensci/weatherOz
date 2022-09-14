@@ -74,25 +74,40 @@ get_summaries <- function(
 
   # Match time interval query to user requests
   m_int <- try(match.arg(interval,
-                         c("daily", "15min", "30min", "hourly", "monthly", "yearly"),
+                         c("daily",
+                           "15min",
+                           "30min",
+                           "hourly",
+                           "monthly",
+                           "yearly"),
                          several.ok = FALSE),
                silent = TRUE)
 
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past.
-  if (m_int %in% c("15min", "30min") && ((as.numeric(format(as.Date(first), "%Y"))) < (as.numeric(format(as.Date(last), "%Y")) - 1))) {
-    stop(call. = FALSE,
-         "Start date is too early. Data in 15 and 30 min intervals are only available from the the 1st day of the previous year")
+  if (m_int %in% c("15min", "30min") &&
+      ((as.numeric(format(
+        as.Date(first), "%Y"
+      ))) < (as.numeric(format(
+        as.Date(last), "%Y"
+      )) - 1))) {
+    stop(
+      call. = FALSE,
+      "Start date is too early. Data in 15 and 30 min intervals are only ",
+      "available from the the 1st day of the previous year"
+    )
   }
 
   # Stop if query is for monthly and interval is wrong
-  if (m_int %in% c("monthly") && (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
+  if (m_int %in% c("monthly") &&
+      (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
     stop(call. = FALSE,
          "For monthly intervals date difference should be at least one month.")
   }
 
   # Stop if query is for daily and interval is wrong
-  if (m_int %in% c("daily") && (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
+  if (m_int %in% c("daily") &&
+      (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
     stop(call. = FALSE,
          "For daily intervals date difference should be at least one day.")
   }
@@ -109,15 +124,17 @@ get_summaries <- function(
          "\"", interval, "\" is not a supported time interval")
 
   # Helper message, tells which variable, date and stations are being queried
-  message("Requesting ",
-          m_int,
-          " data from ",
-          format(as.Date(first), "%e %B %Y"),
-          " to ",
-          format(as.Date(last), "%e %B %Y"),
-          " for location code ",
-          site,
-          "\n")
+  message(
+    "Requesting ",
+    m_int,
+    " data from ",
+    format(as.Date(first), "%e %B %Y"),
+    " to ",
+    format(as.Date(last), "%e %B %Y"),
+    " for location code ",
+    site,
+    "\n"
+  )
 
   # Create base query URL for weather summaries
   api <- paste0("https://api.dpird.wa.gov.au/v2/weather/stations/",
@@ -126,58 +143,84 @@ get_summaries <- function(
                 m_int)
 
   # Select correct time interval input
-  uri <- switch(m_int,
-                `15min` = paste0(api,
-                                 "?startDateTime=",
-                                 format(as.Date(first), "%Y-%m-%d"),
-                                 "T00%3A15%3A00",
-                                 "&endDateTime=",
-                                 format(as.Date(last) + 1, "%Y-%m-%d"),
-                                 "T00%3A00%3A00",
-                                 "&limit=1000",
-                                 "&api_key=", api_key),
-                `30min` = paste0(api,
-                                 "?startDateTime=",
-                                 format(as.Date(first), "%Y-%m-%d"),
-                                 "T00%3A30%3A00",
-                                 "&endDateTime=",
-                                 format(as.Date(last) + 1, "%Y-%m-%d"),
-                                 "T00%3A00%3A00",
-                                 "&limit=1000",
-                                 "&api_key=", api_key),
-                hourly = paste0(api,
-                                "?startDateTime=",
-                                format(as.Date(first), "%Y-%m-%d"),
-                                "T01%3A00%3A00",
-                                "&endDateTime=",
-                                format(as.Date(last) + 1, "%Y-%m-%d"),
-                                "T00%3A00%3A00",
-                                "&limit=1000",
-                                "&api_key=", api_key),
-                daily = paste0(api,
-                               "?startDate=",
-                               format(as.Date(first), "%Y-%m-%d"),
-                               "&endDate=",
-                               format(as.Date(last), "%Y-%m-%d"),
-                               "&api_key=", api_key,
-                               "&limit=",
-                               as.Date(last) - as.Date(first) + 1),
-                monthly = paste0(api, "?startMonth=",
-                                 format(as.Date(first), "%Y-%m"),
-                                 "&endMonth=",
-                                 format(as.Date(last), "%Y-%m"),
-                                 "&limit=",
-                                 ceiling(as.double(difftime(format(as.Date(last), "%Y-%m-%d"),
-                                                    format(as.Date(first), "%Y-%m-%d"),
-                                                    units = "days")/365) * 12),
-                                 "&api_key=", api_key),
-                yearly = paste0(api, "?startYear=",
-                                format(as.Date(first), "%Y"),
-                                "&endYear=",
-                                format(as.Date(last), "%Y"),
-                                "&offset=0",
-                                "&limit=100",
-                                "&api_key=", api_key))
+  uri <- switch(
+    m_int,
+    `15min` = paste0(
+      api,
+      "?startDateTime=",
+      format(as.Date(first), "%Y-%m-%d"),
+      "T00%3A15%3A00",
+      "&endDateTime=",
+      format(as.Date(last) + 1, "%Y-%m-%d"),
+      "T00%3A00%3A00",
+      "&limit=1000",
+      "&api_key=",
+      api_key
+    ),
+    `30min` = paste0(
+      api,
+      "?startDateTime=",
+      format(as.Date(first), "%Y-%m-%d"),
+      "T00%3A30%3A00",
+      "&endDateTime=",
+      format(as.Date(last) + 1, "%Y-%m-%d"),
+      "T00%3A00%3A00",
+      "&limit=1000",
+      "&api_key=",
+      api_key
+    ),
+    hourly = paste0(
+      api,
+      "?startDateTime=",
+      format(as.Date(first), "%Y-%m-%d"),
+      "T01%3A00%3A00",
+      "&endDateTime=",
+      format(as.Date(last) + 1, "%Y-%m-%d"),
+      "T00%3A00%3A00",
+      "&limit=1000",
+      "&api_key=",
+      api_key
+    ),
+    daily = paste0(
+      api,
+      "?startDate=",
+      format(as.Date(first), "%Y-%m-%d"),
+      "&endDate=",
+      format(as.Date(last), "%Y-%m-%d"),
+      "&api_key=",
+      api_key,
+      "&limit=",
+      as.Date(last) - as.Date(first) + 1
+    ),
+    monthly = paste0(
+      api,
+      "?startMonth=",
+      format(as.Date(first), "%Y-%m"),
+      "&endMonth=",
+      format(as.Date(last), "%Y-%m"),
+      "&limit=",
+      ceiling(as.double(
+        difftime(
+          format(as.Date(last), "%Y-%m-%d"),
+          format(as.Date(first), "%Y-%m-%d"),
+          units = "days"
+        ) / 365
+      ) * 12),
+      "&api_key=",
+      api_key
+    ),
+    yearly = paste0(
+      api,
+      "?startYear=",
+      format(as.Date(first), "%Y"),
+      "&endYear=",
+      format(as.Date(last), "%Y"),
+      "&offset=0",
+      "&limit=100",
+      "&api_key=",
+      api_key
+    )
+  )
 
   # return only data collection; disregard metadata
   ret <- jsonlite::fromJSON(url(uri))$data
