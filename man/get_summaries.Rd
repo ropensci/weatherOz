@@ -17,15 +17,15 @@ get_summaries(
 
 \item{first}{The date on which the weather data summary should start. This
 can be provided using an existing variable already in date format,
-using as.Date or as string with format "YYYY-mm-dd".
+using \code{as.Date()} or as string with format "YYYY-mm-dd".
 Note that a string of form "YYYYmmdd" will give an error message.}
 
 \item{last}{The last date for which the data will be sourced, formatted as
-described for the @param first. For intervals less than one day, to get one
-day of data, last should be the same as first, but must be explicitly coded,
-as otherwise it will default to the current date.}
+described for the \code{first} argument. For intervals less than one day, to get
+one day of data, last should be the same as first, but must be explicitly
+coded, as otherwise it will default to the current date.}
 
-\item{api_key}{Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
+\item{api_key}{Api key from DPIRD \url{https://www.agric.wa.gov.au/web-apis}.
 Defaults to NULL.}
 
 \item{interval}{Time interval to summarise over.
@@ -39,29 +39,33 @@ January of last year}
 \value{
 a \code{list} with 3 elements: the station code, station name and a nested
 \verb{data frame} with the all summary output as per Weather API documentation.
+}
+\description{
+Fetch weather summary from DPIRD weather API for an individual station
+}
+\examples{
+# You must have an DPIRD API key to proceed
+mykey <- rstudioapi::askForSecret()
 
-#' @examplesYou must have an DPIRD API key to proceed
+# set date interval for yearly request
+start.date <- "2015-02-01"
 
-mykey <- rstudioapi::askForSecret()set date interval for yearly request
-
-start.date <- "2015-02-01"Use default for end data (current system date)
-
+# Use default for end data (current system date)
 output <- get_summaries(
-site = "AN001",
-first = start.date,
-api_key = mykey,
-interval = "yearly")15 min interval query, define start and end date
+           site = "AN001",
+           first = start.date,
+           api_key = mykey,
+           interval = "yearly")
 
+# 15 min interval query, define start and end date
 start.date <- "2022-05-01"
 end.date <- "2022-05-02"
 
 output <- get_summaries(
-site = "BI",
-first = start.date,
-last = end.date,
-api_key = mykey,
-interval = "15min")
-}
-\description{
-Fetch weather summary from DPIRD weather API for an individual station
+           site = "BI",
+           first = start.date,
+           last = end.date,
+           api_key = mykey,
+           interval = "15min")
+
 }

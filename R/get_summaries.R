@@ -11,13 +11,13 @@
 #' @param site A string with the station ID code for the station of interest.
 #' @param first The date on which the weather data summary should start. This
 #' can be provided using an existing variable already in date format,
-#' using as.Date or as string with format "YYYY-mm-dd".
+#' using `as.Date()` or as string with format "YYYY-mm-dd".
 #' Note that a string of form "YYYYmmdd" will give an error message.
 #' @param last The last date for which the data will be sourced, formatted as
-#' described for the @param first. For intervals less than one day, to get one
-#' day of data, last should be the same as first, but must be explicitly coded,
-#' as otherwise it will default to the current date.
-#' @param api_key Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
+#' described for the `first` argument. For intervals less than one day, to get
+#' one day of data, last should be the same as first, but must be explicitly
+#' coded, as otherwise it will default to the current date.
+#' @param api_key Api key from DPIRD \url{https://www.agric.wa.gov.au/web-apis}.
 #' Defaults to NULL.
 #' @param interval Time interval to summarise over.
 #' Default is 'daily'; others are '15min', '30min', 'hourly',
@@ -30,7 +30,7 @@
 #' @return a `list` with 3 elements: the station code, station name and a nested
 #' `data frame` with the all summary output as per Weather API documentation.
 #'
-#'#' @examples
+#' @examples
 #' # You must have an DPIRD API key to proceed
 #' mykey <- rstudioapi::askForSecret()
 #'

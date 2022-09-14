@@ -14,8 +14,9 @@
 #' one of the existing options (currently 'science' or 'weather')
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
-#' @param station_group
-#' @return a `data.frame` with station code, name, longitude, longitude, owner
+#' @param station_group the name of the station group that you wish to query.
+#'  Currently "all", "api", "rtd", "web", "yshistory", "yellowspot" are valid.
+#' @return a `data.frame` with station code, name, latitude, longitude, owner
 #' and state (for the Science API).
 #' Science \acronym{API} queries return additional details by default
 #' *i.e.*, station model, battery voltage, height of sensors, status and others.
