@@ -59,7 +59,8 @@ get_station_list <- function(api = c("science", "weather"),
   # Error if api key not provided
   if (is.null(api_key)) {
     stop("If you to provide a valid DPIRD API key.\n",
-         "Visit: https://www.agric.wa.gov.au/web-apis")
+         "Visit: https://www.agric.wa.gov.au/web-apis",
+         call. = FALSE)
   }
 
   # Set API
