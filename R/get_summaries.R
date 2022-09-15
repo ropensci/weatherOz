@@ -223,14 +223,5 @@ get_summaries <- function(site,
 
   # return only data collection; disregard metadata
   ret <- jsonlite::fromJSON(url(uri))$data
-
-  # Get query time interval
-  out.period <- ret$summaries$period
-
-  # Remove empty columns (e.g. minute for hourly summaries) and grab number of
-  # records in the data collection
-  out.period <- out.period[, !apply(is.na(out.period), 2, all)]
-  nrec <- nrow(out.period)
-
   return(ret)
 }
