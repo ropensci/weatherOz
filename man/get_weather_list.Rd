@@ -38,12 +38,12 @@ A \code{list} object of data frames containing the following columns:
 }
 }
 \description{
-A wrapper function for \link{weather_data} to handle fetching data for several
-stations specified in a \code{list} object from the \acronym{DPIRD} Science
-\acronym{API} in parallel, see the \strong{Stations} section for further detail.
-Weather data returned will always start on Jan. 1 of the current year and
-carry to the current day or yesterday dependent on data availability in the
-database.
+A wrapper function for \code{FoliarDisease::weather_data} to handle fetching data
+for several stations specified in a \code{list} object from the \acronym{DPIRD}
+Science \acronym{API} in parallel, see the \strong{Stations} section for further
+detail. Weather data returned will always start on Jan. 1 of the current year
+and carry to the current day or yesterday dependent on data availability in
+the database.
 }
 \examples{
 # set up multisession environment

@@ -8,12 +8,12 @@
 
 #' Fetch a list of weather station data from DPIRD Science API
 #'
-#' A wrapper function for [weather_data] to handle fetching data for several
-#' stations specified in a `list` object from the \acronym{DPIRD} Science
-#' \acronym{API} in parallel, see the **Stations** section for further detail.
-#' Weather data returned will always start on Jan. 1 of the current year and
-#' carry to the current day or yesterday dependent on data availability in the
-#' database.
+#' A wrapper function for `FoliarDisease::weather_data` to handle fetching data
+#' for several stations specified in a `list` object from the \acronym{DPIRD}
+#' Science \acronym{API} in parallel, see the **Stations** section for further
+#' detail. Weather data returned will always start on Jan. 1 of the current year
+#' and carry to the current day or yesterday dependent on data availability in
+#' the database.
 #'
 #' @param sites A character vector or list of station ID codes from the
 #'  \acronym{DPIRD} Science \acronym{API} for which data should be fetched.
