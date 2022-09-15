@@ -11,11 +11,15 @@
 #' Providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
 #' Water Corporation, Harvey Water and Pardoo Beef Corporation.
 #' @param which_api name of the \acronym{API} to be queried. Needs to match to
-#' one of the existing options (currently 'science' or 'weather')
+#' one of the existing options (currently 'science' or 'weather') and defaults
+#' to the 'science' \acronym{API}.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
 #' @param station_group the name of the station group that you wish to query.
-#'  Currently "all", "api", "rtd", "web", "yshistory", "yellowspot" are valid.
+#' Defaults to 'rtd'. Currently "all", "api", "rtd", "web", "yshistory",
+#' "yellowspot" are valid groups.
+#' @param state a string limiting the query to one or several states, defaults
+#' to 'wa'. Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".
 #' @return a `data.frame` with station code, name, latitude, longitude, owner
 #' and state (for the Science API).
 #' Science \acronym{API} queries return additional details by default
@@ -38,21 +42,9 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-get_station_list <- function(api = c("science", "weather"),
-                             station_group = c("rtd",
-                                               "all",
-                                               "api",
-                                               "web",
-                                               "yshistory",
-                                               "yellowspot"),
-                             state = c("all",
-                                       "wa",
-                                       "sa",
-                                       "nsw",
-                                       "vic",
-                                       "qld",
-                                       "tas",
-                                       "nt"),
+get_station_list <- function(api = "science",
+                             station_group = "rtd",
+                             state = "wa",
                              api_key = NULL) {
 
 

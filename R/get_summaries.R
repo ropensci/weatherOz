@@ -62,7 +62,7 @@ get_summaries <- function(
     first,
     last = Sys.Date(),
     api_key = api_key,
-    interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly")) {
+    interval = "daily") {
 
   if (missing(site))
     stop(call. = FALSE,
