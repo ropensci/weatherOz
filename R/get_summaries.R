@@ -57,13 +57,11 @@
 #'
 #' @export
 
-get_summaries <- function(
-    site,
-    first,
-    last = Sys.Date(),
-    api_key = api_key,
-    interval = "daily") {
-
+get_summaries <- function(site,
+                          first,
+                          last = Sys.Date(),
+                          api_key = api_key,
+                          interval = "daily") {
   if (missing(site))
     stop(call. = FALSE,
          "Station ID required.")
