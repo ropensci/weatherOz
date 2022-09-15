@@ -70,6 +70,10 @@ get_summaries <- function(site,
     stop(call. = FALSE,
          "Please supply a start date.")
 
+  # validate user provided date
+  .check_date(first)
+  .check_date(last)
+
   # Match time interval query to user requests
   m_int <- try(match.arg(interval,
                          c("daily",
