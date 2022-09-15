@@ -21,14 +21,14 @@ Imports:
     fields,
     FoliarDisease,
     furrr,
-    future,
     ggplot2,
     httr,
     jsonlite,
     lubridate,
     methods,
     purrr
-Suggests: 
+Suggests:
+    future,
     data.table,
     rstudioapi,
     testthat (>= 3.0.0),
