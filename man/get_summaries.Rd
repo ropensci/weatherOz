@@ -9,7 +9,7 @@ get_summaries(
   first,
   last = Sys.Date(),
   api_key = api_key,
-  interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly")
+  interval = "daily"
 )
 }
 \arguments{
