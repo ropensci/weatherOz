@@ -25,9 +25,11 @@ Imports:
     ggplot2,
     httr,
     jsonlite,
-    purrr,
-    sp
+    lubridate,
+    methods,
+    purrr
 Suggests: 
+    data.table,
     rstudioapi,
     testthat (>= 3.0.0),
     vdiffr
