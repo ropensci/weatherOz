@@ -8,8 +8,8 @@
 #' Get extreme weather event summaries for a single DPIRD station
 #'
 #' @param site A string with the station ID code for the station of interest.
-#' @param type A string with the type of extreme weather to return. Can be any
-#' of "frost", "erosion", "heat", a combination of those or "all".
+#' @param type A string with the type of extreme weather to return. Defaults to
+#' 'all; and can be combination of "frost", "erosion", "heat", or "all".
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
 #'
@@ -48,7 +48,7 @@
 #' @export
 
 get_extreme_weather <- function(site,
-                                type = c("frost", "erosion", "heat", "all"),
+                                type = "all",
                                 api_key = NULL)
 {
   if (missing(site)) {
