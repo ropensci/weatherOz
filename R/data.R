@@ -109,7 +109,7 @@
 #' @format  ...
 #' @keywords datasets
 #' @source create based on current office locations
-#' (https://www.agric.wa.gov.au/office-locations).
+#' \url{https://www.agric.wa.gov.au/office-locations}.
 
 "dpird_office_towns"
 
@@ -121,7 +121,7 @@
 #' @docType data
 #' @format  ...
 #' @keywords datasets
-#' @source create by scrapping list of most populous places in WA from Wikipedia
-#' (https://en.wikipedia.org/wiki/List_of_places_in_Western_Australia_by_population).
+#' @source create by scraping list of most populous places in WA from Wikipedia
+#' \url{https://en.wikipedia.org/wiki/List_of_places_in_Western_Australia_by_population}.
 
 "wa_populous_towns"

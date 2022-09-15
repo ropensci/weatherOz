@@ -13,37 +13,38 @@ get_summaries(
 )
 }
 \arguments{
-\item{site}{A string with the station ID code for the station of interest.}
+\item{site}{A string with the station \acronym{ID} code for the station of
+interest.}
 
-\item{first}{The date on which the weather data summary should start. This
-can be provided using an existing variable already in date format,
-using \code{as.Date()} or as string with format "YYYY-mm-dd".
-Note that a string of form "YYYYmmdd" will give an error message.}
+\item{first}{The date on which the weather data summary will be sourced.
+\pkg{wrapique} does its best to determine the date given any format but may
+fail if given an unconventional date format.}
 
-\item{last}{The last date for which the data will be sourced, formatted as
-described for the \code{first} argument. For intervals less than one day, to get
-one day of data, last should be the same as first, but must be explicitly
-coded, as otherwise it will default to the current date.}
+\item{last}{The last date for which the data will be sourced. For intervals
+less than one day, to get one day of data, last should be the same as first,
+but must be explicitly coded, as otherwise it will default to the current
+date.}
 
 \item{api_key}{Api key from DPIRD \url{https://www.agric.wa.gov.au/web-apis}.
-Defaults to NULL.}
+Defaults to \code{NULL}.}
 
-\item{interval}{Time interval to summarise over.
-Default is 'daily'; others are '15min', '30min', 'hourly',
-'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
-will be midnight to midnight, with the last time interval being before
-midnight - hour/minute values are for the end of the time period.
-Data for shorter intervals ('15min', '30min') should be available from
-January of last year}
+\item{interval}{Time interval to summarise over.  The default is 'daily',
+others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
+shorter than 1 day, time period covered will be midnight to midnight, with
+the last time interval being before midnight–hour/minute values are for the
+end of the time period. Data for shorter intervals ('15min', '30min') should
+be available from January of last year.}
 }
 \value{
 a \code{list} with 3 elements: the station code, station name and a nested
-\verb{data frame} with the all summary output as per Weather API documentation.
+\verb{data frame} with the all summary output as per Weather \acronym{API}
+documentation.
 }
 \description{
 Fetch weather summary from DPIRD weather API for an individual station
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
 mykey <- rstudioapi::askForSecret()
 
@@ -67,5 +68,5 @@ output <- get_summaries(
            last = end.date,
            api_key = mykey,
            interval = "15min")
-
+\dontshow{\}) # examplesIf}
 }

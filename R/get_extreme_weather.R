@@ -5,7 +5,7 @@
 # Copyright (C) 2022 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Get extreme weather event summaries for a single DPIRD station.
+#' Get extreme weather event summaries for a single DPIRD station
 #'
 #' @param site A string with the station ID code for the station of interest.
 #' @param type A string with the type of extreme weather to return. Can be any
@@ -40,8 +40,9 @@
 #' outputs <- lapply(these_stations,
 #'                   get_extreme_weather,
 #'                   type = "all",
-#'                   api_key = apiKey) |>
-#'  data.table::rbindlist()
+#'                   api_key = apiKey)
+#'
+#'  data.table::rbindlist(outputs)
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export

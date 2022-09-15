@@ -17,6 +17,7 @@ A \CRANpkg{ggplot2} object
 Creates a climograph of weather data from the DPIRD API
 }
 \examples{
+weather =
 create_climograph(weather = weather)
 
 }

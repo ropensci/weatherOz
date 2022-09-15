@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_extreme_weather.R
 \name{get_extreme_weather}
 \alias{get_extreme_weather}
-\title{Get extreme weather event summaries for a single DPIRD station.}
+\title{Get extreme weather event summaries for a single DPIRD station}
 \usage{
 get_extreme_weather(
   site,
@@ -25,7 +25,7 @@ a \code{data.frame} of one row with 'stationCode', 'stationName',
 information according to the type(s) selected.
 }
 \description{
-Get extreme weather event summaries for a single DPIRD station.
+Get extreme weather event summaries for a single DPIRD station
 }
 \examples{
 # You must have an DPIRD API key to proceed
@@ -50,8 +50,9 @@ these_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
 outputs <- lapply(these_stations,
                   get_extreme_weather,
                   type = "all",
-                  api_key = apiKey) |>
- data.table::rbindlist()
+                  api_key = apiKey)
+
+ data.table::rbindlist(outputs)
 
 }
 \author{

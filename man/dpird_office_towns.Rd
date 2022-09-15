@@ -9,7 +9,7 @@
 }
 \source{
 create based on current office locations
-(https://www.agric.wa.gov.au/office-locations).
+\url{https://www.agric.wa.gov.au/office-locations}.
 }
 \usage{
 dpird_office_towns

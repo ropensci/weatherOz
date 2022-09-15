@@ -8,29 +8,29 @@
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
-#' @param site A string with the station ID code for the station of interest.
-#' @param first The date on which the weather data summary should start. This
-#' can be provided using an existing variable already in date format,
-#' using `as.Date()` or as string with format "YYYY-mm-dd".
-#' Note that a string of form "YYYYmmdd" will give an error message.
-#' @param last The last date for which the data will be sourced, formatted as
-#' described for the `first` argument. For intervals less than one day, to get
-#' one day of data, last should be the same as first, but must be explicitly
-#' coded, as otherwise it will default to the current date.
+#' @param site A string with the station \acronym{ID} code for the station of
+#' interest.
+#' @param first The date on which the weather data summary will be sourced.
+#' \pkg{wrapique} does its best to determine the date given any format but may
+#' fail if given an unconventional date format.
+#' @param last The last date for which the data will be sourced. For intervals
+#' less than one day, to get one day of data, last should be the same as first,
+#' but must be explicitly coded, as otherwise it will default to the current
+#' date.
 #' @param api_key Api key from DPIRD \url{https://www.agric.wa.gov.au/web-apis}.
-#' Defaults to NULL.
-#' @param interval Time interval to summarise over.
-#' Default is 'daily'; others are '15min', '30min', 'hourly',
-#' 'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
-#' will be midnight to midnight, with the last time interval being before
-#' midnight - hour/minute values are for the end of the time period.
-#' Data for shorter intervals ('15min', '30min') should be available from
-#' January of last year
+#' Defaults to `NULL`.
+#' @param interval Time interval to summarise over.  The default is 'daily',
+#' others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
+#' shorter than 1 day, time period covered will be midnight to midnight, with
+#' the last time interval being before midnight–hour/minute values are for the
+#' end of the time period. Data for shorter intervals ('15min', '30min') should
+#' be available from January of last year.
 #'
 #' @return a `list` with 3 elements: the station code, station name and a nested
-#' `data frame` with the all summary output as per Weather API documentation.
+#' `data frame` with the all summary output as per Weather \acronym{API}
+#' documentation.
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # You must have an DPIRD API key to proceed
 #' mykey <- rstudioapi::askForSecret()
 #'
@@ -88,11 +88,8 @@ get_summaries <- function(site,
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past.
   if (m_int %in% c("15min", "30min") &&
-      ((as.numeric(format(
-        as.Date(first), "%Y"
-      ))) < (as.numeric(format(
-        as.Date(last), "%Y"
-      )) - 1))) {
+      ((as.numeric(format(as.Date(first), "%Y"))) <
+       (as.numeric(format(as.Date(last), "%Y")) - 1))) {
     stop(
       call. = FALSE,
       "Start date is too early. Data in 15 and 30 min intervals are only ",
@@ -230,7 +227,7 @@ get_summaries <- function(site,
   # Get query time interval
   out.period <- ret$summaries$period
 
-  # Remove empty columns (eg minute for hourly summaries) and grab number of
+  # Remove empty columns (e.g. minute for hourly summaries) and grab number of
   # records in the data collection
   out.period <- out.period[, !apply(is.na(out.period), 2, all)]
   nrec <- nrow(out.period)

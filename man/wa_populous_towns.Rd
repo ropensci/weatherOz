@@ -8,8 +8,8 @@
 ...
 }
 \source{
-create by scrapping list of most populous places in WA from Wikipedia
-(https://en.wikipedia.org/wiki/List_of_places_in_Western_Australia_by_population).
+create by scraping list of most populous places in WA from Wikipedia
+\url{https://en.wikipedia.org/wiki/List_of_places_in_Western_Australia_by_population}.
 }
 \usage{
 wa_populous_towns

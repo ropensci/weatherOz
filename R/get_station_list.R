@@ -30,12 +30,12 @@
 #' mykey <- rstudioapi::askForSecret()
 #'
 #' stations_weather <- get_station_list(which_api = "weather",
-#' station_ group = "rtd",
+#' station_group = "rtd",
 #' state = "all",
 #' api_key = mykey)
 #'
 #' stations_science <- get_station_list(which_api = "science",
-#' station_ group = "yellowspot",
+#' station_group = "yellowspot",
 #' state = "nsw",
 #' api_key = mykey)
 #'
