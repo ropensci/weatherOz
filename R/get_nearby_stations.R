@@ -199,13 +199,15 @@ get_nearby_stations <- function(latitude = NULL,
     }
   }
 
-  if (isTRUE(dpird_only)) distance_out <- subset(distance_out, owner == "DPIRD")
-  else distance_out <- distance_out |>
-      dplyr::filter(!is.na(latitude) & !is.na(longitude)) |>
-      dplyr::mutate(stationName = tolower(stationName),
-                    latitude = dplyr::case_when(latitude > 0 ~ (latitude * -1),
-                                                TRUE ~ latitude)
-      )
+  if (isTRUE(dpird_only)) {
+    distance_out <- subset(distance_out, owner == "DPIRD")
 
+  } else {
+    distance_out <- dplyr::filter(distance_out, !is.na(latitude) & !is.na(longitude))
+    distance_out <- dplyr::mutate(distance_out,
+                                  stationName = tolower(stationName),
+                                  latitude = dplyr::case_when(latitude > 0 ~ (latitude * -1),
+                                                              TRUE ~ latitude))
+  }
   return(distance_out)
 }
