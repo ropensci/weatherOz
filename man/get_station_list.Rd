@@ -13,6 +13,10 @@ get_station_list(
 )
 }
 \arguments{
+\item{api}{name of the \acronym{API} to be queried. Needs to match to
+one of the existing options (currently 'science' or 'weather') and defaults
+to the 'science' \acronym{API}.}
+
 \item{station_group}{the name of the station group that you wish to query.
 Defaults to 'rtd'. Currently "all", "api", "rtd", "web", "yshistory",
 "yellowspot" are valid groups.}
@@ -22,10 +26,6 @@ to 'wa'. Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
 (\url{https://www.agric.wa.gov.au/web-apis})}
-
-\item{which_api}{name of the \acronym{API} to be queried. Needs to match to
-one of the existing options (currently 'science' or 'weather') and defaults
-to the 'science' \acronym{API}.}
 }
 \value{
 a \code{data.frame} with station code, name, latitude, longitude, owner

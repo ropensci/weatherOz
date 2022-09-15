@@ -10,7 +10,7 @@
 #'
 #' Providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
 #' Water Corporation, Harvey Water and Pardoo Beef Corporation.
-#' @param which_api name of the \acronym{API} to be queried. Needs to match to
+#' @param api name of the \acronym{API} to be queried. Needs to match to
 #' one of the existing options (currently 'science' or 'weather') and defaults
 #' to the 'science' \acronym{API}.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}

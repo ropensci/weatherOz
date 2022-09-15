@@ -36,7 +36,7 @@ Defaults to 100 km.}
 \value{
 a \code{data.frame} with 'stationCode', 'stationName', 'latitude',
 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
-sistance from station of interest.
+distance from station of interest.
 }
 \description{
 Get a list of nearby weather stations from coordinates or station ID code

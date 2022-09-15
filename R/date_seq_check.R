@@ -12,10 +12,10 @@
 #' x <- seq(as.Date("2021-01-01"), as.Date("2021-01-31"), by = "1 day")
 #' y <- "BA"
 #' date_seq_check(x = x, y = y)
-#' @author Adam H. Sparks, adam.sparks@@dpird.wa.gov.au
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export
 
-date_seq_check <- function(x, y, jan1 = TRUE) {
+date_seq_check <- function(x, y) {
   location <- y[[1]]
   date_range <- seq(min(x), max(x), by = "1 day")
   if (any(date_range %notin% x) || any(date_range != x)) {

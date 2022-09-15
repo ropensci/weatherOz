@@ -4,7 +4,7 @@
 \alias{date_seq_check}
 \title{Check dates for sequentialness and completeness}
 \usage{
-date_seq_check(x, y, jan1 = TRUE)
+date_seq_check(x, y)
 }
 \arguments{
 \item{x}{A vector of dates}
@@ -26,5 +26,5 @@ y <- "BA"
 date_seq_check(x = x, y = y)
 }
 \author{
-Adam H. Sparks, adam.sparks@dpird.wa.gov.au
+Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }

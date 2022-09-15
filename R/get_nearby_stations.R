@@ -21,7 +21,7 @@
 #'
 #' @return a `data.frame` with 'stationCode', 'stationName', 'latitude',
 #' 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
-#' sistance from station of interest.
+#' distance from station of interest.
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed
