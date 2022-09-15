@@ -10,9 +10,11 @@
 #' @examples
 #' create_climograph(weather = weather)
 #'
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#'
 create_climograph <- function(weather) {
 
-  MAX_TEMP <- MIN_TEMP <- RAIN <- NULL
+  MAX_TEMP <- MIN_TEMP <- RAIN <- DATE <- NULL
 
   # scale axis to max rainfall and min/max temperature
   ylim.prim <- c(0, max(weather$RAIN))

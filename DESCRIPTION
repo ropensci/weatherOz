@@ -24,6 +24,7 @@ Imports:
     future,
     ggplot2,
     httr,
+    jsonlite,
     purrr,
     sp
 Suggests: 

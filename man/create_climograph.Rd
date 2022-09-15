@@ -20,3 +20,6 @@ Creates a climograph of weather data from the DPIRD API
 create_climograph(weather = weather)
 
 }
+\author{
+Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
+}
