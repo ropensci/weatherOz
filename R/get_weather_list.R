@@ -10,7 +10,7 @@
 #'
 #' A wrapper function for [weather_data] to handle fetching data for several
 #' stations specified in a `list` object from the \acronym{DPIRD} Science
-#' \acronym{API} in parallel, see **Stations** section for further detail.
+#' \acronym{API} in parallel, see the **Stations** section for further detail.
 #' Weather data returned will always start on Jan. 1 of the current year and
 #' carry to the current day or yesterday dependent on data availability in the
 #' database.
@@ -39,7 +39,7 @@
 #'  * minimum temperature (min_temp) and
 #'  * \acronym{DPIRD}'s Science \acronym{API} 2.0 station code.
 #'
-#' @author Adam Sparks, adam.sparks@@dpird.wa.gov.au
+#' @author Adam Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export
 
 get_weather_list <- function(sites,
