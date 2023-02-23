@@ -7,7 +7,6 @@
 #	<https://www.dpird.wa.gov.au>
 
 #' Individual station summaries nicely formatted.
-#'
 #' @param site A string of the station ID code for the station of interest.
 #' Passed through from `get_summaries` function.
 #' @param first The date on which the weather data summary should start.
@@ -25,13 +24,11 @@
 #' @param api_version Defaults to 2, and gives a error if not 2.
 #' @param which_vars Match weather summary selected. Defaults to "all".
 #' Can be one of "all", "rain", "wind", "temp" and "erosion."
-#'
 #' @return a `data frame` with site and date interval queried together with
 #' requested weather summary/summaries.
-#'
 #' @examples
 #' # You must have an DPIRD API key to proceed
-#' mykey <- rstudioapi::askForSecret()
+#' mykey <- 'dpird_api_key'
 #'
 #' # Set date interval for yearly request
 #' # Get rainfall summary

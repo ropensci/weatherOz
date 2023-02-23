@@ -25,14 +25,12 @@
 #' the last time interval being before midnight–hour/minute values are for the
 #' end of the time period. Data for shorter intervals ('15min', '30min') should
 #' be available from January of last year.
-#'
 #' @return a `list` with 3 elements: the station code, station name and a nested
 #' `data frame` with the all summary output as per Weather \acronym{API}
 #' documentation.
-#'
-#' @examplesIf interactive()
+#' @examples
 #' # You must have an DPIRD API key to proceed
-#' mykey <- rstudioapi::askForSecret()
+#' mykey <- 'dpird_api_key'
 #'
 #' # set date interval for yearly request
 #' start.date <- "2015-02-01"
