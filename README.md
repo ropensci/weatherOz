@@ -13,7 +13,7 @@ Follow the API Terms and Conditions for the [DPIRD](https://www.agric.wa.gov.au/
 
 Observation data from the DPIRD's weather station network is also available via a [web interface](https://weather.agric.wa.gov.au).
 The data available is a mirror of the DPIRD Weather API endpoints.
-Rainfall estimates are also available at virtual stations (_i.e._ where no observational data is present) and is sourced from the Doppler radar service provided by the Bureau of Meteorology under license.
+Rainfall estimates are also available at virtual stations (_i.e._, where no observational data is present) and is sourced from the Doppler radar service provided by the Bureau of Meteorology under license.
 
 ## Installation instructions
 
