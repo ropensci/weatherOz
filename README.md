@@ -26,7 +26,7 @@ from the Doppler Radar service provided by the Bureau of Meteorology under licen
 
 **Note that the data are not static and may be replaced with improved data. Also please note that SILO may be unavailable between 11am and 1pm (Brisbane time) each Wednesday and Thursday to allow for essential system maintenance.**
   
-  Please note that not all exposed endpoints of the DPIRD APIs have associated functions. 
+Please note that not all exposed endpoints of the DPIRD APIs have associated functions. 
 Development is ongoing. While we are responsive to user requests, 
 we don't make any commitments about speed of delivery.
 
@@ -34,3 +34,22 @@ we don't make any commitments about speed of delivery.
 Stone, G., Dalla Pozza, R., Carter J., & McKeon, G. (2019). Long Paddock: 
 climate risk and grazing information for Australian rangelands and grazing 
 communities . The Rangeland Journal, 41, 225–232
+
+## Installation instructions
+
+You can install the development version of wrapique like so:
+
+```r
+if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+}
+remotes::install_git("https://git.agric.wa.gov.au/r/wrapique.git")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+``` r
+## basic example code
+```
