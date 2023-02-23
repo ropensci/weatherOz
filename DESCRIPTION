@@ -1,12 +1,23 @@
 Package: wrapique
 Title: WA Weather API queries and mapping
 Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors@R:  c(person(given = "Rodrigo", family = "Pires",
+                     email = "rodrigo.pires@dpird.wa.gov.au",
+                     role = c("aut", "cre"),
+                     comment = c(ORCID = "0000-0001-7384-6849"))),
+            c(person(given = "Anna", family = "Hepworth",
+                    email = "anna.hepworth@dpird.wa.gov.au",
+                    role = "aut",
+                    comment = c(ORCID = "0000-0003-0204-6347"))),
+            c(person(given = "Rebecca", family = "O'Leary",
+                    email = rebecca.o'leary@agric.wa.gov.au",
+                    role = "aut")),
+            c(person(given = "Adam H.", family = "Sparks",
+                     email = "adam.sparks@dpird.wa.gov.au",
+                     role = "aut",
+                     comment = c(ORCID = "0000-0002-0061-8359"))),
+            c(person(given = "Western Australia Agriculture Authority (WAAA)",
+                     role = "cph"))
 Description: Functions to query weather API endpoints provided by the Department
     of Primary Industries and Regional Development (DPIRD) of Western Australia
     and by [info about SILO] and to manipulate and/or map the resulting data.
