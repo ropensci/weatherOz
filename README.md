@@ -15,18 +15,6 @@ Observation data from the DPIRD's weather station network is also available via 
 The data available is a mirror of the DPIRD Weather API endpoints.
 Rainfall estimates are also available at virtual stations (_i.e._ where no observational data is present) and is sourced from the Doppler radar service provided by the Bureau of Meteorology under license.
 
-## Notes on Data and API Endpoints
-
-Note that the data are not static and may be replaced with improved data.
-Also please note that SILO may be unavailable between 11am and 1pm (Brisbane time) each Wednesday and Thursday to allow for essential system maintenance.
-
-Please also note that not all exposed endpoints of the DPIRD APIs have associated functions.
-Development is ongoing.
-While we are responsive to user requests, we don't make any commitments about speed of delivery.
-
-## References
-Stone, G., Dalla Pozza, R., Carter J., & McKeon, G. (2019). Long Paddock: climate risk and grazing information for Australian rangelands and grazing communities. _The Rangeland Journal_, 41, 225–232
-
 ## Installation instructions
 
 You can install the development version of {wrapique} like so:
@@ -45,3 +33,15 @@ This is a basic example which shows you how to solve a common problem:
 ``` r
 ## basic example code
 ```
+
+## Notes on Data and API Endpoints
+
+Note that the data are not static and may be replaced with improved data.
+Also please note that SILO may be unavailable between 11am and 1pm (Brisbane time) each Wednesday and Thursday to allow for essential system maintenance.
+
+Please also note that not all exposed endpoints of the DPIRD APIs have associated functions.
+Development is ongoing.
+While we are responsive to user requests, we don't make any commitments about speed of delivery.
+
+## References
+Stone, G., Dalla Pozza, R., Carter J., & McKeon, G. (2019). Long Paddock: climate risk and grazing information for Australian rangelands and grazing communities. _The Rangeland Journal_, 41, 225–232
