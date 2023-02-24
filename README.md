@@ -3,7 +3,7 @@
 {wrapique} aims to facilitate access and download of a range of climate data from the Western Australian Department of Primary Industries and Regional Development (DPIRD) and the Scientific Information for Land Owners (SILO) API endpoints.
 The package queries the APIs and returns data in your R session as a data frame.
 Observation data from the DPIRD's weather station network are available via the [Science](https://www.agric.wa.gov.au/science-api-20) and [Weather](https://www.agric.wa.gov.au/weather-api-20) APIs.
-SILO data is obtained from the Long Paddock initiative (QLD Government) and are spatially and temporally complete, covering all Australia and few nearby islands (112°E to 154°E, 10°S to 44°S), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
+SILO data is obtained from the Long Paddock initiative (Jeffery et al. 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112°E to 154°E, 10°S to 44°S), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
 Visit the [SILO website](https://siloapi.longpaddock.qld.gov.au/silo/) for more details about how the data is prepared and which climate data are available.
 
 Access to DPIRD API requires an API key.
@@ -44,4 +44,5 @@ Development is ongoing.
 While we are responsive to user requests, we don't make any commitments about speed of delivery.
 
 ## References
-Stone, G., Dalla Pozza, R., Carter J., & McKeon, G. (2019). Long Paddock: climate risk and grazing information for Australian rangelands and grazing communities. _The Rangeland Journal_, 41, 225–232
+
+Jeffrey, S.J., Carter, J.O., Moodie, K.B. and Beswick, A.R. (2001). Using spatial interpolation to construct a comprehensive archive of Australian climate data, _Environmental Modelling and Software_, Vol 16/4, pp 309-330. <https://doi.org/10.1016/S1364-8152(01)00008-1)>.
