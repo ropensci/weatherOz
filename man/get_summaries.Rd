@@ -44,9 +44,8 @@ documentation.
 Fetch weather summary from DPIRD weather API for an individual station
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
-mykey <- rstudioapi::askForSecret()
+mykey <- 'dpird_api_key'
 
 # set date interval for yearly request
 start.date <- "2015-02-01"
@@ -68,5 +67,5 @@ output <- get_summaries(
            last = end.date,
            api_key = mykey,
            interval = "15min")
-\dontshow{\}) # examplesIf}
+
 }

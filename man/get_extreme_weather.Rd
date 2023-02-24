@@ -4,17 +4,13 @@
 \alias{get_extreme_weather}
 \title{Get extreme weather event summaries for a single DPIRD station}
 \usage{
-get_extreme_weather(
-  site,
-  type = c("frost", "erosion", "heat", "all"),
-  api_key = NULL
-)
+get_extreme_weather(site, type = "all", api_key = NULL)
 }
 \arguments{
 \item{site}{A string with the station ID code for the station of interest.}
 
-\item{type}{A string with the type of extreme weather to return. Can be any
-of "frost", "erosion", "heat", a combination of those or "all".}
+\item{type}{A string with the type of extreme weather to return. Defaults to
+'all; and can be combination of "frost", "erosion", "heat", or "all".}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
 (\url{https://www.agric.wa.gov.au/web-apis})}

@@ -4,12 +4,24 @@
 \name{wrapique-package}
 \alias{wrapique}
 \alias{wrapique-package}
-\title{wrapique: WA Weather API queries and mapping}
+\title{wrapique: An API Client for Western Australia (DPIRD) and Australian (SILO) Weather Data APIs}
 \description{
 Functions to query weather API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia and by [info about SILO] and to manipulate and/or map the resulting data. Currently only set up for the South West Land Division (SWLD) in Western Australia.
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Rodrigo Pires \email{rodrigo.pires@dpird.wa.gov.au} (\href{https://orcid.org/0000-0001-7384-6849}{ORCID})
+
+Authors:
+\itemize{
+  \item Anna Hepworth \email{anna.hepworth@dpird.wa.gov.au} (\href{https://orcid.org/0000-0003-0204-6347}{ORCID})
+  \item Rebecca O'Leary \email{rebecca.o'leary@agric.wa.gov.au}
+  \item Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Western Australia Agriculture Authority (WAAA) (Provided funding through A. Sparks' and R. O'Leary's time) [copyright holder, funder]
+}
 
 }
 \keyword{internal}

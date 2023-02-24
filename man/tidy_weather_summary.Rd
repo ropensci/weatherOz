@@ -50,7 +50,7 @@ Individual station summaries nicely formatted.
 }
 \examples{
 # You must have an DPIRD API key to proceed
-mykey <- rstudioapi::askForSecret()
+mykey <- 'dpird_api_key'
 
 # Set date interval for yearly request
 # Get rainfall summary
