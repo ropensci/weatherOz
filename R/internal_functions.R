@@ -66,6 +66,9 @@
 #' @return A data.frame with date class column(s) and numeric class columns for
 #' the weather variables.
 #' @keywords internal
+#'
+#' @noRd
+
 parse_silo <- function(query_response,
                        this_format,
                        this_date) {
