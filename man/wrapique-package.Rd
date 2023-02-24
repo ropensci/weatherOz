@@ -6,7 +6,7 @@
 \alias{wrapique-package}
 \title{wrapique: An API Client for Western Australia (DPIRD) and Australian (SILO) Weather Data APIs}
 \description{
-Provides automated downloading, parsing, cleaning, and formatting of weather data through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES). DPIRD weather data are accessed through DPIRD's public APIs, \url{https://www.agric.wa.gov.au/weather-api-20}. Queensland data are accessed through SILO (Scientific Information for Land Owners), a database of Australian climate data from 1889 (current to yesterday) Jeffery et al. 2001, \doi{ 10.1016/S1364-8152(01)00008-1}.
+Provides automated downloading, parsing, cleaning, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES). DPIRD weather data are accessed through DPIRD's public APIs, \url{https://www.agric.wa.gov.au/weather-api-20}, providing access to weather station data from DPIRD's weather station network. Australia-wide data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001, \doi{ 10.1016/S1364-8152(01)00008-1}).
 }
 \author{
 \strong{Maintainer}: Rodrigo Pires \email{rodrigo.pires@dpird.wa.gov.au} (\href{https://orcid.org/0000-0001-7384-6849}{ORCID})
