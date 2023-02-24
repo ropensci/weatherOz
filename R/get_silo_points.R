@@ -1,3 +1,4 @@
+#
 # file: /R/get_silo_points.R
 #
 # This file is part of the R-package wrapique
