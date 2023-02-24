@@ -73,7 +73,7 @@ get_nearby_stations <- function(latitude = NULL,
          "Visit: https://www.agric.wa.gov.au/web-apis")
   }
 
-  if (isFALSE(wa_only) & isTRUE(dpird_only)) {
+  if (isFALSE(wa_only) & dpird_only) {
     stop(call. = FALSE,
          "DPIRD weather stations are only available in Western Australia.
          Cannot proceed if `wa_only = ", wa_only,
@@ -81,7 +81,7 @@ get_nearby_stations <- function(latitude = NULL,
          dpird_only,".")
   }
 
-  if (isTRUE(wa_only)) {
+  if (wa_only) {
     if (!is.null(site)) {
       res <- jsonlite::fromJSON(
         url(paste0("https://api.dpird.wa.gov.au/v2/science/stations?",
@@ -199,7 +199,7 @@ get_nearby_stations <- function(latitude = NULL,
     }
   }
 
-  if (isTRUE(dpird_only)) {
+  if (dpird_only) {
     distance_out <- subset(distance_out, owner == "DPIRD")
 
   } else {
