@@ -13,8 +13,8 @@
 #' 'monthly' with, that's right, monthly frequency.
 #' @param station_id An integer, station number available at the SILO
 #' the network.
-#' @param latitude A vector, represeting the latitude of a point-of-interest
-#' @param longitude A vector, represeting the longitude of a point-of-interest
+#' @param latitude A vector, representing the latitude of a point-of-interest
+#' @param longitude A vector, representing the longitude of a point-of-interest
 #' @param first A string representing the start date of the query in the
 #' format 'yyyymmdd'
 #' @param last A string representing the end date of the query in the
@@ -24,7 +24,7 @@
 #' retrieve daily data.
 #' @param email A string specifying the email address to use for the request.
 #' The query will return an error if a valid email address is not provided.
-#' @return A dataframe containing the retrieved data from the SILO API.
+#' @return A data frame containing the retrieved data from the SILO API.
 #' @export
 #' @examples
 #' # Source observation data for station Wongan Hills station, WA (8137)
