@@ -1,4 +1,4 @@
-# {wrapique}: a DPIRD weather and SILO API Client
+# {wrapique}: An API Client for Western Australia (DPIRD) and Australian Weather Data (SILO) APIs 
 
 {wrapique} aims to facilitate access and download of a range of climate data from the Western Australian Department of Primary Industries and Regional Development (DPIRD) and the Scientific Information for Land Owners (SILO) API endpoints.
 The package queries the APIs and returns data in your R session as a data frame.
