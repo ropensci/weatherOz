@@ -81,36 +81,52 @@ parse_silo <- function(query_response,
     df <- gsub("\\s+", " ", df)
     out <- read.delim(textConnection(df), sep = " ")
     names(out)[1] <- "year"
-    out$date <- as.Date(out[, "day"] - 1, paste0(out[, "year"], "-01-01"))
+    out$date <-
+      as.Date(out[, "day"] - 1, paste0(out[, "year"], "-01-01"))
   }
 
   # monthly data
   if (this_format == 'monthly') {
     df <- unlist(strsplit(query_response, "\n"))
-    n_first <- grep(format(lubridate::as_date(this_date), "%Y%m"), df)
-    this_names <- c("year_month", "tmax_avg", "tmin_avg",
-                    "total_rainfall", "total_evap", "radiation_avg",
-                    "vapour_pressure_avg")
+    n_first <-
+      grep(format(lubridate::as_date(this_date), "%Y%m"), df)
+    this_names <- c(
+      "year_month",
+      "tmax_avg",
+      "tmin_avg",
+      "total_rainfall",
+      "total_evap",
+      "radiation_avg",
+      "vapour_pressure_avg"
+    )
 
     # Create df and give names
     df <- df[n_first:length(df)]
-    out <- stats::setNames(data.frame(matrix(nrow = length(df),
-                                             ncol = length(this_names))),
-                           nm = this_names)
+    out <- stats::setNames(data.frame(matrix(
+      nrow = length(df),
+      ncol = length(this_names)
+    )),
+    nm = this_names)
     # Add data
     for (j in 1:length(df)) {
-      out[j, ] <- unlist(strsplit(df[j], "\\s+"))
+      out[j,] <- unlist(strsplit(df[j], "\\s+"))
     }
 
     # All columns were parsed as char, fix it
     # Select columns that have only numbers as obs
     num_cols <- unlist(lapply(names(out),
-                              function(x) all(grepl("^[-0-9.]+$", out[[x]]))))
+                              function(x)
+                                all(grepl(
+                                  "^[-0-9.]+$", out[[x]]
+                                ))))
     # grab the column with dates
     date_col <- unlist(lapply(out,
-                              function(x) any(class(out) %in% c("POSIXct",
-                                                                "POSIXt",
-                                                                "Date"))))
+                              function(x)
+                                any(
+                                  class(out) %in% c("POSIXct",
+                                                    "POSIXt",
+                                                    "Date")
+                                )))
     # Put them together
     numeric_columns <- num_cols & !date_col
     for (i in which(numeric_columns)) {
@@ -127,12 +143,14 @@ parse_silo <- function(query_response,
 
     # Create df and provide names
     df <- df[n_first:length(df)]
-    out <- stats::setNames(data.frame(matrix(nrow = length(df),
-                                             ncol = length(this_names))),
-                           nm = this_names)
+    out <- stats::setNames(data.frame(matrix(
+      nrow = length(df),
+      ncol = length(this_names)
+    )),
+    nm = this_names)
     # Add data
     for (j in 1:length(df)) {
-      out[j, ] <- unlist(strsplit(df[j], "\\s+"))
+      out[j,] <- unlist(strsplit(df[j], "\\s+"))
     }
 
     # Set date columns to date class
@@ -142,13 +160,19 @@ parse_silo <- function(query_response,
     # All columns were parsed as char, fix it
     # Select columns that have only numbers as obs
     num_cols <- unlist(lapply(names(out),
-                              function(x) all(grepl("^[-0-9.]+$", out[[x]]))))
+                              function(x)
+                                all(grepl(
+                                  "^[-0-9.]+$", out[[x]]
+                                ))))
 
     # grab the column with dates
     date_col <- unlist(lapply(out,
-                              function(x) any(class(x) %in% c("POSIXct",
-                                                              "POSIXt",
-                                                              "Date"))))
+                              function(x)
+                                any(
+                                  class(x) %in% c("POSIXct",
+                                                  "POSIXt",
+                                                  "Date")
+                                )))
     # Put them together
     numeric_columns <- num_cols & !date_col
     for (i in which(numeric_columns)) {
