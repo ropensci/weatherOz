@@ -10,7 +10,7 @@ get_extreme_weather(site, type = "all", api_key = NULL)
 \item{site}{A string with the station ID code for the station of interest.}
 
 \item{type}{A string with the type of extreme weather to return. Defaults to
-'all; and can be combination of "frost", "erosion", "heat", or "all".}
+"all"; and can be combination of "frost", "erosion", "heat", or "all".}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
 (\url{https://www.agric.wa.gov.au/web-apis})}
@@ -51,6 +51,13 @@ outputs <- lapply(these_stations,
  data.table::rbindlist(outputs)
 
 }
+\seealso{
+Other DPIRD: 
+\code{\link{get_station_list}()},
+\code{\link{get_summaries}()},
+\code{\link{tidy_weather_summary}()}
+}
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
+\concept{DPIRD}

@@ -8,8 +8,7 @@
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
-#' @param site A string with the station \acronym{ID} code for the station of
-#' interest.
+#' @param site A string with the station ID code for the station of interest.
 #' @param first The date on which the weather data summary will be sourced.
 #' \pkg{wrapique} does its best to determine the date given any format but may
 #' fail if given an unconventional date format.
@@ -17,8 +16,8 @@
 #' less than one day, to get one day of data, last should be the same as first,
 #' but must be explicitly coded, as otherwise it will default to the current
 #' date.
-#' @param api_key Api key from DPIRD \url{https://www.agric.wa.gov.au/web-apis}.
-#' Defaults to `NULL`.
+#' @param api_key \acronym{API} key from \acronym{DPIRD}
+#'  \url{https://www.agric.wa.gov.au/web-apis}.  Defaults to `NULL`.
 #' @param interval Time interval to summarise over.  The default is 'daily',
 #' others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
 #' shorter than 1 day, time period covered will be midnight to midnight, with
@@ -28,6 +27,9 @@
 #' @return a `list` with 3 elements: the station code, station name and a nested
 #' `data frame` with the all summary output as per Weather \acronym{API}
 #' documentation.
+#'
+#' @family DPIRD
+#'
 #' @examples
 #' # You must have an DPIRD API key to proceed
 #' mykey <- 'dpird_api_key'

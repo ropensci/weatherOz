@@ -9,13 +9,15 @@
 #'
 #' @param site A string with the station ID code for the station of interest.
 #' @param type A string with the type of extreme weather to return. Defaults to
-#' 'all; and can be combination of "frost", "erosion", "heat", or "all".
+#' "all"; and can be combination of "frost", "erosion", "heat", or "all".
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
 #'
 #' @return a `data.frame` of one row with 'stationCode', 'stationName',
 #' 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
 #' information according to the type(s) selected.
+#'
+#' @family DPIRD
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed

@@ -6,26 +6,34 @@
 # Copyright (C) 2021 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Individual station summaries nicely formatted.
+#' Tidy DPIRD weather station summaries in a nice format
+
+#' Individual \acronym{DPIRD} station summaries nicely formatted.
+#'
 #' @param site A string of the station ID code for the station of interest.
 #' Passed through from `get_summaries` function.
 #' @param first The date on which the weather data summary should start.
 #' @param last The date on which the weather data summary should end.
-#' @param api_key Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
-#' Defaults to NULL.
+#' @param api_key \acronym{API} key from \acronym{DPIRD}
+#' \url{https://www.agric.wa.gov.au/web-apis}. Defaults to `NULL`.
 #' @param interval Time interval to summarise over.
 #' Default is 'daily'; others are '15min', '30min', 'hourly',
 #' 'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
 #' will be midnight to midnight, with the last time interval being before
 #' midnight - hour/minute values are for the end of the time period.
 #' Data for shorter intervals ('15min', '30min') should be available from
-#' January of last year
-#' @param api_name Defaults to "weather", Only works with DPIRD's Weather API.
+#' January of last year.
+#' @param api_name Defaults to "weather", Only works with \acronym{DPIRD}'s
+#'  Weather \acronym{API}.
 #' @param api_version Defaults to 2, and gives a error if not 2.
 #' @param which_vars Match weather summary selected. Defaults to "all".
 #' Can be one of "all", "rain", "wind", "temp" and "erosion."
+#'
 #' @return a `data frame` with site and date interval queried together with
 #' requested weather summary/summaries.
+#'
+#' @family DPIRD
+#'
 #' @examples
 #' # You must have an DPIRD API key to proceed
 #' mykey <- 'dpird_api_key'

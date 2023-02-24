@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_station_list.R
 \name{get_station_list}
 \alias{get_station_list}
-\title{Fetch a list with all available weather stations for either \code{Science} and/or
-\code{Weather} \acronym{DPIRD} \acronym{APIs}.}
+\title{Fetch a list with all available weather stations for DPIRD weather APIs}
 \usage{
 get_station_list(
   api = "science",
@@ -15,26 +14,28 @@ get_station_list(
 \arguments{
 \item{api}{name of the \acronym{API} to be queried. Needs to match to
 one of the existing options (currently 'science' or 'weather') and defaults
-to the 'science' \acronym{API}.}
+to the "science" \acronym{API}.}
 
 \item{station_group}{the name of the station group that you wish to query.
-Defaults to 'rtd'. Currently "all", "api", "rtd", "web", "yshistory",
+Defaults to "rtd". Currently "all", "api", "rtd", "web", "yshistory",
 "yellowspot" are valid groups.}
 
 \item{state}{a string limiting the query to one or several states, defaults
-to 'wa'. Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".}
+to "wa". Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
 (\url{https://www.agric.wa.gov.au/web-apis})}
 }
 \value{
 a \code{data.frame} with station code, name, latitude, longitude, owner
-and state (for the Science API).
+and state (for the Science \acronym{API}).
 Science \acronym{API} queries return additional details by default
 \emph{i.e.}, station model, battery voltage, height of sensors, status and others.
 }
 \description{
-Providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
+Queries \acronym{DPIRD} \acronym{API}s, either "Science" or "Weather", and
+returns a list object of weather data for all available stations. Data
+providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
 Water Corporation, Harvey Water and Pardoo Beef Corporation.
 }
 \examples{
@@ -52,6 +53,13 @@ state = "nsw",
 api_key = mykey)
 
 }
+\seealso{
+Other DPIRD: 
+\code{\link{get_extreme_weather}()},
+\code{\link{get_summaries}()},
+\code{\link{tidy_weather_summary}()}
+}
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
+\concept{DPIRD}

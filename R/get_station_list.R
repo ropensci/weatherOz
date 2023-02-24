@@ -5,25 +5,29 @@
 # Copyright (C) 2022 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Fetch a list with all available weather stations for either `Science` and/or
-#'`Weather` \acronym{DPIRD} \acronym{APIs}.
+#' Fetch a list with all available weather stations for DPIRD weather APIs
 #'
-#' Providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
+#' Queries \acronym{DPIRD} \acronym{API}s, either "Science" or "Weather", and
+#' returns a list object of weather data for all available stations. Data
+#' providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
 #' Water Corporation, Harvey Water and Pardoo Beef Corporation.
+#'
 #' @param api name of the \acronym{API} to be queried. Needs to match to
 #' one of the existing options (currently 'science' or 'weather') and defaults
-#' to the 'science' \acronym{API}.
+#' to the "science" \acronym{API}.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
 #' @param station_group the name of the station group that you wish to query.
-#' Defaults to 'rtd'. Currently "all", "api", "rtd", "web", "yshistory",
+#' Defaults to "rtd". Currently "all", "api", "rtd", "web", "yshistory",
 #' "yellowspot" are valid groups.
 #' @param state a string limiting the query to one or several states, defaults
-#' to 'wa'. Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".
+#' to "wa". Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".
 #' @return a `data.frame` with station code, name, latitude, longitude, owner
-#' and state (for the Science API).
+#' and state (for the Science \acronym{API}).
 #' Science \acronym{API} queries return additional details by default
 #' *i.e.*, station model, battery voltage, height of sensors, status and others.
+#'
+#' @family DPIRD
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed

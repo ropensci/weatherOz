@@ -13,8 +13,7 @@ get_summaries(
 )
 }
 \arguments{
-\item{site}{A string with the station \acronym{ID} code for the station of
-interest.}
+\item{site}{A string with the station ID code for the station of interest.}
 
 \item{first}{The date on which the weather data summary will be sourced.
 \pkg{wrapique} does its best to determine the date given any format but may
@@ -25,8 +24,8 @@ less than one day, to get one day of data, last should be the same as first,
 but must be explicitly coded, as otherwise it will default to the current
 date.}
 
-\item{api_key}{Api key from DPIRD \url{https://www.agric.wa.gov.au/web-apis}.
-Defaults to \code{NULL}.}
+\item{api_key}{\acronym{API} key from \acronym{DPIRD}
+\url{https://www.agric.wa.gov.au/web-apis}.  Defaults to \code{NULL}.}
 
 \item{interval}{Time interval to summarise over.  The default is 'daily',
 others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
@@ -69,3 +68,10 @@ output <- get_summaries(
            interval = "15min")
 
 }
+\seealso{
+Other DPIRD: 
+\code{\link{get_extreme_weather}()},
+\code{\link{get_station_list}()},
+\code{\link{tidy_weather_summary}()}
+}
+\concept{DPIRD}

@@ -6,12 +6,13 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' @title Retrieve data from SILO (Scientifc Information for Land Owners) API
-#' @description Download weather data from the SILO API from both station
-#' observations (DataDrill) and gridded data (PatchedPointData). There are
-#' three formats available: 'alldata' and 'apsim' with daily frequency and
-#' 'monthly' with, that's right, monthly frequency.
-#' @param station_id An integer, station number available at the SILO
+#' Retrieve data from SILO (Scientifc Information for Land Owners) API
+#'
+#' Download weather data from the \acronym{SILO}  \acronym{API} from both
+#'  station observations (DataDrill) and gridded data (PatchedPointData). There
+#'  are three formats available: 'alldata' and 'apsim' with daily frequency and
+#'  'monthly' with, that's right, monthly frequency.
+#' @param station_id An integer, station number available at the \acronym{SILO}
 #' the network.
 #' @param latitude A vector, representing the latitude of a point-of-interest
 #' @param longitude A vector, representing the longitude of a point-of-interest
@@ -24,8 +25,12 @@
 #' retrieve daily data.
 #' @param email A string specifying the email address to use for the request.
 #' The query will return an error if a valid email address is not provided.
-#' @return A data frame containing the retrieved data from the SILO API.
-#' @export
+#'
+#' @return A `data.frame` containing the retrieved data from the \acronym{SILO}
+#'  \acronym{API}.
+#'
+#' @family SILO
+#'
 #' @examples
 #' # Source observation data for station Wongan Hills station, WA (8137)
 #' wd <- get_silo_points(station_id = 8137,
@@ -43,6 +48,7 @@
 #'                 last = "20221201",
 #'                 data_format = "apsim",
 #'                 email = "your@@email")
+#' @export
 
 get_silo_points <- function(station_id = NULL,
                             latitude = NULL,

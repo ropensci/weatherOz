@@ -8,24 +8,24 @@ get_silo_points(
   station_id = NULL,
   latitude = NULL,
   longitude = NULL,
-  start_date = NULL,
-  end_date = NULL,
+  first = NULL,
+  last = NULL,
   data_format = "alldata",
   email = NULL
 )
 }
 \arguments{
-\item{station_id}{An integer, station number available at the SILO
+\item{station_id}{An integer, station number available at the \acronym{SILO}
 the network.}
 
-\item{latitude}{A vector, represeting the latitude of a point-of-interest}
+\item{latitude}{A vector, representing the latitude of a point-of-interest}
 
-\item{longitude}{A vector, represeting the longitude of a point-of-interest}
+\item{longitude}{A vector, representing the longitude of a point-of-interest}
 
-\item{start_date}{A string representing the start date of the query in the
+\item{first}{A string representing the start date of the query in the
 format 'yyyymmdd'}
 
-\item{end_date}{A string representing the end date of the query in the
+\item{last}{A string representing the end date of the query in the
 format 'yyyymmdd'}
 
 \item{data_format}{A string specifying the type of data to retrieve.
@@ -36,19 +36,20 @@ retrieve daily data.}
 The query will return an error if a valid email address is not provided.}
 }
 \value{
-A dataframe containing the retrieved data from the SILO API.
+A \code{data.frame} containing the retrieved data from the \acronym{SILO}
+\acronym{API}.
 }
 \description{
-Download weather data from the SILO API from both station
-observations (DataDrill) and gridded data (PatchedPointData). There are
-three formats available: 'alldata' and 'apsim' with daily frequency and
+Download weather data from the \acronym{SILO}  \acronym{API} from both
+station observations (DataDrill) and gridded data (PatchedPointData). There
+are three formats available: 'alldata' and 'apsim' with daily frequency and
 'monthly' with, that's right, monthly frequency.
 }
 \examples{
 # Source observation data for station Wongan Hills station, WA (8137)
 wd <- get_silo_points(station_id = 8137,
-                      start_date = "20210601",
-                      end_date = "20210701",
+                      first = "20210601",
+                      last = "20210701",
                       data_type = "alldata",
                       email = "your@email")
 
@@ -57,8 +58,13 @@ wd <- get_silo_points(station_id = 8137,
 wd <-
 get_silo_points(latitude = -27.85,
                 longitude = 150.05,
-                start_date = "20221001",
-                end_date = "20221201",
+                first = "20221001",
+                last = "20221201",
                 data_format = "apsim",
                 email = "your@email")
 }
+\seealso{
+Other SILO: 
+\code{\link{get_multi_silo_points}()}
+}
+\concept{SILO}

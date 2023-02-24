@@ -2,7 +2,8 @@
 % Please edit documentation in R/tidy_weather_summary.R
 \name{tidy_weather_summary}
 \alias{tidy_weather_summary}
-\title{Individual station summaries nicely formatted.}
+\title{Tidy DPIRD weather station summaries in a nice format
+Individual \acronym{DPIRD} station summaries nicely formatted.}
 \usage{
 tidy_weather_summary(
   site = NULL,
@@ -23,8 +24,8 @@ Passed through from \code{get_summaries} function.}
 
 \item{last}{The date on which the weather data summary should end.}
 
-\item{api_key}{Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
-Defaults to NULL.}
+\item{api_key}{\acronym{API} key from \acronym{DPIRD}
+\url{https://www.agric.wa.gov.au/web-apis}. Defaults to \code{NULL}.}
 
 \item{interval}{Time interval to summarise over.
 Default is 'daily'; others are '15min', '30min', 'hourly',
@@ -32,9 +33,10 @@ Default is 'daily'; others are '15min', '30min', 'hourly',
 will be midnight to midnight, with the last time interval being before
 midnight - hour/minute values are for the end of the time period.
 Data for shorter intervals ('15min', '30min') should be available from
-January of last year}
+January of last year.}
 
-\item{api_name}{Defaults to "weather", Only works with DPIRD's Weather API.}
+\item{api_name}{Defaults to "weather", Only works with \acronym{DPIRD}'s
+Weather \acronym{API}.}
 
 \item{api_version}{Defaults to 2, and gives a error if not 2.}
 
@@ -46,7 +48,8 @@ a \verb{data frame} with site and date interval queried together with
 requested weather summary/summaries.
 }
 \description{
-Individual station summaries nicely formatted.
+Tidy DPIRD weather station summaries in a nice format
+Individual \acronym{DPIRD} station summaries nicely formatted.
 }
 \examples{
 # You must have an DPIRD API key to proceed
@@ -78,3 +81,10 @@ output <- tidy_weather_summary(
             which_vars = c("wind", "erosion"))
 
 }
+\seealso{
+Other DPIRD: 
+\code{\link{get_extreme_weather}()},
+\code{\link{get_station_list}()},
+\code{\link{get_summaries}()}
+}
+\concept{DPIRD}

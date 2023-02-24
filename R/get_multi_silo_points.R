@@ -5,17 +5,23 @@
 #
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
-#' @title Retrieve data from SILO (Scientifc Information for Land Owners) API
-#' for multiple sites.
-#' @description This function is a wrapper around `get_silo_points` to handle
+
+#' Retrieve data from SILO (Scientific Information for Land Owners) API
+#' for multiple sites
+#'
+#' @description This function is a wrapper around `get_silo_points()` to handle
 #' query with multiple sites, either station codes or latitude and longitude
-#' coordinates. See help for `get_silo_points` for details.
+#' coordinates. See help for `get_silo_points()` for details.
+#'
 #' @inheritParams get_silo_points
-#' #' @return A list of dataframes with the retrieved data. Each list is
-#' a `data.frame` with data for a given station code or coordinates. A new
-#' column is added in both cases, `station_id` or `latitude` and `longitude`,
-#' respectively.
-#' @export
+#'
+#' @return A `list` object of `data.frames` with the retrieved data. Each
+#'    list item is a `data.frame` with data for a given station code or
+#'    geographic coordinates. New columns are added in both cases, `station_id`
+#'    or `latitude` and `longitude`,  respectively.
+#'
+#' @family SILO
+#'
 #' @examples
 #' # start multisession
 #' future::plan("multisession")
@@ -25,7 +31,7 @@
 #'                             first = "20220401",
 #'                             last = "20221001",
 #'                             data_format = "monthly",
-#'                             email = "your@@email")
+#'                             email = "YOUR_EMAIL_ADDRESS")
 #'
 #' # Query multiple stations (using latitude and longitude coordinates)
 #' mylat <- c(-33.512, -30.665, -27.309, -24.237)
@@ -35,7 +41,8 @@
 #'                             first = "202101201",
 #'                             last = "20220228",
 #'                             data_format = "alldata",
-#'                             email = "your@@email")
+#'                             email = "YOUR_EMAIL_ADDRESS")
+#' @export
 
 get_multi_silo_points <- function(station_id = NULL,
                                   latitude = NULL,
