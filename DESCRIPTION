@@ -1,5 +1,5 @@
 Package: wrapique
-Title: WA Weather API queries and mapping
+Title: An API Client for Western Australia (DPIRD) and Australian Weather Data (SILO) APIs 
 Version: 0.0.0.9000
 Authors@R:  c(person(given = "Rodrigo", family = "Pires",
                      email = "rodrigo.pires@dpird.wa.gov.au",
