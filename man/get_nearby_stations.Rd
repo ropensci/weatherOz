@@ -15,26 +15,29 @@ get_nearby_stations(
 )
 }
 \arguments{
-\item{latitude}{Latitude expressed as decimal degrees (DD) (WGS84).}
+\item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
+(DD) (WGS84).}
 
-\item{longitude}{Longitude expressed as decimal degrees (DD) (WGS84).}
+\item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
+(DD) (WGS84).}
 
-\item{site}{A string with the station ID code for the station of interest.
+\item{site}{A \code{string} with the station ID code for the station of interest.
 Optional and defaults to \code{NULL}.}
 
-\item{distance_km}{Distance to limit the search from station of interest.
-Defaults to 100 km.}
+\item{distance_km}{A \code{numeric} value for distance to limit the search from
+the station or location of interest.  Defaults to 100 km.}
 
-\item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
-(\url{https://www.agric.wa.gov.au/web-apis})}
+\item{api_key}{A \code{string} value that is the user's \acronym{API} key from
+\acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).}
 
-\item{wa_only}{Return stations in Western Australia only. Defaults to \code{TRUE}.}
+\item{wa_only}{\code{Boolean}, return stations in Western Australia only. Defaults
+to \code{TRUE}.}
 
-\item{dpird_only}{Return only \acronym{DPIRD} owned stations and defaults to
-\code{FALSE}.}
+\item{dpird_only}{\code{Boolean}, return only \acronym{DPIRD} owned stations.
+Defaults to \code{FALSE}.}
 }
 \value{
-a \code{data.frame} with 'stationCode', 'stationName', 'latitude',
+a \code{data.table} with 'stationCode', 'stationName', 'latitude',
 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
 distance from station of interest.
 }
@@ -45,28 +48,22 @@ Get a list of nearby weather stations from coordinates or station ID code
 # You must have an DPIRD API key to proceed
 my_key <- rstudioapi::askForSecret()
 
-# Query WA only stations and return both DPIRD's and BOM's stations.
-my_station <- "NO"    # Northam
-my_distance <- 50    # in km
-
+# Query WA only stations and return both DPIRD's and BOM's stations for
+# the Northam WA station, returning stations with 50 km of this station
 wa_stn <- get_nearby_stations(
-  site = my_station,
-  distance_km = my_distance,
-  api_key = my_key,
+  site = "NO",
+  distance_km = 50,
+  api_key = "YOUR API KEY",
   dpird_only = FALSE,
   wa_only = TRUE
 )
 
 # Query Wagga Wagga BOM station.
-# Need to set `dpird_only` and `wa_only` to `FALSE`
-lat <- -35.1583
-long <- 147.4575
-
 wagga_stn <- get_nearby_stations(
-  latitude = lat,
-  longitude = long,
+  latitude = -35.1583,
+  longitude = 147.4575,
   distance_km = my_distance,
-  api_key = mykey,
+  api_key = "YOUR API KEY",
   dpird_only = FALSE,
   wa_only = FALSE
 )
