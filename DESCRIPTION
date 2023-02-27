@@ -67,10 +67,10 @@ Imports:
     jsonlite,
     lubridate,
     methods,
-    purrr
+    purrr,
+    data.table
 Suggests:
     future,
-    data.table,
     rstudioapi,
     testthat (>= 3.0.0),
     vdiffr

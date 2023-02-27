@@ -110,8 +110,6 @@ get_extreme_weather <- function(site,
     )
 
     names(out_erosion) <- tolower(names(out_erosion))
-    names(out_erosion) <-
-      janitor::make_clean_names(names(out_erosion))
 
   } else {
     out_erosion <- data.frame()[1:nrec,]
@@ -137,7 +135,6 @@ get_extreme_weather <- function(site,
     )
 
     names(out_frost) <- tolower(names(out_frost))
-    names(out_frost) <- janitor::make_clean_names(names(out_frost))
 
   } else {
     out_frost <- data.frame()[1:nrec,]
@@ -161,7 +158,6 @@ get_extreme_weather <- function(site,
     )
 
     names(out_heat) <- tolower(names(out_heat))
-    names(out_heat) <- janitor::make_clean_names(names(out_heat))
 
   } else {
     out_heat <- data.frame()[1:nrec,]

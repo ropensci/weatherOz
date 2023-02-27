@@ -74,7 +74,7 @@ get_station_list <- function(api = "science",
   # weather accepts all but all returned outputs are identical)
   api_group <- try(
     match.arg(station_group,
-              c("rtd", "all", "api", "web", "yshistory", "yellowspot"),
+              c("rtd", "all", "api", "web",),
               several.ok = FALSE),
     silent = TRUE)
 
@@ -91,8 +91,7 @@ get_station_list <- function(api = "science",
     # Stop if station group is not on the list
      if (!api_group %in% c("rtd", "yellowspot", "yshistory")) {
        stop(call. = FALSE,
-         "Science API only accepts 'rtd', 'yellowspot'\n",
-            "and 'yshistory' as station groups")
+         "Science API only accepts 'rtd' as a station group")
      }
 
     if (this_state == "nt") {
