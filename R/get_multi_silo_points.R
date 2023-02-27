@@ -44,7 +44,7 @@
 #'                             email = "YOUR_EMAIL_ADDRESS")
 #' @export
 
-get_multi_silo_points_v2 <- function(station_id = NULL,
+get_multi_silo_points <- function(station_id = NULL,
                                   latitude = NULL,
                                   longitude = NULL,
                                   first = NULL,
