@@ -68,8 +68,7 @@ Imports:
     jsonlite,
     lubridate,
     methods,
-    purrr,
-    data.table
+    purrr
 Suggests:
     future,
     rstudioapi,
