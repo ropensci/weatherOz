@@ -98,6 +98,6 @@ get_silo_points <- function(station_id = NULL,
 
   # Extract content and parse data according to the format and frequency
   r <- httr::content(result, "text")
-  out <- wrapique::parse_silo(r, data_format, first)
+  out <- parse_silo(r, data_format, first)
   return(out)
 }

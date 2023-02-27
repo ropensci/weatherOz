@@ -44,7 +44,7 @@
 #'                             email = "YOUR_EMAIL_ADDRESS")
 #' @export
 
-get_multi_silo_points <- function(station_id = NULL,
+get_multi_silo_points_v2 <- function(station_id = NULL,
                                   latitude = NULL,
                                   longitude = NULL,
                                   first = NULL,
@@ -67,13 +67,14 @@ get_multi_silo_points <- function(station_id = NULL,
           email = email),
         otherwise = "Error in acquiring weather data for this station.\n"
       ),
-      .options = furrr::furrr_options(seed = NULL),
-      .progress = TRUE
+      .options = furrr::furrr_options(seed = NULL)
     )
 
     # add the location to the weather data
     names(weather_raw) <- station_id
-    out <- Map(cbind, station_id = names(weather_raw), weather_raw)
+    out <- Map(cbind,
+               station_id = names(weather_raw),
+               weather_raw)
   }
 
   if (is.null(station_id) && !is.null(latitude) & !is.null(longitude)) {
@@ -91,23 +92,25 @@ get_multi_silo_points <- function(station_id = NULL,
           email = email),
         otherwise = "Error in acquiring weather data for this station.\n"
       ),
-      .options = furrr::furrr_options(seed = NULL),
-      .progress = TRUE
+      .options = furrr::furrr_options(seed = NULL)
     )
 
     # provide unique names
     names(weather_raw) <- paste0(unique(latitude), "_", unique(longitude))
 
     # add the location to the weather data
-    weather_raw <- Map(cbind, latlon = names(weather_raw), weather_raw)
+    weather_raw <- Map(cbind,
+                       latlon = names(weather_raw),
+                       weather_raw)
 
-    # Split latitude and longitude into its own columns
-    out <- lapply(weather_raw,
-                  function(i) tidyr::separate(i,
-                                              col = latlon,
-                                              into = c("latitude", "longitude"),
-                                              sep = "_"))
+    out <-
+      lapply(weather_raw, function(i) {
+        latlon_sep <- strsplit(i$latlon, "_")[[1]]
+        i$latitude <- latlon_sep[1]
+        i$longitude <- latlon_sep[2]
+        i$latlon <- NULL
+        return(i)
+      })
   }
-
-  return(out)
+  return(weather_raw)
 }
