@@ -7,19 +7,22 @@
 
 #' Get a list of nearby weather stations from coordinates or station ID code
 #'
-#' @param latitude Latitude expressed as decimal degrees (DD) (WGS84).
-#' @param longitude Longitude expressed as decimal degrees (DD) (WGS84).
-#' @param site A string with the station ID code for the station of interest.
+#' @param latitude A `numeric` value for latitude expressed as decimal degrees
+#'   (DD) (WGS84).
+#' @param longitude A `numeric` value for longitude expressed as decimal degrees
+#'  (DD) (WGS84).
+#' @param site A `string` with the station ID code for the station of interest.
 #' Optional and defaults to `NULL`.
-#' @param distance_km Distance to limit the search from station of interest.
-#' Defaults to 100 km.
-#' @param api_key User's \acronym{API} key from \acronym{DPIRD}
-#'  (\url{https://www.agric.wa.gov.au/web-apis})
-#' @param wa_only Return stations in Western Australia only. Defaults to `TRUE`.
-#' @param dpird_only Return only \acronym{DPIRD} owned stations and defaults to
-#'  `FALSE`.
+#' @param distance_km A `numeric` value for distance to limit the search from
+#'  the station or location of interest.  Defaults to 100 km.
+#' @param api_key A `string` value that is the user's \acronym{API} key from
+#'  \acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).
+#' @param wa_only `Boolean`, return stations in Western Australia only. Defaults
+#'  to `TRUE`.
+#' @param dpird_only `Boolean`, return only \acronym{DPIRD} owned stations.
+#'   Defaults to `FALSE`.
 #'
-#' @return a `data.frame` with 'stationCode', 'stationName', 'latitude',
+#' @return a `data.table` with 'stationCode', 'stationName', 'latitude',
 #' 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
 #' distance from station of interest.
 #'
@@ -27,28 +30,22 @@
 #' # You must have an DPIRD API key to proceed
 #' my_key <- rstudioapi::askForSecret()
 #'
-#' # Query WA only stations and return both DPIRD's and BOM's stations.
-#' my_station <- "NO"    # Northam
-#' my_distance <- 50    # in km
-#'
+#' # Query WA only stations and return both DPIRD's and BOM's stations for
+#' # the Northam WA station, returning stations with 50 km of this station
 #' wa_stn <- get_nearby_stations(
-#'   site = my_station,
-#'   distance_km = my_distance,
-#'   api_key = my_key,
+#'   site = "NO",
+#'   distance_km = 50,
+#'   api_key = "YOUR API KEY",
 #'   dpird_only = FALSE,
 #'   wa_only = TRUE
 #' )
 #'
 #' # Query Wagga Wagga BOM station.
-#' # Need to set `dpird_only` and `wa_only` to `FALSE`
-#' lat <- -35.1583
-#' long <- 147.4575
-#'
 #' wagga_stn <- get_nearby_stations(
-#'   latitude = lat,
-#'   longitude = long,
+#'   latitude = -35.1583,
+#'   longitude = 147.4575,
 #'   distance_km = my_distance,
-#'   api_key = mykey,
+#'   api_key = "YOUR API KEY",
 #'   dpird_only = FALSE,
 #'   wa_only = FALSE
 #' )
@@ -66,6 +63,9 @@ get_nearby_stations <- function(latitude = NULL,
                                 dpird_only = FALSE)
 {
 
+  # CRAN NOTE avoidance
+  owner <- links <- NULL
+
   # Error if api key not provided
   if (is.null(api_key)) {
     stop(call. = FALSE,
@@ -76,7 +76,7 @@ get_nearby_stations <- function(latitude = NULL,
   if (isFALSE(wa_only) & dpird_only) {
     stop(call. = FALSE,
          "DPIRD weather stations are only available in Western Australia.
-         Cannot proceed if `wa_only = ", wa_only,
+         Cannot proceed if `wa_only` = ", wa_only,
          " and `dpird_only` = ",
          dpird_only,".")
   }
@@ -112,8 +112,8 @@ get_nearby_stations <- function(latitude = NULL,
                                            "&limit=100",
                                            "&group=rtd")))
 
-      distance_out <- ret$collection
-      distance_out$links <- NULL
+      distance_out <- data.table::data.table(ret$collection)
+      distance_out[, links := NULL]
 
     } else if (is.null(site)) {
 
@@ -135,8 +135,7 @@ get_nearby_stations <- function(latitude = NULL,
                                            "&limit=100",
                                            "&group=rtd")))
 
-      distance_out <- ret$collection
-      distance_out$links <- NULL
+      distance_out <- .create_distance_out(ret)
     }
 
   } else if (isFALSE(wa_only)) {
@@ -171,8 +170,7 @@ get_nearby_stations <- function(latitude = NULL,
                                            "&limit=100",
                                            "&group=yellowspot")))
 
-      distance_out <- ret$collection
-      distance_out$links <- NULL
+      distance_out <- .create_distance_out(ret)
 
     } else if (is.null(site)) {
 
@@ -194,25 +192,66 @@ get_nearby_stations <- function(latitude = NULL,
                                            "&limit=100",
                                            "&group=yellowspot")))
 
-      distance_out <- ret$collection
-      distance_out$links <- NULL
+      distance_out <- .create_distance_out(ret)
     }
   }
 
   if (dpird_only) {
-    distance_out <- subset(distance_out, owner == "DPIRD")
-
+    distance_out <- distance_out[owner %in% "DPIRD"]
   } else {
     # Filter out missing values in latitude and longitude
-    distance_out <- distance_out[complete.cases(distance_out[c("latitude",
-                                                               "longitude")]), ]
+    distance_out <-
+      distance_out[stats::complete.cases(distance_out[, c("latitude",
+                                                        "longitude")])]
 
-    # Convert stationName to lowercase
-    distance_out$stationName <- tolower(distance_out$stationName)
+    # Convert stationName to proper name case
+    distance_out[, stationName := .cap_names(s = stationName)]
 
     # Reverse sign of latitude if it is positive
-    distance_out$latitude[distance_out$latitude > 0] <-
-      distance_out$latitude[distance_out$latitude > 0] * -1
+    distance_out[, latitude := data.table::fifelse(distance_out$latitude > 0,
+                                                   distance_out$latitude * -1,
+                                                   distance_out$latitude)]
   }
+  return(distance_out[])
+}
+
+#' Internal function to create a data.table
+#'
+#' @param ret a JSON object returned from the DPIRD API with station information
+#' @keywords internal
+#' @noRd
+
+.create_distance_out <- function(ret) {
+  distance_out <- data.table::data.table(ret$collection)
+  distance_out[, links := NULL]
   return(distance_out)
+}
+
+
+#' Convert station names to proper case for names
+#'
+#' Converts station names to proper name case, e.g., "York East".
+#'
+#' @param s a `string` to be converted
+#' @keywords internal
+#' @noRd
+#' @author \R authors, taken from ?tolower()
+
+.cap_names <- function(s, strict = FALSE) {
+  cap <- function(s)
+    paste(toupper(substring(s, 1, 1)),
+          {
+            s <- substring(s, 2)
+            if (strict)
+              tolower(s)
+            else
+              s
+          },
+          sep = "", collapse = " ")
+  vapply(
+    X = strsplit(s, split = " "),
+    FUN = cap,
+    FUN.VALUE = character(length(!is.null(names(s)))),
+    USE.NAMES = !is.null(names(s))
+  )
 }
