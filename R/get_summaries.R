@@ -111,11 +111,6 @@ get_summaries <- function(site,
          "For daily intervals date difference should be at least one day.")
   }
 
-  # # Stop if query is for monthly and interval is wrong
-  # if (m_int %in% c("monthly") && ((as.numeric(format(as.Date(first), "%m"))) > (as.numeric(format(as.Date(last), "%m"))))) {
-  #   stop("For monthly intervals date difference should be at least one month.")
-  # }
-
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly, yearly
   if (methods::is(m_int, "try-error"))
@@ -126,11 +121,11 @@ get_summaries <- function(site,
   message(
     "Requesting ",
     m_int,
-    " data from ",
+    " data from",
     format(as.Date(first), "%e %B %Y"),
-    " to ",
+    " to",
     format(as.Date(last), "%e %B %Y"),
-    " for location code ",
+    "for location code",
     site,
     "\n"
   )

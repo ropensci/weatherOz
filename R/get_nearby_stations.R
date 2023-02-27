@@ -203,11 +203,16 @@ get_nearby_stations <- function(latitude = NULL,
     distance_out <- subset(distance_out, owner == "DPIRD")
 
   } else {
-    distance_out <- dplyr::filter(distance_out, !is.na(latitude) & !is.na(longitude))
-    distance_out <- dplyr::mutate(distance_out,
-                                  stationName = tolower(stationName),
-                                  latitude = dplyr::case_when(latitude > 0 ~ (latitude * -1),
-                                                              TRUE ~ latitude))
+    # Filter out missing values in latitude and longitude
+    distance_out <- distance_out[complete.cases(distance_out[c("latitude",
+                                                               "longitude")]), ]
+
+    # Convert stationName to lowercase
+    distance_out$stationName <- tolower(distance_out$stationName)
+
+    # Reverse sign of latitude if it is positive
+    distance_out$latitude[distance_out$latitude > 0] <-
+      distance_out$latitude[distance_out$latitude > 0] * -1
   }
   return(distance_out)
 }
