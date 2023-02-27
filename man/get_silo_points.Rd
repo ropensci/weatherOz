@@ -65,6 +65,6 @@ get_silo_points(latitude = -27.85,
 }
 \seealso{
 Other SILO: 
-\code{\link{get_multi_silo_points}()}
+\code{\link{get_multi_silo_points_v2}()}
 }
 \concept{SILO}
