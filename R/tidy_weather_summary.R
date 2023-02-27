@@ -27,8 +27,6 @@
 #' @param which_vars Match weather summary selected. Defaults to "all".
 #' Can be one of "all", "rain", "wind", "temp" and "erosion."
 #'
-#' @inheritParams get_summaries
-#'
 #' @return a `data frame` with site and date interval queried together with
 #'
 #' @family DPIRD
