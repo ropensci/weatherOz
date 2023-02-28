@@ -308,24 +308,6 @@ parse_silo <- function(query_response,
   }
 }
 
-# Distance over a great circle. Reasonable approximation.
-.haversine_distance <- function(lat1, lon1, lat2, lon2) {
-  # to radians
-  lat1 <- lat1 * 0.01745
-  lat2 <- lat2 * 0.01745
-  lon1 <- lon1 * 0.01745
-  lon2 <- lon2 * 0.01745
-
-  delta_lat <- abs(lat1 - lat2)
-  delta_lon <- abs(lon1 - lon2)
-
-  # radius of earth
-  12742 * asin(sqrt(`+`(
-    (sin(delta_lat / 2)) ^ 2,
-    cos(lat1) * cos(lat2) * (sin(delta_lon / 2)) ^ 2
-  )))
-}
-
 #' @noRd
 # Check states for précis and ag bulletin, use fuzzy matching
 
