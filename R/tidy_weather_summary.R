@@ -117,7 +117,7 @@ tidy_weather_summary <- function(
 
   # Wind
   if (any(c("all", "wind") %in% which_vars)) {
-    temp <- output$summaries$wind
+    temp <- df$summaries$wind
     temp <- lapply(temp, data.table::as.data.table)
 
     out_wind <- data.table::rbindlist(temp)
