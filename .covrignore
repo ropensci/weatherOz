@@ -1,0 +1,2 @@
+# exclude .onLoad function file
+R/zzz.R
