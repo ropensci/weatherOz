@@ -193,6 +193,7 @@ parse_silo <- function(query_response,
 #' @author \R authors, taken from ?tolower()
 
 .cap_names <- function(s, strict = FALSE) {
+  s <- tolower(s)
   cap <- function(s)
     paste(toupper(substring(s, 1, 1)),
           {
@@ -540,3 +541,18 @@ parse_silo <- function(query_response,
   }
   return(xml_url)
 }
+
+#' Internal function to rename colum names
+#'
+#' @param df_out data.frame returned from API query with camel case column
+#' names
+#' @keywords internal
+#' @noRd
+#'
+
+rename_cols <- function(df_out) {
+  df_out[, stationName := .cap_names(s = stationName)]
+  names(df_out)[1:2] <- c("station_code", "station_name")
+  return(df_out)
+}
+

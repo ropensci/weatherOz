@@ -53,14 +53,13 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-
-get_nearby_stations <- function(latitude = NULL,
-                                longitude = NULL,
-                                site = NULL,
-                                distance_km = 100,
-                                api_key = NULL,
-                                wa_only = TRUE,
-                                dpird_only = FALSE)
+find_nearby_stations <- function(latitude = NULL,
+                                 longitude = NULL,
+                                 site = NULL,
+                                 distance_km = 100,
+                                 api_key = NULL,
+                                 wa_only = TRUE,
+                                 dpird_only = FALSE)
 {
 
   # CRAN NOTE avoidance
@@ -85,37 +84,29 @@ get_nearby_stations <- function(latitude = NULL,
     if (!is.null(site)) {
       res <- jsonlite::fromJSON(
         url(paste0("https://api.dpird.wa.gov.au/v2/science/stations?",
-                                           "stationCode=",
-                                           site,
-                                           "&api_key=",
-                                           api_key,
-                                           "&limit=100000&group=rtd")))
+                   "stationCode=",
+                   site,
+                   "&api_key=",
+                   api_key,
+                   "&limit=100000&group=rtd")))
 
-      .long <- res$collection$longitude
       .lat <- res$collection$latitude
+      .lon <- res$collection$longitude
 
-      if ((is.null(.lat)) || (is.null(.long))) {
-        stop(call. = FALSE,
-             "Error collecting the latitude and longitude\n",
-             "details for the station code provided.")
-      }
-
-      # get nearby stations from science api
       ret <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations/nearby?",
-                                           "latitude=", .lat,
-                                           "&longitude=", .long,
-                                           "&radius=", distance_km,
-                                           "&api_key=", api_key,
-                                           "&offset=0",
-                                           "&limit=100",
-                                           "&group=rtd")))
+                 "latitude=", .lat,
+                 "&longitude=", .lon,
+                 "&radius=", distance_km,
+                 "&api_key=", api_key,
+                 "&offset=0",
+                 "&limit=1000",
+                 "&group=rtd")))
 
-      distance_out <- data.table::data.table(ret$collection)
-      distance_out[, links := NULL]
+      distance_out <- .create_distance_out(ret)
 
-    } else if (is.null(site)) {
+    } else {
 
       if (((is.null(latitude)) || (is.null(longitude))) && (is.null(site))) {
         stop(call. = FALSE,
@@ -127,52 +118,45 @@ get_nearby_stations <- function(latitude = NULL,
       ret <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations/nearby?",
-                                           "latitude=", .lat,
-                                           "&longitude=", .long,
-                                           "&radius=", distance_km,
-                                           "&api_key=", api_key,
-                                           "&offset=0",
-                                           "&limit=100",
-                                           "&group=rtd")))
+                 "latitude=", latitude,
+                 "&longitude=", longitude,
+                 "&radius=", distance_km,
+                 "&api_key=", api_key,
+                 "&offset=0",
+                 "&limit=1000",
+                 "&group=rtd")))
 
       distance_out <- .create_distance_out(ret)
     }
+  }
 
-  } else if (isFALSE(wa_only)) {
+  if (isFALSE(wa_only)) {
     if (!is.null(site)) {
       res <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations?",
-                                           "stationCode=",
-                                           site,
-                                           "&api_key=",
-                                           api_key,
-                                           "&limit=100000&group=yellowspot")))
+                 "stationCode=",
+                 site,
+                 "&api_key=",
+                 api_key,
+                 "&limit=100000&group=yellowspot")))
 
-      .long <- res$collection$longitude
       .lat <- res$collection$latitude
+      .lon <- res$collection$longitude
 
-      if ((is.null(.lat)) || (is.null(.long))) {
-        stop(call. = FALSE,
-             "Error collecting the latitude and longitude\n",
-             "details for the station code provided.")
-      }
-
-      # get nearby stations from science api
       ret <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations/nearby?",
-                                           "latitude=", .lat,
-                                           "&longitude=", .long,
-                                           "&radius=", distance_km,
-                                           "&api_key=", api_key,
-                                           "&offset=0",
-                                           "&limit=100",
-                                           "&group=yellowspot")))
+                 "latitude=", .lat,
+                 "&longitude=", .lon,
+                 "&radius=", distance_km,
+                 "&api_key=", api_key,
+                 "&offset=0",
+                 "&limit=100000&group=yellowspot")))
 
       distance_out <- .create_distance_out(ret)
 
-    } else if (is.null(site)) {
+    } else {
 
       if (((is.null(latitude)) || (is.null(longitude))) && (is.null(site))) {
         stop(call. = FALSE,
@@ -184,13 +168,13 @@ get_nearby_stations <- function(latitude = NULL,
       ret <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations/nearby?",
-                                           "latitude=", latitude,
-                                           "&longitude=", longitude,
-                                           "&radius=", distance_km,
-                                           "&api_key=", api_key,
-                                           "&offset=0",
-                                           "&limit=100",
-                                           "&group=yellowspot")))
+                 "latitude=", latitude,
+                 "&longitude=", longitude,
+                 "&radius=", distance_km,
+                 "&api_key=", api_key,
+                 "&offset=0",
+                 "&limit=10000",
+                 "&group=yellowspot")))
 
       distance_out <- .create_distance_out(ret)
     }
@@ -198,20 +182,19 @@ get_nearby_stations <- function(latitude = NULL,
 
   if (dpird_only) {
     distance_out <- distance_out[owner %in% "DPIRD"]
+
   } else {
     # Filter out missing values in latitude and longitude
     distance_out <-
       distance_out[stats::complete.cases(distance_out[, c("latitude",
-                                                        "longitude")])]
-
-    # Convert stationName to proper name case
-    distance_out[, stationName := .cap_names(s = stationName)]
+                                                          "longitude")])]
 
     # Reverse sign of latitude if it is positive
     distance_out[, latitude := data.table::fifelse(distance_out$latitude > 0,
                                                    distance_out$latitude * -1,
                                                    distance_out$latitude)]
   }
+  distance_out <- rename_cols(distance_out)
   return(distance_out[])
 }
 
