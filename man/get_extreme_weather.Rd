@@ -16,7 +16,7 @@ get_extreme_weather(site, type = "all", api_key = NULL)
 (\url{https://www.agric.wa.gov.au/web-apis})}
 }
 \value{
-a \code{data.frame} of one row with 'stationCode', 'stationName',
+a \code{data.table} of one row with 'stationCode', 'stationName',
 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
 information according to the type(s) selected.
 }
