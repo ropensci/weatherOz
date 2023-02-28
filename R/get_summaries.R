@@ -123,9 +123,9 @@ get_summaries <- function(site,
     m_int,
     " data from",
     format(as.Date(first), "%e %B %Y"),
-    " to",
+    " to ",
     format(as.Date(last), "%e %B %Y"),
-    "for location code",
+    " for location code ",
     site,
     "\n"
   )
