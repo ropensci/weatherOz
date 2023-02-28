@@ -1,0 +1,253 @@
+---
+  title: "Create Databases of BOM Station Locations and JSON URLs"
+output: github_document
+---
+
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r color, echo = FALSE, results='asis'}
+# crayon needs to be explicitly activated in Rmd
+options(crayon.enabled = TRUE)
+# Hooks needs to be set to deal with outputs
+# thanks to fansi logic
+old_hooks <- fansi::set_knit_hooks(knitr::knit_hooks,
+                                   which = c("output", "message", "error"))
+```
+
+This document provides details on methods used to create the database of BOM JSON files for stations and corresponding metadata, _e.g._, latitude, longitude (which are more detailed than what is in the JSON file), start, end, elevation, etc.
+
+Refer to this BOM page for more reference, <http://reg.bom.gov.au/catalogue/anon-ftp.shtml>.
+
+  ## Product code definitions
+
+  ### States
+
+  - IDD - NT
+
+  - IDN - NSW/ACT
+
+  - IDQ - Qld
+
+  - IDS - SA
+  
+  - IDT - Tas/Antarctica (distinguished by the product number)
+  
+  - IDV - Vic
+  
+  - IDW - WA
+
+### Product code numbers
+
+  - 60701 - coastal observations (duplicated in 60801)
+  
+  - 60801 - State weather observations excluding Canberra
+  
+  - 60803 - Antarctica weather observations
+  
+  - 60901 - capital city weather observations (duplicated in 60801)
+  
+  - 60903 - Canberra area weather observations
+
+## Get station metadata
+
+The station metadata are downloaded from a zip file linked from the "[Bureau of Meteorology Site Numbers](http://www.bom.gov.au/climate/cdo/about/site-num.shtml)" website.
+The zip file may be directly downloaded, [file of site details](ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip).
+
+```{r get_bom_station_data, eval=TRUE}
+library(magrittr)
+
+# This file is a pseudo-fixed width file. Line five contains the headers at
+# fixed widths which are coded in the read_table() call.
+# The last seven lines contain other information that we don't want.
+# For some reason, reading it directly from the BOM website does not work, so
+# we use curl to fetch it first and then import it from the R tempdir()
+
+curl::curl_download(
+  url = "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
+  destfile = file.path(tempdir(), "stations.zip"),
+  mode = "wb",
+  quiet = TRUE)
+
+bom_stations_raw <-
+  readr::read_table(
+    file.path(tempdir(), "stations.zip"),
+    skip = 4,
+    na = c("..", ".....", " "),
+    col_names = c(
+      "site",
+      "dist",
+      "name",
+      "start",
+      "end",
+      "lat",
+      "lon",
+      "NULL1",
+      "state",
+      "elev",
+      "bar_ht",
+      "wmo"
+    ),
+    col_types = c(
+      site = readr::col_character(),
+      dist = readr::col_character(),
+      name = readr::col_character(),
+      start = readr::col_integer(),
+      end = readr::col_integer(),
+      lat = readr::col_double(),
+      lon = readr::col_double(),
+      NULL1 = readr::col_character(),
+      state = readr::col_character(),
+      elev = readr::col_double(),
+      bar_ht = readr::col_double(),
+      wmo = readr::col_integer()
+    )
+  )
+
+# remove extra columns for source of location
+bom_stations_raw <- bom_stations_raw[, -8]
+
+# trim the end of the rows off that have extra info that's not in columns
+nrows <- nrow(bom_stations_raw) - 3
+bom_stations_raw <- bom_stations_raw[1:nrows, ]
+
+# add current year to stations that are still active
+bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
+  as.double(format(Sys.Date(), "%Y"))
+
+# keep only currently reporting stations
+bom_stations_raw <-
+  bom_stations_raw[bom_stations_raw$end == format(Sys.Date(), "%Y"), ] %>%
+  dplyr::mutate(start = as.integer(start),
+                end = as.integer(end))
+```
+
+## Check station locations
+
+Occasionally the stations are listed in the wrong location, _e.g._, Alice Springs Airport in SA.
+Perform quality check to ensure that the station locations are accurate based on the lat/lon values.
+
+```{r check-locations}
+`%notin%`  <- function(x, table) {
+  # Same as !(x %in% table)
+  match(x, table, nomatch = 0L) == 0L
+}
+
+data.table::setDT(bom_stations_raw)
+latlon2state <- function(lat, lon) {
+  ASGS.foyer::latlon2SA(lat,
+                        lon,
+                        to = "STE",
+                        yr = "2016",
+                        return = "v")
+}
+
+bom_stations_raw %>%
+  .[lon > -50, state_from_latlon := latlon2state(lat, lon)] %>%
+  .[state_from_latlon == "New South Wales", actual_state := "NSW"] %>%
+  .[state_from_latlon == "Victoria", actual_state := "VIC"] %>%
+  .[state_from_latlon == "Queensland", actual_state := "QLD"] %>%
+  .[state_from_latlon == "South Australia", actual_state := "SA"] %>%
+  .[state_from_latlon == "Western Australia", actual_state := "WA"] %>%
+  .[state_from_latlon == "Tasmania", actual_state := "TAS"] %>%
+  .[state_from_latlon == "Australian Capital Territory",
+    actual_state := "ACT"] %>%
+  .[state_from_latlon == "Northern Territory", actual_state := "NT"] %>%
+  .[actual_state != state & state %notin% c("ANT", "ISL"),
+    state := actual_state] %>%
+  .[, actual_state := NULL]
+
+data.table::setDF(bom_stations_raw)
+```
+
+## Create state codes
+
+Use the state values extracted from `ASGS.foyer` to set state codes from BOM  rather than the sometimes incorrect `state` column from BOM.
+
+BOM state codes are as follows:
+
+  - IDD - NT,
+
+- IDN - NSW/ACT,
+
+- IDQ - Qld,
+
+- IDS - SA,
+
+- IDT - Tas/Antarctica,
+
+- IDV - Vic, and
+
+- IDW - WA
+
+```{r state-codes, message=FALSE}
+bom_stations_raw$state_code <- NA
+bom_stations_raw$state_code[bom_stations_raw$state == "WA"] <- "W"
+bom_stations_raw$state_code[bom_stations_raw$state == "QLD"] <- "Q"
+bom_stations_raw$state_code[bom_stations_raw$state == "VIC"] <- "V"
+bom_stations_raw$state_code[bom_stations_raw$state == "NT"] <- "D"
+bom_stations_raw$state_code[bom_stations_raw$state == "TAS" |
+                              bom_stations_raw$state == "ANT"] <-
+  "T"
+bom_stations_raw$state_code[bom_stations_raw$state == "NSW"] <- "N"
+bom_stations_raw$state_code[bom_stations_raw$state == "SA"] <- "S"
+```
+
+## Save data
+
+### Station location database for get_ag_bulletin()
+
+First, rename columns and drop a few that aren't necessary for the ag bulletin information.
+Filter for only stations currently reporting values.
+Then pad the `site` field with 0 to match the data in the XML file that holds the ag bulletin information.
+Lastly, create the databases for use in {wrapique}.
+
+```{r create-stations-site-list, eval=TRUE, message=FALSE}
+new_stations_site_list <-
+  stations_site_list %>%
+  dplyr::select(-state_code, -url) %>%
+  dplyr::filter(end == lubridate::year(Sys.Date())) %>%
+  dplyr::mutate(end = as.integer(end))
+
+new_stations_site_list$site <-
+  gsub("^0{1,2}", "", new_stations_site_list$site)
+
+data.table::setDT(new_stations_site_list)
+data.table::setkey(new_stations_site_list, "site")
+```
+
+#### Changes in stations_site_list
+
+```{r changes-stations-site-list}
+load(system.file("extdata", "stations_site_list.rda", package = "bomrang"))
+
+(
+  stations_site_list_changes <-
+    diffobj::diffPrint(new_stations_site_list, stations_site_list)
+)
+```
+
+#### Save stations_site_list Data and Changes
+
+```{r save-stations-site-list}
+if (!dir.exists("../inst/extdata")) {
+  dir.create("../inst/extdata", recursive = TRUE)
+}
+
+stations_site_list <- new_stations_site_list
+
+save(stations_site_list,
+     file = "../inst/extdata/stations_site_list.rda",
+     compress = "bzip2")
+
+save(stations_site_list_changes,
+     file = "../inst/extdata/stations_site_list_changes.rda",
+     compress = "bzip2")
+```
+
+## Session Info
+
+```{r session_info, echo=FALSE}
+sessioninfo::session_info()
+```

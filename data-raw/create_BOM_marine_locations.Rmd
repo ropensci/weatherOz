@@ -50,9 +50,9 @@ data.table::setkey(new_marine_AAC_codes, "aac")
 
 ## Show Changes from Last Release
 
-To ensure that the data being compared is from the most recent release, reinstall _wrapique_ from CRAN.
+To ensure that the data being compared is from the most recent release, reinstall {wrapique} from CRAN.
 
-```{r diff-codes, eval=FALSE}
+```{r diff-codes}
 install.packages("bomrang", repos = "http://cran.us.r-project.org")
 
 load(system.file("extdata", "marine_AAC_codes.rda", package = "bomrang"))
@@ -65,7 +65,7 @@ load(system.file("extdata", "marine_AAC_codes.rda", package = "bomrang"))
 
 # Save Marine Locations Data and Changes
 
-Save the marine zones' metadata and changes to disk for use in _wrapique_.
+Save the marine zones' metadata and changes to disk for use in {wrapique}.
 
 ```{r create_data}
 if (!dir.exists("../inst/extdata")) {
@@ -77,10 +77,10 @@ marine_AAC_codes <- new_marine_AAC_codes
 save(marine_AAC_codes,
      file = "../inst/extdata/marine_AAC_codes.rda",
      compress = "bzip2")
-# 
-# save(marine_AAC_code_changes,
-#      file = "../inst/extdata/marine_AAC_code_changes.rda",
-#      compress = "bzip2")
+
+save(marine_AAC_code_changes,
+     file = "../inst/extdata/marine_AAC_code_changes.rda",
+     compress = "bzip2")
 ```
 
 ## Session Info

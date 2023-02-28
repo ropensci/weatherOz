@@ -1,42 +1,66 @@
-Create BOM Précis Forecast Town Names Database
+Create BOM Radar Location Database
 ================
 
 <STYLE type='text/css' scoped>
 PRE.fansi SPAN {padding-top: .25em; padding-bottom: .25em};
 </STYLE>
 
-## Get BOM Forecast Town Names and Geographic Locations
+## Note
 
-BOM maintains a shapefile of forecast town names and their geographic
+This functionality is ported from {bomrang},
+<https://github.com/ropensci-archive/bomrang/blob/main/data-raw/create_BOM_radar_locations.md>.
+
+## Get BOM Radar Locations
+
+BOM maintains a shapefile of radar site names and their geographic
 locations. For ease, we’ll just use the .dbf file part of the shapefile
-to extract AAC codes that can be used to add lat/lon values to the
-forecast `data.table` that `get_precis_forecast()` returns. The file is
-available from BOM’s anonymous FTP server with spatial data
+to extract the product codes and radar locations. The file is available
+from BOM’s anonymous FTP server with spatial data
 <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the DBF
 file portion of a shapefile,
-<ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>.
+<ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDR00007.dbf>.
 
 ``` r
 curl::curl_download(
-  "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
-  destfile = paste0(tempdir(), "AAC_codes.dbf"),
+  "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDR00007.dbf",
+  destfile = paste0(tempdir(), "radar_locations.dbf"),
   mode = "wb",
   quiet = TRUE
 )
 
-new_AAC_codes <-
-  foreign::read.dbf(paste0(tempdir(), "AAC_codes.dbf"), as.is = TRUE)
+new_radar_locations <-
+  foreign::read.dbf(paste0(tempdir(), "radar_locations.dbf"), as.is = TRUE)
 
-# convert names to lower case for consistency with bomrang output
-names(new_AAC_codes) <- tolower(names(new_AAC_codes))
+new_radar_locations$LocationID <-
+  ifelse(
+    test = nchar(new_radar_locations$LocationID) == 1,
+    yes = paste0("0", new_radar_locations$LocationID),
+    no = new_radar_locations$LocationID
+  )
 
-# reorder columns
-new_AAC_codes <- new_AAC_codes[, c(2:3, 7:9)]
+data.table::setDT(new_radar_locations)
+data.table::setkey(new_radar_locations, "Name")
 
-data.table::setDT(new_AAC_codes)
-data.table::setnames(new_AAC_codes, c(2, 5), c("town", "elev"))
-data.table::setkey(new_AAC_codes, "aac")
+str(new_radar_locations)
 ```
+
+    ## Classes 'data.table' and 'data.frame':   69 obs. of  13 variables:
+    ##  $ Name      : chr  "Adelaide" "Albany" "Alice Springs" "Bairnsdale" ...
+    ##  $ Longitude : num  138 118 134 148 148 ...
+    ##  $ Latitude  : num  -34.6 -34.9 -23.8 -37.9 -19.9 ...
+    ##  $ Radar_id  : int  64 31 25 68 24 93 66 105 1 17 ...
+    ##  $ Full_Name : chr  "Adelaide (Buckland Park)" "Albany" "Alice Springs" "Bairnsdale" ...
+    ##  $ IDRnn0name: chr  "BuckPk" "Albany" "AliceSp" "Bnsdale" ...
+    ##  $ IDRnn1name: chr  "BucklandPk" "Albany" "AliceSprings" "Bairnsdale" ...
+    ##  $ State     : chr  "SA" "WA" "NT" "VIC" ...
+    ##  $ Type      : chr  "Doppler" "Doppler" "Standard weather watch" "Doppler" ...
+    ##  $ Group_    : chr  "Yes" "Yes" "Yes" "Yes" ...
+    ##  $ Status    : chr  "Public" "Public" "Public" "Public" ...
+    ##  $ Archive   : chr  "BuckPk" "Albany" "AliceSp" "Bnsdale" ...
+    ##  $ LocationID: chr  "64" "31" "25" "68" ...
+    ##  - attr(*, "data_types")= chr [1:13] "C" "F" "F" "N" ...
+    ##  - attr(*, ".internal.selfref")=<externalptr> 
+    ##  - attr(*, "sorted")= chr "Name"
 
 ## Show Changes from Last Release
 
@@ -44,31 +68,34 @@ To ensure that the data being compared is from the most recent release,
 reinstall {wrapique} from CRAN.
 
 ``` r
-install.packages("wrapique", repos = "http://cran.us.r-project.org")
+install.packages("bomrang", repos = "http://cran.us.r-project.org")
 
-load(system.file("extdata", "AAC_codes.rda", package = "wrapique"))
+load(system.file("extdata", "radar_locations.rda", package = "wrapique"))
 
-(AAC_code_changes <- diffobj::diffPrint(new_AAC_codes, AAC_codes))
+(
+  radar_location_changes <-
+    diffobj::diffPrint(new_radar_locations, radar_locations)
+)
 ```
 
-# Save the data
+# Save Radar Stations Data and Changes
 
-Save the stations’ metadata and changes to disk for use in {wrapique}.
+Save the radar stations’ metadata and changes to disk for use in
+{wrapique}.
 
 ``` r
 if (!dir.exists("../inst/extdata")) {
   dir.create("../inst/extdata", recursive = TRUE)
 }
 
-AAC_codes <- new_AAC_codes
+radar_locations <- new_radar_locations
 
-save(AAC_codes,
-     file = "../inst/extdata/AAC_codes.rda",
-     compress = "bzip2"
-)
-# 
-# save(AAC_code_changes,
-#      file = "../inst/extdata/AAC_code_changes.rda",
+save(radar_locations,
+     file = "../inst/extdata/radar_locations.rda",
+     compress = "bzip2")
+
+# save(radar_location_changes,
+#      file = "../inst/extdata/radar_location_changes.rda",
 #      compress = "bzip2")
 ```
 
