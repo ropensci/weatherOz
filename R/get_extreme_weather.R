@@ -13,7 +13,7 @@
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
 #'
-#' @return a `data.frame` of one row with 'stationCode', 'stationName',
+#' @return a `data.table` of one row with 'stationCode', 'stationName',
 #' 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
 #' information according to the type(s) selected.
 #'
@@ -109,10 +109,10 @@ get_extreme_weather <- function(site,
       erosion$yearToDate$days
     )
 
-    names(out_erosion) <- tolower(names(out_erosion))
+    names(out_erosion) <- .cap_names(names(out_erosion))
 
   } else {
-    out_erosion <- data.frame()[1:nrec,]
+    out_erosion <- data.table::data.table()[1:nrec,]
   }
 
   if (any(c("frost", "all") %in% type)) {
@@ -134,10 +134,10 @@ get_extreme_weather <- function(site,
       frost$yearToDate$days
     )
 
-    names(out_frost) <- tolower(names(out_frost))
+    names(out_frost) <- .cap_names(names(out_frost))
 
   } else {
-    out_frost <- data.frame()[1:nrec,]
+    out_frost <- data.table::data.table()[1:nrec,]
   }
 
   if (any(c("heat", "all") %in% type)) {
@@ -157,12 +157,11 @@ get_extreme_weather <- function(site,
       heat$yearToDate$days
     )
 
-    names(out_heat) <- tolower(names(out_heat))
+    names(out_heat) <- .cap_names(names(out_heat))
 
   } else {
-    out_heat <- data.frame()[1:nrec,]
+    out_heat <- data.table::data.table()[1:nrec,]
   }
 
-  ret <- data.frame(out_data, out_erosion, out_frost, out_heat)
-  return(ret)
+  return(data.table::setDT(out_data, out_erosion, out_frost, out_heat))
 }
