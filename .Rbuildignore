@@ -4,3 +4,4 @@
 ^tests/temp_file\.R$
 ^R/dev
 ^LICENSE\.md$
+^data-raw$
