@@ -222,7 +222,7 @@ parse_silo <- function(query_response,
 #' @details Original execution came from
 #' <https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12>
 #'
-#' @author Adam H. Sparks, adamhsparks@@gmail.com
+#' @author Adam H. Sparks, adam.sparks@@dpird.wa.gov.au
 #' @noRd
 #'
 .get_url <- function(remote_file) {
@@ -465,7 +465,7 @@ parse_silo <- function(query_response,
 #'
 #' @return cleaned data.table cols of date and time
 #' @keywords internal
-#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @importFrom data.table ":="
 #' @noRd
 

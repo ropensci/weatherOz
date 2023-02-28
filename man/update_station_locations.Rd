@@ -44,6 +44,6 @@ Other bomrang-ported:
 \code{\link{update_forecast_towns}()}
 }
 \author{
-Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 }
 \concept{bomrang-ported}

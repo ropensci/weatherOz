@@ -56,5 +56,5 @@ future::plan("sequential")
 
 }
 \author{
-Adam Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Adam Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 }

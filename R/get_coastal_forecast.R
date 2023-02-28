@@ -199,7 +199,7 @@ get_coastal_forecast <- function(state = "AUS") {
   out[, c(6:8, 14:20) := lapply(.SD, function(x)
     as.character(x)),
     .SDcols = c(6:8, 14:20)]
-  return(out)
+  return(out[])
 }
 
 #' extract the values of a coastal forecast item
@@ -208,7 +208,7 @@ get_coastal_forecast <- function(state = "AUS") {
 #'
 #' @return a data.table of the forecast for further refining
 #' @keywords internal
-#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
 
 .parse_coastal_xml <- function(xml_object) {
@@ -221,44 +221,44 @@ get_coastal_forecast <- function(state = "AUS") {
   fp <- xml2::xml_find_all(xml_object, ".//forecast-period")
   locations_index <- data.table::data.table(
     # find all the aacs
-    aac = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::area") |> 
+    aac = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::area") |>
       xml2::xml_attr("aac"),
     # find the names of towns
-    dist_name = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::area") |> 
+    dist_name = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::area") |>
       xml2::xml_attr("description"),
-    # find corecast period index
-    index = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::forecast-period") |> 
+    # find forecast period index
+    index = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::forecast-period") |>
       xml2::xml_attr("index"),
-    start_time_local = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::forecast-period") |> 
+    start_time_local = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::forecast-period") |>
       xml2::xml_attr("start-time-local"),
-    end_time_local = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::forecast-period") |> 
+    end_time_local = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::forecast-period") |>
       xml2::xml_attr("start-time-local"),
-    start_time_utc = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::forecast-period") |> 
+    start_time_utc = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::forecast-period") |>
       xml2::xml_attr("start-time-local"),
-    end_time_utc = xml2::xml_parent(meta) |> 
-      xml2::xml_find_first(".//parent::forecast-period") |> 
+    end_time_utc = xml2::xml_parent(meta) |>
+      xml2::xml_find_first(".//parent::forecast-period") |>
       xml2::xml_attr("start-time-local")
   )
   vals <- lapply(fp, function(node) {
     # find names of all children nodes
-    childnodes <- node |> 
-      xml2::xml_children() |> 
+    childnodes <- node |>
+      xml2::xml_children() |>
       xml2::xml_name()
     # find the attr value from all child nodes
-    names <- node |> 
-      xml2::xml_children() |> 
+    names <- node |>
+      xml2::xml_children() |>
       xml2::xml_attr("type")
     # create columns names based on either node name or attr value
     names <- ifelse(is.na(names), childnodes, names)
     # find all values
-    values <- node |> 
-      xml2::xml_children() |> 
+    values <- node |>
+      xml2::xml_children() |>
       xml2::xml_text()
     # create data frame and properly label the columns
     df <- data.frame(t(values), stringsAsFactors = FALSE)

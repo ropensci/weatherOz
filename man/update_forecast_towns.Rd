@@ -39,6 +39,6 @@ Other bomrang-ported:
 \code{\link{update_station_locations}()}
 }
 \author{
-Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 }
 \concept{bomrang-ported}

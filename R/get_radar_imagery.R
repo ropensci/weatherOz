@@ -51,10 +51,10 @@ get_available_radar <- function(radar_id = "all") {
   product_id <- substr(gif_files, 1, nchar(gif_files) - 4)
   LocationID <- substr(product_id, 4, 5)
   range <- substr(product_id, 6, 6)
-  dat <- cbind.data.frame(product_id,
-                          LocationID,
-                          range,
-                          stringsAsFactors = FALSE) |>
+  dat <- cbind(product_id,
+               LocationID,
+               range,
+               stringsAsFactors = FALSE) |>
     dplyr::left_join(radar_locations, by = "LocationID") |>
     dplyr::mutate(
       range  = data.table::fcase(
