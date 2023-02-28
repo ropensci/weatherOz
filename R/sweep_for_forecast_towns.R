@@ -28,7 +28,8 @@ sweep_for_forecast_towns <- function(latlon = c(-35.3, 149.2)) {
   # Load JSON URL list
   load(system.file("extdata",
                    "AAC_codes.rda",
-                   package = "wrapique"))
+                   package = "wrapique",
+                   mustWork = TRUE))
 
   forecast_towns <- data.table::copy(AAC_codes)
   forecast_towns[, "distance" := .haversine_distance(Lat, Lon, lat, lon)] |>
