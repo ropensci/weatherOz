@@ -77,3 +77,8 @@ Suggests:
 Config/testthat/edition: 3
 Depends: 
     R (>= 2.10)
+X-schema.org-applicationCategory: Tools
+X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
+    australia, weather, weather-data, meteorology, western-australia,
+    australia-bureau-of-meteorology, western-australia-agriculture
+X-schema.org-isPartOf: https://www.agric.wa.gov.au/
