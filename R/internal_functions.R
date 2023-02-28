@@ -181,3 +181,32 @@ parse_silo <- function(query_response,
   }
   return(out)
 }
+
+
+#' Convert station names to proper case for names
+#'
+#' Converts station names to proper name case, e.g., "York East".
+#'
+#' @param s a `string` to be converted
+#' @keywords internal
+#' @noRd
+#' @author \R authors, taken from ?tolower()
+
+.cap_names <- function(s, strict = FALSE) {
+  cap <- function(s)
+    paste(toupper(substring(s, 1, 1)),
+          {
+            s <- substring(s, 2)
+            if (strict)
+              tolower(s)
+            else
+              s
+          },
+          sep = "", collapse = " ")
+  vapply(
+    X = strsplit(s, split = " "),
+    FUN = cap,
+    FUN.VALUE = character(length(!is.null(names(s)))),
+    USE.NAMES = !is.null(names(s))
+  )
+}
