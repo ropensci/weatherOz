@@ -71,16 +71,21 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
+    curl,
     data.table,
     FoliarDisease,
+    foreign,
     furrr,
     ggplot2,
     httr,
     jsonlite,
     lubridate,
+    magick,
     methods,
-    purrr
+    purrr,
+    xml2
 Suggests:
+    ASGS.foyer,
     future,
     rstudioapi,
     testthat (>= 3.0.0),
