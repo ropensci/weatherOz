@@ -33,10 +33,10 @@ webpage, \dQuote{Weather Data Services},
 }
 \seealso{
 Other bomrang-ported: 
+\code{\link{find_forecast_towns}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_precis_forecast}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{sweep_for_forecast_towns}()},
 \code{\link{update_station_locations}()}
 }
 \author{
