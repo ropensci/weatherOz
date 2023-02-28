@@ -136,8 +136,8 @@ get_ag_bulletin <- function(state = "AUS") {
       xml2::xml_attr("site"),
     station = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("station"),
-    observation = observations %>% xml2::xml_attr("t"),
-    values = observations %>% xml2::xml_text("t"),
+    observation = observations |>  xml2::xml_attr("t"),
+    values = observations |>  xml2::xml_text("t"),
     product_id = substr(basename(xml_url),
                         1,
                         nchar(basename(xml_url)) - 4)

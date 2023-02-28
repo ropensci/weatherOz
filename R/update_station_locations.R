@@ -116,7 +116,7 @@ update_station_locations <- function() {
 
   # keep only currently reporting stations
   bom_stations_raw <-
-    bom_stations_raw[bom_stations_raw$end == format(Sys.Date(), "%Y"), ] %>%
+    bom_stations_raw[bom_stations_raw$end == format(Sys.Date(), "%Y"), ] |>
     dplyr::mutate(start = as.integer(start),
                   end = as.integer(end))
 
@@ -136,19 +136,19 @@ update_station_locations <- function() {
                             return = "v")
     }
 
-    bom_stations_raw %>%
-      .[lon > -50, state_from_latlon := latlon2state(lat, lon)] %>%
-      .[state_from_latlon == "New South Wales", actual_state := "NSW"] %>%
-      .[state_from_latlon == "Victoria", actual_state := "VIC"] %>%
-      .[state_from_latlon == "Queensland", actual_state := "QLD"] %>%
-      .[state_from_latlon == "South Australia", actual_state := "SA"] %>%
-      .[state_from_latlon == "Western Australia", actual_state := "WA"] %>%
-      .[state_from_latlon == "Tasmania", actual_state := "TAS"] %>%
+    bom_stations_raw |>
+      .[lon > -50, state_from_latlon := latlon2state(lat, lon)] |>
+      .[state_from_latlon == "New South Wales", actual_state := "NSW"] |>
+      .[state_from_latlon == "Victoria", actual_state := "VIC"] |>
+      .[state_from_latlon == "Queensland", actual_state := "QLD"] |>
+      .[state_from_latlon == "South Australia", actual_state := "SA"] |>
+      .[state_from_latlon == "Western Australia", actual_state := "WA"] |>
+      .[state_from_latlon == "Tasmania", actual_state := "TAS"] |>
       .[state_from_latlon == "Australian Capital Territory",
-        actual_state := "ACT"] %>%
-      .[state_from_latlon == "Northern Territory", actual_state := "NT"] %>%
+        actual_state := "ACT"] |>
+      .[state_from_latlon == "Northern Territory", actual_state := "NT"] |>
       .[actual_state != state &
-          state %notin% c("ANT", "ISL"), state := actual_state] %>%
+          state %notin% c("ANT", "ISL"), state := actual_state] |>
       .[, actual_state := NULL]
 
     data.table::setDF(bom_stations_raw)
@@ -177,11 +177,11 @@ update_station_locations <- function() {
   bom_stations_raw$state_code[bom_stations_raw$state == "SA"] <- "S"
 
   stations_site_list <-
-    bom_stations_raw %>%
-    dplyr::select(site:wmo, state, state_code) %>%
-    tidyr::drop_na(wmo) %>%
+    bom_stations_raw |>
+    dplyr::select(site:wmo, state, state_code) |>
+    tidyr::drop_na(wmo) |>
     dplyr::mutate(
-      url = dplyr::case_when(
+      url = data.table::fcase(
         .$state == "NSW" |
           .$state == "NT" |
           .$state == "QLD" |
@@ -236,8 +236,8 @@ update_station_locations <- function() {
     stations_site_list[!is.na(stations_site_list$url), ]
 
   JSONurl_site_list <-
-    JSONurl_site_list %>%
-    dplyr::rowwise() %>%
+    JSONurl_site_list |>
+    dplyr::rowwise() |>
     dplyr::mutate(url = dplyr::if_else(httr::http_error(url),
                                        NA_character_,
                                        url))
@@ -257,8 +257,8 @@ update_station_locations <- function() {
   )
 
   stations_site_list <-
-    stations_site_list %>%
-    dplyr::select(-state_code, -url) %>%
+    stations_site_list |>
+    dplyr::select(-state_code, -url) |>
     dplyr::filter(end == lubridate::year(Sys.Date()))
 
   stations_site_list$site <-

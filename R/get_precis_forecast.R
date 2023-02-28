@@ -56,7 +56,6 @@
 #' @export get_precis_forecast
 
 get_precis_forecast <- function(state = "AUS") {
-
   # this is just a placeholder for functionality with parse_precis_forecast()
   filepath <- NULL
 
@@ -148,7 +147,8 @@ get_precis_forecast <- function(state = "AUS") {
     if (is.null(xml_object)) {
       return(invisible(NULL))
     }
-  } else {# load the XML from local
+  } else {
+    # load the XML from local
     xml_object <- xml2::read_xml(xml_url)
   }
 
@@ -279,12 +279,12 @@ get_precis_forecast <- function(state = "AUS") {
 
   locations_index <- data.table::data.table(
     # find all the aacs
-    aac = xml2::xml_find_first(fp, ".//parent::area") %>%
+    aac = xml2::xml_find_first(fp, ".//parent::area") |>
       xml2::xml_attr("aac"),
     # find the names of towns
-    town = xml2::xml_find_first(fp, ".//parent::area") %>%
+    town = xml2::xml_find_first(fp, ".//parent::area") |>
       xml2::xml_attr("description"),
-    # find corecast period index
+    # find forecast period index
     index = xml2::xml_attr(fp, "index"),
     start_time_local = xml2::xml_attr(fp, "start-time-local"),
     end_time_local = xml2::xml_attr(fp, "end-time-local"),
@@ -294,19 +294,19 @@ get_precis_forecast <- function(state = "AUS") {
 
   vals <- lapply(fp, function(node) {
     # find names of all children nodes
-    childnodes <- node %>%
-      xml2::xml_children() %>%
+    childnodes <- node |>
+      xml2::xml_children() |>
       xml2::xml_name()
     # find the attr value from all child nodes
-    names <- node %>%
-      xml2::xml_children() %>%
+    names <- node |>
+      xml2::xml_children() |>
       xml2::xml_attr("type")
     # create columns names based on either node name or attr value
     names <- ifelse(is.na(names), childnodes, names)
 
     # find all values
-    values <- node %>%
-      xml2::xml_children() %>%
+    values <- node |>
+      xml2::xml_children() |>
       xml2::xml_text()
 
     # create data frame and properly label the columns

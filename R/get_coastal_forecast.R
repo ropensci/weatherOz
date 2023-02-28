@@ -221,44 +221,44 @@ get_coastal_forecast <- function(state = "AUS") {
   fp <- xml2::xml_find_all(xml_object, ".//forecast-period")
   locations_index <- data.table::data.table(
     # find all the aacs
-    aac = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::area") %>%
+    aac = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::area") |> 
       xml2::xml_attr("aac"),
     # find the names of towns
-    dist_name = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::area") %>%
+    dist_name = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::area") |> 
       xml2::xml_attr("description"),
     # find corecast period index
-    index = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::forecast-period") %>%
+    index = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::forecast-period") |> 
       xml2::xml_attr("index"),
-    start_time_local = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::forecast-period") %>%
+    start_time_local = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::forecast-period") |> 
       xml2::xml_attr("start-time-local"),
-    end_time_local = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::forecast-period") %>%
+    end_time_local = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::forecast-period") |> 
       xml2::xml_attr("start-time-local"),
-    start_time_utc = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::forecast-period") %>%
+    start_time_utc = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::forecast-period") |> 
       xml2::xml_attr("start-time-local"),
-    end_time_utc = xml2::xml_parent(meta) %>%
-      xml2::xml_find_first(".//parent::forecast-period") %>%
+    end_time_utc = xml2::xml_parent(meta) |> 
+      xml2::xml_find_first(".//parent::forecast-period") |> 
       xml2::xml_attr("start-time-local")
   )
   vals <- lapply(fp, function(node) {
     # find names of all children nodes
-    childnodes <- node %>%
-      xml2::xml_children() %>%
+    childnodes <- node |> 
+      xml2::xml_children() |> 
       xml2::xml_name()
     # find the attr value from all child nodes
-    names <- node %>%
-      xml2::xml_children() %>%
+    names <- node |> 
+      xml2::xml_children() |> 
       xml2::xml_attr("type")
     # create columns names based on either node name or attr value
     names <- ifelse(is.na(names), childnodes, names)
     # find all values
-    values <- node %>%
-      xml2::xml_children() %>%
+    values <- node |> 
+      xml2::xml_children() |> 
       xml2::xml_text()
     # create data frame and properly label the columns
     df <- data.frame(t(values), stringsAsFactors = FALSE)

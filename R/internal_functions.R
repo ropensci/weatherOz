@@ -536,7 +536,7 @@ parse_silo <- function(query_response,
 .create_bom_file <- function(AUS_XML, .the_state, .file_loc) {
   if (.the_state != "AUS") {
     xml_url <-
-      dplyr::case_when(
+      data.table::fcase(
         .the_state == "ACT" |
           .the_state == "CANBERRA" ~ paste0(.file_loc, "/", AUS_XML[1]),
         .the_state == "NSW" |
@@ -558,4 +558,3 @@ parse_silo <- function(query_response,
   }
   return(xml_url)
 }
-

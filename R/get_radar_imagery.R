@@ -54,14 +54,14 @@ get_available_radar <- function(radar_id = "all") {
   dat <- cbind.data.frame(product_id,
                           LocationID,
                           range,
-                          stringsAsFactors = FALSE) %>%
-    dplyr::left_join(radar_locations, by = "LocationID") %>%
+                          stringsAsFactors = FALSE) |>
+    dplyr::left_join(radar_locations, by = "LocationID") |>
     dplyr::mutate(
-      range  = dplyr::case_when(
-        range == 1 ~ "512km",
-        range == 2 ~ "256km",
-        range == 3 ~ "128km",
-        range == 4 ~ "64km"
+      range  = data.table::fcase(
+        range == 1, "512km",
+        range == 2, "256km",
+        range == 3, "128km",
+        range == 4, "64km"
       )
     )
   if (radar_id[1] == "all") {
@@ -69,7 +69,8 @@ get_available_radar <- function(radar_id = "all") {
   } else if (is.numeric(radar_id) && radar_id %in% dat$Radar_id) {
     dat <- dat[dat$Radar_id %in% radar_id,]
   } else{
-    stop("radar_id not found")
+    stop("`radar_id` was not found",
+         call. = FALSE)
   }
   return(dat)
 }
