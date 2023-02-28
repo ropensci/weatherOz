@@ -58,10 +58,9 @@ the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
 \seealso{
 \link{parse_precis_forecast}
 
-Other bomrang: 
+Other bomrang-ported: 
 \code{\link{get_available_radar}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{sweep_for_forecast_towns}()},
 \code{\link{update_forecast_towns}()},
 \code{\link{update_station_locations}()}
 }
@@ -70,4 +69,4 @@ Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Keith
 Pembleton, \email{keith.pembleton@usq.edu.au} and Paul Melloy,
 \email{paul@melloy.com.au}
 }
-\concept{bomrang}
+\concept{bomrang-ported}

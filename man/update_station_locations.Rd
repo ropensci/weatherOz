@@ -37,14 +37,13 @@ Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}.
 }
 \seealso{
-Other bomrang: 
+Other bomrang-ported: 
 \code{\link{get_available_radar}()},
 \code{\link{get_precis_forecast}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{sweep_for_forecast_towns}()},
 \code{\link{update_forecast_towns}()}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang}
+\concept{bomrang-ported}

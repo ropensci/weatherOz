@@ -23,7 +23,7 @@
 #' webpage, \dQuote{Weather Data Services},
 #' \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}.
 #'
-#' @family bomrang
+#' @family bomrang-ported
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export update_forecast_towns

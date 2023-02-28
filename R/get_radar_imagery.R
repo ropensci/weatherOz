@@ -26,7 +26,7 @@
 #' # Check availability radar imagery for Wollongong (radar_id = 3)
 #' imagery <- get_available_radar(radar_id = 3)
 #'
-#' @family bomrang
+#' @family bomrang-ported
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}
 #'

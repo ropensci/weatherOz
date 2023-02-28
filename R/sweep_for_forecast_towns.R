@@ -14,7 +14,7 @@
 #' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com} and
 #'  James Goldie, \email{me@@jamesgoldie.dev}
 #'
-#' @family bomrang
+#' @family bomrang-ported-ported
 #'
 #' @export sweep_for_forecast_towns
 

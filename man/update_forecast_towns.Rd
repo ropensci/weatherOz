@@ -32,14 +32,13 @@ webpage, \dQuote{Weather Data Services},
 \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}.
 }
 \seealso{
-Other bomrang: 
+Other bomrang-ported: 
 \code{\link{get_available_radar}()},
 \code{\link{get_precis_forecast}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{sweep_for_forecast_towns}()},
 \code{\link{update_station_locations}()}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang}
+\concept{bomrang-ported}

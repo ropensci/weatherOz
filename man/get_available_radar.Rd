@@ -37,14 +37,13 @@ Australian Bureau of Meteorology (BOM) radar image
 \url{http://www.bom.gov.au/australia/radar/}.
 }
 \seealso{
-Other bomrang: 
+Other bomrang-ported: 
 \code{\link{get_precis_forecast}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{sweep_for_forecast_towns}()},
 \code{\link{update_forecast_towns}()},
 \code{\link{update_station_locations}()}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}
 }
-\concept{bomrang}
+\concept{bomrang-ported}

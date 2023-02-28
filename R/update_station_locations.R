@@ -26,7 +26,7 @@
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 #' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}.
 #'
-#' @family bomrang
+#' @family bomrang-ported
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export update_station_locations
 

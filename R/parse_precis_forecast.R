@@ -68,7 +68,7 @@
 #'
 #' @seealso \link{get_precis_forecast}
 #'
-#' @family bomrang
+#' @family bomrang-ported
 #'
 #' @export parse_precis_forecast
 #'
