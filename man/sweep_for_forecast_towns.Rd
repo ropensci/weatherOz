@@ -18,11 +18,10 @@ sorted by distance from \var{latlon}, ascending.
 Find nearest BOM forecast towns for a given location
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
 # sweep for forecast towns near Esperance, WA
 sweep_for_forecast_towns(latlon = c(-33.8614, 121.8913))
-\dontshow{\}) # examplesIf}
+
 }
 \seealso{
 Other bomrang: 

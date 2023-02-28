@@ -4,7 +4,7 @@
 #' @param latlon A length-2 `numeric` vector of latitude and longitude in
 #' decimal degree (DD) format. By default, Canberra (approximately).
 #'
-#' @examplesIf interactive()
+#' @examples
 #'
 #' # sweep for forecast towns near Esperance, WA
 #' sweep_for_forecast_towns(latlon = c(-33.8614, 121.8913))
