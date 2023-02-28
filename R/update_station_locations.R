@@ -136,20 +136,23 @@ update_station_locations <- function() {
                             return = "v")
     }
 
-    bom_stations_raw |>
-      .[lon > -50, state_from_latlon := latlon2state(lat, lon)] |>
-      .[state_from_latlon == "New South Wales", actual_state := "NSW"] |>
-      .[state_from_latlon == "Victoria", actual_state := "VIC"] |>
-      .[state_from_latlon == "Queensland", actual_state := "QLD"] |>
-      .[state_from_latlon == "South Australia", actual_state := "SA"] |>
-      .[state_from_latlon == "Western Australia", actual_state := "WA"] |>
-      .[state_from_latlon == "Tasmania", actual_state := "TAS"] |>
-      .[state_from_latlon == "Australian Capital Territory",
-        actual_state := "ACT"] |>
-      .[state_from_latlon == "Northern Territory", actual_state := "NT"] |>
-      .[actual_state != state &
-          state %notin% c("ANT", "ISL"), state := actual_state] |>
-      .[, actual_state := NULL]
+    bom_stations_raw[lon > -50, state_from_latlon := latlon2state(lat, lon)]
+    bom_stations_raw[state_from_latlon == "New South Wales",
+                     actual_state := "NSW"]
+    bom_stations_raw[state_from_latlon == "Victoria", actual_state := "VIC"]
+    bom_stations_raw[state_from_latlon == "Queensland", actual_state := "QLD"]
+    bom_stations_raw[state_from_latlon == "South Australia",
+                     actual_state := "SA"]
+    bom_stations_raw[state_from_latlon == "Western Australia",
+                     actual_state := "WA"]
+    bom_stations_raw[state_from_latlon == "Tasmania", actual_state := "TAS"]
+    bom_stations_raw[state_from_latlon == "Australian Capital Territory",
+                     actual_state := "ACT"]
+    bom_stations_raw[state_from_latlon == "Northern Territory",
+                     actual_state := "NT"]
+    bom_stations_raw[actual_state != state &
+                       state %notin% c("ANT", "ISL"), state := actual_state]
+    bom_stations_raw[, actual_state := NULL]
 
     data.table::setDF(bom_stations_raw)
   }
@@ -188,7 +191,7 @@ update_station_locations <- function() {
           .$state == "SA" |
           .$state == "TAS" |
           .$state == "VIC" |
-          .$state == "WA" ~
+          .$state == "WA",
           paste0(
             "http://www.bom.gov.au/fwo/ID",
             .$state_code,
@@ -201,7 +204,7 @@ update_station_locations <- function() {
             .$wmo,
             ".json"
           ),
-        .$state == "ACT" ~
+        .$state == "ACT",
           paste0(
             "http://www.bom.gov.au/fwo/IDN",
             "60903",
@@ -212,7 +215,7 @@ update_station_locations <- function() {
             .$wmo,
             ".json"
           ),
-        .$state == "ANT" ~
+        .$state == "ANT",
           paste0(
             "http://www.bom.gov.au/fwo/ID",
             .$state_code,

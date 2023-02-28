@@ -23,8 +23,16 @@ Find nearest BOM forecast towns for a given location
 sweep_for_forecast_towns(latlon = c(-33.8614, 121.8913))
 
 }
+\seealso{
+Other bomrang-ported: 
+\code{\link{get_available_radar}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{parse_precis_forecast}()},
+\code{\link{update_forecast_towns}()},
+\code{\link{update_station_locations}()}
+}
 \author{
 Hugh Parsonage, \email{hugh.parsonage@gmail.com} and
 James Goldie, \email{me@jamesgoldie.dev}
 }
-\concept{bomrang-ported-ported}
+\concept{bomrang-ported}
