@@ -112,5 +112,5 @@ get_multi_silo_points <- function(station_id = NULL,
         return(i)
       })
   }
-  return(weather_raw)
+  return(out)
 }

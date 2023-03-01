@@ -542,10 +542,10 @@ parse_silo <- function(query_response,
   return(xml_url)
 }
 
-#' Internal function to rename colum names
+#' Internal function to rename column names
 #'
-#' @param df_out data.frame returned from API query with camel case column
-#' names
+#' @param df_out data.frame returned from DPIRD API query with camel case
+#' column names
 #' @keywords internal
 #' @noRd
 #'
