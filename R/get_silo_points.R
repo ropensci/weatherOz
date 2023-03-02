@@ -17,14 +17,15 @@
 #' @param latitude A vector, representing the latitude of a point-of-interest
 #' @param longitude A vector, representing the longitude of a point-of-interest
 #' @param first A string representing the start date of the query in the
-#' format 'yyyymmdd'
+#' format 'yyyymmdd' (ISO8601).
 #' @param last A string representing the end date of the query in the
-#' format 'yyyymmdd'
+#' format 'yyyymmdd' (ISO8601).
 #' @param data_format A string specifying the type of data to retrieve.
 #' Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and 'alldata'
 #' retrieve daily data.
-#' @param email A string specifying the email address to use for the request.
-#' The query will return an error if a valid email address is not provided.
+#' @param email A string specifying a valid email address to use for the
+#' request. The query will return an error if a valid email address is not
+#' provided.
 #'
 #' @return A `data.frame` containing the retrieved data from the \acronym{SILO}
 #'  \acronym{API}.
@@ -62,6 +63,7 @@ get_silo_points <- function(station_id = NULL,
   if (missing(first)) stop("Provide a start date", call. = FALSE)
   if (missing(last)) stop("Provide an end date", call. = FALSE)
   if (is.null(email)) stop("Provide a valid email address", call. = FALSE)
+  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   # Retrieve data for queries with lat lon coordinates
   if (is.null(station_id) && !is.null(latitude) & !is.null(longitude)) {
@@ -75,7 +77,7 @@ get_silo_points <- function(station_id = NULL,
 
     # Query API and store output
     result <- httr::GET(
-      url =  "https://www.longpaddock.qld.gov.au/cgi-bin/silo/DataDrillDataset.php",
+      url =  paste0(base_url, "DataDrillDataset.php"),
       query = query_params
     )
   }
@@ -91,7 +93,7 @@ get_silo_points <- function(station_id = NULL,
 
     # Create query and store output
     result <- httr::GET(
-      url =  "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php",
+      url =  paste0(base_url, "PatchedPointDataset.php"),
       query = query_params
     )
   }

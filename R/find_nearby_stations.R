@@ -23,8 +23,8 @@
 #'   Defaults to `FALSE`.
 #'
 #' @return a `data.table` with 'stationCode', 'stationName', 'latitude',
-#' 'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
-#' distance from station of interest.
+#' 'longitude', 'state', 'owner' and 'distance'. Data are sorted by increasing
+#' distance from station or location of interest.
 #'
 #' @examples
 #' # You must have an DPIRD API key to proceed
@@ -90,14 +90,13 @@ find_nearby_stations <- function(latitude = NULL,
                    api_key,
                    "&limit=100000&group=rtd")))
 
-      .lat <- res$collection$latitude
-      .lon <- res$collection$longitude
+      .latlon <- .create_latlon(res)
 
       ret <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations/nearby?",
-                 "latitude=", .lat,
-                 "&longitude=", .lon,
+                 "latitude=", .latlon[[1]],
+                 "&longitude=", .latlon[[2]],
                  "&radius=", distance_km,
                  "&api_key=", api_key,
                  "&offset=0",
@@ -141,14 +140,13 @@ find_nearby_stations <- function(latitude = NULL,
                  api_key,
                  "&limit=100000&group=yellowspot")))
 
-      .lat <- res$collection$latitude
-      .lon <- res$collection$longitude
+      .latlon <- .create_latlon(res)
 
       ret <- jsonlite::fromJSON(
         url(
           paste0("https://api.dpird.wa.gov.au/v2/science/stations/nearby?",
-                 "latitude=", .lat,
-                 "&longitude=", .lon,
+                 "latitude=", .latlon[[1]],
+                 "&longitude=", .latlon[[2]],
                  "&radius=", distance_km,
                  "&api_key=", api_key,
                  "&offset=0",
@@ -194,18 +192,28 @@ find_nearby_stations <- function(latitude = NULL,
                                                    distance_out$latitude * -1,
                                                    distance_out$latitude)]
   }
-  distance_out <- rename_cols(distance_out)
+  distance_out <- .rename_cols(distance_out)
   return(distance_out[])
 }
 
 #' Internal function to create a data.table
 #'
 #' @param ret a JSON object returned from the DPIRD API with station information
-#' @keywords internal
 #' @noRd
 
 .create_distance_out <- function(ret) {
   distance_out <- data.table::data.table(ret$collection)
   distance_out[, links := NULL]
   return(distance_out)
+}
+
+#' Internal function to create .lat and .lon objects
+#'
+#' @param res a json object from a DPIRD API
+#' @return a vector of latitude and longitude values
+#' @noRd
+
+.create_latlon <- function(res) {
+  .lat <- res$collection$latitude
+  .lon <- res$collection$longitude
 }

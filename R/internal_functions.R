@@ -550,7 +550,7 @@ parse_silo <- function(query_response,
 #' @noRd
 #'
 
-rename_cols <- function(df_out) {
+.rename_cols <- function(df_out) {
   df_out[, stationName := .cap_names(s = stationName)]
   names(df_out)[1:2] <- c("station_code", "station_name")
   return(df_out)

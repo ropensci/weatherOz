@@ -10,7 +10,7 @@
 #' for multiple sites
 #'
 #' @description This function is a wrapper around `get_silo_points()` to handle
-#' query with multiple sites, either station codes or latitude and longitude
+#' queries with multiple sites, either station codes or latitude and longitude
 #' coordinates. See help for `get_silo_points()` for details.
 #'
 #' @inheritParams get_silo_points
@@ -18,7 +18,7 @@
 #' @return A `list` object of `data.frames` with the retrieved data. Each
 #'    list item is a `data.frame` with data for a given station code or
 #'    geographic coordinates. New columns are added in both cases, `station_id`
-#'    or `latitude` and `longitude`,  respectively.
+#'    or `latitude` and `longitude`, respectively.
 #'
 #' @family SILO
 #'

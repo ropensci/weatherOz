@@ -1,5 +1,5 @@
 
-#' Find nearest BOM forecast towns for a given location
+#' Find nearest BOM forecast towns for a given location by lat and lon
 #'
 #' @param latitude  A `numeric` value of latitude in decimal degree (DD)
 #'  format. By default, Canberra (approximately).
@@ -27,7 +27,6 @@ find_forecast_towns <-
   function(latitude = -35.3,
            longitude = 149.2,
            distance_km = 100) {
-
 
   # CRAN NOTE avoidance:
   AAC_codes <- lat <- lon <- NULL # nocov
