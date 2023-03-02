@@ -56,7 +56,7 @@ str(new_radar_locations)
 
 To ensure that the data being compared is from the most recent release, reinstall {wrapique} from CRAN.
 
-```{r diff-codes, eval=FALSE}
+```{r diff-codes}
 install.packages("bomrang", repos = "http://cran.us.r-project.org")
 
 load(system.file("extdata", "radar_locations.rda", package = "wrapique"))
@@ -82,9 +82,9 @@ save(radar_locations,
      file = "../inst/extdata/radar_locations.rda",
      compress = "bzip2")
 
-# save(radar_location_changes,
-#      file = "../inst/extdata/radar_location_changes.rda",
-#      compress = "bzip2")
+save(radar_location_changes,
+     file = "../inst/extdata/radar_location_changes.rda",
+     compress = "bzip2")
 ```
 
 ## Session Info

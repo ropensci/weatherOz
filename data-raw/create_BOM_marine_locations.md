@@ -48,9 +48,9 @@ To ensure that the data being compared is from the most recent release,
 reinstall {wrapique} from CRAN.
 
 ``` r
-install.packages("bomrang", repos = "http://cran.us.r-project.org")
+install.packages("wrapique", repos = "http://cran.us.r-project.org")
 
-load(system.file("extdata", "marine_AAC_codes.rda", package = "bomrang"))
+load(system.file("extdata", "marine_AAC_codes.rda", package = "wrapique"))
 
 (
   marine_AAC_code_changes <-
@@ -73,7 +73,7 @@ marine_AAC_codes <- new_marine_AAC_codes
 save(marine_AAC_codes,
      file = "../inst/extdata/marine_AAC_codes.rda",
      compress = "bzip2")
-# 
+
 # save(marine_AAC_code_changes,
 #      file = "../inst/extdata/marine_AAC_code_changes.rda",
 #      compress = "bzip2")
@@ -95,7 +95,7 @@ sessioninfo::session_info()
 ##  collate  en_US.UTF-8
 ##  ctype    en_US.UTF-8
 ##  tz       Australia/Perth
-##  date     2023-02-28
+##  date     2023-03-02
 ##  pandoc   3.1 @ /opt/homebrew/bin/ (via rmarkdown)
 ## 
 ## <span style='color: #00BBBB; font-weight: bold;'>─ Packages ───────────────────────────────────────────────────────────────────</span>
