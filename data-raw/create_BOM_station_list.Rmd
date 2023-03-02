@@ -1,5 +1,5 @@
 ---
-  title: "Create Databases of BOM Station Locations and JSON URLs"
+title: "Create Databases of BOM Station Locations"
 output: github_document
 ---
 
@@ -14,6 +14,8 @@ options(crayon.enabled = TRUE)
 # thanks to fansi logic
 old_hooks <- fansi::set_knit_hooks(knitr::knit_hooks,
                                    which = c("output", "message", "error"))
+library(tidyverse)
+library(vroom)
 ```
 
 This document provides details on methods used to create the database of BOM JSON files for stations and corresponding metadata, _e.g._, latitude, longitude (which are more detailed than what is in the JSON file), start, end, elevation, etc.
@@ -56,65 +58,75 @@ The station metadata are downloaded from a zip file linked from the "[Bureau of 
 The zip file may be directly downloaded, [file of site details](ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip).
 
 ```{r get_bom_station_data, eval=TRUE}
-library(magrittr)
-
 # This file is a pseudo-fixed width file. Line five contains the headers at
 # fixed widths which are coded in the read_table() call.
 # The last seven lines contain other information that we don't want.
 # For some reason, reading it directly from the BOM website does not work, so
-# we use curl to fetch it first and then import it from the R tempdir()
+# we use curl to fetch it first and then import it from the R tempdir(), trim
+# the extra off the ends and write it back out to import using `read_fwf()`.
 
 curl::curl_download(
   url = "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
   destfile = file.path(tempdir(), "stations.zip"),
   mode = "wb",
-  quiet = TRUE)
+  quiet = TRUE
+)
+
+bom_stations_lines <- read_lines(unzip(file.path(tempdir(), "stations.zip")))
+keep <- length(bom_stations_lines) - 7
+bom_stations_lines <- bom_stations_lines[1:keep]
+write_lines(x = bom_stations_lines, file = file.path(tempdir(), "stations.txt"))
 
 bom_stations_raw <-
-  readr::read_table(
-    file.path(tempdir(), "stations.zip"),
-    skip = 4,
-    na = c("..", ".....", " "),
-    col_names = c(
-      "site",
-      "dist",
-      "name",
-      "start",
-      "end",
-      "lat",
-      "lon",
-      "NULL1",
-      "state",
-      "elev",
-      "bar_ht",
-      "wmo"
+  read_fwf(
+    file = file.path(tempdir(), "stations.txt"),
+    col_positions = fwf_empty(
+      file = file.path(tempdir(), "stations.txt"),
+      skip = 4,
+      n = 1000,
+      col_names = c(
+        "site",
+        "dist",
+        "name",
+        "start",
+        "end",
+        "lat",
+        "lon",
+        "NULL1",
+        "state",
+        "elev",
+        "bar_ht",
+        "wmo"
+      )
     ),
+    skip = 4,
     col_types = c(
-      site = readr::col_character(),
-      dist = readr::col_character(),
-      name = readr::col_character(),
+      site = "character",
+      dist = "character",
+      name = "character",
       start = readr::col_integer(),
       end = readr::col_integer(),
       lat = readr::col_double(),
       lon = readr::col_double(),
-      NULL1 = readr::col_character(),
-      state = readr::col_character(),
+      NULL1 = "character",
+      state = "character",
       elev = readr::col_double(),
       bar_ht = readr::col_double(),
       wmo = readr::col_integer()
     )
   )
 
+bom_stations_raw[bom_stations_raw == "...."] <- NA
+bom_stations_raw[bom_stations_raw == ".."] <- NA
+
 # remove extra columns for source of location
 bom_stations_raw <- bom_stations_raw[, -8]
 
-# trim the end of the rows off that have extra info that's not in columns
-nrows <- nrow(bom_stations_raw) - 3
-bom_stations_raw <- bom_stations_raw[1:nrows, ]
-
 # add current year to stations that are still active
+bom_stations_raw$end <- as.numeric(bom_stations_raw$end)
+
 bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
-  as.double(format(Sys.Date(), "%Y"))
+  as.integer(format(Sys.Date(), "%Y"))
 
 # keep only currently reporting stations
 bom_stations_raw <-
@@ -205,8 +217,7 @@ Lastly, create the databases for use in {wrapique}.
 
 ```{r create-stations-site-list, eval=TRUE, message=FALSE}
 new_stations_site_list <-
-  stations_site_list %>%
-  dplyr::select(-state_code, -url) %>%
+  bom_stations_raw %>%
   dplyr::filter(end == lubridate::year(Sys.Date())) %>%
   dplyr::mutate(end = as.integer(end))
 
@@ -219,8 +230,8 @@ data.table::setkey(new_stations_site_list, "site")
 
 #### Changes in stations_site_list
 
-```{r changes-stations-site-list}
-load(system.file("extdata", "stations_site_list.rda", package = "bomrang"))
+```{r changes-stations-site-list, eval=FALSE}
+load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
 
 (
   stations_site_list_changes <-
@@ -241,9 +252,9 @@ save(stations_site_list,
      file = "../inst/extdata/stations_site_list.rda",
      compress = "bzip2")
 
-save(stations_site_list_changes,
-     file = "../inst/extdata/stations_site_list_changes.rda",
-     compress = "bzip2")
+# save(stations_site_list_changes,
+#      file = "../inst/extdata/stations_site_list_changes.rda",
+#      compress = "bzip2")
 ```
 
 ## Session Info
