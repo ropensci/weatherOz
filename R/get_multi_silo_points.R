@@ -53,7 +53,7 @@ get_multi_silo_points <- function(station_id = NULL,
   if (!is.null(latitude)) {
     .v_check_lonlat <-
       Vectorize(.check_lonlat, vectorize.args = c("longitude", "latitude"))
-    invisible(.v_check_lonlat(latitude = mylat, longitude = mylon))
+    invisible(.v_check_lonlat(latitude, longitude))
   }
 
   if (is.null(latitude) & is.null(longitude) && !is.null(station_id)) {
