@@ -11,8 +11,23 @@ PRE.fansi SPAN {padding-top: .25em; padding-bottom: .25em};
 ## <span style='color: #00BB00;'>✔</span> <span style='color: #0000BB;'>lubridate</span> 1.9.2     <span style='color: #00BB00;'>✔</span> <span style='color: #0000BB;'>tidyr    </span> 1.3.0
 ## <span style='color: #00BB00;'>✔</span> <span style='color: #0000BB;'>purrr    </span> 1.0.1     
 ## ── <span style='font-weight: bold;'>Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──
-## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>filter()</span> masks <span style='color: #0000BB;'>stats</span>::filter()
-## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>lag()</span>    masks <span style='color: #0000BB;'>stats</span>::lag()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>between()</span>     masks <span style='color: #0000BB;'>data.table</span>::between()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>filter()</span>      masks <span style='color: #0000BB;'>stats</span>::filter()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>first()</span>       masks <span style='color: #0000BB;'>data.table</span>::first()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>hour()</span>    masks <span style='color: #0000BB;'>data.table</span>::hour()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>isoweek()</span> masks <span style='color: #0000BB;'>data.table</span>::isoweek()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>lag()</span>         masks <span style='color: #0000BB;'>stats</span>::lag()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>dplyr</span>::<span style='color: #00BB00;'>last()</span>        masks <span style='color: #0000BB;'>data.table</span>::last()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>mday()</span>    masks <span style='color: #0000BB;'>data.table</span>::mday()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>minute()</span>  masks <span style='color: #0000BB;'>data.table</span>::minute()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>month()</span>   masks <span style='color: #0000BB;'>data.table</span>::month()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>quarter()</span> masks <span style='color: #0000BB;'>data.table</span>::quarter()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>second()</span>  masks <span style='color: #0000BB;'>data.table</span>::second()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>purrr</span>::<span style='color: #00BB00;'>transpose()</span>   masks <span style='color: #0000BB;'>data.table</span>::transpose()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>wday()</span>    masks <span style='color: #0000BB;'>data.table</span>::wday()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>week()</span>    masks <span style='color: #0000BB;'>data.table</span>::week()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>yday()</span>    masks <span style='color: #0000BB;'>data.table</span>::yday()
+## <span style='color: #BB0000;'>✖</span> <span style='color: #0000BB;'>lubridate</span>::<span style='color: #00BB00;'>year()</span>    masks <span style='color: #0000BB;'>data.table</span>::year()
 ## <span style='color: #00BBBB;'>ℹ</span> Use the <a href='http://conflicted.r-lib.org/'>conflicted package</a> to force all conflicts to become errors
 </CODE></PRE>
 
@@ -142,7 +157,6 @@ station locations are accurate based on the lat/lon values.
 
 ``` r
 `%notin%`  <- function(x, table) {
-  # Same as !(x %in% table)
   match(x, table, nomatch = 0L) == 0L
 }
 
@@ -216,25 +230,21 @@ bom_stations_raw$state_code[bom_stations_raw$state == "SA"] <- "S"
 ### Station location database for get_ag_bulletin()
 
 First, rename columns and drop a few that aren’t necessary for the ag
-bulletin information. Filter for only stations currently reporting
-values. Then pad the `site` field with 0 to match the data in the XML
-file that holds the ag bulletin information. Lastly, create the
-databases for use in {wrapique}.
+bulletin information. Then pad the `site` field with 0 to match the data
+in the XML file that holds the ag bulletin information. Lastly, create
+the data file for use in {wrapique}.
 
 ``` r
-new_stations_site_list <-
-  bom_stations_raw %>%
-  dplyr::filter(end == lubridate::year(Sys.Date())) %>%
-  dplyr::mutate(end = as.integer(end))
+new_stations_site_list <- data.table::data.table(bom_stations_raw)
 
-new_stations_site_list$site <-
-  gsub("^0{1,2}", "", new_stations_site_list$site)
+new_stations_site_list[, site :=
+                         gsub("^0{1,2}", "", new_stations_site_list$site)]
 
 data.table::setDT(new_stations_site_list)
 data.table::setkey(new_stations_site_list, "site")
 ```
 
-#### Changes in stations_site_list
+#### Changes in “stations_site_list”
 
 ``` r
 load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
@@ -275,7 +285,7 @@ save(stations_site_list,
 ##  collate  en_US.UTF-8
 ##  ctype    en_US.UTF-8
 ##  tz       Australia/Perth
-##  date     2023-03-02
+##  date     2023-03-03
 ##  pandoc   3.1 @ /opt/homebrew/bin/ (via rmarkdown)
 ## 
 ## <span style='color: #00BBBB; font-weight: bold;'>─ Packages ───────────────────────────────────────────────────────────────────</span>
@@ -291,7 +301,7 @@ save(stations_site_list,
 ##  crayon        1.5.2   <span style='color: #555555;'>2022-09-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  credentials   1.3.2   <span style='color: #555555;'>2021-11-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  curl          5.0.0   <span style='color: #555555;'>2023-01-12</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
-##  data.table    1.14.8  <span style='color: #555555;'>2023-02-17</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
+##  data.table  * 1.14.8  <span style='color: #555555;'>2023-02-17</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  digest        0.6.31  <span style='color: #555555;'>2022-12-11</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  dplyr       * 1.1.0   <span style='color: #555555;'>2023-01-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.2)</span>
 ##  ellipsis      0.3.2   <span style='color: #555555;'>2021-04-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>

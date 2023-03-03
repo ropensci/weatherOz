@@ -14,6 +14,8 @@ options(crayon.enabled = TRUE)
 # thanks to fansi logic
 old_hooks <- fansi::set_knit_hooks(knitr::knit_hooks,
                                    which = c("output", "message", "error"))
+
+library(data.table)
 library(tidyverse)
 library(vroom)
 ```
@@ -136,7 +138,6 @@ Perform quality check to ensure that the station locations are accurate based on
 
 ```{r check-locations}
 `%notin%`  <- function(x, table) {
-  # Same as !(x %in% table)
   match(x, table, nomatch = 0L) == 0L
 }
 
@@ -205,26 +206,22 @@ bom_stations_raw$state_code[bom_stations_raw$state == "SA"] <- "S"
 ### Station location database for get_ag_bulletin()
 
 First, rename columns and drop a few that aren't necessary for the ag bulletin information.
-Filter for only stations currently reporting values.
 Then pad the `site` field with 0 to match the data in the XML file that holds the ag bulletin information.
-Lastly, create the databases for use in {wrapique}.
+Lastly, create the data file for use in {wrapique}.
 
-```{r create-stations-site-list, eval=TRUE, message=FALSE}
-new_stations_site_list <-
-  bom_stations_raw %>%
-  dplyr::filter(end == lubridate::year(Sys.Date())) %>%
-  dplyr::mutate(end = as.integer(end))
+```{r create-stations-site-list, message=FALSE}
+new_stations_site_list <- data.table::data.table(bom_stations_raw)
 
-new_stations_site_list$site <-
-  gsub("^0{1,2}", "", new_stations_site_list$site)
+new_stations_site_list[, site :=
+                         gsub("^0{1,2}", "", new_stations_site_list$site)]
 
 data.table::setDT(new_stations_site_list)
 data.table::setkey(new_stations_site_list, "site")
 ```
 
-#### Changes in stations_site_list
+#### Changes in "stations_site_list"
 
-```{r changes-stations-site-list, eval=FALSE}
+```{r changes-stations-site-list, eval=TRUE}
 load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
 
 (
@@ -246,9 +243,9 @@ save(stations_site_list,
      file = "../inst/extdata/stations_site_list.rda",
      compress = "bzip2")
 
-# save(stations_site_list_changes,
-#      file = "../inst/extdata/stations_site_list_changes.rda",
-#      compress = "bzip2")
+save(stations_site_list_changes,
+     file = "../inst/extdata/stations_site_list_changes.rda",
+     compress = "bzip2")
 ```
 
 ## Session Info
