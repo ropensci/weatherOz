@@ -38,8 +38,7 @@ Authors@R: c(
       c(
         person(
           given = "Western Australia Agriculture Authority (WAAA)",
-          role = c("cph", "fnd"),
-          comment = c("Provided funding through A. Sparks' and R. O'Leary's time")
+          role = c("cph")
         )
       )
     )
@@ -83,6 +82,7 @@ Imports:
     magick,
     methods,
     purrr,
+    readr,
     xml2
 Suggests:
     ASGS.foyer,
