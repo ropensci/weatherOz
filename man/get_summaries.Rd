@@ -71,7 +71,6 @@ output <- get_summaries(
 \seealso{
 Other DPIRD: 
 \code{\link{get_extreme_weather}()},
-\code{\link{get_station_list}()},
 \code{\link{tidy_weather_summary}()}
 }
 \concept{DPIRD}

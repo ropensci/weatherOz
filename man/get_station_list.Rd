@@ -2,64 +2,58 @@
 % Please edit documentation in R/get_station_list.R
 \name{get_station_list}
 \alias{get_station_list}
-\title{Fetch a list with all available weather stations for DPIRD weather APIs}
+\title{Fetch a list with all available weather stations for the DPIRD Weather API
+or stations present in the SILO API.}
 \usage{
-get_station_list(
-  api = "science",
-  station_group = "rtd",
-  state = "wa",
-  api_key = NULL
-)
+get_station_list(api = "weather", state = "wa", limit = 1000, api_key = NULL)
 }
 \arguments{
 \item{api}{name of the \acronym{API} to be queried. Needs to match to
-one of the existing options (currently 'science' or 'weather') and defaults
-to the "science" \acronym{API}.}
-
-\item{station_group}{the name of the station group that you wish to query.
-Defaults to "rtd". Currently "all", "api", "rtd", "web", "yshistory",
-"yellowspot" are valid groups.}
+one of the existing options (currently 'weather' or 'silo'). Defaults to the
+"weather" \acronym{API}.}
 
 \item{state}{a string limiting the query to one or several states, defaults
 to "wa". Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".}
+
+\item{limit}{a numeric value, limiting the amount of rows to return. Defaults
+to 1000.}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
 (\url{https://www.agric.wa.gov.au/web-apis})}
 }
 \value{
-a \code{data.frame} with station code, name, latitude, longitude, owner
-and state (for the Science \acronym{API}).
-Science \acronym{API} queries return additional details by default
-\emph{i.e.}, station model, battery voltage, height of sensors, status and others.
+a \code{data.table} with station code, name, latitude, longitude, owner
+and state plus metadata details if any available.
 }
 \description{
-Queries \acronym{DPIRD} \acronym{API}s, either "Science" or "Weather", and
-returns a list object of weather data for all available stations. Data
-providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
-Water Corporation, Harvey Water and Pardoo Beef Corporation.
+Queries \acronym{DPIRD} and \acronym{SILO} \acronym{API}s. If querying the
+DPIRD Weather API, the function return a data frame with metadata for the
+weather stations in the \acronym{DPIRD} network. Data providers include:
+\acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES}, Water Corporation, Harvey
+Water and Pardoo Beef Corporation. If querying the \acronym{SILO}
+\acronym{API}, the function also return a data frame with metadata for the
+\acronym{SILO} weather stations network.
 }
 \examples{
-# You must have an DPIRD API key to proceed
-mykey <- rstudioapi::askForSecret()
+Query DPIRD API
+# You must have an api key to query the DPIRD API
+mykey <- "YOUR_API_KEY"
 
-stations_weather <- get_station_list(which_api = "weather",
-station_group = "rtd",
-state = "all",
-api_key = mykey)
+dpird_stations <- get_station_list(api = "weather",
+                                   state = "wa",
+                                   api_key = mykey)
 
-stations_science <- get_station_list(which_api = "science",
-station_group = "yellowspot",
-state = "nsw",
-api_key = mykey)
+# Query the SILO API
+silo_stations <- get_station_list(api = "silo",
+                                   state = "nsw",
+                                   api_key = mykey)
 
-}
-\seealso{
-Other DPIRD: 
-\code{\link{get_extreme_weather}()},
-\code{\link{get_summaries}()},
-\code{\link{tidy_weather_summary}()}
+# Query the SILO API for mulitple states
+silo_stations_multi_state <- get_station_list(api = "silo",
+                                              state = c("nsw", "nt"),
+                                              api_key = mykey)
+
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
-\concept{DPIRD}

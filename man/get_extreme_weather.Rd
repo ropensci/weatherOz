@@ -53,7 +53,6 @@ outputs <- lapply(these_stations,
 }
 \seealso{
 Other DPIRD: 
-\code{\link{get_station_list}()},
 \code{\link{get_summaries}()},
 \code{\link{tidy_weather_summary}()}
 }

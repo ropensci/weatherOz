@@ -25,7 +25,7 @@
 #' to 1000.
 #' @param state a string limiting the query to one or several states, defaults
 #' to "wa". Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".
-#' @return a `data.frame` with station code, name, latitude, longitude, owner
+#' @return a `data.table` with station code, name, latitude, longitude, owner
 #' and state plus metadata details if any available.
 #'
 #' @examples

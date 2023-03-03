@@ -82,7 +82,6 @@ output <- tidy_weather_summary(
 \seealso{
 Other DPIRD: 
 \code{\link{get_extreme_weather}()},
-\code{\link{get_station_list}()},
 \code{\link{get_summaries}()}
 }
 \concept{DPIRD}
