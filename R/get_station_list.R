@@ -66,7 +66,7 @@ get_station_list <- function(api = "weather",
     silent = TRUE)
 
   # Query API
-  if (which_api == 'weather') {
+  if (which_api == "weather") {
 
     # Match request limits
     n_limit <- limit
