@@ -48,7 +48,7 @@ silo_stations <- get_station_list(api = "silo",
                                    state = "nsw",
                                    api_key = mykey)
 
-# Query the SILO API for mulitple states
+# Query the SILO API for multiple states
 silo_stations_multi_state <- get_station_list(api = "silo",
                                               state = c("nsw", "nt"),
                                               api_key = mykey)
