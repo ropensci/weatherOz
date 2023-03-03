@@ -21,7 +21,7 @@
 #'
 #' @family SILO
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # start multisession
 #' future::plan("multisession")
 #' # Query multiple stations (BoM, by code)
