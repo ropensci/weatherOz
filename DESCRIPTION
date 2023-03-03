@@ -80,6 +80,7 @@ Imports:
     methods,
     purrr,
     readr,
+    utils,
     xml2
 Suggests:
     ASGS.foyer,

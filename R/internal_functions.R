@@ -79,7 +79,7 @@ parse_silo <- function(query_response,
     df <- as.character(df[[1]][2])
     df <- unlist(strsplit(df, "\n"))[-2]
     df <- gsub("\\s+", " ", df)
-    out <- read.delim(textConnection(df), sep = " ")
+    out <- utils::read.delim(textConnection(df), sep = " ")
     names(out)[1] <- "year"
     out$date <-
       as.Date(out[, "day"] - 1, paste0(out[, "year"], "-01-01"))
