@@ -26,7 +26,7 @@
 #' 'longitude', 'state', 'owner' and 'distance'. Data are sorted by increasing
 #' distance from station or location of interest.
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # You must have an DPIRD API key to proceed
 #' my_key <- rstudioapi::askForSecret()
 #'
