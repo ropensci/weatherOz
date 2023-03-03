@@ -69,56 +69,59 @@ update_station_locations <- function() {
       call. = FALSE
     ))
 
+
   bom_stations_raw <-
-    readr::read_table(
-      file.path(tempdir(), "stations.zip"),
-      skip = 4,
-      na = c("..", ".....", " "),
-      col_names = c(
-        "site",
-        "dist",
-        "name",
-        "start",
-        "end",
-        "lat",
-        "lon",
-        "NULL1",
-        "state",
-        "elev",
-        "bar_ht",
-        "wmo"
+    readr::read_fwf(
+      file = file.path(tempdir(), "stations.txt"),
+      col_positions = readr::fwf_empty(
+        file = file.path(tempdir(), "stations.txt"),
+        skip = 4,
+        n = 1000,
+        col_names = c(
+          "site",
+          "dist",
+          "name",
+          "start",
+          "end",
+          "lat",
+          "lon",
+          "NULL1",
+          "state",
+          "elev",
+          "bar_ht",
+          "wmo"
+        )
       ),
+      skip = 4,
       col_types = c(
-        site = readr::col_character(),
-        dist = readr::col_character(),
-        name = readr::col_character(),
+        site = "character",
+        dist = "character",
+        name = "character",
         start = readr::col_integer(),
         end = readr::col_integer(),
         lat = readr::col_double(),
         lon = readr::col_double(),
-        NULL1 = readr::col_character(),
-        state = readr::col_character(),
+        NULL1 = "character",
+        state = "character",
         elev = readr::col_double(),
         bar_ht = readr::col_double(),
         wmo = readr::col_integer()
       )
     )
 
+  bom_stations_raw[bom_stations_raw == "...."] <- NA
+  bom_stations_raw[bom_stations_raw == ".."] <- NA
+
   # remove extra columns for source of location
   bom_stations_raw <- bom_stations_raw[, -8]
 
-  # trim the end of the rows off that have extra info that's not in columns
-  nrows <- nrow(bom_stations_raw) - 3
-  bom_stations_raw <- bom_stations_raw[1:nrows, ]
+  # add current year to stations that are still active
+  bom_stations_raw$end <- as.numeric(bom_stations_raw$end)
 
   bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
     as.integer(format(Sys.Date(), "%Y"))
 
-  # keep only currently reporting stations
-  bom_stations_raw <-
-    bom_stations_raw[bom_stations_raw$end == format(Sys.Date(), "%Y"), ] |>
-    dplyr::mutate(start = as.integer(start),
-                  end = as.integer(end))
+  data.table::setDT(bom_stations_raw)
 
   # if sf is installed, correct the state column, otherwise skip
   if (requireNamespace("ASGS.foyer", quietly = TRUE)) {
@@ -127,7 +130,7 @@ update_station_locations <- function() {
       "be checked against lat/lon location values and corrected in the\n",
       "updated internal database lists of stations."
     )
-    data.table::setDT(bom_stations_raw)
+
     latlon2state <- function(lat, lon) {
       ASGS.foyer::latlon2SA(lat,
                             lon,
@@ -159,15 +162,10 @@ update_station_locations <- function() {
 
   message("Overwriting existing databases")
 
-  stations_site_list <-
-    stations_site_list |>
-    dplyr::select(-state_code, -url) |>
-    dplyr::filter(end == lubridate::year(Sys.Date()))
-
-  stations_site_list$site <-
-    gsub("^0{1,2}", "", stations_site_list$site)
+  stations_site_list[, site := gsub("^0{1,2}", "", stations_site_list$site)]
 
   fname <-
     system.file("extdata", "stations_site_list.rda", package = "wrapique")
+
   save(stations_site_list, file = fname, compress = "bzip2")
 }
