@@ -112,11 +112,11 @@ get_station_list <- function(api = "weather",
                       "&state=",
                       this_state))
 
-    res <- jsonlite::fromJSON(ret)
-    out <- res$collection
+    out <- data.table::data.table(jsonlite::fromJSON(ret)$collection)
 
-    out$latitude <- as.numeric(out$latitude)
-    out$longitude <- as.numeric(out$longitude)
+    out[, latitude := as.numeric(latitude)]
+    out[, longitude := as.numeric(longitude)]
+
     out <- .rename_cols(out, which_api = "dpird")
   }
 
@@ -137,25 +137,29 @@ get_station_list <- function(api = "weather",
     }
 
     # get file with bom station metadata
-    load(system.file(
-      "extdata",
-      "stations_site_list.rda",
-      package = "wrapique",
-      mustWork = TRUE
-    ))
+    load(
+      system.file(
+        "extdata",
+        "stations_site_list.rda",
+        package = "wrapique",
+        mustWork = TRUE
+      )
+    )
 
     out_bom <- data.table::copy(stations_site_list)
-    out_bom$state <- tolower(out_bom$state)
+    out_bom[, state := tolower(out_bom$state)]
 
     if (!is.null(this_state) & length(this_state) > 1) {
       out <- subset(out_bom, state %in% this_state)
-    } else if (!is.null(this_state) & length(this_state) == 1 & this_state == 'all') {
+    } else if (!is.null(this_state) &
+               length(this_state) == 1 & this_state == 'all') {
       out <- out_bom
-    } else if (!is.null(this_state) & length(this_state) == 1 & this_state != 'all') {
+    } else if (!is.null(this_state) &
+               length(this_state) == 1 & this_state != 'all') {
       out <- subset(out_bom, state == this_state)
     }
     out <- .rename_cols(out, which_api = "silo")
   }
 
-  return(out)
+  return(out[])
 }
