@@ -556,7 +556,6 @@ parse_silo <- function(query_response,
   return(df_out)
 }
 
-
 #' Check user-input longitude and latitude values for validity
 #'
 #' @param longitude user provided numeric value as decimal degrees
@@ -570,7 +569,7 @@ parse_silo <- function(query_response,
       call. = FALSE,
       "Please check your longitude, `",
       paste0(longitude),
-      "`, to be sure it is valid.\n"
+      "`, to be sure it is valid for Australian data.\n"
     )
   }
   if (latitude < -23 | latitude > -38.5) {
@@ -578,7 +577,7 @@ parse_silo <- function(query_response,
       call. = FALSE,
       "Please check your latitude, `",
       paste0(latitude),
-      "`, value to be sure it is valid.\n"
+      "`, value to be sure it is valid for Australian data.\n"
     )
     return(invisible(NULL))
   }
