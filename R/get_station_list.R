@@ -152,10 +152,10 @@ get_station_list <- function(api = "weather",
     if (!is.null(this_state) & length(this_state) > 1) {
       out <- subset(out_bom, state %in% this_state)
     } else if (!is.null(this_state) &
-               length(this_state) == 1 & this_state == 'all') {
+               length(this_state) == 1 & this_state == "all") {
       out <- out_bom
     } else if (!is.null(this_state) &
-               length(this_state) == 1 & this_state != 'all') {
+               length(this_state) == 1 & this_state != "all") {
       out <- subset(out_bom, state == this_state)
     }
     out <- .rename_cols(out, which_api = "silo")
