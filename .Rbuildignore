@@ -5,3 +5,4 @@
 ^R/dev
 ^LICENSE\.md$
 ^data-raw$
+^\.covrignore$
