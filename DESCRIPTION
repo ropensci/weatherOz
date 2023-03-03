@@ -71,10 +71,8 @@ RoxygenNote: 7.2.3
 Imports: 
     curl,
     data.table,
-    FoliarDisease,
     foreign,
     furrr,
-    ggplot2,
     httr,
     jsonlite,
     lubridate,
