@@ -13,9 +13,7 @@ Fuzzy string matching via \code{\link[base]{agrep}} is done.  Defaults to
 }
 \value{
 A data frame as a \code{\link[data.table]{data.table}} object of Australia
-\acronym{BOM} agricultural bulletin information.  For full details of fields
-and units returned see Appendix 3 in the \pkg{wrapique} vignette, use \cr
-\code{vignette("wrapique", package = "wrapique")} to view.
+\acronym{BOM} agricultural bulletin information.
 }
 \description{
 Fetch the \acronym{BOM} agricultural bulletin information and return it in a

@@ -16,10 +16,7 @@ file(s) to parse. See Details for more.}
 }
 \value{
 A \code{\link[data.table]{data.table}} of Australia \acronym{BOM} précis
-seven day forecasts for \acronym{BOM} selected towns.  For full details of
-fields and units returned see Appendix 2 in the \pkg{wrapique} vignette,
-use\cr
-\code{vignette("wrapique", package = "wrapique")} to view.
+seven day forecasts for \acronym{BOM} selected towns.
 }
 \description{
 Parse local \acronym{BOM} daily précis forecast \acronym{XML} file(s) and

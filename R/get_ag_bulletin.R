@@ -24,9 +24,7 @@
 #'
 #' @return
 #'  A data frame as a \code{\link[data.table]{data.table}} object of Australia
-#'  \acronym{BOM} agricultural bulletin information.  For full details of fields
-#'  and units returned see Appendix 3 in the \pkg{wrapique} vignette, use \cr
-#'  \code{vignette("wrapique", package = "wrapique")} to view.
+#'  \acronym{BOM} agricultural bulletin information.
 #'
 #' @examplesIf interactive()
 #'

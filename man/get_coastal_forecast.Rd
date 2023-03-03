@@ -14,9 +14,7 @@ information.}
 }
 \value{
 A \code{\link[data.table]{data.table}} of an Australia \acronym{BOM}
-Coastal Waters Forecast. For full details of fields and units
-returned see Appendix 5 in the \pkg{wrapique} vignette, use \cr
-\code{vignette("wrapique", package = "wrapique")} to view.
+Coastal Waters Forecast.
 }
 \description{
 Fetch the \acronym{BOM} daily Coastal Waters Forecast and return a data frame
