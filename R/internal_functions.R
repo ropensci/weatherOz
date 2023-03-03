@@ -546,15 +546,7 @@ parse_silo <- function(query_response,
 #'
 #' @param df_out data.frame returned from DPIRD API query with camel case
 #' column names
-#' @keywords internal
-#' @noRd
-#'
-
-#' Internal function to rename column names
-#'
-#' @param df_out data.frame returned from DPIRD API query with camel case
-#' column names
-#' @which_api a string with the chosen API, either 'weather' or 'silo'
+#' @param which_api a string with the chosen API, either 'weather' or 'silo'
 #' @keywords internal
 #' @noRd
 #'
