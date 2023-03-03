@@ -586,7 +586,7 @@ parse_silo <- function(query_response,
       "`, to be sure it is valid for Australian data.\n"
     )
   }
-  if (latitude < -23 | latitude > -38.5) {
+  if (latitude < -38.5 | latitude > -23) {
     stop(
       call. = FALSE,
       "Please check your latitude, `",
