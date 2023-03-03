@@ -51,6 +51,8 @@ get_multi_silo_points <- function(station_id = NULL,
                                   data_format = "standard",
                                   email = NULL) {
 
+  .check_lonlat(longitude = longitude, latitude = latitude)
+
   if (is.null(latitude) & is.null(longitude) && !is.null(station_id)) {
 
     weather_raw <- furrr::future_map(

@@ -559,24 +559,27 @@ parse_silo <- function(query_response,
 
 #' Check user-input longitude and latitude values for validity
 #'
-#' @param longitude
-#' @param latitude
-#' @return
+#' @param longitude user provided numeric value as decimal degrees
+#' @param latitude user provided numeric value as decimal degrees
+#' @noRd
+#' @return invisible `NULL`, called for its side-effects
 
-# .check_lonlat <- function(longitude, latitude)
-#   if (lonlat[1] < -180 | lonlat[1] > 180) {
-#     stop(call. = FALSE,
-#          "Please check your longitude, `",
-#          paste0(lonlat[1]),
-#          "`, to be sure it is valid.\n")
-#   }
-# if (lonlat[2] < -90 | lonlat[2] > 90) {
-#   stop(
-#     call. = FALSE,
-#     "Please check your latitude, `",
-#     paste0(lonlat[2]),
-#     "`, value to be sure it is valid.\n"
-#   )
-#   return(invisible(NULL))
-# }
-
+.check_lonlat <- function(longitude, latitude) {
+  if (longitude < 114.5 | longitude > 152.5) {
+    stop(
+      call. = FALSE,
+      "Please check your longitude, `",
+      paste0(longitude),
+      "`, to be sure it is valid.\n"
+    )
+  }
+  if (latitude < -23 | latitude > -38.5) {
+    stop(
+      call. = FALSE,
+      "Please check your latitude, `",
+      paste0(latitude),
+      "`, value to be sure it is valid.\n"
+    )
+    return(invisible(NULL))
+  }
+}

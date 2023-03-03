@@ -31,6 +31,8 @@ find_forecast_towns <-
   # CRAN NOTE avoidance:
   AAC_codes <- lat <- lon <- NULL # nocov
 
+  .check_lonlat(longitude = longitude, latitude = latitude)
+
   # Load JSON URL list
   load(system.file(
     "extdata",
