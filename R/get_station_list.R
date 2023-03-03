@@ -116,6 +116,7 @@ get_station_list <- function(api = "weather",
 
     out[, latitude := as.numeric(latitude)]
     out[, longitude := as.numeric(longitude)]
+    out[, links := NULL]
 
     out <- .rename_cols(out, which_api = "dpird")
   }
