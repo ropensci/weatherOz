@@ -20,7 +20,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Western Australia Agriculture Authority (WAAA) (Provided funding through A. Sparks' and R. O'Leary's time) [copyright holder, funder]
+  \item Western Australia Agriculture Authority (WAAA) [copyright holder]
 }
 
 }
