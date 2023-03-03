@@ -29,7 +29,7 @@
 #' and state plus metadata details if any available.
 #'
 #' @examples
-#' Query DPIRD API
+#' # Query DPIRD API
 #' # You must have an api key to query the DPIRD API
 #' mykey <- "YOUR_API_KEY"
 #'

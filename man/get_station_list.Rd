@@ -35,7 +35,7 @@ Water and Pardoo Beef Corporation. If querying the \acronym{SILO}
 \acronym{SILO} weather stations network.
 }
 \examples{
-Query DPIRD API
+# Query DPIRD API
 # You must have an api key to query the DPIRD API
 mykey <- "YOUR_API_KEY"
 
