@@ -10,7 +10,7 @@
 #'
 #' @examples
 #'
-#' # sweep for forecast towns near Esperance, WA
+#' # find forecast towns near Esperance, WA
 #' find_forecast_towns(lat = -33.8614, lon = 121.8913)
 #'
 #' @return A \code{\link{data.table}} of all forecast towns (in this package)
