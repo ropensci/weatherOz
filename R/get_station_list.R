@@ -5,137 +5,158 @@
 # Copyright (C) 2022 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Fetch a list with all available weather stations for DPIRD weather APIs
+#' Fetch a list with all available weather stations for the DPIRD Weather API
+#' or stations present in the SILO API.
 #'
-#' Queries \acronym{DPIRD} \acronym{API}s, either "Science" or "Weather", and
-#' returns a list object of weather data for all available stations. Data
-#' providers include: \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES},
-#' Water Corporation, Harvey Water and Pardoo Beef Corporation.
+#' Queries \acronym{DPIRD} and \acronym{SILO} \acronym{API}s. If querying the
+#' DPIRD Weather API, the function return a data frame with metadata for the
+#' weather stations in the \acronym{DPIRD} network. Data providers include:
+#' \acronym{DPIRD}, \acronym{DBCA}, \acronym{DFES}, Water Corporation, Harvey
+#' Water and Pardoo Beef Corporation. If querying the \acronym{SILO}
+#' \acronym{API}, the function also return a data frame with metadata for the
+#' \acronym{SILO} weather stations network.
 #'
 #' @param api name of the \acronym{API} to be queried. Needs to match to
-#' one of the existing options (currently 'science' or 'weather') and defaults
-#' to the "science" \acronym{API}.
+#' one of the existing options (currently 'weather' or 'silo'). Defaults to the
+#' "weather" \acronym{API}.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (\url{https://www.agric.wa.gov.au/web-apis})
-#' @param station_group the name of the station group that you wish to query.
-#' Defaults to "rtd". Currently "all", "api", "rtd", "web", "yshistory",
-#' "yellowspot" are valid groups.
+#' @param limit a numeric value, limiting the amount of rows to return. Defaults
+#' to 1000.
 #' @param state a string limiting the query to one or several states, defaults
 #' to "wa". Accepts "all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt".
 #' @return a `data.frame` with station code, name, latitude, longitude, owner
-#' and state (for the Science \acronym{API}).
-#' Science \acronym{API} queries return additional details by default
-#' *i.e.*, station model, battery voltage, height of sensors, status and others.
-#'
-#' @family DPIRD
+#' and state plus metadata details if any available.
 #'
 #' @examples
-#' # You must have an DPIRD API key to proceed
-#' mykey <- rstudioapi::askForSecret()
+#' Query DPIRD API
+#' # You must have an api key to query the DPIRD API
+#' mykey <- "YOUR_API_KEY"
 #'
-#' stations_weather <- get_station_list(which_api = "weather",
-#' station_group = "rtd",
-#' state = "all",
-#' api_key = mykey)
+#' dpird_stations <- get_station_list(api = "weather",
+#'                                    state = "wa",
+#'                                    api_key = mykey)
 #'
-#' stations_science <- get_station_list(which_api = "science",
-#' station_group = "yellowspot",
-#' state = "nsw",
-#' api_key = mykey)
+#' # Query the SILO API
+#' silo_stations <- get_station_list(api = "silo",
+#'                                    state = "nsw",
+#'                                    api_key = mykey)
+#'
+#' # Query the SILO API for mulitple states
+#' silo_stations_multi_state <- get_station_list(api = "silo",
+#'                                               state = c("nsw", "nt"),
+#'                                               api_key = mykey)
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-get_station_list <- function(api = "science",
-                             station_group = "rtd",
+get_station_list <- function(api = "weather",
                              state = "wa",
+                             limit = 1000,
                              api_key = NULL) {
 
-
-  # Error if api key not provided
-  if (is.null(api_key)) {
-    stop("If you to provide a valid DPIRD API key.\n",
-         "Visit: https://www.agric.wa.gov.au/web-apis",
-         call. = FALSE)
-  }
+  # CRAN NOTE avoidance:
+  stations_site_list <- api_group <- NULL # nocov
 
   # Set API
   which_api <- try(
     match.arg(tolower(api),
-              c("science", "weather"),
-              several.ok = FALSE),
-    silent = TRUE)
-
-  # Match request limits
-  n_limit <- switch(which_api, science = "100000", weather = "0")
-
-  # Set stations group
-  # science only accepts 'rtd'
-  # weather accepts all but all returned outputs are identical)
-  api_group <- try(
-    match.arg(station_group,
-              c("rtd", "all", "api", "web",),
-              several.ok = FALSE),
-    silent = TRUE)
-
-  # Match state query
-  this_state <- try(
-    match.arg(state,
-              c("all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt"),
+              c("weather", "silo"),
               several.ok = FALSE),
     silent = TRUE)
 
   # Query API
-  if (which_api == 'science') {
+  if (which_api == 'weather') {
+
+    # Match request limits
+    n_limit <- limit
+
+    # Set stations group
+    # Only 'rtd' for the DPIRD API
+    api_group <- 'rtd'
+
+    # Error if api key not provided
+    if (is.null(api_key)) {
+      stop("If you to provide a valid DPIRD API key.\n",
+           "Visit: https://www.agric.wa.gov.au/web-apis",
+           call. = FALSE)
+    }
+
+    # Match state query
+    this_state <- try(
+      match.arg(state,
+                c("all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt"),
+                several.ok = FALSE),
+      silent = TRUE)
 
     # Stop if station group is not on the list
-     if (!api_group %in% c("rtd", "yellowspot", "yshistory")) {
-       stop(call. = FALSE,
-         "Science API only accepts 'rtd' as a station group")
-     }
-
-    if (this_state == "nt") {
-    stop(call. = FALSE,
-         "The Science API has no data for NT stations.\n",
-         "Visit: https://www.agric.wa.gov.au/web-apis")
+    if (api_group != "rtd") {
+      stop(call. = FALSE,
+           "Science API only accepts 'rtd' as a station group")
     }
 
-    g <- url(paste0("https://api.dpird.wa.gov.au/v2/",
-                    which_api,
-                    "/stations.json?api_key=",
-                    api_key,
-                    "&limit=",
-                    n_limit,
-                    "&group=",
-                    api_group,
-                    "&state=",
-                    this_state))
-  } else {
-    if (length(this_state != 0)) {
-      message("Weather API only returns queries for WA.\n",
-              "Disregarding state selection.")
+    if (this_state != "wa") {
+      stop(call. = FALSE,
+           "The Weather API has no data for stations outside WA.\n",
+           "Visit: https://www.agric.wa.gov.au/web-apis")
     }
-    g <- url(paste0("https://api.dpird.wa.gov.au/v2/",
-                    which_api,
-                    "/stations?api_key=",
-                    api_key,
-                    "&limit=",
-                    n_limit,
-                    "&group=",
-                    api_group))
 
+    ret <- url(paste0("https://api.dpird.wa.gov.au/v2/",
+                      which_api,
+                      "/stations.json?api_key=",
+                      api_key,
+                      "&limit=",
+                      n_limit,
+                      "&group=",
+                      api_group,
+                      "&state=",
+                      this_state))
+
+    res <- jsonlite::fromJSON(ret)
+
+    out <- res$collection
+
+    out$latitude <- as.numeric(out$latitude)
+    out$longitude <- as.numeric(out$longitude)
+    out <- rename_cols(out, which_api = "dpird")
   }
 
-  res <- jsonlite::fromJSON(g)
+  if (which_api == "silo") {
 
-  stations <- res$collection
+    # Match state query
+    this_state <- try(
+      match.arg(state,
+                c("all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt"),
+                several.ok = TRUE),
+      silent = TRUE)
 
-  stations$latitude <- as.numeric(stations$latitude)
-  stations$longitude <- as.numeric(stations$longitude)
+    if (is.null(this_state)) {
+      stop(call. = FALSE,
+           "You must provide at least string to the `state` argument when\n
+           querying the SILO API. One or more of `wa`, `sa`, `nsw`,\n
+           `vic`, `qld`, `tas`, `nt` and `all`.")
+    }
 
-  stations$stationName <- tolower(stations$stationName)
-  stations$links <- NULL
-  names(stations) <- tolower(names(stations))
+    # get file with bom station metadata
+    load(system.file(
+      "extdata",
+      "stations_site_list.rda",
+      package = "wrapique",
+      mustWork = TRUE
+    ))
 
-  return(stations)
+    out_bom <- data.table::copy(stations_site_list)
+    out_bom$state <- tolower(out_bom$state)
+
+    if (!is.null(this_state) & length(this_state) > 1) {
+      out <- subset(out_bom, state %in% this_state)
+    } else if (!is.null(this_state) & length(this_state) == 1 & this_state == 'all') {
+      out <- out_bom
+    } else if (!is.null(this_state) & length(this_state) == 1 & this_state != 'all') {
+      out <- subset(out_bom, state == this_state)
+    }
+    out <- rename_cols(out, which_api = "silo")
+  }
+
+  return(out)
 }

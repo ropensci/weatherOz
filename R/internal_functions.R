@@ -550,9 +550,30 @@ parse_silo <- function(query_response,
 #' @noRd
 #'
 
-.rename_cols <- function(df_out) {
-  df_out[, stationName := .cap_names(s = stationName)]
-  names(df_out)[1:2] <- c("station_code", "station_name")
+#' Internal function to rename column names
+#'
+#' @param df_out data.frame returned from DPIRD API query with camel case
+#' column names
+#' @which_api a string with the choosen API, either 'weather' or 'silo'
+#' @keywords internal
+#' @noRd
+#'
+
+.rename_cols <- function(df_out,
+                         which_api = "dpird") {
+  if (which_api == 'dpird') {
+    df_out <- data.table::data.table(df_out)
+    df_out[, stationName := .cap_names(s = stationName)]
+    names(df_out)[1:2] <- c("station_code", "station_name")
+  }
+
+  if (which_api == 'silo') {
+    df_out <- data.table::data.table(df_out)
+    df_out[, name := .cap_names(s = name)]
+    names(df_out)[1] <- "station_code"
+    names(df_out)[3] <- "station_name"
+  }
+
   return(df_out)
 }
 

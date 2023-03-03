@@ -232,7 +232,7 @@ find_nearby_stations <- function(latitude = NULL,
                                                    distance_out$latitude * -1,
                                                    distance_out$latitude)]
   }
-  distance_out <- .rename_cols(distance_out)
+  distance_out <- .rename_cols(distance_out, which_api = 'dpird')
   return(distance_out[])
 }
 
