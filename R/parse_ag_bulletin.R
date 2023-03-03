@@ -35,8 +35,7 @@
 #' @return A \code{\link[data.table]{data.table}} of Australia \acronym{BOM}
 #'  agricultural bulletin information.
 #'
-#' @examples
-#' \donttest{
+#' @examplesIf interactive()
 #' # parse the ag bulletin for Western Australia
 #'
 #' # download to tempfile() using basename() to keep original name
@@ -46,8 +45,6 @@
 #'               mode = "wb")
 #'
 #' parse_ag_bulletin(state = "WA", filepath = tempdir())
-#'
-#'}
 #'
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of

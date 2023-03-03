@@ -45,7 +45,7 @@ same fashion as \code{\link{get_precis_forecast}}, provided that the files
 are all present in the directory.
 }
 \examples{
-\donttest{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # parse the ag bulletin for Western Australia
 
 # download to tempfile() using basename() to keep original name
@@ -55,9 +55,7 @@ download.file(url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ60604.xml",
               mode = "wb")
 
 parse_ag_bulletin(state = "WA", filepath = tempdir())
-
-}
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Agricultural observations are retrieved from the Australian Bureau of
