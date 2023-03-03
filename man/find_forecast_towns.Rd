@@ -25,8 +25,8 @@ Find nearest BOM forecast towns for a given location by lat and lon
 }
 \examples{
 
-# sweep for forecast towns near Esperance, WA
-find_forecast_towns(lat = -33.8614, lon = 121.8913)
+# find forecast towns near Esperance, WA
+find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
 
 }
 \seealso{

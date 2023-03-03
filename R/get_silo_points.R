@@ -32,7 +32,7 @@
 #'
 #' @family SILO
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (8137)
 #' wd <- get_silo_points(station_id = 8137,
 #'                       first = "20210601",

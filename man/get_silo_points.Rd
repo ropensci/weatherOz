@@ -47,6 +47,7 @@ are three formats available: 'alldata' and 'apsim' with daily frequency and
 'monthly' with, that's right, monthly frequency.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Source observation data for station Wongan Hills station, WA (8137)
 wd <- get_silo_points(station_id = 8137,
                       first = "20210601",
@@ -63,6 +64,7 @@ get_silo_points(latitude = -27.85,
                 last = "20221201",
                 data_format = "apsim",
                 email = "your@email")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other SILO: 

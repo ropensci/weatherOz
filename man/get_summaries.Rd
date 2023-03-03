@@ -43,6 +43,7 @@ documentation.
 Fetch weather summary from DPIRD weather API for an individual station
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
 mykey <- 'dpird_api_key'
 
@@ -66,7 +67,7 @@ output <- get_summaries(
            last = end.date,
            api_key = mykey,
            interval = "15min")
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other DPIRD: 

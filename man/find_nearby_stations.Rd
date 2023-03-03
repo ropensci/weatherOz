@@ -45,6 +45,7 @@ distance from station or location of interest.
 Get a list of nearby weather stations from coordinates or station ID code
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
 my_key <- rstudioapi::askForSecret()
 
@@ -67,7 +68,7 @@ wagga_stn <- find_nearby_stations(
   dpird_only = FALSE,
   wa_only = FALSE
 )
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}

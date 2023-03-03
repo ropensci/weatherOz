@@ -35,6 +35,7 @@ Water and Pardoo Beef Corporation. If querying the \acronym{SILO}
 \acronym{SILO} weather stations network.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Query DPIRD API
 # You must have an api key to query the DPIRD API
 mykey <- "YOUR_API_KEY"
@@ -52,7 +53,7 @@ silo_stations <- get_station_list(api = "silo",
 silo_stations_multi_state <- get_station_list(api = "silo",
                                               state = c("nsw", "nt"),
                                               api_key = mykey)
-
+\dontshow{\}) # examplesIf}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}

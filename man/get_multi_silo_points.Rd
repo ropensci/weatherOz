@@ -48,6 +48,7 @@ queries with multiple sites, either station codes or latitude and longitude
 coordinates. See help for \code{get_silo_points()} for details.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # start multisession
 future::plan("multisession")
 # Query multiple stations (BoM, by code)
@@ -67,6 +68,7 @@ wd <- get_multi_silo_points(latitude = mylat,
                             last = "20220228",
                             data_format = "alldata",
                             email = "YOUR_EMAIL_ADDRESS")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other SILO: 

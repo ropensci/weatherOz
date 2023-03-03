@@ -50,6 +50,7 @@ a \verb{data frame} with site and date interval queried together with
 Individual station summaries nicely formatted.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
 mykey <- 'dpird_api_key'
 
@@ -77,7 +78,7 @@ output <- tidy_weather_summary(
             api_key = mykey,
             interval = "daily",
             which_vars = c("wind", "erosion"))
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other DPIRD: 

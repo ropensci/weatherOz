@@ -28,7 +28,7 @@
 #' @return a `data.table` with station code, name, latitude, longitude, owner
 #' and state plus metadata details if any available.
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # Query DPIRD API
 #' # You must have an api key to query the DPIRD API
 #' mykey <- "YOUR_API_KEY"

@@ -30,7 +30,7 @@
 #'
 #' @family DPIRD
 #'
-#' @examples
+#' @examplesIf interactive()
 #' # You must have an DPIRD API key to proceed
 #' mykey <- 'dpird_api_key'
 #'

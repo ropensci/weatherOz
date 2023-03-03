@@ -24,6 +24,7 @@ information according to the type(s) selected.
 Get extreme weather event summaries for a single DPIRD station
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
 my_key <- rstudioapi::askForSecret()
 
@@ -49,7 +50,7 @@ outputs <- lapply(these_stations,
                   api_key = apiKey)
 
  data.table::rbindlist(outputs)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other DPIRD: 
