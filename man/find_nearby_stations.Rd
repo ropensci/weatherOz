@@ -38,8 +38,8 @@ Defaults to \code{FALSE}.}
 }
 \value{
 a \code{data.table} with 'stationCode', 'stationName', 'latitude',
-'longitude', 'state', 'owner' and 'distance'. Data is sorted by increasing
-distance from station of interest.
+'longitude', 'state', 'owner' and 'distance'. Data are sorted by increasing
+distance from station or location of interest.
 }
 \description{
 Get a list of nearby weather stations from coordinates or station ID code
@@ -50,7 +50,7 @@ my_key <- rstudioapi::askForSecret()
 
 # Query WA only stations and return both DPIRD's and BOM's stations for
 # the Northam WA station, returning stations with 50 km of this station
-wa_stn <- get_nearby_stations(
+wa_stn <- find_nearby_stations(
   site = "NO",
   distance_km = 50,
   api_key = "YOUR API KEY",
@@ -59,7 +59,7 @@ wa_stn <- get_nearby_stations(
 )
 
 # Query Wagga Wagga BOM station.
-wagga_stn <- get_nearby_stations(
+wagga_stn <- find_nearby_stations(
   latitude = -35.1583,
   longitude = 147.4575,
   distance_km = my_distance,

@@ -32,7 +32,7 @@
 #'
 #' # Query WA only stations and return both DPIRD's and BOM's stations for
 #' # the Northam WA station, returning stations with 50 km of this station
-#' wa_stn <- get_nearby_stations(
+#' wa_stn <- find_nearby_stations(
 #'   site = "NO",
 #'   distance_km = 50,
 #'   api_key = "YOUR API KEY",
@@ -41,7 +41,7 @@
 #' )
 #'
 #' # Query Wagga Wagga BOM station.
-#' wagga_stn <- get_nearby_stations(
+#' wagga_stn <- find_nearby_stations(
 #'   latitude = -35.1583,
 #'   longitude = 147.4575,
 #'   distance_km = my_distance,

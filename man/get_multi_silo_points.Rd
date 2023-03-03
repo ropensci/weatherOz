@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_multi_silo_points.R
 \name{get_multi_silo_points}
 \alias{get_multi_silo_points}
-\title{Retrieve data from SILO (Scientific Information for Land Owners) API
-for multiple sites}
+\title{Retrieve data from SILO (Scientific Information for Land Owners) API for multiple sites}
 \usage{
 get_multi_silo_points(
   station_id = NULL,
@@ -24,27 +23,28 @@ the network.}
 \item{longitude}{A vector, representing the longitude of a point-of-interest}
 
 \item{first}{A string representing the start date of the query in the
-format 'yyyymmdd'}
+format 'yyyymmdd' (ISO8601).}
 
 \item{last}{A string representing the end date of the query in the
-format 'yyyymmdd'}
+format 'yyyymmdd' (ISO8601).}
 
 \item{data_format}{A string specifying the type of data to retrieve.
 Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and 'alldata'
 retrieve daily data.}
 
-\item{email}{A string specifying the email address to use for the request.
-The query will return an error if a valid email address is not provided.}
+\item{email}{A string specifying a valid email address to use for the
+request. The query will return an error if a valid email address is not
+provided.}
 }
 \value{
-A \code{list} object of \code{data.frames} with the retrieved data. Each
-list item is a \code{data.frame} with data for a given station code or
-geographic coordinates. New columns are added in both cases, \code{station_id}
-or \code{latitude} and \code{longitude},  respectively.
+A \code{list} object of \code{data.frames} with the retrieved data. Each list
+item is a \code{data.frame} with data for a given station code or geographic
+coordinates. New columns are added in both cases, \code{station_id} or \code{latitude}
+and \code{longitude}, respectively.
 }
 \description{
 This function is a wrapper around \code{get_silo_points()} to handle
-query with multiple sites, either station codes or latitude and longitude
+queries with multiple sites, either station codes or latitude and longitude
 coordinates. See help for \code{get_silo_points()} for details.
 }
 \examples{

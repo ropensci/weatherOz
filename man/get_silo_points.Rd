@@ -23,17 +23,18 @@ the network.}
 \item{longitude}{A vector, representing the longitude of a point-of-interest}
 
 \item{first}{A string representing the start date of the query in the
-format 'yyyymmdd'}
+format 'yyyymmdd' (ISO8601).}
 
 \item{last}{A string representing the end date of the query in the
-format 'yyyymmdd'}
+format 'yyyymmdd' (ISO8601).}
 
 \item{data_format}{A string specifying the type of data to retrieve.
 Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and 'alldata'
 retrieve daily data.}
 
-\item{email}{A string specifying the email address to use for the request.
-The query will return an error if a valid email address is not provided.}
+\item{email}{A string specifying a valid email address to use for the
+request. The query will return an error if a valid email address is not
+provided.}
 }
 \value{
 A \code{data.frame} containing the retrieved data from the \acronym{SILO}

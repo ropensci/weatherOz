@@ -556,3 +556,27 @@ parse_silo <- function(query_response,
   return(df_out)
 }
 
+
+#' Check user-input longitude and latitude values for validity
+#'
+#' @param longitude
+#' @param latitude
+#' @return
+
+# .check_lonlat <- function(longitude, latitude)
+#   if (lonlat[1] < -180 | lonlat[1] > 180) {
+#     stop(call. = FALSE,
+#          "Please check your longitude, `",
+#          paste0(lonlat[1]),
+#          "`, to be sure it is valid.\n")
+#   }
+# if (lonlat[2] < -90 | lonlat[2] > 90) {
+#   stop(
+#     call. = FALSE,
+#     "Please check your latitude, `",
+#     paste0(lonlat[2]),
+#     "`, value to be sure it is valid.\n"
+#   )
+#   return(invisible(NULL))
+# }
+

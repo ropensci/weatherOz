@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_forecast_towns.R
 \name{find_forecast_towns}
 \alias{find_forecast_towns}
-\title{Find nearest BOM forecast towns for a given location}
+\title{Find nearest BOM forecast towns for a given location by lat and lon}
 \usage{
 find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 100)
 }
@@ -21,7 +21,7 @@ A \code{\link{data.table}} of all forecast towns (in this package)
 sorted by distance from \var{latlon}, ascending.
 }
 \description{
-Find nearest BOM forecast towns for a given location
+Find nearest BOM forecast towns for a given location by lat and lon
 }
 \examples{
 

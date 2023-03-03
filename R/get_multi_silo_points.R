@@ -6,8 +6,7 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Retrieve data from SILO (Scientific Information for Land Owners) API
-#' for multiple sites
+#' Retrieve data from SILO (Scientific Information for Land Owners) API for multiple sites
 #'
 #' @description This function is a wrapper around `get_silo_points()` to handle
 #' queries with multiple sites, either station codes or latitude and longitude
@@ -15,10 +14,10 @@
 #'
 #' @inheritParams get_silo_points
 #'
-#' @return A `list` object of `data.frames` with the retrieved data. Each
-#'    list item is a `data.frame` with data for a given station code or
-#'    geographic coordinates. New columns are added in both cases, `station_id`
-#'    or `latitude` and `longitude`, respectively.
+#' @return A `list` object of `data.frames` with the retrieved data. Each list
+#'  item is a `data.frame` with data for a given station code or geographic
+#'  coordinates. New columns are added in both cases, `station_id` or `latitude`
+#'  and `longitude`, respectively.
 #'
 #' @family SILO
 #'
