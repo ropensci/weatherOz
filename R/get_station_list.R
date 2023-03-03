@@ -129,6 +129,7 @@ get_station_list <- function(api = "weather",
                 c("all", "wa", "sa", "nsw", "vic", "qld", "tas", "nt"),
                 several.ok = TRUE),
       silent = TRUE)
+  stations <- data.table::data.table(res$collection)
 
     if (is.null(this_state)) {
       stop(call. = FALSE,
@@ -144,6 +145,11 @@ get_station_list <- function(api = "weather",
       package = "wrapique",
       mustWork = TRUE
     ))
+  stations[, latitude := as.numeric(latitude)]
+  stations[, longitude := as.numeric(longitude)]
+  stations[, stationName := .cap_names(stationName)]
+  stations[, links := NULL]
+  names(stations) <- tolower(names(stations))
 
     out_bom <- data.table::copy(stations_site_list)
     out_bom$state <- tolower(out_bom$state)
