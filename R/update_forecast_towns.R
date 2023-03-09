@@ -67,6 +67,6 @@ update_forecast_towns <- function() {
   # overwrite the existing isd_history.rda file on disk
   message("\nOverwriting existing database of forecast towns and AAC codes.\n")
   fname <-
-    system.file("extdata", "AAC_codes.rda", package = "bomrang")
+    system.file("extdata", "AAC_codes.rda", package = "wrapique")
   save(AAC_codes, file = fname, compress = "bzip2")
 }
