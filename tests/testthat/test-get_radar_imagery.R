@@ -8,7 +8,7 @@ test_that("get_available_radar functions properly", {
   skip_on_cran()
 
   x <- get_available_radar(radar_id = "all")
-  expect_is(x, "data.frame")
+  expect_s3_class(x, "data.frame")
   expect_gt(nrow(x), 0)
 
   xx <- get_available_radar()
