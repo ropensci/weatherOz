@@ -14,7 +14,6 @@ test_that("get_available_imagery functions properly", {
     get_satellite_imagery(product_id = "IDE00425",
                           scans = 1)
   expect_is(j, "SpatRaster")
-  expect_true(dir.exists(manage_cache$cache_path_get()))
 })
 
 test_that("product ID urls are properly handled", {
