@@ -4,7 +4,7 @@
 \name{wrapique-package}
 \alias{wrapique}
 \alias{wrapique-package}
-\title{wrapique: An API Client for Western Australia (DPIRD) and Australian (SILO) Weather Data APIs}
+\title{wrapique: An API Client for Australian Weather and Climate Data Resources}
 \description{
 Provides automated downloading, parsing, cleaning, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development ('DPIRD' ) of Western Australia and by the Science and Technology Division of the Queensland Government's Department of Environment and Science ('DES'). As well as Australian Government Bureau of Meteorology ('BOM') precis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files. 'DPIRD' weather data are accessed through public APIs provided by 'DPIRD', \url{https://www.agric.wa.gov.au/weather-api-20}, providing access to weather station data from 'DPIRD's' weather station network. Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001, \doi{ 10.1016/S1364-8152(01)00008-1}). 'DPIRD' data are made available under a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU) license \url{https://creativecommons.org/licenses/by/3.0/au/deed.en}. 'SILO' data are released under a Creative Commons Attribution 4.0 International licence (CC BY 4.0) \url{https://creativecommons.org/licenses/by/4.0/}. 'BOM' data are (c) Australian Government Bureau of Meteorology and released under a Creative Commons (CC) Attribution 3.0 licence or Public Access Licence (PAL) as appropriate, see \url{http://www.bom.gov.au/other/copyright.shtml} for further details.
 }
@@ -15,6 +15,13 @@ Authors:
 \itemize{
   \item Anna Hepworth \email{anna.hepworth@dpird.wa.gov.au} (\href{https://orcid.org/0000-0003-0204-6347}{ORCID})
   \item Rebecca O'Leary \email{rebecca.o'leary@agric.wa.gov.au}
+  \item Jonathan Carroll \email{rpkg@jcarroll.com.au} (\href{https://orcid.org/0000-0002-1404-5264}{ORCID})
+  \item James Goldie \email{me@rensa.co} (\href{https://orcid.org/0000-0002-5024-6207}{ORCID})
+  \item Dean Marchiori \email{deanmarchiori@gmail.com}
+  \item Paul Melloy \email{paul@melloy.com.au} (\href{https://orcid.org/0000-0003-4253-7167}{ORCID})
+  \item Mark Padgham \email{mark.padgham@email.com} (\href{https://orcid.org/0000-0003-2172-5265}{ORCID}) [reviewer]
+  \item Hugh Parsonage \email{hugh.parsonage@gmail.com} (\href{https://orcid.org/0000-0003-4055-0835}{ORCID})
+  \item Keith Pembleton \email{keith.pembleton@usq.edu.au} (\href{https://orcid.org/0000-0002-1896-4516}{ORCID})
   \item Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
 }
 
