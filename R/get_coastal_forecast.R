@@ -126,7 +126,7 @@ get_coastal_forecast <- function(state = "AUS") {
   # merge with aac codes for location information
   load(system.file("extdata",
                    "marine_AAC_codes.rda",
-                   package = "bomrang"))  # nocov
+                   package = "wrapique"))  # nocov
   data.table::setkey(out, "aac")
   out <- marine_AAC_codes[out, on = c("aac", "dist_name")]
   # add state field
