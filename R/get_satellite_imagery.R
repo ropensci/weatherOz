@@ -43,12 +43,12 @@
 #' Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
 #' images \url{http://www.bom.gov.au/australia/satellite/index.shtml}
 #'
-#' @examples
-#' \donttest{
+#' @examplesIf interactive()
 #' # Check availability of AHI VIS (true colour) / IR (Ch13 greyscale) composite
 #' # 1km FD GEOS GIS images
 #' imagery <- get_available_imagery(product_id = "IDE00425")
-#' }
+#'
+#' @family bomrang-ported
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @export get_available_imagery

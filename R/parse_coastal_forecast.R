@@ -35,7 +35,7 @@
 #' A \code{\link[data.table]{data.table}} of an Australia \acronym{BOM}
 #' Coastal Waters Forecast.
 #'
-#' @family bomrang
+#' @family bomrang-ported
 #'
 #' @examplesIf interactive()
 #' \donttest{

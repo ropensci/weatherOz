@@ -48,17 +48,30 @@ equirect. GIS}
 }
 }
 \examples{
-\donttest{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Check availability of AHI VIS (true colour) / IR (Ch13 greyscale) composite
 # 1km FD GEOS GIS images
 imagery <- get_available_imagery(product_id = "IDE00425")
-}
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
 images \url{http://www.bom.gov.au/australia/satellite/index.shtml}
 }
+\seealso{
+Other bomrang-ported: 
+\code{\link{find_forecast_towns}()},
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_satellite_imagery}()},
+\code{\link{parse_coastal_forecast}()},
+\code{\link{parse_precis_forecast}()},
+\code{\link{update_ag_station_locations}()},
+\code{\link{update_forecast_towns}()}
+}
 \author{
 Adam H. Sparks, \email{adamhsparks@gmail.com}
 }
+\concept{bomrang-ported}

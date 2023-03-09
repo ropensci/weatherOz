@@ -57,6 +57,8 @@
 #'
 #' @seealso \link{parse_ag_bulletin}
 #'
+#' @family bomrang-ported
+#'
 #' @export get_ag_bulletin
 
 get_ag_bulletin <- function(state = "AUS") {

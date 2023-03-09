@@ -83,9 +83,12 @@ Australian Bureau of Meteorology (BOM) high-definition satellite images \cr
 
 Other bomrang-ported: 
 \code{\link{find_forecast_towns}()},
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
+\code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_ag_station_locations}()},
 \code{\link{update_forecast_towns}()}

@@ -65,8 +65,21 @@ Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers: \cr
 }
 \seealso{
 \link{parse_ag_bulletin}
+
+Other bomrang-ported: 
+\code{\link{find_forecast_towns}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_satellite_imagery}()},
+\code{\link{parse_coastal_forecast}()},
+\code{\link{parse_precis_forecast}()},
+\code{\link{update_ag_station_locations}()},
+\code{\link{update_forecast_towns}()}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Paul Melloy
 \email{paul@melloy.com.au}
 }
+\concept{bomrang-ported}
