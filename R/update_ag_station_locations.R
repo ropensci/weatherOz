@@ -79,7 +79,7 @@ update_ag_station_locations <- function() {
   readr::write_lines(x = bom_stations_lines,
                      file = file.path(tempdir(), "stations.txt"))
 
-  bom_stations_raw <-
+  stations_site_list <-
     readr::read_fwf(
       file = file.path(tempdir(), "stations.txt"),
       col_positions = readr::fwf_empty(
@@ -118,19 +118,19 @@ update_ag_station_locations <- function() {
       )
     )
 
-  bom_stations_raw[bom_stations_raw == "...."] <- NA
-  bom_stations_raw[bom_stations_raw == ".."] <- NA
+  stations_site_list[stations_site_list == "...."] <- NA
+  stations_site_list[stations_site_list == ".."] <- NA
 
   # remove extra columns for source of location
-  bom_stations_raw <- bom_stations_raw[, -8]
+  stations_site_list <- stations_site_list[, -8]
 
   # add current year to stations that are still active
-  bom_stations_raw$end <- as.numeric(bom_stations_raw$end)
+  stations_site_list$end <- as.numeric(stations_site_list$end)
 
-  bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
+  stations_site_list["end"][is.na(stations_site_list["end"])] <-
     as.integer(format(Sys.Date(), "%Y"))
 
-  data.table::setDT(bom_stations_raw)
+  data.table::setDT(stations_site_list)
 
   message("Overwriting existing databases")
 
