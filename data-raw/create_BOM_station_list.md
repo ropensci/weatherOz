@@ -149,82 +149,6 @@ bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
   as.integer(format(Sys.Date(), "%Y"))
 ```
 
-## Check station locations
-
-Occasionally the stations are listed in the wrong location, *e.g.*,
-Alice Springs Airport in SA. Perform quality check to ensure that the
-station locations are accurate based on the lat/lon values.
-
-``` r
-`%notin%`  <- function(x, table) {
-  match(x, table, nomatch = 0L) == 0L
-}
-
-data.table::setDT(bom_stations_raw)
-latlon2state <- function(lat, lon) {
-  ASGS.foyer::latlon2SA(lat,
-                        lon,
-                        to = "STE",
-                        yr = "2016",
-                        return = "v")
-}
-
-bom_stations_raw %>%
-  .[lon > -50, state_from_latlon := latlon2state(lat, lon)] %>%
-  .[state_from_latlon == "New South Wales", actual_state := "NSW"] %>%
-  .[state_from_latlon == "Victoria", actual_state := "VIC"] %>%
-  .[state_from_latlon == "Queensland", actual_state := "QLD"] %>%
-  .[state_from_latlon == "South Australia", actual_state := "SA"] %>%
-  .[state_from_latlon == "Western Australia", actual_state := "WA"] %>%
-  .[state_from_latlon == "Tasmania", actual_state := "TAS"] %>%
-  .[state_from_latlon == "Australian Capital Territory",
-    actual_state := "ACT"] %>%
-  .[state_from_latlon == "Northern Territory", actual_state := "NT"] %>%
-  .[actual_state != state & state %notin% c("ANT", "ISL"),
-    state := actual_state] %>%
-  .[, actual_state := NULL]
-```
-
-    ## Loading required package: sp
-
-``` r
-data.table::setDF(bom_stations_raw)
-```
-
-## Create state codes
-
-Use the state values extracted from `ASGS.foyer` to set state codes from
-BOM rather than the sometimes incorrect `state` column from BOM.
-
-BOM state codes are as follows:
-
-- IDD - NT,
-
-- IDN - NSW/ACT,
-
-- IDQ - Qld,
-
-- IDS - SA,
-
-- IDT - Tas/Antarctica,
-
-- IDV - Vic, and
-
-- IDW - WA
-
-``` r
-bom_stations_raw$state_code <- NA
-bom_stations_raw$state_code[bom_stations_raw$state == "WA"] <- "W"
-bom_stations_raw$state_code[bom_stations_raw$state == "QLD"] <- "Q"
-bom_stations_raw$state_code[bom_stations_raw$state == "VIC"] <- "V"
-bom_stations_raw$state_code[bom_stations_raw$state == "NT"] <- "D"
-bom_stations_raw$state_code[bom_stations_raw$state == "TAS" |
-                              bom_stations_raw$state == "ANT"] <-
-  "T"
-bom_stations_raw$state_code[bom_stations_raw$state == "NSW"] <- "N"
-bom_stations_raw$state_code[bom_stations_raw$state == "SA"] <- "S"
-```
-
 ## Save data
 
 ### Station location database for get_ag_bulletin()
@@ -255,6 +179,47 @@ load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
 )
 ```
 
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>new_stations_site_list</span>                                                       
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>stations_site_list</span>                                                           
+## <span style='color: #00BBBB;'>@@ 6,19 / 6,19 @@                                                              </span>
+## <span style='color: #555555;'>~         site dist               name start  end      lat      lon state  elev</span>
+##       5: 10003   10          BALKULING  1913 1955 -31.9833 117.1000    WA  &lt;NA&gt;
+##      ---                                                                       
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19416:</span>  9995  09A       LAKE SHASTER  2003 2010 -33.8044 120.6342    WA  81.0
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19415:</span>  9995  09A       LAKE SHASTER  2003 2010 -33.8044 120.6342    WA  81.0
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19417:</span>  9996  09A  LATITUDE 33 WINES  1993 2009 -33.8294 115.1903    WA 120.0
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19416:</span>  9996  09A  LATITUDE 33 WINES  1993 2009 -33.8294 115.1903    WA 120.0
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19418:</span>  9997  09A RAVENSCLIFFE ALERT  2003 2023 -33.7647 115.8431    WA 200.0
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19417:</span>  9997  09A RAVENSCLIFFE ALERT  2003 2023 -33.7647 115.8431    WA 200.0
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19419:</span>  9998  09A      NORTH WALPOLE  2004 2023 -34.9469 116.7222    WA  73.0
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19418:</span>  9998  09A      NORTH WALPOLE  2004 2023 -34.9469 116.7222    WA  73.0
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19420:</span>  9999  09A     ALBANY AIRPORT  2012 2023 -34.9411 117.8158    WA  68.4
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19419:</span>  9999  09A     ALBANY AIRPORT  2012 2023 -34.9411 117.8158    WA  68.4
+## <span style='color: #BBBB00;'>&lt;</span>        bar_ht   wmo                                                          
+## <span style='color: #0000BB;'>&gt;</span>        bar_ht   wmo <span style='color: #0000BB;'>state_from_latlon</span> <span style='color: #0000BB;'>state_code</span>                             
+## <span style='color: #BBBB00;'>&lt;</span>     1:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span>     1:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span>     2:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span>     2:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span>     3:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span>     3:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span>     4:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span>     4:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span>     5:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span>     5:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+##      ---                                                                       
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19415:</span>   <span style='color: #0000BB;'>&lt;NA&gt;</span>  <span style='color: #0000BB;'>&lt;NA&gt;</span> <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span> 19416:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span> 19416:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span> 19417:   &lt;NA&gt;  &lt;NA&gt;                                                          
+## <span style='color: #0000BB;'>&gt;</span> 19417:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span> 19418:   <span style='color: #BBBB00;'>&lt;NA&gt;</span>  <span style='color: #BBBB00;'>&lt;NA&gt;</span>                                                          
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19419:</span>   73.5 95647                                                          
+## <span style='color: #0000BB;'>&gt;</span> 19418:   73.5 95647 <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19420:</span>   70.0 94802                                                          
+## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19419:</span>   70.0 94802 <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>
+</CODE></PRE>
+
 #### Save stations_site_list Data and Changes
 
 ``` r
@@ -268,9 +233,9 @@ save(stations_site_list,
      file = "../inst/extdata/stations_site_list.rda",
      compress = "bzip2")
 
-# save(stations_site_list_changes,
-#      file = "../inst/extdata/stations_site_list_changes.rda",
-#      compress = "bzip2")
+save(stations_site_list_changes,
+     file = "../inst/extdata/stations_site_list_changes.rda",
+     compress = "bzip2")
 ```
 
 ## Session Info
@@ -285,13 +250,12 @@ save(stations_site_list,
 ##  collate  en_US.UTF-8
 ##  ctype    en_US.UTF-8
 ##  tz       Australia/Perth
-##  date     2023-03-03
-##  pandoc   3.1 @ /opt/homebrew/bin/ (via rmarkdown)
+##  date     2023-03-08
+##  pandoc   3.1.1 @ /opt/homebrew/bin/ (via rmarkdown)
 ## 
 ## <span style='color: #00BBBB; font-weight: bold;'>─ Packages ───────────────────────────────────────────────────────────────────</span>
 ##  <span style='color: #555555; font-style: italic;'>package    </span> <span style='color: #555555; font-style: italic;'>*</span> <span style='color: #555555; font-style: italic;'>version</span> <span style='color: #555555; font-style: italic;'>date (UTC)</span> <span style='color: #555555; font-style: italic;'>lib</span> <span style='color: #555555; font-style: italic;'>source</span>
 ##  archive       1.1.5   <span style='color: #555555;'>2022-05-06</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
-##  ASGS.foyer    0.3.1   <span style='color: #555555;'>2021-03-21</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  askpass       1.1     <span style='color: #555555;'>2019-01-13</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  bit           4.0.5   <span style='color: #555555;'>2022-11-15</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  bit64         4.0.5   <span style='color: #555555;'>2020-08-30</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
@@ -302,6 +266,7 @@ save(stations_site_list,
 ##  credentials   1.3.2   <span style='color: #555555;'>2021-11-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  curl          5.0.0   <span style='color: #555555;'>2023-01-12</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  data.table  * 1.14.8  <span style='color: #555555;'>2023-02-17</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
+##  diffobj       0.3.5   <span style='color: #555555;'>2021-10-05</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  digest        0.6.31  <span style='color: #555555;'>2022-12-11</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  dplyr       * 1.1.0   <span style='color: #555555;'>2023-01-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.2)</span>
 ##  ellipsis      0.3.2   <span style='color: #555555;'>2021-04-29</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
@@ -316,7 +281,6 @@ save(stations_site_list,
 ##  hms           1.1.2   <span style='color: #555555;'>2022-08-19</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  htmltools     0.5.4   <span style='color: #555555;'>2022-12-07</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  knitr         1.42    <span style='color: #555555;'>2023-01-25</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
-##  lattice       0.20-45 <span style='color: #555555;'>2021-09-22</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  lifecycle     1.0.3   <span style='color: #555555;'>2022-10-07</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  lubridate   * 1.9.2   <span style='color: #555555;'>2023-02-10</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  magrittr      2.0.3   <span style='color: #555555;'>2022-03-30</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
@@ -332,7 +296,6 @@ save(stations_site_list,
 ##  rstudioapi    0.14    <span style='color: #555555;'>2022-08-22</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  scales        1.2.1   <span style='color: #555555;'>2022-08-20</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  sessioninfo   1.2.2   <span style='color: #555555;'>2021-12-06</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
-##  sp          * 1.6-0   <span style='color: #555555;'>2023-01-19</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.2)</span>
 ##  stringi       1.7.12  <span style='color: #555555;'>2023-01-11</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  stringr     * 1.5.0   <span style='color: #555555;'>2022-12-02</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
 ##  sys           3.4.1   <span style='color: #555555;'>2022-10-18</span> <span style='color: #555555;'>[1]</span> <span style='color: #555555;'>CRAN (R 4.2.0)</span>
