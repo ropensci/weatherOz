@@ -164,7 +164,7 @@ get_precis_forecast <- function(state = "AUS") {
   .split_time_cols(x = out)
 
   # merge with aac codes for location information
-  load(system.file("extdata", "AAC_codes.rda", package = "bomrang"))  # nocov
+  load(system.file("extdata", "AAC_codes.rda", package = "wrapique"))  # nocov
   data.table::setkey(out, "aac")
   out <- AAC_codes[out, on = c("aac", "town")]
 
