@@ -29,7 +29,7 @@
 #'
 #' @family bomrang-ported
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
-#' @export update_station_locations
+#' @export
 #' @return `NULL`, called for it's side-effects writing an updated file to local
 #' disk for the package to use.
 
