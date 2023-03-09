@@ -34,6 +34,13 @@ or all using \code{AUS}.
 \item{AUS}{Australia, returns forecast for all states, NT and ACT}
 }
 }
+\note{
+Data and Information Use
+Please note the copyright notice and disclaimer,
+\url{http://www.bom.gov.au/other/copyright.shtml} related to the use of this
+information. Users of this information are deemed to have read and
+accepted the conditions described therein.
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 

@@ -39,7 +39,9 @@ Australian Bureau of Meteorology (BOM) radar image
 \seealso{
 Other bomrang-ported: 
 \code{\link{find_forecast_towns}()},
+\code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
+\code{\link{get_satellite_imagery}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()},
 \code{\link{update_station_locations}()}
