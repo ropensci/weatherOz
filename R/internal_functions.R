@@ -512,7 +512,8 @@ parse_silo <- function(query_response,
 #' Takes the XML file name and creates the full file path or URL
 #'
 #' @param AUS_XML a vector of XML file names for BOM products
-#' @param the_state user provided state argument for requested data
+#' @param .the_state user provided state argument for requested data
+#' @param .file_loc file path for use with the `parse_` functions
 #'
 #' @noRd
 
@@ -521,22 +522,30 @@ parse_silo <- function(query_response,
     xml_url <-
       data.table::fcase(
         .the_state == "ACT" |
-          .the_state == "CANBERRA", paste0(.file_loc, "/", AUS_XML[1]),
+          .the_state == "CANBERRA",
+        paste0(.file_loc, "/", AUS_XML[1]),
         .the_state == "NSW" |
-          .the_state == "NEW SOUTH WALES", paste0(.file_loc, "/", AUS_XML[1]),
+          .the_state == "NEW SOUTH WALES",
+        paste0(.file_loc, "/", AUS_XML[1]),
         .the_state == "NT" |
-          .the_state == "NORTHERN TERRITORY", paste0(.file_loc,
-                                                      "/", AUS_XML[2]),
+          .the_state == "NORTHERN TERRITORY",
+        paste0(.file_loc,
+               "/", AUS_XML[2]),
         .the_state == "QLD" |
-          .the_state == "QUEENSLAND", paste0(.file_loc, "/", AUS_XML[3]),
+          .the_state == "QUEENSLAND",
+        paste0(.file_loc, "/", AUS_XML[3]),
         .the_state == "SA" |
-          .the_state == "SOUTH AUSTRALIA", paste0(.file_loc, "/", AUS_XML[4]),
+          .the_state == "SOUTH AUSTRALIA",
+        paste0(.file_loc, "/", AUS_XML[4]),
         .the_state == "TAS" |
-          .the_state == "TASMANIA", paste0(.file_loc, "/", AUS_XML[5]),
+          .the_state == "TASMANIA",
+        paste0(.file_loc, "/", AUS_XML[5]),
         .the_state == "VIC" |
-          .the_state == "VICTORIA", paste0(.file_loc, "/", AUS_XML[6]),
+          .the_state == "VICTORIA",
+        paste0(.file_loc, "/", AUS_XML[6]),
         .the_state == "WA" |
-          .the_state == "WESTERN AUSTRALIA", paste0(.file_loc, "/", AUS_XML[7])
+          .the_state == "WESTERN AUSTRALIA",
+        paste0(.file_loc, "/", AUS_XML[7])
       )
   }
   return(xml_url)
