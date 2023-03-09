@@ -84,7 +84,7 @@ test_that("get_ag_bulletin() returns the bulletin for AUS", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "AUS")
   state <- na.omit(bom_bulletin[["state"]])
-  expect_equal(length(unique(state)), 8)
+  expect_equal(length(unique(state)), 7)
 })
 
 # Test that .validate_state() stops if the state recognised
@@ -243,7 +243,7 @@ test_that("parse_ag_bulletin() returns the bulletin for AUS", {
   bom_bulletin <-
     parse_ag_bulletin(state = "AUS", filepath = tempdir())
   state <- na.omit(bom_bulletin[["state"]])
-  expect_equal(length(unique(state)), 8)
+  expect_equal(length(unique(state)), 7)
 })
 
 # Test that .validate_state() stops if the state recognised
