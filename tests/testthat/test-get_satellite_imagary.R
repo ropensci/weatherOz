@@ -13,7 +13,7 @@ test_that("get_available_imagery functions properly", {
   j <-
     get_satellite_imagery(product_id = "IDE00425",
                           scans = 1)
-  expect_s3_class(j, "SpatRaster")
+  expect_s4_class(j, "SpatRaster")
 })
 
 test_that("product ID urls are properly handled", {
