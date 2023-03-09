@@ -41,7 +41,7 @@ This is a basic example which shows you how to solve a common problem:
 
 ## Notes on Data and API Endpoints
 
-Note that the data are not static and may be replaced with improved data.
+Note that most of the data are not static and may be replaced with improved data.
 Also please note that SILO may be unavailable between 11am and 1pm (Brisbane time) each Wednesday and Thursday to allow for essential system maintenance.
 
 Please also note that not all exposed endpoints of the DPIRD APIs have associated functions.
