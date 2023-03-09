@@ -46,6 +46,8 @@
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Paul Melloy
 #' \email{paul@@melloy.com.au}
 #'
+#' @family bomrang-ported
+#'
 #' @seealso \link{parse_coastal_forecast}
 #'
 #' @export get_coastal_forecast
