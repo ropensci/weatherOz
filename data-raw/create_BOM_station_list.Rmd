@@ -74,7 +74,7 @@ curl::curl_download(
   quiet = TRUE
 )
 
-bom_stations_lines <- read_lines(unzip(file.path(tempdir(), "stations.zip")))
+bom_stations_lines <- read_lines(file.path(tempdir(), "stations.zip"))
 keep <- length(bom_stations_lines) - 7
 bom_stations_lines <- bom_stations_lines[1:keep]
 write_lines(x = bom_stations_lines, file = file.path(tempdir(), "stations.txt"))

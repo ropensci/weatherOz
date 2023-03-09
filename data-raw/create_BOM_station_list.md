@@ -92,7 +92,7 @@ curl::curl_download(
   quiet = TRUE
 )
 
-bom_stations_lines <- read_lines(unzip(file.path(tempdir(), "stations.zip")))
+bom_stations_lines <- read_lines(file.path(tempdir(), "stations.zip"))
 keep <- length(bom_stations_lines) - 7
 bom_stations_lines <- bom_stations_lines[1:keep]
 write_lines(x = bom_stations_lines, file = file.path(tempdir(), "stations.txt"))
@@ -179,45 +179,35 @@ load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
 )
 ```
 
-<PRE class="fansi fansi-output"><CODE>## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>new_stations_site_list</span>                                                       
+<PRE class="fansi fansi-output"><CODE>## <span style='color: #555555;'>No visible differences between objects, but objects are *not* `all.equal`:</span>
+## <span style='color: #555555;'>- Column &#039;lat&#039;: Mean relative difference: 0.000002582665</span>
+## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>new_stations_site_list</span>                                                       
 ## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>stations_site_list</span>                                                           
-## <span style='color: #00BBBB;'>@@ 6,19 / 6,19 @@                                                              </span>
-## <span style='color: #555555;'>~         site dist               name start  end      lat      lon state  elev</span>
+## <span style='color: #00BBBB;'>@@ 1,24 / 1,24 @@                                                              </span>
+##           site dist               name start  end      lat      lon state  elev
+##       1:  1000   01           KARUNJIE  1940 1983 -16.2919 127.1956    WA 320.0
+##       2: 10000   10        AMERY ACRES  1934 2023 -31.1683 117.0736    WA 340.0
+##       3: 10001   10            BAANDEE  1905 1976 -31.6000 117.9667    WA  &lt;NA&gt;
+##       4: 10002   10      BAANDEE NORTH  1911 2023 -31.3667 117.9031    WA 270.0
 ##       5: 10003   10          BALKULING  1913 1955 -31.9833 117.1000    WA  &lt;NA&gt;
 ##      ---                                                                       
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19416:</span>  9995  09A       LAKE SHASTER  2003 2010 -33.8044 120.6342    WA  81.0
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19415:</span>  9995  09A       LAKE SHASTER  2003 2010 -33.8044 120.6342    WA  81.0
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19417:</span>  9996  09A  LATITUDE 33 WINES  1993 2009 -33.8294 115.1903    WA 120.0
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19416:</span>  9996  09A  LATITUDE 33 WINES  1993 2009 -33.8294 115.1903    WA 120.0
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19418:</span>  9997  09A RAVENSCLIFFE ALERT  2003 2023 -33.7647 115.8431    WA 200.0
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19417:</span>  9997  09A RAVENSCLIFFE ALERT  2003 2023 -33.7647 115.8431    WA 200.0
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19419:</span>  9998  09A      NORTH WALPOLE  2004 2023 -34.9469 116.7222    WA  73.0
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19418:</span>  9998  09A      NORTH WALPOLE  2004 2023 -34.9469 116.7222    WA  73.0
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19420:</span>  9999  09A     ALBANY AIRPORT  2012 2023 -34.9411 117.8158    WA  68.4
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19419:</span>  9999  09A     ALBANY AIRPORT  2012 2023 -34.9411 117.8158    WA  68.4
-## <span style='color: #BBBB00;'>&lt;</span>        bar_ht   wmo                                                          
-## <span style='color: #0000BB;'>&gt;</span>        bar_ht   wmo <span style='color: #0000BB;'>state_from_latlon</span> <span style='color: #0000BB;'>state_code</span>                             
-## <span style='color: #BBBB00;'>&lt;</span>     1:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span>     1:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span>     2:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span>     2:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span>     3:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span>     3:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span>     4:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span>     4:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span>     5:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span>     5:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
+##   19416:  9995  09A       LAKE SHASTER  2003 2010 -33.8044 120.6342    WA  81.0
+##   19417:  9996  09A  LATITUDE 33 WINES  1993 2009 -33.8294 115.1903    WA 120.0
+##   19418:  9997  09A RAVENSCLIFFE ALERT  2003 2023 -33.7647 115.8431    WA 200.0
+##   19419:  9998  09A      NORTH WALPOLE  2004 2023 -34.9469 116.7222    WA  73.0
+##   19420:  9999  09A     ALBANY AIRPORT  2012 2023 -34.9411 117.8158    WA  68.4
+##          bar_ht   wmo                                                          
+##       1:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##       2:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##       3:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##       4:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##       5:   &lt;NA&gt;  &lt;NA&gt;                                                          
 ##      ---                                                                       
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19415:</span>   <span style='color: #0000BB;'>&lt;NA&gt;</span>  <span style='color: #0000BB;'>&lt;NA&gt;</span> <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span> 19416:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span> 19416:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span> 19417:   &lt;NA&gt;  &lt;NA&gt;                                                          
-## <span style='color: #0000BB;'>&gt;</span> 19417:   &lt;NA&gt;  &lt;NA&gt; <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span> 19418:   <span style='color: #BBBB00;'>&lt;NA&gt;</span>  <span style='color: #BBBB00;'>&lt;NA&gt;</span>                                                          
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19419:</span>   73.5 95647                                                          
-## <span style='color: #0000BB;'>&gt;</span> 19418:   73.5 95647 <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>                             
-## <span style='color: #BBBB00;'>&lt;</span> <span style='color: #BBBB00;'>19420:</span>   70.0 94802                                                          
-## <span style='color: #0000BB;'>&gt;</span> <span style='color: #0000BB;'>19419:</span>   70.0 94802 <span style='color: #0000BB;'>Western</span> <span style='color: #0000BB;'>Australia</span>          <span style='color: #0000BB;'>W</span>
+##   19416:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##   19417:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##   19418:   &lt;NA&gt;  &lt;NA&gt;                                                          
+##   19419:   73.5 95647                                                          
+##   19420:   70.0 94802
 </CODE></PRE>
 
 #### Save stations_site_list Data and Changes
@@ -250,7 +240,7 @@ save(stations_site_list_changes,
 ##  collate  en_US.UTF-8
 ##  ctype    en_US.UTF-8
 ##  tz       Australia/Perth
-##  date     2023-03-08
+##  date     2023-03-09
 ##  pandoc   3.1.1 @ /opt/homebrew/bin/ (via rmarkdown)
 ## 
 ## <span style='color: #00BBBB; font-weight: bold;'>─ Packages ───────────────────────────────────────────────────────────────────</span>
