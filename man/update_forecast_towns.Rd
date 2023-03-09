@@ -39,7 +39,7 @@ Other bomrang-ported:
 \code{\link{get_precis_forecast}()},
 \code{\link{get_satellite_imagery}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{update_station_locations}()}
+\code{\link{update_ag_station_locations}()}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}

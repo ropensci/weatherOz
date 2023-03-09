@@ -1,12 +1,13 @@
 
-#' Update internal databases with latest BOM station metadata
+#' Update internal databases with latest BOM ag bulletin location data
 #'
-#' Download the latest station locations and metadata and update internal
-#' databases that support the use of \code{\link{get_ag_bulletin}}.  There is no
-#' need to use this unless you know that a station exists in \acronym{BOM}'s
-#' database that is not available in the databases distributed with
-#' \pkg{wrapique}. In fact, for reproducibility purposes, users are discouraged
-#' from using this function.  Ported from \pkg{bomrang}.
+#' Download the latest ag bulletin station locations and metadata and update
+#' the internal database that supports the use of \code{\link{get_ag_bulletin}}.
+#' There is no need to use this unless you know that a station exists in
+#' \acronym{BOM}'s database that is not available in the databases distributed
+#' with \pkg{wrapique}. In fact, for reproducibility purposes. In fact, users
+#' are strongly discouraged from using this function.  Ported from
+#' \pkg{bomrang}.
 #'
 #' If \CRANpkg{ASGS.foyer} is installed locally, this function will
 #' automatically check and correct any invalid state values for stations located
@@ -16,7 +17,7 @@
 #'
 #' @examplesIf interactive()
 #'
-#' update_station_locations()
+#' update_station_ag_locations()
 #'
 #' @return Updated internal databases of \acronym{BOM} station locations and
 #' \acronym{JSON} \acronym{URL}s
@@ -29,8 +30,10 @@
 #' @family bomrang-ported
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export update_station_locations
+#' @return `NULL`, called for it's side-effects writing an updated file to local
+#' disk for the package to use.
 
-update_station_locations <- function() {
+update_ag_station_locations <- function() {
   message(
     "This will overwrite the current internal databases of BOM stations.\n",
     "If reproducibility is necessary, you may not wish to proceed.\n",
@@ -70,6 +73,11 @@ update_station_locations <- function() {
       call. = FALSE
     ))
 
+  bom_stations_lines <- readr::read_lines(file.path(tempdir(), "stations.zip"))
+  keep <- length(bom_stations_lines) - 7
+  bom_stations_lines <- bom_stations_lines[1:keep]
+  readr::write_lines(x = bom_stations_lines,
+                     file = file.path(tempdir(), "stations.txt"))
 
   bom_stations_raw <-
     readr::read_fwf(
@@ -124,43 +132,6 @@ update_station_locations <- function() {
 
   data.table::setDT(bom_stations_raw)
 
-  # if sf is installed, correct the state column, otherwise skip
-  if (requireNamespace("ASGS.foyer", quietly = TRUE)) {
-    message(
-      "The package 'ASGS.foyer' is installed. Station locations will\n",
-      "be checked against lat/lon location values and corrected in the\n",
-      "updated internal database lists of stations."
-    )
-
-    latlon2state <- function(lat, lon) {
-      ASGS.foyer::latlon2SA(lat,
-                            lon,
-                            to = "STE",
-                            yr = "2016",
-                            return = "v")
-    }
-
-    bom_stations_raw[lon > -50, state_from_latlon := latlon2state(lat, lon)]
-    bom_stations_raw[state_from_latlon == "New South Wales",
-                     actual_state := "NSW"]
-    bom_stations_raw[state_from_latlon == "Victoria", actual_state := "VIC"]
-    bom_stations_raw[state_from_latlon == "Queensland", actual_state := "QLD"]
-    bom_stations_raw[state_from_latlon == "South Australia",
-                     actual_state := "SA"]
-    bom_stations_raw[state_from_latlon == "Western Australia",
-                     actual_state := "WA"]
-    bom_stations_raw[state_from_latlon == "Tasmania", actual_state := "TAS"]
-    bom_stations_raw[state_from_latlon == "Australian Capital Territory",
-                     actual_state := "ACT"]
-    bom_stations_raw[state_from_latlon == "Northern Territory",
-                     actual_state := "NT"]
-    bom_stations_raw[actual_state != state &
-                       state %notin% c("ANT", "ISL"), state := actual_state]
-    bom_stations_raw[, actual_state := NULL]
-
-    data.table::setDF(bom_stations_raw)
-  }
-
   message("Overwriting existing databases")
 
   stations_site_list[, site := gsub("^0{1,2}", "", stations_site_list$site)]
@@ -169,4 +140,5 @@ update_station_locations <- function() {
     system.file("extdata", "stations_site_list.rda", package = "wrapique")
 
   save(stations_site_list, file = fname, compress = "bzip2")
+  return(invisible(NULL))
 }
