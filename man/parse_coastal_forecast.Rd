@@ -8,14 +8,14 @@ parse_coastal_forecast(state = "AUS", filepath)
 }
 \arguments{
 \item{state}{Required value of an Australian state or territory as full name
-or postal code.  Fuzzy string matching via \code{\link[base]{agrep}} is
+or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is
 done.}
 
 \item{filepath}{A string providing the directory location of the coastal
 forecast file(s) to parse. See Details for more.}
 }
 \value{
-A \code{\link[data.table]{data.table}} of an Australia \acronym{BOM}
+A \code{\link[data.table:data.table]{data.table::data.table()}} of an Australia \acronym{BOM}
 Coastal Waters Forecast.
 }
 \description{
@@ -40,7 +40,7 @@ or all using \code{AUS}.
 The \var{filepath} argument will only accept a directory where files
 are located for parsing. DO NOT supply the full path including the file name.
 This function will only parse the requested state or all of Australia in the
-same fashion as \code{\link{get_coastal_forecast}}, provided that the files
+same fashion as \code{\link[=get_coastal_forecast]{get_coastal_forecast()}}, provided that the files
 are all present in the directory.
 }
 \examples{

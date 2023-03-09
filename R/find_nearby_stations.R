@@ -16,7 +16,7 @@
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'  the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `string` value that is the user's \acronym{API} key from
-#'  \acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).
+#'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
 #' @param wa_only `Boolean`, return stations in Western Australia only. Defaults
 #'  to `TRUE`.
 #' @param dpird_only `Boolean`, return only \acronym{DPIRD} owned stations.

@@ -8,8 +8,8 @@ get_satellite_imagery(product_id, scans = 1)
 }
 \arguments{
 \item{product_id}{Character. \acronym{BOM} product ID to download in
-'GeoTIFF' format and import as a \code{\link[terra]{SpatRaster}} object.  A
-vector of values from \code{\link{get_available_imagery}} may be used here.
+'GeoTIFF' format and import as a \code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} object.  A
+vector of values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.
 Value is required.}
 
 \item{scans}{Numeric. Number of scans to download, starting with most recent
@@ -25,10 +25,10 @@ A \code{SpatRaster} object of GeoTIFF images with layers named by
 \description{
 Fetch \acronym{BOM} satellite GeoTIFF imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a raster
-\code{\link[terra]{SpatRaster}} object of 'GeoTIFF' files. Files are
+\code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} object of 'GeoTIFF' files. Files are
 available at ten minutes update frequency with a 24 hour delete time.
 It is suggested to check file availability first by using
-\code{\link{get_available_imagery}}.
+\code{\link[=get_available_imagery]{get_available_imagery()}}.
 }
 \details{
 Valid \acronym{BOM} satellite Product IDs for use with
@@ -63,7 +63,7 @@ functionality any longer.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-# GEOS GIS \code{SpatRaster} object for most recent single scan available
+# GEOS GIS `SpatRaster` object for most recent single scan available
 
 imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 
@@ -79,7 +79,7 @@ Australian Bureau of Meteorology (BOM) high-definition satellite images \cr
 \url{http://www.bom.gov.au/australia/satellite/index.shtml}
 }
 \seealso{
-\code{\link{get_available_imagery}}
+\code{\link[=get_available_imagery]{get_available_imagery()}}
 
 Other bomrang-ported: 
 \code{\link{find_forecast_towns}()},

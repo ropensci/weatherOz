@@ -26,14 +26,14 @@ message.
 \description{
 Fetch \acronym{BOM} radar imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/radar/} and return a
-\code{\link[terra]{SpatRaster}} layer object.  Files available are the most
+\code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} layer object.  Files available are the most
 recent radar snapshot which are updated approximately every 6 to 10 minutes.
 Suggested to check file availability first by using
-\code{\link{get_available_radar}}.
+\code{\link[=get_available_radar]{get_available_radar()}}.
 }
 \details{
 Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery
-can be obtained from \code{\link{get_available_radar}}.
+can be obtained from \code{\link[=get_available_radar]{get_available_radar()}}.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -48,7 +48,7 @@ Australian Bureau of Meteorology (\acronym{BOM}) radar images\cr
 \url{http://www.bom.gov.au/australia/radar/}
 }
 \seealso{
-\code{\link{get_available_radar}}
+\code{\link[=get_available_radar]{get_available_radar()}}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}

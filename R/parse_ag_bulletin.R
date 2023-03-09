@@ -6,14 +6,14 @@
 #' Ported from \pkg{bomrang}.
 #'
 #' @param state Required value of an Australian state or territory as full name
-#'  or postal code.  Fuzzy string matching via \code{\link[base]{agrep}} is
+#'  or postal code.  Fuzzy string matching via [base::agrep()] is
 #'  done.
 #'
 #' @param filepath A string providing the directory location of the précis
 #' file(s) to parse. See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using \code{AUS}.
+#' or all using `AUS`.
 #'  \describe{
 #'    \item{ACT}{Australian Capital Territory (will return NSW)}
 #'    \item{NSW}{New South Wales}
@@ -29,10 +29,10 @@
 #' @details The \var{filepath} argument will only accept a directory where files
 #' are located for parsing. DO NOT supply the full path including the file name.
 #' This function will only parse the requested state or all of Australia in the
-#' same fashion as \code{\link{get_precis_forecast}}, provided that the files
+#' same fashion as [get_precis_forecast()], provided that the files
 #' are all present in the directory.
 #'
-#' @return A \code{\link[data.table]{data.table}} of Australia \acronym{BOM}
+#' @return A [data.table::data.table()] of Australia \acronym{BOM}
 #'  agricultural bulletin information.
 #'
 #' @examplesIf interactive()
@@ -49,22 +49,22 @@
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins, \cr
-#' \url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}
+#' <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>
 #'
 #' and
 #'
 #' Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
 #' Observation of Rainfall, \cr
-#' \url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}
+#' <http://www.bom.gov.au/climate/how/observations/rain-measure.shtml>
 #'
 #' Station location and other metadata are sourced from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers: \cr
-#' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
+#' <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Paul Melloy
 #' \email{paul@@melloy.com.au}
 #'
-#' @seealso \link{get_ag_bulletin}
+#' @seealso [get_ag_bulletin]
 #'
 #' @export parse_ag_bulletin
 #'

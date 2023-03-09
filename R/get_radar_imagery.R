@@ -2,7 +2,7 @@
 #' Get a listing of available BOM radar imagery
 #'
 #' Fetch a listing of available \acronym{BOM} \acronym{radar} imagery from
-#' \url{ftp://ftp.bom.gov.au/anon/gen/radar/} to determine which files are
+#' <ftp://ftp.bom.gov.au/anon/gen/radar/> to determine which files are
 #' currently available for download.  The files available are the most recent
 #' \acronym{radar} imagery for each location, which are updated approximately
 #' every 6 to 10 minutes by the \acronym{BOM}.  Ported from \pkg{bomrang}.
@@ -19,7 +19,7 @@
 #'
 #' @references
 #' Australian Bureau of Meteorology (BOM) radar image
-#' \url{http://www.bom.gov.au/australia/radar/}.
+#' <http://www.bom.gov.au/australia/radar/>.
 #'
 #' @examplesIf interactive()
 #'
@@ -78,37 +78,37 @@ get_available_radar <- function(radar_id = "all") {
 #' Get \acronym{BOM} radar imagery
 #'
 #' Fetch \acronym{BOM} radar imagery from
-#' \url{ftp://ftp.bom.gov.au/anon/gen/radar/} and return a
-#' \code{\link[terra]{SpatRaster}} layer object.  Files available are the most
+#' <ftp://ftp.bom.gov.au/anon/gen/radar/> and return a
+#' [terra::SpatRaster()] layer object.  Files available are the most
 #' recent radar snapshot which are updated approximately every 6 to 10 minutes.
 #' Suggested to check file availability first by using
-#' \code{\link{get_available_radar}}.
+#' [get_available_radar()].
 #'
 #' @param product_id Character. \acronym{BOM} product ID to download and import
 #' as a \CRANpkg{magick} object.  Value is required.
 #'
 #' @param path Character. A character string with the name where the downloaded
-#' file is saved.  If not provided, the default value \code{NULL} is used which
+#' file is saved.  If not provided, the default value `NULL` is used which
 #' saves the file in an \R session temp directory.
 #'
 #' @param download_only Logical. Whether the radar image is loaded into the
 #' environment as a \CRANpkg{magick} object or just downloaded.
 #'
 #' @details Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery
-#' can be obtained from \code{\link{get_available_radar}}.
+#' can be obtained from [get_available_radar()].
 #'
 #'@seealso
-#'\code{\link{get_available_radar}}
+#'[get_available_radar()]
 #'
 #' @return
 #' A \CRANpkg{magick} object of the most recent \acronym{radar} image snapshot
-#'  published by the \acronym{BOM}. If \code{download_only = TRUE} there will be
+#'  published by the \acronym{BOM}. If `download_only = TRUE` there will be
 #'  a `NULL` return value with the download path printed in the console as a
 #'  message.
 #'
 #' @references
 #' Australian Bureau of Meteorology (\acronym{BOM}) radar images\cr
-#' \url{http://www.bom.gov.au/australia/radar/}
+#' <http://www.bom.gov.au/australia/radar/>
 #'
 #' @examplesIf interactive()
 #'

@@ -15,7 +15,7 @@ disk for the package to use.
 }
 \description{
 Download the latest ag bulletin station locations and metadata and update
-the internal database that supports the use of \code{\link{get_ag_bulletin}}.
+the internal database that supports the use of \code{\link[=get_ag_bulletin]{get_ag_bulletin()}}.
 There is no need to use this unless you know that a station exists in
 \acronym{BOM}'s database that is not available in the databases distributed
 with \pkg{wrapique}. In fact, for reproducibility purposes. In fact, users

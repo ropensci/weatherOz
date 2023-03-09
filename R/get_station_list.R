@@ -20,7 +20,7 @@
 #' one of the existing options (currently 'weather' or 'silo'). Defaults to the
 #' "weather" \acronym{API}.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
-#'  (\url{https://www.agric.wa.gov.au/web-apis})
+#'  (<https://www.agric.wa.gov.au/web-apis>)
 #' @param limit a numeric value, limiting the amount of rows to return. Defaults
 #' to 1000.
 #' @param state a string limiting the query to one or several states, defaults

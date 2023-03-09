@@ -8,14 +8,14 @@ parse_precis_forecast(state, filepath)
 }
 \arguments{
 \item{state}{Required value of an Australian state or territory as full name
-or postal code.  Fuzzy string matching via \code{\link[base]{agrep}} is
+or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is
 done.}
 
 \item{filepath}{A string providing the directory location of the précis
 file(s) to parse. See Details for more.}
 }
 \value{
-A \code{\link[data.table]{data.table}} of Australia \acronym{BOM} précis
+A \code{\link[data.table:data.table]{data.table::data.table()}} of Australia \acronym{BOM} précis
 seven day forecasts for \acronym{BOM} selected towns.
 }
 \description{
@@ -41,7 +41,7 @@ or all using \code{AUS}.
 The \var{filepath} argument will only accept a directory where files
 are located for parsing. DO NOT supply the full path including the file name.
 This function will only parse the requested state or all of Australia in the
-same fashion as \code{\link{get_precis_forecast}}, provided that the files
+same fashion as \code{\link[=get_precis_forecast]{get_precis_forecast()}}, provided that the files
 are all present in the directory.
 }
 \examples{

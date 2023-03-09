@@ -2,7 +2,7 @@
 #' Update internal databases with latest BOM ag bulletin location data
 #'
 #' Download the latest ag bulletin station locations and metadata and update
-#' the internal database that supports the use of \code{\link{get_ag_bulletin}}.
+#' the internal database that supports the use of [get_ag_bulletin()].
 #' There is no need to use this unless you know that a station exists in
 #' \acronym{BOM}'s database that is not available in the databases distributed
 #' with \pkg{wrapique}. In fact, for reproducibility purposes. In fact, users
@@ -25,7 +25,7 @@
 #' @references
 #' Station location and other metadata are sourced from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
-#' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}.
+#' <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>.
 #'
 #' @family bomrang-ported
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}

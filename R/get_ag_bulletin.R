@@ -5,11 +5,11 @@
 #' data frame.  Ported from \pkg{bomrang}.
 #'
 #' @param state Australian state or territory as full name or postal code.
-#'  Fuzzy string matching via \code{\link[base]{agrep}} is done.  Defaults to
+#'  Fuzzy string matching via [base::agrep()] is done.  Defaults to
 #'  \dQuote{AUS} returning all state bulletins, see Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using \code{AUS}.
+#' or all using `AUS`.
 #'  \describe{
 #'    \item{ACT}{Australian Capital Territory (will return NSW)}
 #'    \item{NSW}{New South Wales}
@@ -23,12 +23,12 @@
 #'  }
 #'
 #' @return
-#'  A data frame as a \code{\link[data.table]{data.table}} object of Australia
+#'  A data frame as a [data.table::data.table()] object of Australia
 #'  \acronym{BOM} agricultural bulletin information.
 #'
 #' @note Data and Information Use
 #' Please note the copyright notice and disclaimer,
-#' \url{http://www.bom.gov.au/other/copyright.shtml} related to the use of this
+#' <http://www.bom.gov.au/other/copyright.shtml> related to the use of this
 #' information. Users of this information are deemed to have read and
 #' accepted the conditions described therein.
 #'
@@ -40,22 +40,22 @@
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins, \cr
-#' \url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}
+#' <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>
 #'
 #' and
 #'
 #' Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
 #' Observation of Rainfall, \cr
-#' \url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}
+#' <http://www.bom.gov.au/climate/how/observations/rain-measure.shtml>
 #'
 #' Station location and other metadata are sourced from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers: \cr
-#' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
+#' <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Paul Melloy
 #' \email{paul@@melloy.com.au}
 #'
-#' @seealso \link{parse_ag_bulletin}
+#' @seealso [parse_ag_bulletin]
 #'
 #' @family bomrang-ported
 #'

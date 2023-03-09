@@ -13,7 +13,7 @@
 #' # find forecast towns near Esperance, WA
 #' find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
 #'
-#' @return A \code{\link{data.table}} of all forecast towns (in this package)
+#' @return A [data.table()] of all forecast towns (in this package)
 #' sorted by distance from \var{latlon}, ascending.
 #' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com} and
 #'  James Goldie, \email{me@@jamesgoldie.dev} and Adam Sparks,

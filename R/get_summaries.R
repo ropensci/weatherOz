@@ -17,7 +17,7 @@
 #' but must be explicitly coded, as otherwise it will default to the current
 #' date.
 #' @param api_key \acronym{API} key from \acronym{DPIRD}
-#'  \url{https://www.agric.wa.gov.au/web-apis}.  Defaults to `NULL`.
+#'  <https://www.agric.wa.gov.au/web-apis>.  Defaults to `NULL`.
 #' @param interval Time interval to summarise over.  The default is 'daily',
 #' others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
 #' shorter than 1 day, time period covered will be midnight to midnight, with
