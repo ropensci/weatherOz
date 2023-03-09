@@ -26,6 +26,12 @@
 #'  A data frame as a \code{\link[data.table]{data.table}} object of Australia
 #'  \acronym{BOM} agricultural bulletin information.
 #'
+#' @note Data and Information Use
+#' Please note the copyright notice and disclaimer,
+#' \url{http://www.bom.gov.au/other/copyright.shtml} related to the use of this
+#' information. Users of this information are deemed to have read and
+#' accepted the conditions described therein.
+#'
 #' @examplesIf interactive()
 #'
 #' ag_bulletin <- get_ag_bulletin(state = "QLD")
@@ -54,7 +60,9 @@
 #' @export get_ag_bulletin
 
 get_ag_bulletin <- function(state = "AUS") {
-  # this is just a placeholder for functionality with parse_ag_bulletin()
+  # this is just a place holder for functionality with parse_ag_bulletin(),
+  # when this is `NULL` the default string is the BOM's ftp site that points
+  # to the directory where the XML files are hosted
   filepath <- NULL
 
   # see internal_functions.R for these functions
