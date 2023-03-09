@@ -16,7 +16,7 @@ Authors:
   \item Anna Hepworth \email{anna.hepworth@dpird.wa.gov.au} (\href{https://orcid.org/0000-0003-0204-6347}{ORCID})
   \item Rebecca O'Leary \email{rebecca.o'leary@agric.wa.gov.au}
   \item Jonathan Carroll \email{rpkg@jcarroll.com.au} (\href{https://orcid.org/0000-0002-1404-5264}{ORCID})
-  \item James Goldie \email{me@rensa.co} (\href{https://orcid.org/0000-0002-5024-6207}{ORCID})
+  \item James Goldie \email{me@jamesgoldie.dev} (\href{https://orcid.org/0000-0002-5024-6207}{ORCID})
   \item Dean Marchiori \email{deanmarchiori@gmail.com}
   \item Paul Melloy \email{paul@melloy.com.au} (\href{https://orcid.org/0000-0003-4253-7167}{ORCID})
   \item Mark Padgham \email{mark.padgham@email.com} (\href{https://orcid.org/0000-0003-2172-5265}{ORCID}) [reviewer]

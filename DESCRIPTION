@@ -33,7 +33,7 @@ Authors@R: c(
     given = "James",
     family = "Goldie",
     role = "aut",
-    email = "me@rensa.co",
+    email = "me@jamesgoldie.dev",
     comment = c(ORCID = "0000-0002-5024-6207")
   ),
   person(
