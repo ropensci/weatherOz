@@ -85,6 +85,8 @@ Imports:
     xml2
 Suggests:
     future,
+    knitr,
+    rmarkdown,
     rstudioapi,
     testthat (>= 3.0.0),
     vdiffr
@@ -96,3 +98,4 @@ X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
     australia, weather, weather-data, meteorology, western-australia,
     australia-bureau-of-meteorology, western-australia-agriculture
 X-schema.org-isPartOf: https://www.agric.wa.gov.au/
+VignetteBuilder: knitr
