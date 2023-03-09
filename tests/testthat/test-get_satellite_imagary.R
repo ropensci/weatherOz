@@ -7,17 +7,12 @@ test_that("Error handling", {
 
 test_that("get_available_imagery functions properly", {
   skip_on_cran()
-  # if cache directory exists during testing, remove it for following tests
-  unlink(manage_cache$cache_path_get(),
-         recursive = TRUE)
-
   i <- get_available_imagery()
   expect_type(i, "character")
   expect_error(get_satellite_imagery(product_id = c("IDE00425", "IDE00420")))
   j <-
     get_satellite_imagery(product_id = "IDE00425",
-                          scans = 1,
-                          cache = TRUE)
+                          scans = 1)
   expect_is(j, "SpatRaster")
   expect_true(dir.exists(manage_cache$cache_path_get()))
 })
