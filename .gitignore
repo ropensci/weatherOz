@@ -6,3 +6,5 @@
 tests/.DS_Store
 inst/.DS_Store
 inst/doc
+/doc/
+/Meta/
