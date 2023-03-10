@@ -186,14 +186,17 @@ The fields in the data frame are:
 ### Example 1
 
 Following is an example sweeping for stations starting with Canberra.
+Note that this code chunk is not executed due to the need of an API key.
+We get the station distances in this function from the DPIRD API so you will need to supply your own API key.
 
-```{r sweep_stations, eval=TRUE}
+```{r find_stations, eval=FALSE}
 # Show only the first ten stations in the list
-head(find_nearby_stations(
+find_nearby_stations(
   latitude = -35.4,
   longitude = 149.2,
-  distance_km = 10
-))
+  distance_km = 10,
+  api_key = YOUR_API_KEY
+)
 ```
 
 ## Using find_forecast_towns()
@@ -217,6 +220,7 @@ The fields in the data frame are:
 ### Example
 
 Following is an example sweeping for forecast towns starting with Canberra.
+As this function is executed locally using great circle distances, it doesn't need an API key.
 
 ```{r sweep_forecast, eval=TRUE}
 # Show only the first ten towns in the list
