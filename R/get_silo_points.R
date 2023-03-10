@@ -27,7 +27,7 @@
 #' request. The query will return an error if a valid email address is not
 #' provided.
 #'
-#' @return A `data.frame` containing the retrieved data from the \acronym{SILO}
+#' @return A `data.table` containing the retrieved data from the \acronym{SILO}
 #'  \acronym{API}.
 #'
 #' @family SILO
@@ -101,6 +101,6 @@ get_silo_points <- function(station_id = NULL,
 
   # Extract content and parse data according to the format and frequency
   r <- httr::content(result, "text")
-  out <- parse_silo(r, data_format, first)
-  return(out)
+  out <- .parse_silo(r, data_format, first)
+  return(out[])
 }

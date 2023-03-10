@@ -37,7 +37,7 @@ request. The query will return an error if a valid email address is not
 provided.}
 }
 \value{
-A \code{data.frame} containing the retrieved data from the \acronym{SILO}
+A \code{data.table} containing the retrieved data from the \acronym{SILO}
 \acronym{API}.
 }
 \description{

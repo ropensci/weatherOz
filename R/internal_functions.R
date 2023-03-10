@@ -69,7 +69,7 @@
 #'
 #' @noRd
 
-parse_silo <- function(query_response,
+.parse_silo <- function(query_response,
                        this_format,
                        this_date) {
   # apsim data
@@ -179,7 +179,7 @@ parse_silo <- function(query_response,
       out[[i]] <- as.numeric(as.character(out[[i]]))
     }
   }
-  return(out)
+  return(data.table::setDT(out))
 }
 
 
