@@ -28,6 +28,9 @@
 #' `data frame` with the all summary output as per Weather \acronym{API}
 #' documentation.
 #'
+#' @note You can request your own API key from DPIRD for free by filling out the
+#' form found at <https://www.agric.wa.gov.au/web-apis>.
+#'
 #' @family DPIRD
 #'
 #' @examplesIf interactive()

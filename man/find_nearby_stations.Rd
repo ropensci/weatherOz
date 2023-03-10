@@ -44,6 +44,10 @@ distance from station or location of interest.
 \description{
 Get a list of nearby weather stations from coordinates or station ID code
 }
+\note{
+You can request your own API key from DPIRD for free by filling out the
+form found at \url{https://www.agric.wa.gov.au/web-apis}.
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed

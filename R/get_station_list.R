@@ -28,6 +28,9 @@
 #' @return a `data.table` with station code, name, latitude, longitude, owner
 #' and state plus metadata details if any available.
 #'
+#' @note You can request your own API key from DPIRD for free by filling out the
+#' form found at <https://www.agric.wa.gov.au/web-apis>.
+#'
 #' @examplesIf interactive()
 #' # Query DPIRD API
 #' # You must have an api key to query the DPIRD API

@@ -26,6 +26,9 @@
 #' 'longitude', 'state', 'owner' and 'distance'. Data are sorted by increasing
 #' distance from station or location of interest.
 #'
+#' @note You can request your own API key from DPIRD for free by filling out the
+#' form found at <https://www.agric.wa.gov.au/web-apis>.
+#'
 #' @examplesIf interactive()
 #' # You must have an DPIRD API key to proceed
 #' my_key <- rstudioapi::askForSecret()

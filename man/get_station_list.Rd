@@ -34,6 +34,10 @@ Water and Pardoo Beef Corporation. If querying the \acronym{SILO}
 \acronym{API}, the function also return a data frame with metadata for the
 \acronym{SILO} weather stations network.
 }
+\note{
+You can request your own API key from DPIRD for free by filling out the
+form found at \url{https://www.agric.wa.gov.au/web-apis}.
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Query DPIRD API

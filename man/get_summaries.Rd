@@ -42,6 +42,10 @@ documentation.
 \description{
 Fetch weather summary from DPIRD weather API for an individual station
 }
+\note{
+You can request your own API key from DPIRD for free by filling out the
+form found at \url{https://www.agric.wa.gov.au/web-apis}.
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # You must have an DPIRD API key to proceed
