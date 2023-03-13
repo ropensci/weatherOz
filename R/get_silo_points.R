@@ -132,6 +132,9 @@ get_silo_points <- function(station_id = NULL,
 .parse_silo <- function(query_response,
                         this_format,
                         this_date) {
+
+  Date <- Date2 <- NULL #nocov
+
   # apsim data
   if (toupper(this_format) == "APSIM") {
     # code snippet from {cropgrowdays}
