@@ -41,7 +41,7 @@ A \code{data.table} containing the retrieved data from the \acronym{SILO}
 \acronym{API}.
 }
 \description{
-Download weather data from the \acronym{SILO}  \acronym{API} from both
+Download weather data from the \acronym{SILO} \acronym{API} from both
 station observations (DataDrill) and gridded data (PatchedPointData). There
 are three formats available: 'alldata' and 'apsim' with daily frequency and
 'monthly' with, that's right, monthly frequency.
