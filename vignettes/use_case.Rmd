@@ -1,11 +1,11 @@
 ---
-title: "weatherOz Use Case"
+title: "wrapique Use Case"
 author: "Keith Pembleton, Adam H. Sparks and Mark Padgham"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{weatherOz Use Case}
+  %\VignetteIndexEntry{wrapique Use Case}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{dplyr}
@@ -14,7 +14,7 @@ vignette: >
 
 
 
-## Using {weatherOz} with the {WINS} for pulses project
+## Using {wrapique} with the {WINS} for pulses project
 
 [Summer pulses (*e.g.*, mungbeans) are a high value crop for Queensland grain growers](http://www.pulseaus.com.au/about/australian-pulse-industry).
 However, temperatures above 40 °C, particularly during flowering, can have a severe detrimental effect on crop yields (Kaushal *et al.* 2016).
@@ -24,15 +24,15 @@ However, this requires farmers to recognise a heat stress event is coming and co
 
 The [{WINS}](https://github.com/ToowoombaTrio/WINS) for pulses project provides warnings when heat stress events are likely to occur so that farmers can irrigate their crops prior to the event to minimise any resulting yield
 loss.
-It does this by using the `get_precis_forecast()` function from {weatherOz} along with functionality from
+It does this by using the `get_precis_forecast()` function from {wrapique} along with functionality from
 [{mailR}](https://CRAN.R-project.org/package=mailR) (Rahul 2015).
 
 
 ```r
-install.packages("weatherOz")
+install.packages("wrapique")
 install.packages("mailR")
 library(dplyr)  # for filter()
-library(weatherOz)
+library(wrapique)
 library(mailR)
 ```
 
@@ -81,7 +81,7 @@ Finally we need to set a forecast temperature threshold that will trigger an ale
 threshold_temp <- 40
 ```
 
-We then use {weatherOz} to access the latest précis forecast for Queensland.
+We then use {wrapique} to access the latest précis forecast for Queensland.
 
 
 ```r
