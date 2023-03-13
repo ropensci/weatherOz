@@ -1,11 +1,11 @@
 ---
-title: "wrapique"
+title: "weatherOz"
 author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham and Hugh Parsonage and Adam H. Sparks"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{wrapique}
+  %\VignetteIndexEntry{weatherOz}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{terra}
@@ -21,12 +21,12 @@ knitr::opts_chunk$set(collapse = TRUE,
 ```
 
 ```{r libraries, echo=FALSE, message=FALSE}
-library(wrapique)
+library(weatherOz)
 ```
 
 ## Introduction
 
-{wrapique} provides automated downloading, parsing, cleaning, and formatting
+{weatherOz} provides automated downloading, parsing, cleaning, and formatting
 of weather data for Australia through API endpoints provided by the Department
 of Primary Industries and Regional Development (DPIRD) of Western Australia,
 and by the Science and Technology Division of the Queensland Government's
@@ -43,17 +43,17 @@ Land Owners) (Jeffery et al., 2001).
 BOM also serves several types of data data as XML, JSON and SHTML files.
 This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
-{wrapique} provides functionality to query, fetch and create `terra::SpatRaster()` objects of the GeoTIFF imagery or a magick object of radar image gif files.
+{weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` objects of the GeoTIFF imagery or a magick object of radar image gif files.
 
-## Using {wrapique}
+## Using {weatherOz}
 
-Several functions are provided by {wrapique} to retrieve Australian Bureau of Meteorology (BOM) data.
+Several functions are provided by {weatherOz} to retrieve Australian Bureau of Meteorology (BOM) data.
 A family of functions retrieve weather data and return data frames;
  * `get_precis_forecast()`, which retrieves the précis (short) forecast;
  * `get_ag_bulletin()`, which retrieves the agriculture bulletin;
  * `get_coastal_forecast()`, which fetches coastal waters forecasts for each state; and
 A second family of functions retrieve information pertaining to satellite and radar imagery, `get_available_imagery()` and the imagery itself, `_imagery()` for satellite, and `get_available_radar()` and `get_radar_imagery()` for radar images.
-The last group functions provides internal functionality for {wrapique} itself; `update_forecast_towns()`, which updates an internal database of forecast locations distributed with the package, `update_ag_station_locations()`, which updates an internal database of the stations reporting ag bulletins and `find_forecast_towns()` and find_nearby_stations()` which returns either the closest forecast locations or the nearest weather stations with an ag bulletin to a given point in Australia.
+The last group functions provides internal functionality for {weatherOz} itself; `update_forecast_towns()`, which updates an internal database of forecast locations distributed with the package, `update_ag_station_locations()`, which updates an internal database of the stations reporting ag bulletins and `find_forecast_towns()` and find_nearby_stations()` which returns either the closest forecast locations or the nearest weather stations with an ag bulletin to a given point in Australia.
 
 ## Using get_precis_forecast()
 
@@ -229,24 +229,24 @@ head(find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 10))
 
 ## Using the update functions
 
-{wrapique} uses internal databases of station location data from BOM to provide location and other metadata, _e.g._ elevation, station names, WMO codes, etc. to make the process of querying for weather data faster.
-These databases are created and packaged with {wrapique} for distribution and are updated with new releases.
-Users have the option of updating these databases after installing {wrapique}.
-While this option gives the users the ability to keep the databases up-to-date and gives {wrapique}'s authors flexibility in maintaining it, this also means that reproducibility may be affected since the same version of {wrapique} may have different databases on different machines.
+{weatherOz} uses internal databases of station location data from BOM to provide location and other metadata, _e.g._ elevation, station names, WMO codes, etc. to make the process of querying for weather data faster.
+These databases are created and packaged with {weatherOz} for distribution and are updated with new releases.
+Users have the option of updating these databases after installing {weatherOz}.
+While this option gives the users the ability to keep the databases up-to-date and gives {weatherOz}'s authors flexibility in maintaining it, this also means that reproducibility may be affected since the same version of {wrapique} may have different databases on different machines.
 If reproducibility is necessary, care should be taken to ensure that the version of the databases is the same across different machines.
 
-The databases consist of three files, used by {wrapique}, `AAC_codes.rda`, `JSONurl_latlon_by_station_name.rda` and `stations_site_list.rda`.
+The databases consist of three files, used by {weatherOz}, `AAC_codes.rda`, `JSONurl_latlon_by_station_name.rda` and `stations_site_list.rda`.
 These files can be located on your local system by using the following command,
 
 ```{r, eval=FALSE}
-paste0(.libPaths(), "/wrapique/extdata")[1]
+paste0(.libPaths(), "/weatherOz/extdata")[1]
 ```
 
-unless you have specified another location for library installations and installed {wrapique} there, in which case it would still be in `wrapique/extdata`.
+unless you have specified another location for library installations and installed {weatherOz} there, in which case it would still be in `wrapique/extdata`.
 
 ### Using update_forecast_towns()
 
-`update_forecast_towns()` downloads the latest précis forecast locations from the BOM server and updates {wrapique}'s internal database of towns used for forecast locations.
+`update_forecast_towns()` downloads the latest précis forecast locations from the BOM server and updates {weatherOz}'s internal database of towns used for forecast locations.
 This database is distributed with the package to make the process faster when fetching the forecast.
 
 ### Example
@@ -259,8 +259,8 @@ update_forecast_towns()
 
 ### Using update_station_locations
 
-`update_station_locations()` downloads the latest station locations and metadata and updates {wrapique}'s internal databases that support the use of `get_current_weather()` and `get_ag_bulletin()`.
-There is no need to use this unless you know that a station exists in BOM's database that is not available in the databases distributed with {wrapique}.
+`update_station_locations()` downloads the latest station locations and metadata and updates {weatherOz}'s internal databases that support the use of `get_current_weather()` and `get_ag_bulletin()`.
+There is no need to use this unless you know that a station exists in BOM's database that is not available in the databases distributed with {weatherOz}.
 
 ### Example
 
@@ -270,9 +270,9 @@ Following is an example updating the précis forecast locations internal databas
 update_station_locations()
 ```
 
-## Using {wrapique} to retrieve satellite imagery
+## Using {weatherOz} to retrieve satellite imagery
 
-{wrapique} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
+{weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
 [Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
 
 Valid BOM satellite Product IDs for GeoTIFF files include:
@@ -333,15 +333,15 @@ i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 i <- get_satellite_imagery(product_id = avail, scans = 1)
 ```
 
-`terra::plot()` has been re-exported to simplify visualising these files while using {wrapique}.
+`terra::plot()` has been re-exported to simplify visualising these files while using {weatherOz}.
 
 ```{r plot_satellite}
 plot(i)
 ```
 
-## Using {wrapique} to retrieve radar imagery
+## Using {weatherOz} to retrieve radar imagery
 
-{wrapique} provides functionality to retrieve the latest radar imagery provided by BOM through public FTP.
+{weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through public FTP.
 These are the latest snapshots for each radar locations at various radar ranges _e.g._, 512km, 256km, 128km and 64km for some stations.
 
 ### Using get_available_radar()
@@ -553,7 +553,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(data.table)
   library(grid)
   library(gridExtra)
-  load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
+  load(system.file("extdata", "stations_site_list.rda", package = "weatherOz"))
   setDT(stations_site_list)
 
   Aust_stations <-

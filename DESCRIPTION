@@ -121,6 +121,7 @@ Imports:
     utils,
     xml2
 Suggests:
+    dplyr,
     future,
     knitr,
     rmarkdown,
