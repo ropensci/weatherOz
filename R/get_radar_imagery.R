@@ -126,7 +126,7 @@ get_radar_imagery <- get_radar <-
            download_only = FALSE) {
     if (length(product_id) != 1) {
       stop(
-        "\nbomrang only supports working with one Product ID at a time",
+        "\nweatherOz only supports working with one Product ID at a time",
         "for radar images\n",
         call. = FALSE
       )
@@ -169,8 +169,8 @@ get_radar_imagery <- get_radar <-
     },
     error = function() {
       return(magick::image_read(
-        path = system.file("error_images",
-                           "image_error_message.png",
+        path = system.file("error_image",
+                           "error_message.png",
                            package = "weatherOz")
       ))
     })

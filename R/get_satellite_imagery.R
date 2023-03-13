@@ -196,7 +196,7 @@ get_satellite_imagery <- get_satellite <-
     error = function() {
       return(magick::image_read(
         system.file("error_images",
-                    "image_error_message.png",
+                    "error_message.png",
                     package = "weatherOz")
       ))
     }
