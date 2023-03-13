@@ -3,12 +3,12 @@
 #'
 #' Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
 #' <ftp://ftp.bom.gov.au/anon/gen/gms/> to determine which files are
-#' currently available for download.  Files are available at ten minute update
-#' frequency with a 24 hour delete time.  Useful to know the most recent files
-#' available and then specify in the [get_satellite_imagery()]
+#' currently available for download. Files are available at ten minute update
+#' frequency with a 24-hour delete time. It is useful to know the most recent
+#' files available and then specify in the [get_satellite_imagery()]
 #' function.
 #'
-#' @param product_id Character.  \acronym{BOM} product ID of interest for which
+#' @param product_id Character. \acronym{BOM} product ID of interest for which
 #' a list of available images will be returned.  Defaults to all images
 #' currently available.
 #'
@@ -37,7 +37,7 @@
 #' }
 #'
 #' @return
-#' A vector of all available files for the requested Product ID(s).
+#' A `vector` of all available files for the requested Product ID(s).
 #'
 #' @references
 #' Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
