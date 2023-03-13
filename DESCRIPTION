@@ -121,6 +121,7 @@ Imports:
     utils,
     xml2
 Suggests:
+    spelling,
     dplyr,
     future,
     knitr,
@@ -137,3 +138,4 @@ X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
     australia-bureau-of-meteorology, western-australia-agriculture
 X-schema.org-isPartOf: https://www.agric.wa.gov.au/
 VignetteBuilder: knitr
+Language: en-US

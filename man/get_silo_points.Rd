@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_silo_points.R
 \name{get_silo_points}
 \alias{get_silo_points}
-\title{Retrieve data from SILO (Scientifc Information for Land Owners) API}
+\title{Retrieve data from SILO (Scientific Information for Land Owners) API}
 \usage{
 get_silo_points(
   station_id = NULL,
