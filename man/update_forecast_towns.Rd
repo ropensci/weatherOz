@@ -16,7 +16,7 @@ update internal database of précis forecast town names and \acronym{AAC}
 codes used by \code{\link[=get_precis_forecast]{get_precis_forecast()}}.  There is no need to use
 this unless you know that a forecast town exists in a more current version of
 the \acronym{BOM} précis forecast town name database that is not available in
-the database distributed with \pkg{wrapique}.  In fact, for
+the database distributed with \pkg{weatherOz}.  In fact, for
 reproducibility purposes, users are discouraged from using this function.
 Ported from \pkg{bomrang}.
 }

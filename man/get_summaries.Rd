@@ -16,7 +16,7 @@ get_summaries(
 \item{site}{A string with the station ID code for the station of interest.}
 
 \item{first}{The date on which the weather data summary will be sourced.
-\pkg{wrapique} does its best to determine the date given any format but may
+\pkg{weatherOz} does its best to determine the date given any format but may
 fail if given an unconventional date format.}
 
 \item{last}{The last date for which the data will be sourced. For intervals
