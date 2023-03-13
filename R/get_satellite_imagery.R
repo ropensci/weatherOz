@@ -197,7 +197,7 @@ get_satellite_imagery <- get_satellite <-
       return(magick::image_read(
         system.file("error_images",
                     "image_error_message.png",
-                    package = "wrapique")
+                    package = "weatherOz")
       ))
     }
     )
@@ -256,8 +256,8 @@ get_satellite_imagery <- get_satellite <-
 #' @noRd
 .ftp_images <- function(product_id, bom_server) {
   # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- paste0("{wrapique} R package (",
-                      utils::packageVersion("wrapique"))
+  USERAGENT <- paste0("{weatherOz} R package (",
+                      utils::packageVersion("weatherOz"))
   # set a custom user-agent, restore original settings on exit
   # required for #130 - BOM returns 403 for RStudio
   op <- options()

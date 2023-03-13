@@ -2,9 +2,9 @@
   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
   <!-- badges: end -->
 
-# {wrapique}: An API Client for Australian Weather and Climate Data Resources
+# {weatherOz}: An API Client for Australian Weather and Climate Data Resources
 
-{wrapique} aims to facilitate access and download of a range of weather and climate data for Australia.
+{weatherOz} aims to facilitate access and download of a range of weather and climate data for Australia.
 Data are sourced from from the Western Australian Department of Primary Industries and Regional Development (DPIRD) and the Scientific Information for Land Owners (SILO) API endpoints and the Australian Government Bureau of Meteorology (BOM).
 The package queries the APIs and returns data as a data frame or radar and satellite imagery in your R session.
 Observation data from the DPIRD's weather station network are available via the [Science](https://www.agric.wa.gov.au/science-api-20) and [Weather](https://www.agric.wa.gov.au/weather-api-20) APIs.
@@ -22,13 +22,13 @@ Rainfall estimates are also available at virtual stations (_i.e._, where no obse
 
 ## Installation instructions
 
-You can install the development version of {wrapique} like so:
+You can install the development version of {weatherOz} like so:
 
 ```r
 if (!requireNamespace("remotes", quietly = TRUE)) {
     install.packages("remotes")
 }
-remotes::install_git("https://git.agric.wa.gov.au/r/wrapique.git")
+remotes::install_git("https://git.agric.wa.gov.au/r/weatherOz.git")
 ```
 
 ## Example

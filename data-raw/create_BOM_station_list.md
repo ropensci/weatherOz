@@ -156,7 +156,7 @@ bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
 First, rename columns and drop a few that aren’t necessary for the ag
 bulletin information. Then pad the `site` field with 0 to match the data
 in the XML file that holds the ag bulletin information. Lastly, create
-the data file for use in {wrapique}.
+the data file for use in {weatherOz}.
 
 ``` r
 new_stations_site_list <- data.table::data.table(bom_stations_raw)
@@ -171,7 +171,7 @@ data.table::setkey(new_stations_site_list, "site")
 #### Changes in “stations_site_list”
 
 ``` r
-load(system.file("extdata", "stations_site_list.rda", package = "wrapique"))
+load(system.file("extdata", "stations_site_list.rda", package = "weatherOz"))
 
 (
   stations_site_list_changes <-

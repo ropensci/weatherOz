@@ -65,12 +65,12 @@ str(new_radar_locations)
 ## Show Changes from Last Release
 
 To ensure that the data being compared is from the most recent release,
-reinstall {wrapique} from CRAN.
+reinstall {weatherOz} from CRAN.
 
 ``` r
 install.packages("bomrang", repos = "http://cran.us.r-project.org")
 
-load(system.file("extdata", "radar_locations.rda", package = "wrapique"))
+load(system.file("extdata", "radar_locations.rda", package = "weatherOz"))
 
 (
   radar_location_changes <-
@@ -81,7 +81,7 @@ load(system.file("extdata", "radar_locations.rda", package = "wrapique"))
 # Save Radar Stations Data and Changes
 
 Save the radar stations’ metadata and changes to disk for use in
-{wrapique}.
+{weatherOz}.
 
 ``` r
 if (!dir.exists("../inst/extdata")) {

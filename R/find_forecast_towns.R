@@ -37,7 +37,7 @@ find_forecast_towns <-
   load(system.file(
     "extdata",
     "AAC_codes.rda",
-    package = "wrapique",
+    package = "weatherOz",
     mustWork = TRUE
   ))
 

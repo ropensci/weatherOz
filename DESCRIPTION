@@ -1,4 +1,4 @@
-Package: wrapique
+Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
 Version: 0.0.0.9000
 Authors@R: c(

@@ -1,7 +1,7 @@
 #
 # file: /R/tidy_weather_summary.R
 #
-# This file is part of the R-package wrapique
+# This file is part of the R-package weatherOz
 #
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>

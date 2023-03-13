@@ -1,6 +1,6 @@
 
 .onLoad <-
-  function(libname = find.package("wrapique"),
-           pkgname = "wrapique") {
+  function(libname = find.package("weatherOz"),
+           pkgname = "weatherOz") {
     options(bomrang.connection = stdin())
   }

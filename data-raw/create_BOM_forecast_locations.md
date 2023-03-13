@@ -41,19 +41,19 @@ data.table::setkey(new_AAC_codes, "aac")
 ## Show Changes from Last Release
 
 To ensure that the data being compared is from the most recent release,
-reinstall {wrapique} from CRAN.
+reinstall {weatherOz} from CRAN.
 
 ``` r
-install.packages("wrapique", repos = "http://cran.us.r-project.org")
+install.packages("weatherOz", repos = "http://cran.us.r-project.org")
 
-load(system.file("extdata", "AAC_codes.rda", package = "wrapique"))
+load(system.file("extdata", "AAC_codes.rda", package = "weatherOz"))
 
 (AAC_code_changes <- diffobj::diffPrint(new_AAC_codes, AAC_codes))
 ```
 
 # Save the data
 
-Save the stations’ metadata and changes to disk for use in {wrapique}.
+Save the stations’ metadata and changes to disk for use in {weatherOz}.
 
 ``` r
 if (!dir.exists("../inst/extdata")) {

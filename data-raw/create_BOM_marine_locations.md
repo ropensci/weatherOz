@@ -45,12 +45,12 @@ data.table::setkey(new_marine_AAC_codes, "aac")
 ## Show Changes from Last Release
 
 To ensure that the data being compared is from the most recent release,
-reinstall {wrapique} from CRAN.
+reinstall {weatherOz} from CRAN.
 
 ``` r
-install.packages("wrapique", repos = "http://cran.us.r-project.org")
+install.packages("weatherOz", repos = "http://cran.us.r-project.org")
 
-load(system.file("extdata", "marine_AAC_codes.rda", package = "wrapique"))
+load(system.file("extdata", "marine_AAC_codes.rda", package = "weatherOz"))
 
 (
   marine_AAC_code_changes <-
@@ -61,7 +61,7 @@ load(system.file("extdata", "marine_AAC_codes.rda", package = "wrapique"))
 # Save Marine Locations Data and Changes
 
 Save the marine zones’ metadata and changes to disk for use in
-{wrapique}.
+{weatherOz}.
 
 ``` r
 if (!dir.exists("../inst/extdata")) {

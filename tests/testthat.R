@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(wrapique)
+library(weatherOz)
 
-test_check("wrapique")
+test_check("weatherOz")

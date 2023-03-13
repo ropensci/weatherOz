@@ -35,7 +35,7 @@
 get_available_radar <- function(radar_id = "all") {
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar/"
   radar_locations <- NULL #nocov
-  load(system.file("extdata", "radar_locations.rda", package = "wrapique"))
+  load(system.file("extdata", "radar_locations.rda", package = "weatherOz"))
   list_files <- curl::new_handle()
   curl::handle_setopt(
     handle = list_files,
@@ -171,7 +171,7 @@ get_radar_imagery <- get_radar <-
       return(magick::image_read(
         path = system.file("error_images",
                            "image_error_message.png",
-                           package = "wrapique")
+                           package = "weatherOz")
       ))
     })
   }

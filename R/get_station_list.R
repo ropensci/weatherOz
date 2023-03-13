@@ -1,6 +1,6 @@
 # file: /R/get_station_list.R
 #
-# This file is part of the R-package wrapique
+# This file is part of the R-package weatherOz
 #
 # Copyright (C) 2022 DPIRD
 #	<https://www.dpird.wa.gov.au>
@@ -146,7 +146,7 @@ get_station_list <- function(api = "weather",
       system.file(
         "extdata",
         "stations_site_list.rda",
-        package = "wrapique",
+        package = "weatherOz",
         mustWork = TRUE
       )
     )

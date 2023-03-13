@@ -1,6 +1,6 @@
 # file: /R/get_nearby_stations.R
 #
-# This file is part of the R-package wrapique
+# This file is part of the R-package weatherOz
 #
 # Copyright (C) 2022 DPIRD
 #	<https://www.dpird.wa.gov.au>

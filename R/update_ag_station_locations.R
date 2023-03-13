@@ -5,7 +5,7 @@
 #' the internal database that supports the use of [get_ag_bulletin()].
 #' There is no need to use this unless you know that a station exists in
 #' \acronym{BOM}'s database that is not available in the databases distributed
-#' with \pkg{wrapique}. In fact, for reproducibility purposes. In fact, users
+#' with \pkg{weatherOz}. In fact, for reproducibility purposes. In fact, users
 #' are strongly discouraged from using this function.  Ported from
 #' \pkg{bomrang}.
 #'
@@ -41,7 +41,7 @@ update_ag_station_locations <- function() {
   )
 
   answer <-
-    readLines(con = getOption("wrapique.connection"), n = 1)
+    readLines(con = getOption("weatherOz.connection"), n = 1)
 
   answer <- toupper(answer)
 
@@ -137,7 +137,7 @@ update_ag_station_locations <- function() {
   stations_site_list[, site := gsub("^0{1,2}", "", stations_site_list$site)]
 
   fname <-
-    system.file("extdata", "stations_site_list.rda", package = "wrapique")
+    system.file("extdata", "stations_site_list.rda", package = "weatherOz")
 
   save(stations_site_list, file = fname, compress = "bzip2")
   return(invisible(NULL))

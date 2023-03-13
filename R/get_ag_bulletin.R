@@ -167,7 +167,7 @@ get_ag_bulletin <- function(state = "AUS") {
   # merge with AAC codes
   # load AAC code/town name list to join with final output
   load(system.file("extdata", "stations_site_list.rda", # nocov
-                   package = "wrapique")) # nocov
+                   package = "weatherOz")) # nocov
   data.table::setkey(out, "site")
   out <- stations_site_list[out, on = "site"]
   # tidy up the cols

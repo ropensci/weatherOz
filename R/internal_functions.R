@@ -92,8 +92,8 @@
 .get_url <- function(remote_file) {
 
   # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- paste0("{wrapique} R package (",
-                      utils::packageVersion("wrapique"),
+  USERAGENT <- paste0("{weatherOz} R package (",
+                      utils::packageVersion("weatherOz"),
                       ")")
   # set a custom user-agent, restore original settings on exit
   # required for #130 - BOM returns 403 for RStudio
