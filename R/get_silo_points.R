@@ -63,10 +63,10 @@ get_silo_points <- function(station_id = NULL,
   if (is.null(email)) stop("Provide a valid email address", call. = FALSE)
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
-  .check_lonlat(longitude = longitude, latitude = latitude)
-
   # Retrieve data for queries with lat lon coordinates
   if (is.null(station_id) && !is.null(latitude) & !is.null(longitude)) {
+
+    .check_lonlat(longitude = longitude, latitude = latitude)
 
     # Build query
     query_params <- list(lat = latitude, lon = longitude,
