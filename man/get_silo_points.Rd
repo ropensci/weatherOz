@@ -57,13 +57,12 @@ wd <- get_silo_points(station_id = 8137,
 
 # Source data from latitude and longitude coordinates (gridded data)
 # Southwood, WLD in the 'apsim' format.
-wd <-
-get_silo_points(latitude = -27.85,
-                longitude = 150.05,
-                first = "20221001",
-                last = "20221201",
-                data_format = "apsim",
-                email = "your@email")
+wd <- get_silo_points(latitude = -27.85,
+                      longitude = 150.05,
+                      first = "20221001",
+                      last = "20221201",
+                      data_format = "apsim",
+                      email = "your@email")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

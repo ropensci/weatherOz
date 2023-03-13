@@ -42,13 +42,12 @@
 #'
 #' # Source data from latitude and longitude coordinates (gridded data)
 #' # Southwood, WLD in the 'apsim' format.
-#' wd <-
-#' get_silo_points(latitude = -27.85,
-#'                 longitude = 150.05,
-#'                 first = "20221001",
-#'                 last = "20221201",
-#'                 data_format = "apsim",
-#'                 email = "your@@email")
+#' wd <- get_silo_points(latitude = -27.85,
+#'                       longitude = 150.05,
+#'                       first = "20221001",
+#'                       last = "20221201",
+#'                       data_format = "apsim",
+#'                       email = "your@@email")
 #' @export
 
 get_silo_points <- function(station_id = NULL,
@@ -106,12 +105,12 @@ get_silo_points <- function(station_id = NULL,
 }
 
 
-#' @title SILO API query parser
-#' @description This function takes results from an API query to the SILO
-#' database and formats it to a flat data.frame or a list of data.frames if
-#' querying multiple sites. The function also converts character columns to date
-#' and numerical classes, according to the data represented in the column.
-#' Note that for the 'monthly' `data_format` the function also renames the
+#' SILO API query parser
+#' Takes results from an API query to the SILO database and formats it to a
+#' flat `data.table` or a list object of `data.tables` if querying multiple
+#' sites. The function also converts character columns to date and numerical
+#' classes, according to the data represented in the column.
+#' @note For the 'monthly' `data_format` the function also renames the
 #' columns from "Yr.Mth", "Avg TMax (oC)", "Avg TMin (oC)", "Tot Rain (mm)"
 #' "Tot Evap (mm)", "Avg Rad (MJ/m2)", "Avg VP (hPa)" to "year_month", "
 #' tmax_avg", "tmin_avg", "total_rainfall", "total_evap", "radiation_avg" and
@@ -123,10 +122,9 @@ get_silo_points <- function(station_id = NULL,
 #' `get_silo_points()`.
 #' @param this_date A string, user defined by the query details and represents
 #' the start date of the query. Internally inherited from `get_silo_points()`.
-#' @return A data.frame with date class column(s) and numeric class columns for
-#' the weather variables.
+#' @return A `data.table` with date class column(s) and numeric class columns
+#' for the weather variables.
 #' @keywords internal
-#'
 #' @noRd
 
 .parse_silo <- function(query_response,
