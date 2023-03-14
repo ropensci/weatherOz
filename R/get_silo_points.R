@@ -88,7 +88,6 @@ get_silo_points <- function(station_id = NULL,
   if (is.null(email)) stop("Provide a valid email address", call. = FALSE)
   stopifnot("Provide equal length lat and lon values" =
               length(latitude) == length(longitude))
-  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   # if a single station or single lat/lon is requested, return values, else
   # check vectors for validity and then return all values in one data.table
@@ -201,6 +200,8 @@ get_silo_points <- function(station_id = NULL,
                         last = last,
                         data_format = data_format,
                         email = email) {
+  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
+
   # Retrieve data for queries with lat lon coordinates
   if (is.null(station_id) &&
       !is.null(latitude) & !is.null(longitude)) {
