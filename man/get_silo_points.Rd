@@ -52,7 +52,7 @@ are three formats available: 'alldata' and 'apsim' with daily frequency and
 wd <- get_silo_points(station_id = 8137,
                       first = "20210601",
                       last = "20210701",
-                      data_type = "alldata",
+                      data_format = "alldata",
                       email = "your@email")
 
 # Source data from latitude and longitude coordinates (gridded data)
@@ -63,10 +63,28 @@ wd <- get_silo_points(latitude = -27.85,
                       last = "20221201",
                       data_format = "apsim",
                       email = "your@email")
+
+# using multiple station IDs or locations
+
+# start multisession
+future::plan("multisession")
+# Query multiple stations (BoM, by code)
+my_stations <- c(65030, 89033, 39083, 8061)
+wd <- get_multi_silo_points(station_id = my_stations,
+                            first = "20220401",
+                            last = "20221001",
+                            data_format = "monthly",
+                            email = "YOUR_EMAIL_ADDRESS")
+
+# Query multiple stations (using latitude and longitude coordinates)
+mylat <- c(-33.512, -30.665, -27.309, -24.237)
+mylon <- c(115.821, 117.487, 119.649, 121.584)
+wd <- get_multi_silo_points(latitude = mylat,
+                            longitude = mylon,
+                            first = "202101201",
+                            last = "20220228",
+                            data_format = "alldata",
+                            email = "YOUR_EMAIL_ADDRESS")
 \dontshow{\}) # examplesIf}
-}
-\seealso{
-Other SILO: 
-\code{\link{get_multi_silo_points}()}
 }
 \concept{SILO}
