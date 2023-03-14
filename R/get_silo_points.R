@@ -97,17 +97,6 @@ get_silo_points <- function(station_id = NULL,
   if (length(station_id) == 1 || length(latitude) == 1) {
     if (is.null(station_id)) {
       .check_lonlat(longitude = longitude, latitude = latitude)
-    }
-    return(
-      .query_silo(
-        station_id = station_id,
-        first = first,
-        last = last,
-        data_format = data_format,
-        email = email
-      )
-    )
-    else {
       return(
         .query_silo(
           latitude = latitude,
@@ -119,6 +108,16 @@ get_silo_points <- function(station_id = NULL,
         )
       )
     }
+    return(
+      .query_silo(
+        station_id = station_id,
+        first = first,
+        last = last,
+        data_format = data_format,
+        email = email
+      )
+    )
+  }
 
   # query multiple points and return the values ----
   .v_check_lonlat <-
