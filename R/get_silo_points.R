@@ -99,6 +99,7 @@ get_silo_points <- function(station_id = NULL,
       .check_lonlat(longitude = longitude, latitude = latitude)
       return(
         .query_silo(
+          station_id = station_id,
           latitude = latitude,
           longitude = longitude,
           first = first,
@@ -111,6 +112,8 @@ get_silo_points <- function(station_id = NULL,
     return(
       .query_silo(
         station_id = station_id,
+        latitude = latitude,
+        longitude = longitude,
         first = first,
         last = last,
         data_format = data_format,
