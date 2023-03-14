@@ -94,7 +94,7 @@ get_silo_points <- function(station_id = NULL,
   # check vectors for validity and then return all values in one data.table
   if (length(station_id) == 1 || length(latitude) == 1) {
     .check_lonlat(longitude = longitude, latitude = latitude)
-    return(.query_silo)
+    return(.query_silo())
   } else {
     if (!is.null(latitude)) {
       .v_check_lonlat <-
@@ -172,20 +172,20 @@ get_silo_points <- function(station_id = NULL,
 #' Internal function to construct, send, receive and return the parsed API
 #' response.
 #'
-#' @param .station_id `Integer`, An integer or vector of integers representing
+#' @param station_id `Integer`, An integer or vector of integers representing
 #'  station number(s) available from the \acronym{SILO} network.
-#' @param .latitude `Numeric`. A single value or a vector, representing the
+#' @param latitude `Numeric`. A single value or a vector, representing the
 #'  latitude(s) of the point(s)-of-interest.
-#' @param .longitude `Numeric`. A single value or vector, representing the
+#' @param longitude `Numeric`. A single value or vector, representing the
 #'  longitude(s) of the point(s)-of-interest.
-#' @param .first `Integer`. A string representing the start date of the query in
+#' @param first `Integer`. A string representing the start date of the query in
 #'  the format 'yyyymmdd' (ISO-8601).
-#' @param .last `Integer`. A string representing the end date of the query in the
+#' @param last `Integer`. A string representing the end date of the query in the
 #' format 'yyyymmdd' (ISO-8601).
-#' @param .data_format `Character`. A string specifying the type of data to
+#' @param data_format `Character`. A string specifying the type of data to
 #'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 #'  'alldata' retrieve daily data.
-#' @param .email `Character`. A string specifying a valid email address to use
+#' @param email `Character`. A string specifying a valid email address to use
 #'  for the request. The query will return an error if a valid email address is
 #'  not provided.
 #'
@@ -194,25 +194,25 @@ get_silo_points <- function(station_id = NULL,
 #'
 #' @noRd
 #' @keywords Internal
-.query_silo <- function(.station_id = station_id,
-                        .latitude = latitude,
-                        .longitude = longitude,
-                        .first = first,
-                        .last = last,
-                        .data_format = data_format,
-                        .email = email) {
+.query_silo <- function(station_id = station_id,
+                        latitude = latitude,
+                        longitude = longitude,
+                        first = first,
+                        last = last,
+                        data_format = data_format,
+                        email = email) {
   # Retrieve data for queries with lat lon coordinates
-  if (is.null(.station_id) &&
-      !is.null(.latitude) & !is.null(.longitude)) {
+  if (is.null(station_id) &&
+      !is.null(latitude) & !is.null(longitude)) {
 
     # Build query
     query_params <- list(
-      lat = .latitude,
-      lon = .longitude,
-      start = .first,
-      finish = .last,
-      format = .data_format,
-      username = .email,
+      lat = latitude,
+      lon = longitude,
+      start = first,
+      finish = last,
+      format = data_format,
+      username = email,
       password = "api_request"
     )
 
@@ -222,15 +222,15 @@ get_silo_points <- function(station_id = NULL,
   }
 
   # Retrieve data for queries with station code
-  if (is.null(.latitude) &
-      is.null(.longitude) && !is.null(.station_id)) {
+  if (is.null(latitude) &
+      is.null(longitude) && !is.null(station_id)) {
     # Build query
     query_params <- list(
-      station = .station_id,
-      start = .first,
-      finish = .last,
-      format = .data_format,
-      username = .email,
+      station = station_id,
+      start = first,
+      finish = last,
+      format = data_format,
+      username = email,
       password = "api_request"
     )
 
