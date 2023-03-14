@@ -51,7 +51,7 @@
 #'                email = "your@@email")
 #'
 #' # Source data from latitude and longitude coordinates (gridded data)
-#' # Southwood, WLD in the 'apsim' format.
+#' # Southwood, QLD in the 'apsim' format.
 #' wd <- get_silo(latitude = -27.85,
 #'                longitude = 150.05,
 #'                first = "20221001",
