@@ -19,10 +19,10 @@ get_silo_points(
 station number(s) available from the \acronym{SILO} network.}
 
 \item{latitude}{\code{Numeric}. A single value or a vector, representing the
-latitude(s) of the point(s)-of-interest}
+latitude(s) of the point(s)-of-interest.}
 
 \item{longitude}{\code{Numeric}. A single value or vector, representing the
-longitude(s) of the point(s)-of-interest}
+longitude(s) of the point(s)-of-interest.}
 
 \item{first}{\code{Integer}. A string representing the start date of the query in
 the format 'yyyymmdd' (ISO-8601).}
