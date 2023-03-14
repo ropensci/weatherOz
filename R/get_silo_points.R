@@ -1,5 +1,5 @@
 #
-# file: /R/get_silo_points.R
+# file: /R/get_silo.R
 #
 # This file is part of the R-package weatherOz
 #
@@ -9,16 +9,23 @@
 #' Retrieve data from SILO (Scientific Information for Land Owners) API
 #'
 #' Download weather data from the \acronym{SILO} \acronym{API} from both
-#'  station observations (DataDrill) and gridded data (PatchedPointData). There
-#'  are three formats available: 'alldata' and 'apsim' with daily frequency and
-#'  'monthly' with, that's right, monthly frequency.
+#' station observations (DataDrill) and gridded data (PatchedPointData). There
+#' are three formats available: 'alldata' and 'apsim' with daily frequency and
+#' 'monthly' with, that's right, monthly frequency. Queries with `station_id`
+#' return stations observations from the 'DataDrill' endpoint while queries with
+#' `latitude` and `longitude` coordinates return gridded data from the
+#' 'PatchedPointData'.
 #'
 #' @param station_id `Integer`, An integer or vector of integers representing
-#'  station number(s) available from the \acronym{SILO} network.
+#'  station number(s) available from the \acronym{SILO} network. Defaults to
+#'  `NULL` and when used, queries with latitude and longitude inputs are not
+#'  permitted.
 #' @param latitude `Numeric`. A single value or a vector, representing the
-#'  latitude(s) of the point(s)-of-interest.
+#'  latitude(s) of the point(s)-of-interest. Defaults to `NULL` and when used,
+#'  queries with `station_id` inputs are not permitted.
 #' @param longitude `Numeric`. A single value or vector, representing the
-#'  longitude(s) of the point(s)-of-interest.
+#'  longitude(s) of the point(s)-of-interest. Defaults to `NULL` and when used,
+#'  queries with `station_id` inputs are not permitted.
 #' @param first `Integer`. A string representing the start date of the query in
 #'  the format 'yyyymmdd' (ISO-8601).
 #' @param last `Integer`. A string representing the end date of the query in the
@@ -37,20 +44,20 @@
 #'
 #' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (8137)
-#' wd <- get_silo_points(station_id = 8137,
-#'                       first = "20210601",
-#'                       last = "20210701",
-#'                       data_format = "alldata",
-#'                       email = "your@@email")
+#' wd <- get_silo(station_id = 8137,
+#'                first = "20210601",
+#'                last = "20210701",
+#'                data_format = "alldata",
+#'                email = "your@@email")
 #'
 #' # Source data from latitude and longitude coordinates (gridded data)
 #' # Southwood, WLD in the 'apsim' format.
-#' wd <- get_silo_points(latitude = -27.85,
-#'                       longitude = 150.05,
-#'                       first = "20221001",
-#'                       last = "20221201",
-#'                       data_format = "apsim",
-#'                       email = "your@@email")
+#' wd <- get_silo(latitude = -27.85,
+#'                longitude = 150.05,
+#'                first = "20221001",
+#'                last = "20221201",
+#'                data_format = "apsim",
+#'                email = "your@@email")
 #'
 #' # using multiple station IDs or locations
 #'
@@ -58,30 +65,30 @@
 #' future::plan("multisession")
 #' # Query multiple stations (BoM, by code)
 #' my_stations <- c(65030, 89033, 39083, 8061)
-#' wd <- get_multi_silo_points(station_id = my_stations,
-#'                             first = "20220401",
-#'                             last = "20221001",
-#'                             data_format = "monthly",
-#'                             email = "YOUR_EMAIL_ADDRESS")
+#' wd <- get_silo(station_id = my_stations,
+#'                first = "20220401",
+#'                last = "20221001",
+#'                data_format = "monthly",
+#'                email = "YOUR_EMAIL_ADDRESS")
 #'
 #' # Query multiple stations (using latitude and longitude coordinates)
 #' mylat <- c(-33.512, -30.665, -27.309, -24.237)
 #' mylon <- c(115.821, 117.487, 119.649, 121.584)
-#' wd <- get_multi_silo_points(latitude = mylat,
-#'                             longitude = mylon,
-#'                             first = "202101201",
-#'                             last = "20220228",
-#'                             data_format = "alldata",
-#'                             email = "YOUR_EMAIL_ADDRESS")
+#' wd <- get_silo(latitude = mylat,
+#'                longitude = mylon,
+#'                first = "202101201",
+#'                last = "20220228",
+#'                data_format = "alldata",
+#'                email = "YOUR_EMAIL_ADDRESS")
 #' @export
 
-get_silo_points <- function(station_id = NULL,
-                            latitude = NULL,
-                            longitude = NULL,
-                            first = NULL,
-                            last = NULL,
-                            data_format = "alldata",
-                            email = NULL) {
+get_silo <- function(station_id = NULL,
+                     latitude = NULL,
+                     longitude = NULL,
+                     first = NULL,
+                     last = NULL,
+                     data_format = "alldata",
+                     email = NULL) {
   if (missing(first))
     stop("Provide a start date", call. = FALSE)
   if (missing(last))
@@ -97,7 +104,7 @@ get_silo_points <- function(station_id = NULL,
   if (length(station_id) == 1 || length(latitude) == 1) {
     if (is.null(station_id)) {
       .check_lonlat(longitude = longitude, latitude = latitude)
-     return(
+      return(
         .query_silo(
           .station_id = station_id,
           .latitude = latitude,
@@ -107,7 +114,7 @@ get_silo_points <- function(station_id = NULL,
           .data_format = data_format,
           .email = email
         )
-     )
+      )
 
     } else {
       return(
@@ -125,8 +132,9 @@ get_silo_points <- function(station_id = NULL,
   }
 
   # query multiple points and return the values ----
-  # with latlon coords
+  # with station id as input
   if (!is.null(station_id)) {
+    names(station_id) <- station_id
 
     weather_raw <- furrr::future_map(
       .x = station_id,
@@ -152,13 +160,12 @@ get_silo_points <- function(station_id = NULL,
                weather_raw)
 
   } else {
-
     .v_check_lonlat <-
       Vectorize(.check_lonlat,
                 vectorize.args = c("longitude", "latitude"))
     invisible(.v_check_lonlat(longitude = longitude, latitude = latitude))
 
-    # with lat lon coordinates, not station code
+    # with lat lon coordinates as input, not station code
     weather_raw <- furrr::future_map2(
       .x = latitude,
       .y = longitude,
@@ -194,7 +201,7 @@ get_silo_points <- function(station_id = NULL,
         return(i)
       })
   }
-  return(out)
+  return(data.table::rbindlist(out))
 }
 
 #' Construct and send SILO API queries
@@ -293,9 +300,9 @@ get_silo_points <- function(station_id = NULL,
 #' character data.
 #' @param this_format A string, user defined by the query details. One of
 #' 'alldata', 'apsim' and 'monthly'. Internally inherited from
-#' `get_silo_points()`.
+#' `get_silo()`.
 #' @param this_date A string, user defined by the query details and represents
-#' the start date of the query. Internally inherited from `get_silo_points()`.
+#' the start date of the query. Internally inherited from `get_silo()`.
 #' @return A `data.table` with date class column(s) and numeric class columns
 #' for the weather variables.
 #' @keywords internal
