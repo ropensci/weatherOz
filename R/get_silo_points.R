@@ -119,7 +119,6 @@ get_silo_points <- function(station_id = NULL,
         )
       )
     }
-  }
 
   # query multiple points and return the values ----
   .v_check_lonlat <-
@@ -185,7 +184,6 @@ out <-
     i$latlon <- NULL
     return(i)
   })
-}
 return(out)
 }
 
