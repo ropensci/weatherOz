@@ -37,7 +37,7 @@
 #' wd <- get_silo_points(station_id = 8137,
 #'                       first = "20210601",
 #'                       last = "20210701",
-#'                       data_type = "alldata",
+#'                       data_format = "alldata",
 #'                       email = "your@@email")
 #'
 #' # Source data from latitude and longitude coordinates (gridded data)
@@ -211,10 +211,11 @@ get_silo_points <- function(station_id = NULL,
     nm = this_names)
     # Add data
     for (j in 1:length(df)) {
-      out[j,] <- data.table::setDT(unlist(strsplit(df[j], "\\s+")))
+      out[j,] <- unlist(strsplit(df[j], "\\s+"))
     }
 
     # Set date columns to date class
+    out <- data.table::data.table(out)
     out[, Date := as.Date(out$Date, format = "%Y%m%d")]
     out[, Date2 := as.Date(out$Date2, format = "%d-%m-%Y")]
 
