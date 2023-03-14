@@ -97,96 +97,104 @@ get_silo_points <- function(station_id = NULL,
   if (length(station_id) == 1 || length(latitude) == 1) {
     if (is.null(station_id)) {
       .check_lonlat(longitude = longitude, latitude = latitude)
+     return(
+        .query_silo(
+          .station_id = station_id,
+          .latitude = latitude,
+          .longitude = longitude,
+          .first = first,
+          .last = last,
+          .data_format = data_format,
+          .email = email
+        )
+     )
+
+    } else {
       return(
         .query_silo(
-          station_id = station_id,
-          latitude = latitude,
-          longitude = longitude,
-          first = first,
-          last = last,
-          data_format = data_format,
-          email = email
+          .station_id = station_id,
+          .latitude = latitude,
+          .longitude = longitude,
+          .first = first,
+          .last = last,
+          .data_format = data_format,
+          .email = email
         )
       )
     }
-    return(
-      .query_silo(
-        station_id = station_id,
-        latitude = latitude,
-        longitude = longitude,
-        first = first,
-        last = last,
-        data_format = data_format,
-        email = email
-      )
-    )
   }
 
   # query multiple points and return the values ----
-  .v_check_lonlat <-
-    Vectorize(.check_lonlat,
-              vectorize.args = c("longitude", "latitude"))
-  invisible(.v_check_lonlat(longitude = longitude, latitude = latitude))
+  # with latlon coords
+  if (!is.null(station_id)) {
 
-  weather_raw <- furrr::future_map(
-    .x = station_id,
-    .f = purrr::possibly(
-      ~ get_silo_points(
-        station_id = .x,
-        latitude = latitude,
-        longitude = longitude,
-        first = first,
-        last = last,
-        data_format = data_format,
-        email = email
+    weather_raw <- furrr::future_map(
+      .x = station_id,
+      .f = purrr::possibly(
+        ~ .query_silo(
+          .station_id = .x,
+          .latitude = latitude,
+          .longitude = longitude,
+          .first = first,
+          .last = last,
+          .data_format = data_format,
+          .email = email
+        ),
+        otherwise = "Error in acquiring weather data for this station.\n"
       ),
-      otherwise = "Error in acquiring weather data for this station.\n"
-    ),
-    .options = furrr::furrr_options(seed = NULL)
-  )
+      .options = furrr::furrr_options(seed = NULL)
+    )
 
-  # add the location to the weather data
-  names(weather_raw) <- station_id
-  out <- Map(cbind,
-             station_id = names(weather_raw),
-             weather_raw)
-} else {
-  weather_raw <- furrr::future_map2(
-    .x = latitude,
-    .y = longitude,
-    .f = purrr::possibly(
-      ~ get_silo_points(
-        latitude = .x,
-        longitude = .y,
-        first = first,
-        last = last,
-        data_format = data_format,
-        email = email
+    # add the location to the weather data
+    names(weather_raw) <- station_id
+    out <- Map(cbind,
+               station_id = names(weather_raw),
+               weather_raw)
+
+  } else {
+
+    .v_check_lonlat <-
+      Vectorize(.check_lonlat,
+                vectorize.args = c("longitude", "latitude"))
+    invisible(.v_check_lonlat(longitude = longitude, latitude = latitude))
+
+    # with lat lon coordinates, not station code
+    weather_raw <- furrr::future_map2(
+      .x = latitude,
+      .y = longitude,
+      .f = purrr::possibly(
+        ~ .query_silo(
+          .station_id = station_id,
+          .latitude = .x,
+          .longitude = .y,
+          .first = first,
+          .last = last,
+          .data_format = data_format,
+          .email = email
+        ),
+        otherwise = "Error in acquiring weather data for this station.\n"
       ),
-      otherwise = "Error in acquiring weather data for this station.\n"
-    ),
-    .options = furrr::furrr_options(seed = NULL)
-  )
+      .options = furrr::furrr_options(seed = NULL)
+    )
 
-  # provide unique names via lat/lon values
-  names(weather_raw) <-
-    paste0(unique(latitude), "_", unique(longitude))
+    # provide unique names via lat/lon values
+    names(weather_raw) <-
+      paste0(unique(latitude), "_", unique(longitude))
 
-  # add the location to the weather data
-  weather_raw <- Map(cbind,
-                     latlon = names(weather_raw),
-                     weather_raw)
-}
-
-out <-
-  lapply(weather_raw, function(i) {
-    latlon_sep <- strsplit(i$latlon, "_")[[1]]
-    i$latitude <- latlon_sep[1]
-    i$longitude <- latlon_sep[2]
-    i$latlon <- NULL
-    return(i)
-  })
-return(out)
+    # add the location to the weather data
+    weather_raw <- Map(cbind,
+                       latlon = names(weather_raw),
+                       weather_raw)
+    out <-
+      lapply(weather_raw, function(i) {
+        latlon_sep <- strsplit(i$latlon, "_")[[1]]
+        i$latitude <- latlon_sep[1]
+        i$longitude <- latlon_sep[2]
+        i$latlon <- NULL
+        return(i)
+      })
+  }
+  return(out)
 }
 
 #' Construct and send SILO API queries
@@ -216,26 +224,26 @@ return(out)
 #'
 #' @noRd
 #' @keywords Internal
-.query_silo <- function(station_id = station_id,
-                        latitude = latitude,
-                        longitude = longitude,
-                        first = first,
-                        last = last,
-                        data_format = data_format,
-                        email = email) {
+.query_silo <- function(.station_id = station_id,
+                        .latitude = latitude,
+                        .longitude = longitude,
+                        .first = first,
+                        .last = last,
+                        .data_format = data_format,
+                        .email = email) {
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   # Retrieve data for queries with lat lon coordinates
-  if (is.null(station_id) &&
-      !is.null(latitude) & !is.null(longitude)) {
+  if (is.null(.station_id) &&
+      !is.null(.latitude) & !is.null(.longitude)) {
     # Build query
     query_params <- list(
-      lat = latitude,
-      lon = longitude,
-      start = first,
-      finish = last,
-      format = data_format,
-      username = email,
+      lat = .latitude,
+      lon = .longitude,
+      start = .first,
+      finish = .last,
+      format = .data_format,
+      username = .email,
       password = "api_request"
     )
 
@@ -246,15 +254,15 @@ return(out)
   }
 
   # Retrieve data for queries with station code
-  if (is.null(latitude) &
-      is.null(longitude) && !is.null(station_id)) {
+  if (is.null(.latitude) &
+      is.null(.longitude) && !is.null(.station_id)) {
     # Build query
     query_params <- list(
-      station = station_id,
-      start = first,
-      finish = last,
-      format = data_format,
-      username = email,
+      station = .station_id,
+      start = .first,
+      finish = .last,
+      format = .data_format,
+      username = .email,
       password = "api_request"
     )
 
@@ -266,7 +274,7 @@ return(out)
 
   # Extract content and parse data according to the format and frequency
   r <- httr::content(result, "text")
-  out <- .parse_silo(r, data_format, first)
+  out <- .parse_silo(r, .data_format, .first)
   return(out[])
 }
 
