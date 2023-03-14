@@ -12,20 +12,23 @@
 #'  station observations (DataDrill) and gridded data (PatchedPointData). There
 #'  are three formats available: 'alldata' and 'apsim' with daily frequency and
 #'  'monthly' with, that's right, monthly frequency.
-#' @param station_id An integer, station number available at the \acronym{SILO}
-#' the network.
-#' @param latitude A vector, representing the latitude of a point-of-interest
-#' @param longitude A vector, representing the longitude of a point-of-interest
-#' @param first A string representing the start date of the query in the
-#' format 'yyyymmdd' (ISO8601).
-#' @param last A string representing the end date of the query in the
-#' format 'yyyymmdd' (ISO8601).
-#' @param data_format A string specifying the type of data to retrieve.
-#' Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and 'alldata'
-#' retrieve daily data.
-#' @param email A string specifying a valid email address to use for the
-#' request. The query will return an error if a valid email address is not
-#' provided.
+#'
+#' @param station_id `Integer`, An integer or vector of integers representing
+#'  station number(s) available from the \acronym{SILO} network.
+#' @param latitude `Numeric`. A single value or a vector, representing the
+#'  latitude(s) of the point(s)-of-interest
+#' @param longitude `Numeric`. A single value or vector, representing the
+#'  longitude(s) of the point(s)-of-interest
+#' @param first `Integer`. A string representing the start date of the query in
+#'  the format 'yyyymmdd' (ISO-8601).
+#' @param last `Integer`. A string representing the end date of the query in the
+#' format 'yyyymmdd' (ISO-8601).
+#' @param data_format `Character`. A string specifying the type of data to
+#'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
+#'  'alldata' retrieve daily data.
+#' @param email `Character`. A string specifying a valid email address to use
+#'  for the request. The query will return an error if a valid email address is
+#'  not provided.
 #'
 #' @return A `data.table` containing the retrieved data from the \acronym{SILO}
 #'  \acronym{API}.

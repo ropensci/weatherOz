@@ -15,26 +15,28 @@ get_silo_points(
 )
 }
 \arguments{
-\item{station_id}{An integer, station number available at the \acronym{SILO}
-the network.}
+\item{station_id}{\code{Integer}, An integer or vector of integers representing
+station number(s) available from the \acronym{SILO} network.}
 
-\item{latitude}{A vector, representing the latitude of a point-of-interest}
+\item{latitude}{\code{Numeric}. A single value or a vector, representing the
+latitude(s) of the point(s)-of-interest}
 
-\item{longitude}{A vector, representing the longitude of a point-of-interest}
+\item{longitude}{\code{Numeric}. A single value or vector, representing the
+longitude(s) of the point(s)-of-interest}
 
-\item{first}{A string representing the start date of the query in the
-format 'yyyymmdd' (ISO8601).}
+\item{first}{\code{Integer}. A string representing the start date of the query in
+the format 'yyyymmdd' (ISO-8601).}
 
-\item{last}{A string representing the end date of the query in the
-format 'yyyymmdd' (ISO8601).}
+\item{last}{\code{Integer}. A string representing the end date of the query in the
+format 'yyyymmdd' (ISO-8601).}
 
-\item{data_format}{A string specifying the type of data to retrieve.
-Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and 'alldata'
-retrieve daily data.}
+\item{data_format}{\code{Character}. A string specifying the type of data to
+retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
+'alldata' retrieve daily data.}
 
-\item{email}{A string specifying a valid email address to use for the
-request. The query will return an error if a valid email address is not
-provided.}
+\item{email}{\code{Character}. A string specifying a valid email address to use
+for the request. The query will return an error if a valid email address is
+not provided.}
 }
 \value{
 A \code{data.table} containing the retrieved data from the \acronym{SILO}
