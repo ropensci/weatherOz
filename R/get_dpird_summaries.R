@@ -1,10 +1,149 @@
 #
-# file: /R/get_summaries.R
+# file: /R/get_dpird_summaries.R
 #
 # This file is part of the R-package weatherOz
 #
-# Copyright (C) 2021 DPIRD
+# Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
+
+#' Individual station summaries nicely formatted.
+#' @param site A string of the station ID code for the station of interest.
+#' Defaults to NULL.
+#' @param first A string representing the start date of the query in the
+#' format 'yyyy-mm-dd'. Defaults to NULL.
+#' @param last A string representing the start date of the query in the
+#' format 'yyyy-mm-dd'. Defaults to the current system date.
+#' @param api_key Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
+#' Defaults to NULL.
+#' @param interval Time interval to summarise over.
+#' Default is 'daily'; others are '15min', '30min', 'hourly',
+#' 'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
+#' will be midnight to midnight, with the last time interval being before
+#' midnight - hour/minute values are for the end of the time period.
+#' Data for shorter intervals ('15min', '30min') are available from
+#' January of the previous year.
+#' @param which_vars Match weather summary selected. Defaults to "all".
+#' Can be one of "all", "rain", "wind", "temp" and "erosion."
+#'
+#' @return a `data frame` with site and date interval queried together with
+#'
+#' @family DPIRD
+#'
+#' @examplesIf interactive()
+#' # You must have an DPIRD API key to proceed
+#' mykey <- 'dpird_api_key'
+#'
+#' # Set date interval for yearly request
+#' # Get rainfall summary
+#' start_date <- "2017-10-28"
+#'
+#' # Use default for end data (current system date)
+#' output <- get_dpird_summaries(
+#'             site = "CL001",
+#'             first = start_date,
+#'             api_key = mykey,
+#'             interval = "yearly",
+#'             which_vars = "rain")
+#'
+#' # Only for wind and erosion conditions for daily time interval
+#' # define start and end date
+#' start_date <- "2022-05-01"
+#' end_date <- "2022-05-02"
+#'
+#' output <- get_dpird_summaries(
+#'             site = "BI",
+#'             first = start_date,
+#'             last = end_date,
+#'             api_key = mykey,
+#'             interval = "daily",
+#'             which_vars = c("wind", "erosion"))
+#'
+#' @export
+
+get_dpird_summaries <- function(
+    site = NULL,
+    first = NULL,
+    last = Sys.Date(),
+    api_key = NULL,
+    interval = "daily",
+    which_vars = "all") {
+
+  # Function can only hand one station at time at this stage
+  if (length(site) > 1)
+    stop("Multiple stations not currently supported")
+
+  # Get summaries based on user query
+  df <-
+    .query_dpird_summaries(
+      site = site,
+      first = first,
+      last = last,
+      api_key = api_key,
+      interval = interval
+    )
+
+  # Get query time interval
+  out_period <- df$summaries$period
+
+  # Remove empty columns (eg minute for hourly summaries) and grab number of
+  # records in the data collection
+  out_period <- out_period[, !apply(is.na(out_period), 2, all)]
+  nrec <- nrow(out_period)
+
+  # Airtemp
+  if (any(c("all", "temp") %in% which_vars)) {
+    out_temp <- df$summaries$airTemperature
+    names(out_temp) <- paste0("airtemp.",
+                              names(out_temp))
+
+  } else {
+    out_temp <- data.frame()[1:nrec, ]
+  }
+
+  # Rainfall
+  if (any(c("all", "rain") %in% which_vars)) {
+    out_rain <- df$summaries$rainfall
+
+  } else {
+    out_rain <- data.frame()[1:nrec, ]
+  }
+
+  # Wind
+  if (any(c("all", "wind") %in% which_vars)) {
+    temp <- df$summaries$wind
+    temp <- lapply(temp, data.table::as.data.table)
+
+    out_wind <- data.table::rbindlist(temp)
+    names(out_wind) <- paste0("wind.",
+                              names(out_wind))
+
+  } else {
+    out_wind <- data.frame()[1:nrec, ]
+  }
+
+  # Wind erosion
+  if (any(c("all", "erosion") %in% which_vars)) {
+    out_erosion <- df$summaries$erosionCondition
+    names(out_erosion) <- paste0("wind.erosion.",
+                                 names(out_erosion))
+
+  } else {
+    out_erosion <- data.frame()[1:nrec, ]
+  }
+
+  # Put together
+  out <- data.frame(site = df$stationCode,
+                    out_period,
+                    out_temp,
+                    rain = out_rain,
+                    out_wind,
+                    out_erosion,
+                    row.names = NULL)
+
+  names(out) <- tolower(names(out))
+  names(out) <- gsub("[.]", "_", names(out))
+  return(data.table::setDT(out)[])
+}
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
@@ -17,7 +156,7 @@
 #' but must be explicitly coded, as otherwise it will default to the current
 #' date.
 #' @param api_key \acronym{API} key from \acronym{DPIRD}
-#'  <https://www.agric.wa.gov.au/web-apis>.  Defaults to `NULL`.
+#'  <https://www.agric.wa.gov.au/web-apis>.  Defaults to NULL.
 #' @param interval Time interval to summarise over.  The default is 'daily',
 #' others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
 #' shorter than 1 day, time period covered will be midnight to midnight, with
@@ -33,38 +172,39 @@
 #'
 #' @family DPIRD
 #'
-#' @examplesIf interactive()
+#' @examples
 #' # You must have an DPIRD API key to proceed
 #' mykey <- 'dpird_api_key'
 #'
 #' # set date interval for yearly request
-#' start.date <- "2015-02-01"
+#' start_date <- "2015-02-01"
 #'
 #' # Use default for end data (current system date)
-#' output <- get_summaries(
+#' output <- .query_dpird_summaries(
 #'            site = "AN001",
-#'            first = start.date,
+#'            first = start_date,
 #'            api_key = mykey,
 #'            interval = "yearly")
 #'
 #' # 15 min interval query, define start and end date
-#' start.date <- "2022-05-01"
-#' end.date <- "2022-05-02"
+#' start_date <- "2022-05-01"
+#' end_date <- "2022-05-02"
 #'
-#' output <- get_summaries(
+#' output <- .query_dpird_summaries(
 #'            site = "BI",
-#'            first = start.date,
-#'            last = end.date,
+#'            first = start_date,
+#'            last = end_date,
 #'            api_key = mykey,
 #'            interval = "15min")
 #'
-#' @export
+#' @noRd
+#' @keywords Internal
 
-get_summaries <- function(site,
-                          first,
-                          last = Sys.Date(),
-                          api_key = api_key,
-                          interval = "daily") {
+.query_dpird_summaries <- function(site = NULL,
+                                   first = NULL,
+                                   last = Sys.Date(),
+                                   api_key = NULL,
+                                   interval = "daily") {
   if (missing(site))
     stop(call. = FALSE,
          "Station ID required.")
@@ -126,7 +266,7 @@ get_summaries <- function(site,
     m_int,
     " data from",
     format(as.Date(first), "%e %B %Y"),
-    " to ",
+    " to",
     format(as.Date(last), "%e %B %Y"),
     " for location code ",
     site,
@@ -223,3 +363,4 @@ get_summaries <- function(site,
   ret <- jsonlite::fromJSON(url(uri))$data
   return(ret)
 }
+
