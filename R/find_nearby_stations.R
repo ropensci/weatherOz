@@ -56,7 +56,6 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-
 find_nearby_stations <- function(latitude = NULL,
                                  longitude = NULL,
                                  site = NULL,

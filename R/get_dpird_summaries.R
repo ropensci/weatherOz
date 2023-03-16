@@ -6,9 +6,13 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Individual station summaries nicely formatted.
-#' @param site A string of the station ID code for the station of interest.
-#' Defaults to NULL.
+#' Get weather data from DPIRD weather API summarised by time interval
+#'
+#' Nicely formatted individual station weather summaries from the DPIRD
+#' weather station network.
+#'
+#' @param station_id A string of the station ID code for the station of
+#' interest. Defaults to NULL.
 #' @param first A string representing the start date of the query in the
 #' format 'yyyy-mm-dd'. Defaults to NULL.
 #' @param last A string representing the start date of the query in the
@@ -25,7 +29,8 @@
 #' @param which_vars Match weather summary selected. Defaults to "all".
 #' Can be one of "all", "rain", "wind", "temp" and "erosion."
 #'
-#' @return a `data frame` with site and date interval queried together with
+#' @return a `data table` with station_id and date interval queried together
+#' with the requested weather variables.
 #'
 #' @family DPIRD
 #'
@@ -58,96 +63,44 @@
 #'             interval = "daily",
 #'             which_vars = c("wind", "erosion"))
 #'
-#' @export
+#' @export get_dpird_summaries
 
 get_dpird_summaries <- function(
-    site = NULL,
+    station_id = NULL,
     first = NULL,
     last = Sys.Date(),
     api_key = NULL,
     interval = "daily",
     which_vars = "all") {
 
-  # Function can only hand one station at time at this stage
-  if (length(site) > 1)
-    stop("Multiple stations not currently supported")
-
-  # Get summaries based on user query
-  df <-
-    .query_dpird_summaries(
-      site = site,
+  if (length(station_id) == 1) {
+    return(.query_dpird_summaries(
+      station_id = station_id,
       first = first,
       last = last,
       api_key = api_key,
-      interval = interval
+      interval = interval,
+      which_vars = which_vars)
     )
-
-  # Get query time interval
-  out_period <- df$summaries$period
-
-  # Remove empty columns (eg minute for hourly summaries) and grab number of
-  # records in the data collection
-  out_period <- out_period[, !apply(is.na(out_period), 2, all)]
-  nrec <- nrow(out_period)
-
-  # Airtemp
-  if (any(c("all", "temp") %in% which_vars)) {
-    out_temp <- df$summaries$airTemperature
-    names(out_temp) <- paste0("airtemp.",
-                              names(out_temp))
-
   } else {
-    out_temp <- data.frame()[1:nrec, ]
+    # query multiple stations and return the values ----
+    return(
+      lapply(station_id,
+             query_dpird_summaries,
+             station_id = station_id,
+             first = first,
+             last = last,
+             api_key = api_key,
+             interval = interval,
+             which_vars = which_vars)
+    )
   }
-
-  # Rainfall
-  if (any(c("all", "rain") %in% which_vars)) {
-    out_rain <- df$summaries$rainfall
-
-  } else {
-    out_rain <- data.frame()[1:nrec, ]
-  }
-
-  # Wind
-  if (any(c("all", "wind") %in% which_vars)) {
-    temp <- df$summaries$wind
-    temp <- lapply(temp, data.table::as.data.table)
-
-    out_wind <- data.table::rbindlist(temp)
-    names(out_wind) <- paste0("wind.",
-                              names(out_wind))
-
-  } else {
-    out_wind <- data.frame()[1:nrec, ]
-  }
-
-  # Wind erosion
-  if (any(c("all", "erosion") %in% which_vars)) {
-    out_erosion <- df$summaries$erosionCondition
-    names(out_erosion) <- paste0("wind.erosion.",
-                                 names(out_erosion))
-
-  } else {
-    out_erosion <- data.frame()[1:nrec, ]
-  }
-
-  # Put together
-  out <- data.frame(site = df$stationCode,
-                    out_period,
-                    out_temp,
-                    rain = out_rain,
-                    out_wind,
-                    out_erosion,
-                    row.names = NULL)
-
-  names(out) <- tolower(names(out))
-  names(out) <- gsub("[.]", "_", names(out))
-  return(data.table::setDT(out)[])
 }
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
-#' @param site A string with the station ID code for the station of interest.
+#' @param station_id A string with the station ID code for the station of
+#' interest.
 #' @param first The date on which the weather data summary will be sourced.
 #' \pkg{weatherOz} does its best to determine the date given any format but may
 #' fail if given an unconventional date format.
@@ -181,7 +134,7 @@ get_dpird_summaries <- function(
 #'
 #' # Use default for end data (current system date)
 #' output <- .query_dpird_summaries(
-#'            site = "AN001",
+#'            station_id = "AN001",
 #'            first = start_date,
 #'            api_key = mykey,
 #'            interval = "yearly")
@@ -191,7 +144,7 @@ get_dpird_summaries <- function(
 #' end_date <- "2022-05-02"
 #'
 #' output <- .query_dpird_summaries(
-#'            site = "BI",
+#'            station_id = "BI",
 #'            first = start_date,
 #'            last = end_date,
 #'            api_key = mykey,
@@ -200,18 +153,26 @@ get_dpird_summaries <- function(
 #' @noRd
 #' @keywords Internal
 
-.query_dpird_summaries <- function(site = NULL,
+.query_dpird_summaries <- function(station_id = NULL,
                                    first = NULL,
                                    last = Sys.Date(),
                                    api_key = NULL,
-                                   interval = "daily") {
-  if (missing(site))
+                                   interval = "daily",
+                                   which_vars = "all") {
+  if (is.null(station_id))
     stop(call. = FALSE,
          "Station ID required.")
 
-  if (missing(first))
+  if (is.null(first))
     stop(call. = FALSE,
          "Please supply a start date.")
+
+  # Error if api key not provided
+  if (is.null(api_key)) {
+    stop("If you to provide a valid DPIRD API key.\n",
+         "Visit: https://www.agric.wa.gov.au/web-apis",
+         call. = FALSE)
+  }
 
   # validate user provided date
   .check_date(first)
@@ -269,13 +230,13 @@ get_dpird_summaries <- function(
     " to",
     format(as.Date(last), "%e %B %Y"),
     " for location code ",
-    site,
+    station_id,
     "\n"
   )
 
   # Create base query URL for weather summaries
   api <- paste0("https://api.dpird.wa.gov.au/v2/weather/stations/",
-                site,
+                station_id,
                 "/summaries/",
                 m_int)
 
@@ -360,7 +321,87 @@ get_dpird_summaries <- function(
   )
 
   # return only data collection; disregard metadata
-  ret <- jsonlite::fromJSON(url(uri))$data
-  return(ret)
+  out <- .parse_summary(jsonlite::fromJSON(url(uri))$data,
+                        which_vars)
+  return(out[])
+}
+
+#' .parse_summary
+#'
+#' Parses and tidy up data as returned by `.query_dpird_summaries()`
+#'
+#' @param .ret_list a list with the DPIRD weather API response
+#' @param .which_vars a character vector with the variables to query. See the
+#' `.query_dpird_summaries()` for further details.
+#'
+#' @return a tidy `data table` with station id and request weather summaries
+#'
+#' @noRd
+#' @keywords Internal
+#'
+.parse_summary <- function(.ret_list = NULL,
+                           .which_vars = NULL) {
+  # Get query time interval
+  out_period <- .ret_list$summaries$period
+
+  # Remove empty columns (eg minute for hourly summaries) and grab number of
+  # records in the data collection
+  out_period <- out_period[, !apply(is.na(out_period), 2, all)]
+  nrec <- nrow(out_period)
+
+  # Airtemp
+  if (any(c("all", "temp") %in% .which_vars)) {
+    out_temp <- .ret_list$summaries$airTemperature
+    names(out_temp) <- paste0("airtemp.",
+                              names(out_temp))
+
+  } else {
+    out_temp <- data.frame()[1:nrec, ]
+  }
+
+  # Rainfall
+  if (any(c("all", "rain") %in% .which_vars)) {
+    out_rain <- .ret_list$summaries$rainfall
+
+  } else {
+    out_rain <- data.frame()[1:nrec, ]
+  }
+
+  # Wind
+  if (any(c("all", "wind") %in% .which_vars)) {
+    temp <- .ret_list$summaries$wind
+    temp <- lapply(temp, data.table::as.data.table)
+
+    out_wind <- data.table::rbindlist(temp)
+    names(out_wind) <- paste0("wind.",
+                              names(out_wind))
+
+  } else {
+    out_wind <- data.frame()[1:nrec, ]
+  }
+
+  # Wind erosion
+  if (any(c("all", "erosion") %in% .which_vars)) {
+    out_erosion <- .ret_list$summaries$erosionCondition
+    names(out_erosion) <- paste0("wind.erosion.",
+                                 names(out_erosion))
+
+  } else {
+    out_erosion <- data.frame()[1:nrec, ]
+  }
+
+  # Put together
+  out <- data.frame(station_id = .ret_list$stationCode,
+                    out_period,
+                    out_temp,
+                    rain = out_rain,
+                    out_wind,
+                    out_erosion,
+                    row.names = NULL)
+
+  names(out) <- tolower(names(out))
+  names(out) <- gsub("[.]", "_", names(out))
+  out <- data.table::setDT(out)
+  return(out[])
 }
 
