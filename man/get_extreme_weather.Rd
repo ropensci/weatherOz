@@ -54,8 +54,7 @@ outputs <- lapply(these_stations,
 }
 \seealso{
 Other DPIRD: 
-\code{\link{get_summaries}()},
-\code{\link{tidy_weather_summary}()}
+\code{\link{get_dpird_summaries}()}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
