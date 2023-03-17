@@ -1,2 +1,6 @@
 # exclude .onLoad function file
 R/zzz.R
+
+# exclude print function file
+R/weatherOz_print_functions.R
+

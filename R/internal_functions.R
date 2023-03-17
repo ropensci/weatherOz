@@ -1,4 +1,6 @@
 
+"%||%" <- function(a, b) if (!is.null(a)) a else b
+
 #' Negate %in% for easy comparisons
 #'
 #' Check if values in `x` are also in `y`

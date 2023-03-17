@@ -63,7 +63,7 @@
 
 get_ag_bulletin <- function(state = "AUS") {
   # this is just a place holder for functionality with parse_ag_bulletin(),
-  # when this is `NULL` the default string is the BOM's ftp site that points
+  # when this is `NULL` the default string is the BOM's FTP site that points
   # to the directory where the XML files are hosted
   filepath <- NULL
 
@@ -72,7 +72,15 @@ get_ag_bulletin <- function(state = "AUS") {
   location <- .validate_filepath(filepath)
   bulletin_out <-
     .return_bulletin(file_loc = location, cleaned_state = the_state)
-  return(bulletin_out)
+
+  return(
+    structure(
+      bulletin_out,
+      class = union("weatherOz_ag_bulletin_tbl", class(bulletin_out)),
+      state = state,
+      product_id = bulletin_out[1, 1]
+    )
+  )
 }
 
 # Ag bulletin functions for get() and parse() ----------------------------------
