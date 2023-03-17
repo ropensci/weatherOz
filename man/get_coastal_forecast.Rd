@@ -13,8 +13,8 @@ Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defa
 information.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} of an Australia \acronym{BOM}
-Coastal Waters Forecast.
+A \code{\link[data.table:data.table]{data.table::data.table()}} of an Australia \acronym{BOM} Coastal Waters
+Forecast.
 }
 \description{
 Fetch the \acronym{BOM} daily Coastal Waters Forecast and return a data frame
