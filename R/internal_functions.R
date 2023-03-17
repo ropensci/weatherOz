@@ -86,7 +86,7 @@
 #' @details Original execution came from
 #' <https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12>
 #'
-#' @author Adam H. Sparks, adam.sparks@@dpird.wa.gov.au
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
 #'
 .get_url <- function(remote_file) {
