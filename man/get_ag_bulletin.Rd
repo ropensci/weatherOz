@@ -12,8 +12,8 @@ Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defa
 \dQuote{AUS} returning all state bulletins, see Details for more.}
 }
 \value{
-A data frame as a \code{weatherOz_tbl} object, inherits and is fully compatible
-with \code{\link[data.table:data.table]{data.table::data.table()}} of Australia \acronym{BOM} agricultural
+A data frame as a \code{weatherOz_tbl} object (inherits and is fully compatible
+with \code{\link[data.table:data.table]{data.table::data.table()}}) of Australia \acronym{BOM} agricultural
 bulletin information.
 }
 \description{
