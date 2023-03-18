@@ -49,6 +49,13 @@ print.weatherOz_tbl <- function(x,
   .stylecat("  ", strrep("-", 76), "  \n")
 }
 
+
+#' Style header meta-information for BOM products
+#'
+#' Formats meta-information for users that BOM includes in the bulletins
+#' using italics and DPIRD's dark red colour style
+#'
+#' @noRd
 .stylecat <- function(...) {
   dpird_medium_red <-
     crayon::make_style(rgb(0.58, 0.20, 0.13), bg = FALSE)
