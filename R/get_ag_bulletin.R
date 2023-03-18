@@ -23,8 +23,9 @@
 #'  }
 #'
 #' @return
-#'  A data frame as a [data.table::data.table()] object of Australia
-#'  \acronym{BOM} agricultural bulletin information.
+#'  A data frame as a `weatherOz_tbl` object, inherits and is fully compatible
+#'  with [data.table::data.table()] of Australia \acronym{BOM} agricultural
+#'  bulletin information.
 #'
 #' @note Data and Information Use
 #' Please note the copyright notice and disclaimer,
@@ -76,9 +77,10 @@ get_ag_bulletin <- function(state = "AUS") {
   return(
     structure(
       bulletin_out,
-      class = union("weatherOz_ag_bulletin_tbl", class(bulletin_out)),
-      state = state,
-      product_id = bulletin_out[1, 1]
+      class = union("weatherOz_tbl", class(bulletin_out)),
+      state = unique(bulletin_out[, "state"]),
+      product_id = unique(bulletin_out[, "product_id"]),
+      tbl_type = "ag_bulletin"
     )
   )
 }
