@@ -44,7 +44,7 @@
 #'
 #' # Use default for end data (current system date)
 #' output <- get_dpird_summaries(
-#'             site = "CL001",
+#'             station_id = "CL001",
 #'             first = start_date,
 #'             api_key = mykey,
 #'             interval = "yearly",
@@ -56,7 +56,7 @@
 #' end_date <- "2022-05-02"
 #'
 #' output <- get_dpird_summaries(
-#'             site = "BI",
+#'             station_id = "BI",
 #'             first = start_date,
 #'             last = end_date,
 #'             api_key = mykey,
@@ -225,9 +225,9 @@ get_dpird_summaries <- function(
   message(
     "Requesting ",
     m_int,
-    " data from",
+    " data from ",
     format(as.Date(first), "%e %B %Y"),
-    " to",
+    " to ",
     format(as.Date(last), "%e %B %Y"),
     " for location code ",
     station_id,

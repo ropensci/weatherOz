@@ -7,7 +7,7 @@
 
 #' Get extreme weather event summaries for a single DPIRD station
 #'
-#' @param site A string with the station ID code for the station of interest.
+#' @param station_id A string with the station ID code for the station of interest.
 #' @param type A string with the type of extreme weather to return. Defaults to
 #' "all"; and can be combination of "frost", "erosion", "heat", or "all".
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
@@ -28,7 +28,7 @@
 #' my_events <- c("erosion", "heat")
 #'
 #' output <- get_extreme_weather(
-#'   site = my_station,
+#'   station_id = my_station,
 #'   type = my_events,
 #'   api_key = my_key
 #' )
@@ -42,18 +42,18 @@
 #' outputs <- lapply(these_stations,
 #'                   get_extreme_weather,
 #'                   type = "all",
-#'                   api_key = apiKey)
+#'                   api_key = my_key)
 #'
-#'  data.table::rbindlist(outputs)
+#' df <- data.table::rbindlist(outputs)
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-get_extreme_weather <- function(site,
+get_extreme_weather <- function(station_id,
                                 type = "all",
                                 api_key = NULL)
 {
-  if (missing(site)) {
+  if (missing(station_id)) {
     stop(
       call. = FALSE,
       "Provide a station ID via the `site` argument. It should take a string
@@ -68,7 +68,7 @@ get_extreme_weather <- function(site,
   ),
   silent = TRUE)
 
-  if (length(site) != 1) {
+  if (length(station_id) != 1) {
     stop(call. = FALSE,
          "Wrong number of sites.\n",
          "This function only handles one site per query.")
@@ -79,7 +79,11 @@ get_extreme_weather <- function(site,
     paste0(
       "https://api.dpird.wa.gov.au/v2/weather/stations/extreme-conditions?",
       "stationCode=",
-      site,
+      station_id,
+      "&offset=0",
+      "&limit=1",
+      "&group=all",
+      "&includeClosed=true",
       "&api_key=",
       api_key
     )
@@ -163,5 +167,10 @@ get_extreme_weather <- function(site,
     out_heat <- data.table::data.table()[1:nrec,]
   }
 
-  return(data.table::setDT(out_data, out_erosion, out_frost, out_heat))
+  # return final data
+  out <- data.table::data.table(out_data, out_erosion, out_frost, out_heat)
+  out <- .rename_cols(out)
+  names(out) <- gsub("[.]", "_", names(out))
+
+  return(data.table::setDT(out))
 }
