@@ -47,7 +47,7 @@
 #' wagga_stn <- find_nearby_stations(
 #'   latitude = -35.1583,
 #'   longitude = 147.4575,
-#'   distance_km = my_distance,
+#'   distance_km = 50,
 #'   api_key = "YOUR API KEY",
 #'   dpird_only = FALSE,
 #'   wa_only = FALSE
@@ -65,8 +65,6 @@ find_nearby_stations <- function(latitude = NULL,
                                  dpird_only = FALSE) {
   # CRAN NOTE avoidance
   owner <- links <- NULL
-
-  .check_lonlat(longitude = longitude, latitude = latitude)
 
   # Error if api key not provided
   if (is.null(api_key)) {
@@ -116,7 +114,7 @@ find_nearby_stations <- function(latitude = NULL,
           "&api_key=",
           api_key,
           "&offset=0",
-          "&limit=1000",
+          "&limit=10000",
           "&group=rtd"
         )
       ))
@@ -133,6 +131,8 @@ find_nearby_stations <- function(latitude = NULL,
         )
       }
 
+      .check_lonlat(longitude = longitude, latitude = latitude)
+
       # get nearby stations from science api
       ret <- jsonlite::fromJSON(url(
         paste0(
@@ -146,7 +146,7 @@ find_nearby_stations <- function(latitude = NULL,
           "&api_key=",
           api_key,
           "&offset=0",
-          "&limit=1000",
+          "&limit=10000",
           "&group=rtd"
         )
       ))
@@ -164,7 +164,7 @@ find_nearby_stations <- function(latitude = NULL,
           site,
           "&api_key=",
           api_key,
-          "&limit=100000&group=yellowspot"
+          "&limit=1&group=yellowspot"
         )
       ))
 
@@ -197,6 +197,8 @@ find_nearby_stations <- function(latitude = NULL,
           "coordinates or a valid station code."
         )
       }
+
+      .check_lonlat(longitude = longitude, latitude = latitude)
 
       # get nearby stations from science api
       ret <- jsonlite::fromJSON(url(
@@ -257,6 +259,6 @@ find_nearby_stations <- function(latitude = NULL,
 #' @noRd
 
 .create_latlon <- function(res) {
-  .lat <- res$collection$latitude
-  .lon <- res$collection$longitude
+  list(.lat <- res$collection$latitude,
+       .lon <- res$collection$longitude)
 }
