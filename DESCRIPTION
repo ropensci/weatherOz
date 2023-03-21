@@ -111,6 +111,7 @@ Imports:
     data.table,
     foreign,
     furrr,
+    grDevices,
     httr,
     jsonlite,
     knitr,
