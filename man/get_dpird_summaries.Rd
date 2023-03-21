@@ -56,7 +56,7 @@ start_date <- "2017-10-28"
 
 # Use default for end data (current system date)
 output <- get_dpird_summaries(
-            site = "CL001",
+            station_id = "CL001",
             first = start_date,
             api_key = mykey,
             interval = "yearly",
@@ -68,7 +68,7 @@ start_date <- "2022-05-01"
 end_date <- "2022-05-02"
 
 output <- get_dpird_summaries(
-            site = "BI",
+            station_id = "BI",
             first = start_date,
             last = end_date,
             api_key = mykey,

@@ -4,10 +4,10 @@
 \alias{get_extreme_weather}
 \title{Get extreme weather event summaries for a single DPIRD station}
 \usage{
-get_extreme_weather(site, type = "all", api_key = NULL)
+get_extreme_weather(station_id, type = "all", api_key = NULL)
 }
 \arguments{
-\item{site}{A string with the station ID code for the station of interest.}
+\item{station_id}{A string with the station ID code for the station of interest.}
 
 \item{type}{A string with the type of extreme weather to return. Defaults to
 "all"; and can be combination of "frost", "erosion", "heat", or "all".}
@@ -16,7 +16,7 @@ get_extreme_weather(site, type = "all", api_key = NULL)
 (\url{https://www.agric.wa.gov.au/web-apis})}
 }
 \value{
-a \code{data.table} of one row with 'stationCode', 'stationName',
+a \code{data.table} of one row with 'station_code', 'station_name',
 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
 information according to the type(s) selected.
 }
@@ -33,7 +33,7 @@ my_station <- "BR"
 my_events <- c("erosion", "heat")
 
 output <- get_extreme_weather(
-  site = my_station,
+  station_id = my_station,
   type = my_events,
   api_key = my_key
 )
@@ -47,9 +47,9 @@ these_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
 outputs <- lapply(these_stations,
                   get_extreme_weather,
                   type = "all",
-                  api_key = apiKey)
+                  api_key = my_key)
 
- data.table::rbindlist(outputs)
+df <- data.table::rbindlist(outputs)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
