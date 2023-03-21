@@ -58,6 +58,6 @@ print.weatherOz_tbl <- function(x,
 #' @noRd
 .stylecat <- function(...) {
   dpird_medium_red <-
-    crayon::make_style(rgb(0.58, 0.20, 0.13), bg = FALSE)
+    crayon::make_style(grDevices::rgb(0.58, 0.20, 0.13), bg = FALSE)
   cat(dpird_medium_red(crayon::italic(paste0(...))))
 }
