@@ -86,7 +86,7 @@ get_dpird_summaries <- function(
     # query multiple stations and return the values ----
     return(
       lapply(station_id,
-             query_dpird_summaries,
+             .query_dpird_summaries,
              station_id = station_id,
              first = first,
              last = last,
