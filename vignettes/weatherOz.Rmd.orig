@@ -232,7 +232,7 @@ head(find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 10))
 {weatherOz} uses internal databases of station location data from BOM to provide location and other metadata, _e.g._ elevation, station names, WMO codes, etc. to make the process of querying for weather data faster.
 These databases are created and packaged with {weatherOz} for distribution and are updated with new releases.
 Users have the option of updating these databases after installing {weatherOz}.
-While this option gives the users the ability to keep the databases up-to-date and gives {weatherOz}'s authors flexibility in maintaining it, this also means that reproducibility may be affected since the same version of {wrapique} may have different databases on different machines.
+While this option gives the users the ability to keep the databases up-to-date and gives {weatherOz}'s authors flexibility in maintaining it, this also means that reproducibility may be affected since the same version of {weatherOz} may have different databases on different machines.
 If reproducibility is necessary, care should be taken to ensure that the version of the databases is the same across different machines.
 
 The databases consist of three files, used by {weatherOz}, `AAC_codes.rda`, `JSONurl_latlon_by_station_name.rda` and `stations_site_list.rda`.
@@ -242,7 +242,7 @@ These files can be located on your local system by using the following command,
 paste0(.libPaths(), "/weatherOz/extdata")[1]
 ```
 
-unless you have specified another location for library installations and installed {weatherOz} there, in which case it would still be in `wrapique/extdata`.
+unless you have specified another location for library installations and installed {weatherOz} there, in which case it would still be in `weatherOz/extdata`.
 
 ### Using update_forecast_towns()
 
