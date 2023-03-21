@@ -28,7 +28,7 @@ You can install the development version of {weatherOz} like so:
 if (!requireNamespace("remotes", quietly = TRUE)) {
     install.packages("remotes")
 }
-remotes::install_git("https://git.agric.wa.gov.au/r/weatherOz.git")
+remotes::install_git("https://github.com/DPIRD-FSI/weatherOz.git")
 ```
 
 ## Example
@@ -36,7 +36,29 @@ remotes::install_git("https://git.agric.wa.gov.au/r/weatherOz.git")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-## basic example code
+# Source wind and erosion conditions for daily time interval from DPIRD Weather
+# API
+# define start and end date
+start_date <- "2022-05-01"
+end_date <- "2022-05-02"
+
+output <- get_dpird_summaries(
+            site = "BI",
+            first = start_date,
+            last = end_date,
+            api_key = mykey,
+            interval = "hourly",
+            which_vars = c("wind", "erosion"))
+
+# Source data from latitude and longitude coordinates (gridded data - SILO API)
+# Southwood, QLD in the 'apsim' format.
+wd <- get_silo(latitude = -27.85,
+               longitude = 150.05,
+               first = "20221001",
+               last = "20221201",
+               data_format = "apsim",
+               email = "your@email")
+
 ```
 
 ## Notes on Data and API Endpoints

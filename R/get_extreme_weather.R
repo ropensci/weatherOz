@@ -13,7 +13,7 @@
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (<https://www.agric.wa.gov.au/web-apis>)
 #'
-#' @return a `data.table` of one row with 'stationCode', 'stationName',
+#' @return a `data.table` of one row with 'station_code', 'station_name',
 #' 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
 #' information according to the type(s) selected.
 #'
