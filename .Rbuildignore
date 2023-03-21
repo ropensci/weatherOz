@@ -8,3 +8,6 @@
 ^\.covrignore$
 ^doc$
 ^Meta$
+^\.ccache$
+^\.github$
+^tic\.R$
