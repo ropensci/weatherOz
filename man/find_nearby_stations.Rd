@@ -67,7 +67,7 @@ wa_stn <- find_nearby_stations(
 wagga_stn <- find_nearby_stations(
   latitude = -35.1583,
   longitude = 147.4575,
-  distance_km = my_distance,
+  distance_km = 50,
   api_key = "YOUR API KEY",
   dpird_only = FALSE,
   wa_only = FALSE
