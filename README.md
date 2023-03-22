@@ -29,10 +29,10 @@ You can install the development version of {weatherOz} like so:
 if (!requireNamespace("remotes", quietly = TRUE)) {
     install.packages("remotes")
 }
-remotes::install_git("https://github.com/DPIRD-FSI/weatherOz.git")
+remotes::install_github("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
 ```
 
-## Example
+## Example 1
 
 Source wind and erosion conditions for daily time interval from the DPIRD Weather API.
 
