@@ -61,7 +61,16 @@ get_precis_forecast <- function(state = "AUS") {
   location <- .validate_filepath(filepath)
   forecast_out <- .return_precis(location, the_state)
 
-  return(forecast_out)
+  # return(forecast_out)
+  return(
+    structure(
+      forecast_out,
+      class = union("weatherOz_tbl", class(forecast_out)),
+      state = unique(forecast_out[, "state"]),
+      product_id = unique(forecast_out[, "product_id"]),
+      tbl_type = "precis_forecast"
+    )
+  )
 }
 
 
