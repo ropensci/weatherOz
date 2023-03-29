@@ -1,5 +1,4 @@
 
-
 #' Get a listing of available BOM satellite GeoTIFF imagery
 #'
 #' Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
@@ -67,10 +66,9 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #' <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#' [terra::SpatRaster()] object of 'GeoTIFF' files. Files are
-#'  available at ten minutes update frequency with a 24 hour delete time.
-#'  It is suggested to check file availability first by using
-#'  [get_available_imagery()].
+#' [terra::SpatRaster()] object of 'GeoTIFF' files. Files are available at ten
+#'  minutes update frequency with a 24 hour delete time.  It is suggested to
+#'  check file availability first by using [get_available_imagery()].
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID to download in
 #' 'GeoTIFF' format and import as a [terra::SpatRaster()] object.  A
