@@ -56,6 +56,7 @@ print.weatherOz_tbl <- function(x,
     )
   }
 
+  ## coastal forecast header -----
   if ("coastal_forecast" %in% attributes(x)) {
     .stylecat(
       "  ",
@@ -88,16 +89,21 @@ print.weatherOz_tbl <- function(x,
               "  \n")
   }
 
+  ## precis forecast header ----
   if ("precis_forecast" %in% attributes(x)) {
     .stylecat(
       "  ",
       strrep("-", 11),
-      "  Australian Bureau of Meteorology (BOM) Précis Forecast. ",
+      "  Australian Bureau of Meteorology (BOM) Pr",
+      stringi::stri_trans_nfc('\u00e9'),
+      "cis Forecast. ",
       strrep("-", 1),
       "\n"
     )
     .stylecat(
-      "  The HTML version of Short Form (Précis) Forecast for \n",
+      "  The HTML version of Short Form (Pr",
+      stringi::stri_trans_nfc('\u00e9'),
+      "cis) Forecast for \n",
       "  ",
       knitr::combine_words(unlist(state)),
       " can be found at:\n"

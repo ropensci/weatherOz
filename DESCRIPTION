@@ -118,6 +118,7 @@ Imports:
     magick,
     methods,
     readr,
+    stringi,
     terra,
     utils,
     xml2
