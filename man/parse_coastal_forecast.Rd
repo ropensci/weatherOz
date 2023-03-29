@@ -4,7 +4,7 @@
 \alias{parse_coastal_forecast}
 \title{Parse local BOM coastal waters forecast XML files}
 \usage{
-parse_coastal_forecast(state = "AUS", filepath)
+parse_coastal_forecast(state, filepath)
 }
 \arguments{
 \item{state}{Required value of an Australian state or territory as full name

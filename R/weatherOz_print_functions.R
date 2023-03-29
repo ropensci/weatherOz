@@ -1,6 +1,6 @@
 #' Print a weatherOz_tbl object
 #'
-#' Custom [print()] method for `weatherOz_tbl` objects.
+#' Custom `print()` method for `weatherOz_tbl` objects.
 #'
 #' @param x a Defaults to `weatherOz_tbl` object.
 #' @param ... ignored
@@ -77,9 +77,9 @@ print.weatherOz_tbl <- function(x,
 
   if ("precis_forecast" %in% attributes(x)) {
     .stylecat("  ", strrep("-", 11),
-              "  Australian Bureau of Meteorology (BOM) précis Forecast. ",
+              "  Australian Bureau of Meteorology (BOM) Precis Forecast. ",
               strrep("-", 11), "\n")
-    .stylecat("  The HTML version of Short Form (précis) Forecast for\n",
+    .stylecat("  The HTML version of Short Form (precis) Forecast for\n",
               "  ", knitr::combine_words(unlist(state)), " can be found at:\n")
     for (s in state) {
       .stylecat("  <www.bom.gov.au/",
@@ -95,7 +95,6 @@ print.weatherOz_tbl <- function(x,
               "  \n")
   }
 }
-
 
 #' Style header meta-information for BOM products
 #'
