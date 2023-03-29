@@ -81,6 +81,13 @@ Following is an example fetching the forecast for Queensland.
 
 ```r
 (QLD_forecast <- get_precis_forecast(state = "QLD"))
+#>   -----------  Australian Bureau of Meteorology (BOM) Précis Forecast. -
+#>   The HTML version of Short Form (Précis) Forecast for
+#>   QLD can be found at:
+#>   <www.bom.gov.au/qld/forecasts/state.shtml>
+#>   Please note information at the page 
+#>   <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>
+#>   --------------------------------------------------------------------------------  
 #>      index product_id state         town       aac       lat      lon elev
 #>   1:     0   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
 #>   2:     1   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
@@ -167,11 +174,10 @@ Following is an example fetching the ag bulletin for Queensland.
 ```r
 (QLD_bulletin <- get_ag_bulletin(state = "QLD"))
 #>   -----------  Australian Bureau of Meteorology (BOM) Ag Bulletin. -----------
-#>   Please note information at the foot of,
-#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ60604.html>,
+#>   Please note information at the foot of:
+#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ60604.html>
 #>   the HTML version of Agricultural Observations Bulletin for 
-#>   QLD.
-#>   Also see 
+#>   QLD.  Also see: 
 #>   <https://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
 #>   ----------------------------------------------------------------------------  
 #>     product_id state dist                      name   wmo  site              station
@@ -248,421 +254,110 @@ Following is an example fetching the forecast for Queensland.
 
 ```r
 (QLD_coastal_forecast <- get_coastal_forecast(state = "QLD"))
-#>     index product_id    type state_code
-#>  1:  <NA>   IDQ11290    <NA>        QLD
-#>  2:  <NA>   IDQ11290    <NA>        QLD
-#>  3:  <NA>   IDQ11290    <NA>        QLD
-#>  4:  <NA>   IDQ11290    <NA>        QLD
-#>  5:     0   IDQ11290    <NA>        QLD
-#>  6:     1   IDQ11290    <NA>        QLD
-#>  7:     2   IDQ11290    <NA>        QLD
-#>  8:     3   IDQ11290    <NA>        QLD
-#>  9:     0   IDQ11290    <NA>        QLD
-#> 10:     1   IDQ11290    <NA>        QLD
-#> 11:     2   IDQ11290    <NA>        QLD
-#> 12:     3   IDQ11290    <NA>        QLD
-#> 13:     0   IDQ11290 Coastal        QLD
-#> 14:     1   IDQ11290 Coastal        QLD
-#> 15:     2   IDQ11290 Coastal        QLD
-#> 16:     3   IDQ11290 Coastal        QLD
-#> 17:     0   IDQ11290    <NA>        QLD
-#> 18:     1   IDQ11290    <NA>        QLD
-#> 19:     2   IDQ11290    <NA>        QLD
-#> 20:     3   IDQ11290    <NA>        QLD
-#> 21:     0   IDQ11290    <NA>        QLD
-#> 22:     1   IDQ11290    <NA>        QLD
-#> 23:     2   IDQ11290    <NA>        QLD
-#> 24:     3   IDQ11290    <NA>        QLD
-#> 25:     0   IDQ11290    <NA>        QLD
-#> 26:     1   IDQ11290    <NA>        QLD
-#> 27:     2   IDQ11290    <NA>        QLD
-#> 28:     3   IDQ11290    <NA>        QLD
-#> 29:     0   IDQ11290    <NA>        QLD
-#> 30:     1   IDQ11290    <NA>        QLD
-#> 31:     2   IDQ11290    <NA>        QLD
-#> 32:     3   IDQ11290    <NA>        QLD
-#> 33:     0   IDQ11290    <NA>        QLD
-#> 34:     1   IDQ11290    <NA>        QLD
-#> 35:     2   IDQ11290    <NA>        QLD
-#> 36:     3   IDQ11290    <NA>        QLD
-#> 37:     0   IDQ11290    <NA>        QLD
-#> 38:     1   IDQ11290    <NA>        QLD
-#> 39:     2   IDQ11290    <NA>        QLD
-#> 40:     3   IDQ11290    <NA>        QLD
-#> 41:     0   IDQ11290   Local        QLD
-#> 42:     1   IDQ11290   Local        QLD
-#> 43:     2   IDQ11290   Local        QLD
-#> 44:     3   IDQ11290   Local        QLD
-#> 45:     0   IDQ11290    <NA>        QLD
+#>   -------  Australian Bureau of Meteorology (BOM) Coastal Waters Forecast. -------
+#>   Please note information at the foot of:
+#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ11290.html>
+#>   the HTML version of Coastal Waters Forecast for 
+#>   QLD.
+#>   Also see 
+#>   <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>.
+#>   --------------------------------------------------------------------------------  
+#>     index product_id type state_code
+#>  1:  <NA>   IDQ11290 <NA>        QLD
+#>  2:  <NA>   IDQ11290 <NA>        QLD
+#>  3:  <NA>   IDQ11290 <NA>        QLD
+#>  4:  <NA>   IDQ11290 <NA>        QLD
+#>  5:     0   IDQ11290 <NA>        QLD
+#> ---                                 
+#> 60:     3   IDQ11290 <NA>        QLD
+#> 61:     0   IDQ11290 <NA>        QLD
+#> 62:     1   IDQ11290 <NA>        QLD
+#> 63:     2   IDQ11290 <NA>        QLD
+#> 64:     3   IDQ11290 <NA>        QLD
 #>                                                          dist_name pt_1_name pt_2_name
 #>  1:                                                     Queensland      <NA>      <NA>
 #>  2:                                 Queensland Gulf of Carpentaria      <NA>      <NA>
 #>  3:                                               North Queensland      <NA>      <NA>
 #>  4:                                               South Queensland      <NA>      <NA>
 #>  5: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>      <NA>
-#>  6: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>      <NA>
-#>  7: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>      <NA>
-#>  8: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>      <NA>
-#>  9:   North East Gulf of Carpentaria: Cape Keerweer to Crab Island      <NA>      <NA>
-#> 10:   North East Gulf of Carpentaria: Cape Keerweer to Crab Island      <NA>      <NA>
-#> 11:   North East Gulf of Carpentaria: Cape Keerweer to Crab Island      <NA>      <NA>
-#> 12:   North East Gulf of Carpentaria: Cape Keerweer to Crab Island      <NA>      <NA>
-#> 13:                                                  Torres Strait      <NA>      <NA>
-#> 14:                                                  Torres Strait      <NA>      <NA>
-#> 15:                                                  Torres Strait      <NA>      <NA>
-#> 16:                                                  Torres Strait      <NA>      <NA>
-#> 17:                  Peninsula Coast: Sharp Point to Cape Melville      <NA>      <NA>
-#> 18:                  Peninsula Coast: Sharp Point to Cape Melville      <NA>      <NA>
-#> 19:                  Peninsula Coast: Sharp Point to Cape Melville      <NA>      <NA>
-#> 20:                  Peninsula Coast: Sharp Point to Cape Melville      <NA>      <NA>
-#> 21:              Cooktown Coast: Cape Melville to Cape Tribulation      <NA>      <NA>
-#> 22:              Cooktown Coast: Cape Melville to Cape Tribulation      <NA>      <NA>
-#> 23:              Cooktown Coast: Cape Melville to Cape Tribulation      <NA>      <NA>
-#> 24:              Cooktown Coast: Cape Melville to Cape Tribulation      <NA>      <NA>
-#> 25:                     Cairns Coast: Cape Tribulation to Cardwell      <NA>      <NA>
-#> 26:                     Cairns Coast: Cape Tribulation to Cardwell      <NA>      <NA>
-#> 27:                     Cairns Coast: Cape Tribulation to Cardwell      <NA>      <NA>
-#> 28:                     Cairns Coast: Cape Tribulation to Cardwell      <NA>      <NA>
-#> 29:                            Townsville Coast: Cardwell to Bowen      <NA>      <NA>
-#> 30:                            Townsville Coast: Cardwell to Bowen      <NA>      <NA>
-#> 31:                            Townsville Coast: Cardwell to Bowen      <NA>      <NA>
-#> 32:                            Townsville Coast: Cardwell to Bowen      <NA>      <NA>
-#> 33:                             Mackay Coast: Bowen to St Lawrence      <NA>      <NA>
-#> 34:                             Mackay Coast: Bowen to St Lawrence      <NA>      <NA>
-#> 35:                             Mackay Coast: Bowen to St Lawrence      <NA>      <NA>
-#> 36:                             Mackay Coast: Bowen to St Lawrence      <NA>      <NA>
-#> 37:                Capricornia Coast: St Lawrence to Burnett Heads      <NA>      <NA>
-#> 38:                Capricornia Coast: St Lawrence to Burnett Heads      <NA>      <NA>
-#> 39:                Capricornia Coast: St Lawrence to Burnett Heads      <NA>      <NA>
-#> 40:                Capricornia Coast: St Lawrence to Burnett Heads      <NA>      <NA>
-#> 41:                                                     Hervey Bay      <NA>      <NA>
-#> 42:                                                     Hervey Bay      <NA>      <NA>
-#> 43:                                                     Hervey Bay      <NA>      <NA>
-#> 44:                                                     Hervey Bay      <NA>      <NA>
-#> 45:         Fraser Island Coast: Sandy Cape to Double Island Point      <NA>      <NA>
+#> ---                                                                                   
+#> 60:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>      <NA>
+#> 61:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
+#> 62:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
+#> 63:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
+#> 64:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
 #>           aac    start_time_local      end_time_local utc_offset      start_time_utc
 #>  1: QLD_FA001 2023-03-29 15:50:59 2023-03-29 15:50:59      10:00 2023-03-29 15:50:59
 #>  2: QLD_FA002 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
 #>  3: QLD_FA003 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
 #>  4: QLD_FA004 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
 #>  5: QLD_MW001 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#>  6: QLD_MW001 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#>  7: QLD_MW001 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#>  8: QLD_MW001 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#>  9: QLD_MW002 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 10: QLD_MW002 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 11: QLD_MW002 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 12: QLD_MW002 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 13: QLD_MW003 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 14: QLD_MW003 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 15: QLD_MW003 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 16: QLD_MW003 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 17: QLD_MW004 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 18: QLD_MW004 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 19: QLD_MW004 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 20: QLD_MW004 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 21: QLD_MW005 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 22: QLD_MW005 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 23: QLD_MW005 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 24: QLD_MW005 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 25: QLD_MW006 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 26: QLD_MW006 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 27: QLD_MW006 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 28: QLD_MW006 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 29: QLD_MW007 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 30: QLD_MW007 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 31: QLD_MW007 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 32: QLD_MW007 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 33: QLD_MW008 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 34: QLD_MW008 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 35: QLD_MW008 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 36: QLD_MW008 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 37: QLD_MW009 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 38: QLD_MW009 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 39: QLD_MW009 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 40: QLD_MW009 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 41: QLD_MW010 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#> 42: QLD_MW010 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
-#> 43: QLD_MW010 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
-#> 44: QLD_MW010 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
-#> 45: QLD_MW011 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
-#>            end_time_utc
-#>  1: 2023-03-29 15:50:59
-#>  2: 2023-03-29 17:00:00
-#>  3: 2023-03-29 17:00:00
-#>  4: 2023-03-29 17:00:00
-#>  5: 2023-03-29 17:00:00
-#>  6: 2023-03-30 00:00:00
-#>  7: 2023-03-31 00:00:00
-#>  8: 2023-04-01 00:00:00
-#>  9: 2023-03-29 17:00:00
-#> 10: 2023-03-30 00:00:00
-#> 11: 2023-03-31 00:00:00
-#> 12: 2023-04-01 00:00:00
-#> 13: 2023-03-29 17:00:00
-#> 14: 2023-03-30 00:00:00
-#> 15: 2023-03-31 00:00:00
-#> 16: 2023-04-01 00:00:00
-#> 17: 2023-03-29 17:00:00
-#> 18: 2023-03-30 00:00:00
-#> 19: 2023-03-31 00:00:00
-#> 20: 2023-04-01 00:00:00
-#> 21: 2023-03-29 17:00:00
-#> 22: 2023-03-30 00:00:00
-#> 23: 2023-03-31 00:00:00
-#> 24: 2023-04-01 00:00:00
-#> 25: 2023-03-29 17:00:00
-#> 26: 2023-03-30 00:00:00
-#> 27: 2023-03-31 00:00:00
-#> 28: 2023-04-01 00:00:00
-#> 29: 2023-03-29 17:00:00
-#> 30: 2023-03-30 00:00:00
-#> 31: 2023-03-31 00:00:00
-#> 32: 2023-04-01 00:00:00
-#> 33: 2023-03-29 17:00:00
-#> 34: 2023-03-30 00:00:00
-#> 35: 2023-03-31 00:00:00
-#> 36: 2023-04-01 00:00:00
-#> 37: 2023-03-29 17:00:00
-#> 38: 2023-03-30 00:00:00
-#> 39: 2023-03-31 00:00:00
-#> 40: 2023-04-01 00:00:00
-#> 41: 2023-03-29 17:00:00
-#> 42: 2023-03-30 00:00:00
-#> 43: 2023-03-31 00:00:00
-#> 44: 2023-04-01 00:00:00
-#> 45: 2023-03-29 17:00:00
-#>                                                                                          forecast_seas
-#>  1:                                                                                               <NA>
-#>  2:                                                                                               <NA>
-#>  3:                                                                                               <NA>
-#>  4:                                                                                               <NA>
-#>  5:                                                                                     Below 1 metre.
-#>  6:                                                                                     Below 1 metre.
-#>  7:                                                                                     Below 1 metre.
-#>  8:                                                                                     Below 1 metre.
-#>  9:                                                                                     Below 1 metre.
-#> 10:                                                                                     Below 1 metre.
-#> 11:                                                                                     Below 1 metre.
-#> 12:                                                                                  Below 0.5 metres.
-#> 13:                                                                                     Below 1 metre.
-#> 14:                                                                                     Below 1 metre.
-#> 15:                                                                                     Below 1 metre.
-#> 16:                                                                                     Below 1 metre.
-#> 17:                                                                                    Around 1 metre.
-#> 18:                                                                                    Around 1 metre.
-#> 19:                                                                                     Below 1 metre.
-#> 20:                                                                                     Below 1 metre.
-#> 21:                                                                                    Around 1 metre.
-#> 22:                                                                                     Below 1 metre.
-#> 23:                                                                                     Below 1 metre.
-#> 24:                                                                                     Below 1 metre.
-#> 25:                                                                                     Below 1 metre.
-#> 26:                                                                                  Below 0.5 metres.
-#> 27:                                                                                  Below 0.5 metres.
-#> 28:                                                                                  Below 0.5 metres.
-#> 29:                                                                                  Below 0.5 metres.
-#> 30:                                                                                     Below 1 metre.
-#> 31:                                                                                     Below 1 metre.
-#> 32:                                                                                  Below 0.5 metres.
-#> 33:                                                                                  Below 0.5 metres.
-#> 34:                                                                                     Below 1 metre.
-#> 35:                                                                                     Below 1 metre.
-#> 36:                                                                                     Below 1 metre.
-#> 37:                                                                                     Below 1 metre.
-#> 38:                                                                                     Below 1 metre.
-#> 39:                                                                                     Below 1 metre.
-#> 40:                                                                                     Below 1 metre.
-#> 41:                                                                                     Below 1 metre.
-#> 42:                                                                                     Below 1 metre.
-#> 43:                                                                                     Below 1 metre.
-#> 44:                                                                                     Below 1 metre.
-#> 45:                                                                                     Below 1 metre.
-#>                                                                                                      forecast_weather
-#>  1:                                                                                                              <NA>
-#>  2:                                                                                                              <NA>
-#>  3:                                                                                                              <NA>
-#>  4:                                                                                                              <NA>
-#>  5:                                                                                                            Clear.
-#>  6:                                                                                                            Sunny.
-#>  7:                                         Sunny morning. The chance of a thunderstorm in the afternoon and evening.
-#>  8:                                                                                                     Mostly sunny.
-#>  9:                                                        Mostly clear. The chance of a thunderstorm north of Weipa.
-#> 10:     Mostly sunny. 50% chance of showers north of Weipa, near zero chance elsewhere. The chance of a thunderstorm.
-#> 11:                                                                       Mostly sunny. The chance of a thunderstorm.
-#> 12:                                      Mostly sunny day. The chance of a thunderstorm in the afternoon and evening.
-#> 13:                                                                      Partly cloudy. The chance of a thunderstorm.
-#> 14:                                               Partly cloudy. 70% chance of showers. The chance of a thunderstorm.
-#> 15:                                                             Partly cloudy. The chance of a thunderstorm offshore.
-#> 16:                                                                                                    Partly cloudy.
-#> 17:                                                                       Mostly clear. The chance of a thunderstorm.
-#> 18:                                         Partly cloudy. The chance of a thunderstorm in the morning and afternoon.
-#> 19:                                                                                                     Mostly sunny.
-#> 20:                                                                                                     Mostly sunny.
-#> 21:                                                                                                            Clear.
-#> 22:                                                                                                     Mostly sunny.
-#> 23:                                                                                                            Sunny.
-#> 24:                                                                                                     Mostly sunny.
-#> 25:                                                                                                            Clear.
-#> 26:                                                                                                            Sunny.
-#> 27:                                                                                                            Sunny.
-#> 28:                                                                                                            Sunny.
-#> 29:                                                           Partly cloudy. Medium (50%) chance of showers offshore.
-#> 30:                                                                                                            Sunny.
-#> 31:                                Sunny day. The chance of a thunderstorm inshore in the late afternoon and evening.
-#> 32:                                             Sunny day. The chance of a thunderstorm in the afternoon and evening.
-#> 33:                                                                                                     Mostly clear.
-#> 34:                  Mostly sunny morning. The chance of a thunderstorm south of Mackay in the afternoon and evening.
-#> 35:                                                Mostly sunny. 50% chance of showers. The chance of a thunderstorm.
-#> 36:                                               Partly cloudy. 50% chance of showers. The chance of a thunderstorm.
-#> 37:                                                                                                     Mostly clear.
-#> 38:        Partly cloudy. 80% chance of showers. The chance of a thunderstorm from the late morning, possibly severe.
-#> 39:                          Partly cloudy. 60% chance of showers. The chance of a thunderstorm north of Agnes Water.
-#> 40:                                                                                                  Becoming cloudy.
-#> 41:                                                                                  Partly cloudy. Possible showers.
-#> 42:                              Partly cloudy. 95% chance of showers. The chance of a thunderstorm, possibly severe.
-#> 43:                                                                                                     Mostly sunny.
-#> 44:                                                                                                    Partly cloudy.
-#> 45:                                                                                  Partly cloudy. Possible showers.
-#>                                                                                                                                                                                                                                 forecast_winds
-#>  1:                                                                                                                                                                                                                                       <NA>
-#>  2:                                                                                                                                                                                                                                       <NA>
-#>  3:                                                                                                                                                                                                                                       <NA>
-#>  4:                                                                                                                                                                                                                                       <NA>
-#>  5:                                                                                                                                                                                                                   Variable about 10 knots.
-#>  6:                                                                                          Variable about 10 knots becoming east to northeasterly 10 to 15 knots in the late afternoon then becoming variable about 10 knots in the evening.
-#>  7:                                                                                     Variable about 10 knots becoming southeast to southwesterly 10 to 15 knots in the late afternoon then becoming variable about 10 knots in the evening.
-#>  8:                                                                                                                                                                                                                   Variable about 10 knots.
-#>  9:                                                                                                                                                                Variable about 10 knots, becoming east to southeasterly later this evening.
-#> 10:                                                                              East to southeasterly about 10 knots tending east to northeasterly 10 to 15 knots in the morning then becoming variable about 10 knots in the late afternoon.
-#> 11:                                                                                                                                                                                                      East to southeasterly about 10 knots.
-#> 12:                                                                                                                                                                  East to southeasterly about 10 knots, becoming variable in the afternoon.
-#> 13:                                                                                                                                                                                                      East to southeasterly 10 to 15 knots.
-#> 14:                                                                                                                                                    East to southeasterly 10 to 15 knots decreasing to about 10 knots early in the morning.
-#> 15:                                                                                                                                                     East to southeasterly 10 to 15 knots decreasing to about 10 knots in the late evening.
-#> 16:                                                                                                                                                            Southeasterly about 10 knots increasing to 10 to 15 knots during the afternoon.
-#> 17:                                                                                                                              East to southeasterly 10 to 15 knots, reaching up to 20 knots offshore south of Cape Sidmouth in the evening.
-#> 18:                                                                                                                                                          East to southeasterly 10 to 15 knots decreasing to about 10 knots in the morning.
-#> 19:                                                                                                                                                          East to southeasterly 10 to 15 knots decreasing to about 10 knots in the evening.
-#> 20:                                                                                                                                                      East to southeasterly about 10 knots increasing to 10 to 15 knots during the morning.
-#> 21:                                                                                                                                                                                     Southeasterly 10 to 15 knots, reaching up to 20 knots.
-#> 22:                                                                                                                                                    East to southeasterly 10 to 15 knots decreasing to about 10 knots early in the morning.
-#> 23:                                                                                                                                                                                                      East to southeasterly about 10 knots.
-#> 24:                                                                                                                                                    East to southeasterly about 10 knots increasing to 10 to 15 knots during the afternoon.
-#> 25:                                                                                                                                                                                                      East to southeasterly about 10 knots.
-#> 26:                                                                                                                                                                Variable below 10 knots, becoming easterly about 10 knots in the afternoon.
-#> 27:                                                                                                                                                  Variable below 10 knots, becoming north to northeasterly about 10 knots in the afternoon.
-#> 28:                                                                                                                                                  Variable below 10 knots, becoming north to northeasterly about 10 knots in the afternoon.
-#> 29:                                                                                                                          East to southeasterly about 10 knots, inshore winds northeasterly and reaching up to 15 knots early this evening.
-#> 30:                                                               East to northeasterly below 10 knots becoming north to northwesterly about 10 knots during the morning. Inshore winds turning northeasterly 10 to 15 knots in the afternoon.
-#> 31:                                                                                                                       North to northwesterly about 10 knots. Inshore winds turning north to northeasterly 10 to 15 knots in the afternoon.
-#> 32:                                                                                                                                              North to northeasterly about 10 knots. Wind variable less than 10 knots in the early morning.
-#> 33:                                                                                                                                             East to southeasterly about 10 knots, inshore winds north to northeasterly early this evening.
-#> 34:                                                                   North to northeasterly about 10 knots tending north to northwesterly 10 to 15 knots early in the morning. Inshore winds turning north to northeasterly in the afternoon.
-#> 35:                                                                                                         North to northwesterly 10 to 15 knot. Wind south of Mackay turning northeast to southeasterly about 10 knots during the afternoon.
-#> 36:                                                                                                                                                Variable about 10 knots becoming east to southeasterly 10 to 15 knots during the afternoon.
-#> 37:                                                                                                                                                    North to northeasterly about 10 knots increasing to 10 to 15 knots in the late evening.
-#> 38:                                                                                              North to northwesterly 10 to 15 knots turning west to northwesterly during the evening. Inshore winds turning northeasterly in the afternoon.
-#> 39:                                                                            Variable about 10 knots becoming south to southeasterly 10 to 15 knots in the morning then becoming southeast to northeasterly about 10 knots in the afternoon.
-#> 40:                                                                                           Variable about 10 knots becoming east to southeasterly 10 to 15 knots during the afternoon then decreasing to about 10 knots during the evening.
-#> 41:                                                                                                                                                 North to northeasterly 10 to 15 knots, tending north to northwesterly during this evening.
-#> 42:                                                                              North to northwesterly 10 to 15 knots tending west to northwesterly in the afternoon, then shifting west to southwesterly about 10 knots in the late evening.
-#> 43:                                                                South to southwesterly about 10 knots becoming south to southeasterly 10 to 15 knots during the morning then turning east to southeasterly about 10 knots in the afternoon.
-#> 44:                                                                                       Southerly less than 10 knots, tending south to southeasterly about 10 knots during the morning, then turning east to southeasterly in the afternoon.
-#> 45:                                                                                                                                               North to northeasterly 10 to 15 knots, reaching up to 20 knots offshore in the late evening.
-#>                                                                                         forecast_swell1
-#>  1:                                                                                                <NA>
-#>  2:                                                                                                <NA>
-#>  3:                                                                                                <NA>
-#>  4:                                                                                                <NA>
-#>  5:                                                                                                <NA>
-#>  6:                                                                                                <NA>
-#>  7:                                                                                                <NA>
-#>  8:                                                                                                <NA>
-#>  9:                                                                                                <NA>
-#> 10:                                                                                                <NA>
-#> 11:                                                                                                <NA>
-#> 12:                                                                                   Below 0.5 metres.
-#> 13:                                                                East to southeasterly below 1 metre.
-#> 14:                                                                East to southeasterly below 1 metre.
-#> 15:                                                                East to southeasterly below 1 metre.
-#> 16:                                                                East to southeasterly below 1 metre.
-#> 17:                                                                        Southeasterly below 1 metre.
-#> 18:                                                                East to southeasterly below 1 metre.
-#> 19:                                                                East to southeasterly below 1 metre.
-#> 20:                                                                        Southeasterly below 1 metre.
-#> 21:                                                                East to southeasterly below 1 metre.
-#> 22:                                                                East to southeasterly below 1 metre.
-#> 23:                                                                East to southeasterly below 1 metre.
-#> 24:                                                                East to southeasterly below 1 metre.
-#> 25:                                                                East to southeasterly below 1 metre.
-#> 26:                                                                East to southeasterly below 1 metre.
-#> 27:                                                                             Easterly below 1 metre.
-#> 28:                                                                             Easterly below 1 metre.
-#> 29:                                                                East to northeasterly below 1 metre.
-#> 30:                                                                East to northeasterly below 1 metre.
-#> 31:                                                                East to northeasterly below 1 metre.
-#> 32:                                                                East to northeasterly below 1 metre.
-#> 33:                                                                             Easterly below 1 metre.
-#> 34:                                                                             Easterly below 1 metre.
-#> 35:                                                                                   Below 0.5 metres.
-#> 36:                                                                             Easterly below 1 metre.
-#> 37:                              Easterly below 1 metre inshore, increasing to around 1 metre offshore.
-#> 38:                                                                             Easterly below 1 metre.
-#> 39:                                                                East to southeasterly below 1 metre.
-#> 40: East to southeasterly below 1 metre inshore, increasing to around 1 metre offshore southern waters.
-#> 41:                                                               North to northeasterly below 1 metre.
-#> 42:                                           North to northeasterly below 1 metre in the northern bay.
-#> 43:                                                               Below 0.5 metres in the northern bay.
-#> 44:                                                               Below 0.5 metres in the northern bay.
-#> 45:                                                                             Easterly below 1 metre.
-#>     forecast_swell2 forecast_caution marine_forecast tropical_system_location forecast_waves
-#>  1:            <NA>             <NA>            <NA>                       NA             NA
-#>  2:            <NA>             <NA>            <NA>                       NA             NA
-#>  3:            <NA>             <NA>            <NA>                       NA             NA
-#>  4:            <NA>             <NA>            <NA>                       NA             NA
-#>  5:            <NA>             <NA>            <NA>                       NA             NA
-#>  6:            <NA>             <NA>            <NA>                       NA             NA
-#>  7:            <NA>             <NA>            <NA>                       NA             NA
-#>  8:            <NA>             <NA>            <NA>                       NA             NA
-#>  9:            <NA>             <NA>            <NA>                       NA             NA
-#> 10:            <NA>             <NA>            <NA>                       NA             NA
-#> 11:            <NA>             <NA>            <NA>                       NA             NA
-#> 12:            <NA>             <NA>            <NA>                       NA             NA
-#> 13:            <NA>             <NA>            <NA>                       NA             NA
-#> 14:            <NA>             <NA>            <NA>                       NA             NA
-#> 15:            <NA>             <NA>            <NA>                       NA             NA
-#> 16:            <NA>             <NA>            <NA>                       NA             NA
-#> 17:            <NA>             <NA>            <NA>                       NA             NA
-#> 18:            <NA>             <NA>            <NA>                       NA             NA
-#> 19:            <NA>             <NA>            <NA>                       NA             NA
-#> 20:            <NA>             <NA>            <NA>                       NA             NA
-#> 21:            <NA>             <NA>            <NA>                       NA             NA
-#> 22:            <NA>             <NA>            <NA>                       NA             NA
-#> 23:            <NA>             <NA>            <NA>                       NA             NA
-#> 24:            <NA>             <NA>            <NA>                       NA             NA
-#> 25:            <NA>             <NA>            <NA>                       NA             NA
-#> 26:            <NA>             <NA>            <NA>                       NA             NA
-#> 27:            <NA>             <NA>            <NA>                       NA             NA
-#> 28:            <NA>             <NA>            <NA>                       NA             NA
-#> 29:            <NA>             <NA>            <NA>                       NA             NA
-#> 30:            <NA>             <NA>            <NA>                       NA             NA
-#> 31:            <NA>             <NA>            <NA>                       NA             NA
-#> 32:            <NA>             <NA>            <NA>                       NA             NA
-#> 33:            <NA>             <NA>            <NA>                       NA             NA
-#> 34:            <NA>             <NA>            <NA>                       NA             NA
-#> 35:            <NA>             <NA>            <NA>                       NA             NA
-#> 36:            <NA>             <NA>            <NA>                       NA             NA
-#> 37:            <NA>             <NA>            <NA>                       NA             NA
-#> 38:            <NA>             <NA>            <NA>                       NA             NA
-#> 39:            <NA>             <NA>            <NA>                       NA             NA
-#> 40:            <NA>             <NA>            <NA>                       NA             NA
-#> 41:            <NA>             <NA>            <NA>                       NA             NA
-#> 42:            <NA>             <NA>            <NA>                       NA             NA
-#> 43:            <NA>             <NA>            <NA>                       NA             NA
-#> 44:            <NA>             <NA>            <NA>                       NA             NA
-#> 45:            <NA>             <NA>            <NA>                       NA             NA
-#>  [ reached getOption("max.print") -- omitted 20 rows ]
+#> ---                                                                                 
+#> 60: QLD_MW014 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
+#> 61: QLD_MW015 2023-03-29 17:00:00 2023-03-29 17:00:00      10:00 2023-03-29 17:00:00
+#> 62: QLD_MW015 2023-03-30 00:00:00 2023-03-30 00:00:00      10:00 2023-03-30 00:00:00
+#> 63: QLD_MW015 2023-03-31 00:00:00 2023-03-31 00:00:00      10:00 2023-03-31 00:00:00
+#> 64: QLD_MW015 2023-04-01 00:00:00 2023-04-01 00:00:00      10:00 2023-04-01 00:00:00
+#>            end_time_utc     forecast_seas
+#>  1: 2023-03-29 15:50:59              <NA>
+#>  2: 2023-03-29 17:00:00              <NA>
+#>  3: 2023-03-29 17:00:00              <NA>
+#>  4: 2023-03-29 17:00:00              <NA>
+#>  5: 2023-03-29 17:00:00    Below 1 metre.
+#> ---                                      
+#> 60: 2023-04-01 00:00:00    Below 1 metre.
+#> 61: 2023-03-29 17:00:00 Below 0.5 metres.
+#> 62: 2023-03-30 00:00:00    Below 1 metre.
+#> 63: 2023-03-31 00:00:00    Below 1 metre.
+#> 64: 2023-04-01 00:00:00    Below 1 metre.
+#>                                                                                 forecast_weather
+#>  1:                                                                                         <NA>
+#>  2:                                                                                         <NA>
+#>  3:                                                                                         <NA>
+#>  4:                                                                                         <NA>
+#>  5:                                                                                       Clear.
+#> ---                                                                                             
+#> 60:                                                                               Partly cloudy.
+#> 61:                                                                                Mostly clear.
+#> 62: Mostly sunny day. The chance of a thunderstorm through the Capricorn Channel in the evening.
+#> 63:                                                 Partly cloudy. The chance of a thunderstorm.
+#> 64:                                                 Partly cloudy. The chance of a thunderstorm.
+#>                                                                                            forecast_winds
+#>  1:                                                                                                  <NA>
+#>  2:                                                                                                  <NA>
+#>  3:                                                                                                  <NA>
+#>  4:                                                                                                  <NA>
+#>  5:                                                                              Variable about 10 knots.
+#> ---                                                                                                      
+#> 60:          East to southeasterly about 10 knots. Inshore winds less than 10 knots in the early morning.
+#> 61: East to northeasterly below 10 knots. Winds north of Creal Reef east to southeasterly about 10 knots.
+#> 62:              Northeasterly below 10 knots becoming north to northwesterly about 10 knots before dawn.
+#> 63:                                                                              Variable about 10 knots.
+#> 64:           Variable about 10 knots becoming east to southeasterly 10 to 15 knots during the afternoon.
+#>                                                              forecast_swell1 forecast_swell2
+#>  1:                                                                     <NA>            <NA>
+#>  2:                                                                     <NA>            <NA>
+#>  3:                                                                     <NA>            <NA>
+#>  4:                                                                     <NA>            <NA>
+#>  5:                                                                     <NA>            <NA>
+#> ---                                                                                         
+#> 60: Southerly below 1 metre inshore, increasing to 1 to 1.5 metres offshore.            <NA>
+#> 61:                                                 Easterly around 1 metre.            <NA>
+#> 62:                                                  Easterly below 1 metre.            <NA>
+#> 63:                                     East to southeasterly below 1 metre.            <NA>
+#> 64:                                             Southeasterly below 1 metre.            <NA>
+#>     forecast_caution marine_forecast tropical_system_location forecast_waves
+#>  1:             <NA>            <NA>                       NA             NA
+#>  2:             <NA>            <NA>                       NA             NA
+#>  3:             <NA>            <NA>                       NA             NA
+#>  4:             <NA>            <NA>                       NA             NA
+#>  5:             <NA>            <NA>                       NA             NA
+#> ---                                                                         
+#> 60:             <NA>            <NA>                       NA             NA
+#> 61:             <NA>            <NA>                       NA             NA
+#> 62:             <NA>            <NA>                       NA             NA
+#> 63:             <NA>            <NA>                       NA             NA
+#> 64:             <NA>            <NA>                       NA             NA
 ```
 
 
@@ -871,7 +566,7 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 #> [136] "IDE00425.202303290500.tif" "IDE00425.202303290510.tif" "IDE00425.202303290520.tif"
 #> [139] "IDE00425.202303290530.tif" "IDE00425.202303290540.tif" "IDE00425.202303290550.tif"
 #> [142] "IDE00425.202303290600.tif" "IDE00425.202303290610.tif" "IDE00425.202303290620.tif"
-#> [145] "IDE00425.202303290630.tif"
+#> [145] "IDE00425.202303290630.tif" "IDE00425.202303290640.tif"
 #>   [1] "IDE00425.202303280610.tif" "IDE00425.202303280620.tif" "IDE00425.202303280630.tif"
 #>   [4] "IDE00425.202303280640.tif" "IDE00425.202303280650.tif" "IDE00425.202303280700.tif"
 #>   [7] "IDE00425.202303280710.tif" "IDE00425.202303280720.tif" "IDE00425.202303280730.tif"
@@ -920,7 +615,7 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 #> [136] "IDE00425.202303290500.tif" "IDE00425.202303290510.tif" "IDE00425.202303290520.tif"
 #> [139] "IDE00425.202303290530.tif" "IDE00425.202303290540.tif" "IDE00425.202303290550.tif"
 #> [142] "IDE00425.202303290600.tif" "IDE00425.202303290610.tif" "IDE00425.202303290620.tif"
-#> [145] "IDE00425.202303290630.tif"
+#> [145] "IDE00425.202303290630.tif" "IDE00425.202303290640.tif"
 ```
 
 ### Using get_satellite_imagery()
@@ -1007,7 +702,7 @@ This value must be specified and the function will accept only one at a time.
 
 ```r
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmplRd6Rl/fileb60f271b30be.png
+#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmplRd6Rl/fileb60f113d16c3.png
 plot(y)
 ```
 
