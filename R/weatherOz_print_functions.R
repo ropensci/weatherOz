@@ -47,7 +47,7 @@ print.weatherOz_tbl <- function(x,
       knitr::combine_words(unlist(state)),
       ".",
       "  Also see: \n",
-      "  <https://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>",
+      "  <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>",
       ".\n",
       "  ",
       strrep("-",
@@ -109,7 +109,7 @@ print.weatherOz_tbl <- function(x,
       " can be found at:\n"
     )
     for (s in state) {
-      .stylecat("  <www.bom.gov.au/",
+      .stylecat("  <http://www.bom.gov.au/",
                 tolower(s),
                 "/forecasts/state.shtml>\n")
     }
