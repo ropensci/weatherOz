@@ -7,7 +7,7 @@
 get_available_radar(radar_id = "all")
 }
 \arguments{
-\item{radar_id}{Numeric. \acronym{BOM} radar \acronym{ID} of interest for
+\item{radar_id}{\code{Numeric}. \acronym{BOM} radar \acronym{ID} of interest for
 which a list of available images will be returned.  Defaults to all images
 currently available.}
 }

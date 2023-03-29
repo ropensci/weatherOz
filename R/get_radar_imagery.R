@@ -7,7 +7,7 @@
 #' \acronym{radar} imagery for each location, which are updated approximately
 #' every 6 to 10 minutes by the \acronym{BOM}.  Ported from \pkg{bomrang}.
 #'
-#' @param radar_id Numeric. \acronym{BOM} radar \acronym{ID} of interest for
+#' @param radar_id `Numeric`. \acronym{BOM} radar \acronym{ID} of interest for
 #' which a list of available images will be returned.  Defaults to all images
 #' currently available.
 #'
@@ -39,7 +39,7 @@ get_available_radar <- function(radar_id = "all") {
   list_files <- curl::new_handle()
   curl::handle_setopt(
     handle = list_files,
-    FTP_RESPONSE_TIMEOUT = 200000,
+    TCP_KEEPALIVE = 200000,
     CONNECTTIMEOUT = 90,
     ftp_use_epsv = TRUE,
     dirlistonly = TRUE
@@ -57,17 +57,19 @@ get_available_radar <- function(radar_id = "all") {
                                 key = "LocationID")
 
   dat <- dat[radar_locations, on = "LocationID"]
-  dat[, range := data.table::fcase(
-        range == 1, "512km",
-        range == 2, "256km",
-        range == 3, "128km",
-        range == 4, "64km"
-      )]
+  dat[, range := data.table::fcase(range == 1,
+                                   "512km",
+                                   range == 2,
+                                   "256km",
+                                   range == 3,
+                                   "128km",
+                                   range == 4,
+                                   "64km")]
 
   if (radar_id[1] == "all") {
     dat <- dat
   } else if (is.numeric(radar_id) && radar_id %in% dat$Radar_id) {
-    dat <- dat[dat$Radar_id %in% radar_id,]
+    dat <- dat[dat$Radar_id %in% radar_id, ]
   } else{
     stop("`radar_id` was not found",
          call. = FALSE)
@@ -141,7 +143,7 @@ get_radar_imagery <- get_radar <-
     h <- curl::new_handle()
     curl::handle_setopt(
       handle = h,
-      FTP_RESPONSE_TIMEOUT = 200000,
+      TCP_KEEPALIVE = 200000,
       CONNECTTIMEOUT = 90
     )
     tryCatch({

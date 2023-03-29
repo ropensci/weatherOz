@@ -110,7 +110,7 @@
   h <- curl::new_handle()
   curl::handle_setopt(
     handle = h,
-    FTP_RESPONSE_TIMEOUT = 60L,
+    TCP_KEEPALIVE = 60L,
     CONNECTTIMEOUT = 60L,
     TIMEOUT = 120L,
     USERAGENT = USERAGENT

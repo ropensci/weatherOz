@@ -1,4 +1,5 @@
 
+
 #' Get a listing of available BOM satellite GeoTIFF imagery
 #'
 #' Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
@@ -8,7 +9,7 @@
 #' files available and then specify in the [get_satellite_imagery()]
 #' function.
 #'
-#' @param product_id Character. \acronym{BOM} product ID of interest for which
+#' @param product_id `Character`. \acronym{BOM} product ID of interest for which
 #' a list of available images will be returned.  Defaults to all images
 #' currently available.
 #'
@@ -71,12 +72,12 @@ get_available_imagery <- function(product_id = "all") {
 #'  It is suggested to check file availability first by using
 #'  [get_available_imagery()].
 #'
-#' @param product_id Character. \acronym{BOM} product ID to download in
+#' @param product_id `Character`. \acronym{BOM} product ID to download in
 #' 'GeoTIFF' format and import as a [terra::SpatRaster()] object.  A
 #' vector of values from [get_available_imagery()] may be used here.
 #' Value is required.
-#' @param scans Numeric. Number of scans to download, starting with most recent
-#' and progressing backwards, *e.g.*, 1 - the most recent single scan
+#' @param scans `Numeric`. Number of scans to download, starting with most
+#' recent and progressing backwards, *e.g.*, 1 - the most recent single scan
 #' available , 6 - the most recent hour available, 12 - the most recent 2 hours
 #' available, etc.  Negating will return the oldest files first.  Defaults to 1.
 #' Value is optional.
@@ -147,10 +148,8 @@ get_satellite_imagery <- get_satellite <-
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
 
     # if we're feeding output from get_available_imagery(), use those values
-    if (substr(
-      product_id[1],
-      nchar(product_id[1]) - 3, nchar(product_id[1])
-    ) == ".tif") {
+    if (substr(product_id[1],
+               nchar(product_id[1]) - 3, nchar(product_id[1])) == ".tif") {
       tif_files <- utils::tail(product_id, scans)
     } else {
       # otherwise check the user entered product_id values
@@ -173,21 +172,23 @@ get_satellite_imagery <- get_satellite <-
     # download files from server
 
     h <- curl::new_handle()
-    curl::handle_setopt(handle = h,
-                        FTP_RESPONSE_TIMEOUT = 200000,
-                        CONNECTTIMEOUT = 90,
-                        ftp_use_epsv = TRUE
+    curl::handle_setopt(
+      handle = h,
+      TCP_KEEPALIVE = 200000,
+      CONNECTTIMEOUT = 90,
+      ftp_use_epsv = TRUE
     )
 
     # TODO: this needs to be commented to be more clear
     tryCatch({
       Map(
         function(urls, destination)
-          curl::curl_download(urls,
-                              destination,
-                              mode = "wb",
-                              quiet = TRUE,
-                              handle = h
+          curl::curl_download(
+            urls,
+            destination,
+            mode = "wb",
+            quiet = TRUE,
+            handle = h
           ),
         tif_files,
         file.path(tempdir(), basename(tif_files))
@@ -199,21 +200,25 @@ get_satellite_imagery <- get_satellite <-
                     "error_message.png",
                     package = "weatherOz")
       ))
-    }
-    )
+    })
     # create SpatRaster object of the GeoTIFF files
     files <-
       list.files(tempdir(), pattern = "\\.tif$", full.names = TRUE)
-    files <- basename(files)[basename(files) %in% basename(tif_files)]
+    files <-
+      basename(files)[basename(files) %in% basename(tif_files)]
     files <- file.path(tempdir(), files)
     if (all(substr(files, nchar(files) - 3, nchar(files)) == ".tif")) {
       read_tif <- terra::rast(files)
     } else {
-      stop(paste0(
-        "\nCannot create a `SpatRaster` object of ", files, ".\n",
-        "\nPerhaps the file download corrupted?\n",
-        "\nYou might also check your cache directory for the files.\n"
-      ))
+      stop(
+        paste0(
+          "\nCannot create a `SpatRaster` object of ",
+          files,
+          ".\n",
+          "\nPerhaps the file download corrupted?\n",
+          "\nYou might also check your cache directory for the files.\n"
+        )
+      )
     }
     return(read_tif)
   }
@@ -269,21 +274,20 @@ get_satellite_imagery <- get_satellite <-
   # but then will not actually serve the requested file, so we want to set a max
   # time limit for the complete process to complete as well.
   list_files <- curl::new_handle()
-  curl::handle_setopt(handle = list_files,
-                      FTP_RESPONSE_TIMEOUT = 60L,
-                      CONNECTTIMEOUT = 60L,
-                      TIMEOUT = 120L,
-                      USERAGENT = USERAGENT,
-                      ftp_use_epsv = TRUE,
-                      dirlistonly = TRUE
+  curl::handle_setopt(
+    handle = list_files,
+    TCP_KEEPALIVE = 60L,
+    CONNECTTIMEOUT = 60L,
+    TIMEOUT = 120L,
+    USERAGENT = USERAGENT,
+    ftp_use_epsv = TRUE,
+    dirlistonly = TRUE
   )
 
   # get file list from FTP server
-  con <- curl::curl(
-    url = bom_server,
-    "r",
-    handle = list_files
-  )
+  con <- curl::curl(url = bom_server,
+                    "r",
+                    handle = list_files)
   tif_files <- readLines(con)
   close(con)
 
@@ -295,93 +299,63 @@ get_satellite_imagery <- get_satellite <-
     tif_files <- switch(
       product_id,
       "IDE00420" = {
-        tif_files[grepl(
-          "IDE00420",
-          tif_files
-        )]
+        tif_files[grepl("IDE00420",
+                        tif_files)]
       },
       "IDE00421" = {
-        tif_files[grepl(
-          "IDE00421",
-          tif_files
-        )]
+        tif_files[grepl("IDE00421",
+                        tif_files)]
       },
       "IDE00422" = {
-        tif_files[grepl(
-          "IDE00422",
-          tif_files
-        )]
+        tif_files[grepl("IDE00422",
+                        tif_files)]
       },
       "IDE00423" = {
-        tif_files[grepl(
-          "IDE00423",
-          tif_files
-        )]
+        tif_files[grepl("IDE00423",
+                        tif_files)]
       },
       "IDE00425" = {
-        tif_files[grepl(
-          "IDE00425",
-          tif_files
-        )]
+        tif_files[grepl("IDE00425",
+                        tif_files)]
       },
       "IDE00426" = {
-        tif_files[grepl(
-          "IDE00426",
-          tif_files
-        )]
+        tif_files[grepl("IDE00426",
+                        tif_files)]
       },
       "IDE00427" = {
-        tif_files[grepl(
-          "IDE00427",
-          tif_files
-        )]
+        tif_files[grepl("IDE00427",
+                        tif_files)]
       },
       "IDE00430" = {
-        tif_files[grepl(
-          "IDE00430",
-          tif_files
-        )]
+        tif_files[grepl("IDE00430",
+                        tif_files)]
       },
       "IDE00431" = {
-        tif_files[grepl(
-          "IDE00431",
-          tif_files
-        )]
+        tif_files[grepl("IDE00431",
+                        tif_files)]
       },
       "IDE00432" = {
-        tif_files[grepl(
-          "IDE00432",
-          tif_files
-        )]
+        tif_files[grepl("IDE00432",
+                        tif_files)]
       },
       "IDE00433" = {
-        tif_files[grepl(
-          "IDE00433",
-          tif_files
-        )]
+        tif_files[grepl("IDE00433",
+                        tif_files)]
       },
       "IDE00435" = {
-        tif_files[grepl(
-          "IDE00435",
-          tif_files
-        )]
+        tif_files[grepl("IDE00435",
+                        tif_files)]
       },
       "IDE00436" = {
-        tif_files[grepl(
-          "IDE00436",
-          tif_files
-        )]
+        tif_files[grepl("IDE00436",
+                        tif_files)]
       },
       "IDE00437" = {
-        tif_files[grepl(
-          "IDE00437",
-          tif_files
-        )]
+        tif_files[grepl("IDE00437",
+                        tif_files)]
       },
-      tif_files[grepl(
-        "IDE00439",
-        tif_files
-      )]
+      tif_files[grepl("IDE00439",
+                      tif_files)]
     )
     paste0(bom_server, tif_files)
   } else {
@@ -397,7 +371,7 @@ get_satellite_imagery <- get_satellite <-
 }
 
 
-# Export terra plot functionality to plot radar imagery
+# Export terra plot functionality to plot radar imagery ----
 #' @importFrom terra plot
 #' @export
 terra::plot

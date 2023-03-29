@@ -7,13 +7,13 @@
 get_satellite_imagery(product_id, scans = 1)
 }
 \arguments{
-\item{product_id}{Character. \acronym{BOM} product ID to download in
+\item{product_id}{\code{Character}. \acronym{BOM} product ID to download in
 'GeoTIFF' format and import as a \code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} object.  A
 vector of values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.
 Value is required.}
 
-\item{scans}{Numeric. Number of scans to download, starting with most recent
-and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
+\item{scans}{\code{Numeric}. Number of scans to download, starting with most
+recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
 available , 6 - the most recent hour available, 12 - the most recent 2 hours
 available, etc.  Negating will return the oldest files first.  Defaults to 1.
 Value is optional.}

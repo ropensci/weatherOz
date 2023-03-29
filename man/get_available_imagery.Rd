@@ -7,7 +7,7 @@
 get_available_imagery(product_id = "all")
 }
 \arguments{
-\item{product_id}{Character. \acronym{BOM} product ID of interest for which
+\item{product_id}{\code{Character}. \acronym{BOM} product ID of interest for which
 a list of available images will be returned.  Defaults to all images
 currently available.}
 }
