@@ -58,8 +58,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
-      - uses: actions/upload-artifact@v2
-
       # set date/week for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
       # - cache R packages daily
