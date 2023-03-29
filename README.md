@@ -29,16 +29,14 @@ You can install the development version of {weatherOz} like so:
 if (!requireNamespace("remotes", quietly = TRUE)) {
     install.packages("remotes")
 }
-remotes::install_git("https://github.com/DPIRD-FSI/weatherOz.git")
+remotes::install_github("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
 ```
 
-## Example
+## Example 1
 
-This is a basic example which shows you how to solve a common problem:
+Source wind and erosion conditions for daily time interval from the DPIRD Weather API.
 
-``` r
-# Source wind and erosion conditions for daily time interval from DPIRD Weather
-# API
+```r
 # define start and end date
 start_date <- "2022-05-01"
 end_date <- "2022-05-02"
@@ -50,16 +48,19 @@ output <- get_dpird_summaries(
             api_key = mykey,
             interval = "hourly",
             which_vars = c("wind", "erosion"))
+```
 
-# Source data from latitude and longitude coordinates (gridded data - SILO API)
-# Southwood, QLD in the 'apsim' format.
+## Example 2
+
+Source data from latitude and longitude coordinates (gridded data - SILO API) Southwood, QLD in the 'apsim' format.
+
+```r
 wd <- get_silo(latitude = -27.85,
                longitude = 150.05,
                first = "20221001",
                last = "20221201",
                data_format = "apsim",
                email = "your@email")
-
 ```
 
 ## Notes on Data and API Endpoints
@@ -74,3 +75,7 @@ While we are responsive to user requests, we don't make any commitments about sp
 ## References
 
 Jeffrey, S.J., Carter, J.O., Moodie, K.B. and Beswick, A.R. (2001). Using spatial interpolation to construct a comprehensive archive of Australian climate data, _Environmental Modelling and Software_, Vol 16/4, pp 309-330. <https://doi.org/10.1016/S1364-8152(01)00008-1)>.
+
+## Code of Conduct
+ 
+Please note that the weatherOz project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

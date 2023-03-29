@@ -60,7 +60,16 @@ get_coastal_forecast <- function(state = "AUS") {
   location <- .validate_filepath(filepath)
   coastal_out <-
     .return_coastal(file_loc = location, cleaned_state = the_state)
-  return(coastal_out)
+
+  return(
+    structure(
+      coastal_out,
+      class = union("weatherOz_tbl", class(coastal_out)),
+      state = unique(coastal_out[, "state_code"]),
+      product_id = unique(coastal_out[, "product_id"]),
+      tbl_type = "coastal_forecast"
+    )
+  )
 }
 
 # Coastal forecast functions for get() and parse()------------------------------

@@ -140,7 +140,7 @@ get_satellite_imagery <- get_satellite <-
   function(product_id,
            scans = 1) {
     if (length(unique(substr(product_id, 1, 8))) != 1) {
-      stop("\nwrapique only supports working with one Product ID at a time\n")
+      stop("\nweatherOz only supports working with one Product ID at a time\n")
     }
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"

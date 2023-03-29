@@ -1,6 +1,6 @@
 #' Print a weatherOz_tbl object
 #'
-#' Custom [print()] method for `weatherOz_tbl` objects.
+#' Custom `print()` method for `weatherOz_tbl` objects.
 #'
 #' @param x a Defaults to `weatherOz_tbl` object.
 #' @param ... ignored
@@ -31,24 +31,70 @@ print.weatherOz_tbl <- function(x,
     .stylecat("  ", strrep("-", 11),
               "  Australian Bureau of Meteorology (BOM) Ag Bulletin. ",
               strrep("-", 11), "\n")
-    .stylecat("  Please note information at the foot of,\n")
+    .stylecat("  Please note information at the foot of:\n")
     for (i in product_id) {
       .stylecat("  <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
                 i,
-                ".html>,\n")
+                ".html>\n")
     }
     .stylecat("  the HTML version of Agricultural Observations Bulletin for \n",
               "  ", knitr::combine_words(unlist(state)), ".",
               "\n")
     .stylecat(
-      "  Also see \n",
+      "  Also see: \n",
       "  <https://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>",
       ".\n"
     )
+    .stylecat("  ",
+              strrep("-",
+                     76),
+              "  \n")
   }
-  .stylecat("  ", strrep("-", 76), "  \n")
-}
 
+  if ("coastal_forecast" %in% attributes(x)) {
+    .stylecat("  ", strrep("-", 11),
+              "  Australian Bureau of Meteorology (BOM) Coastal Waters Forecast. ",
+              strrep("-", 11), "\n")
+    .stylecat("  Please note information at the foot of:\n")
+    for (i in product_id) {
+      .stylecat("  <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
+                i,
+                ".html>\n")
+    }
+    .stylecat("  the HTML version of Coastal Waters Forecast for \n",
+              "  ", knitr::combine_words(unlist(state)), ".",
+              "\n")
+    .stylecat(
+      "  Also see \n",
+      "  <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>",
+      ".\n"
+    )
+    .stylecat("  ",
+              strrep("-",
+                     89),
+              "  \n")
+  }
+
+  if ("precis_forecast" %in% attributes(x)) {
+    .stylecat("  ", strrep("-", 11),
+              "  Australian Bureau of Meteorology (BOM) Precis Forecast. ",
+              strrep("-", 11), "\n")
+    .stylecat("  The HTML version of Short Form (precis) Forecast for\n",
+              "  ", knitr::combine_words(unlist(state)), " can be found at:\n")
+    for (s in state) {
+      .stylecat("  <www.bom.gov.au/",
+                tolower(s),
+                "/forecasts/state.shtml>\n")
+    }
+    .stylecat("  Please note information at the page \n",
+              "  <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>",
+              "\n")
+    .stylecat("  ",
+              strrep("-",
+                     80),
+              "  \n")
+  }
+}
 
 #' Style header meta-information for BOM products
 #'

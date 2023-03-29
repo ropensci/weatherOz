@@ -431,7 +431,20 @@
   if (which_api == 'dpird') {
     df_out <- data.table::data.table(df_out)
     df_out[, stationName := .cap_names(s = stationName)]
-    names(df_out)[1:2] <- c("station_code", "station_name")
+
+    # Split the vector into two with an underscore between the names
+    new_names <- lapply(names(df_out), function(x) {
+      paste(strsplit(x,
+                     "(?<=[a-z])(?=[A-Z])",
+                     perl = TRUE)[[1]],
+            collapse = "_"
+      )
+    })
+
+    # Tranform to lower case and rename df_out
+    new_names <- unlist(new_names)
+    new_names <- tolower(new_names)
+    names(df_out) <- gsub("[.]", "_", new_names)
   }
 
   if (which_api == 'silo') {

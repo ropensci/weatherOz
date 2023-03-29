@@ -871,6 +871,7 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 #> [136] "IDE00425.202303290500.tif" "IDE00425.202303290510.tif" "IDE00425.202303290520.tif"
 #> [139] "IDE00425.202303290530.tif" "IDE00425.202303290540.tif" "IDE00425.202303290550.tif"
 #> [142] "IDE00425.202303290600.tif" "IDE00425.202303290610.tif" "IDE00425.202303290620.tif"
+#> [145] "IDE00425.202303290630.tif"
 #>   [1] "IDE00425.202303280610.tif" "IDE00425.202303280620.tif" "IDE00425.202303280630.tif"
 #>   [4] "IDE00425.202303280640.tif" "IDE00425.202303280650.tif" "IDE00425.202303280700.tif"
 #>   [7] "IDE00425.202303280710.tif" "IDE00425.202303280720.tif" "IDE00425.202303280730.tif"
@@ -919,6 +920,7 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 #> [136] "IDE00425.202303290500.tif" "IDE00425.202303290510.tif" "IDE00425.202303290520.tif"
 #> [139] "IDE00425.202303290530.tif" "IDE00425.202303290540.tif" "IDE00425.202303290550.tif"
 #> [142] "IDE00425.202303290600.tif" "IDE00425.202303290610.tif" "IDE00425.202303290620.tif"
+#> [145] "IDE00425.202303290630.tif"
 ```
 
 ### Using get_satellite_imagery()
@@ -1005,7 +1007,7 @@ This value must be specified and the function will accept only one at a time.
 
 ```r
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmplRd6Rl/fileb60f11b6ca89.png
+#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmplRd6Rl/fileb60f271b30be.png
 plot(y)
 ```
 

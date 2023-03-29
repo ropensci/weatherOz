@@ -69,7 +69,7 @@
 #'
 #' @export parse_coastal_forecast
 
-parse_coastal_forecast <- function(state = "AUS", filepath) {
+parse_coastal_forecast <- function(state, filepath) {
   # see internal_functions.R for these functions
   the_state <- .check_states(state)
   location <- .validate_filepath(filepath)
