@@ -105,22 +105,40 @@ get_station_list <- function(api = "weather",
            "Visit: https://www.agric.wa.gov.au/web-apis")
     }
 
-    ret <- url(paste0("https://api.dpird.wa.gov.au/v2/",
-                      which_api,
-                      "/stations.json?api_key=",
-                      api_key,
-                      "&limit=",
-                      n_limit,
-                      "&group=",
-                      api_group,
-                      "&state=",
-                      this_state))
+    # Check the operating system
+    os <- Sys.info()[["sysname"]]
+
+    # Define the query URLs
+    if (os == "Windows") {
+      base_url <- "https://api.agric.wa.gov.au/v2/"
+    } else {
+      base_url <- "https://api.dpird.wa.gov.au/v2/"
+    }
+
+    ret <- paste0(base_url,
+                  which_api,
+                  "/stations.json?",
+                  "api_key=",
+                  api_key,
+                  "&offset=0",
+                  "&limit=",
+                  n_limit,
+                  "&group=",
+                  api_group)
 
     out <- data.table::data.table(jsonlite::fromJSON(ret)$collection)
 
+    # Deal with windProbeHeights column
+    wind_sensors <- do.call(rbind, out$windProbeHeights)
+    wind_sensors[wind_sensors[, 2] == 3, 2] <- NA
+
+    # Prepare data to export
+    out[, windProbeHeights.3m := wind_sensors[, 1]]
+    out[, windProbeHeights.10m := wind_sensors[, 2]]
     out[, latitude := as.numeric(latitude)]
     out[, longitude := as.numeric(longitude)]
     out[, links := NULL]
+    out[, windProbeHeights := NULL]
 
     out <- .rename_cols(out, which_api = "dpird")
   }
