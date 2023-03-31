@@ -60,7 +60,8 @@ get_station_list <- function(api = "weather",
 
   # CRAN NOTE avoidance:
   stations_site_list <-
-    api_group <- latitude <- longitude <- links <- NULL #nocov
+    api_group <- latitude <- longitude <- links <-
+    windProbeHeights <- windProbeHeights.10m <- windProbeHeights.3m <- NULL #nocov
 
   # Set API
   which_api <- try(
