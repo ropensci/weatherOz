@@ -36,7 +36,8 @@
                                       "Bdy",
                                       "bdY",
                                       "bdy"
-                                    )),
+                                    ),
+                                    tz = Sys.timezone()),
     warning = function(c) {
       stop(call. = FALSE,
            "\n",
