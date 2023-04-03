@@ -370,6 +370,7 @@ get_satellite_imagery <- get_satellite <-
 
 
 # Export terra plot functionality to plot radar imagery ----
+#' @importFrom graphics plot
 #' @importFrom terra plot
 #' @export
 terra::plot

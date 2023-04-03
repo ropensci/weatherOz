@@ -110,6 +110,7 @@ Imports:
     curl,
     data.table,
     foreign,
+    graphics,
     grDevices,
     httr,
     jsonlite,
