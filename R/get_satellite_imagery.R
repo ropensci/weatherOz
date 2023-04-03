@@ -56,10 +56,8 @@
 get_available_imagery <- function(product_id = "all") {
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
   .check_IDs(product_id)
-  message("\nThe following files are currently available for download:\n")
   tif_list <- .ftp_images(product_id, bom_server = ftp_base)
-  write(tif_list, file = file.path(tempdir(), "tif_list"))
-  print(tif_list)
+  return(tif_list)
 }
 
 #' Get \acronym{BOM} Satellite GeoTIFF Imagery
@@ -67,7 +65,7 @@ get_available_imagery <- function(product_id = "all") {
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #' <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
 #' [terra::SpatRaster()] object of 'GeoTIFF' files. Files are available at ten
-#'  minutes update frequency with a 24 hour delete time.  It is suggested to
+#'  minutes update frequency with a 24-hour delete time.  It is suggested to
 #'  check file availability first by using [get_available_imagery()].
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID to download in
