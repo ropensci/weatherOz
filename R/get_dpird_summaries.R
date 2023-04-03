@@ -40,7 +40,7 @@
 #'
 #' # Set date interval for yearly request
 #' # Get rainfall summary
-#' start_date <- "2017-10-28"
+#' start_date <- "20171028"
 #'
 #' # Use default for end data (current system date)
 #' output <- get_dpird_summaries(
@@ -52,8 +52,8 @@
 #'
 #' # Only for wind and erosion conditions for daily time interval
 #' # define start and end date
-#' start_date <- "2022-05-01"
-#' end_date <- "2022-05-02"
+#' start_date <- "20220501"
+#' end_date <- "20220502"
 #'
 #' output <- get_dpird_summaries(
 #'             station_id = "BI",
@@ -130,7 +130,7 @@ get_dpird_summaries <- function(
 #' mykey <- 'dpird_api_key'
 #'
 #' # set date interval for yearly request
-#' start_date <- "2015-02-01"
+#' start_date <- "20150201"
 #'
 #' # Use default for end data (current system date)
 #' output <- .query_dpird_summaries(
@@ -140,8 +140,8 @@ get_dpird_summaries <- function(
 #'            interval = "yearly")
 #'
 #' # 15 min interval query, define start and end date
-#' start_date <- "2022-05-01"
-#' end_date <- "2022-05-02"
+#' start_date <- "20220501"
+#' end_date <- "20220502"
 #'
 #' output <- .query_dpird_summaries(
 #'            station_id = "BI",
@@ -175,8 +175,8 @@ get_dpird_summaries <- function(
   }
 
   # validate user provided date
-  .check_date(first)
-  .check_date(last)
+  first <- .check_date(first)
+  last <- .check_date(last)
 
   # Match time interval query to user requests
   m_int <- try(match.arg(interval,
