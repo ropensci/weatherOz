@@ -119,6 +119,7 @@ Imports:
     methods,
     readr,
     stringi,
+    stars,
     terra,
     utils,
     xml2

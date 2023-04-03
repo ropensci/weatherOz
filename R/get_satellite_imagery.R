@@ -368,9 +368,9 @@ get_satellite_imagery <- get_satellite <-
   return(tif_files)
 }
 
-
-# Export terra plot functionality to plot satellite imagery ----
-#' @importFrom terra plot
-#' @method plot SpatRaster
+#' @importMethodsFrom terra plot
 #' @export
-plot.SpatRaster <- function(x) plot("SpatRaster")
+setMethod("plot", signature = "SpatRaster", definition = function(x,...){
+  terra::plot(x)
+})
+
