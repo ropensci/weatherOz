@@ -366,9 +366,20 @@ get_satellite_imagery <- get_satellite <-
   return(tif_files)
 }
 
+#' Plot a terra SpatRaster object
+#'
+#' Native plotting of \CRANpkg{terra} `SpatRaster` objects, such as objects
+#' returned from `get_satellite_imagery()` by default.
+#'
 #' @importMethodsFrom terra plot
+#' @param x An object of class `SpatRaster`.
+#' @param y Not used.
+#' @param ... Plot parameters forwarded.
 #' @export
-setMethod("plot", signature = "SpatRaster", definition = function(x,...){
-  terra::plot(x)
-})
-
+methods::setMethod(
+  "plot",
+  signature = "SpatRaster",
+  definition = function(x, y = "missing", ...) {
+    terra::plot(x)
+  }
+)
