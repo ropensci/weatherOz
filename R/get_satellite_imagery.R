@@ -369,8 +369,8 @@ get_satellite_imagery <- get_satellite <-
 }
 
 
-# Export terra plot functionality to plot radar imagery ----
-#' @importFrom graphics plot
+# Export terra plot functionality to plot satellite imagery ----
 #' @importFrom terra plot
+#' @method plot SpatRaster
 #' @export
-terra::plot
+plot.SpatRaster <- function(x) plot("SpatRaster")

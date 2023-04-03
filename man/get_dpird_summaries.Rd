@@ -52,7 +52,7 @@ mykey <- 'dpird_api_key'
 
 # Set date interval for yearly request
 # Get rainfall summary
-start_date <- "2017-10-28"
+start_date <- "20171028"
 
 # Use default for end data (current system date)
 output <- get_dpird_summaries(
@@ -64,8 +64,8 @@ output <- get_dpird_summaries(
 
 # Only for wind and erosion conditions for daily time interval
 # define start and end date
-start_date <- "2022-05-01"
-end_date <- "2022-05-02"
+start_date <- "20220501"
+end_date <- "20220502"
 
 output <- get_dpird_summaries(
             station_id = "BI",
