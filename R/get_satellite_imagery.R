@@ -366,6 +366,8 @@ get_satellite_imagery <- get_satellite <-
   return(tif_files)
 }
 
+## Reexport plot() for SpatRaster ----
+
 #' Plot a terra SpatRaster object
 #'
 #' Native plotting of \CRANpkg{terra} `SpatRaster` objects, such as objects
