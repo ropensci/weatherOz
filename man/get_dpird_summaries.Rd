@@ -15,35 +15,35 @@ get_dpird_summaries(
 }
 \arguments{
 \item{station_id}{A string of the station ID code for the station of
-interest. Defaults to NULL.}
+interest. Defaults to \code{NULL}.}
 
 \item{first}{A string representing the start date of the query in the
-format 'yyyy-mm-dd'. Defaults to NULL.}
+format 'yyyymmdd'. Defaults to \code{NULL}.}
 
 \item{last}{A string representing the start date of the query in the
-format 'yyyy-mm-dd'. Defaults to the current system date.}
+format 'yyyymmdd'. Defaults to the current system date.}
 
-\item{api_key}{Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
-Defaults to NULL.}
+\item{api_key}{An \acronym{API} key from \acronym{DPIRD}.
+(\url{https://www.agric.wa.gov.au/web-apis}). Defaults to \code{NULL}.}
 
 \item{interval}{Time interval to summarise over.
-Default is 'daily'; others are '15min', '30min', 'hourly',
-'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
+Default is 'daily'; others are '15min', '30min', 'hourly', 'monthly',
+and 'yearly'. For intervals shorter than 1 day, time period covered
 will be midnight to midnight, with the last time interval being before
 midnight - hour/minute values are for the end of the time period.
 Data for shorter intervals ('15min', '30min') are available from
 January of the previous year.}
 
-\item{which_vars}{Match weather summary selected. Defaults to "all".
-Can be one of "all", "rain", "wind", "temp" and "erosion."}
+\item{which_vars}{Match weather summary selected. Defaults to "all"; others
+are "rain", "wind", "temp" and "erosion."}
 }
 \value{
-a \verb{data table} with station_id and date interval queried together
+a \code{data.table} with \code{station_id} and date interval queried together
 with the requested weather variables.
 }
 \description{
-Nicely formatted individual station weather summaries from the DPIRD
-weather station network.
+Nicely formatted individual station weather summaries from the
+\acronym{DPIRD} weather station network.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
