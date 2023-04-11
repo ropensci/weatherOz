@@ -63,7 +63,7 @@
 #'             interval = "daily",
 #'             which_vars = c("wind", "erosion"))
 #'
-#' @export get_dpird_summaries
+#' @export
 
 get_dpird_summaries <- function(
     station_id = NULL,
