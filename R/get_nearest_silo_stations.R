@@ -28,7 +28,7 @@
 #' @return A `data.table` of available stations and associated metadata.
 #'
 #' @export
-find_nearby_silo_stations <- function(distance_km,
+find_nearby_silo_stations <- function(distance_km = NULL,
                                       longitude = NULL,
                                       latitude = NULL,
                                       station_id = NULL) {
@@ -47,12 +47,17 @@ find_nearby_silo_stations <- function(distance_km,
     .check_lonlat(longitude = longitude, latitude = latitude)
   }
 
-  x <-
-    .get_silo_stations(.station_id = station_id, .distance_km = distance_km)
-
   if (!is.null(station_id)) {
-    return(x)
+    return(
+      .get_silo_stations(
+        .station_id = station_id,
+        .distance_km = distance_km)
+      )
+
   } else if (is.null(station_id)) {
+    x <-
+      .get_silo_stations(.station_id = NULL)
+
     x[, "distance" := .haversine_distance(latitude,
                                           longitude,
                                           lat,
@@ -85,12 +90,36 @@ find_nearby_silo_stations <- function(distance_km,
   base_url <-
     "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php?format="
 
+  # Define column types
+  col_types <- c(
+    Number = "factor",
+    `Station name` = "character",
+    Latitude = "numeric",
+    Longitud = "numeric",
+    Stat = "factor",
+    Elevat. = "numeric",
+    `Distance (km)` = "numeric"
+  )
+
+  # Define column names
+  col_names = c(
+    "station_code",
+    "station_name",
+    "lat",
+    "lon",
+    "state",
+    "elevation",
+    "distance_km"
+  )
+
   # if `.station_id` is not provided, fetch all stations in AU. Otherwise, use
   # the cgi-bin interface to find stations within `.distance_km` of the given
   # `.station_id`
   if (is.null(.station_id)) {
     r <- data.table::fread(paste0(base_url,
-                                  "near&station=015526&radius=2500"))
+                                  "near&station=015526&radius=10000"),
+                           colClasses = col_types,
+                           col.names = col_names)
   } else {
     r <- data.table::fread(paste0(
       base_url,
@@ -98,22 +127,18 @@ find_nearby_silo_stations <- function(distance_km,
       .station_id,
       "&radius=",
       .distance_km
-    ))
+    ),
+    colClasses = col_types,
+    col.names = col_names
+    )
   }
 
-  data.table::setnames(
-    r,
-    names(r),
-    c(
-      "station_id",
-      "station_name",
-      "lat",
-      "lon",
-      "state",
-      "elevation",
-      "distance_km"
-    )
-  )
-  data.table::setkey(r, "station_id")
+  # Manipulate cols
+  r[, station_name := .cap_names(s = station_name)]
+  r[, owner := "BOM"]
+
+  data.table::setkey(r, "station_code")
+  data.table::setcolorder(r, c(1:5, 6, 8, 7))
+
   return(r[])
 }
