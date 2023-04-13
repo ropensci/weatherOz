@@ -8,29 +8,32 @@
 
 #' Get weather data from DPIRD weather API summarised by time interval
 #'
-#' Nicely formatted individual station weather summaries from the
-#' \acronym{DPIRD} weather station network.
+#' Nicely formatted individual station weather summaries from the DPIRD
+#' weather station network.
 #'
 #' @param station_id A string of the station ID code for the station of
-#' interest. Defaults to `NULL`.
+#' interest. Defaults to NULL.
 #' @param first A string representing the start date of the query in the
-#' format 'yyyymmdd'. Defaults to `NULL`.
+#' format 'yyyy-mm-dd'. Defaults to NULL.
 #' @param last A string representing the start date of the query in the
-#' format 'yyyymmdd'. Defaults to the current system date.
-#' @param api_key An \acronym{API} key from \acronym{DPIRD}.
-#' (<https://www.agric.wa.gov.au/web-apis>). Defaults to `NULL`.
+#' format 'yyyy-mm-dd'. Defaults to the current system date.
+#' @param api_key Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
+#' Defaults to NULL.
 #' @param interval Time interval to summarise over.
-#' Default is 'daily'; others are '15min', '30min', 'hourly', 'monthly',
-#' and 'yearly'. For intervals shorter than 1 day, time period covered
+#' Default is 'daily'; others are '15min', '30min', 'hourly',
+#' 'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
 #' will be midnight to midnight, with the last time interval being before
 #' midnight - hour/minute values are for the end of the time period.
 #' Data for shorter intervals ('15min', '30min') are available from
 #' January of the previous year.
-#' @param which_vars Match weather summary selected. Defaults to "all"; others
-#' are "rain", "wind", "temp" and "erosion."
+#' @param which_vars Match weather summary selected. Defaults to "all".
+#' Can be one of "all", "rain", "wind", "temp" and "erosion."
 #'
-#' @return a `data.table` with `station_id` and date interval queried together
+#' @return a `data table` with station_id and date interval queried together
 #' with the requested weather variables.
+#'
+#' @note Please note this function converts date-time columns from Coordinated
+#' Universal Time 'UTC' to Australian Western Standard Time 'AWST'
 #'
 #' @family DPIRD
 #'
@@ -63,7 +66,7 @@
 #'             interval = "daily",
 #'             which_vars = c("wind", "erosion"))
 #'
-#' @export
+#' @export get_dpird_summaries
 
 get_dpird_summaries <- function(
     station_id = NULL,
@@ -101,16 +104,16 @@ get_dpird_summaries <- function(
 #'
 #' @param station_id A string with the station ID code for the station of
 #' interest.
-#' @param first The date on which the weather data summary will be sourced.
-#' \pkg{weatherOz} does its best to determine the date given any format but may
-#' fail if given an unconventional date format.
-#' @param last The last date for which the data will be sourced. For intervals
-#' less than one day, to get one day of data, last should be the same as first,
-#' but must be explicitly coded, as otherwise it will default to the current
-#' date.
+#' @param first `Integer`. A string representing the start date of the query in
+#' the format 'yyyymmdd' (ISO-8601). \pkg{weatherOz} does its best to determine
+#' the date given any format but may fail if given an unconventional date format.
+#' @param last A string representing the start date of the query in the format '
+#' yyyymmdd' (ISO-8601). For intervals less than one day, to get one day of
+#' data, last should be the same as first, but must be explicitly coded,
+#' as otherwise it will default to the current date.
 #' @param api_key \acronym{API} key from \acronym{DPIRD}
 #'  <https://www.agric.wa.gov.au/web-apis>.  Defaults to NULL.
-#' @param interval Time interval to summarise over.  The default is 'daily',
+#' @param interval Time interval to summarise over. The default is 'daily',
 #' others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
 #' shorter than 1 day, time period covered will be midnight to midnight, with
 #' the last time interval being before midnight–hour/minute values are for the
@@ -121,7 +124,13 @@ get_dpird_summaries <- function(
 #' documentation.
 #'
 #' @note You can request your own API key from DPIRD for free by filling out the
-#' form found at <https://www.agric.wa.gov.au/web-apis>.
+#' form found at <https://www.agric.wa.gov.au/web-apis>. Also note that
+#' \acronym{DPIRD} API has usage limits (2000 observations), which are evident
+#' if you are querying relative long time periods using the '15min', '30min'
+#' and 'hourly' summarisation intervals The API will not warn you that the query
+#' might have ended before date used in the `last` argument. Check the DPIRD
+#' Weather API documentation for further details
+#' <https://www.agric.wa.gov.au/web-apis>.
 #'
 #' @family DPIRD
 #'
@@ -226,9 +235,9 @@ get_dpird_summaries <- function(
     "Requesting ",
     m_int,
     " data from ",
-    format(as.Date(first), "%e %B %Y"),
+    format(first, "%e %B %Y"),
     " to ",
-    format(as.Date(last), "%e %B %Y"),
+    format(last, "%e %B %Y"),
     " for location code ",
     station_id,
     "\n"
@@ -246,10 +255,10 @@ get_dpird_summaries <- function(
     `15min` = paste0(
       api,
       "?startDateTime=",
-      format(as.Date(first), "%Y-%m-%d"),
+      format(first, "%Y-%m-%d"),
       "T00%3A15%3A00",
       "&endDateTime=",
-      format(as.Date(last) + 1, "%Y-%m-%d"),
+      format(last + lubridate::days(1), "%Y-%m-%d"),
       "T00%3A00%3A00",
       "&limit=1000",
       "&api_key=",
@@ -258,10 +267,10 @@ get_dpird_summaries <- function(
     `30min` = paste0(
       api,
       "?startDateTime=",
-      format(as.Date(first), "%Y-%m-%d"),
+      format(first, "%Y-%m-%d"),
       "T00%3A30%3A00",
       "&endDateTime=",
-      format(as.Date(last) + 1, "%Y-%m-%d"),
+      format(last + lubridate::days(1), "%Y-%m-%d"),
       "T00%3A00%3A00",
       "&limit=1000",
       "&api_key=",
@@ -270,10 +279,10 @@ get_dpird_summaries <- function(
     hourly = paste0(
       api,
       "?startDateTime=",
-      format(as.Date(first), "%Y-%m-%d"),
+      format(first, "%Y-%m-%d"),
       "T01%3A00%3A00",
       "&endDateTime=",
-      format(as.Date(last) + 1, "%Y-%m-%d"),
+      format(last + lubridate::days(1), "%Y-%m-%d"),
       "T00%3A00%3A00",
       "&limit=1000",
       "&api_key=",
@@ -282,25 +291,24 @@ get_dpird_summaries <- function(
     daily = paste0(
       api,
       "?startDate=",
-      format(as.Date(first), "%Y-%m-%d"),
+      format(first, "%Y-%m-%d"),
       "&endDate=",
-      format(as.Date(last), "%Y-%m-%d"),
+      format(last, "%Y-%m-%d"),
       "&api_key=",
       api_key,
-      "&limit=",
-      as.Date(last) - as.Date(first) + 1
+      "&limit=1000"
     ),
     monthly = paste0(
       api,
       "?startMonth=",
-      format(as.Date(first), "%Y-%m"),
+      format(first, "%Y-%m"),
       "&endMonth=",
-      format(as.Date(last), "%Y-%m"),
+      format(last, "%Y-%m"),
       "&limit=",
       ceiling(as.double(
         difftime(
-          format(as.Date(last), "%Y-%m-%d"),
-          format(as.Date(first), "%Y-%m-%d"),
+          format(last, "%Y-%m-%d"),
+          format(first, "%Y-%m-%d"),
           units = "days"
         ) / 365
       ) * 12),
@@ -310,9 +318,9 @@ get_dpird_summaries <- function(
     yearly = paste0(
       api,
       "?startYear=",
-      format(as.Date(first), "%Y"),
+      format(first, "%Y"),
       "&endYear=",
-      format(as.Date(last), "%Y"),
+      format(last, "%Y"),
       "&offset=0",
       "&limit=100",
       "&api_key=",
@@ -321,6 +329,7 @@ get_dpird_summaries <- function(
   )
 
   # return only data collection; disregard metadata
+  print(uri)
   out <- .parse_summary(jsonlite::fromJSON(url(uri))$data,
                         which_vars)
   return(out[])
@@ -402,6 +411,49 @@ get_dpird_summaries <- function(
   names(out) <- tolower(names(out))
   names(out) <- gsub("[.]", "_", names(out))
   out <- data.table::setDT(out)
+
+  out[, to := format(
+    lubridate::as_datetime(
+      lubridate::ymd_hms(to),
+      tz = "Australia/Perth"),
+    "%Y-%m-%d %H:%M:%S %Z")]
+
+  out[, from := format(
+    lubridate::as_datetime(
+      lubridate::ymd_hms(from),
+      tz = "Australia/Perth"),
+    "%Y-%m-%d %H:%M:%S %Z")]
+
+  if ("airtemp_mintime" %in% colnames(out)) {
+    out[, airtemp_mintime := format(
+      lubridate::as_datetime(
+        lubridate::ymd_hms(airtemp_mintime),
+        tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z")]
+  }
+
+  if ("airtemp_maxtime" %in% colnames(out)) {
+    out[, airtemp_maxtime := format(
+      lubridate::as_datetime(
+        lubridate::ymd_hms(airtemp_maxtime),
+        tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z")]
+  }
+
+  if ("wind_max_time" %in% colnames(out)) {
+    out[, wind_max_time := format(
+      lubridate::as_datetime(
+        lubridate::ymd_hms(wind_max_time),
+        tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z")]
+  }
+
+  if ("wind_erosion_starttime" %in% colnames(out)) {
+    out[, wind_erosion_starttime := format(
+      lubridate::as_datetime(
+        lubridate::ymd_hms(wind_erosion_starttime),
+        tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z")]
+  }
   return(out[])
 }
-
