@@ -78,6 +78,10 @@ find_nearby_silo_stations <- function(distance_km = NULL,
 
     x[, distance_km := NULL]
 
+    x <-
+      x[distance %in%
+          x[(distance <= distance_km)]$distance]
+
     if (nrow(x) == 0L) message(
       paste0(
         "No SILO stations found around a radius of < ",
@@ -89,8 +93,7 @@ find_nearby_silo_stations <- function(distance_km = NULL,
       )
     )
 
-    return(x[distance %in%
-               x[(distance <= distance_km)]$distance])
+    return(x)
   }
 }
 
