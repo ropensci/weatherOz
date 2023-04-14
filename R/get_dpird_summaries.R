@@ -230,19 +230,6 @@ get_dpird_summaries <- function(
     stop(call. = FALSE,
          "\"", interval, "\" is not a supported time interval")
 
-  # Helper message, tells which variable, date and stations are being queried
-  message(
-    "Requesting ",
-    m_int,
-    " data from ",
-    format(first, "%e %B %Y"),
-    " to ",
-    format(last, "%e %B %Y"),
-    " for location code ",
-    station_id,
-    "\n"
-  )
-
   # Create base query URL for weather summaries
   api <- paste0("https://api.dpird.wa.gov.au/v2/weather/stations/",
                 station_id,
@@ -329,7 +316,6 @@ get_dpird_summaries <- function(
   )
 
   # return only data collection; disregard metadata
-  print(uri)
   out <- .parse_summary(jsonlite::fromJSON(url(uri))$data,
                         which_vars)
   return(out[])

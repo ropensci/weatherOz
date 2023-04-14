@@ -48,11 +48,23 @@ find_nearby_silo_stations <- function(distance_km = NULL,
   }
 
   if (!is.null(station_id)) {
-    return(
+    x <-
       .get_silo_stations(
         .station_id = station_id,
-        .distance_km = distance_km)
+        .distance_km = distance_km
       )
+
+    # Warn user if there are no stations within the input radius and return data
+    if (nrow(x) == 0L) message(
+      paste0(
+        "No SILO stations found around a radius of < ",
+        distance_km, " km\n",
+        " from station ",
+        station_id, ".\n"
+      )
+    )
+
+    return(x)
 
   } else if (is.null(station_id)) {
     x <-
@@ -65,6 +77,17 @@ find_nearby_silo_stations <- function(distance_km = NULL,
       data.table::setorderv("distance")
 
     x[, distance_km := NULL]
+
+    if (nrow(x) == 0L) message(
+      paste0(
+        "No SILO stations found around a radius of < ",
+        distance_km, " km\n",
+        " from coordinates ",
+        latitude, " and ",
+        longitude,
+        " (lat/lon)\n"
+      )
+    )
 
     return(x[distance %in%
                x[(distance <= distance_km)]$distance])

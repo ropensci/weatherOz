@@ -72,366 +72,175 @@ find_nearby_stations <- function(latitude = NULL,
     )
   }
 
-  if (which_api %in% c("silo", "dpird") & which_api != "all") {
-    if (length(station_id) == 1 || length(latitude) == 1) {
-      if (is.null(station_id)) {
+  if (length(station_id) == 1 || length(latitude) == 1) {
+    if (is.null(station_id)) {
 
-        .check_lonlat(longitude = longitude, latitude = latitude)
+      .check_lonlat(longitude = longitude, latitude = latitude)
 
-        if (which_api == "silo") {
-          # Get list of all stations in Australia
-          # Calculate distance from lat/lon coordinates, sort and filter data to
-          # distance threshold. Round distance in km to .0
-          out <- find_nearby_silo_stations(distance_km = distance_km,
-                                           longitude = longitude,
-                                           latitude = latitude)
-          out[ , distance := round(distance, 1)]
-
-          # Warn user if there are no stations within the input radius and return data
-          if (nrow(out) == 0L) message(
-            paste0(
-              "No SILO stations found around a radius of < ",
-              distance_km, " km\n",
-              " from coordinates ",
-              latitude, " and ",
-              longitude,
-              " (lat/lon)"
-            )
-          )
-          # Rename lat and lon for consistency and return data.table
-          data.table::setnames(out, c(3, 4, 8),
-                               c("latitude", "longitude", "distance"))
-
-        }
-        if (which_api == "dpird") {
-
-          # Error if api key not provided
-          if (is.null(api_key)) {
-            stop(
-              call. = FALSE,
-              "Provide a valid DPIRD API key.\n",
-              "Visit: https://www.agric.wa.gov.au/web-apis"
-            )
-          }
-
-          # get nearby stations from weather api
-          ret <- jsonlite::fromJSON(url(
-            paste0(
-              "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-              "latitude=",
-              latitude,
-              "&longitude=",
-              longitude,
-              "&radius=",
-              distance_km,
-              "&api_key=",
-              api_key,
-              "&offset=0",
-              "&limit=1000",
-              "&group=rtd"
-            )
-          ))
-
-          # Warn user if there are no stations within the input radius and return data
-          if (is.null(nrow(ret$collection))) {
-            message(
-              paste0(
-                "No DPIRD stations found around a radius of < ",
-                distance_km, " km\n",
-                " from coordinates ",
-                latitude, " and ",
-                longitude,
-                " (lat/lon)"
-              )
-            )
-          } else {
-            out <- .parse_dpird_stations(ret)
-          }
-        }
-      }
-      if (!is.null(station_id)) {
-        if (which_api == "silo") {
-          out <- find_nearby_silo_stations(distance_km = distance_km,
-                                           station_id = station_id)
-
-          if (nrow(out) == 0L) message(
-            paste0(
-              "No SILO stations found around a radius of < ",
-              distance_km, " km\n",
-              " from coordinates ",
-              latitude, " and ",
-              longitude,
-              " (lat/lon)"
-            )
-          )
-
-          out[ , distance_km := round(distance_km, 1)]
-          out[distance %in%
-                out[(distance <= distance_km)]$distance]
-
-          # Rename lat and lon for consistency and return data.table
-          # Rename lat and lon for consistency and return data.table
-          data.table::setnames(out, c(3, 4, 8),
-                               c("latitude", "longitude", "distance"))
-          data.table::setorderv(out, "distance")
-        }
-
-        if (which_api == "dpird") {
-          # Error if api key not provided
-          if (is.null(api_key)) {
-            stop(
-              call. = FALSE,
-              "Provide a valid DPIRD API key.\n",
-              "Visit: https://www.agric.wa.gov.au/web-apis"
-            )
-          }
-
-          res <- jsonlite::fromJSON(url(
-            paste0(
-              "https://api.dpird.wa.gov.au/v2/weather/stations?",
-              "stationCode=",
-              station_id,
-              "&api_key=",
-              api_key,
-              "&limit=1&group=rtd"
-            )
-          ))
-
-          .latlon <- .create_latlon(res)
-
-          ret <- jsonlite::fromJSON(url(
-            paste0(
-              "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-              "latitude=",
-              .latlon[[1]],
-              "&longitude=",
-              .latlon[[2]],
-              "&radius=",
-              distance_km,
-              "&api_key=",
-              api_key,
-              "&offset=0",
-              "&limit=1000",
-              "&group=rtd"
-            )
-          ))
-          if (is.null(nrow(ret$collection))) {
-            message(
-              paste0(
-                "No DPIRD stations found around a radius of < ",
-                distance_km, " km\n",
-                " from coordinates ",
-                latitude, " and ",
-                longitude,
-                " (lat/lon)"
-              )
-            )
-          } else {
-            out <- .parse_dpird_stations(ret)
-          }
-        }
-      }
-    }
-    return(out[])
-  }
-
-  if (which_api == "all" & which_api %notin% c("silo", "dpird")) {
-    if (!is.null(station_id)) {
-      if (isTRUE(grepl("^\\d+$", station_id))) {
-
-        out_silo <- find_nearby_silo_stations(distance_km = distance_km,
-                                              station_id = station_id)
-
-        if (nrow(out) == 0L) message(
-          paste0(
-            "No SILO stations found around a radius of < ",
-            distance_km, " km\n",
-            " from coordinates ",
-            latitude, " and ",
-            longitude,
-            " (lat/lon)"
-          )
-        )
-
-        out_silo[ , distance_km := round(distance_km, 1)]
-        out_silo[distance %in%
-                   out_silo[(distance <= distance_km)]$distance]
+      if (which_api == "silo") {
+        # Get list of all stations in Australia
+        # Calculate distance from lat/lon coordinates, sort and filter data to
+        # distance threshold. Round distance in km to .0
+        out <- find_nearby_silo_stations(distance_km = distance_km,
+                                         longitude = longitude,
+                                         latitude = latitude)
+        out[ , distance := round(distance, 1)]
 
         # Rename lat and lon for consistency and return data.table
+        data.table::setnames(out, c(3, 4, 8),
+                             c("latitude", "longitude", "distance"))
+        return(out)
+
+      } else if (which_api == "dpird") {
+        out <-
+          .get_dpird_stations(
+            .latitude = latitude,
+            .longitude = longitude,
+            .distance_km = distance_km,
+            .api_key = api_key
+          )
+        return(out)
+
+      } else if (which_api == "all") {
+        # return dpird
+        out_dpird <-
+          .get_dpird_stations(
+            .latitude = latitude,
+            .longitude = longitude,
+            .distance_km = distance_km,
+            .api_key = api_key
+          )
+        # return silo
+        out_silo <- find_nearby_silo_stations(distance_km = distance_km,
+                                              longitude = longitude,
+                                              latitude = latitude)
+        out_silo[ , distance := round(distance, 1)]
+
         # Rename lat and lon for consistency and return data.table
         data.table::setnames(out_silo, c(3, 4, 8),
                              c("latitude", "longitude", "distance"))
-        data.table::setorderv(out_silo, "distance")
 
-        # Error if api key not provided
-        if (is.null(api_key)) {
-          stop(
-            call. = FALSE,
-            "Provide a valid DPIRD API key.\n",
-            "Visit: https://www.agric.wa.gov.au/web-apis"
-          )
-        }
 
-        this_coords <- out_silo[1, .(latitude, longitude)]
+        if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
+          out <- rbind(out_dpird, out_silo)
+          data.table::setorderv(out, "distance")
+          return(out)
 
-        # get nearby stations from weather api
-        ret <- jsonlite::fromJSON(url(
-          paste0(
-            "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-            "latitude=",
-            this_coords[1, latitude],
-            "&longitude=",
-            this_coords[1, longitude],
-            "&radius=",
-            distance_km,
-            "&api_key=",
-            api_key,
-            "&offset=0",
-            "&limit=1000",
-            "&group=rtd"
-          )
-        ))
-        if (is.null(nrow(ret$collection))) {
-          message(
-            paste0(
-              "No DPIRD stations found around a radius of < ",
-              distance_km, " km\n",
-              " from coordinates ",
-              latitude, " and ",
-              longitude,
-              " (lat/lon)"
-            )
-          )
-        } else {
-          out_dpird <- .parse_dpird_stations(ret)
+        } else if (is.null(out_dpird) & nrow(out_silo) != 0L) {
+          return(out_silo)
+
+        } else if (!is.null(out_dpird) & nrow(out_silo) == 0L) {
+          return(out_dpird)
         }
       }
+    }
+  }
 
+  if (!is.null(station_id)) {
+    if (which_api == "silo") {
+      out <- find_nearby_silo_stations(distance_km = distance_km,
+                                       station_id = station_id)
+
+      out[ , distance_km := round(distance_km, 1)]
+      out[distance %in%
+            out[(distance <= distance_km)]$distance]
+
+      # Rename lat and lon for consistency and return data.table
+      data.table::setnames(out, c(3, 4, 8),
+                           c("latitude", "longitude", "distance"))
+      data.table::setorderv(out, "distance")
+
+      return(out)
+
+    } else if (which_api == "dpird") {
+      out <-
+        .get_dpird_stations(
+          .station_id = station_id,
+          .distance_km = distance_km,
+          .api_key = api_key
+        )
+      return(out)
+
+    } else if (which_api == "all") {
       if (isFALSE(grepl("^\\d+$", station_id))) {
-        res <- jsonlite::fromJSON(url(
-          paste0(
-            "https://api.dpird.wa.gov.au/v2/weather/stations?",
-            "stationCode=",
-            station_id,
-            "&api_key=",
-            api_key,
-            "&limit=1&group=rtd"
+        # return dpird
+        out_dpird <-
+          .get_dpird_stations(
+            .station_id = station_id,
+            .distance_km = distance_km,
+            .api_key = api_key
           )
-        ))
 
-        .latlon <- .create_latlon(res)
+        this_coords <- out_dpird[1, .(latitude, longitude)]
 
-        ret <- jsonlite::fromJSON(url(
-          paste0(
-            "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-            "latitude=",
-            .latlon[[1]],
-            "&longitude=",
-            .latlon[[2]],
-            "&radius=",
-            distance_km,
-            "&api_key=",
-            api_key,
-            "&offset=0",
-            "&limit=1000",
-            "&group=rtd"
-          )
-        ))
-        if (is.null(nrow(ret$collection))) {
-          message(
-            paste0(
-              "No DPIRD stations found around a radius of < ",
-              distance_km, " km\n",
-              " from coordinates ",
-              latitude, " and ",
-              longitude,
-              " (lat/lon)"
-            )
-          )
-        } else {
-          out_dpird <- .parse_dpird_stations(ret)
-        }
-
-        # Now query silo
-        out_silo <- find_nearby_silo_stations(distance_km = distance_km,
-                                              longitude = .latlon[[2]],
-                                              latitude = .latlon[[1]])
-
-        if (nrow(out_silo) == 0L) message(
-          paste0(
-            "No SILO stations found around a radius of < ",
-            distance_km, " km\n",
-            " from coordinates ",
-            latitude, " and ",
-            longitude,
-            " (lat/lon)"
-          )
+        # return silo
+        out_silo <- find_nearby_silo_stations(
+          distance_km = distance_km,
+          longitude = this_coords[1, longitude],
+          latitude = this_coords[1, latitude]
         )
 
         out_silo[ , distance := round(distance, 1)]
+
+        # Rename lat and lon for consistency and return data.table
         data.table::setnames(out_silo, c(3, 4, 8),
                              c("latitude", "longitude", "distance"))
-        data.table::setorderv(out_silo, "distance")
-      }
-      return(merge(out_dpird, out_silo))
-    }
 
-    if (is.null(station_id)) {
-      ret <- jsonlite::fromJSON(url(
-        paste0(
-          "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-          "latitude=",
-          latitude,
-          "&longitude=",
-          longitude,
-          "&radius=",
-          distance_km,
-          "&api_key=",
-          api_key,
-          "&offset=0",
-          "&limit=1000",
-          "&group=rtd"
+
+        if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
+          out <- rbind(out_dpird, out_silo)
+          data.table::setorderv(out, "distance")
+          return(out)
+
+        } else if (is.null(out_dpird) & nrow(out_silo) != 0L) {
+          return(out_silo)
+
+        } else if (!is.null(out_dpird) & nrow(out_silo) == 0L) {
+          return(out_dpird)
+        }
+
+
+      } else if (grepl("^\\d+$", station_id)) {
+        # return silo
+        out_silo <- find_nearby_silo_stations(
+          distance_km = distance_km,
+          station_id = station_id
         )
-      ))
-      if (is.null(nrow(ret$collection))) {
-        message(
-          paste0(
-            "No DPIRD stations found around a radius of < ",
-            distance_km, " km\n",
-            " from coordinates ",
-            latitude, " and ",
-            longitude,
-            " (lat/lon)"
+
+        out_silo[ , distance_km := round(distance_km, 1)]
+
+        # Rename lat and lon for consistency and return data.table
+        data.table::setnames(out_silo, c(3, 4, 8),
+                             c("latitude", "longitude", "distance"))
+
+        # return dpird
+        this_coords <- out_silo[1, .(latitude, longitude)]
+
+        # return dpird
+        out_dpird <-
+          .get_dpird_stations(
+            .latitude = this_coords[1, latitude],
+            .longitude = this_coords[1, longitude],
+            .distance_km = distance_km,
+            .api_key = api_key
           )
-        )
-      } else {
-        out_dpird <- .parse_dpird_stations(ret)
+
+        if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
+          out <- rbind(out_dpird, out_silo)
+          data.table::setorderv(out, "distance")
+          return(out)
+
+        } else if (is.null(out_dpird) & nrow(out_silo) != 0L) {
+          return(out_silo)
+
+        } else if (!is.null(out_dpird) & nrow(out_silo) == 0L) {
+          return(out_dpird)
+        }
       }
-
-      # Now query silo
-      out_silo <- find_nearby_silo_stations(distance_km = distance_km,
-                                            longitude = longitude,
-                                            latitude = latitude)
-
-      if (nrow(out_silo) == 0L) message(
-        paste0(
-          "No SILO stations found around a radius of < ",
-          distance_km, " km\n",
-          " from coordinates ",
-          latitude, " and ",
-          longitude,
-          " (lat/lon)"
-        )
-      )
-
-      out_silo[ , distance := round(distance, 1)]
-      data.table::setnames(out_silo, c(3, 4, 8),
-                           c("latitude", "longitude", "distance"))
-      data.table::setorderv(out_silo, "distance")
     }
-    return(merge(out_dpird, out_silo))
   }
 }
+
 
 #' SILO API query parser for stations list
 #' Takes results from an API query to the SILO database and formats it to a
@@ -496,6 +305,116 @@ find_nearby_stations <- function(latitude = NULL,
   return(out)
 }
 
+#' Create a data.table object of all stations available in DPIRD
+#'
+#' @param .station_id A string identifying a station in DPIRD's network
+#' which shouldbe used as the centre point to determine stations that fall
+#' within `.distance_km`
+#' @param .distance_km A `numeric` value for the distance in kilometres in which
+#' to search for nearby stations from a given geographic location or known
+#' `.station_id`.
+#' @param .api_key A `string` value that is the user's \acronym{API} key from
+#'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
+#'
+#' @noRd
+.get_dpird_stations <- function(.station_id,
+                               .distance_km,
+                               .latitude,
+                               .longitude,
+                               .api_key) {
+
+  # Error if api key not provided
+  if (is.null(.api_key)) {
+    stop(
+      call. = FALSE,
+      "Provide a valid DPIRD API key.\n",
+      "Visit: https://www.agric.wa.gov.au/web-apis"
+    )
+  }
+
+  if (!missing(.station_id)) {
+    base_url <- "https://api.dpird.wa.gov.au/v2/weather/stations?stationCode="
+
+    res <- jsonlite::fromJSON(url(
+      paste0(base_url,
+             .station_id,
+             "&api_key=",
+             .api_key,
+             "&limit=1&group=rtd"
+      )
+    ))
+
+    .latlon <- .create_latlon(res)
+
+    ret <- jsonlite::fromJSON(url(
+      paste0(
+        "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
+        "latitude=",
+        .latlon[[1]],
+        "&longitude=",
+        .latlon[[2]],
+        "&radius=",
+        .distance_km,
+        "&api_key=",
+        .api_key,
+        "&offset=0",
+        "&limit=1000",
+        "&group=rtd"
+      )
+    ))
+
+    if (is.null(nrow(ret$collection))) {
+      message(
+        paste0(
+          "No DPIRD stations found around a radius of < ",
+          .distance_km, " km\n",
+          " from station ",
+          .station_id, "."
+        )
+      )
+
+    } else {
+      return(.parse_dpird_stations(ret))
+    }
+
+  } else if (missing(.station_id)) {
+
+    # get nearby stations from weather api
+    ret <- jsonlite::fromJSON(url(
+      paste0(
+        "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
+        "latitude=",
+        .latitude,
+        "&longitude=",
+        .longitude,
+        "&radius=",
+        .distance_km,
+        "&api_key=",
+        .api_key,
+        "&offset=0",
+        "&limit=1000",
+        "&group=rtd"
+      )
+    ))
+
+    # Warn user if there are no stations within the input radius and return data
+    if (is.null(nrow(ret$collection))) {
+      message(
+        paste0(
+          "No DPIRD stations found around a radius of < ",
+          .distance_km, " km\n",
+          " from coordinates ",
+          .latitude, " and ",
+          .longitude,
+          " (lat/lon)\n"
+        )
+      )
+    } else {
+      return(.parse_dpird_stations(ret))
+    }
+  }
+}
+
 #' DPIRD API query parser for stations list
 #' Takes results from an API query to the DPIRD Weather API and formats it to a
 #' flat `data.table`. The function also converts character columns to date and
@@ -534,10 +453,10 @@ find_nearby_stations <- function(latitude = NULL,
                                         out$latitude * -1,
                                         out$latitude)]
 
-  out <- out[owner_code %in% "DPIRD"]
   out[, state := "WA"]
   data.table::setcolorder(out, c(1:4, 8, 5, 6, 7))
   data.table::setnames(out, c(6, 7), c("elevation", "owner"))
+  out <- out[owner %notin% "DPIRDTST"]
 
   return(out)
 }
