@@ -502,3 +502,21 @@
     cos(lat1) * cos(lat2) * (sin(delta_lon / 2)) ^ 2
   )))
 }
+
+
+#' Check user inputs for lat, lon or station_id
+#' @param .latitude latitude passed from another function
+#' @param .longitude longitude passed from another function
+#' @param .station_id station_id passed from another function
+#' @noRd
+#' @return invisible `NULL`, called for its side-effects
+.check_location_params <- function(.latitude, .longitude, .station_id) {
+  if (((is.null(.latitude)) ||
+       (is.null(.longitude))) && (is.null(.station_id))) {
+    stop(
+      call. = FALSE,
+      "Provide valid `latitude` and `longitude` coordinates\n",
+      "or a valid `station_code`."
+    )
+  }
+}
