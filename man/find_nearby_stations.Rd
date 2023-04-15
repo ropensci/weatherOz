@@ -38,22 +38,18 @@ network.}
 }
 \value{
 a \code{data.table} with 'station_code', 'station_name', 'latitude',
-'longitude', 'elevation' and 'distance'. Data are sorted by increasing
-distance from station or location of interest. SILO queries also return the
-Australian State ('state') while DPIRD queries also returns 'owner', 'online'
-and 'status'.
+'longitude', 'elevation', 'state', 'owner', 'online', 'status' and
+distance'. Data are sorted by increasing distance from station or location
 }
 \description{
 Get a list of nearby weather stations from coordinates or station ID code
 }
 \note{
-You can request your own API key from DPIRD for free by filling out the
-form found at \url{https://www.agric.wa.gov.au/web-apis}.
+You can request your own \acronym{API} key from \acronym{DPIRD} for
+free by filling out the form found at \url{https://www.agric.wa.gov.au/web-apis}.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# You must have an DPIRD API key to proceed
-my_key <- rstudioapi::askForSecret()
 
 # Query WA only stations and return both DPIRD's and BOM's stations for
 # the Northam WA station, returning stations with 50 km of this station
@@ -61,7 +57,7 @@ wa_stn <- find_nearby_stations(
   station_id = "NO",
   distance_km = 50,
   api_key = "YOUR API KEY",
-  silo_stations = FALSE
+  which_api = "DPIRD"
 )
 
 # Query Wagga Wagga BOM station.
@@ -69,8 +65,7 @@ wagga_stn <- find_nearby_stations(
   latitude = -35.1583,
   longitude = 147.4575,
   distance_km = 200,
-  api_key = "YOUR API KEY",
-  silo_stations = FALSE
+  which_api = "SILO"
 )
 \dontshow{\}) # examplesIf}
 }
