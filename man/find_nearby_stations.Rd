@@ -27,10 +27,14 @@ interest. Optional and defaults to \code{NULL}.}
 the station or location of interest.  Defaults to 100 km.}
 
 \item{api_key}{A \code{string} value that is the user's \acronym{API} key from
-\acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).}
+\acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).  Only used
+when \code{which_api} is "DPIRD" or "both".}
 
-\item{silo_stations}{\code{Boolean}, return SILO stations only. Defaults
-to \code{TRUE}. If \code{FALSE}, return only \acronym{DPIRD} owned stations.}
+\item{which_api}{A \code{string} value that indicates which API to use.  Defaults
+to "silo". Valid values are "both", for both \acronym{SILO} (\acronym{BOM})
+and \acronym{DPIRD} weather station networks; "silo" for only stations in
+the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
+network.}
 }
 \value{
 a \code{data.table} with 'station_code', 'station_name', 'latitude',

@@ -16,9 +16,13 @@
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'  the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `string` value that is the user's \acronym{API} key from
-#'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
-#' @param silo_stations `Boolean`, return SILO stations only. Defaults
-#' to `TRUE`. If `FALSE`, return only \acronym{DPIRD} owned stations.
+#'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
+#'  when `which_api` is "DPIRD" or "both".
+#' @param which_api A `string` value that indicates which API to use.  Defaults
+#'  to "silo". Valid values are "both", for both \acronym{SILO} (\acronym{BOM})
+#'  and \acronym{DPIRD} weather station networks; "silo" for only stations in
+#'  the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
+#'  network.
 #'
 #' @return a `data.table` with 'station_code', 'station_name', 'latitude',
 #' 'longitude', 'elevation' and 'distance'. Data are sorted by increasing
@@ -62,6 +66,8 @@ find_nearby_stations <- function(latitude = NULL,
                                  which_api = "silo") {
   # CRAN NOTE avoidance
   lat <- lon <- distance <- owner <- links <- NULL
+
+  which_api <- tolower(which_api)
 
   if (((is.null(latitude)) ||
        (is.null(longitude))) && (is.null(station_id))) {
