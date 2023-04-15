@@ -143,7 +143,7 @@ find_nearby_stations <- function(latitude = NULL,
                            c("latitude", "longitude", "distance"))
       data.table::setorderv(out, "distance")
 
-      return(out)
+      return(out[])
 
     } else if (which_api == "dpird") {
       out <-
@@ -154,7 +154,7 @@ find_nearby_stations <- function(latitude = NULL,
           .longitude = longitude,
           .api_key = api_key
         )
-      return(out)
+      return(out[])
 
     } else if (which_api == "all") {
       if (isFALSE(grepl("^\\d+$", station_id))) {
@@ -180,13 +180,13 @@ find_nearby_stations <- function(latitude = NULL,
         if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
           out <- rbind(out_dpird, out_silo)
           data.table::setorderv(out, "distance")
-          return(out)
+          return(out[])
 
         } else if (is.null(out_dpird) & nrow(out_silo) != 0L) {
-          return(out_silo)
+          return(out_silo[])
 
         } else if (!is.null(out_dpird) & nrow(out_silo) == 0L) {
-          return(out_dpird)
+          return(out_dpird[])
         }
 
 
@@ -209,13 +209,13 @@ find_nearby_stations <- function(latitude = NULL,
         if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
           out <- rbind(out_dpird, out_silo)
           data.table::setorderv(out, "distance")
-          return(out)
+          return(out[])
 
         } else if (is.null(out_dpird) & nrow(out_silo) != 0L) {
-          return(out_silo)
+          return(out_silo[])
 
         } else if (!is.null(out_dpird) & nrow(out_silo) == 0L) {
-          return(out_dpird)
+          return(out_dpird[])
         }
       }
     }
@@ -300,16 +300,20 @@ find_nearby_stations <- function(latitude = NULL,
     x <-
       .get_silo_stations(.station_id = NULL)
 
-    x[, "distance" := .haversine_distance(lat1 = .latitude,
-                                          lon1 = .longitude,
-                                          lat2 = latitude,
-                                          lon2 = longitude)] |>
+    x[, "distance" := round(
+      .haversine_distance(
+        lat1 = .latitude,
+        lon1 = .longitude,
+        lat2 = latitude,
+        lon2 = longitude
+      ),
+      1
+    )] |>
       data.table::setorderv("distance")
 
     x <-
       x[distance %in%
           x[(distance <= distance_km)]$distance]
-    x[, distance := round(distance, 1)]
 
     if (nrow(x) == 0L)
       message(
