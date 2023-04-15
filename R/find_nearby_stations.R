@@ -114,26 +114,30 @@ find_nearby_stations <- function(latitude = NULL,
             .api_key = api_key
           )
         # return silo
-        out_silo <- find_nearby_silo_stations(distance_km = distance_km,
-                                              longitude = longitude,
-                                              latitude = latitude)
-        out_silo[ , distance := round(distance, 1)]
+        out_silo <-
+          .find_nearby_silo_stations(
+            distance_km = distance_km,
+            longitude = longitude,
+            latitude = latitude
+          )
+        out_silo[, distance := round(distance, 1)]
 
         # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out_silo, c(3, 4, 8),
+        data.table::setnames(out_silo,
+                             c(3, 4, 8),
                              c("latitude", "longitude", "distance"))
 
 
         if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
           out <- rbind(out_dpird, out_silo)
           data.table::setorderv(out, "distance")
-          return(out)
+          return(out[])
 
         } else if (is.null(out_dpird) & nrow(out_silo) != 0L) {
-          return(out_silo)
+          return(out_silo[])
 
         } else if (!is.null(out_dpird) & nrow(out_silo) == 0L) {
-          return(out_dpird)
+          return(out_dpird[])
         }
       }
     }
@@ -141,10 +145,10 @@ find_nearby_stations <- function(latitude = NULL,
 
   if (!is.null(station_id)) {
     if (which_api == "silo") {
-      out <- find_nearby_silo_stations(distance_km = distance_km,
-                                       station_id = station_id)
+      out <- .find_nearby_silo_stations(distance_km = distance_km,
+                                        station_id = station_id)
 
-      out[ , distance_km := round(distance_km, 1)]
+      out[, distance_km := round(distance_km, 1)]
       out[distance %in%
             out[(distance <= distance_km)]$distance]
 
@@ -177,16 +181,17 @@ find_nearby_stations <- function(latitude = NULL,
         this_coords <- out_dpird[1, .(latitude, longitude)]
 
         # return silo
-        out_silo <- find_nearby_silo_stations(
+        out_silo <- .find_nearby_silo_stations(
           distance_km = distance_km,
           longitude = this_coords[1, longitude],
           latitude = this_coords[1, latitude]
         )
 
-        out_silo[ , distance := round(distance, 1)]
+        out_silo[, distance := round(distance, 1)]
 
         # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out_silo, c(3, 4, 8),
+        data.table::setnames(out_silo,
+                             c(3, 4, 8),
                              c("latitude", "longitude", "distance"))
 
 
@@ -205,15 +210,14 @@ find_nearby_stations <- function(latitude = NULL,
 
       } else if (grepl("^\\d+$", station_id)) {
         # return silo
-        out_silo <- find_nearby_silo_stations(
-          distance_km = distance_km,
-          station_id = station_id
-        )
+        out_silo <- .find_nearby_silo_stations(distance_km = distance_km,
+                                               station_id = station_id)
 
-        out_silo[ , distance_km := round(distance_km, 1)]
+        out_silo[, distance_km := round(distance_km, 1)]
 
         # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out_silo, c(3, 4, 8),
+        data.table::setnames(out_silo,
+                             c(3, 4, 8),
                              c("latitude", "longitude", "distance"))
 
         # return dpird
