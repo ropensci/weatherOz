@@ -53,8 +53,6 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-# TODO:: Fix the damned .haversine distance and remove redundant code
-
 find_nearby_stations <- function(latitude = NULL,
                                  longitude = NULL,
                                  station_id = NULL,
@@ -311,6 +309,7 @@ find_nearby_stations <- function(latitude = NULL,
     x <-
       x[distance %in%
           x[(distance <= distance_km)]$distance]
+    x[, distance := round(distance, 1)]
 
     if (nrow(x) == 0L)
       message(
