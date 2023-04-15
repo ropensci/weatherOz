@@ -38,8 +38,8 @@ network.}
 }
 \value{
 a \code{data.table} with 'station_code', 'station_name', 'latitude',
-'longitude', 'elevation', 'state', 'owner', 'online', 'status' and
-distance'. Data are sorted by increasing distance from station or location
+'longitude', 'elevation', 'state', 'owner', and 'distance'.  Data are sorted
+by increasing distance from station or location of interest.
 }
 \description{
 Get a list of nearby weather stations from coordinates or station ID code
