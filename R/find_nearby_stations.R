@@ -25,17 +25,14 @@
 #'  network.
 #'
 #' @return a `data.table` with 'station_code', 'station_name', 'latitude',
-#' 'longitude', 'elevation' and 'distance'. Data are sorted by increasing
-#' distance from station or location of interest. SILO queries also return the
-#' Australian State ('state') while DPIRD queries also returns 'owner', 'online'
-#' and 'status'.
+#'  'longitude', 'elevation', 'state', 'owner', 'online', 'status' and
+#'  distance'. Data are sorted by increasing distance from station or location
+#"  of interest.
 #'
-#' @note You can request your own API key from DPIRD for free by filling out the
-#' form found at <https://www.agric.wa.gov.au/web-apis>.
+#' @note You can request your own \acronym{API} key from \acronym{DPIRD} for
+#' free by filling out the form found at <https://www.agric.wa.gov.au/web-apis>.
 #'
 #' @examplesIf interactive()
-#' # You must have an DPIRD API key to proceed
-#' my_key <- rstudioapi::askForSecret()
 #'
 #' # Query WA only stations and return both DPIRD's and BOM's stations for
 #' # the Northam WA station, returning stations with 50 km of this station
@@ -43,7 +40,7 @@
 #'   station_id = "NO",
 #'   distance_km = 50,
 #'   api_key = "YOUR API KEY",
-#'   silo_stations = FALSE
+#'   which_api = "DPIRD"
 #' )
 #'
 #' # Query Wagga Wagga BOM station.
@@ -51,8 +48,7 @@
 #'   latitude = -35.1583,
 #'   longitude = 147.4575,
 #'   distance_km = 200,
-#'   api_key = "YOUR API KEY",
-#'   silo_stations = FALSE
+#'   which_api = "SILO"
 #' )
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
