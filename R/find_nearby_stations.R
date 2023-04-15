@@ -83,16 +83,10 @@ find_nearby_stations <- function(latitude = NULL,
         # Get list of all stations in Australia
         # Calculate distance from lat/lon coordinates, sort and filter data to
         # distance threshold. Round distance in km to .0
-        out <- .find_nearby_silo_stations(
-          distance_km = distance_km,
-          longitude = longitude,
-          latitude = latitude
-        )
-        out[, distance := round(distance, 1)]
 
-        # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out, c(3, 4, 8),
-                             c("latitude", "longitude", "distance"))
+        out <- .find_nearby_silo_stations(distance_km = distance_km,
+                                          longitude = longitude,
+                                          latitude = latitude)
         return(out[])
 
       } else if (which_api == "dpird") {
@@ -506,11 +500,11 @@ find_nearby_stations <- function(latitude = NULL,
   # Define column names
   col_names = c("station_code",
                 "station_name",
-                "lat",
-                "lon",
+                "latitude",
+                "longitude",
                 "state",
                 "elevation",
-                "distance_km")
+                "distance")
 
   # if `.station_id` is not provided, fetch all stations in AU. Otherwise, use
   # the cgi-bin interface to find stations within `.distance_km` of the given
@@ -539,6 +533,7 @@ find_nearby_stations <- function(latitude = NULL,
   # Manipulate cols
   r[, station_name := .cap_names(s = station_name)]
   r[, owner := "BOM"]
+  r[, distance := round(distance, 1)]
   data.table::setkey(r, "station_code")
   data.table::setcolorder(r, c(1:5, 6, 8, 7))
 
