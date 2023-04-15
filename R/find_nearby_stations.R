@@ -53,6 +53,8 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
+# TODO:: Fix the damned .haversine distance and remove redundant code
+
 find_nearby_stations <- function(latitude = NULL,
                                  longitude = NULL,
                                  station_id = NULL,
@@ -150,6 +152,8 @@ find_nearby_stations <- function(latitude = NULL,
         .get_dpird_stations(
           .station_id = station_id,
           .distance_km = distance_km,
+          .latitude = latitude,
+          .longitude = longitude,
           .api_key = api_key
         )
       return(out)
@@ -161,6 +165,8 @@ find_nearby_stations <- function(latitude = NULL,
           .get_dpird_stations(
             .station_id = station_id,
             .distance_km = distance_km,
+            .latitude = latitude,
+            .longitude = longitude,
             .api_key = api_key
           )
 
@@ -172,14 +178,6 @@ find_nearby_stations <- function(latitude = NULL,
           longitude = this_coords[1, longitude],
           latitude = this_coords[1, latitude]
         )
-
-        out_silo[, distance := round(distance, 1)]
-
-        # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out_silo,
-                             c(3, 4, 8),
-                             c("latitude", "longitude", "distance"))
-
 
         if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
           out <- rbind(out_dpird, out_silo)
@@ -200,14 +198,6 @@ find_nearby_stations <- function(latitude = NULL,
                                                station_id = station_id)
 
         out_silo[, distance_km := round(distance_km, 1)]
-
-        # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out_silo,
-                             c(3, 4, 8),
-                             c("latitude", "longitude", "distance"))
-
-        # return dpird
-        this_coords <- out_silo[1, .(latitude, longitude)]
 
         # return dpird
         out_dpird <-
@@ -306,16 +296,17 @@ find_nearby_stations <- function(latitude = NULL,
     return(x)
 
   } else if (is.null(station_id)) {
+    .latitude = latitude
+    .longitude = longitude
+
     x <-
       .get_silo_stations(.station_id = NULL)
 
-    x[, "distance" := .haversine_distance(latitude,
-                                          longitude,
-                                          lat,
-                                          lon)] |>
+    x[, "distance" := .haversine_distance(lat1 = .latitude,
+                                          lon1 = .longitude,
+                                          lat2 = latitude,
+                                          lon2 = longitude)] |>
       data.table::setorderv("distance")
-
-    x[, distance_km := NULL]
 
     x <-
       x[distance %in%
