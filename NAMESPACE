@@ -2,7 +2,6 @@
 
 S3method(print,weatherOz_tbl)
 export(find_forecast_towns)
-export(find_nearby_silo_stations)
 export(find_nearby_stations)
 export(get_ag_bulletin)
 export(get_available_imagery)
