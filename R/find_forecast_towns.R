@@ -21,7 +21,7 @@
 #'
 #' @family bomrang-ported
 #'
-#' @export find_forecast_towns
+#' @export
 
 find_forecast_towns <-
   function(latitude = -35.3,
