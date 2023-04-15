@@ -25,9 +25,8 @@
 #'  network.
 #'
 #' @return a `data.table` with 'station_code', 'station_name', 'latitude',
-#'  'longitude', 'elevation', 'state', 'owner', 'online', 'status' and
-#'  distance'. Data are sorted by increasing distance from station or location
-#"  of interest.
+#'  'longitude', 'elevation', 'state', 'owner', and 'distance'.  Data are sorted
+#'  by increasing distance from station or location of interest.
 #'
 #' @note You can request your own \acronym{API} key from \acronym{DPIRD} for
 #' free by filling out the form found at <https://www.agric.wa.gov.au/web-apis>.
