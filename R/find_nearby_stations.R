@@ -2,7 +2,7 @@
 #
 # This file is part of the R-package weatherOz
 #
-# Copyright (C) 2022 DPIRD
+# Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
 #' Get a list of nearby weather stations from coordinates or station ID code
