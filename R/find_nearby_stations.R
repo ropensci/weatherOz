@@ -99,7 +99,7 @@ find_nearby_stations <- function(latitude = NULL,
           )
         return(out[])
 
-      } else if (which_api == "all") {
+      } else if (which_api == "both") {
         # return dpird
         out_dpird <-
           .get_dpird_stations(
@@ -110,18 +110,9 @@ find_nearby_stations <- function(latitude = NULL,
           )
         # return silo
         out_silo <-
-          .find_nearby_silo_stations(
-            distance_km = distance_km,
-            longitude = longitude,
-            latitude = latitude
-          )
-        out_silo[, distance := round(distance, 1)]
-
-        # Rename lat and lon for consistency and return data.table
-        data.table::setnames(out_silo,
-                             c(3, 4, 8),
-                             c("latitude", "longitude", "distance"))
-
+          .find_nearby_silo_stations(distance_km = distance_km,
+                                     longitude = longitude,
+                                     latitude = latitude)
 
         if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
           out <- rbind(out_dpird, out_silo)
