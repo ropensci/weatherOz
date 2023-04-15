@@ -483,6 +483,9 @@ find_nearby_stations <- function(latitude = NULL,
 #'
 #' @noRd
 .get_silo_stations <- function(.station_id, .distance_km) {
+
+  station_name <- distance <- NULL # nocov
+
   base_url <-
     "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php?format="
 
