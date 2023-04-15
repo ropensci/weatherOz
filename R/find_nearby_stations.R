@@ -420,9 +420,11 @@ find_nearby_stations <- function(latitude = NULL,
       message(
         paste0(
           "No DPIRD stations found around a radius of < ",
-          .distance_km, " km\n",
+          .distance_km,
+          " km\n",
           " from station ",
-          .station_id, "."
+          .station_id,
+          "."
         )
       )
 
@@ -431,7 +433,6 @@ find_nearby_stations <- function(latitude = NULL,
     }
 
   } else if (missing(.station_id)) {
-
     # get nearby stations from weather api
     ret <- jsonlite::fromJSON(url(
       paste0(
@@ -455,9 +456,11 @@ find_nearby_stations <- function(latitude = NULL,
       message(
         paste0(
           "No DPIRD stations found around a radius of < ",
-          .distance_km, " km\n",
+          .distance_km,
+          " km\n",
           " from coordinates ",
-          .latitude, " and ",
+          .latitude,
+          " and ",
           .longitude,
           " (lat/lon)\n"
         )
@@ -467,6 +470,80 @@ find_nearby_stations <- function(latitude = NULL,
     }
   }
 }
+
+
+#' Create a data.table object of all stations available in SILO
+#'
+#' @param .station_id A string identifying a BOM station in SILO which should
+#' be used as the centre point to determine stations that fall within
+#'  `.distance_km`
+#' @param .distance_km A `numeric` value for the distance in kilometres in which
+#'  to search for nearby stations from a given geographic location or known
+#'  `.station_id`.
+#'
+#' Uses SILO's cgi-bin web interface to query and download a text file of
+#' BOM weather stations in SILO within 2500 km of Finke, NT (near the Lambert
+#' centre of Australia). Stations are returned in order of distance from the
+#' Finke Post Office.
+#'
+#' @noRd
+.get_silo_stations <- function(.station_id, .distance_km) {
+  base_url <-
+    "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php?format="
+
+  # Define column types
+  col_types <- c(
+    Number = "factor",
+    `Station name` = "character",
+    Latitude = "numeric",
+    Longitud = "numeric",
+    Stat = "factor",
+    Elevat. = "numeric",
+    `Distance (km)` = "numeric"
+  )
+
+  # Define column names
+  col_names = c("station_code",
+                "station_name",
+                "lat",
+                "lon",
+                "state",
+                "elevation",
+                "distance_km")
+
+  # if `.station_id` is not provided, fetch all stations in AU. Otherwise, use
+  # the cgi-bin interface to find stations within `.distance_km` of the given
+  # `.station_id`
+  if (is.null(.station_id)) {
+    r <- data.table::fread(
+      paste0(base_url,
+             "near&station=015526&radius=10000"),
+      colClasses = col_types,
+      col.names = col_names
+    )
+  } else {
+    r <- data.table::fread(
+      paste0(
+        base_url,
+        "near&station=",
+        .station_id,
+        "&radius=",
+        .distance_km
+      ),
+      colClasses = col_types,
+      col.names = col_names
+    )
+  }
+
+  # Manipulate cols
+  r[, station_name := .cap_names(s = station_name)]
+  r[, owner := "BOM"]
+  data.table::setkey(r, "station_code")
+  data.table::setcolorder(r, c(1:5, 6, 8, 7))
+
+  return(r[])
+}
+
 
 #' DPIRD API query parser for stations list
 #' Takes results from an API query to the DPIRD Weather API and formats it to a
@@ -479,7 +556,6 @@ find_nearby_stations <- function(latitude = NULL,
 #' @noRd
 
 .parse_dpird_stations <- function(query_result = ret) {
-
   # Manipulate date for consistency
   links <- NULL #nocov
   out <- data.table::data.table(query_result$collection)
