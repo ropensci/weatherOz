@@ -69,33 +69,30 @@ find_nearby_stations <- function(latitude = NULL,
 
   which_api <- tolower(which_api)
 
-  if (((is.null(latitude)) ||
-       (is.null(longitude))) && (is.null(station_id))) {
-    stop(
-      call. = FALSE,
-      "Provide valid latitude and longitude\n",
-      "coordinates or a valid station code."
-    )
-  }
+  .check_location_params(.latitude = latitude,
+                         .longitude = longitude,
+                         .station_id = station_id)
 
-  if (length(station_id) == 1 || length(latitude) == 1) {
+  if (length(station_id) == 1 ||
+      length(latitude) + length(longitude) == 2) {
     if (is.null(station_id)) {
-
       .check_lonlat(longitude = longitude, latitude = latitude)
 
       if (which_api == "silo") {
         # Get list of all stations in Australia
         # Calculate distance from lat/lon coordinates, sort and filter data to
         # distance threshold. Round distance in km to .0
-        out <- find_nearby_silo_stations(distance_km = distance_km,
-                                         longitude = longitude,
-                                         latitude = latitude)
-        out[ , distance := round(distance, 1)]
+        out <- .find_nearby_silo_stations(
+          distance_km = distance_km,
+          longitude = longitude,
+          latitude = latitude
+        )
+        out[, distance := round(distance, 1)]
 
         # Rename lat and lon for consistency and return data.table
         data.table::setnames(out, c(3, 4, 8),
                              c("latitude", "longitude", "distance"))
-        return(out)
+        return(out[])
 
       } else if (which_api == "dpird") {
         out <-
@@ -105,7 +102,7 @@ find_nearby_stations <- function(latitude = NULL,
             .distance_km = distance_km,
             .api_key = api_key
           )
-        return(out)
+        return(out[])
 
       } else if (which_api == "all") {
         # return dpird
