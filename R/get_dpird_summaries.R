@@ -14,9 +14,9 @@
 #' @param station_id A string of the station ID code for the station of
 #' interest. Defaults to `NULL`.
 #' @param first A string representing the start date of the query in the
-#' format 'yyyy-mm-dd'. Defaults to `NULL`.
+#' format 'yyyymmdd'. Defaults to `NULL`.
 #' @param last A string representing the start date of the query in the
-#' format 'yyyy-mm-dd'. Defaults to the current system date.
+#' format 'yyyymmdd'. Defaults to the current system date.
 #' @param api_key Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
 #' Defaults to `NULL`.
 #' @param interval Time interval to summarise over.

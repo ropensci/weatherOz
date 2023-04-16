@@ -18,10 +18,10 @@ get_dpird_summaries(
 interest. Defaults to \code{NULL}.}
 
 \item{first}{A string representing the start date of the query in the
-format 'yyyy-mm-dd'. Defaults to \code{NULL}.}
+format 'yyyymmdd'. Defaults to \code{NULL}.}
 
 \item{last}{A string representing the start date of the query in the
-format 'yyyy-mm-dd'. Defaults to the current system date.}
+format 'yyyymmdd'. Defaults to the current system date.}
 
 \item{api_key}{Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
 Defaults to \code{NULL}.}
