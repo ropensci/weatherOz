@@ -17,9 +17,9 @@
 #'  the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `string` value that is the user's \acronym{API} key from
 #'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
-#'  when `which_api` is "DPIRD" or "both".
+#'  when `which_api` is "DPIRD" or "all".
 #' @param which_api A `string` value that indicates which API to use.  Defaults
-#'  to "silo". Valid values are "both", for both \acronym{SILO} (\acronym{BOM})
+#'  to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
 #'  and \acronym{DPIRD} weather station networks; "silo" for only stations in
 #'  the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
 #'  network.
@@ -64,10 +64,10 @@ find_nearby_stations <- function(latitude = NULL,
 
   which_api <- tolower(which_api)
 
-  if (which_api %notin% c("both", "silo", "dpird")) {
+  if (which_api %notin% c("all", "silo", "dpird")) {
     stop(call. = FALSE,
          "You have provided an invalide value for `which_api`.\n",
-         "Valid values are 'both', 'silo' or 'dpird'.")
+         "Valid values are 'all', 'silo' or 'dpird'.")
   }
 
   .check_location_params(.latitude = latitude,
@@ -99,7 +99,7 @@ find_nearby_stations <- function(latitude = NULL,
           )
         return(out[])
 
-      } else if (which_api == "both") {
+      } else if (which_api == "all") {
         # return dpird
         out_dpird <-
           .get_dpird_stations(
