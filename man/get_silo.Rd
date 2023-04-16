@@ -28,10 +28,10 @@ queries with \code{station_id} input is not permitted.}
 longitude of the point-of-interest. Defaults to \code{NULL} and when used,
 queries with \code{station_id} inputs is not permitted.}
 
-\item{first}{\code{Integer}. A string representing the start date of the query in
+\item{first}{\code{Integer}. A value representing the start date of the query in
 the format 'yyyymmdd' (ISO-8601).}
 
-\item{last}{\code{Integer}. A string representing the end date of the query in the
+\item{last}{\code{Integer}. A value representing the end date of the query in the
 format 'yyyymmdd' (ISO-8601).}
 
 \item{data_format}{\code{Character}. A string specifying the type of data to

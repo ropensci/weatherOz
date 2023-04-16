@@ -26,9 +26,9 @@
 #' @param longitude `Numeric`. A single value  representing the
 #'  longitude of the point-of-interest. Defaults to `NULL` and when used,
 #'  queries with `station_id` inputs is not permitted.
-#' @param first `Integer`. A string representing the start date of the query in
+#' @param first `Integer`. A value representing the start date of the query in
 #'  the format 'yyyymmdd' (ISO-8601).
-#' @param last `Integer`. A string representing the end date of the query in the
+#' @param last `Integer`. A value representing the end date of the query in the
 #' format 'yyyymmdd' (ISO-8601).
 #' @param data_format `Character`. A string specifying the type of data to
 #'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
