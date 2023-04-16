@@ -28,7 +28,7 @@ Defaults to NULL.}
 
 \item{interval}{Time interval to summarise over.
 Default is 'daily'; others are '15min', '30min', 'hourly',
-'monthly', 'yearly'.For intervals shorter than 1 day, time period covered
+'monthly', 'yearly'.  For intervals shorter than 1 day, time period covered
 will be midnight to midnight, with the last time interval being before
 midnight - hour/minute values are for the end of the time period.
 Data for shorter intervals ('15min', '30min') are available from
@@ -47,7 +47,7 @@ weather station network.
 }
 \note{
 Please note this function converts date-time columns from Coordinated
-Universal Time 'UTC' to Australian Western Standard Time 'AWST'
+Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
