@@ -12,13 +12,13 @@
 #' weather station network.
 #'
 #' @param station_id A string of the station ID code for the station of
-#' interest. Defaults to NULL.
+#' interest. Defaults to `NULL`.
 #' @param first A string representing the start date of the query in the
-#' format 'yyyy-mm-dd'. Defaults to NULL.
+#' format 'yyyy-mm-dd'. Defaults to `NULL`.
 #' @param last A string representing the start date of the query in the
 #' format 'yyyy-mm-dd'. Defaults to the current system date.
 #' @param api_key Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
-#' Defaults to NULL.
+#' Defaults to `NULL`.
 #' @param interval Time interval to summarise over.
 #' Default is 'daily'; others are '15min', '30min', 'hourly',
 #' 'monthly', 'yearly'.  For intervals shorter than 1 day, time period covered
