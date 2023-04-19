@@ -130,11 +130,11 @@ find_nearby_stations <- function(latitude = NULL,
   }
 
   if (!is.null(station_id)) {
-    if (which_api == "silo") {
+    if (which_api == "silo" &
+        isTRUE(grepl("^\\d+$", station_id))) {
       out <- .find_nearby_silo_stations(distance_km = distance_km,
                                         station_id = station_id)
 
-      out[, distance_km := round(distance_km, 1)]
       out[distance %in%
             out[(distance <= distance_km)]$distance]
 
@@ -145,7 +145,8 @@ find_nearby_stations <- function(latitude = NULL,
 
       return(out[])
 
-    } else if (which_api == "dpird") {
+    } else if (which_api == "dpird" &
+               isFALSE(grepl("^\\d+$", station_id))) {
       out <-
         .get_dpird_stations(
           .station_id = station_id,
@@ -198,6 +199,8 @@ find_nearby_stations <- function(latitude = NULL,
         out_silo[, distance_km := round(distance_km, 1)]
 
         # return dpird
+        this_coords <- out_silo[1, .(latitude, longitude)]
+
         out_dpird <-
           .get_dpird_stations(
             .latitude = this_coords[1, latitude],
@@ -221,8 +224,6 @@ find_nearby_stations <- function(latitude = NULL,
     }
   }
 }
-
-
 
 #' Find stations within a given radius of a geographic point or weather station
 #'

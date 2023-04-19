@@ -385,6 +385,16 @@ get_dpird_summaries <- function(
     out_erosion <- data.frame()[1:nrec, ]
   }
 
+  # Soil temperature
+  if (any(c("all", "soil") %in% .which_vars)) {
+    out_soil <- .ret_list$summaries$soilTemperature
+    names(out_soil) <- paste0("soil.",
+                                 names(out_soil))
+
+  } else {
+    out_soil <- data.frame()[1:nrec, ]
+  }
+
   # Put together
   out <- data.frame(station_id = .ret_list$stationCode,
                     out_period,
@@ -392,6 +402,7 @@ get_dpird_summaries <- function(
                     rain = out_rain,
                     out_wind,
                     out_erosion,
+                    out_soil,
                     row.names = NULL)
 
   names(out) <- tolower(names(out))
@@ -438,6 +449,22 @@ get_dpird_summaries <- function(
     out[, wind_erosion_starttime := format(
       lubridate::as_datetime(
         lubridate::ymd_hms(wind_erosion_starttime),
+        tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z")]
+  }
+
+  if ("soil_mintime" %in% colnames(out)) {
+    out[, soil_mintime := format(
+      lubridate::as_datetime(
+        lubridate::ymd_hms(soil_mintime),
+        tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z")]
+  }
+
+  if ("soil_maxtime" %in% colnames(out)) {
+    out[, soil_maxtime := format(
+      lubridate::as_datetime(
+        lubridate::ymd_hms(soil_maxtime),
         tz = "Australia/Perth"),
       "%Y-%m-%d %H:%M:%S %Z")]
   }
