@@ -69,34 +69,36 @@
 #'
 #' @export get_dpird_summaries
 
-get_dpird_summaries <- function(
-    station_id,
-    first,
-    last = Sys.Date(),
-    api_key,
-    interval = "daily",
-    which_vars = "all") {
-
+get_dpird_summaries <- function(station_id,
+                                first,
+                                last = Sys.Date(),
+                                api_key,
+                                interval = "daily",
+                                which_vars = "all") {
   if (length(station_id) == 1) {
-    return(.query_dpird_summaries(
-      station_id = station_id,
-      first = first,
-      last = last,
-      api_key = api_key,
-      interval = interval,
-      which_vars = which_vars)
+    return(
+      .query_dpird_summaries(
+        station_id = station_id,
+        first = first,
+        last = last,
+        api_key = api_key,
+        interval = interval,
+        which_vars = which_vars
+      )
     )
   } else {
     # query multiple stations and return the values ----
     return(
-      lapply(station_id,
-             .query_dpird_summaries,
-             station_id = station_id,
-             first = first,
-             last = last,
-             api_key = api_key,
-             interval = interval,
-             which_vars = which_vars)
+      lapply(
+        station_id,
+        .query_dpird_summaries,
+        station_id = station_id,
+        first = first,
+        last = last,
+        api_key = api_key,
+        interval = interval,
+        which_vars = which_vars
+      )
     )
   }
 }
@@ -183,9 +185,11 @@ get_dpird_summaries <- function(
 
   # Error if api key not provided
   if (is.null(api_key)) {
-    stop("If you to provide a valid DPIRD API key.\n",
-         "Visit: https://www.agric.wa.gov.au/web-apis",
-         call. = FALSE)
+    stop(
+      "If you to provide a valid DPIRD API key.\n",
+      "Visit: https://www.agric.wa.gov.au/web-apis",
+      call. = FALSE
+    )
   }
 
   # validate user provided date
@@ -206,13 +210,18 @@ get_dpird_summaries <- function(
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past.
   if (m_int %in% c("15min", "30min") &&
-      ((as.numeric(format(as.Date(first), "%Y"))) <
-       (as.numeric(format(as.Date(last), "%Y")) - 1))) {
+      ((as.numeric(format(
+        as.Date(first), "%Y"
+      ))) <
+      (as.numeric(format(
+        as.Date(last), "%Y"
+      )) - 1))) {
     stop(
       call. = FALSE,
       "Start date is too early. Data in 15 and 30 min intervals are only ",
       "available from the the 1st day of ",
-      lubridate::year(lubridate::today()) - 1, "."
+      lubridate::year(lubridate::today()) - 1,
+      "."
     )
   }
 
@@ -237,10 +246,12 @@ get_dpird_summaries <- function(
          "\"", interval, "\" is not a supported time interval")
 
   # Create base query URL for weather summaries
-  api <- paste0("https://api.dpird.wa.gov.au/v2/weather/stations/",
-                station_id,
-                "/summaries/",
-                m_int)
+  api <- paste0(
+    "https://api.dpird.wa.gov.au/v2/weather/stations/",
+    station_id,
+    "/summaries/",
+    m_int
+  )
 
   # Select correct time interval input
   uri <- switch(
@@ -299,11 +310,9 @@ get_dpird_summaries <- function(
       format(last, "%Y-%m"),
       "&limit=",
       ceiling(as.double(
-        difftime(
-          format(last, "%Y-%m-%d"),
-          format(first, "%Y-%m-%d"),
-          units = "days"
-        ) / 365
+        difftime(format(last, "%Y-%m-%d"),
+                 format(first, "%Y-%m-%d"),
+                 units = "days") / 365
       ) * 12),
       "&api_key=",
       api_key
@@ -358,7 +367,7 @@ get_dpird_summaries <- function(
                               names(out_temp))
 
   } else {
-    out_temp <- data.frame()[1:nrec, ]
+    out_temp <- data.frame()[1:nrec,]
   }
 
   # Rainfall
@@ -366,7 +375,7 @@ get_dpird_summaries <- function(
     out_rain <- .ret_list$summaries$rainfall
 
   } else {
-    out_rain <- data.frame()[1:nrec, ]
+    out_rain <- data.frame()[1:nrec,]
   }
 
   # Wind
@@ -379,7 +388,7 @@ get_dpird_summaries <- function(
                               names(out_wind))
 
   } else {
-    out_wind <- data.frame()[1:nrec, ]
+    out_wind <- data.frame()[1:nrec,]
   }
 
   # Wind erosion
@@ -389,90 +398,92 @@ get_dpird_summaries <- function(
                                  names(out_erosion))
 
   } else {
-    out_erosion <- data.frame()[1:nrec, ]
+    out_erosion <- data.frame()[1:nrec,]
   }
 
   # Soil temperature
   if (any(c("all", "soil") %in% .which_vars)) {
     out_soil <- .ret_list$summaries$soilTemperature
     names(out_soil) <- paste0("soil.",
-                                 names(out_soil))
+                              names(out_soil))
 
   } else {
-    out_soil <- data.table::data.table()[1:nrec, ]
+    out_soil <- data.table::data.table()[1:nrec,]
   }
 
   # Put together
-  out <- data.table::data.table(station_id = .ret_list$stationCode,
-                    out_period,
-                    out_temp,
-                    rain = out_rain,
-                    out_wind,
-                    out_erosion,
-                    out_soil,
-                    row.names = NULL)
+  out <- data.table::data.table(
+    station_id = .ret_list$stationCode,
+    out_period,
+    out_temp,
+    rain = out_rain,
+    out_wind,
+    out_erosion,
+    out_soil,
+    row.names = NULL
+  )
 
   names(out) <- tolower(names(out))
   names(out) <- gsub("[.]", "_", names(out))
 
   out[, to := format(
-    lubridate::as_datetime(
-      lubridate::ymd_hms(to),
-      tz = "Australia/Perth"),
-    "%Y-%m-%d %H:%M:%S %Z")]
+    lubridate::as_datetime(lubridate::ymd_hms(to),
+                           tz = "Australia/Perth"),
+    "%Y-%m-%d %H:%M:%S %Z"
+  )]
 
   out[, from := format(
-    lubridate::as_datetime(
-      lubridate::ymd_hms(from),
-      tz = "Australia/Perth"),
-    "%Y-%m-%d %H:%M:%S %Z")]
+    lubridate::as_datetime(lubridate::ymd_hms(from),
+                           tz = "Australia/Perth"),
+    "%Y-%m-%d %H:%M:%S %Z"
+  )]
 
   if ("airtemp_mintime" %in% colnames(out)) {
     out[, airtemp_mintime := format(
-      lubridate::as_datetime(
-        lubridate::ymd_hms(airtemp_mintime),
-        tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z")]
+      lubridate::as_datetime(lubridate::ymd_hms(airtemp_mintime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
   }
 
   if ("airtemp_maxtime" %in% colnames(out)) {
     out[, airtemp_maxtime := format(
-      lubridate::as_datetime(
-        lubridate::ymd_hms(airtemp_maxtime),
-        tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z")]
+      lubridate::as_datetime(lubridate::ymd_hms(airtemp_maxtime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
   }
 
   if ("wind_max_time" %in% colnames(out)) {
     out[, wind_max_time := format(
-      lubridate::as_datetime(
-        lubridate::ymd_hms(wind_max_time),
-        tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z")]
+      lubridate::as_datetime(lubridate::ymd_hms(wind_max_time),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
   }
 
   if ("wind_erosion_starttime" %in% colnames(out)) {
     out[, wind_erosion_starttime := format(
-      lubridate::as_datetime(
-        lubridate::ymd_hms(wind_erosion_starttime),
-        tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z")]
+      lubridate::as_datetime(lubridate::ymd_hms(wind_erosion_starttime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
   }
 
   if ("soil_mintime" %in% colnames(out)) {
     out[, soil_mintime := format(
-      lubridate::as_datetime(
-        lubridate::ymd_hms(soil_mintime),
-        tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z")]
+      lubridate::as_datetime(lubridate::ymd_hms(soil_mintime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
   }
 
   if ("soil_maxtime" %in% colnames(out)) {
     out[, soil_maxtime := format(
-      lubridate::as_datetime(
-        lubridate::ymd_hms(soil_maxtime),
-        tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z")]
+      lubridate::as_datetime(lubridate::ymd_hms(soil_maxtime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
   }
   return(out[])
 }
