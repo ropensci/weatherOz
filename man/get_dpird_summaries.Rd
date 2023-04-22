@@ -6,26 +6,26 @@
 \usage{
 get_dpird_summaries(
   station_id,
-  first = NULL,
+  first,
   last = Sys.Date(),
-  api_key = NULL,
+  api_key,
   interval = "daily",
   which_vars = "all"
 )
 }
 \arguments{
 \item{station_id}{A \code{character} string of the station ID code for the station
-of interest. Defaults to all stations.}
+of interest.}
 
 \item{first}{A \code{character} string representing the start date of the query in
-the format 'yyyymmdd'. Defaults to \code{NULL}.}
+the format 'yyyymmdd'.}
 
 \item{last}{A \code{character} string representing the start date of the query in
 the format 'yyyymmdd'. Defaults to the current system date.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD} \url{https://www.agric.wa.gov.au/web-apis} for the
-\acronym{DPIRD} weather \acronym{API}. Defaults to \code{NULL}.}
+\acronym{DPIRD} weather \acronym{API}.}
 
 \item{interval}{A \code{character} string that indicates the time interval to
 summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
@@ -39,7 +39,7 @@ previous year.}
 Defaults to "all".  Can be one of "all", "rain", "wind", "temp" or "erosion."}
 }
 \value{
-a \verb{data table} with station_id and date interval queried together
+a \code{data.table} with 'station_id' and date interval queried together
 with the requested weather variables.
 }
 \description{

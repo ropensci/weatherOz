@@ -12,14 +12,14 @@
 #' weather station network.
 #'
 #' @param station_id A `character` string of the station ID code for the station
-#'  of interest. Defaults to all stations.
+#'  of interest.
 #' @param first A `character` string representing the start date of the query in
-#' the format 'yyyymmdd'. Defaults to `NULL`.
+#' the format 'yyyymmdd'.
 #' @param last A `character` string representing the start date of the query in
 #' the format 'yyyymmdd'. Defaults to the current system date.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #' \acronym{DPIRD} <https://www.agric.wa.gov.au/web-apis> for the
-#' \acronym{DPIRD} weather \acronym{API}. Defaults to `NULL`.
+#' \acronym{DPIRD} weather \acronym{API}.
 #' @param interval A `character` string that indicates the time interval to
 #' summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
 #' 'monthly', 'yearly'.  For intervals shorter than 1 day, time period covered
@@ -30,7 +30,7 @@
 #' @param which_vars A `character` string selecting the desired weather summary.
 #' Defaults to "all".  Can be one of "all", "rain", "wind", "temp" or "erosion."
 #'
-#' @return a `data table` with station_id and date interval queried together
+#' @return a `data.table` with 'station_id' and date interval queried together
 #' with the requested weather variables.
 #'
 #' @note Please note this function converts date-time columns from Coordinated
@@ -71,9 +71,9 @@
 
 get_dpird_summaries <- function(
     station_id,
-    first = NULL,
+    first,
     last = Sys.Date(),
-    api_key = NULL,
+    api_key,
     interval = "daily",
     which_vars = "all") {
 
@@ -103,25 +103,26 @@ get_dpird_summaries <- function(
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
-#' @param station_id A string with the station ID code for the station of
-#' interest.
-#' @param first `Integer`. A string representing the start date of the query in
-#' the format 'yyyymmdd' (ISO-8601). \pkg{weatherOz} does its best to determine
-#' the date given any format but may fail if given an unconventional date format.
-#' @param last A string representing the start date of the query in the format '
-#' yyyymmdd' (ISO-8601). For intervals less than one day, to get one day of
-#' data, last should be the same as first, but must be explicitly coded,
+#' @param station_id `Character`. A string with the station ID code for the
+#' station of interest.
+#' @param first `Character`. A string representing the start date of the query
+#' in the format 'yyyymmdd' (ISO-8601). \pkg{weatherOz} does its best to
+#' determine the date given any format but may fail if given an unconventional
+#' date format.
+#' @param last `Character`. A string representing the start date of the query in
+#' the format 'yyyymmdd' (ISO-8601). For intervals less than one day, to get one
+#' day of data, last should be the same as first, but must be explicitly coded,
 #' as otherwise it will default to the current date.
-#' @param api_key \acronym{API} key from \acronym{DPIRD}
+#' @param api_key `Character`. An \acronym{API} key from \acronym{DPIRD}
 #'  <https://www.agric.wa.gov.au/web-apis>.  Defaults to NULL.
-#' @param interval Time interval to summarise over. The default is 'daily',
-#' others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For intervals
-#' shorter than 1 day, time period covered will be midnight to midnight, with
-#' the last time interval being before midnight–hour/minute values are for the
-#' end of the time period. Data for shorter intervals ('15min', '30min') should
-#' be available from January of last year.
+#' @param interval `Character`. Time interval to summarise over. The default is
+#' 'daily', others are '15min', '30min', 'hourly', 'monthly', 'yearly'. For
+#' intervals shorter than 1 day, time period covered will be midnight to
+#' midnight, with the last time interval being before midnight–hour/minute
+#' values are for the end of the time period. Data for shorter intervals
+#' ('15min', '30min') should be available from January of last year.
 #' @return a `list` with 3 elements: the station code, station name and a nested
-#' `data frame` with the all summary output as per Weather \acronym{API}
+#' `data.table` with the all summary output as per Weather \acronym{API}
 #' documentation.
 #'
 #' @note You can request your own API key from DPIRD for free by filling out the
