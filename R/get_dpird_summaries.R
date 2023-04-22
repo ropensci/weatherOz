@@ -208,7 +208,8 @@ get_dpird_summaries <- function(
     stop(
       call. = FALSE,
       "Start date is too early. Data in 15 and 30 min intervals are only ",
-      "available from the the 1st day of the previous year"
+      "available from the the 1st day of ",
+      lubridate::year(lubridate::today()) - 1, "."
     )
   }
 
