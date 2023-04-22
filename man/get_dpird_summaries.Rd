@@ -5,7 +5,7 @@
 \title{Get weather data from DPIRD weather API summarised by time interval}
 \usage{
 get_dpird_summaries(
-  station_id = NULL,
+  station_id,
   first = NULL,
   last = Sys.Date(),
   api_key = NULL,
@@ -14,28 +14,29 @@ get_dpird_summaries(
 )
 }
 \arguments{
-\item{station_id}{A string of the station ID code for the station of
-interest. Defaults to \code{NULL}.}
+\item{station_id}{A \code{character} string of the station ID code for the station
+of interest. Defaults to all stations.}
 
-\item{first}{A string representing the start date of the query in the
-format 'yyyymmdd'. Defaults to \code{NULL}.}
+\item{first}{A \code{character} string representing the start date of the query in
+the format 'yyyymmdd'. Defaults to \code{NULL}.}
 
-\item{last}{A string representing the start date of the query in the
-format 'yyyymmdd'. Defaults to the current system date.}
+\item{last}{A \code{character} string representing the start date of the query in
+the format 'yyyymmdd'. Defaults to the current system date.}
 
-\item{api_key}{Api key from DPIRD (https://www.agric.wa.gov.au/web-apis).
-Defaults to \code{NULL}.}
+\item{api_key}{A \code{character} string containing your \acronym{API} key from
+\acronym{DPIRD} \url{https://www.agric.wa.gov.au/web-apis} for the
+\acronym{DPIRD} weather \acronym{API}. Defaults to \code{NULL}.}
 
-\item{interval}{Time interval to summarise over.
-Default is 'daily'; others are '15min', '30min', 'hourly',
+\item{interval}{A \code{character} string that indicates the time interval to
+summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
 'monthly', 'yearly'.  For intervals shorter than 1 day, time period covered
 will be midnight to midnight, with the last time interval being before
-midnight - hour/minute values are for the end of the time period.
-Data for shorter intervals ('15min', '30min') are available from
-January of the previous year.}
+midnight - hour/minute values are for the end of the time period.  Data for
+shorter intervals ('15min', '30min') are available from January of the
+previous year.}
 
-\item{which_vars}{Match weather summary selected. Defaults to "all".
-Can be one of "all", "rain", "wind", "temp" and "erosion."}
+\item{which_vars}{A \code{character} string selecting the desired weather summary.
+Defaults to "all".  Can be one of "all", "rain", "wind", "temp" or "erosion."}
 }
 \value{
 a \verb{data table} with station_id and date interval queried together
