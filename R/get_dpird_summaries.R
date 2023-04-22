@@ -103,6 +103,8 @@ get_dpird_summaries <- function(
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
+#' Internal function to handle weather data fetching from DPIRD's API.
+#'
 #' @param station_id `Character`. A string with the station ID code for the
 #' station of interest.
 #' @param first `Character`. A string representing the start date of the query
@@ -170,13 +172,14 @@ get_dpird_summaries <- function(
                                    api_key = NULL,
                                    interval = "daily",
                                    which_vars = "all") {
-  if (missing(station_id)) {
-    station_id <- get_station_list(api_key = api_key)[, 1]
+  if (is.null(station_id)) {
+    stop(call. = FALSE,
+         "Please supply a valid `station_id`.")
   }
 
   if (is.null(first))
     stop(call. = FALSE,
-         "Please supply a start date.")
+         "Please supply a valid start date.")
 
   # Error if api key not provided
   if (is.null(api_key)) {
@@ -326,13 +329,14 @@ get_dpird_summaries <- function(
 
 #' .parse_summary
 #'
-#' Parses and tidy up data as returned by `.query_dpird_summaries()`
+#' Internal function that parses and tidy up data as returned by
+#'  `.query_dpird_summaries()`
 #'
 #' @param .ret_list a list with the DPIRD weather API response
 #' @param .which_vars a character vector with the variables to query. See the
 #' `.query_dpird_summaries()` for further details.
 #'
-#' @return a tidy `data table` with station id and request weather summaries
+#' @return a tidy `data.table` with station id and request weather summaries
 #'
 #' @noRd
 #' @keywords Internal
@@ -368,7 +372,7 @@ get_dpird_summaries <- function(
   # Wind
   if (any(c("all", "wind") %in% .which_vars)) {
     temp <- .ret_list$summaries$wind
-    temp <- lapply(temp, data.table::as.data.table)
+    temp <- lapply(temp, data.table::data.table)
 
     out_wind <- data.table::rbindlist(temp)
     names(out_wind) <- paste0("wind.",
@@ -395,11 +399,11 @@ get_dpird_summaries <- function(
                                  names(out_soil))
 
   } else {
-    out_soil <- data.frame()[1:nrec, ]
+    out_soil <- data.table::data.table()[1:nrec, ]
   }
 
   # Put together
-  out <- data.frame(station_id = .ret_list$stationCode,
+  out <- data.table::data.table(station_id = .ret_list$stationCode,
                     out_period,
                     out_temp,
                     rain = out_rain,
@@ -410,7 +414,6 @@ get_dpird_summaries <- function(
 
   names(out) <- tolower(names(out))
   names(out) <- gsub("[.]", "_", names(out))
-  out <- data.table::setDT(out)
 
   out[, to := format(
     lubridate::as_datetime(
