@@ -49,6 +49,20 @@
   return(x)
 }
 
+#' Check user input dates to ensure sequential order
+#'
+#' @param .first a user supplied date for the start of data query
+#' @param .last a user supplied date for the end of data query
+#' @noRd
+
+.check_date_order <- function(.first, .last) {
+  if (.last < .first) {
+    stop(call. = FALSE,
+         "The first and last dates appear to be reversed.")
+    return(invisible(NULL))
+  }
+}
+
 #' Convert station names to proper case for names
 #'
 #' Converts station names to proper name case, e.g., "York East".
