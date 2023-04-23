@@ -87,7 +87,7 @@ get_dpird_summaries <- function(station_id,
     )
   } else {
     # query multiple stations and return the values ----
-    return(
+    return(data.table::rbindlist(
       lapply(
         station_id,
         .query_dpird_summaries,
@@ -98,7 +98,7 @@ get_dpird_summaries <- function(station_id,
         interval = interval,
         which_vars = which_vars
       )
-    )
+    ))
   }
 }
 
