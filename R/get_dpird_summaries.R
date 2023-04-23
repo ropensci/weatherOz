@@ -167,26 +167,26 @@ get_dpird_summaries <- function(station_id,
 #' @noRd
 #' @keywords Internal
 
-.query_dpird_summaries <- function(station_id = NULL,
-                                   first = NULL,
+.query_dpird_summaries <- function(station_id,
+                                   first,
                                    last = Sys.Date(),
-                                   api_key = NULL,
+                                   api_key,
                                    interval = "daily",
                                    which_vars = "all") {
-  if (is.null(station_id)) {
+  if (missing(station_id)) {
     stop(call. = FALSE,
          "Please supply a valid `station_id`.")
   }
 
-  if (is.null(first))
+  if (missing(first))
     stop(call. = FALSE,
-         "Please supply a valid start date.")
+         "Please supply a valid start date as `first`.")
 
   # Error if api key not provided
-  if (is.null(api_key)) {
+  if (missing(api_key)) {
     stop(
-      "If you to provide a valid DPIRD API key.\n",
-      "Visit: https://www.agric.wa.gov.au/web-apis",
+      "A valid DPIRD API key must be provided, please visit\n",
+      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
       call. = FALSE
     )
   }
@@ -194,27 +194,45 @@ get_dpird_summaries <- function(station_id,
   # validate user provided date
   first <- .check_date(first)
   last <- .check_date(last)
+  .check_date_order(first, last)
 
   # Match time interval query to user requests
   m_int <- try(match.arg(interval,
-                         c("daily",
-                           "15min",
+                         c("15min",
                            "30min",
                            "hourly",
+                           "daily",
                            "monthly",
                            "yearly"),
                          several.ok = FALSE),
                silent = TRUE)
 
+  # Stop if query is for monthly and interval is wrong
+  if (m_int %in% c("monthly") &&
+      (lubridate::interval(first, last, tzone = "Australia/Perth")) < 0) {
+    stop(call. = FALSE,
+         "For monthly intervals the interval should be at least one month.")
+  }
+
+  # Stop if query is for daily and interval is wrong
+  if (m_int %in% c("daily") &&
+      (lubridate::interval(first, last, tzone = "Australia/Perth")) < 0) {
+    stop(call. = FALSE,
+         "For daily intervals the interval should be at least one day.")
+  }
+
+  # Error if summary interval is not available. API only allows for daily,
+  # 15 min, 30 min, hourly, monthly, yearly
+  if (methods::is(m_int, "try-error"))
+    stop(call. = FALSE,
+         "\"", interval, "\" is not a supported time interval")
+
   # Stop if query is for 15 and 30 min intervals and date is more than one
-  # year in the past.
-  if (m_int %in% c("15min", "30min") &&
-      ((as.numeric(format(
-        as.Date(first), "%Y"
-      ))) <
-      (as.numeric(format(
-        as.Date(last), "%Y"
-      )) - 1))) {
+  # year in the past
+  if (m_int %in% c("15min", "30min") & lubridate::year(first) <
+      lubridate::year(lubridate::today()) - 1 ||
+      m_int %in% c("15min", "30min") & lubridate::year(last) <
+      lubridate::year(lubridate::today()) - 1) {
     stop(
       call. = FALSE,
       "Start date is too early. Data in 15 and 30 min intervals are only ",
@@ -223,26 +241,6 @@ get_dpird_summaries <- function(station_id,
       "."
     )
   }
-
-  # Stop if query is for monthly and interval is wrong
-  if (m_int %in% c("monthly") &&
-      (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
-    stop(call. = FALSE,
-         "For monthly intervals date difference should be at least one month.")
-  }
-
-  # Stop if query is for daily and interval is wrong
-  if (m_int %in% c("daily") &&
-      (lubridate::interval(first, last, tz = "Australia/Perth")) < 0) {
-    stop(call. = FALSE,
-         "For daily intervals date difference should be at least one day.")
-  }
-
-  # Error if summary interval is not available. API only allows for daily,
-  # 15 min, 30 min, hourly, monthly, yearly
-  if (methods::is(m_int, "try-error"))
-    stop(call. = FALSE,
-         "\"", interval, "\" is not a supported time interval")
 
   # Create base query URL for weather summaries
   api <- paste0(
