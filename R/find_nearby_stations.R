@@ -259,6 +259,9 @@ find_nearby_stations <- function(latitude = NULL,
                                        longitude = NULL,
                                        latitude = NULL,
                                        station_id = NULL) {
+
+  distance <- NULL #nocov
+
   if (!is.null(station_id) &&
       !is.null(longitude) && !is.null(latitude)) {
     stop(
@@ -470,7 +473,7 @@ find_nearby_stations <- function(latitude = NULL,
 #' @noRd
 .get_silo_stations <- function(.station_id, .distance_km) {
 
-  station_name <- distance <- NULL # nocov
+  station_name <- distance <- owner <- NULL # nocov
 
   base_url <-
     "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php?format="
@@ -541,8 +544,12 @@ find_nearby_stations <- function(latitude = NULL,
 #' @noRd
 
 .parse_dpird_stations <- function(query_result = ret) {
-  # Manipulate date for consistency
-  links <- NULL #nocov
+
+  # nocov start
+  links <- ret <- distance <- model <- owner <- start_date <- end_date <-
+    comments <- job_number <- online <- status <- latitude <- state <- NULL
+  #nocov end
+
   out <- data.table::data.table(query_result$collection)
   out <- .rename_cols(out, which_api = 'dpird')
 

@@ -4,3 +4,4 @@
            pkgname = "weatherOz") {
     options(bomrang.connection = stdin())
   }
+utils::globalVariables(".")

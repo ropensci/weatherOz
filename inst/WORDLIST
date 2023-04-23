@@ -1,7 +1,7 @@
 AAC
 AHI
 AUS
-Api
+AWST
 BOM
 BOM's
 Beswick
@@ -50,18 +50,21 @@ agric
 al
 alldata
 ammin
-apis
+api
 apsim
 au
+bom
 bomrang
 colour
 cron
 dateTime
 doi
+dpird
 equirect
 et
 evaporative
 gmail
+gms
 greyscale
 gridded
 hectoPascals
@@ -84,8 +87,6 @@ qld
 recognise
 reproducibility
 sa
-stationCode
-stationName
 summarise
 summarised
 tas
@@ -94,5 +95,4 @@ vic
 visualising
 wa
 www
-yyyy
 yyyymmdd
