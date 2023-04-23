@@ -8,40 +8,39 @@
 
 #' Get weather data from DPIRD weather API summarised by time interval
 #'
-#' Nicely formatted individual station weather summaries from the DPIRD
-#' weather station network.
+#' Nicely formatted individual station weather summaries from the
+#'  \acronym{DPIRD} weather station network.
 #'
-#' @param station_id A `character` string of the station ID code for the station
-#'  of interest.
+#' @param station_id A `character` string or `vector` of the \acronym{DPIRD}
+#'  station \acronym{ID} code(s) for the station(s) of interest.
 #' @param first A `character` string representing the start date of the query in
-#' the format 'yyyymmdd'.
+#'  the format 'yyyymmdd'.
 #' @param last A `character` string representing the start date of the query in
-#' the format 'yyyymmdd'. Defaults to the current system date.
+#'  the format 'yyyymmdd'.  Defaults to the current system date.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#' \acronym{DPIRD} <https://www.agric.wa.gov.au/web-apis> for the
-#' \acronym{DPIRD} weather \acronym{API}.
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} weather \acronym{API}.
 #' @param interval A `character` string that indicates the time interval to
-#' summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
-#' 'monthly', 'yearly'.  For intervals shorter than 1 day, time period covered
-#' will be midnight to midnight, with the last time interval being before
-#' midnight - hour/minute values are for the end of the time period.  Data for
-#' shorter intervals ('15min', '30min') are available from January of the
-#' previous year.
+#'  summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
+#'  'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
+#'  covered will be midnight to midnight, with the last time interval being
+#'  before midnight - hour/minute values are for the end of the time period.
+#'  Data for shorter intervals ('15min', '30min') are available from January of
+#'  the previous year.
 #' @param which_vars A `character` string selecting the desired weather summary.
-#' Defaults to "all".  Can be one of "all", "rain", "wind", "temp" or "erosion."
+#'  Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp' or
+#'  'erosion'.
 #'
 #' @return a `data.table` with 'station_id' and date interval queried together
-#' with the requested weather variables.
+#'  with the requested weather variables.
 #'
 #' @note Please note this function converts date-time columns from Coordinated
-#' Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
+#'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 #'
 #' @family DPIRD
 #'
 #' @examplesIf interactive()
 #' # You must have an DPIRD API key to proceed
-#' mykey <- 'dpird_api_key'
-#'
 #' # Set date interval for yearly request
 #' # Get rainfall summary
 #' start_date <- "20171028"
@@ -50,7 +49,7 @@
 #' output <- get_dpird_summaries(
 #'             station_id = "CL001",
 #'             first = start_date,
-#'             api_key = mykey,
+#'             api_key = "YOUR API KEY",
 #'             interval = "yearly",
 #'             which_vars = "rain")
 #'
@@ -63,7 +62,7 @@
 #'             station_id = "BI",
 #'             first = start_date,
 #'             last = end_date,
-#'             api_key = mykey,
+#'             api_key = "YOUR API KEY",
 #'             interval = "daily",
 #'             which_vars = c("wind", "erosion"))
 #'
