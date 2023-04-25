@@ -124,14 +124,15 @@ get_dpird_summaries <- function(station_id,
 
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly, yearly
-  if (methods::is(m_int, "try-error"))
+  if (methods::is(m_int, "try-error")) {
     stop(call. = FALSE,
          "\"", interval, "\" is not a supported time interval")
+  }
 
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past
   if (m_int %in% c("15min", "30min") & lubridate::year(first) <
-      lubridate::year(lubridate::today()) - 1 ||
+      lubridate::year(lubridate::today()) - 1 |
       m_int %in% c("15min", "30min") & lubridate::year(last) <
       lubridate::year(lubridate::today()) - 1) {
     stop(
@@ -143,33 +144,18 @@ get_dpird_summaries <- function(station_id,
     )
   }
 
-  if (length(station_id) == 1) {
-    return(
-      .query_dpird_summaries(
-        station_id = station_id,
-        first = first,
-        last = last,
-        api_key = api_key,
-        interval = interval,
-        which_vars = which_vars
-      )
+  return(
+    .query_dpird_summaries(
+      station_id = station_id,
+      first = first,
+      last = last,
+      api_key = api_key,
+      interval = interval,
+      which_vars = which_vars
     )
-  } else {
-    # query multiple stations and return the values ----
-    return(data.table::rbindlist(
-      lapply(
-        station_id,
-        .query_dpird_summaries,
-        station_id = station_id,
-        first = first,
-        last = last,
-        api_key = api_key,
-        interval = interval,
-        which_vars = which_vars
-      )
-    ))
-  }
+  )
 }
+
 
 #' Fetch weather summary from DPIRD weather API for an individual station
 #'
@@ -238,11 +224,10 @@ get_dpird_summaries <- function(station_id,
 
 .query_dpird_summaries <- function(station_id,
                                    first,
-                                   last = Sys.Date(),
+                                   last,
                                    api_key,
-                                   interval = "daily",
-                                   which_vars = "all") {
-
+                                   interval,
+                                   which_vars) {
   m_int <- NULL # nocov
 
   # Create base query URL for weather summaries
@@ -353,7 +338,8 @@ get_dpird_summaries <- function(station_id,
 .parse_summary <- function(.ret_list = NULL,
                            .which_vars = NULL) {
   # nocov start
-  to <- from <- airtemp_mintime <- airtemp_maxtime <- wind_max_time <-
+  to <-
+    from <- airtemp_mintime <- airtemp_maxtime <- wind_max_time <-
     wind_erosion_starttime <- soil_mintime <- soil_maxtime <- NULL
   # nocov end
 
@@ -372,7 +358,7 @@ get_dpird_summaries <- function(station_id,
                               names(out_temp))
 
   } else {
-    out_temp <- data.frame()[1:nrec,]
+    out_temp <- data.frame()[1:nrec, ]
   }
 
   # Rainfall
@@ -380,7 +366,7 @@ get_dpird_summaries <- function(station_id,
     out_rain <- .ret_list$summaries$rainfall
 
   } else {
-    out_rain <- data.frame()[1:nrec,]
+    out_rain <- data.frame()[1:nrec, ]
   }
 
   # Wind
@@ -393,7 +379,7 @@ get_dpird_summaries <- function(station_id,
                               names(out_wind))
 
   } else {
-    out_wind <- data.frame()[1:nrec,]
+    out_wind <- data.frame()[1:nrec, ]
   }
 
   # Wind erosion
@@ -403,7 +389,7 @@ get_dpird_summaries <- function(station_id,
                                  names(out_erosion))
 
   } else {
-    out_erosion <- data.frame()[1:nrec,]
+    out_erosion <- data.frame()[1:nrec, ]
   }
 
   # Soil temperature
@@ -413,7 +399,7 @@ get_dpird_summaries <- function(station_id,
                               names(out_soil))
 
   } else {
-    out_soil <- data.table::data.table()[1:nrec,]
+    out_soil <- data.table::data.table()[1:nrec, ]
   }
 
   # Put together
