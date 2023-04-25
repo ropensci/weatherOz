@@ -36,7 +36,7 @@ update_forecast_towns <- function() {
   )
 
   answer <-
-    readLines(con = getOption("bomrang.connection"), n = 1)
+    readLines(con = getOption("weatherOz.connection"), n = 1)
 
   answer <- toupper(answer)
 
