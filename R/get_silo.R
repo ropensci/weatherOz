@@ -26,10 +26,10 @@
 #' @param longitude `Numeric`. A single value  representing the
 #'  longitude of the point-of-interest. Defaults to `NULL` and when used,
 #'  queries with `station_id` inputs is not permitted.
-#' @param first `Integer`. A value representing the start date of the query in
-#'  the format 'yyyymmdd' (ISO-8601).
-#' @param last `Integer`. A value representing the end date of the query in the
-#' format 'yyyymmdd' (ISO-8601).
+#' @param first A `character` string representing the start date of the query in
+#'  the format 'yyyymmdd'.
+#' @param last A `character` string representing the start date of the query in
+#'  the format 'yyyymmdd'.  Defaults to the current system date.
 #' @param data_format `Character`. A string specifying the type of data to
 #'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 #'  'alldata' retrieve daily data.
@@ -64,15 +64,13 @@
 get_silo <- function(station_id = NULL,
                      latitude = NULL,
                      longitude = NULL,
-                     first = NULL,
-                     last = NULL,
+                     first,
+                     last = Sys.Date(),
                      data_format = "alldata",
-                     email = NULL) {
+                     email) {
   if (missing(first))
     stop("Provide a start date", call. = FALSE)
-  if (missing(last))
-    stop("Provide an end date", call. = FALSE)
-  if (is.null(email))
+  if (missing(email))
     stop("Provide a valid email address", call. = FALSE)
   stopifnot("Provide equal length lat and lon values" =
               length(latitude) == length(longitude))
@@ -239,7 +237,7 @@ get_silo <- function(station_id = NULL,
   }
 
   # monthly data
-  if (this_format == 'monthly') {
+  if (this_format == "monthly") {
     df <- unlist(strsplit(query_response, "\n"))
     n_first <-
       grep(format(lubridate::as_date(this_date), "%Y%m"), df)
