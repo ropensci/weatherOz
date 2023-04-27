@@ -75,6 +75,11 @@ get_silo <- function(station_id = NULL,
   stopifnot("Provide equal length lat and lon values" =
               length(latitude) == length(longitude))
 
+  # validate user provided date
+  first <- gsub("-", "", .check_date(first))
+  last <-  gsub("-", "", .check_date(last))
+  .check_date_order(first, last)
+
   # query a single point and return the values ----
   # if a single station or single lat/lon is requested, return values, else
   # check vectors for validity and then return all values in one data.table
@@ -251,7 +256,7 @@ get_silo <- function(station_id = NULL,
       "vapour_pressure_avg"
     )
 
-    # Create df and give names
+        # Create df and give names
     df <- df[n_first:length(df)]
     out <- stats::setNames(data.frame(matrix(
       nrow = length(df),
@@ -291,6 +296,8 @@ get_silo <- function(station_id = NULL,
     n_names <- grep("Date", df)
     n_first <- grep(this_date, df)
     this_names <- unlist(strsplit(df[n_names], "\\s+"))
+
+    print(n_first); str(df)
 
     # Create df and provide names
     df <- df[n_first:length(df)]
