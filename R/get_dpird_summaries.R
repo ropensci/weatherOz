@@ -28,7 +28,7 @@
 #'  Data for shorter intervals ('15min', '30min') are available from January of
 #'  the previous year.
 #' @param which_vars A `character` string selecting the desired weather summary.
-#'  Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp' or
+#'  Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' and
 #'  'erosion'.
 #'
 #' @return a `data.table` with 'station_id' and date interval queried together
@@ -150,7 +150,7 @@ get_dpird_summaries <- function(station_id,
         first = first,
         last = last,
         api_key = api_key,
-        interval = interval,
+        interval = m_int,
         which_vars = which_vars
       )
     )
@@ -164,7 +164,7 @@ get_dpird_summaries <- function(station_id,
         first = first,
         last = last,
         api_key = api_key,
-        interval = interval,
+        interval = m_int,
         which_vars = which_vars
       )
     ))
@@ -240,22 +240,22 @@ get_dpird_summaries <- function(station_id,
                                    first,
                                    last = Sys.Date(),
                                    api_key,
-                                   interval = "daily",
-                                   which_vars = "all") {
+                                   interval,
+                                   which_vars) {
 
-  m_int <- NULL # nocov
+  # m_int <- NULL # nocov
 
   # Create base query URL for weather summaries
   api <- paste0(
     "https://api.dpird.wa.gov.au/v2/weather/stations/",
     station_id,
     "/summaries/",
-    m_int
+    interval
   )
 
   # Select correct time interval input
   uri <- switch(
-    m_int,
+    interval,
     `15min` = paste0(
       api,
       "?startDateTime=",
