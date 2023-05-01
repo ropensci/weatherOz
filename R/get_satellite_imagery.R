@@ -377,7 +377,6 @@ get_satellite_imagery <- get_satellite <-
 #' @param x An object of class `SpatRaster`.
 #' @param y Not used.
 #' @param ... Plot parameters forwarded.
-#' @noRd
 #' @export
 methods::setMethod(
   "plot",
