@@ -148,9 +148,9 @@ get_ag_bulletin <- function(state = "AUS") {
       xml2::xml_attr("obs-time-utc"),
     time_zone = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("time-zone"),
-    site =  xml2::xml_find_first(observations, ".//ancestor::obs") |>
+    station_code =  xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("site"),
-    station = xml2::xml_find_first(observations, ".//ancestor::obs") |>
+    station_name = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("station"),
     observation = observations |>
       xml2::xml_attr("t"),
@@ -162,8 +162,8 @@ get_ag_bulletin <- function(state = "AUS") {
   )
   out <- data.table::dcast(
     out,
-    product_id + obs_time_local + obs_time_utc + time_zone + site + station ~
-      observation,
+    product_id + obs_time_local + obs_time_utc + time_zone + station_name +
+      station_code ~ observation,
     value.var = "values"
   )
   # check that all fields are present, if not add missing col with NAs
@@ -172,16 +172,13 @@ get_ag_bulletin <- function(state = "AUS") {
   if (length(missing) != 0) {
     out[, eval(missing) := NA]
   }
-  # remove leading 0 to merge with stations_site_list
-  out[, site := gsub("^0{1,2}", "", out$site)]
+
   # merge with AAC codes
-  data.table::setnames(out, old = c("site", "station"),
-                       new = c("station_code", "station_name"))
   # load AAC code/town name list to join with final output
   load(system.file("extdata", "stations_site_list.rda", # nocov
                    package = "weatherOz")) # nocov
-  data.table::setkey(out, "station_name")
-  out <- stations_site_list[out, on = "station_name"]
+  data.table::setkey(out, "station_code")
+  out <- stations_site_list[out, on = "station_code"]
   # tidy up the cols
   refcols <- c(
     "product_id",
