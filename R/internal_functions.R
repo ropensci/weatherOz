@@ -63,36 +63,6 @@
   }
 }
 
-#' Convert station names to proper case for names
-#'
-#' Converts station names to proper name case, e.g., "York East".
-#'
-#' @param s a `string` to be converted
-#' @keywords internal
-#' @noRd
-#' @author \R authors, taken from ?tolower()
-
-.cap_names <- function(s, strict = FALSE) {
-  s <- tolower(s)
-  cap <- function(s)
-    paste(toupper(substring(s, 1, 1)),
-          {
-            s <- substring(s, 2)
-            if (strict)
-              tolower(s)
-            else
-              s
-          },
-          sep = "", collapse = " ")
-  vapply(
-    X = strsplit(s, split = " "),
-    FUN = cap,
-    FUN.VALUE = character(length(!is.null(names(s)))),
-    USE.NAMES = !is.null(names(s))
-  )
-}
-
-
 #' Get response from a BOM URL
 #'
 #' Gets response from a BOM URL, checks the server for response first, then
@@ -445,7 +415,8 @@
   stationName <- name <- NULL #nocov
   if (which_api == 'dpird') {
     df_out <- data.table::data.table(df_out)
-    df_out[, stationName := .cap_names(s = stationName)]
+    df_out[, stationName := DescTools::StrCap(x = stationName,
+                                              method = "word")]
 
     # Split the vector into two with an underscore between the names
     new_names <- lapply(names(df_out), function(x) {
@@ -464,7 +435,7 @@
 
   if (which_api == 'silo') {
     df_out <- data.table::data.table(df_out)
-    df_out[, name := .cap_names(s = name)]
+    df_out[, name := DescTools::StrCap(x = name, method = "word")]
     names(df_out)[1] <- "station_code"
     names(df_out)[3] <- "station_name"
   }

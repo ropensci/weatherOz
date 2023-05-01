@@ -109,6 +109,7 @@ Imports:
     crayon,
     curl,
     data.table,
+    DescTools,
     foreign,
     grDevices,
     httr,
