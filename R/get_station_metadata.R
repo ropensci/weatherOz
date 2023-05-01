@@ -1,7 +1,8 @@
 
 #' Get latest BOM station metadata
 #'
-#' Download the latest station locations and metadata.
+#' Download the latest station locations and metadata for stations in the
+#'  \acronym{SILO} data set.
 #'
 #' If \CRANpkg{ASGS.foyer} is installed locally, this function will
 #' automatically check and correct any invalid state values for stations located

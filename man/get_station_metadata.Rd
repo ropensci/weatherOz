@@ -11,7 +11,8 @@ a \code{data.table} of \acronym{BOM} weather stations' metadata for
 stations available from \acronym{SILO}.
 }
 \description{
-Download the latest station locations and metadata.
+Download the latest station locations and metadata for stations in the
+\acronym{SILO} data set.
 }
 \details{
 If \CRANpkg{ASGS.foyer} is installed locally, this function will
