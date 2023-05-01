@@ -297,8 +297,6 @@ get_silo <- function(station_id = NULL,
     n_first <- grep(this_date, df)
     this_names <- unlist(strsplit(df[n_names], "\\s+"))
 
-    print(n_first); str(df)
-
     # Create df and provide names
     df <- df[n_first:length(df)]
     out <- stats::setNames(data.frame(matrix(
