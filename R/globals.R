@@ -1,16 +1,23 @@
 # CRAN NOTE avoidance
 utils::globalVariables(
   c(
+    "actual_state",
+    "end",
+    "lat",
+    "lon",
+    "obs_time_local",
+    "obs_time_utc",
+    "r",
+    "site",
+    "state",
     "station_code",
     "station_name",
     "status",
-    "site",
     "state_code",
-    "wmo",
-    "state",
-    "lon",
-    "lat",
-    "actual_state",
     "state_from_latlon",
     "start",
-    "end"))
+    "stations_site_list",
+    "site",
+    "wmo"
+  )
+)
