@@ -29,7 +29,6 @@ get_station_metadata <- function() {
     actual_state <-
     state_from_latlon <- start <- end <- NULL # nocov end
 
-
   tryCatch({
     curl::curl_download(
       url =
@@ -54,9 +53,9 @@ get_station_metadata <- function() {
       file = file_in,
       na = c("..", ".....", " "),
       skip = 4,
-      col_positions = readr::fwf_cols("site" = c(1, 8),
+      col_positions = readr::fwf_cols("station_code" = c(1, 8),
                                       "dist" = c(9, 14),
-                                      "name" = c(15, 55),
+                                      "station_name" = c(15, 55),
                                       "start" = c(56, 63),
                                       "end" = c(64, 71),
                                       "lat" = c(72, 80),
@@ -67,9 +66,9 @@ get_station_metadata <- function() {
                                       "bar_height.m" = c(121, 129),
                                       "wmo" = c(130, 136)),
       col_types = c(
-        site = readr::col_character(),
+        station_code = readr::col_character(),
         dist = readr::col_character(),
-        name = readr::col_character(),
+        site_name = readr::col_character(),
         start = readr::col_integer(),
         end = readr::col_integer(),
         lat = readr::col_double(),
@@ -83,6 +82,9 @@ get_station_metadata <- function() {
       n_max = length(utils::count.fields(file_in)) - 6, # drop last six rows
     ))
 
+  bom_stations[, station_code := as.factor(station_code)]
+  bom_stations[, station_name := DescTools::StrCap(x = station_name,
+                                                   method = "word")]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
   bom_stations[, status := ifelse(!is.na(end), "Closed", "Open")]
@@ -119,5 +121,14 @@ get_station_metadata <- function() {
           state %notin% c("ANT", "ISL"), state := actual_state] %>%
       .[, actual_state := NULL]
   }
-  return(bom_stations)
+
+  silo_stations <-
+    find_nearby_stations(
+      latitude = -25.5833,
+      longitude = 134.5667,
+      distance_km = 10000,
+      which_api = "silo"
+    )
+
+  return(bom_stations[station_name %in% silo_stations$station_name])
 }
