@@ -36,7 +36,7 @@ Data for shorter intervals ('15min', '30min') are available from January of
 the previous year.}
 
 \item{which_vars}{A \code{character} string selecting the desired weather summary.
-Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp' or
+Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' or
 'erosion'.}
 }
 \value{

@@ -18,9 +18,10 @@ automatically check and correct any invalid state values for stations located
 in Australia.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 get_station_metadata()
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 Station location and other metadata are sourced from the Australian Bureau of
@@ -28,5 +29,6 @@ Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@gmail.com}
+Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
+\concept{BOM}
