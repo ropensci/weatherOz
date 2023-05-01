@@ -18,10 +18,9 @@ automatically check and correct any invalid state values for stations located
 in Australia.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
+\dontrun{
 get_station_metadata()
-\dontshow{\}) # examplesIf}
+}
 }
 \references{
 Station location and other metadata are sourced from the Australian Bureau of
