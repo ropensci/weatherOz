@@ -1,4 +1,5 @@
 
+
 #' Get BOM agriculture bulletin information for select stations
 #'
 #' Fetch the \acronym{BOM} agricultural bulletin information and return it in a
@@ -123,14 +124,14 @@ get_ag_bulletin <- function(state = "AUS") {
 
 #' @noRd
 .parse_bulletin <- function(xml_url) {
-
   # load the XML from ftp
   if (substr(xml_url, 1, 3) == "ftp") {
     xml_object <- .get_url(remote_file = xml_url)
     if (is.null(xml_object)) {
       return(invisible(NULL))
     }
-  } else {# load the XML from local
+  } else {
+    # load the XML from local
     xml_object <- xml2::read_xml(xml_url)
   }
   # get definitions (and all possible value fields to check against)
@@ -148,9 +149,9 @@ get_ag_bulletin <- function(state = "AUS") {
       xml2::xml_attr("obs-time-utc"),
     time_zone = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("time-zone"),
-    station_code =  xml2::xml_find_first(observations, ".//ancestor::obs") |>
+    site = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("site"),
-    station_name = xml2::xml_find_first(observations, ".//ancestor::obs") |>
+    station = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("station"),
     observation = observations |>
       xml2::xml_attr("t"),
@@ -162,8 +163,8 @@ get_ag_bulletin <- function(state = "AUS") {
   )
   out <- data.table::dcast(
     out,
-    product_id + obs_time_local + obs_time_utc + time_zone + station_name +
-      station_code ~ observation,
+    product_id + obs_time_local + obs_time_utc + time_zone + station + site ~
+      observation,
     value.var = "values"
   )
   # check that all fields are present, if not add missing col with NAs
@@ -173,30 +174,15 @@ get_ag_bulletin <- function(state = "AUS") {
     out[, eval(missing) := NA]
   }
 
-  # merge with AAC codes
-  # load AAC code/town name list to join with final output
-  load(system.file("extdata", "stations_site_list.rda", # nocov
-                   package = "weatherOz")) # nocov
-  data.table::setkey(out, "station_code")
-  out <- stations_site_list[out, on = "station_code"]
   # tidy up the cols
   refcols <- c(
     "product_id",
     "state",
-    "dist",
-    "station_name",
-    "wmo",
+    "station",
     "site",
-    "station_code",
     "obs_time_local",
     "obs_time_utc",
     "time_zone",
-    "lat",
-    "lon",
-    "elev.m",
-    "bar_height.m",
-    "start",
-    "end",
     "r",
     "tn",
     "tx",
@@ -214,22 +200,42 @@ get_ag_bulletin <- function(state = "AUS") {
   )
   # set col classes
   # factor
-  out[, c(1) := lapply(.SD, function(x)
+  out[, c(1, 6) := lapply(.SD, function(x)
     as.factor(x)),
-    .SDcols = c(1)]
+    .SDcols = c(1, 6)]
   # dates
   out[, obs_time_local := gsub("T", " ", obs_time_local)]
   out[, obs_time_utc := gsub("T", " ", obs_time_utc)]
-  out[, c(13:14) := lapply(.SD, function(x)
+  out[, c(2:3) := lapply(.SD, function(x)
     as.POSIXct(x,
                origin = "1970-1-1",
                format = "%Y%m%d %H%M")),
-    .SDcols = c(13:14)]
+    .SDcols = c(2:3)]
   # set "Tce" to 0.01
   out[, r := gsub("Tce", "0.01", r)]
   # set numeric cols
   out[, 7:20 := lapply(.SD, as.numeric),
       .SDcols = 7:20]
+
+
+  # add state column
+  out[, state := data.table::fcase(
+    product_id == "IDN65176",
+    "NSW",
+    product_id == "IDD65176",
+    "NT",
+    product_id == "IDQ60604",
+    "QLD",
+    product_id == "IDS65176",
+    "SA",
+    product_id == "IDT65176",
+    "TAS",
+    product_id == "IDV65176",
+    "VIC",
+    product_id == "IDW65176",
+    "WA"
+  )]
+
   data.table::setcolorder(out, refcols)
   # return from main function
   return(out)

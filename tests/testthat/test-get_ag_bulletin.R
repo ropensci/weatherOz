@@ -1,28 +1,19 @@
 # get_ag_bulletin() ------------------------------------------------------------
-# Test that get_ag_bulletin() returns a data frame with 30 columns
-test_that("get_ag_bulletin returns 30 columns", {
+# Test that get_ag_bulletin() returns a data frame with 21 columns
+test_that("get_ag_bulletin returns 21 columns", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "QLD")
-  expect_equal(ncol(bom_bulletin), 30, info = print(ncol(bom_bulletin)))
+  expect_equal(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
   expect_named(
     bom_bulletin,
     c(
       "product_id",
       "state",
-      "dist",
-      "name",
-      "wmo",
-      "site",
       "station",
+      "site",
       "obs_time_local",
       "obs_time_utc",
       "time_zone",
-      "lat",
-      "lon",
-      "elev",
-      "bar_ht",
-      "start",
-      "end",
       "r",
       "tn",
       "tx",
@@ -95,8 +86,8 @@ test_that("get_ag_bulletin() stops if the state is recognised", {
 })
 
 # parse_ag_bulletin() ----------------------------------------------------------
-# Test that get_ag_bulletin() returns a data frame with 30 columns
-test_that("get_ag_bulletin returns 30 columns", {
+# Test that get_ag_bulletin() returns a data frame with 21 columns
+test_that("get_ag_bulletin returns 21 columns", {
   skip_on_cran()
   download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ60604.xml",
@@ -108,26 +99,17 @@ test_that("get_ag_bulletin returns 30 columns", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "QLD", filepath = tempdir())
-  expect_equal(ncol(bom_bulletin), 30, info = print(ncol(bom_bulletin)))
+  expect_equal(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
   expect_named(
     bom_bulletin,
     c(
       "product_id",
       "state",
-      "dist",
-      "name",
-      "wmo",
-      "site",
       "station",
+      "site",
       "obs_time_local",
       "obs_time_utc",
       "time_zone",
-      "lat",
-      "lon",
-      "elev",
-      "bar_ht",
-      "start",
-      "end",
       "r",
       "tn",
       "tx",
