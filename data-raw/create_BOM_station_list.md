@@ -157,7 +157,7 @@ new_stations_site_list[, site :=
                          gsub("^0{1,2}", "", new_stations_site_list$site)]
 
 data.table::setDT(new_stations_site_list)
-data.table::setkey(new_stations_site_list, "site")
+data.table::setkey(new_stations_site_list, "station_code")
 ```
 
 #### Changes in “stations_site_list”
