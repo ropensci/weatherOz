@@ -57,69 +57,9 @@ update_ag_station_locations <- function() {
     actual_state <- state_from_latlon <- start <- end <-
     stations_site_list <- NULL # nocov end
 
-  tryCatch({
-    curl::curl_download(
-      url =
-        "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
-      destfile = file.path(tempdir(), "stations.zip"),
-      mode = "wb",
-      quiet = TRUE
-    )
-  },
-  error = function(x)
-    stop(
-      "\nThe server with the location information is not responding. ",
-      "Please retry again later.\n",
-      call. = FALSE
-    ))
 
-  bom_stations_lines <- readr::read_lines(file.path(tempdir(), "stations.zip"))
-  keep <- length(bom_stations_lines) - 7
-  bom_stations_lines <- bom_stations_lines[1:keep]
-  readr::write_lines(x = bom_stations_lines,
-                     file = file.path(tempdir(), "stations.txt"))
 
-  stations_site_list <-
-    readr::read_fwf(
-      file = file.path(tempdir(), "stations.txt"),
-      col_positions = readr::fwf_empty(
-        file = file.path(tempdir(), "stations.txt"),
-        skip = 4,
-        n = 1000,
-        col_names = c(
-          "site",
-          "dist",
-          "name",
-          "start",
-          "end",
-          "lat",
-          "lon",
-          "NULL1",
-          "state",
-          "elev",
-          "bar_ht",
-          "wmo"
-        )
-      ),
-      skip = 4,
-      col_types = c(
-        site = "character",
-        dist = "character",
-        name = "character",
-        start = readr::col_integer(),
-        end = readr::col_integer(),
-        lat = readr::col_double(),
-        lon = readr::col_double(),
-        NULL1 = "character",
-        state = "character",
-        elev = readr::col_double(),
-        bar_ht = readr::col_double(),
-        wmo = readr::col_integer()
-      )
-    )
-
-  stations_site_list[stations_site_list == "...."] <- NA
-  stations_site_list[stations_site_list == ".."] <- NA
+  bom_stations <- fetch_bom_stn_sitelist()
 
   # remove extra columns for source of location
   stations_site_list <- stations_site_list[, -8]
