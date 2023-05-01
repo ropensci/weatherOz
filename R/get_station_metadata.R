@@ -25,10 +25,6 @@
 #' @export
 
 get_station_metadata <- function() {
-  # CRAN NOTE avoidance
-  site <- state_code <- wmo <- state <- lon <- lat <- # nocov start
-    actual_state <-
-    state_from_latlon <- start <- end <- NULL # nocov end
 
   tryCatch({
     curl::curl_download(
