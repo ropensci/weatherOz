@@ -28,7 +28,7 @@
 #'  Data for shorter intervals ('15min', '30min') are available from January of
 #'  the previous year.
 #' @param which_vars A `character` string selecting the desired weather summary.
-#'  Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp' or
+#'  Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' or
 #'  'erosion'.
 #'
 #' @return a `data.table` with 'station_id' and date interval queried together
@@ -144,16 +144,32 @@ get_dpird_summaries <- function(station_id,
     )
   }
 
-  return(
-    .query_dpird_summaries(
-      station_id = station_id,
-      first = first,
-      last = last,
-      api_key = api_key,
-      interval = interval,
-      which_vars = which_vars
+  if (length(station_id) == 1) {
+    return(
+      .query_dpird_summaries(
+        station_id = station_id,
+        first = first,
+        last = last,
+        api_key = api_key,
+        interval = interval,
+        which_vars = which_vars
+      )
     )
-  )
+  } else {
+    # query multiple stations and return the values ----
+    return(data.table::rbindlist(
+      lapply(
+        station_id,
+        .query_dpird_summaries,
+        station_id = station_id,
+        first = first,
+        last = last,
+        api_key = api_key,
+        interval = m_int,
+        which_vars = which_vars
+      )
+    ))
+  }
 }
 
 
@@ -228,19 +244,17 @@ get_dpird_summaries <- function(station_id,
                                    api_key,
                                    interval,
                                    which_vars) {
-  m_int <- NULL # nocov
-
   # Create base query URL for weather summaries
   api <- paste0(
     "https://api.dpird.wa.gov.au/v2/weather/stations/",
     station_id,
     "/summaries/",
-    m_int
+    interval
   )
 
   # Select correct time interval input
   uri <- switch(
-    m_int,
+    interval,
     `15min` = paste0(
       api,
       "?startDateTime=",
@@ -358,7 +372,7 @@ get_dpird_summaries <- function(station_id,
                               names(out_temp))
 
   } else {
-    out_temp <- data.frame()[1:nrec, ]
+    out_temp <- data.frame()[1:nrec,]
   }
 
   # Rainfall
@@ -366,7 +380,7 @@ get_dpird_summaries <- function(station_id,
     out_rain <- .ret_list$summaries$rainfall
 
   } else {
-    out_rain <- data.frame()[1:nrec, ]
+    out_rain <- data.frame()[1:nrec,]
   }
 
   # Wind
@@ -379,7 +393,7 @@ get_dpird_summaries <- function(station_id,
                               names(out_wind))
 
   } else {
-    out_wind <- data.frame()[1:nrec, ]
+    out_wind <- data.frame()[1:nrec,]
   }
 
   # Wind erosion
@@ -389,7 +403,7 @@ get_dpird_summaries <- function(station_id,
                                  names(out_erosion))
 
   } else {
-    out_erosion <- data.frame()[1:nrec, ]
+    out_erosion <- data.frame()[1:nrec,]
   }
 
   # Soil temperature
@@ -399,7 +413,7 @@ get_dpird_summaries <- function(station_id,
                               names(out_soil))
 
   } else {
-    out_soil <- data.table::data.table()[1:nrec, ]
+    out_soil <- data.table::data.table()[1:nrec,]
   }
 
   # Put together
