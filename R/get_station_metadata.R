@@ -85,6 +85,7 @@ get_station_metadata <- function() {
 
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
+  bom_stations[, status := ifelse(!is.na(end), "Closed", "Open")]
   bom_stations[is.na(end), end := as.integer(format(Sys.Date(), "%Y"))]
 
 
