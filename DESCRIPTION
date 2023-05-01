@@ -116,19 +116,21 @@ Imports:
     knitr,
     lubridate,
     magick,
+    magrittr (>= 1.5),
     methods,
-    readr,
+    readr (>= 1.1.1),
     stringi,
     stars,
     terra,
     utils,
     xml2
 Suggests:
-    spelling,
+    ASGS.foyer,
     dplyr,
     future,
     rmarkdown,
     rstudioapi,
+    spelling,
     testthat (>= 3.0.0),
     vdiffr
 Config/testthat/edition: 3
