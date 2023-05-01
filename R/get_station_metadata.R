@@ -18,8 +18,10 @@
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 #' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
-#' @export get_station_metadata()
+#' @family BOM
+#'
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @export
 
 get_station_metadata <- function() {
   # CRAN NOTE avoidance
@@ -44,7 +46,7 @@ get_station_metadata <- function() {
       call. = FALSE
     ))
 
-  unzip(file.path(tempdir(), "stations.zip"))
+  utils::unzip(file.path(tempdir(), "stations.zip"))
   file_in <- file.path(tempdir(), "stations.txt")
 
   bom_stations <-
@@ -78,7 +80,7 @@ get_station_metadata <- function() {
         bar_height.m = readr::col_double(),
         wmo = readr::col_integer()
       ),
-      n_max = length(count.fields(file_in)) - 6, # drop last six rows
+      n_max = length(utils::count.fields(file_in)) - 6, # drop last six rows
     ))
 
   bom_stations[, start := as.integer(start)]
