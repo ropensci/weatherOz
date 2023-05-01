@@ -7,7 +7,8 @@
 get_station_metadata()
 }
 \value{
-a \code{data.table} of BOM weather station metadata.
+a \code{data.table} of \acronym{BOM} weather stations' metadata for
+stations available from \acronym{SILO}.
 }
 \description{
 Download the latest station locations and metadata.
@@ -27,7 +28,11 @@ Station location and other metadata are sourced from the Australian Bureau of
 Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
 }
+\seealso{
+Other SILO: 
+\code{\link{get_silo}()}
+}
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{BOM}
+\concept{SILO}

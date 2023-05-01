@@ -74,4 +74,8 @@ wd <- get_silo(latitude = -27.85,
                email = "your@email")
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other SILO: 
+\code{\link{get_station_metadata}()}
+}
 \concept{SILO}

@@ -11,14 +11,15 @@
 #' \dontrun{
 #' get_station_metadata()
 #' }
-#' @return a `data.table` of BOM weather station metadata.
+#' @return a `data.table` of \acronym{BOM} weather stations' metadata for
+#'  stations available from \acronym{SILO}.
 #'
 #' @references
 #' Station location and other metadata are sourced from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 #' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
 #'
-#' @family BOM
+#' @family SILO
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export
