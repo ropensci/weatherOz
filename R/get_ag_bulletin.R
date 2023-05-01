@@ -154,8 +154,10 @@ get_ag_bulletin <- function(state = "AUS") {
       xml2::xml_attr("site"),
     station = xml2::xml_find_first(observations, ".//ancestor::obs") |>
       xml2::xml_attr("station"),
-    observation = observations |>  xml2::xml_attr("t"),
-    values = observations |>  xml2::xml_text("t"),
+    observation = observations |>
+      xml2::xml_attr("t"),
+    values = observations |>
+      xml2::xml_text("t"),
     product_id = substr(basename(xml_url),
                         1,
                         nchar(basename(xml_url)) - 4)
@@ -175,27 +177,29 @@ get_ag_bulletin <- function(state = "AUS") {
   # remove leading 0 to merge with stations_site_list
   out[, site := gsub("^0{1,2}", "", out$site)]
   # merge with AAC codes
+  data.table::setnames(out, old = c("site", "station"),
+                       new = c("station_code", "station_name"))
   # load AAC code/town name list to join with final output
   load(system.file("extdata", "stations_site_list.rda", # nocov
                    package = "weatherOz")) # nocov
-  data.table::setkey(out, "site")
-  out <- stations_site_list[out, on = "site"]
+  data.table::setkey(out, "station_name")
+  out <- stations_site_list[out, on = "station_name"]
   # tidy up the cols
   refcols <- c(
     "product_id",
     "state",
     "dist",
-    "name",
+    "station_name",
     "wmo",
     "site",
-    "station",
+    "station_code",
     "obs_time_local",
     "obs_time_utc",
     "time_zone",
     "lat",
     "lon",
-    "elev",
-    "bar_ht",
+    "elev.m",
+    "bar_height.m",
     "start",
     "end",
     "r",
@@ -215,9 +219,9 @@ get_ag_bulletin <- function(state = "AUS") {
   )
   # set col classes
   # factor
-  out[, c(1:3, 11:12) := lapply(.SD, function(x)
+  out[, c(1) := lapply(.SD, function(x)
     as.factor(x)),
-    .SDcols = c(1:3, 11:12)]
+    .SDcols = c(1)]
   # dates
   out[, obs_time_local := gsub("T", " ", obs_time_local)]
   out[, obs_time_utc := gsub("T", " ", obs_time_utc)]
@@ -229,8 +233,8 @@ get_ag_bulletin <- function(state = "AUS") {
   # set "Tce" to 0.01
   out[, r := gsub("Tce", "0.01", r)]
   # set numeric cols
-  out[, c(4:7, 9:10, 17:30) := lapply(.SD, as.numeric),
-      .SDcols = c(4:7, 9:10, 17:30)]
+  out[, 7:20 := lapply(.SD, as.numeric),
+      .SDcols = 7:20]
   data.table::setcolorder(out, refcols)
   # return from main function
   return(out)
