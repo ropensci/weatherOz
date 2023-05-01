@@ -17,16 +17,15 @@ old_hooks <- fansi::set_knit_hooks(knitr::knit_hooks,
 
 library(data.table)
 library(tidyverse)
-library(vroom)
 ```
 
 This document provides details on methods used to create the database of BOM JSON files for stations and corresponding metadata, _e.g._, latitude, longitude (which are more detailed than what is in the JSON file), start, end, elevation, etc.
 
 Refer to this BOM page for more reference, <http://reg.bom.gov.au/catalogue/anon-ftp.shtml>.
 
-  ## Product code definitions
+## Product code definitions
 
-  ### States
+### States
 
   - IDD - NT
 
@@ -62,10 +61,9 @@ The zip file may be directly downloaded, [file of site details](ftp://ftp.bom.go
 ```{r get_bom_station_data, eval=TRUE}
 # This file is a pseudo-fixed width file. Line five contains the headers at
 # fixed widths which are coded in the read_table() call.
-# The last seven lines contain other information that we don't want.
+# The last eight lines contain other information that we don't want.
 # For some reason, reading it directly from the BOM website does not work, so
-# we use curl to fetch it first and then import it from the R tempdir(), trim
-# the extra off the ends and write it back out to import using `read_fwf()`.
+# we use curl to fetch it first and then import it from the R tempdir().
 
 curl::curl_download(
   url = "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
@@ -73,62 +71,55 @@ curl::curl_download(
   mode = "wb",
   quiet = TRUE
 )
+ utils::unzip(file.path(tempdir(), "stations.zip"), exdir = tempdir())
+  file_in <- file.path(tempdir(), "stations.txt")
 
-bom_stations_lines <- read_lines(file.path(tempdir(), "stations.zip"))
-keep <- length(bom_stations_lines) - 7
-bom_stations_lines <- bom_stations_lines[1:keep]
-write_lines(x = bom_stations_lines, file = file.path(tempdir(), "stations.txt"))
-
-bom_stations_raw <-
-  read_fwf(
-    file = file.path(tempdir(), "stations.txt"),
-    col_positions = fwf_empty(
-      file = file.path(tempdir(), "stations.txt"),
-      skip = 4,
-      n = 1000,
-      col_names = c(
-        "site",
-        "dist",
-        "name",
-        "start",
-        "end",
-        "lat",
-        "lon",
-        "NULL1",
-        "state",
-        "elev",
-        "bar_ht",
-        "wmo"
+  bom_stations <-
+    data.table::setDT(
+      readr::read_fwf(
+        file = file_in,
+        na = c("..", ".....", " "),
+        skip = 4,
+        col_positions = readr::fwf_cols(
+          "station_code" = c(1, 8),
+          "dist" = c(9, 14),
+          "station_name" = c(15, 55),
+          "start" = c(56, 63),
+          "end" = c(64, 71),
+          "lat" = c(72, 80),
+          "lon" = c(81, 90),
+          "source" = c(91, 105),
+          "state" = c(106, 109),
+          "elev.m" = c(110, 120),
+          "bar_height.m" = c(121, 129),
+          "wmo" = c(130, 136)
+        ),
+        col_types = c(
+          station_code = readr::col_character(),
+          dist = readr::col_character(),
+          site_name = readr::col_character(),
+          start = readr::col_integer(),
+          end = readr::col_integer(),
+          lat = readr::col_double(),
+          lon = readr::col_double(),
+          source = readr::col_character(),
+          state = readr::col_character(),
+          elev.m = readr::col_double(),
+          bar_height.m = readr::col_double(),
+          wmo = readr::col_integer()
+        ),
+        n_max = length(utils::count.fields(file_in)) - 6,
+        # drop last six rows
       )
-    ),
-    skip = 4,
-    col_types = c(
-      site = "character",
-      dist = "character",
-      name = "character",
-      start = readr::col_integer(),
-      end = readr::col_integer(),
-      lat = readr::col_double(),
-      lon = readr::col_double(),
-      NULL1 = "character",
-      state = "character",
-      elev = readr::col_double(),
-      bar_ht = readr::col_double(),
-      wmo = readr::col_integer()
     )
-  )
 
-bom_stations_raw[bom_stations_raw == "...."] <- NA
-bom_stations_raw[bom_stations_raw == ".."] <- NA
-
-# remove extra columns for source of location
-bom_stations_raw <- bom_stations_raw[, -8]
-
-# add current year to stations that are still active
-bom_stations_raw$end <- as.numeric(bom_stations_raw$end)
-
-bom_stations_raw["end"][is.na(bom_stations_raw["end"])] <-
-  as.integer(format(Sys.Date(), "%Y"))
+  bom_stations[, station_code := as.factor(station_code)]
+  bom_stations[, station_name := DescTools::StrCap(x = station_name,
+                                                   method = "word")]
+  bom_stations[, start := as.integer(start)]
+  bom_stations[, end := as.integer(end)]
+  bom_stations[, status := ifelse(!is.na(end), "Closed", "Open")]
+  bom_stations[is.na(end), end := as.integer(format(Sys.Date(), "%Y"))]
 ```
 
 ## Save data
@@ -140,7 +131,7 @@ Then pad the `site` field with 0 to match the data in the XML file that holds th
 Lastly, create the data file for use in {weatherOz}.
 
 ```{r create-stations-site-list, message=FALSE}
-new_stations_site_list <- data.table::data.table(bom_stations_raw)
+new_stations_site_list <- data.table::data.table(bom_stations)
 
 new_stations_site_list[, site :=
                          gsub("^0{1,2}", "", new_stations_site_list$site)]
@@ -151,7 +142,7 @@ data.table::setkey(new_stations_site_list, "site")
 
 #### Changes in "stations_site_list"
 
-```{r changes-stations-site-list, eval=TRUE}
+```{r changes-stations-site-list, eval=FALSE}
 load(system.file("extdata", "stations_site_list.rda", package = "weatherOz"))
 
 (
@@ -173,9 +164,9 @@ save(stations_site_list,
      file = "../inst/extdata/stations_site_list.rda",
      compress = "bzip2")
 
-save(stations_site_list_changes,
-     file = "../inst/extdata/stations_site_list_changes.rda",
-     compress = "bzip2")
+# save(stations_site_list_changes,
+#      file = "../inst/extdata/stations_site_list_changes.rda",
+#      compress = "bzip2")
 ```
 
 ## Session Info
