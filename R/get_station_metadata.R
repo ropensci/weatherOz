@@ -46,7 +46,7 @@ get_station_metadata <- function() {
       call. = FALSE
     ))
 
-  utils::unzip(file.path(tempdir(), "stations.zip"))
+  utils::unzip(file.path(tempdir(), "stations.zip"), exdir = tempdir())
   file_in <- file.path(tempdir(), "stations.txt")
 
   bom_stations <-
