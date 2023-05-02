@@ -71,7 +71,7 @@ fetch_bom_stn_sitelist <- function() {
 
   bom_stations[, station_code := as.factor(station_code)]
   bom_stations[, station_name := DescTools::StrCap(
-    x = tolower(bom_stations$station_name),
+    x = tolower(station_name),
     method = "word")]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
