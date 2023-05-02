@@ -108,6 +108,7 @@ RoxygenNote: 7.2.3
 Imports: 
     crayon,
     curl,
+    crul,
     data.table,
     DescTools,
     foreign,

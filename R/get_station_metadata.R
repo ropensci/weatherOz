@@ -1,17 +1,25 @@
 
-#' Get latest BOM station metadata
+#' Get latest BOM and DPIRD weather station network station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
-#'  \acronym{SILO} data set.
+#'  \acronym{SILO} and \acronym{DPIRD} data sets.
 #'
 #' If \CRANpkg{ASGS.foyer} is installed locally, this function will
 #' automatically check and correct any invalid state values for stations located
-#' in Australia.
+#' in Australia in the \acronym{SILO} data.
 #'
 #' @param check_location `Boolean`. An optional check to use
 #'  \CRANpkg{ASGS.foyer} to double check the station's physical locations and
 #'  correct any errors in the state where the station is located.
 #'  \CRANpkg{ASGS.foyer} must be installed to use this.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} weather \acronym{API}.
+#' @param which_api A `string` value that indicates which API to use.  Defaults
+#'  to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
+#'  and \acronym{DPIRD} weather station networks; "silo" for only stations in
+#'  the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
+#'  network.
 #'
 #' @examples
 #' \dontrun{
@@ -31,7 +39,27 @@
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export
 
-get_station_metadata <- function(check_location = FALSE) {
+get_station_metadata <-
+  function(check_location = FALSE,
+           api_key = NULL,
+           which_api = "silo") {
+
+    which_api <- .check_which_api()
+
+    if (which_api == "silo") {
+      silo <- .fetch_silo_metadata()
+    } else if (which_api == "dpird") {
+      dpird <- .fetch_dpird_metadata()
+    } else if (which_api == "both") {
+      silo <- .fetch_silo_metadata()
+      dpird <- .fetch_dpird_metadata()
+    }
+
+    out <- #Merge dpird and silo dfs here
+      return(out)
+  }
+
+.fetch_silo_metadata <- function(check_location = check_location) {
   tryCatch({
     curl::curl_download(
       url =
@@ -140,4 +168,55 @@ get_station_metadata <- function(check_location = FALSE) {
     )
 
   return(bom_stations[station_name %in% silo_stations$station_name])
+}
+
+
+.fetch_dpird_metadata <- function(.api_key) {
+  base_url = "https://api.dpird.wa.gov.au/v2/weather/stations/"
+
+  query_list <- list(
+    station_code = "SP%2CAN001",
+    offset = "0",
+    limit = 300,
+    includeClosed = "true",
+    select = paste0(
+      list(
+        "altitude",
+        "startDate",
+        "endDate",
+        "stationCode",
+        "stationName",
+        "latitude",
+        "longitude",
+        "owner",
+        "status"
+      ),
+      collapse = ","
+    ),
+    group = "api",
+    api_key = .api_key
+  )
+
+  client <- crul::HttpClient$new(url = base_url)
+
+  # nocov begin
+  response <- client$get(query = query_list,
+                         retry = 6L,
+                         timeout = 30L)
+
+  # check to see if request failed or succeeded
+  # - a custom approach this time combining status code,
+  #   explanation of the code, and message from the server
+  if (response$status_code > 201) {
+    mssg <- jsonlite::fromJSON(response$parse("UTF-8"))$message
+    x <- response$status_http()
+    stop(sprintf("HTTP (%s) - %s\n  %s", x$status_code, x$explanation, mssg),
+         call. = FALSE)
+  }
+
+  response <- .send_query(.query_list = query_list, .url = base_url)
+  response$raise_for_status()
+  # create meta object
+  r <- jsonlite::fromJSON(response$parse("UTF8"))
+  return(data.table::setDT(r$collection))
 }

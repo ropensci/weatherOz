@@ -1,5 +1,10 @@
 
-"%||%" <- function(a, b) if (!is.null(a)) a else b
+
+"%||%" <- function(a, b)
+  if (!is.null(a))
+    a
+else
+  b
 
 #' Negate %in% for easy comparisons
 #'
@@ -77,7 +82,6 @@
 #' @noRd
 #'
 .get_url <- function(remote_file) {
-
   # define custom useragent and handle for communicating with BOM servers
   USERAGENT <- paste0("{weatherOz} R package (",
                       utils::packageVersion("weatherOz"),
@@ -421,8 +425,7 @@
       paste(strsplit(x,
                      "(?<=[a-z])(?=[A-Z])",
                      perl = TRUE)[[1]],
-            collapse = "_"
-      )
+            collapse = "_")
     })
 
     # Transform to lower case and rename df_out
@@ -491,13 +494,31 @@
 #' @param .station_id station_id passed from another function
 #' @noRd
 #' @return invisible `NULL`, called for its side-effects
-.check_location_params <- function(.latitude, .longitude, .station_id) {
-  if (((is.null(.latitude)) ||
-       (is.null(.longitude))) && (is.null(.station_id))) {
+.check_location_params <-
+  function(.latitude, .longitude, .station_id) {
+    if (((is.null(.latitude)) ||
+         (is.null(.longitude))) && (is.null(.station_id))) {
+      stop(
+        call. = FALSE,
+        "Provide valid `latitude` and `longitude` coordinates\n",
+        "or a valid `station_code`."
+      )
+    }
+  }
+
+#' Check user-input API value
+#' @param which_api user-provided value for `which_api`
+#' @return A lower-case string of a valid API value for \pkg{weatherOz}
+#' @noRd
+.check_which_api <- function(which_api) {
+  which_api <- tolower(which_api)
+
+  if (which_api %notin% c("all", "silo", "dpird")) {
     stop(
       call. = FALSE,
-      "Provide valid `latitude` and `longitude` coordinates\n",
-      "or a valid `station_code`."
+      "You have provided an invalide value for `which_api`.\n",
+      "Valid values are 'all', 'silo' or 'dpird'."
     )
   }
+  return(invisible(NULL))
 }

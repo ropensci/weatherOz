@@ -60,13 +60,7 @@ find_nearby_stations <- function(latitude = NULL,
                                  api_key = NULL,
                                  which_api = "silo") {
 
-  which_api <- tolower(which_api)
-
-  if (which_api %notin% c("all", "silo", "dpird")) {
-    stop(call. = FALSE,
-         "You have provided an invalide value for `which_api`.\n",
-         "Valid values are 'all', 'silo' or 'dpird'.")
-  }
+  which_api <- .check_which_api(which_api)
 
   .check_location_params(.latitude = latitude,
                          .longitude = longitude,
