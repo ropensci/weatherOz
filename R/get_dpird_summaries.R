@@ -351,11 +351,6 @@ get_dpird_summaries <- function(station_id,
 #'
 .parse_summary <- function(.ret_list = NULL,
                            .which_vars = NULL) {
-  # nocov start
-  to <-
-    from <- airtemp_mintime <- airtemp_maxtime <- wind_max_time <-
-    wind_erosion_starttime <- soil_mintime <- soil_maxtime <- NULL
-  # nocov end
 
   # Get query time interval
   out_period <- .ret_list$summaries$period
