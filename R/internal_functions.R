@@ -1,10 +1,5 @@
 
-
-"%||%" <- function(a, b)
-  if (!is.null(a))
-    a
-else
-  b
+"%||%" <- function(a, b) if (!is.null(a)) a else b
 
 #' Negate %in% for easy comparisons
 #'
@@ -520,5 +515,5 @@ else
       "Valid values are 'all', 'silo' or 'dpird'."
     )
   }
-  return(invisible(NULL))
+  return(which_api)
 }

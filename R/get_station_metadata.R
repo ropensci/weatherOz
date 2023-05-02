@@ -47,19 +47,19 @@ get_station_metadata <-
     which_api <- .check_which_api()
 
     if (which_api == "silo") {
-      silo <- .fetch_silo_metadata()
+      silo <- .fetch_silo_metadata(.check_location = check_location)
     } else if (which_api == "dpird") {
-      dpird <- .fetch_dpird_metadata()
-    } else if (which_api == "both") {
-      silo <- .fetch_silo_metadata()
-      dpird <- .fetch_dpird_metadata()
+      dpird <- .fetch_dpird_metadata(.api_key = api_key)
+    } else if (which_api == "all") {
+      silo <- .fetch_silo_metadata(.check_location = check_location)
+      dpird <- .fetch_dpird_metadata(.api_key = api_key)
     }
 
     out <- #Merge dpird and silo dfs here
       return(out)
   }
 
-.fetch_silo_metadata <- function(check_location = check_location) {
+.fetch_silo_metadata <- function(.check_location = check_location) {
   tryCatch({
     curl::curl_download(
       url =
@@ -128,7 +128,7 @@ get_station_metadata <-
 
   # if ASGS.foyer is installed, correct the state column, otherwise skip
   if (requireNamespace("ASGS.foyer", quietly = TRUE)) {
-    if (isTRUE(check_location)) {
+    if (isTRUE(.check_location)) {
       message(
         "The package {ASGS.foyer} is installed. Station locations will\n",
         "be checked against lat/lon location values and corrected if necessary."
@@ -171,7 +171,7 @@ get_station_metadata <-
 }
 
 
-.fetch_dpird_metadata <- function(.api_key) {
+.fetch_dpird_metadata <- function(.api_key = api_key) {
   base_url = "https://api.dpird.wa.gov.au/v2/weather/stations/"
 
   query_list <- list(
@@ -214,9 +214,27 @@ get_station_metadata <-
          call. = FALSE)
   }
 
-  response <- .send_query(.query_list = query_list, .url = base_url)
   response$raise_for_status()
   # create meta object
   r <- jsonlite::fromJSON(response$parse("UTF8"))
-  return(data.table::setDT(r$collection))
+  r <- data.table::data.table(r$collection)
+
+  setnames(r, old = c("stationCode", "stationName", "latitude", "longitude", "altitude",
+                      "owner", "startDate", "endDate", "status"),
+           new = c("station_code", "station_name", "lat", "lon", "elev.m",
+                   "owner", "start", "end")
+
+  "station_code" = c(1, 8),
+  "dist" = c(9, 14),
+  "station_name" = c(15, 55),
+  "start" = c(56, 63),
+  "end" = c(64, 71),
+  "lat" = c(72, 80),
+  "lon" = c(81, 90),
+  "source" = c(91, 105),
+  "state" = c(106, 109),
+  "elev.m" = c(110, 120),
+  "bar_height.m" = c(121, 129),
+  "wmo" = c(130, 136)
+  return()
 }
