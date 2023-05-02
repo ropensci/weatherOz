@@ -17,7 +17,7 @@ fetch_bom_stn_sitelist <- function() {
         "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
       destfile = file.path(tempdir(), "stations.zip"),
       mode = "wb",
-      quiet = FALSE
+      quiet = TRUE
     )
   },
   error = function(x)
