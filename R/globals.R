@@ -1,13 +1,20 @@
 # CRAN NOTE avoidance
 utils::globalVariables(
   c(
+    "AAC_codes",
+    "api_group",
     "actual_state",
+    "distance",
     "end",
     "lat",
+    "latitude",
+    "links",
     "lon",
+    "longitude",
     "name",
     "obs_time_local",
     "obs_time_utc",
+    "owner",
     "product_id",
     "r",
     "site",
@@ -20,6 +27,9 @@ utils::globalVariables(
     "state_from_latlon",
     "start",
     "stations_site_list",
+    "windProbeHeights",
+    "windProbeHeights.10m",
+    "windProbeHeights.3m",
     "wmo"
   )
 )

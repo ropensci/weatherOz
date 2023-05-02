@@ -59,8 +59,6 @@ find_nearby_stations <- function(latitude = NULL,
                                  distance_km = 100,
                                  api_key = NULL,
                                  which_api = "silo") {
-  # CRAN NOTE avoidance
-  lat <- lon <- distance <- owner <- links <- NULL
 
   which_api <- tolower(which_api)
 

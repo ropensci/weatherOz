@@ -28,9 +28,6 @@ find_forecast_towns <-
            longitude = 149.2,
            distance_km = 100) {
 
-  # CRAN NOTE avoidance:
-  AAC_codes <- lat <- lon <- distance <- NULL # nocov
-
   .check_lonlat(longitude = longitude, latitude = latitude)
 
   # Load JSON URL list
