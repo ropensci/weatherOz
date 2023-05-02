@@ -123,8 +123,10 @@ get_station_metadata <-
                                                    method = "word")]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
-  bom_stations[, status := ifelse(!is.na(end), "Closed", "Open")]
-  bom_stations[is.na(end), end := as.integer(format(Sys.Date(), "%Y"))]
+  bom_stations[, status := ifelse(!is.na(end), "closed", "open")]
+  bom_stations[, dist := NULL]
+  bom_stations[, source := NULL]
+  bom_stations[, bar_height.m := NULL]
 
   # if ASGS.foyer is installed, correct the state column, otherwise skip
   if (requireNamespace("ASGS.foyer", quietly = TRUE)) {
