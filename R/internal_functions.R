@@ -427,10 +427,8 @@
       )
     })
 
-    # Tranform to lower case and rename df_out
-    new_names <- unlist(new_names)
-    new_names <- tolower(new_names)
-    names(df_out) <- gsub("[.]", "_", new_names)
+    # Transform to lower case and rename df_out
+    names(df_out) <- gsub("[.]", "_", tolower(unlist(new_names)))
   }
 
   if (which_api == 'silo') {
