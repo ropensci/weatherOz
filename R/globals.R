@@ -18,7 +18,6 @@ utils::globalVariables(
     "state_from_latlon",
     "start",
     "stations_site_list",
-    "site",
     "wmo"
   )
 )
