@@ -213,10 +213,6 @@ get_coastal_forecast <- function(state = "AUS") {
 #' @noRd
 
 .parse_coastal_xml <- function(xml_object) {
-  tropical_system_location <-
-    forecast_waves <- synoptic_situation <-  # nocov start
-    preamble <- warning_summary_footer <- product_footer <-
-    postamble <- NULL  # nocov end
   # get the actual forecast objects
   meta <- xml2::xml_find_all(xml_object, ".//text")
   fp <- xml2::xml_find_all(xml_object, ".//forecast-period")

@@ -574,7 +574,6 @@ find_nearby_stations <- function(latitude = NULL,
 #' @noRd
 
 .create_distance_out <- function(ret) {
-  links <- NULL #nocov
   distance_out <- data.table::data.table(ret$collection)
   distance_out[, links := NULL]
   return(distance_out)
