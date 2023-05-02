@@ -412,7 +412,6 @@
 
 .rename_cols <- function(df_out,
                          which_api = "dpird") {
-  stationName <- name <- NULL #nocov
   if (which_api == "dpird") {
     df_out <- data.table::data.table(df_out)
     df_out[, stationName := DescTools::StrCap(x = stationName,
