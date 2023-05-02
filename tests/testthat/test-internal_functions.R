@@ -23,3 +23,17 @@ test_that("Broken Hill airport to Sydney airport approximately 932158", {
     0.01
   )
 })
+
+
+test_that("a `date` entered in incorrect format is corrected", {
+  dates <- "Jan-01-1983"
+  dates <- .check_date(dates)
+  expect_s3_class(dates, "POSIXct")
+})
+
+test_that("a `date` entered in incorrect format and corrected", {
+  dates <- "Jan-01-n"
+  expect_error(.check_date(dates),
+               regexp = "*Please enter a valid date format.")
+})
+
