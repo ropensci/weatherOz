@@ -2,15 +2,29 @@
 % Please edit documentation in R/get_station_metadata.R
 \name{get_station_metadata}
 \alias{get_station_metadata}
-\title{Get latest BOM station metadata}
+\title{Get latest BOM and DPIRD weather station network station metadata}
 \usage{
-get_station_metadata(check_location = FALSE)
+get_station_metadata(
+  check_location = FALSE,
+  api_key = NULL,
+  which_api = "silo"
+)
 }
 \arguments{
 \item{check_location}{\code{Boolean}. An optional check to use
 \CRANpkg{ASGS.foyer} to double check the station's physical locations and
 correct any errors in the state where the station is located.
 \CRANpkg{ASGS.foyer} must be installed to use this.}
+
+\item{api_key}{A \code{character} string containing your \acronym{API} key from
+\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
+\acronym{DPIRD} weather \acronym{API}.}
+
+\item{which_api}{A \code{string} value that indicates which API to use.  Defaults
+to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
+and \acronym{DPIRD} weather station networks; "silo" for only stations in
+the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
+network.}
 }
 \value{
 a \code{data.table} of \acronym{BOM} weather stations' metadata for
@@ -18,12 +32,12 @@ stations available from \acronym{SILO}.
 }
 \description{
 Download the latest station locations and metadata for stations in the
-\acronym{SILO} data set.
+\acronym{SILO} and \acronym{DPIRD} data sets.
 }
 \details{
 If \CRANpkg{ASGS.foyer} is installed locally, this function will
 automatically check and correct any invalid state values for stations located
-in Australia.
+in Australia in the \acronym{SILO} data.
 }
 \examples{
 \dontrun{
