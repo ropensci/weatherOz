@@ -157,7 +157,7 @@ get_station_metadata <-
                    actual_state := "NT"]
       bom_stations[actual_state != state &
                      state %notin% c("ANT", "ISL"), state := actual_state]
-      bom_stations[, actual_state := NULL, dist := NULL]
+      bom_stations[, actual_state := NULL]
     }
   }
 
