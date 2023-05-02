@@ -1,5 +1,4 @@
 
-
 #' Get latest BOM station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
@@ -24,7 +23,8 @@
 #' @references
 #' Station location and other metadata are sourced from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
-#' \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
+#' <http://www.bom.gov.au/climate/cdo/about/site-num.shtml> and
+#' <http://www.bom.gov.au/climate/data/lists_by_element/stations.txt>
 #'
 #' @family SILO
 #'
@@ -91,9 +91,8 @@ get_station_metadata <- function(check_location = FALSE) {
     )
 
   bom_stations[, station_code := as.factor(station_code)]
-  bom_stations[, station_name := DescTools::StrCap(
-    x = tolower(station_name),
-    method = "word")]
+  bom_stations[, station_name := DescTools::StrCap(x = tolower(station_name),
+                                                   method = "word")]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
   bom_stations[, status := ifelse(!is.na(end), "Closed", "Open")]
