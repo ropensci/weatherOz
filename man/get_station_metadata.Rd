@@ -4,7 +4,13 @@
 \alias{get_station_metadata}
 \title{Get latest BOM station metadata}
 \usage{
-get_station_metadata()
+get_station_metadata(check_location = FALSE)
+}
+\arguments{
+\item{check_location}{\code{Boolean}. An optional check to use
+\CRANpkg{ASGS.foyer} to double check the station's physical locations and
+correct any errors in the state where the station is located.
+\CRANpkg{ASGS.foyer} must be installed to use this.}
 }
 \value{
 a \code{data.table} of \acronym{BOM} weather stations' metadata for
