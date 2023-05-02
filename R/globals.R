@@ -7,6 +7,7 @@ utils::globalVariables(
     "lon",
     "obs_time_local",
     "obs_time_utc",
+    "product_id",
     "r",
     "site",
     "state",
