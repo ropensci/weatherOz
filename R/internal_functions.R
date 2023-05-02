@@ -83,7 +83,6 @@
                       utils::packageVersion("weatherOz"),
                       ")")
   # set a custom user-agent, restore original settings on exit
-  # required for #130 - BOM returns 403 for RStudio
   op <- options()
   on.exit(options(op))
   options(HTTPUserAgent = USERAGENT)
