@@ -64,8 +64,8 @@ fetch_bom_stn_sitelist <- function() {
           bar_height.m = readr::col_double(),
           wmo = readr::col_integer()
         ),
-        n_max = length(utils::count.fields(file_in)) - 6,
         # drop last six rows
+        n_max = length(utils::count.fields(file_in)) - 6
       )
     )
 
