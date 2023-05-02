@@ -39,7 +39,6 @@ Other bomrang-ported:
 \code{\link{get_satellite_imagery}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
-\code{\link{update_ag_station_locations}()},
 \code{\link{update_forecast_towns}()}
 }
 \author{
