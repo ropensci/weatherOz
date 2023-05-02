@@ -1,4 +1,5 @@
 
+
 #' Get latest BOM and DPIRD weather station network station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
@@ -43,7 +44,6 @@ get_station_metadata <-
   function(check_location = FALSE,
            api_key = NULL,
            which_api = "silo") {
-
     which_api <- .check_which_api()
 
     if (which_api == "silo") {
@@ -229,10 +229,8 @@ get_station_metadata <-
       "latitude",
       "longitude",
       "altitude",
-      "owner",
       "startDate",
-      "endDate",
-      "status"
+      "endDate"
     ),
     new = c(
       "station_code",
@@ -240,11 +238,9 @@ get_station_metadata <-
       "lat",
       "lon",
       "elev.m",
-      "owner",
       "start",
       "end"
     )
   )
-
   return(r)
 }
