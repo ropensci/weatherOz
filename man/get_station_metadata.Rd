@@ -24,11 +24,34 @@ correct any errors in the state where the station is located.
 to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
 and \acronym{DPIRD} weather station networks; "silo" for only stations in
 the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
-network.}
+network.
+
+@note \acronym{BOM} does not report the exact date on which stations opened
+or closed, only the year. Therefore the 'start' and 'end' columns will
+indicate January 1 of the year that a station opened or closed for
+\acronym{BOM} stations whereas stations in the \acronym{DPIRD} network
+have the date to the day. For \acronym{BOM} stations that are closed
+for the current year, this indicates that the station closed sometime
+during the current year prior to the request being made.}
 }
 \value{
 a \code{data.table} of \acronym{BOM} weather stations' metadata for
-stations available from \acronym{SILO}.
+stations available from \acronym{SILO} with the following columns.
+\tabular{rl}{
+\strong{station_code}:\tab Unique station ID. \code{factor}\cr
+\strong{station_name}:\tab Unique station name. \code{character}\cr
+\strong{start}:\tab Date observations start. \code{date}\cr
+\strong{end}:\tab Date observations end. \code{date}\cr
+\strong{lat}:\tab Latitude in decimal degrees. \code{numeric}\cr
+\strong{lon}:\tab Longitude in decimal degrees. \code{numeric}\cr
+\strong{state}:\tab State in which the station is located. \code{character}\cr
+\strong{elev.m}:\tab Station elevation in metres. \code{numeric}\cr
+\strong{source}:\tab Organisation responsible for the data or station
+maintenance. \code{character}\cr
+\strong{status}:\tab Station status, one of "open" or "closed". \code{character}\cr
+\strong{wmo}:\tab: World Meteorlogical Organisation, acronym{WMO}, number if
+applicable. \code{numeric}\cr
+}
 }
 \description{
 Download the latest station locations and metadata for stations in the
@@ -48,13 +71,9 @@ get_station_metadata()
 Station location and other metadata are sourced from the Australian Bureau of
 Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml} and
-\url{http://www.bom.gov.au/climate/data/lists_by_element/stations.txt}
-}
-\seealso{
-Other SILO: 
-\code{\link{get_silo}()}
+\url{http://www.bom.gov.au/climate/data/lists_by_element/stations.txt} and
+\acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{SILO}
