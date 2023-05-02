@@ -155,7 +155,7 @@ get_station_metadata <-
                    actual_state := "NT"]
       bom_stations[actual_state != state &
                      state %notin% c("ANT", "ISL"), state := actual_state]
-      bom_stations[, actual_state := NULL]
+      bom_stations[, actual_state := NULL, dist := NULL]
     }
   }
 
@@ -219,22 +219,30 @@ get_station_metadata <-
   r <- jsonlite::fromJSON(response$parse("UTF8"))
   r <- data.table::data.table(r$collection)
 
-  setnames(r, old = c("stationCode", "stationName", "latitude", "longitude", "altitude",
-                      "owner", "startDate", "endDate", "status"),
-           new = c("station_code", "station_name", "lat", "lon", "elev.m",
-                   "owner", "start", "end")
+  data.table::setnames(
+    r,
+    old = c(
+      "stationCode",
+      "stationName",
+      "latitude",
+      "longitude",
+      "altitude",
+      "owner",
+      "startDate",
+      "endDate",
+      "status"
+    ),
+    new = c(
+      "station_code",
+      "station_name",
+      "lat",
+      "lon",
+      "elev.m",
+      "owner",
+      "start",
+      "end"
+    )
+  )
 
-  "station_code" = c(1, 8),
-  "dist" = c(9, 14),
-  "station_name" = c(15, 55),
-  "start" = c(56, 63),
-  "end" = c(64, 71),
-  "lat" = c(72, 80),
-  "lon" = c(81, 90),
-  "source" = c(91, 105),
-  "state" = c(106, 109),
-  "elev.m" = c(110, 120),
-  "bar_height.m" = c(121, 129),
-  "wmo" = c(130, 136)
-  return()
+  return(r)
 }
