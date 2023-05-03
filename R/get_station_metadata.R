@@ -1,5 +1,4 @@
 
-
 #' Get latest BOM and DPIRD weather station network station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
@@ -48,7 +47,7 @@
 #'   **source**:\tab Organisation responsible for the data or station
 #'    maintenance. `character`\cr
 #'   **status**:\tab Station status, one of "open" or "closed". `character`\cr
-#'   **wmo**:\tab World Meteorlogical Organisation, acronym{WMO}, number if
+#'   **wmo**:\tab World Meteorological Organisation, acronym{WMO}, number if
 #'    applicable. `numeric`\cr
 #'   }
 #'
