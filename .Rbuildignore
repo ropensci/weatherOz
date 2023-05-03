@@ -12,3 +12,4 @@
 ^\.github$
 ^tic\.R$
 ^CODE_OF_CONDUCT\.md$
+^codecov\.yml$
