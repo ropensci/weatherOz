@@ -69,20 +69,20 @@ get_station_metadata <-
     which_api <- .check_which_api(which_api)
 
     if (which_api == "silo") {
-      silo <- .fetch_silo_metadata(.check_location = check_location)
+      out <- .fetch_silo_metadata(.check_location = check_location)
     } else if (which_api == "dpird") {
-      dpird <- .fetch_dpird_metadata(.api_key = api_key)
+      out <- .fetch_dpird_metadata(.api_key = api_key)
     } else if (which_api == "all") {
       silo <- .fetch_silo_metadata(.check_location = check_location)
       dpird <- .fetch_dpird_metadata(.api_key = api_key)
+      out <- data.table::rbindlist(list(silo, dpird))
     }
 
-    out <- data.table::rbindlist(list(silo, dpird))
     data.table::setkey(out, "station_code")
     data.table::setorderv(out, cols = c("state", "station_name"))
     out[, start := data.table::fifelse(is.na(start),
                                        as.character(lubridate::year(Sys.Date())),
-                                       start)]
+                                       as.character(start))]
     out[, start := data.table::fifelse(nchar(start) == 4,
                                        paste(start, "01", "01", sep = "-"),
                                        start)]
@@ -90,7 +90,7 @@ get_station_metadata <-
 
     out[, end := data.table::fifelse(is.na(end),
                                      as.character(lubridate::year(Sys.Date())),
-                                     end)]
+                                     as.character(end))]
     out[, end := data.table::fifelse(nchar(end) == 4,
                                      paste(end, "01", "01", sep = "-"),
                                      end)]
