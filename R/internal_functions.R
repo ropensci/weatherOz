@@ -1,4 +1,5 @@
 
+
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 
 #' Negate %in% for easy comparisons
@@ -412,8 +413,7 @@
                          which_api = "dpird") {
   if (which_api == "dpird") {
     df_out <- data.table::data.table(df_out)
-    df_out[, stationName := .strcap(x = stationName,
-                                              method = "word")]
+    df_out[, stationName := .strcap(x = stationName)]
 
     # Split the vector into two with an underscore between the names
     new_names <- lapply(names(df_out), function(x) {
@@ -429,7 +429,7 @@
 
   if (which_api == 'silo') {
     df_out <- data.table::data.table(df_out)
-    df_out[, name := .strcap(x = name, method = "word")]
+    df_out[, name := .strcap(x = name)]
     names(df_out)[1] <- "station_code"
     names(df_out)[3] <- "station_name"
   }
@@ -520,88 +520,30 @@
 
 #' Capitalise the First Letters of Words in a String
 #'
-#' Capitalize the first letter of each element of the string vector.
+#' Capitalise the first letter of each element of the string vector.
 #'
 #' @param x `string` to be capitalized.
-#' @param method one out of "first" (default), "word", "title". "first" will
-#'  only capitalize the first character of a string. "word" will capitalize all
-#'  found words and "title" will also capitalize wordwise, but leave out: a,
-#'  an, the, at, by, for, in, of, on, to, up, and, as, but, s, or and nor.)
 #'
-#' @note Taken from \CRANpkg{Hmisc}
-#' @note A `string` that is all CAPS will not work. First use `tolower(x)` then
-#' use `.strcap(x)` or wrap `.strcap(tolower(x))`.
+#' @note Taken from \CRANpkg{Hmisc} with modifications to simplify by
+#'  Adam Sparks.
 #'
-#' @author Charles Dupont
+#' @author Charles Dupont and Adam H. Sparks,
+#'  \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
 
-.strcap <- function(x, method = c("first", "word", "title")) {
+.strcap <- function(x) {
+
   .cap <- function(x) {
     capped <- grep('^[^A-Z]*', x, perl = TRUE)
-
-    substr(x[capped], 1, 1) <- toupper(substr(x[capped], 1, 1))
+    substr(x[capped], 1, 1) <- toupper(tolower(substr(x[capped], 1, 1)))
     return(x)
   }
 
   na <- is.na(x)
 
-  switch(
-    match.arg(method),
-    first = {
-      res <- .cap(x)
-    },
-    word = {
-      res <-
-        unlist(lapply(lapply(
-          strsplit(x, split = "\\b\\W+\\b"), .cap
-        ), paste, collapse = " "))
-    },
-    title = {
-      z <- strsplit(tolower(x), split = "\\b\\W+\\b")
-      low <-
-        c(
-          "a",
-          "an",
-          "the",
-          "at",
-          "by",
-          "for",
-          "in",
-          "of",
-          "on",
-          "to",
-          "up",
-          "and",
-          "as",
-          "but",
-          "or",
-          "nor",
-          "s"
-        )
-      z <- lapply(z, function(y) {
-        y[y %nin% low] <- StrCap(y[y %nin% low])
-        y[y %in% low] <- tolower(y[y %in% low])
-        y
-      })
-
-      nn <- strsplit(x, split = "\\w+")
-
-      res <- unlist(lapply(1:length(z), function(i) {
-        if (length(nn[[i]]) != length(z[[i]])) {
-          if (z[[i]][1] == "") {
-            z[[i]] <- z[[i]][-1]
-          } else {
-            z[[i]] <- c(z[[i]], "")
-          }
-        } else {
-          if (z[[i]][1] == "" & length(z[[i]]) > 1)
-            z[[i]] <- VecRot(z[[i]], -1)
-        }
-        do.call(paste, list(nn[[i]], z[[i]], sep = "", collapse = ""))
-      }))
-
-    }
-  )
+  res <-
+    unlist(lapply(lapply(strsplit(x, split = "\\b\\W+\\b"), .cap),
+                  paste, collapse = " "))
 
   res[na] <- NA
   return(res)

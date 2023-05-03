@@ -513,8 +513,7 @@ find_nearby_stations <- function(latitude = NULL,
   }
 
   # Manipulate cols
-  r[, station_name := .strcap(x = tolower(station_name),
-                                        method = "word")]
+  r[, station_name := .strcap(x = station_name)]
   r[, owner := "BOM"]
   r[, distance := round(distance, 1)]
   data.table::setkey(r, "station_code")
@@ -537,7 +536,7 @@ find_nearby_stations <- function(latitude = NULL,
 .parse_dpird_stations <- function(query_result = ret) {
 
   out <- data.table::data.table(query_result$collection)
-  out <- .rename_cols(out, which_api = 'dpird')
+  out <- .rename_cols(out, which_api = "dpird")
 
   out[, distance := round(distance, 1)]
   out[, links := NULL]

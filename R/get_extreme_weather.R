@@ -113,8 +113,7 @@ get_extreme_weather <- function(station_id,
       erosion$yearToDate$days
     )
 
-    names(out_erosion) <- .strcap(x = names(out_erosion),
-                                            method = "word")
+    names(out_erosion) <- .strcap(x = names(out_erosion))
 
   } else {
     out_erosion <- data.table::data.table()[1:nrec,]
@@ -139,8 +138,7 @@ get_extreme_weather <- function(station_id,
       frost$yearToDate$days
     )
 
-    names(out_frost) <- .strcap(x = names(out_frost),
-                                          method = "word")
+    names(out_frost) <- .strcap(x = names(out_frost))
 
   } else {
     out_frost <- data.table::data.table()[1:nrec,]
@@ -163,7 +161,7 @@ get_extreme_weather <- function(station_id,
       heat$yearToDate$days
     )
 
-    names(out_heat) <- .strcap(x = names(out_heat), method = "word")
+    names(out_heat) <- .strcap(x = names(out_heat))
 
   } else {
     out_heat <- data.table::data.table()[1:nrec,]
