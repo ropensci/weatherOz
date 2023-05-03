@@ -8,9 +8,6 @@
 #' automatically check and correct any invalid state values for stations located
 #' in Australia in the \acronym{SILO} data.
 #'
-#' @param check_location `Boolean`. An optional check to use
-#'  \CRANpkg{ASGS.foyer} to double check the station's physical locations and
-#'  correct any errors in the state where the station is located.
 #'  \CRANpkg{ASGS.foyer} must be installed to use this.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
@@ -47,7 +44,7 @@
 #'   **source**:\tab Organisation responsible for the data or station
 #'    maintenance. `character`\cr
 #'   **status**:\tab Station status, one of "open" or "closed". `character`\cr
-#'   **wmo**:\tab World Meteorological Organisation, acronym{WMO}, number if
+#'   **wmo**:\tab World Meteorological Organisation, (acronym{WMO}), number if
 #'    applicable. `numeric`\cr
 #'   }
 #'
@@ -62,8 +59,7 @@
 #' @export
 
 get_station_metadata <-
-  function(check_location = FALSE,
-           api_key = NULL,
+  function(api_key = NULL,
            which_api = "silo") {
     which_api <- .check_which_api(which_api)
 
@@ -88,7 +84,7 @@ get_station_metadata <-
     out[, start := lubridate::ymd(start)]
 
     out[, end := data.table::fifelse(is.na(end),
-                                     as.character(lubridate::year(Sys.Date())),
+                                     as.character(Sys.Date()),
                                      as.character(end))]
     out[, end := data.table::fifelse(nchar(end) == 4,
                                      paste(end, "01", "01", sep = "-"),
@@ -166,39 +162,6 @@ get_station_metadata <-
   bom_stations[, source := NULL]
   bom_stations[, bar_height.m := NULL]
   bom_stations[, source := "Bureau of Meteorology"]
-
-  # if ASGS.foyer is installed, correct the state column, otherwise skip
-  if (requireNamespace("ASGS.foyer", quietly = TRUE)) {
-    if (isTRUE(.check_location)) {
-      message(
-        "The package {ASGS.foyer} is installed. Station locations will\n",
-        "be checked against lat/lon location values and corrected if necessary."
-      )
-      data.table::setDT(bom_stations)
-      latlon2state <- function(lat, lon) {
-        ASGS.foyer::latlon2SA(lat,
-                              lon,
-                              to = "STE",
-                              yr = "2016",
-                              return = "v")
-      }
-
-      bom_stations[lon > -50, state_from_latlon := latlon2state(lat, lon)]
-      bom_stations[state_from_latlon == "New South Wales", actual_state := "NSW"]
-      bom_stations[state_from_latlon == "Victoria", actual_state := "VIC"]
-      bom_stations[state_from_latlon == "Queensland", actual_state := "QLD"]
-      bom_stations[state_from_latlon == "South Australia", actual_state := "SA"]
-      bom_stations[state_from_latlon == "Western Australia", actual_state := "WA"]
-      bom_stations[state_from_latlon == "Tasmania", actual_state := "TAS"]
-      bom_stations[state_from_latlon == "Australian Capital Territory",
-                   actual_state := "ACT"]
-      bom_stations[state_from_latlon == "Northern Territory",
-                   actual_state := "NT"]
-      bom_stations[actual_state != state &
-                     state %notin% c("ANT", "ISL"), state := actual_state]
-      bom_stations[, actual_state := NULL]
-    }
-  }
 
   data.table::setcolorder(
     bom_stations,

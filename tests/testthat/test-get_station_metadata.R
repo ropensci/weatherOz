@@ -1,6 +1,7 @@
 
 test_that("get_station_metadata functions properly", {
   skip_on_cran()
+  skip_if_offline()
   x <-
     get_station_metadata(check_location = FALSE, which_api = "silo")
   expect_equal(ncol(x), 11)
