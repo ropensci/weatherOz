@@ -412,7 +412,7 @@
                          which_api = "dpird") {
   if (which_api == "dpird") {
     df_out <- data.table::data.table(df_out)
-    df_out[, stationName := DescTools::StrCap(x = stationName,
+    df_out[, stationName := .strcap(x = stationName,
                                               method = "word")]
 
     # Split the vector into two with an underscore between the names
@@ -429,7 +429,7 @@
 
   if (which_api == 'silo') {
     df_out <- data.table::data.table(df_out)
-    df_out[, name := DescTools::StrCap(x = name, method = "word")]
+    df_out[, name := .strcap(x = name, method = "word")]
     names(df_out)[1] <- "station_code"
     names(df_out)[3] <- "station_name"
   }

@@ -110,7 +110,6 @@ Imports:
     curl,
     crul,
     data.table,
-    DescTools,
     foreign,
     grDevices,
     httr,

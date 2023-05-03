@@ -513,7 +513,7 @@ find_nearby_stations <- function(latitude = NULL,
   }
 
   # Manipulate cols
-  r[, station_name := DescTools::StrCap(x = tolower(station_name),
+  r[, station_name := .strcap(x = tolower(station_name),
                                         method = "word")]
   r[, owner := "BOM"]
   r[, distance := round(distance, 1)]
