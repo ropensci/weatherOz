@@ -49,7 +49,7 @@ stations available from \acronym{SILO} with the following columns.
 \strong{source}:\tab Organisation responsible for the data or station
 maintenance. \code{character}\cr
 \strong{status}:\tab Station status, one of "open" or "closed". \code{character}\cr
-\strong{wmo}:\tab: World Meteorlogical Organisation, acronym{WMO}, number if
+\strong{wmo}:\tab World Meteorlogical Organisation, acronym{WMO}, number if
 applicable. \code{numeric}\cr
 }
 }

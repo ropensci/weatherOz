@@ -48,7 +48,7 @@
 #'   **source**:\tab Organisation responsible for the data or station
 #'    maintenance. `character`\cr
 #'   **status**:\tab Station status, one of "open" or "closed". `character`\cr
-#'   **wmo**:\tab: World Meteorlogical Organisation, acronym{WMO}, number if
+#'   **wmo**:\tab World Meteorlogical Organisation, acronym{WMO}, number if
 #'    applicable. `numeric`\cr
 #'   }
 #'
