@@ -126,7 +126,6 @@ Imports:
     utils,
     xml2
 Suggests:
-    ASGS.foyer,
     dplyr,
     future,
     rmarkdown,
