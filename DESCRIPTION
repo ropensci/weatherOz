@@ -118,7 +118,6 @@ Imports:
     knitr,
     lubridate,
     magick,
-    magrittr (>= 1.5),
     methods,
     readr (>= 1.1.1),
     stringi,
