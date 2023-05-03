@@ -30,10 +30,10 @@
 #'   for the current year, this indicates that the station closed sometime
 #'   during the current year prior to the request being made.
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
+#' # fetch SILO metadata
 #' get_station_metadata()
-#' }
+#'
 #' @return a `data.table` of \acronym{BOM} weather stations' metadata for
 #'  stations available from \acronym{SILO} with the following columns.
 #'  \tabular{rl}{

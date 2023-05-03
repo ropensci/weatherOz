@@ -63,9 +63,10 @@ automatically check and correct any invalid state values for stations located
 in Australia in the \acronym{SILO} data.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# fetch SILO metadata
 get_station_metadata()
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 Station location and other metadata are sourced from the Australian Bureau of
