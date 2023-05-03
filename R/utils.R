@@ -9,6 +9,8 @@
 #'  an, the, at, by, for, in, of, on, to, up, and, as, but, s, or and nor.)
 #'
 #' @note Taken from \CRANpkg{Hmisc}
+#' @note A `string` that is all CAPS will not work. First use `tolower(x)` then
+#' use `.strcap(x)` or wrap `.strcap(tolower(x))`.
 #'
 #' @author Charles Dupont
 #' @noRd
