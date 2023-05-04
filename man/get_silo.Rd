@@ -15,18 +15,18 @@ get_silo(
 )
 }
 \arguments{
-\item{station_id}{\code{Integer}, An integer representing the station number
+\item{station_id}{An \code{integer} representing the station number
 available from the \acronym{SILO} network. Defaults to
 \code{NULL} and when used, queries with latitude and longitude input are not
 permitted.}
 
-\item{latitude}{\code{Numeric}. A single value representing the
-latitude of the point-of-interest. Defaults to \code{NULL} and when used,
-queries with \code{station_id} input is not permitted.}
+\item{latitude}{A single \code{numeric} value representing the latitude of the
+point-of-interest. Defaults to \code{NULL} and when used, queries with
+\code{station_id} input are not permitted. Requires \code{longitude} to be provided.}
 
-\item{longitude}{\code{Numeric}. A single value  representing the
-longitude of the point-of-interest. Defaults to \code{NULL} and when used,
-queries with \code{station_id} inputs is not permitted.}
+\item{longitude}{A single \code{numeric} value  representing the longitude of the
+point-of-interest. Defaults to \code{NULL} and when used, queries with
+\code{station_id} inputs are not permitted.  Requires \code{latitude} to be provided.}
 
 \item{first}{A \code{character} string representing the start date of the query in
 the format 'yyyymmdd'.}
@@ -38,7 +38,7 @@ the format 'yyyymmdd'.  Defaults to the current system date.}
 retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 'alldata' retrieve daily data.}
 
-\item{email}{\code{Character}. A string specifying a valid email address to use
+\item{email}{A \code{character }string specifying a valid email address to use
 for the request. The query will return an error if a valid email address is
 not provided.}
 }

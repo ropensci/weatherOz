@@ -177,13 +177,13 @@ get_dpird_summaries <- function(station_id,
 #'
 #' Internal function to handle weather data fetching from DPIRD's API.
 #'
-#' @param station_id `Character`. A string with the station ID code for the
+#' @param station_id A `character` string with the station ID code for the
 #' station of interest.
-#' @param first `Character`. A string representing the start date of the query
+#' @param first A `character` string representing the start date of the query
 #' in the format 'yyyymmdd' (ISO-8601). \pkg{weatherOz} does its best to
 #' determine the date given any format but may fail if given an unconventional
 #' date format.
-#' @param last `Character`. A string representing the start date of the query in
+#' @param last A `character` string representing the start date of the query in
 #' the format 'yyyymmdd' (ISO-8601). For intervals less than one day, to get one
 #' day of data, last should be the same as first, but must be explicitly coded,
 #' as otherwise it will default to the current date.

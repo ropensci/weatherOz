@@ -16,16 +16,16 @@
 #' `latitude` and `longitude` coordinates return gridded data from the
 #' 'PatchedPointData'.
 #'
-#' @param station_id `Integer`, An integer representing the station number
+#' @param station_id An `integer` representing the station number
 #'  available from the \acronym{SILO} network. Defaults to
 #'  `NULL` and when used, queries with latitude and longitude input are not
 #'  permitted.
-#' @param latitude `Numeric`. A single value representing the
-#'  latitude of the point-of-interest. Defaults to `NULL` and when used,
-#'  queries with `station_id` input is not permitted.
-#' @param longitude `Numeric`. A single value  representing the
-#'  longitude of the point-of-interest. Defaults to `NULL` and when used,
-#'  queries with `station_id` inputs is not permitted.
+#' @param latitude A single `numeric` value representing the latitude of the
+#' point-of-interest. Defaults to `NULL` and when used, queries with
+#' `station_id` input are not permitted. Requires `longitude` to be provided.
+#' @param longitude A single `numeric` value  representing the longitude of the
+#'  point-of-interest. Defaults to `NULL` and when used, queries with
+#'  `station_id` inputs are not permitted.  Requires `latitude` to be provided.
 #' @param first A `character` string representing the start date of the query in
 #'  the format 'yyyymmdd'.
 #' @param last A `character` string representing the start date of the query in
@@ -33,7 +33,7 @@
 #' @param data_format A `character` string specifying the type of data to
 #'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 #'  'alldata' retrieve daily data.
-#' @param email `Character`. A string specifying a valid email address to use
+#' @param email A `character `string specifying a valid email address to use
 #'  for the request. The query will return an error if a valid email address is
 #'  not provided.
 #'
@@ -148,7 +148,6 @@ get_silo <- function(station_id = NULL,
                         .last = last,
                         .data_format = data_format,
                         .email = email) {
-
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   # Retrieve data for queries with lat lon coordinates
@@ -256,7 +255,7 @@ get_silo <- function(station_id = NULL,
       "vapour_pressure_avg"
     )
 
-        # Create df and give names
+    # Create df and give names
     df <- df[n_first:length(df)]
     out <- stats::setNames(data.frame(matrix(
       nrow = length(df),
@@ -265,7 +264,7 @@ get_silo <- function(station_id = NULL,
     nm = this_names)
     # Add data
     for (j in 1:length(df)) {
-      out[j, ] <- unlist(strsplit(df[j], "\\s+"))
+      out[j,] <- unlist(strsplit(df[j], "\\s+"))
     }
 
     # All columns were parsed as char, fix it
@@ -307,7 +306,7 @@ get_silo <- function(station_id = NULL,
     nm = this_names)
     # Add data
     for (j in 1:length(df)) {
-      out[j, ] <- unlist(strsplit(df[j], "\\s+"))
+      out[j,] <- unlist(strsplit(df[j], "\\s+"))
     }
 
     # Set date columns to date class
@@ -349,6 +348,7 @@ get_silo <- function(station_id = NULL,
 }
 
 #' Check SILO data codes
+#'
 #' Checks if any SILO data codes for interpolated data are present in the
 #' requested station observation data. If any such codes are found, a message
 #' will be reported with a suggestion to check the data source columns
@@ -357,19 +357,17 @@ get_silo <- function(station_id = NULL,
 #' @param dt A `data.table`, defaults to the SILO API query result object from
 #' `.query_silo()`.
 #' @param .this_format A string specifying the format of the input
-#'   data. Valid values are 'alldata' and 'apsim'. Default is to this_format'
+#'   data. Valid values are 'alldata' and 'apsim'. Default is to 'this_format'
 #'   variable passed to the `data_format` argument in `get_silo()`.
 #'
-#' @return This function returns no value, only a friendly message. It is used
-#' for checking and reporting the presence of interpolated data codes in the
-#' station observation data (for API queries performed using a station_id/code).
+#' @return An `invisible(NULL)`. This function returns no value, only a friendly
+#' message. It is used for checking and reporting the presence of interpolated
+#' data codes in the station observation data (for API queries performed using a
+#' station_id/code).
 #'
-#' @examples
 #' @noRd
 .check_silo_codes <- function(dt,
                               .this_format = this_format) {
-
-
   if (.this_format == "alldata") {
     code_cols <- c("Smx",
                    "Smn",
@@ -382,40 +380,33 @@ get_silo <- function(station_id = NULL,
                    "Sp")
 
     # Count the number of non-zero rows for each new column
-    non_zero_counts <- dt[, lapply(.SD, function(col) sum(col != 0)),
+    non_zero_counts <-
+      dt[, lapply(.SD, function(col)
+        sum(col != 0)),
+        .SDcols = code_cols]
 
-                          .SDcols = code_cols]
-
-    if (any(non_zero_counts > 0)) {
-      # Report message
-      message(
-        "\nYou have requested station observation data but rows in this dataset \n",
-        "have data codes of interpolated data. Check the data source columns and\n",
-        "`get_silo()` documentation for further details on codes and references.\n"
-      )
-    }
-  } else if (.this_format == "apsim") {
-
+  } else {
     # Split the 'code' column into separate columns for each quality code
     code_cols <- c("Ssl", "Smx", "Smn", "Srn", "Sev", "Svp")
     x <- data.table::copy(dt)
-    x[, (code_cols) := tstrsplit(as.character(code),
-                                 "",
-                                 fixed = TRUE,
-                                 type.convert = TRUE)]
+    x[, (code_cols) := data.table::tstrsplit(as.character(code),
+                                             "",
+                                             fixed = TRUE,
+                                             type.convert = TRUE)]
 
     # Count the number of non-zero rows for each new column
-    non_zero_counts <- x[, lapply(.SD, function(col) sum(col != 0)),
-
-                         .SDcols = code_cols]
-
-    if (any(non_zero_counts > 0)) {
-      # Report message
-      message(
-        "\nYou have requested station observation data but rows in this dataset \n",
-        "have data codes of interpolated data. Check the data source columns and\n",
-        "`get_silo()` documentation for further details on codes and references.\n"
-      )
-    }
+    non_zero_counts <- x[, lapply(.SD, function(col)
+      sum(col != 0)),
+      .SDcols = code_cols]
   }
+
+  if (any(non_zero_counts > 0)) {
+    # Report message
+    message(
+      "\nYou have requested station observation data but rows in this dataset \n",
+      "have data codes of interpolated data. Check the data source columns and\n",
+      "`get_silo()` documentation for further details on codes and references.\n"
+    )
+  }
+  return(invisible(NULL))
 }
