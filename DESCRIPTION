@@ -101,6 +101,8 @@ Description: Provides automated downloading, parsing, cleaning, and formatting
     under a Creative Commons (CC) Attribution 3.0 licence or Public Access
     Licence (PAL) as appropriate, see
     <http://www.bom.gov.au/other/copyright.shtml> for further details.
+URL: https://github.com/DPIRD-FSI/weatherOz/, https://dpird-fsi.github.io/weatherOz/
+BugReports: https://github.com/DPIRD-FSI/weatherOz/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
