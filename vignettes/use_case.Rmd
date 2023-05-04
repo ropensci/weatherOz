@@ -59,10 +59,12 @@ head(subscribers_list)
 ```
 
 ```
-##   Entry  Name Surname  Location                 email
-## 1     1   Joe   Blogs     Dalby   XXXX.XXXX@gmail.com
-## 2     2  John     Doe Toowoomba XXXX.XXXX@hotmail.com
-## 3     3 Jayne     Doe   Warwick     123.123@gmail.com
+## data.frame [3, 5]
+## Entry    chr 1 2 3
+## Name     chr Joe John Jayne
+## Surname  chr Blogs Doe Doe
+## Location chr Dalby Toowoomba Warwick
+## email    chr XXXX.XXXX@gmail.com XXXX.XXXX@hotmail.com 123.~
 ```
 
 We also need to specify our email address and password.

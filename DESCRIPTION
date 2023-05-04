@@ -129,7 +129,7 @@ Imports:
 Suggests:
     covr,
     dplyr,
-    future,
+    mailR,
     rmarkdown,
     rstudioapi,
     spelling,

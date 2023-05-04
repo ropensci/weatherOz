@@ -8,7 +8,6 @@ vignette: >
   %\VignetteIndexEntry{weatherOz}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  %\VignetteDepends{terra}
 ---
 
 ```{r setup, include=FALSE}
