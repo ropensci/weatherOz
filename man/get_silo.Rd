@@ -34,7 +34,7 @@ the format 'yyyymmdd'.}
 \item{last}{A \code{character} string representing the start date of the query in
 the format 'yyyymmdd'.  Defaults to the current system date.}
 
-\item{data_format}{\code{Character}. A string specifying the type of data to
+\item{data_format}{A \code{character} string specifying the type of data to
 retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 'alldata' retrieve daily data.}
 

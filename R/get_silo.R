@@ -30,7 +30,7 @@
 #'  the format 'yyyymmdd'.
 #' @param last A `character` string representing the start date of the query in
 #'  the format 'yyyymmdd'.  Defaults to the current system date.
-#' @param data_format `Character`. A string specifying the type of data to
+#' @param data_format A `character` string specifying the type of data to
 #'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 #'  'alldata' retrieve daily data.
 #' @param email `Character`. A string specifying a valid email address to use
@@ -365,6 +365,7 @@ get_silo <- function(station_id = NULL,
 #' station observation data (for API queries performed using a station_id/code).
 #'
 #' @examples
+#' @noRd
 .check_silo_codes <- function(dt,
                               .this_format = this_format) {
 
