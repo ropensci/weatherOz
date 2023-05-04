@@ -148,10 +148,6 @@ get_silo <- function(station_id = NULL,
                         .last = last,
                         .data_format = data_format,
                         .email = email) {
-  # nocov start
-  station_id <- latitude <- longitude <- first <- last <- data_format <-
-    email <- NULL
-  # nocov end
 
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
