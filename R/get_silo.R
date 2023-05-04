@@ -196,7 +196,7 @@ get_silo <- function(station_id = NULL,
 
   # Extract content and parse data according to the format and frequency
   r <- httr::content(result, "text")
-  out <- .parse_silo(r, .data_format, .first)
+  out <- .parse_silo(r, .data_format, .first, .station_id)
   return(out[])
 }
 
@@ -218,6 +218,8 @@ get_silo <- function(station_id = NULL,
 #' `get_silo()`.
 #' @param this_date A string, user defined by the query details and represents
 #' the start date of the query. Internally inherited from `get_silo()`.
+#' @param station_id A string, user defined by the query details and represents
+#' the station code. Internally inherited from `get_silo()`.
 #' @return A `data.table` with date class column(s) and numeric class columns
 #' for the weather variables.
 #' @keywords internal
@@ -225,7 +227,8 @@ get_silo <- function(station_id = NULL,
 
 .parse_silo <- function(query_response,
                         this_format,
-                        this_date) {
+                        this_date,
+                        station_id) {
   Date <- Date2 <- NULL #nocov
 
   # apsim data
@@ -239,6 +242,7 @@ get_silo <- function(station_id = NULL,
     names(out)[1] <- "year"
     out$date <-
       as.Date(out[, "day"] - 1, paste0(out[, "year"], "-01-01"))
+    out <- data.table::setDT(out)
   }
 
   # monthly data
@@ -288,6 +292,7 @@ get_silo <- function(station_id = NULL,
     for (i in which(numeric_columns)) {
       out[[i]] <- as.numeric(as.character(out[[i]]))
     }
+    out <- data.table::setDT(out)
   }
 
   # 'alldata' data (complete data with quality colums)
@@ -335,6 +340,85 @@ get_silo <- function(station_id = NULL,
     for (i in which(numeric_columns)) {
       out[[i]] <- as.numeric(as.character(out[[i]]))
     }
+    out <- data.table::setDT(out)
   }
-  return(data.table::setDT(out))
+
+  # if querying station observation data, check data
+  # codes for the presence of interpolated data
+  if (!is.null(station_id)) {
+    .check_silo_codes(out, this_format)
+  }
+
+  return(out)
+}
+
+#' Check SILO data codes
+#' Checks if any SILO data codes for interpolated data are present in the
+#' requested station observation data. If any such codes are found, a message
+#' will be reported with a suggestion to check the data source columns
+#' and `get_silo()` documentation for further details on codes and references.
+#'
+#' @param dt A `data.table`, defaults to the SILO API query result object from
+#' `.query_silo()`.
+#' @param .this_format A string specifying the format of the input
+#'   data. Valid values are 'alldata' and 'apsim'. Default is to this_format'
+#'   variable passed to the `data_format` argument in `get_silo()`.
+#'
+#' @return This function returns no value, only a friendly message. It is used
+#' for checking and reporting the presence of interpolated data codes in the
+#' station observation data (for API queries performed using a station_id/code).
+#'
+#' @examples
+.check_silo_codes <- function(dt,
+                              .this_format = this_format) {
+
+
+  if (.this_format == "alldata") {
+    code_cols <- c("Smx",
+                   "Smn",
+                   "Srn",
+                   "Sev",
+                   "Ssl",
+                   "Svp",
+                   "Ssp",
+                   "Ses",
+                   "Sp")
+
+    # Count the number of non-zero rows for each new column
+    non_zero_counts <- dt[, lapply(.SD, function(col) sum(col != 0)),
+
+                          .SDcols = code_cols]
+
+    if (any(non_zero_counts > 0)) {
+      # Report message
+      message(
+        "\nYou have requested station observation data but rows in this dataset \n",
+        "have data codes of interpolated data. Check the data source columns and\n",
+        "`get_silo()` documentation for further details on codes and references.\n"
+      )
+    }
+  } else if (.this_format == "apsim") {
+
+    # Split the 'code' column into separate columns for each quality code
+    code_cols <- c("Ssl", "Smx", "Smn", "Srn", "Sev", "Svp")
+    x <- data.table::copy(dt)
+    x[, (code_cols) := tstrsplit(as.character(code),
+                                 "",
+                                 fixed = TRUE,
+                                 type.convert = TRUE)]
+
+    # Count the number of non-zero rows for each new column
+    non_zero_counts <- x[, lapply(.SD, function(col) sum(col != 0)),
+
+                         .SDcols = code_cols]
+
+    if (any(non_zero_counts > 0)) {
+      # Report message
+      message(
+        "\nYou have requested station observation data but rows in this dataset \n",
+        "have data codes of interpolated data. Check the data source columns and\n",
+        "`get_silo()` documentation for further details on codes and references.\n"
+      )
+    }
+  }
 }

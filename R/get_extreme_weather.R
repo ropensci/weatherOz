@@ -171,6 +171,7 @@ get_extreme_weather <- function(station_id,
   out <- data.table::data.table(out_data, out_erosion, out_frost, out_heat)
   out <- .rename_cols(out)
   names(out) <- gsub("[.]", "_", names(out))
+  names(out) <- gsub(" ", "_", names(out))
 
   return(data.table::setDT(out))
 }
