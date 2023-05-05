@@ -1,5 +1,5 @@
 
-#' Get the latest DPIRD and SILO weather station station metadata
+#' Get the latest DPIRD and SILO weather station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
 #'  \acronym{SILO} and \acronym{DPIRD} data sets.

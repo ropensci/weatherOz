@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_station_metadata.R
 \name{get_station_metadata}
 \alias{get_station_metadata}
-\title{Get the latest DPIRD and SILO weather station station metadata}
+\title{Get the latest DPIRD and SILO weather station metadata}
 \usage{
 get_station_metadata(api_key = NULL, which_api = "silo")
 }
