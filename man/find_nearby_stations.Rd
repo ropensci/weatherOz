@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_nearby_stations.R
 \name{find_nearby_stations}
 \alias{find_nearby_stations}
-\title{Get a list of nearby weather stations from coordinates or station ID code}
+\title{Find nearby weather stations given geographic coordinates or a station code}
 \usage{
 find_nearby_stations(
   latitude = NULL,
@@ -42,7 +42,7 @@ a \code{data.table} with 'station_code', 'station_name', 'latitude',
 by increasing distance from station or location of interest.
 }
 \description{
-Get a list of nearby weather stations from coordinates or station ID code
+Find nearby weather stations given geographic coordinates or a station code
 }
 \note{
 You can request your own \acronym{API} key from \acronym{DPIRD} for

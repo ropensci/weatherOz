@@ -6,7 +6,7 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Get weather data from DPIRD weather API summarised by time interval
+#' Get weather data from DPIRD Weather 2.0 API summarised by time interval
 #'
 #' Nicely formatted individual station weather summaries from the
 #'  \acronym{DPIRD} weather station network.

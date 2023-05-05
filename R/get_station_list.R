@@ -5,8 +5,7 @@
 # Copyright (C) 2022 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Fetch a list with all available weather stations for the DPIRD Weather API
-#' or stations present in the SILO API.
+#' Get a list of all available weather stations in the DPIRD Weather 2.0 or SILO APIs
 #'
 #' Queries \acronym{DPIRD} and \acronym{SILO} \acronym{API}s. If querying the
 #' DPIRD Weather API, the function return a data frame with metadata for the

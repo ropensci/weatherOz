@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_station_list.R
 \name{get_station_list}
 \alias{get_station_list}
-\title{Fetch a list with all available weather stations for the DPIRD Weather API
-or stations present in the SILO API.}
+\title{Get a list of all available weather stations in the DPIRD Weather 2.0 or SILO APIs}
 \usage{
 get_station_list(api = "weather", state = "wa", limit = 1000, api_key = NULL)
 }

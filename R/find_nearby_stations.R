@@ -5,7 +5,7 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Get a list of nearby weather stations from coordinates or station ID code
+#' Find nearby weather stations given geographic coordinates or a station code
 #'
 #' @param latitude A `numeric` value for latitude expressed as decimal degrees
 #'   (DD) (WGS84).

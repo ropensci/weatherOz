@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dpird_summaries.R
 \name{get_dpird_summaries}
 \alias{get_dpird_summaries}
-\title{Get weather data from DPIRD weather API summarised by time interval}
+\title{Get weather data from DPIRD Weather 2.0 API summarised by time interval}
 \usage{
 get_dpird_summaries(
   station_id,

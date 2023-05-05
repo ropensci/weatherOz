@@ -6,7 +6,7 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
-#' Retrieve data from SILO (Scientific Information for Land Owners) API
+#' Get weather data from SILO (Scientific Information for Land Owners) API
 #'
 #' Download weather data from the \acronym{SILO} \acronym{API} from both
 #' station observations (DataDrill) and gridded data (PatchedPointData). There

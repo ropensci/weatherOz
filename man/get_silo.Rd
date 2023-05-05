@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_silo.R
 \name{get_silo}
 \alias{get_silo}
-\title{Retrieve data from SILO (Scientific Information for Land Owners) API}
+\title{Get weather data from SILO (Scientific Information for Land Owners) API}
 \usage{
 get_silo(
   station_id = NULL,
