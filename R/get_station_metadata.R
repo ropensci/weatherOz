@@ -4,19 +4,14 @@
 #' Download the latest station locations and metadata for stations in the
 #'  \acronym{SILO} and \acronym{DPIRD} data sets.
 #'
-#' If \CRANpkg{ASGS.foyer} is installed locally, this function will
-#' automatically check and correct any invalid state values for stations located
-#' in Australia in the \acronym{SILO} data.
-#'
-#'  \CRANpkg{ASGS.foyer} must be installed to use this.
-#' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} weather \acronym{API}.
 #' @param which_api A `string` value that indicates which API to use.  Defaults
 #'  to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
 #'  and \acronym{DPIRD} weather station networks; "silo" for only stations in
 #'  the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
 #'  network.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} weather \acronym{API}.
 #'
 #'  @note \acronym{BOM} does not report the exact date on which stations opened
 #'   or closed, only the year. Therefore the 'start' and 'end' columns will
@@ -59,8 +54,8 @@
 #' @export
 
 get_station_metadata <-
-  function(api_key = NULL,
-           which_api = "silo") {
+  function(which_api = "silo",
+           api_key = NULL) {
     which_api <- .check_which_api(which_api)
 
     if (which_api == "silo") {
