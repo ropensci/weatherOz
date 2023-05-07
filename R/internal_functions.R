@@ -2,19 +2,19 @@
 
 "%||%" <- function(a, b) if (!is.null(a)) a else b
 
-#' Negate %in% for easy comparisons
+#' Add %notin% function
 #'
-#' Check if values in `x` are also in `y`
+#' Negates `%in%` for easier (mis)matching.
 #'
-#' @param x a vector of values
-#' @param y a vector of values of the same length as `x` for comparison
-#' @example x %notin% y
+#' @param x A character string to match.
+#' @param table A table containing values to match `x` against.
+#'
+#' @return A logical vector, indicating if a mismatch was located for any
+#'  element of x: thus the values are TRUE or FALSE and never NA.
 #' @keywords internal
-#' @return A vector of Boolean values the same length as `x` and `y`
-#' @author Adam Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
-`%notin%` <- function(x, y) {
-  match(x, y, nomatch = 0L) == 0L
+`%notin%` <- function(x, table) {
+  match(x, table, nomatch = 0L) == 0L
 }
 
 #' Check user-provided dates for validity

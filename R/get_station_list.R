@@ -100,16 +100,6 @@ get_station_list <- function(api = "weather",
            "Visit: https://www.agric.wa.gov.au/web-apis")
     }
 
-    # Check the operating system
-    os <- Sys.info()[["sysname"]]
-
-    # Define the query URLs
-    if (os == "Windows") {
-      base_url <- "https://api.agric.wa.gov.au/v2/"
-    } else {
-      base_url <- "https://api.dpird.wa.gov.au/v2/"
-    }
-
     ret <- paste0(base_url,
                   which_api,
                   "/stations.json?",
