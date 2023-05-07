@@ -23,11 +23,11 @@
                          group) {
   if (interval == "minute") {
     query_list <- list(
-      startdateTime = start_date_time,
+      startDateTime = start_date_time,
       endDateTime = end_date_time,
       api_key = api_key,
       select = paste(which_values, collapse = ","),
-      limit = 1440
+      limit = 1000
     )
   } else if (interval %in% c("15min", "30min", "hourly")) {
     query_list <- list(
@@ -36,7 +36,7 @@
       endDateTime = format(last + lubridate::days(1), "%Y-%m-%d"),
       interval = interval,
       select = which_values,
-      limit = 3000,
+      limit = 1000,
       group = all,
       api_key = api_key
     )
@@ -46,7 +46,7 @@
       startDateTime = format(first, "%Y-%m-%d"),
       endDateTime = format(last, "%Y-%m-%d"),
       select = which_values,
-      limit = 3000,
+      limit = 1000,
       group = all,
       api_key = api_key
     )

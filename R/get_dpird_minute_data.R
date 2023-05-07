@@ -46,9 +46,9 @@
 #' yesterday <- now() - hours(24)
 #'
 #' get_dpird_minute_data(station_code = "NO",
-#'                       start_date_time = today,
-#'                       end_date_time = yesterday,
-#'                       api_key = "YOUR_API_KEY",
+#'                       start_date_time = yesterday,
+#'                       end_date_time = today,
+#'                       api_key = YOUR_API_KEY,
 #'                       which_values = c("airTemperature",
 #'                                        "solarIrradiance"))
 #'
@@ -89,7 +89,7 @@ get_dpird_minute_data <- function(station_code,
   end_date_time <- .check_date_time(end_date_time)
 
   if (start_date_time > end_date_time) {
-    stop(.Call = FALSE,
+    stop(call. = FALSE,
          "The `start_date_time` and `end_date_time` are reversed.")
   }
 
@@ -110,6 +110,12 @@ get_dpird_minute_data <- function(station_code,
   out <- .query_dpird_api(.base_url = minute_base_url,
                           .query_list = query_list)
 
+  out[, date_time := seq.POSIXt(from = as.POSIXct(start_date_time),
+                                by = "min",
+                                length.out = 1000)]
+  out[, station_code := station_code]
+  data.table::setkey(x = out, cols = station_code)
+  data.table::setcolorder(out, c("station_code", "date_time"))
   return(out)
 }
 
