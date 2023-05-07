@@ -106,8 +106,7 @@ get_dpird_minute_data <- function(station_code,
 
   minute_base_url = sprintf("%sweather/stations/%s/data",
                      base_dpird_url,
-                     station_code,
-                     "data")
+                     station_code)
   out <- .query_dpird_api(.base_url = minute_base_url,
                           .query_list = query_list)
 
