@@ -217,27 +217,8 @@ get_station_metadata <-
     api_key = .api_key
   )
 
-  client <- crul::HttpClient$new(url = base_url)
-
-  # nocov begin
-  response <- client$get(query = query_list,
-                         retry = 6L,
-                         timeout = 30L)
-
-  # check to see if request failed or succeeded
-  # - a custom approach this time combining status code,
-  #   explanation of the code, and message from the server
-  if (response$status_code > 201) {
-    mssg <- jsonlite::fromJSON(response$parse("UTF-8"))$message
-    x <- response$status_http()
-    stop(sprintf("HTTP (%s) - %s\n  %s", x$status_code, x$explanation, mssg),
-         call. = FALSE)
-  }
-
-  response$raise_for_status()
-  # create meta object
-  dpird_stations <- jsonlite::fromJSON(response$parse("UTF8"))
-  dpird_stations <- data.table::data.table(dpird_stations$collection)
+  dpird_stations <- query_dpird_api(base_url = base_url,
+                                    query_list = query_list)
 
   data.table::setnames(
     dpird_stations,
