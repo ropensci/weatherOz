@@ -298,7 +298,6 @@
 #' @return cleaned data.table cols of date and time
 #' @keywords internal
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
-#' @importFrom data.table ":="
 #' @noRd
 
 .split_time_cols <- function(x) {
@@ -554,7 +553,7 @@
 #'  camelCase field names
 #'
 #' @return Modifies the the colnames of `x` in place
-#'
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @keywords internal
 #' @noRd
 
