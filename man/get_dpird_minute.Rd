@@ -28,8 +28,8 @@ date rounded to the nearest minute.  This function does its best to
 decipher many date and time formats but prefers ISO8601.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
-\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} weather \acronym{API}.}
+\acronym{DPIRD}, see \url{https://www.agric.wa.gov.au/web-apis} for the
+\acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
 \item{which_values}{A \code{vector} of weather values to query from the
 \acronym{API}. See \strong{Available Values} section for valid available codes.
