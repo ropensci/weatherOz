@@ -6,7 +6,7 @@
 \usage{
 get_dpird_minute(
   station_code,
-  start_date_time = lubridate::now() - lubridate::minutes(1439),
+  start_date_time = lubridate::now() - lubridate::hours(24),
   end_date_time = lubridate::now(),
   api_key,
   which_values

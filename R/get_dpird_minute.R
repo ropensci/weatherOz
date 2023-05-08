@@ -60,7 +60,7 @@
 
 get_dpird_minute <- function(station_code,
                              start_date_time = lubridate::now() -
-                               lubridate::minutes(1439),
+                               lubridate::hours(24),
                              end_date_time = lubridate::now(),
                              api_key,
                              which_values) {
@@ -148,7 +148,7 @@ get_dpird_minute <- function(station_code,
                           .query_list = query_list,
                           .limit = length(hour_sequence))
   .set_snake_case_names(out)
-  out[, date_time := hour_sequence]
+  out[, date_time := hour_sequence[nrow(out)]]
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code", "date_time"))
