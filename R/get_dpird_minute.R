@@ -49,13 +49,14 @@
 #' today <- now()
 #' yesterday <- now() - hours(24)
 #'
-#' get_dpird_minute_data(station_code = "NO",
-#'                       start_date_time = yesterday,
-#'                       end_date_time = today,
-#'                       api_key = YOUR_API_KEY,
-#'                       which_values = c("airTemperature", "solarIrradiance")
+#' get_dpird_minute(station_code = "NO",
+#'                  start_date_time = yesterday,
+#'                  end_date_time = today,
+#'                  api_key = YOUR_API_KEY,
+#'                  which_values = c("airTemperature", "solarIrradiance"))
 #'
 #' @family DPIRD
+#' @export
 
 get_dpird_minute <- function(station_code,
                              start_date_time = lubridate::now() -
