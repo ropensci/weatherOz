@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_dpird_minute.R
 \name{get_dpird_minute}
 \alias{get_dpird_minute}
-\title{Nicely formatted minute weather station data from the \acronym{DPIRD} weather
-station network over a maximum 24 hour period.}
+\title{Get minute weather data from DPIRD Weather 2.0 API}
 \usage{
 get_dpird_minute(
   station_code,

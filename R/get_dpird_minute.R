@@ -1,5 +1,5 @@
 
-' Get minute weather data from DPIRD Weather 2.0 API
+#' Get minute weather data from DPIRD Weather 2.0 API
 #'
 #' Nicely formatted minute weather station data from the \acronym{DPIRD} weather
 #'  station network over a maximum 24 hour period.
