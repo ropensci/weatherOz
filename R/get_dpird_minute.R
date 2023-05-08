@@ -1,4 +1,5 @@
-#' Get minute weather data from DPIRD Weather 2.0 API
+
+' Get minute weather data from DPIRD Weather 2.0 API
 #'
 #' Nicely formatted minute weather station data from the \acronym{DPIRD} weather
 #'  station network over a maximum 24 hour period.
@@ -36,7 +37,8 @@
 #' * windMinSpeed
 #'
 #' @note Please note this function converts date-time columns from Coordinated
-#'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
+#'  Universal Time 'UTC' returned by the \acronym{API} to Australian Western
+#'  Standard Time 'AWST'.
 #'
 #' @return a `data.table` with 'station_code' and date interval queried together
 #'  with the requested weather variables.
