@@ -13,6 +13,7 @@ utils::globalVariables(
     "code",
     "comments",
     "data_format",
+    "date_time",
     "dist",
     "distance",
     "email",

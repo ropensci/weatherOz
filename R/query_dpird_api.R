@@ -83,8 +83,10 @@
 
 #' Query the DPIRD API using {crul}
 #'
-#' @param base_url the base URL for the API query
-#' @param query_list a list of values in the API to query
+#' @param .base_url the base URL for the API query
+#' @param .query_list a list of values in the API to query
+#' @param .limit (numeric/integer) the maximum records wanted. Defaults to 1000
+#'  as per the Weather 2.0 API
 #'
 #' @return A `data.table` of data for manipulating before returning to the user
 #'
@@ -92,29 +94,63 @@
 #' @keywords internal
 
 .query_dpird_api <- function(.base_url,
-                             .query_list) {
-  client <- crul::HttpClient$new(url = .base_url)
+                             .query_list,
+                             .limit) {
+  connection <- crul::HttpClient$new(url = .base_url)
 
-  # nocov begin
-  response <- client$get(query = .query_list,
-                         retry = 6L,
-                         timeout = 30L)
+  client <- crul::Paginator$new(client = connection,
+                                limit = .limit,
+                                limit_param = "limit",
+                                offset_param = "offset",
+                                chunk = 1000)
+  response <- client$get(query = .query_list)
 
   # check to see if request failed or succeeded
   # - a custom approach this time combining status code,
   #   explanation of the code, and message from the server
-  if (response$status_code > 201) {
-    mssg <- jsonlite::fromJSON(response$parse("UTF-8"))$message
-    x <- response$status_http()
-    stop(sprintf("HTTP (%s) - %s\n  %s",
-                 x$status_code,
-                 x$message,
-                 x$explanation),
-         call. = FALSE)
-  }
 
-  response$raise_for_status()
-  # create meta object
-  dpird_stations <- jsonlite::fromJSON(response$parse("UTF8"))
-  dpird_stations <- data.table::data.table(dpird_stations$collection)
+  if (length(response) == 1L) {
+    if (response$status_code > 201) {
+      mssg <- jsonlite::fromJSON(response$parse("UTF-8"))$message
+      x <- response$status_http()
+      stop(sprintf(
+        "HTTP (%s) - %s\n  %s",
+        x$status_code,
+        x$message,
+        x$explanation
+      ),
+      call. = FALSE)
+    }
+
+    response$raise_for_status()
+
+    # pull data out into `data.table`
+    x <- jsonlite::fromJSON(response$parse("UTF8"))
+    dpird_stations <- data.table::data.table(x$collection)
+
+  } else {
+    # check response from first item in list, should be same across all
+    if (response[[1]]$status_code > 201) {
+      mssg <- jsonlite::fromJSON(response[[1]]$parse("UTF-8"))$message
+      x <- response$status_http()
+      stop(sprintf(
+        "HTTP (%s) - %s\n  %s",
+        x$status_code,
+        x$message,
+        x$explanation
+      ),
+      call. = FALSE)
+    }
+
+    response[[1]]$raise_for_status()
+
+    # pull data out into `data.table`
+    parsed <- vector(mode = "list", length = length(response))
+    for (i in seq_len(length(response))) {
+      x <- jsonlite::fromJSON(response[[i]]$parse("UTF8"))
+      parsed[[i]] <- data.table::data.table(x$collection)
+    }
+    dpird_stations <- data.table::rbindlist(parsed)
+  }
+  return(dpird_stations)
 }
