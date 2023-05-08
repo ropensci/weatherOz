@@ -548,3 +548,19 @@
   res[na] <- NA
   return(res)
 }
+
+#' Convert camelCase names from DPIRD API to snake_case
+#' @param x a `data.table` of results from a DPIRD Weather 2.0 API query with
+#'  camelCase field names
+#'
+#' @return Modifies the the colnames of `x` in place
+#'
+#' @keywords internal
+#' @noRd
+
+.set_snake_case_names <- function(x) {
+  return(data.table::setnames(x, old = names(x),
+                       new = gsub(" ", "_", tolower(
+                         gsub("(.)([A-Z])", "\\1 \\2",
+                              names(x))))))
+}

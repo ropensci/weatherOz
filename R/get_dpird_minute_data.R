@@ -19,6 +19,8 @@
 #'  \acronym{DPIRD} weather \acronym{API}.
 #' @param which_values A `vector` of weather values to query from the
 #'  \acronym{API}. See **Available Values** section for valid available codes.
+#'  Defaults to all available values.
+#'
 #' @section Available Values:
 #' * airTemperature,
 #' * dateTime,
@@ -49,37 +51,41 @@
 #'                       start_date_time = yesterday,
 #'                       end_date_time = today,
 #'                       api_key = YOUR_API_KEY,
-#'                       which_values = c("airTemperature",
-#'                                        "solarIrradiance"))
+#'                       which_values = c("airTemperature", "solarIrradiance")
 #'
 #' @family DPIRD
 
-get_dpird_minute_data <- function(station_code,
-                                  start_date_time = lubridate::round_date(
-                                      lubridate::now() - lubridate::hours(24),
-                                      unit = "minute"),
-                                  end_date_time = lubridate::round_date(
-                                      lubridate::now(),
-                                      unit = "minute"),
-                                  api_key,
-                                  which_values) {
+get_dpird_minute <- function(station_code,
+                             start_date_time = lubridate::round_date(
+                               lubridate::now() - lubridate::hours(24),
+                               unit = "minute"),
+                             end_date_time = lubridate::round_date(
+                               lubridate::now(),
+                               unit = "minute"),
+                             api_key,
+                             which_values) {
 
-  if (any(
-    which_values %notin% c(
-      "airTemperature",
-      "dateTime",
-      "dewPoint",
-      "rainfall",
-      "relativeHumidity",
-      "soilTemperature",
-      "solarIrradiance",
-      "wetBulb",
-      "wind",
-      "windAvgSpeed",
-      "windMaxSpeed",
-      "windMinSpeed"
-    )
-  )) {
+  all_values <- c(
+    "airTemperature",
+    "dateTime",
+    "dewPoint",
+    "rainfall",
+    "relativeHumidity",
+    "soilTemperature",
+    "solarIrradiance",
+    "wetBulb",
+    "wind",
+    "windAvgSpeed",
+    "windMaxSpeed",
+    "windMinSpeed"
+  )
+
+  if (missing(which_values)) {
+    which_values <- all_values
+  }
+
+  # TODO: add feedback for the user including which values are invalid
+  if (any(which_values %notin% all_values)) {
     stop(call. = FALSE,
          "You have specified a 'value' in `which_values`\n",
          "that is not available in the 'API'.\n")
@@ -109,7 +115,7 @@ get_dpird_minute_data <- function(station_code,
                      station_code)
   out <- .query_dpird_api(.base_url = minute_base_url,
                           .query_list = query_list)
-
+  .set_snake_case_names(out)
   out[, date_time := seq.POSIXt(from = as.POSIXct(start_date_time),
                                 by = "min",
                                 length.out = 1000)]
