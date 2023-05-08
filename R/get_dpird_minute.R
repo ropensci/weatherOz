@@ -11,10 +11,8 @@
 #'  before the current local system time, returning the most recent 24 hour
 #'  observations rounded to the nearest minute. This function does its best to
 #'  decipher many date and time formats but prefers ISO8601.
-#' @param end_date_time A `character` string representing the start date of the
-#'  query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to the current system
-#'  date rounded to the nearest minute.  This function does its best to
-#'  decipher many date and time formats but prefers ISO8601.
+#' @param minutes An `integer` value that provides the number of observations to
+#'  be returned. Defaults to 1440 minutes for 24 hours of observations.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'  \acronym{DPIRD}, see <https://www.agric.wa.gov.au/web-apis> for the
 #'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
@@ -46,12 +44,11 @@
 #' @examplesIf interactive()
 #' library(lubridate)
 #'
-#' today <- now()
 #' yesterday <- now() - hours(24)
 #'
 #' get_dpird_minute(station_code = "NO",
 #'                  start_date_time = yesterday,
-#'                  end_date_time = today,
+#'                  minutes = 1440,
 #'                  api_key = YOUR_API_KEY,
 #'                  which_values = c("airTemperature", "solarIrradiance"))
 #'
@@ -61,7 +58,7 @@
 get_dpird_minute <- function(station_code,
                              start_date_time = lubridate::now() -
                                lubridate::hours(24),
-                             end_date_time = lubridate::now(),
+                             minutes = 1440,
                              api_key,
                              which_values) {
   if (missing(station_code)) {
@@ -104,18 +101,12 @@ get_dpird_minute <- function(station_code,
   }
 
   start_date_time <- .check_date_time(start_date_time)
-  end_date_time <- .check_date_time(end_date_time)
-
-  if (start_date_time > end_date_time) {
-    stop(call. = FALSE,
-         "The `start_date_time` and `end_date_time` are reversed.")
-  }
 
   hour_sequence <- clock::date_seq(from = start_date_time,
-                  to = end_date_time,
-                  by = clock::duration_minutes(1))
+                  by = clock::duration_minutes(1),
+                  total_size = minutes)
   total_recs_req <- length(hour_sequence)
-  if (total_recs_req > 1441) {
+  if (total_recs_req > 1440) {
     stop(call. = FALSE,
          "The API only supports queries for a maximum 24hr interval.")
   }
@@ -123,7 +114,8 @@ get_dpird_minute <- function(station_code,
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
-    end_date_time = lubridate::format_ISO8601(end_date_time, usetz = "Z"),
+    end_date_time = lubridate::format_ISO8601(
+      hour_sequence[length(total_recs_req)], usetz = "Z"),
     api_key = api_key,
     interval = "minute",
     which_values = which_values,
@@ -148,7 +140,7 @@ get_dpird_minute <- function(station_code,
                           .query_list = query_list,
                           .limit = length(hour_sequence))
   .set_snake_case_names(out)
-  out[, date_time := hour_sequence[nrow(out)]]
+  out[, date_time := hour_sequence]
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code", "date_time"))
