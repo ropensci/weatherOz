@@ -7,7 +7,7 @@
 get_dpird_minute(
   station_code,
   start_date_time = lubridate::now() - lubridate::hours(24),
-  minutes = 1440,
+  minutes = 1440L,
   api_key,
   which_values
 )
@@ -68,7 +68,7 @@ Standard Time 'AWST'.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 library(lubridate)
 
-today <- now()
+yesterday <- now() - hours(24)
 
 get_dpird_minute(station_code = "NO",
                  start_date_time = yesterday,
