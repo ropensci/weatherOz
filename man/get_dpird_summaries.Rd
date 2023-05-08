@@ -82,6 +82,7 @@ output <- get_dpird_summaries(
 }
 \seealso{
 Other DPIRD: 
+\code{\link{get_dpird_minute}()},
 \code{\link{get_extreme_weather}()}
 }
 \concept{DPIRD}

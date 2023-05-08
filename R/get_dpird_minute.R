@@ -56,14 +56,23 @@
 #' @family DPIRD
 
 get_dpird_minute <- function(station_code,
-                             start_date_time = lubridate::round_date(
-                               lubridate::now() - lubridate::hours(24),
-                               unit = "minute"),
-                             end_date_time = lubridate::round_date(
-                               lubridate::now() - lubridate::minutes(1),
-                               unit = "minute"),
+                             start_date_time = lubridate::now() -
+                               lubridate::minutes(1439),
+                             end_date_time = lubridate::now(),
                              api_key,
                              which_values) {
+  if (missing(station_code)) {
+    stop(call. = FALSE,
+         "Please supply a valid `station_id`.")
+  }
+
+  if (missing(api_key)) {
+    stop(
+      "A valid DPIRD API key must be provided, please visit\n",
+      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
+      call. = FALSE
+    )
+  }
 
   all_values <- c(
     "airTemperature",
@@ -102,9 +111,8 @@ get_dpird_minute <- function(station_code,
   hour_sequence <- clock::date_seq(from = start_date_time,
                   to = end_date_time,
                   by = clock::duration_minutes(1))
-
   total_recs_req <- length(hour_sequence)
-  if (total_recs_req > 1440) {
+  if (total_recs_req > 1441) {
     stop(call. = FALSE,
          "The API only supports queries for a maximum 24hr interval.")
   }
@@ -119,6 +127,16 @@ get_dpird_minute <- function(station_code,
     limit = total_recs_req,
     group = NULL
   )
+
+  # Check the operating system
+  os <- Sys.info()[["sysname"]]
+
+  # Define the query URLs
+  if (os == "Windows") {
+    base_dpird_url <- "https://api.agric.wa.gov.au/v2/"
+  } else {
+    base_dpird_url <- "https://api.dpird.wa.gov.au/v2/"
+  }
 
   minute_base_url = sprintf("%sweather/stations/%s/data",
                      base_dpird_url,

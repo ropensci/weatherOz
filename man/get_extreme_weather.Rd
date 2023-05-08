@@ -54,6 +54,7 @@ df <- data.table::rbindlist(outputs)
 }
 \seealso{
 Other DPIRD: 
+\code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()}
 }
 \author{

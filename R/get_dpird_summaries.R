@@ -333,8 +333,6 @@ get_dpird_summaries <- function(station_id,
   out <- jsonlite::fromJSON(url(uri))$data
   if (length(out) > 0) {
     out <- .parse_summary(out, which_vars)
-  } else {
-    out <-
   }
   return(out[])
 }

@@ -1,14 +1,32 @@
 
 #' Construct a list of options to pass to the DPIRD API
 #'
-#' @param station_code
-#' @param start_date_time
-#' @param end_date_time
-#' @param api_key
-#' @param interval
-#' @param limit
-#' @param which_values
-#' @param group
+#' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
+#'  station \acronym{ID} code(s) for the station(s) of interest.
+#' @param start_date_time A `character` string representing the start date and
+#'  time of the query in the format 'yyyy-mm-dd-hh-mm'. Defaults to 24 hours
+#'  before the current local system time, returning the most recent 24 hour
+#'  observations rounded to the nearest minute. This function does its best to
+#'  decipher many date and time formats but prefers ISO8601.
+#' @param end_date_time A `character` string representing the start date of the
+#'  query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to the current system
+#'  date rounded to the nearest minute.  This function does its best to
+#'  decipher many date and time formats but prefers ISO8601.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} weather \acronym{API}.
+#' @param interval Interval to use, one of "minute", "15min", "30min", "hourly",
+#' "daily", "monthly" or "yearly".
+#' @param limit The pagination limit parameter restricts the number of entries
+#'  returned.
+#' @param which_values Values to query from the API
+#' @param group A `string` used to filter the stations to a predefined group.
+#'  These need to be supported on the back end. 'all' returns all stations,
+#'  'api' returns the default stations in use with the API, 'web' returns the
+#'  list in use by the weather.agric.wa.gov.au and 'rtd' returns stations with
+#'  scientifically complete datasets. Available values: 'api', 'all', 'web' and
+#'  'rtd'.
+#'
 #' @return A `list` object of values to be passed to a [crul] object to query
 #'  the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @keywords internal
@@ -21,6 +39,7 @@
                          limit,
                          which_values,
                          group) {
+
   if (interval == "minute") {
     query_list <- list(
       startDateTime = start_date_time,
