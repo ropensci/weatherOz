@@ -14,7 +14,7 @@ get_dpird_minute(
 }
 \arguments{
 \item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
-station \acronym{ID} code(s) for the station(s) of interest.}
+station \acronym{ID} code for the station of interest.}
 
 \item{start_date_time}{A \code{character} string representing the start date and
 time of the query in the format 'yyyy-mm-dd-hh-mm'. Defaults to 24 hours

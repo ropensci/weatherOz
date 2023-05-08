@@ -5,7 +5,7 @@
 #'  station network over a maximum 24 hour period.
 #'
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
-#'  station \acronym{ID} code(s) for the station(s) of interest.
+#'  station \acronym{ID} code for the station of interest.
 #' @param start_date_time A `character` string representing the start date and
 #'  time of the query in the format 'yyyy-mm-dd-hh-mm'. Defaults to 24 hours
 #'  before the current local system time, returning the most recent 24 hour
