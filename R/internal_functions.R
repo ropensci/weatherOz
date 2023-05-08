@@ -559,8 +559,13 @@
 #' @noRd
 
 .set_snake_case_names <- function(x) {
+  if (isFALSE(inherits(x, "data.table"))) {
+    stop(call. = FALSE,
+         "this function only works on `data.tables`")
+  }
   return(data.table::setnames(x, old = names(x),
-                       new = gsub(" ", "_", tolower(
-                         gsub("(.)([A-Z])", "\\1 \\2",
-                              names(x))))))
+                              new = gsub(" ", "_", tolower(
+                                gsub("(.)([A-Z])", "\\1 \\2",
+                                     names(x))
+                              ))))
 }
