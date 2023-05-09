@@ -61,6 +61,7 @@
 get_station_metadata <-
   function(api_key = NULL,
            which_api = "silo") {
+
     which_api <- .check_which_api(which_api)
 
     if (which_api == "silo") {
@@ -195,9 +196,7 @@ get_station_metadata <-
   base_url = "https://api.dpird.wa.gov.au/v2/weather/stations/"
 
   query_list <- list(
-    station_code = "SP%2CAN001",
     offset = "0",
-    limit = 300,
     includeClosed = "true",
     select = paste0(
       list(
@@ -217,8 +216,9 @@ get_station_metadata <-
     api_key = .api_key
   )
 
-  dpird_stations <- query_dpird_api(base_url = base_url,
-                                    query_list = query_list)
+  dpird_stations <- .query_dpird_api(.base_url = base_url,
+                                     .query_list = query_list,
+                                     .limit = 300)
 
   data.table::setnames(
     dpird_stations,
