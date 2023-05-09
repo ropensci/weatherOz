@@ -39,7 +39,6 @@
                          limit,
                          which_values,
                          group) {
-
   if (interval == "minute") {
     query_list <- list(
       startDateTime = start_date_time,
@@ -117,59 +116,39 @@
                              .limit) {
   connection <- crul::HttpClient$new(url = .base_url)
 
-  client <- crul::Paginator$new(client = connection,
-                                limit = .limit,
-                                limit_param = "limit",
-                                offset_param = "offset",
-                                chunk = 1000)
+  client <- crul::Paginator$new(
+    client = connection,
+    limit = .limit,
+    limit_param = "limit",
+    offset_param = "offset",
+    chunk = 1000
+  )
   response <- client$get(query = .query_list)
 
   # check to see if request failed or succeeded
   # - a custom approach this time combining status code,
   #   explanation of the code, and message from the server
-
-  if (length(response) == 1L) {
-    if (response$status_code > 201) {
-      mssg <- jsonlite::fromJSON(response$parse("UTF-8"))$message
-      x <- response$status_http()
-      stop(sprintf(
-        "HTTP (%s) - %s\n  %s",
-        x$status_code,
-        x$message,
-        x$explanation
-      ),
-      call. = FALSE)
-    }
-
-    response$raise_for_status()
-
-    # pull data out into `data.table`
-    x <- jsonlite::fromJSON(response$parse("UTF8"))
-    dpird_stations <- data.table::data.table(x$collection)
-
-  } else {
-    # check response from first item in list, should be same across all
-    if (response[[1]]$status_code > 201) {
-      mssg <- jsonlite::fromJSON(response[[1]]$parse("UTF-8"))$message
-      x <- response$status_http()
-      stop(sprintf(
-        "HTTP (%s) - %s\n  %s",
-        x$status_code,
-        x$message,
-        x$explanation
-      ),
-      call. = FALSE)
-    }
-
-    response[[1]]$raise_for_status()
-
-    # pull data out into `data.table`
-    parsed <- vector(mode = "list", length = length(response))
-    for (i in seq_len(length(response))) {
-      x <- jsonlite::fromJSON(response[[i]]$parse("UTF8"))
-      parsed[[i]] <- data.table::data.table(x$collection)
-    }
-    dpird_stations <- data.table::rbindlist(parsed)
+  # check response from first item in list, should be same across all
+  if (response[[1]]$status_code > 201) {
+    mssg <- jsonlite::fromJSON(response[[1]]$parse("UTF-8"))$message
+    x <- response$status_http()
+    stop(sprintf(
+      "HTTP (%s) - %s\n  %s",
+      x$status_code,
+      x$message,
+      x$explanation
+    ),
+    call. = FALSE)
   }
+
+  response[[1]]$raise_for_status()
+
+  # pull data out into `data.table`
+  parsed <- vector(mode = "list", length = length(response))
+  for (i in seq_len(length(response))) {
+    x <- jsonlite::fromJSON(response[[i]]$parse("UTF8"))
+    parsed[[i]] <- data.table::data.table(x$collection)
+  }
+  dpird_stations <- data.table::rbindlist(parsed)
   return(dpird_stations)
 }
