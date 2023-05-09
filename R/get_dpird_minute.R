@@ -57,7 +57,7 @@
 
 get_dpird_minute <- function(station_code,
                              start_date_time = lubridate::now() -
-                               lubridate::hours(24),
+                               lubridate::hours(24L),
                              minutes = 1440L,
                              api_key,
                              which_values) {
