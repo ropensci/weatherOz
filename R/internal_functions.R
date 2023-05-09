@@ -483,16 +483,16 @@
 }
 
 
-#' Check user inputs for lat, lon or station_id
+#' Check user inputs for lat, lon or station_code
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function
-#' @param .station_id station_id passed from another function
+#' @param .station_code station_code passed from another function
 #' @noRd
 #' @return invisible `NULL`, called for its side-effects
 .check_location_params <-
-  function(.latitude, .longitude, .station_id) {
+  function(.latitude, .longitude, .station_code) {
     if (((is.null(.latitude)) ||
-         (is.null(.longitude))) && (is.null(.station_id))) {
+         (is.null(.longitude))) && (is.null(.station_code))) {
       stop(
         call. = FALSE,
         "Provide valid `latitude` and `longitude` coordinates\n",
@@ -532,10 +532,11 @@
 #' @noRd
 
 .strcap <- function(x) {
+  x <- tolower(x)
 
   .cap <- function(x) {
     capped <- grep('^[^A-Z]*', x, perl = TRUE)
-    substr(x[capped], 1, 1) <- toupper(tolower(substr(x[capped], 1, 1)))
+    substr(x[capped], 1, 1) <- toupper(substr(x[capped], 1, 1))
     return(x)
   }
 

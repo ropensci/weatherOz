@@ -11,7 +11,7 @@
 #' Nicely formatted individual station weather summaries from the
 #'  \acronym{DPIRD} weather station network.
 #'
-#' @param station_id A `character` string or `vector` of the \acronym{DPIRD}
+#' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
 #'  station \acronym{ID} code(s) for the station(s) of interest.
 #' @param first A `character` string representing the start date of the query in
 #'  the format 'yyyymmdd'.
@@ -31,7 +31,7 @@
 #'  Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' or
 #'  'erosion'.
 #'
-#' @return a `data.table` with 'station_id' and date interval queried together
+#' @return a `data.table` with 'station_code' and date interval queried together
 #'  with the requested weather variables.
 #'
 #' @note Please note this function converts date-time columns from Coordinated
@@ -47,7 +47,7 @@
 #'
 #' # Use default for end data (current system date)
 #' output <- get_dpird_summaries(
-#'             station_id = "CL001",
+#'             station_code = "CL001",
 #'             first = start_date,
 #'             api_key = "YOUR API KEY",
 #'             interval = "yearly",
@@ -59,7 +59,7 @@
 #' end_date <- "20220502"
 #'
 #' output <- get_dpird_summaries(
-#'             station_id = "BI",
+#'             station_code = "BI",
 #'             first = start_date,
 #'             last = end_date,
 #'             api_key = "YOUR API KEY",
@@ -68,15 +68,15 @@
 #'
 #' @export get_dpird_summaries
 
-get_dpird_summaries <- function(station_id,
+get_dpird_summaries <- function(station_code,
                                 first,
                                 last = Sys.Date(),
                                 api_key,
                                 interval = "daily",
                                 which_vars = "all") {
-  if (missing(station_id)) {
+  if (missing(station_code)) {
     stop(call. = FALSE,
-         "Please supply a valid `station_id`.")
+         "Please supply a valid `station_code`.")
   }
 
   if (missing(first))
@@ -144,10 +144,10 @@ get_dpird_summaries <- function(station_id,
     )
   }
 
-  if (length(station_id) == 1) {
+  if (length(station_code) == 1) {
     return(
       .query_dpird_summaries(
-        station_id = station_id,
+        station_code = station_code,
         first = first,
         last = last,
         api_key = api_key,
@@ -159,9 +159,9 @@ get_dpird_summaries <- function(station_id,
     # query multiple stations and return the values ----
     return(data.table::rbindlist(
       lapply(
-        station_id,
+        station_code,
         .query_dpird_summaries,
-        station_id = station_id,
+        station_code = station_code,
         first = first,
         last = last,
         api_key = api_key,
@@ -177,7 +177,7 @@ get_dpird_summaries <- function(station_id,
 #'
 #' Internal function to handle weather data fetching from DPIRD's API.
 #'
-#' @param station_id A `character` string with the station ID code for the
+#' @param station_code A `character` string with the station ID code for the
 #' station of interest.
 #' @param first A `character` string representing the start date of the query
 #' in the format 'yyyymmdd' (ISO-8601). \pkg{weatherOz} does its best to
@@ -219,7 +219,7 @@ get_dpird_summaries <- function(station_id,
 #'
 #' # Use default for end data (current system date)
 #' output <- .query_dpird_summaries(
-#'            station_id = "AN001",
+#'            station_code = "AN001",
 #'            first = start_date,
 #'            api_key = mykey,
 #'            interval = "yearly")
@@ -229,7 +229,7 @@ get_dpird_summaries <- function(station_id,
 #' end_date <- "20220502"
 #'
 #' output <- .query_dpird_summaries(
-#'            station_id = "BI",
+#'            station_code = "BI",
 #'            first = start_date,
 #'            last = end_date,
 #'            api_key = mykey,
@@ -238,7 +238,7 @@ get_dpird_summaries <- function(station_id,
 #' @noRd
 #' @keywords Internal
 
-.query_dpird_summaries <- function(station_id,
+.query_dpird_summaries <- function(station_code,
                                    first,
                                    last,
                                    api_key,
@@ -247,7 +247,7 @@ get_dpird_summaries <- function(station_id,
   # Create base query URL for weather summaries
   api <- paste0(
     "https://api.dpird.wa.gov.au/v2/weather/stations/",
-    station_id,
+    station_code,
     "/summaries/",
     interval
   )
@@ -413,7 +413,7 @@ get_dpird_summaries <- function(station_id,
 
   # Put together
   out <- data.table::data.table(
-    station_id = .ret_list$stationCode,
+    station_code = .ret_list$stationCode,
     out_period,
     out_temp,
     rain = out_rain,

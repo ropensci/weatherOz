@@ -7,7 +7,7 @@
 find_nearby_stations(
   latitude = NULL,
   longitude = NULL,
-  station_id = NULL,
+  station_code = NULL,
   distance_km = 100,
   api_key = NULL,
   which_api = "silo"
@@ -20,7 +20,7 @@ find_nearby_stations(
 \item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
 (DD) (WGS84).}
 
-\item{station_id}{A \code{string} with the station ID code for the station of
+\item{station_code}{A \code{string} with the station ID code for the station of
 interest. Optional and defaults to \code{NULL}.}
 
 \item{distance_km}{A \code{numeric} value for distance to limit the search from
@@ -54,7 +54,7 @@ free by filling out the form found at \url{https://www.agric.wa.gov.au/web-apis}
 # Query WA only stations and return both DPIRD's and BOM's stations for
 # the Northam WA station, returning stations with 50 km of this station
 wa_stn <- find_nearby_stations(
-  station_id = "NO",
+  station_code = "NO",
   distance_km = 50,
   api_key = "YOUR API KEY",
   which_api = "DPIRD"

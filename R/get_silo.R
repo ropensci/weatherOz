@@ -11,21 +11,21 @@
 #' Download weather data from the \acronym{SILO} \acronym{API} from both
 #' station observations (DataDrill) and gridded data (PatchedPointData). There
 #' are three formats available: 'alldata' and 'apsim' with daily frequency and
-#' 'monthly' with, that's right, monthly frequency. Queries with `station_id`
+#' 'monthly' with, that's right, monthly frequency. Queries with `station_code`
 #' return stations observations from the 'DataDrill' endpoint while queries with
 #' `latitude` and `longitude` coordinates return gridded data from the
 #' 'PatchedPointData'.
 #'
-#' @param station_id An `integer` representing the station number
+#' @param station_code An `integer` representing the station number
 #'  available from the \acronym{SILO} network. Defaults to
 #'  `NULL` and when used, queries with latitude and longitude input are not
 #'  permitted.
 #' @param latitude A single `numeric` value representing the latitude of the
 #' point-of-interest. Defaults to `NULL` and when used, queries with
-#' `station_id` input are not permitted. Requires `longitude` to be provided.
+#' `station_code` input are not permitted. Requires `longitude` to be provided.
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'  point-of-interest. Defaults to `NULL` and when used, queries with
-#'  `station_id` inputs are not permitted.  Requires `latitude` to be provided.
+#'  `station_code` inputs are not permitted.  Requires `latitude` to be provided.
 #' @param first A `character` string representing the start date of the query in
 #'  the format 'yyyymmdd'.
 #' @param last A `character` string representing the start date of the query in
@@ -44,7 +44,7 @@
 #'
 #' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (8137)
-#' wd <- get_silo(station_id = 8137,
+#' wd <- get_silo(station_code = 8137,
 #'                first = "20210601",
 #'                last = "20210701",
 #'                data_format = "alldata",
@@ -61,7 +61,7 @@
 #'
 #' @export get_silo
 
-get_silo <- function(station_id = NULL,
+get_silo <- function(station_code = NULL,
                      latitude = NULL,
                      longitude = NULL,
                      first,
@@ -83,12 +83,12 @@ get_silo <- function(station_id = NULL,
   # query a single point and return the values ----
   # if a single station or single lat/lon is requested, return values, else
   # check vectors for validity and then return all values in one data.table
-  if (length(station_id) == 1 || length(latitude) == 1) {
-    if (is.null(station_id)) {
+  if (length(station_code) == 1 || length(latitude) == 1) {
+    if (is.null(station_code)) {
       .check_lonlat(longitude = longitude, latitude = latitude)
       return(
         .query_silo(
-          .station_id = station_id,
+          .station_code = station_code,
           .latitude = latitude,
           .longitude = longitude,
           .first = first,
@@ -101,7 +101,7 @@ get_silo <- function(station_id = NULL,
     } else {
       return(
         .query_silo(
-          .station_id = station_id,
+          .station_code = station_code,
           .latitude = latitude,
           .longitude = longitude,
           .first = first,
@@ -119,7 +119,7 @@ get_silo <- function(station_id = NULL,
 #' Internal function to construct, send, receive and return the parsed API
 #' response.
 #'
-#' @param station_id `Integer`, An integer or vector of integers representing
+#' @param station_code `Integer`, An integer or vector of integers representing
 #'  station number(s) available from the \acronym{SILO} network.
 #' @param latitude `Numeric`. A single value or a vector, representing the
 #'  latitude(s) of the point(s)-of-interest.
@@ -137,11 +137,11 @@ get_silo <- function(station_id = NULL,
 #'  not provided.
 #'
 #' @examples
-#' .query_silo(station_id = 8137)
+#' .query_silo(station_code = 8137)
 #'
 #' @noRd
 #' @keywords Internal
-.query_silo <- function(.station_id = station_id,
+.query_silo <- function(.station_code = station_code,
                         .latitude = latitude,
                         .longitude = longitude,
                         .first = first,
@@ -151,7 +151,7 @@ get_silo <- function(station_id = NULL,
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   # Retrieve data for queries with lat lon coordinates
-  if (is.null(.station_id) &&
+  if (is.null(.station_code) &&
       !is.null(.latitude) & !is.null(.longitude)) {
     # Build query
     query_params <- list(
@@ -172,10 +172,10 @@ get_silo <- function(station_id = NULL,
 
   # Retrieve data for queries with station code
   if (is.null(.latitude) &
-      is.null(.longitude) && !is.null(.station_id)) {
+      is.null(.longitude) && !is.null(.station_code)) {
     # Build query
     query_params <- list(
-      station = .station_id,
+      station = .station_code,
       start = .first,
       finish = .last,
       format = .data_format,
@@ -191,7 +191,7 @@ get_silo <- function(station_id = NULL,
 
   # Extract content and parse data according to the format and frequency
   r <- httr::content(result, "text")
-  out <- .parse_silo(r, .data_format, .first, .station_id)
+  out <- .parse_silo(r, .data_format, .first, .station_code)
   return(out[])
 }
 
@@ -213,7 +213,7 @@ get_silo <- function(station_id = NULL,
 #' `get_silo()`.
 #' @param this_date A string, user defined by the query details and represents
 #' the start date of the query. Internally inherited from `get_silo()`.
-#' @param station_id A string, user defined by the query details and represents
+#' @param station_code A string, user defined by the query details and represents
 #' the station code. Internally inherited from `get_silo()`.
 #' @return A `data.table` with date class column(s) and numeric class columns
 #' for the weather variables.
@@ -223,7 +223,7 @@ get_silo <- function(station_id = NULL,
 .parse_silo <- function(query_response,
                         this_format,
                         this_date,
-                        station_id) {
+                        station_code) {
   Date <- Date2 <- NULL #nocov
 
   # apsim data
@@ -340,7 +340,7 @@ get_silo <- function(station_id = NULL,
 
   # if querying station observation data, check data
   # codes for the presence of interpolated data
-  if (!is.null(station_id)) {
+  if (!is.null(station_code)) {
     .check_silo_codes(out, this_format)
   }
 
@@ -363,21 +363,18 @@ get_silo <- function(station_id = NULL,
 #' @return An `invisible(NULL)`. This function returns no value, only a friendly
 #' message. It is used for checking and reporting the presence of interpolated
 #' data codes in the station observation data (for API queries performed using a
-#' station_id/code).
+#' station_code/code).
 #'
 #' @noRd
 .check_silo_codes <- function(dt,
                               .this_format = this_format) {
+
   if (.this_format == "alldata") {
     code_cols <- c("Smx",
                    "Smn",
                    "Srn",
                    "Sev",
-                   "Ssl",
-                   "Svp",
-                   "Ssp",
-                   "Ses",
-                   "Sp")
+                   "Svp")
 
     # Count the number of non-zero rows for each new column
     non_zero_counts <-
@@ -385,28 +382,45 @@ get_silo <- function(station_id = NULL,
         sum(col != 0)),
         .SDcols = code_cols]
 
-  } else {
+    if (any(non_zero_counts > 0)) {
+      # Report message
+      message(
+        "\nYou have requested station observation data but rows in this dataset \n",
+        "have data codes of interpolated data. Check the data source columns and\n",
+        "`get_silo()` documentation for further details on codes and references.\n"
+      )
+    }
+
+  } else if (data_format == "apsim") {
+
     # Split the 'code' column into separate columns for each quality code
-    code_cols <- c("Ssl", "Smx", "Smn", "Srn", "Sev", "Svp")
+    code_cols <- c("radn",
+                   "maxt",
+                   "mint",
+                   "rain",
+                   "evap",
+                   "vp")
+
     x <- data.table::copy(dt)
-    x[, (code_cols) := data.table::tstrsplit(as.character(code),
-                                             "",
-                                             fixed = TRUE,
-                                             type.convert = TRUE)]
+    x[, (code_cols) := tstrsplit(as.character(code),
+                                 "",
+                                 fixed = TRUE,
+                                 type.convert = TRUE)]
 
     # Count the number of non-zero rows for each new column
-    non_zero_counts <- x[, lapply(.SD, function(col)
-      sum(col != 0)),
-      .SDcols = code_cols]
-  }
+    non_zero_counts <-
+      dt[, lapply(.SD, function(col)
+        sum(col != 0)),
+        .SDcols = code_cols]
 
-  if (any(non_zero_counts > 0)) {
-    # Report message
-    message(
-      "\nYou have requested station observation data but rows in this dataset \n",
-      "have data codes of interpolated data. Check the data source columns and\n",
-      "`get_silo()` documentation for further details on codes and references.\n"
-    )
+    if (any(non_zero_counts > 0)) {
+      # Report message
+      message(
+        "\nYou have requested station observation data but rows in this dataset \n",
+        "have data codes of interpolated data. Check the data source columns and\n",
+        "`get_silo()` documentation for further details on codes and references.\n"
+      )
+    }
   }
   return(invisible(NULL))
 }
