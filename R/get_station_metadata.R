@@ -64,11 +64,11 @@ get_station_metadata <-
     which_api <- .check_which_api(which_api)
 
     if (which_api == "silo") {
-      out <- .fetch_silo_metadata(.check_location = check_location)
+      out <- .fetch_silo_metadata()
     } else if (which_api == "dpird") {
       out <- .fetch_dpird_metadata(.api_key = api_key)
     } else if (which_api == "all") {
-      silo <- .fetch_silo_metadata(.check_location = check_location)
+      silo <- .fetch_silo_metadata()
       dpird <- .fetch_dpird_metadata(.api_key = api_key)
       out <- data.table::rbindlist(list(silo, dpird))
     }
@@ -93,7 +93,7 @@ get_station_metadata <-
     return(out)
   }
 
-.fetch_silo_metadata <- function(.check_location = check_location) {
+.fetch_silo_metadata <- function() {
   tryCatch({
     curl::curl_download(
       url =
