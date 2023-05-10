@@ -41,7 +41,8 @@
 #' @return a `data.table` with 'station_code' and date interval queried together
 #'  with the requested weather variables.
 #'
-#' @examplesIf interactive()
+#' @examples
+#' \dontrun{
 #' library(lubridate)
 #'
 #' yesterday <- now() - hours(24)
@@ -51,7 +52,7 @@
 #'                  minutes = 1440,
 #'                  api_key = YOUR_API_KEY,
 #'                  which_values = c("airTemperature", "solarIrradiance"))
-#'
+#' }
 #' @family DPIRD
 #' @export
 

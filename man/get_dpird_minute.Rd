@@ -65,7 +65,7 @@ Standard Time 'AWST'.
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 library(lubridate)
 
 yesterday <- now() - hours(24)
@@ -75,7 +75,7 @@ get_dpird_minute(station_code = "NO",
                  minutes = 1440,
                  api_key = YOUR_API_KEY,
                  which_values = c("airTemperature", "solarIrradiance"))
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other DPIRD: 
