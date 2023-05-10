@@ -39,7 +39,8 @@
 #'
 #' @family DPIRD
 #'
-#' @examplesIf interactive()
+#' @examples
+#' \dontrun{
 #' # You must have an DPIRD API key to proceed
 #' # Set date interval for yearly request
 #' # Get rainfall summary
@@ -65,7 +66,7 @@
 #'             api_key = "YOUR API KEY",
 #'             interval = "daily",
 #'             which_vars = c("wind", "erosion"))
-#'
+#' }
 #' @export get_dpird_summaries
 
 get_dpird_summaries <- function(station_code,
@@ -225,7 +226,6 @@ get_dpird_summaries <- function(station_code,
 #'            interval = "yearly")
 #'
 #' # 15 min interval query, define start and end date
-#' start_date <- "20220501"
 #' end_date <- "20220502"
 #'
 #' output <- .query_dpird_summaries(

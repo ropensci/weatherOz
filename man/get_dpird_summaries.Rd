@@ -52,7 +52,7 @@ Please note this function converts date-time columns from Coordinated
 Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # You must have an DPIRD API key to proceed
 # Set date interval for yearly request
 # Get rainfall summary
@@ -78,7 +78,7 @@ output <- get_dpird_summaries(
             api_key = "YOUR API KEY",
             interval = "daily",
             which_vars = c("wind", "erosion"))
-\dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 Other DPIRD: 
