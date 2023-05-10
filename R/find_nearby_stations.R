@@ -11,7 +11,7 @@
 #'   (DD) (WGS84).
 #' @param longitude A `numeric` value for longitude expressed as decimal degrees
 #'  (DD) (WGS84).
-#' @param station_id A `string` with the station ID code for the station of
+#' @param station_code A `string` with the station ID code for the station of
 #' interest. Optional and defaults to `NULL`.
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'  the station or location of interest.  Defaults to 100 km.
@@ -36,7 +36,7 @@
 #' # Query WA only stations and return both DPIRD's and BOM's stations for
 #' # the Northam WA station, returning stations with 50 km of this station
 #' wa_stn <- find_nearby_stations(
-#'   station_id = "NO",
+#'   station_code = "NO",
 #'   distance_km = 50,
 #'   api_key = "YOUR API KEY",
 #'   which_api = "DPIRD"
@@ -55,7 +55,7 @@
 
 find_nearby_stations <- function(latitude = NULL,
                                  longitude = NULL,
-                                 station_id = NULL,
+                                 station_code = NULL,
                                  distance_km = 100,
                                  api_key = NULL,
                                  which_api = "silo") {
@@ -64,11 +64,11 @@ find_nearby_stations <- function(latitude = NULL,
 
   .check_location_params(.latitude = latitude,
                          .longitude = longitude,
-                         .station_id = station_id)
+                         .station_code = station_code)
 
-  if (length(station_id) == 1 ||
+  if (length(station_code) == 1 ||
       length(latitude) + length(longitude) == 2) {
-    if (is.null(station_id)) {
+    if (is.null(station_code)) {
       .check_lonlat(longitude = longitude, latitude = latitude)
 
       if (which_api == "silo") {
@@ -121,11 +121,11 @@ find_nearby_stations <- function(latitude = NULL,
     }
   }
 
-  if (!is.null(station_id)) {
+  if (!is.null(station_code)) {
     if (which_api == "silo" &
-        isTRUE(grepl("^\\d+$", station_id))) {
+        isTRUE(grepl("^\\d+$", station_code))) {
       out <- .find_nearby_silo_stations(distance_km = distance_km,
-                                        station_id = station_id)
+                                        station_code = station_code)
 
       out[distance %in%
             out[(distance <= distance_km)]$distance]
@@ -138,10 +138,10 @@ find_nearby_stations <- function(latitude = NULL,
       return(out[])
 
     } else if (which_api == "dpird" &
-               isFALSE(grepl("^\\d+$", station_id))) {
+               isFALSE(grepl("^\\d+$", station_code))) {
       out <-
         .get_dpird_stations(
-          .station_id = station_id,
+          .station_code = station_code,
           .distance_km = distance_km,
           .latitude = latitude,
           .longitude = longitude,
@@ -150,11 +150,11 @@ find_nearby_stations <- function(latitude = NULL,
       return(out[])
 
     } else if (which_api == "all") {
-      if (isFALSE(grepl("^\\d+$", station_id))) {
+      if (isFALSE(grepl("^\\d+$", station_code))) {
         # return dpird
         out_dpird <-
           .get_dpird_stations(
-            .station_id = station_id,
+            .station_code = station_code,
             .distance_km = distance_km,
             .latitude = latitude,
             .longitude = longitude,
@@ -183,10 +183,10 @@ find_nearby_stations <- function(latitude = NULL,
         }
 
 
-      } else if (grepl("^\\d+$", station_id)) {
+      } else if (grepl("^\\d+$", station_code)) {
         # return silo
         out_silo <- .find_nearby_silo_stations(distance_km = distance_km,
-                                               station_id = station_id)
+                                               station_code = station_code)
 
         out_silo[, distance_km := round(distance_km, 1)]
 
@@ -224,20 +224,20 @@ find_nearby_stations <- function(latitude = NULL,
 #'
 #' @param distance_km A `numeric` value for the distance in kilometres in which
 #'  to search for nearby stations from a given geographic location or known
-#'  `station_id`. Cannot be used when `longitude` and `latitude` are provided.
+#'  `station_code`. Cannot be used when `longitude` and `latitude` are provided.
 #' @param longitude A `numeric` value for longitude expressed as decimal degrees
-#'  (DD) (WGS84). Required if `latitude` is used. Cannot be used if `station_id`
+#'  (DD) (WGS84). Required if `latitude` is used. Cannot be used if `station_code`
 #'  is provided.
 #' @param latitude A `numeric` value for latitude expressed as decimal degrees
 #'   (DD) (WGS84). Required if `longitude` is used. Cannot be used if
-#'   `station_id` is provided.
-#' @param station_id A `character` value for a known station from which the
+#'   `station_code` is provided.
+#' @param station_code A `character` value for a known station from which the
 #' nearby stations are to be identified.
 #'
 #' @examples
 #' # find stations within 50 km of Finke Post Office, NT
 #' .find_nearby_silo_stations(distance_km = 50,
-#'                          station_id = "015526")
+#'                          station_code = "015526")
 #'
 #' # find stations within 500 km of Esperance, WA
 #' .find_nearby_silo_stations(distance_km = 50,
@@ -250,14 +250,14 @@ find_nearby_stations <- function(latitude = NULL,
 .find_nearby_silo_stations <- function(distance_km = NULL,
                                        longitude = NULL,
                                        latitude = NULL,
-                                       station_id = NULL) {
+                                       station_code = NULL) {
 
-  if (!is.null(station_id) &&
+  if (!is.null(station_code) &&
       !is.null(longitude) && !is.null(latitude)) {
     stop(
       call. = FALSE,
-      "You have provided `station_id` along with `longitude` and \n",
-      "`latitude` values. Please provide only one, either `station_id` \n",
+      "You have provided `station_code` along with `longitude` and \n",
+      "`latitude` values. Please provide only one, either `station_code` \n",
       "or a pairing of `longitude` and `latitude` values."
     )
   }
@@ -267,9 +267,9 @@ find_nearby_stations <- function(latitude = NULL,
     .check_lonlat(longitude = longitude, latitude = latitude)
   }
 
-  if (!is.null(station_id)) {
+  if (!is.null(station_code)) {
     x <-
-      .get_silo_stations(.station_id = station_id,
+      .get_silo_stations(.station_code = station_code,
                          .distance_km = distance_km)
 
     # Warn user if there are no stations within the input radius and return data
@@ -280,19 +280,19 @@ find_nearby_stations <- function(latitude = NULL,
           distance_km,
           " km\n",
           " from station ",
-          station_id,
+          station_code,
           ".\n"
         )
       )
 
     return(x)
 
-  } else if (is.null(station_id)) {
+  } else if (is.null(station_code)) {
     .latitude = latitude
     .longitude = longitude
 
     x <-
-      .get_silo_stations(.station_id = NULL)
+      .get_silo_stations(.station_code = NULL)
 
     x[, "distance" := round(
       .haversine_distance(
@@ -329,12 +329,12 @@ find_nearby_stations <- function(latitude = NULL,
 
 #' Create a data.table object of all stations available in DPIRD
 #'
-#' @param .station_id A string identifying a station in DPIRD's network, which
+#' @param .station_code A string identifying a station in DPIRD's network, which
 #'  should be used as the centre point to determine stations that fall within
 #'  `.distance_km`
 #' @param .distance_km A `numeric` value for the distance in kilometres in which
 #'  to search for nearby stations from a given geographic location or known
-#' `.station_id`.
+#' `.station_code`.
 #' @param .latitude A `numeric` value (Decimal Degrees) passed from another
 #'  function
 #' @param .longitude A `numeric` value (Decimal Degrees) passed from another
@@ -343,7 +343,7 @@ find_nearby_stations <- function(latitude = NULL,
 #'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
 #'
 #' @noRd
-.get_dpird_stations <- function(.station_id,
+.get_dpird_stations <- function(.station_code,
                                 .distance_km,
                                 .latitude,
                                 .longitude,
@@ -357,14 +357,14 @@ find_nearby_stations <- function(latitude = NULL,
     )
   }
 
-  if (!missing(.station_id)) {
+  if (!missing(.station_code)) {
     base_url <-
       "https://api.dpird.wa.gov.au/v2/weather/stations?stationCode="
 
     res <- jsonlite::fromJSON(url(
       paste0(
         base_url,
-        .station_id,
+        .station_code,
         "&api_key=",
         .api_key,
         "&limit=1&group=rtd"
@@ -397,7 +397,7 @@ find_nearby_stations <- function(latitude = NULL,
           .distance_km,
           " km\n",
           " from station ",
-          .station_id,
+          .station_code,
           "."
         )
       )
@@ -406,7 +406,7 @@ find_nearby_stations <- function(latitude = NULL,
       return(.parse_dpird_stations(ret))
     }
 
-  } else if (missing(.station_id)) {
+  } else if (missing(.station_code)) {
     # get nearby stations from weather api
     ret <- jsonlite::fromJSON(url(
       paste0(
@@ -448,12 +448,12 @@ find_nearby_stations <- function(latitude = NULL,
 
 #' Create a data.table object of all stations available in SILO
 #'
-#' @param .station_id A string identifying a BOM station in SILO which should
+#' @param .station_code A string identifying a BOM station in SILO which should
 #' be used as the centre point to determine stations that fall within
 #'  `.distance_km`
 #' @param .distance_km A `numeric` value for the distance in kilometres in which
 #'  to search for nearby stations from a given geographic location or known
-#'  `.station_id`.
+#'  `.station_code`.
 #'
 #' Uses SILO's cgi-bin web interface to query and download a text file of
 #' BOM weather stations in SILO within 2500 km of Finke, NT (near the Lambert
@@ -461,7 +461,7 @@ find_nearby_stations <- function(latitude = NULL,
 #' Finke Post Office.
 #'
 #' @noRd
-.get_silo_stations <- function(.station_id, .distance_km) {
+.get_silo_stations <- function(.station_code, .distance_km) {
 
   base_url <-
     "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php?format="
@@ -486,10 +486,10 @@ find_nearby_stations <- function(latitude = NULL,
                 "elevation",
                 "distance")
 
-  # if `.station_id` is not provided, fetch all stations in AU. Otherwise, use
+  # if `.station_code` is not provided, fetch all stations in AU. Otherwise, use
   # the cgi-bin interface to find stations within `.distance_km` of the given
-  # `.station_id`
-  if (is.null(.station_id)) {
+  # `.station_code`
+  if (is.null(.station_code)) {
     r <- data.table::fread(
       paste0(base_url,
              "near&station=015526&radius=10000"),
@@ -502,7 +502,7 @@ find_nearby_stations <- function(latitude = NULL,
       paste0(
         base_url,
         "near&station=",
-        .station_id,
+        .station_code,
         "&radius=",
         .distance_km
       ),

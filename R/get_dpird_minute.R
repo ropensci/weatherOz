@@ -63,7 +63,7 @@ get_dpird_minute <- function(station_code,
                              which_values) {
   if (missing(station_code)) {
     stop(call. = FALSE,
-         "Please supply a valid `station_id`.")
+         "Please supply a valid `station_code`.")
   }
 
   if (missing(api_key)) {

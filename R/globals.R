@@ -60,7 +60,7 @@ utils::globalVariables(
     "status",
     "state_code",
     "state_from_latlon",
-    "station_id",
+    "station_code",
     "stations_site_list",
     "synoptic_situation",
     "this_format",

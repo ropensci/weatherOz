@@ -7,7 +7,7 @@
 
 #' Get extreme weather event summaries for a single DPIRD station
 #'
-#' @param station_id A string with the station ID code for the station of interest.
+#' @param station_code A string with the station ID code for the station of interest.
 #' @param type A string with the type of extreme weather to return. Defaults to
 #' "all"; and can be combination of "frost", "erosion", "heat", or "all".
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
@@ -28,7 +28,7 @@
 #' my_events <- c("erosion", "heat")
 #'
 #' output <- get_extreme_weather(
-#'   station_id = my_station,
+#'   station_code = my_station,
 #'   type = my_events,
 #'   api_key = my_key
 #' )
@@ -49,11 +49,11 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
 
-get_extreme_weather <- function(station_id,
+get_extreme_weather <- function(station_code,
                                 type = "all",
                                 api_key = NULL)
 {
-  if (missing(station_id)) {
+  if (missing(station_code)) {
     stop(
       call. = FALSE,
       "Provide a station ID via the `site` argument. It should take a string
@@ -68,7 +68,7 @@ get_extreme_weather <- function(station_id,
   ),
   silent = TRUE)
 
-  if (length(station_id) != 1) {
+  if (length(station_code) != 1) {
     stop(call. = FALSE,
          "Wrong number of sites.\n",
          "This function only handles one site per query.")
@@ -79,7 +79,7 @@ get_extreme_weather <- function(station_id,
     paste0(
       "https://api.dpird.wa.gov.au/v2/weather/stations/extreme-conditions?",
       "stationCode=",
-      station_id,
+      station_code,
       "&offset=0",
       "&limit=1",
       "&group=all",

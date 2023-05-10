@@ -5,7 +5,7 @@
 \title{Get weather data from DPIRD Weather 2.0 API summarised by time interval}
 \usage{
 get_dpird_summaries(
-  station_id,
+  station_code,
   first,
   last = Sys.Date(),
   api_key,
@@ -14,7 +14,7 @@ get_dpird_summaries(
 )
 }
 \arguments{
-\item{station_id}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
+\item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
 station \acronym{ID} code(s) for the station(s) of interest.}
 
 \item{first}{A \code{character} string representing the start date of the query in
@@ -40,7 +40,7 @@ Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' or
 'erosion'.}
 }
 \value{
-a \code{data.table} with 'station_id' and date interval queried together
+a \code{data.table} with 'station_code' and date interval queried together
 with the requested weather variables.
 }
 \description{
@@ -60,7 +60,7 @@ start_date <- "20171028"
 
 # Use default for end data (current system date)
 output <- get_dpird_summaries(
-            station_id = "CL001",
+            station_code = "CL001",
             first = start_date,
             api_key = "YOUR API KEY",
             interval = "yearly",
@@ -72,7 +72,7 @@ start_date <- "20220501"
 end_date <- "20220502"
 
 output <- get_dpird_summaries(
-            station_id = "BI",
+            station_code = "BI",
             first = start_date,
             last = end_date,
             api_key = "YOUR API KEY",
