@@ -11,7 +11,7 @@
 #'  \CRANpkg{ASGS.foyer} must be installed to use this.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} weather \acronym{API}.
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param which_api A `string` value that indicates which API to use.  Defaults
 #'  to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
 #'  and \acronym{DPIRD} weather station networks; "silo" for only stations in

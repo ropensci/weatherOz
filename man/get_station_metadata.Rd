@@ -9,7 +9,7 @@ get_station_metadata(api_key = NULL, which_api = "silo")
 \arguments{
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} weather \acronym{API}.}
+\acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
 \item{which_api}{A \code{string} value that indicates which API to use.  Defaults
 to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})

@@ -25,7 +25,7 @@ the format 'yyyymmdd'.  Defaults to the current system date.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} weather \acronym{API}.}
+\acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
 \item{interval}{A \code{character} string that indicates the time interval to
 summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',

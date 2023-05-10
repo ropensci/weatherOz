@@ -19,7 +19,7 @@
 #'  the format 'yyyymmdd'.  Defaults to the current system date.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} weather \acronym{API}.
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param interval A `character` string that indicates the time interval to
 #'  summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
 #'  'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
