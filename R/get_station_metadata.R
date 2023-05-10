@@ -2,29 +2,24 @@
 #' Get the latest DPIRD and SILO weather station station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
-#'  \acronym{SILO} and \acronym{DPIRD} data sets.
-#'
-#' If \CRANpkg{ASGS.foyer} is installed locally, this function will
-#' automatically check and correct any invalid state values for stations located
-#' in Australia in the \acronym{SILO} data.
-#'
-#'  \CRANpkg{ASGS.foyer} must be installed to use this.
+#'  \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#' @param which_api A `string` value that indicates which API to use.  Defaults
-#'  to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
-#'  and \acronym{DPIRD} weather station networks; "silo" for only stations in
-#'  the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
-#'  network.
+#' @param which_api A `string` value that indicates which \acronym{API} to use.
+#'  Defaults to 'silo'. Valid values are 'all', for both \acronym{SILO}
+#'  (\acronym{BOM}) and \acronym{DPIRD} \acronym{API}s; 'silo' for only stations
+#'  from the \acronym{SILO} \acronym{API}; or 'dpird' for stations from the
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#'  @note \acronym{BOM} does not report the exact date on which stations opened
-#'   or closed, only the year. Therefore the 'start' and 'end' columns will
-#'   indicate January 1 of the year that a station opened or closed for
-#'   \acronym{BOM} stations whereas stations in the \acronym{DPIRD} network
-#'   have the date to the day. For \acronym{BOM} stations that are closed
-#'   for the current year, this indicates that the station closed sometime
-#'   during the current year prior to the request being made.
+#' @note For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
+#'  not report the exact date on which stations opened or closed, only the year.
+#'  Therefore the 'start' and 'end' columns will indicate January 1 of the year
+#'  that a station opened or closed, whereas stations in the \acronym{DPIRD}
+#'  network have the date to the day. For \acronym{BOM} stations that are closed
+#'  for the current year, this indicates that the station closed sometime
+#'  during the current year prior to the request being made. `NA` in the current
+#'  year indicates a station is still open.
 #'
 #' @examplesIf interactive()
 #' # fetch SILO metadata
@@ -43,8 +38,8 @@
 #'   **elev.m**:\tab Station elevation in metres. `numeric`\cr
 #'   **source**:\tab Organisation responsible for the data or station
 #'    maintenance. `character`\cr
-#'   **status**:\tab Station status, one of "open" or "closed". `character`\cr
-#'   **wmo**:\tab World Meteorological Organisation, (acronym{WMO}), number if
+#'   **status**:\tab Station status, one of 'open' or 'closed'. `character`\cr
+#'   **wmo**:\tab World Meteorological Organisation, (\acronym{WMO}), number if
 #'    applicable. `numeric`\cr
 #'   }
 #'
@@ -52,7 +47,7 @@
 #' Station location and other metadata are sourced from the Australian Bureau of
 #' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 #' <http://www.bom.gov.au/climate/cdo/about/site-num.shtml> and
-#' <http://www.bom.gov.au/climate/data/lists_by_element/stations.txt> and
+#' <http://www.bom.gov.au/climate/data/lists_by_element/stations.txt> and the
 #' \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
