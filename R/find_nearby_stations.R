@@ -11,7 +11,7 @@
 #'   (DD) (WGS84).
 #' @param longitude A `numeric` value for longitude expressed as decimal degrees
 #'  (DD) (WGS84).
-#' @param station_code A `string` with the station ID code for the station of
+#' @param station_code A `string` with the station code for the station of
 #' interest. Optional and defaults to `NULL`.
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'  the station or location of interest.  Defaults to 100 km.

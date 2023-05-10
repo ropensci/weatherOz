@@ -29,7 +29,7 @@ during the current year prior to the request being made.}
 a \code{data.table} of \acronym{BOM} weather stations' metadata for
 stations available from \acronym{SILO} with the following columns.
 \tabular{rl}{
-\strong{station_code}:\tab Unique station ID. \code{factor}\cr
+\strong{station_code}:\tab Unique station code. \code{factor}\cr
 \strong{station_name}:\tab Unique station name. \code{character}\cr
 \strong{start}:\tab Date observations start. \code{date}\cr
 \strong{end}:\tab Date observations end. \code{date}\cr

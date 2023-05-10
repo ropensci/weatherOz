@@ -7,10 +7,11 @@
 get_extreme_weather(station_code, type = "all", api_key = NULL)
 }
 \arguments{
-\item{station_code}{A string with the station ID code for the station of interest.}
+\item{station_code}{A string with the station code for the station of
+interest.}
 
 \item{type}{A string with the type of extreme weather to return. Defaults to
-"all"; and can be combination of "frost", "erosion", "heat", or "all".}
+'all'; and can be a combination of 'frost', 'erosion', 'heat', or 'all'.}
 
 \item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
 (\url{https://www.agric.wa.gov.au/web-apis})}
@@ -43,7 +44,7 @@ output <- get_extreme_weather(
 these_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
 
 # Row bind output lists (one for each station)
-# together with `data.table::rbindlist`
+# together with [data.table::rbindlist]
 outputs <- lapply(these_stations,
                   get_extreme_weather,
                   type = "all",

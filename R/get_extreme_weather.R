@@ -7,9 +7,10 @@
 
 #' Get extreme weather event summaries for a single DPIRD station
 #'
-#' @param station_code A string with the station ID code for the station of interest.
+#' @param station_code A string with the station code for the station of
+#'  interest.
 #' @param type A string with the type of extreme weather to return. Defaults to
-#' "all"; and can be combination of "frost", "erosion", "heat", or "all".
+#' 'all'; and can be a combination of 'frost', 'erosion', 'heat', or 'all'.
 #' @param api_key User's \acronym{API} key from \acronym{DPIRD}
 #'  (<https://www.agric.wa.gov.au/web-apis>)
 #'
@@ -38,7 +39,7 @@
 #' these_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
 #'
 #' # Row bind output lists (one for each station)
-#' # together with `data.table::rbindlist`
+#' # together with [data.table::rbindlist]
 #' outputs <- lapply(these_stations,
 #'                   get_extreme_weather,
 #'                   type = "all",
@@ -51,14 +52,19 @@
 
 get_extreme_weather <- function(station_code,
                                 type = "all",
-                                api_key = NULL)
-{
+                                api_key = NULL) {
   if (missing(station_code)) {
     stop(
       call. = FALSE,
-      "Provide a station ID via the `site` argument. It should take a string
+      "Provide a station code via the `site` argument. It should take a string
          e.g., `AN001` for Allanooka station."
     )
+  }
+
+  if (length(station_code) != 1) {
+    stop(call. = FALSE,
+         "Wrong number of sites.\n",
+         "This function only handles one site per query.")
   }
 
   type <- try(match.arg(
@@ -67,12 +73,6 @@ get_extreme_weather <- function(station_code,
     several.ok = TRUE
   ),
   silent = TRUE)
-
-  if (length(station_code) != 1) {
-    stop(call. = FALSE,
-         "Wrong number of sites.\n",
-         "This function only handles one site per query.")
-  }
 
   httr::set_config(httr::config(ssl_verifypeer = 0L))
   api <-

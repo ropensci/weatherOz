@@ -33,7 +33,7 @@
 #' @return a `data.table` of \acronym{BOM} weather stations' metadata for
 #'  stations available from \acronym{SILO} with the following columns.
 #'  \tabular{rl}{
-#'   **station_code**:\tab Unique station ID. `factor`\cr
+#'   **station_code**:\tab Unique station code. `factor`\cr
 #'   **station_name**:\tab Unique station name. `character`\cr
 #'   **start**:\tab Date observations start. `date`\cr
 #'   **end**:\tab Date observations end. `date`\cr
