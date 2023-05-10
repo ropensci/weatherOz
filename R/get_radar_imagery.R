@@ -7,7 +7,7 @@
 #' \acronym{radar} imagery for each location, which are updated approximately
 #' every 6 to 10 minutes by the \acronym{BOM}.  Ported from \pkg{bomrang}.
 #'
-#' @param radar_id `Numeric`. \acronym{BOM} radar \acronym{ID} of interest for
+#' @param radar_id `Numeric`. \acronym{BOM} radar of interest for
 #' which a list of available images will be returned.  Defaults to all images
 #' currently available.
 #'

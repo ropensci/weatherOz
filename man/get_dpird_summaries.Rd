@@ -15,7 +15,7 @@ get_dpird_summaries(
 }
 \arguments{
 \item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
-station \acronym{ID} code(s) for the station(s) of interest.}
+station code(s) for the station(s) of interest.}
 
 \item{first}{A \code{character} string representing the start date of the query in
 the format 'yyyymmdd'.}

@@ -12,7 +12,7 @@
 #'  \acronym{DPIRD} weather station network.
 #'
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
-#'  station \acronym{ID} code(s) for the station(s) of interest.
+#'  station code(s) for the station(s) of interest.
 #' @param first A `character` string representing the start date of the query in
 #'  the format 'yyyymmdd'.
 #' @param last A `character` string representing the start date of the query in

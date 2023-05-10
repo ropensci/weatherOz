@@ -2,7 +2,7 @@
 #' Construct a list of options to pass to the DPIRD API
 #'
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
-#'  station \acronym{ID} code(s) for the station(s) of interest.
+#'  station code(s) for the station(s) of interest.
 #' @param start_date_time A `character` string representing the start date and
 #'  time of the query in the format 'yyyy-mm-dd-hh-mm'. Defaults to 24 hours
 #'  before the current local system time, returning the most recent 24 hour
