@@ -25,8 +25,8 @@ stations available from \acronym{SILO} with the following columns.
 \strong{station_name}:\tab Unique station name. \code{character}\cr
 \strong{start}:\tab Date observations start. \code{date}\cr
 \strong{end}:\tab Date observations end. \code{date}\cr
-\strong{lat}:\tab Latitude in decimal degrees. \code{numeric}\cr
-\strong{lon}:\tab Longitude in decimal degrees. \code{numeric}\cr
+\strong{latitude}:\tab Latitude in decimal degrees. \code{numeric}\cr
+\strong{longitude}:\tab Longitude in decimal degrees. \code{numeric}\cr
 \strong{state}:\tab State in which the station is located. \code{character}\cr
 \strong{elev.m}:\tab Station elevation in metres. \code{numeric}\cr
 \strong{source}:\tab Organisation responsible for the data or station

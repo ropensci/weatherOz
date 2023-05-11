@@ -32,8 +32,8 @@
 #'   **station_name**:\tab Unique station name. `character`\cr
 #'   **start**:\tab Date observations start. `date`\cr
 #'   **end**:\tab Date observations end. `date`\cr
-#'   **lat**:\tab Latitude in decimal degrees. `numeric`\cr
-#'   **lon**:\tab Longitude in decimal degrees. `numeric`\cr
+#'   **latitude**:\tab Latitude in decimal degrees. `numeric`\cr
+#'   **longitude**:\tab Longitude in decimal degrees. `numeric`\cr
 #'   **state**:\tab State in which the station is located. `character`\cr
 #'   **elev.m**:\tab Station elevation in metres. `numeric`\cr
 #'   **source**:\tab Organisation responsible for the data or station
@@ -175,6 +175,12 @@ get_station_metadata <-
     )
   )
 
+  data.table::setnames(
+    bom_stations,
+    old = c("lat", "lon"),
+    new = c("latitude", "longitude")
+  )
+
   silo_stations <-
     find_nearby_stations(
       latitude = -25.5833,
@@ -220,8 +226,6 @@ get_station_metadata <-
     old = c(
       "stationCode",
       "stationName",
-      "latitude",
-      "longitude",
       "altitude",
       "startDate",
       "endDate",
@@ -230,8 +234,6 @@ get_station_metadata <-
     new = c(
       "station_code",
       "station_name",
-      "lat",
-      "lon",
       "elev.m",
       "start",
       "end",
@@ -249,8 +251,8 @@ get_station_metadata <-
       "station_name",
       "start",
       "end",
-      "lat",
-      "lon",
+      "latitude",
+      "longitude",
       "state",
       "elev.m",
       "source",
