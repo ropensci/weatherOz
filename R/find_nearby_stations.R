@@ -31,8 +31,8 @@
 #' @note You can request your own \acronym{API} key from \acronym{DPIRD} for
 #' free by filling out the form found at <https://www.agric.wa.gov.au/web-apis>.
 #'
-#' @examplesIf interactive()
-#'
+#' @examples
+#' \dontrun{
 #' # Query WA only stations and return both DPIRD's and BOM's stations for
 #' # the Northam WA station, returning stations with 50 km of this station
 #' wa_stn <- find_nearby_stations(
@@ -49,6 +49,7 @@
 #'   distance_km = 200,
 #'   which_api = "SILO"
 #' )
+#' }
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @export
