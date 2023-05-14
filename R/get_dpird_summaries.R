@@ -267,8 +267,40 @@ get_dpird_summaries <- function(station_code,
     which_values = which_values,
     group = group,
     include_closed = include_closed,
-    api_key = api_key,
+    api_key = api_key
   )
+
+  # Define the query URL by OS due to issues with WindowsOS
+  if (Sys.info()[["sysname"]] == "Windows") {
+    base_url <- "https://api.agric.wa.gov.au/v2/weather/stations/summaries/"
+  } else {
+    base_url <- "https://api.agric.wa.gov.au/v2/weather/stations/summaries/"
+  }
+
+  # set base URL according to interval
+  if (interval == "15min") {
+    base_url <- paste0(base_url, "15min")
+  } else if (interval == "30min") {
+    base_url <- paste0(base_url, "30min")
+  } else if (interval == "hourly") {
+    base_url <- paste0(base_url, "hourly")
+  } else if (interval == "daily") {
+    base_url <- paste0(base_url, "daily")
+  } else if (interval == "monthly") {
+    base_url <- paste0(base_url, "monthly")
+  } else if (interval == "yearly") {
+    base_url <- paste0(base_url, "yearly")
+  }
+
+  out <- .query_dpird_api(.base_url = base_url,
+                          .query_list = query_list,
+                          .limit = 1000)
+  .set_snake_case_names(out)
+  out[, date_time := hour_sequence]
+  out[, station_code := station_code]
+  data.table::setkey(x = out, cols = station_code)
+  data.table::setcolorder(out, c("station_code", "date_time"))
+  return(out)
 
 }
 

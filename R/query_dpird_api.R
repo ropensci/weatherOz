@@ -53,8 +53,8 @@
   } else if (interval %in% c("15min", "30min", "hourly")) {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(first, "%Y-%m-%d"),
-      endDateTime = format(last + lubridate::days(1), "%Y-%m-%d"),
+      startDateTime = format(start_date, "%Y-%m-%d"),
+      endDateTime = format(end_date + lubridate::days(1), "%Y-%m-%d"),
       interval = interval,
       select = which_values,
       group = all,
@@ -64,8 +64,8 @@
   } else if (interval == "daily") {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(first, "%Y-%m-%d"),
-      endDateTime = format(last, "%Y-%m-%d"),
+      startDateTime = format(start_date, "%Y-%m-%d"),
+      endDateTime = format(end_date, "%Y-%m-%d"),
       select = which_values,
       group = all,
       includeClosed = include_closed,
@@ -74,12 +74,12 @@
   } else if (interval == "monthly") {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(first, "%Y-%"),
-      endDateTime = format(last, "%Y-%m"),
+      startDateTime = format(start_date, "%Y-%"),
+      endDateTime = format(end_date, "%Y-%m"),
       limit = ceiling(as.double(
         difftime(
-          format(last, "%Y-%m-%d"),
-          format(first, "%Y-%m-%d"),
+          format(end_date, "%Y-%m-%d"),
+          format(start_date, "%Y-%m-%d"),
           units = "days"
         ) / 365
       ) * 12),
@@ -91,8 +91,8 @@
   }  else {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(first, "%Y"),
-      endDateTime = format(last, "%Y"),
+      startDateTime = format(start_date, "%Y"),
+      endDateTime = format(end_date, "%Y"),
       select = which_values,
       group = all,
       includeClosed = include_closed,
@@ -132,7 +132,7 @@
   # check to see if request failed or succeeded
   # - a custom approach this time combining status code,
   #   explanation of the code, and message from the server
-  # check response from first item in list, should be same across all
+  # check response from start_date item in list, should be same across all
   if (response[[1]]$status_code > 201) {
     mssg <- jsonlite::fromJSON(response[[1]]$parse("UTF-8"))$message
     x <- response$status_http()
