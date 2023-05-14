@@ -7,10 +7,10 @@
 #'
 #' @param state Australian state or territory as full name or postal code.
 #'  Fuzzy string matching via [base::agrep()] is done.  Defaults to
-#'  \dQuote{AUS} returning all state bulletins, see Details for more.
+#'  "AUS" returning all state bulletins, see Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using `AUS`.
+#' or all using 'AUS'.
 #'  \describe{
 #'    \item{ACT}{Australian Capital Territory (will return NSW)}
 #'    \item{NSW}{New South Wales}
@@ -25,7 +25,7 @@
 #'
 #' @return
 #'  A data frame as a `weatherOz_tbl` object (inherits and is fully compatible
-#'  with [data.table::data.table()]) of Australia \acronym{BOM} agricultural
+#'  with [data.table::data.table]) of Australia \acronym{BOM} agricultural
 #'  bulletin information.
 #'
 #' @note Data and Information Use

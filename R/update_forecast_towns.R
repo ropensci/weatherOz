@@ -20,7 +20,7 @@
 #'
 #' @references
 #' Data are sourced from: Australian Bureau of Meteorology (\acronym{BOM})
-#' webpage, \dQuote{Weather Data Services},
+#' webpage, "Weather Data Services",
 #' <http://www.bom.gov.au/catalogue/data-feeds.shtml>.
 #'
 #' @family bomrang-ported

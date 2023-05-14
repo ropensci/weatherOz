@@ -13,14 +13,15 @@
 #'  decipher many date and time formats but prefers ISO8601.
 #' @param minutes An `integer` value that provides the number of observations to
 #'  be returned. Defaults to 1440 minutes for 24 hours of observations.
-#' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, see <https://www.agric.wa.gov.au/web-apis> for the
-#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param which_values A `vector` of weather values to query from the
 #'  \acronym{API}. See **Available Values** section for valid available codes.
-#'  Defaults to all available values.
+#'  Defaults to all available values, "all".
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values:
+#' ## Available Values:
+#' * all (includes all of the following),
 #' * airTemperature,
 #' * dateTime,
 #' * dewPoint,
@@ -38,8 +39,8 @@
 #'  Universal Time 'UTC' returned by the \acronym{API} to Australian Western
 #'  Standard Time 'AWST'.
 #'
-#' @return a `data.table` with 'station_code' and date interval queried together
-#'  with the requested weather variables.
+#' @return a [data.table::data.table] with 'station_code' and date interval
+#'  queried together with the requested weather variables.
 #'
 #' @examples
 #' \dontrun{
@@ -60,8 +61,8 @@ get_dpird_minute <- function(station_code,
                              start_date_time = lubridate::now() -
                                lubridate::hours(24L),
                              minutes = 1440L,
-                             api_key,
-                             which_values) {
+                             which_values = "all",
+                             api_key) {
   if (missing(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
@@ -75,23 +76,15 @@ get_dpird_minute <- function(station_code,
     )
   }
 
-  all_values <- c(
-    "airTemperature",
-    "dateTime",
-    "dewPoint",
-    "rainfall",
-    "relativeHumidity",
-    "soilTemperature",
-    "solarIrradiance",
-    "wetBulb",
-    "wind",
-    "windAvgSpeed",
-    "windMaxSpeed",
-    "windMinSpeed"
-  )
+  if (which_values != "all" & which_values %notin% dpird_minute_values) {
+    stop(
+      stop(call. = FALSE,
+           "You have specified a value not found in the 'API'.")
+    )
+  }
 
-  if (missing(which_values)) {
-    which_values <- all_values
+  if (which_values == "all") {
+    which_values <- dpird_minute_values
   }
 
   # TODO: add feedback for the user including which values are invalid
@@ -112,6 +105,10 @@ get_dpird_minute <- function(station_code,
          "The API only supports queries for a maximum 24hr interval.")
   }
 
+  # the `station_code` is null here because we assemble it next due to issues
+  # Windows accessing the API properly at the proper URL
+  # TODO: Figure out how to fix this
+
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
@@ -121,6 +118,7 @@ get_dpird_minute <- function(station_code,
     interval = "minute",
     which_values = which_values,
     limit = total_recs_req,
+    include_closed = NULL,
     group = NULL
   )
 

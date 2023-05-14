@@ -37,8 +37,8 @@
 #'  for the request. The query will return an error if a valid email address is
 #'  not provided.
 #'
-#' @return A `data.table` containing the retrieved data from the \acronym{SILO}
-#'  \acronym{API}.
+#' @return A [data.table::data.table] containing the retrieved data from the
+#'  \acronym{SILO} \acronym{API}.
 #'
 #' @family SILO
 #'

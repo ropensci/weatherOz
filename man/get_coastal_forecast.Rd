@@ -9,11 +9,11 @@ get_coastal_forecast(state = "AUS")
 \arguments{
 \item{state}{Australian state or territory as full name or postal code.
 Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to
-\dQuote{AUS} returning all state forecasts, see details for further
+"AUS" returning all state forecasts, see details for further
 information.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} of an Australia \acronym{BOM} Coastal Waters
+A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{BOM} Coastal Waters
 Forecast.
 }
 \description{
@@ -22,7 +22,7 @@ of the forecast regions for a specified state or region.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
-or all using \code{AUS}.
+or all using 'AUS'.
 \describe{
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}

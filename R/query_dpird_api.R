@@ -1,5 +1,9 @@
 
-#' Construct a list of options to pass to the DPIRD API
+#' Construct a list of options to pass to the DPIRD API for summary and minute data
+#'
+#' Note that `get_extreme_weather()` uses it's own process to build queries and
+#' query the API in it's own function definition.  This only covers the standard
+#' weather data from stations.
 #'
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
 #'  station code(s) for the station(s) of interest.
@@ -12,11 +16,8 @@
 #'  query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to the current system
 #'  date rounded to the nearest minute.  This function does its best to
 #'  decipher many date and time formats but prefers ISO8601.
-#' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#' @param interval Interval to use, one of "minute", "15min", "30min", "hourly",
-#' "daily", "monthly" or "yearly".
+#' @param interval Interval to use, one of 'minute', '15min', '30min', 'hourly',
+#' 'daily', 'monthly' or 'yearly'.
 #' @param limit The pagination limit parameter restricts the number of entries
 #'  returned.
 #' @param which_values Values to query from the API
@@ -26,6 +27,9 @@
 #'  list in use by the weather.agric.wa.gov.au and 'rtd' returns stations with
 #'  scientifically complete datasets. Available values: 'api', 'all', 'web' and
 #'  'rtd'.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @return A `list` object of values to be passed to a [crul] object to query
 #'  the \acronym{DPIRD} Weather 2.0 \acronym{API}.
@@ -34,18 +38,17 @@
 .build_query <- function(station_code,
                          start_date_time,
                          end_date_time,
-                         api_key,
                          interval,
-                         limit,
                          which_values,
-                         group) {
+                         group,
+                         include_closed,
+                         api_key) {
   if (interval == "minute") {
     query_list <- list(
       startDateTime = start_date_time,
       endDateTime = end_date_time,
       api_key = api_key,
-      select = paste(which_values, collapse = ","),
-      limit = 1000
+      select = paste(which_values, collapse = ",")
     )
   } else if (interval %in% c("15min", "30min", "hourly")) {
     query_list <- list(
@@ -54,8 +57,8 @@
       endDateTime = format(last + lubridate::days(1), "%Y-%m-%d"),
       interval = interval,
       select = which_values,
-      limit = 1000,
       group = all,
+      includeClosed = include_closed,
       api_key = api_key
     )
   } else if (interval == "daily") {
@@ -64,8 +67,8 @@
       startDateTime = format(first, "%Y-%m-%d"),
       endDateTime = format(last, "%Y-%m-%d"),
       select = which_values,
-      limit = 1000,
       group = all,
+      includeClosed = include_closed,
       api_key = api_key
     )
   } else if (interval == "monthly") {
@@ -82,6 +85,7 @@
       ) * 12),
       select = which_values,
       group = all,
+      includeClosed = include_closed,
       api_key = api_key
     )
   }  else {
@@ -90,8 +94,8 @@
       startDateTime = format(first, "%Y"),
       endDateTime = format(last, "%Y"),
       select = which_values,
-      limit = 1000,
       group = all,
+      includeClosed = include_closed,
       api_key = api_key
     )
   }

@@ -13,7 +13,7 @@
 #' file(s) to parse. See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using `AUS`.
+#' or all using 'AUS'.
 #'  \describe{
 #'    \item{ACT}{Australian Capital Territory (will return NSW)}
 #'    \item{NSW}{New South Wales}
@@ -32,7 +32,7 @@
 #' same fashion as [get_precis_forecast()], provided that the files
 #' are all present in the directory.
 #'
-#' @return A [data.table::data.table()] of Australia \acronym{BOM}
+#' @return A [data.table::data.table] of Australia \acronym{BOM}
 #'  agricultural bulletin information.
 #'
 #' @examplesIf interactive()

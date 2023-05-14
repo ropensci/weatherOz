@@ -15,7 +15,7 @@ done.}
 forecast file(s) to parse. See Details for more.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} of an Australia \acronym{BOM}
+A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{BOM}
 Coastal Waters Forecast.
 }
 \description{
@@ -24,7 +24,7 @@ and return a data frame for a specified state or territory or all Australia.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
-or all using \code{AUS}.
+or all using 'AUS'.
 \describe{
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}

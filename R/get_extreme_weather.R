@@ -2,25 +2,102 @@
 #
 # This file is part of the R-package weatherOz
 #
-# Copyright (C) 2022 DPIRD
+# Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
 #' Get extreme weather event summaries for a single DPIRD station
 #'
-#' @param station_code A string with the station code for the station of
-#'  interest.
-#' @param type A string with the type of extreme weather to return. Defaults to
-#' 'all'; and can be a combination of 'frost', 'erosion', 'heat', or 'all'.
-#' @param api_key User's \acronym{API} key from \acronym{DPIRD}
-#'  (<https://www.agric.wa.gov.au/web-apis>)
+#' @param station_code A `character` string with the station code for the
+#'  station of interest.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#' @param which_values A `character` string with the type of extreme weather to
+#'  return.  See **Available Values** for a full list of valid values.  Defaults
+#'  to 'all', returning the full list of values unless otherwise specified.
+#' @param group Filter the stations to a predefined group. These need to be
+#'  supported on the back end; 'all' returns all stations, 'api' returns the
+#'  default stations in use with the \acronym{API}, 'web' returns the list in
+#'  use by the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations
+#'  with scientifically complete data sets. Defaults to 'rtd'.
+#' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
+#'  `TRUE` the query returns closed and open stations. Closed stations are those
+#'  that have been turned off and no longer report data.  They may be useful for
+#'  historical purposes.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @return a `data.table` of one row with 'station_code', 'station_name',
-#' 'latitude', 'longitude', 'dateTime' of the query and the extreme weather
-#' information according to the type(s) selected.
+#'
+#' ## Available Values for `which_values`
+#'
+#' * all (returns all of the following values),
+#' * erosionCondition,
+#' * erosionConditionLast7Days,
+#' * erosionConditionLast7DaysDays,
+#' * erosionConditionLast7DaysMinutes,
+#' * erosionConditionLast14Days,
+#' * erosionConditionLast14DaysDays,
+#' * erosionConditionLast14DaysMinutes,
+#' * erosionConditionMonthToDate,
+#' * erosionConditionMonthToDateDays,
+#' * erosionConditionMonthToDateMinutes,
+#' * erosionConditionMonthToDateStartTime,
+#' * erosionConditionSince12AM,
+#' * erosionConditionSince12AMMinutes,
+#' * erosionConditionSince12AMStartTime,
+#' * erosionConditionYearToDate,
+#' * erosionConditionYearToDateDays,
+#' * erosionConditionYearToDateMinutes,
+#' * erosionConditionYearToDateStartTime,
+#' * frostCondition,
+#' * frostConditionLast7Days,
+#' * frostConditionLast7DaysDays,
+#' * frostConditionLast7DaysMinutes,
+#' * frostConditionLast14Days,
+#' * frostConditionLast14DaysDays,
+#' * frostConditionLast14DaysMinutes,
+#' * frostConditionMonthToDate,
+#' * frostConditionMonthToDateDays,
+#' * frostConditionMonthToDateMinutes,
+#' * frostConditionMonthToDateStartTime,
+#' * frostConditionSince9AM,
+#' * frostConditionSince9AMMinutes,
+#' * frostConditionSince9AMStartTime,
+#' * frostConditionTo9AM,
+#' * frostConditionTo9AMMinutes,
+#' * frostConditionTo9AMStartTime,
+#' * frostConditionYearToDate,
+#' * frostConditionYearToDate,
+#' * frostConditionYearToDateMinutes,
+#' * frostConditionYearToDateStartTime,
+#' * heatCondition,
+#' * heatConditionLast7Days,
+#' * heatConditionLast7DaysDays,
+#' * heatConditionLast7DaysMinutes,
+#' * heatConditionLast14Days,
+#' * heatConditionLast14DaysDays,
+#' * heatConditionLast14DaysMinutes,
+#' * heatConditionMonthToDate,
+#' * heatConditionMonthToDateDays,
+#' * heatConditionMonthToDateMinutes,
+#' * heatConditionMonthToDateStartTime,
+#' * heatConditionSince12AM,
+#' * heatConditionSince12AMMinutes,
+#' * heatConditionSince12AMStartTime,
+#' * heatConditionYearToDate,
+#' * heatConditionYearToDateDays,
+#' * heatConditionYearToDateMinutes, and
+#' * heatConditionYearToDateStartTime
+#'
+#' @return a [data.table::data.table] of one row with 'station_code',
+#'  'station_name', 'latitude', 'longitude', 'date_time' of the query and the
+#'  extreme weather information according to the value(s) selected.
 #'
 #' @family DPIRD
 #'
-#' @examplesIf interactive()
+#' @examples
+#' \dontrun{
 #' # You must have an DPIRD API key to proceed
 #' my_key <- rstudioapi::askForSecret()
 #'
@@ -46,12 +123,17 @@
 #'                   api_key = my_key)
 #'
 #' df <- data.table::rbindlist(outputs)
+#' }
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
+#'  Sparks, \email{adam.sparks@@dpird.wa.gov.au}.
+#'
 #' @export
 
 get_extreme_weather <- function(station_code,
-                                type = "all",
+                                which_values = "all",
+                                group = "rtd",
+                                include_closed = FALSE,
                                 api_key = NULL) {
   if (missing(station_code)) {
     stop(
@@ -61,117 +143,41 @@ get_extreme_weather <- function(station_code,
     )
   }
 
-  if (length(station_code) != 1) {
+  if (length(station_code) != 1L) {
     stop(call. = FALSE,
          "Wrong number of sites.\n",
          "This function only handles one site per query.")
   }
 
-  type <- try(match.arg(
-    type,
-    choices = c("frost", "erosion", "heat", "all"),
-    several.ok = TRUE
-  ),
-  silent = TRUE)
-
-  httr::set_config(httr::config(ssl_verifypeer = 0L))
-  api <-
-    paste0(
-      "https://api.dpird.wa.gov.au/v2/weather/stations/extreme-conditions?",
-      "stationCode=",
-      station_code,
-      "&offset=0",
-      "&limit=1",
-      "&group=all",
-      "&includeClosed=true",
-      "&api_key=",
-      api_key
-    )
-
-  api_data <- jsonlite::fromJSON(url(api))
-  out_data <- api_data$collection[, c("stationCode",
-                                      "stationName",
-                                      "latitude",
-                                      "longitude",
-                                      "dateTime")]
-  nrec <- nrow(out_data)
-
-  if (any(c("erosion", "all") %in% type)) {
-    erosion <- api_data$collection$erosionCondition
-    out_erosion <- data.frame(
-      erosion$since12AM$minutes,
-      erosion$since12AM$startTime,
-      erosion$last7Days$minutes,
-      erosion$last7Days$days,
-      erosion$last14Days$minutes,
-      erosion$last14Days$days,
-      erosion$monthToDate$minutes,
-      erosion$monthToDate$startTime,
-      erosion$monthToDate$days,
-      erosion$yearToDate$minutes,
-      erosion$yearToDate$startTime,
-      erosion$yearToDate$days
-    )
-
-    names(out_erosion) <- .strcap(x = names(out_erosion))
-
-  } else {
-    out_erosion <- data.table::data.table()[1:nrec,]
+  if (which_values != "all" &
+      which_values %notin% dpird_extreme_weather_values) {
+      stop(call. = FALSE,
+           "You have specified a value not found in the 'API'.")
   }
 
-  if (any(c("frost", "all") %in% type)) {
-    frost <- api_data$collection$frostCondition
-    out_frost <- data.frame(
-      frost$since9AM$minutes,
-      frost$since9AM$startTime,
-      frost$to9AM$minutes,
-      frost$to9AM$startTime,
-      frost$last7Days$minutes,
-      frost$last7Days$days,
-      frost$last14Days$minutes,
-      frost$last14Days$days,
-      frost$monthToDate$minutes,
-      frost$monthToDate$startTime,
-      frost$monthToDate$days,
-      frost$yearToDate$minutes,
-      frost$yearToDate$startTime,
-      frost$yearToDate$days
-    )
-
-    names(out_frost) <- .strcap(x = names(out_frost))
-
-  } else {
-    out_frost <- data.table::data.table()[1:nrec,]
+  if (which_values == "all") {
+    which_values <- dpird_extreme_weather_values
   }
 
-  if (any(c("heat", "all") %in% type)) {
-    heat <- api_data$collection$heatCondition
-    out_heat <- data.frame(
-      heat$since12AM$minutes,
-      heat$since12AM$startTime,
-      heat$last7Days$minutes,
-      heat$last7Days$days,
-      heat$last14Days$minutes,
-      heat$last14Days$days,
-      heat$monthToDate$minutes,
-      heat$monthToDate$startTime,
-      heat$monthToDate$days,
-      heat$yearToDate$minutes,
-      heat$yearToDate$startTime,
-      heat$yearToDate$days
-    )
+  values <- c("stationCode", "dateTime", "latitude", "longitude", which_values)
 
-    names(out_heat) <- .strcap(x = names(out_heat))
+  query_list <- list(
+    stationCode = station_code,
+    offset = 0L,
+    select = paste(values, collapse = ","),
+    group = group,
+    includeClosed = include_closed,
+    api_key = api_key
+  )
 
-  } else {
-    out_heat <- data.table::data.table()[1:nrec,]
-  }
+  out <- .query_dpird_api(.base_url =
+                     "https://api.dpird.wa.gov.au/v2/weather/stations/extreme-conditions",
+                   .query_list = query_list,
+                   .limit = 1L)
+  .set_snake_case_names(out)
 
-  # return final data
-  out <- data.table::data.table(out_data, out_erosion, out_frost, out_heat)
-  out <- .rename_cols(out)
-  names(out) <- gsub("[.]", "_", names(out))
-  names(out) <- gsub(" ", "_", names(out))
-
-  return(data.table::setDT(out))
+  out[, station_code := station_code]
+  data.table::setkey(x = out, cols = station_code)
+  data.table::setcolorder(out, c("station_code", "date_time"))
+  return(out)
 }

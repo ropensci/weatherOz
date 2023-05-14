@@ -8,12 +8,12 @@ get_precis_forecast(state = "AUS")
 }
 \arguments{
 \item{state}{Australian state or territory as full name or postal code.
-Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to
-\dQuote{AUS} returning all state bulletins, see Details for more.}
+Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to 'AUS'
+returning all state bulletins, see Details for more.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} of an Australia \acronym{BOM} précis
-seven day forecasts for \acronym{BOM} selected towns.
+A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{BOM} précis seven day
+forecasts for \acronym{BOM} selected towns.
 }
 \description{
 Fetch the \acronym{BOM} daily précis forecast and return a data frame of the
@@ -22,7 +22,7 @@ seven-day town forecasts for a specified state or territory.  Ported from
 }
 \details{
 Allowed state and territory postal codes, only one state per request
-or all using \code{AUS}.
+or all using 'AUS'.
 \describe{
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}

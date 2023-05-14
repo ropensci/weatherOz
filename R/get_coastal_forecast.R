@@ -6,11 +6,11 @@
 #'
 #' @param state Australian state or territory as full name or postal code.
 #'  Fuzzy string matching via [base::agrep()] is done.  Defaults to
-#'  \dQuote{AUS} returning all state forecasts, see details for further
+#'  "AUS" returning all state forecasts, see details for further
 #'   information.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using `AUS`.
+#' or all using 'AUS'.
 #'  \describe{
 #'    \item{ACT}{Australian Capital Territory (will return NSW)}
 #'    \item{NSW}{New South Wales}
@@ -24,7 +24,7 @@
 #'  }
 #'
 #' @return
-#' A [data.table::data.table()] of an Australia \acronym{BOM} Coastal Waters
+#' A [data.table::data.table] of an Australia \acronym{BOM} Coastal Waters
 #' Forecast.
 #'
 #' @examplesIf interactive()

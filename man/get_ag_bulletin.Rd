@@ -9,11 +9,11 @@ get_ag_bulletin(state = "AUS")
 \arguments{
 \item{state}{Australian state or territory as full name or postal code.
 Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to
-\dQuote{AUS} returning all state bulletins, see Details for more.}
+"AUS" returning all state bulletins, see Details for more.}
 }
 \value{
 A data frame as a \code{weatherOz_tbl} object (inherits and is fully compatible
-with \code{\link[data.table:data.table]{data.table::data.table()}}) of Australia \acronym{BOM} agricultural
+with \link[data.table:data.table]{data.table::data.table}) of Australia \acronym{BOM} agricultural
 bulletin information.
 }
 \description{
@@ -22,7 +22,7 @@ data frame.  Ported from \pkg{bomrang}.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
-or all using \code{AUS}.
+or all using 'AUS'.
 \describe{
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}

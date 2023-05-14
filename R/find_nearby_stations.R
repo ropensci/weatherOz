@@ -17,16 +17,16 @@
 #'  the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `string` value that is the user's \acronym{API} key from
 #'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
-#'  when `which_api` is "DPIRD" or "all".
+#'  when `which_api` is 'DPIRD' or 'all'.
 #' @param which_api A `string` value that indicates which API to use.  Defaults
-#'  to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
+#'  to 'silo'. Valid values are 'all', for both \acronym{SILO} (\acronym{BOM})
 #'  and \acronym{DPIRD} weather station networks; "silo" for only stations in
-#'  the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
+#'  the \acronym{SILO} network; or 'dpird' for stations in the \acronym{DPIRD}
 #'  network.
 #'
-#' @return a `data.table` with 'station_code', 'station_name', 'latitude',
-#'  'longitude', 'elevation', 'state', 'owner', and 'distance'.  Data are sorted
-#'  by increasing distance from station or location of interest.
+#' @return a [data.table::data.table] with 'station_code', 'station_name',
+#'  'latitude', 'longitude', 'elevation', 'state', 'owner', and 'distance'.
+#'  Data are sorted by increasing distance from station or location of interest.
 #'
 #' @note You can request your own \acronym{API} key from \acronym{DPIRD} for
 #' free by filling out the form found at <https://www.agric.wa.gov.au/web-apis>.

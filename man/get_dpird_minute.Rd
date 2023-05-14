@@ -8,8 +8,8 @@ get_dpird_minute(
   station_code,
   start_date_time = lubridate::now() - lubridate::hours(24L),
   minutes = 1440L,
-  api_key,
-  which_values
+  which_values = "all",
+  api_key
 )
 }
 \arguments{
@@ -25,30 +25,16 @@ decipher many date and time formats but prefers ISO8601.}
 \item{minutes}{An \code{integer} value that provides the number of observations to
 be returned. Defaults to 1440 minutes for 24 hours of observations.}
 
-\item{api_key}{A \code{character} string containing your \acronym{API} key from
-\acronym{DPIRD}, see \url{https://www.agric.wa.gov.au/web-apis} for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.}
-
 \item{which_values}{A \code{vector} of weather values to query from the
 \acronym{API}. See \strong{Available Values} section for valid available codes.
-Defaults to all available values.}
-}
-\value{
-a \code{data.table} with 'station_code' and date interval queried together
-with the requested weather variables.
-}
-\description{
-Nicely formatted minute weather station data from the \acronym{DPIRD} weather
-station network over a maximum 24 hour period.
-}
-\note{
-Please note this function converts date-time columns from Coordinated
-Universal Time 'UTC' returned by the \acronym{API} to Australian Western
-Standard Time 'AWST'.
-}
-\section{Available Values}{
+Defaults to all available values, "all".}
 
+\item{api_key}{A \code{character} string containing your \acronym{API} key from
+\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
+\acronym{DPIRD} Weather 2.0 \acronym{API}.
+\subsection{Available Values:}{
 \itemize{
+\item all (includes all of the following),
 \item airTemperature,
 \item dateTime,
 \item dewPoint,
@@ -62,8 +48,21 @@ Standard Time 'AWST'.
 \item windMaxSpeed, and
 \item windMinSpeed
 }
+}}
 }
-
+\value{
+a \link[data.table:data.table]{data.table::data.table} with 'station_code' and date interval
+queried together with the requested weather variables.
+}
+\description{
+Nicely formatted minute weather station data from the \acronym{DPIRD} weather
+station network over a maximum 24 hour period.
+}
+\note{
+Please note this function converts date-time columns from Coordinated
+Universal Time 'UTC' returned by the \acronym{API} to Australian Western
+Standard Time 'AWST'.
+}
 \examples{
 \dontrun{
 library(lubridate)

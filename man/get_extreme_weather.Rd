@@ -4,28 +4,109 @@
 \alias{get_extreme_weather}
 \title{Get extreme weather event summaries for a single DPIRD station}
 \usage{
-get_extreme_weather(station_code, type = "all", api_key = NULL)
+get_extreme_weather(
+  station_code,
+  which_values = "all",
+  group = "rtd",
+  include_closed = FALSE,
+  api_key = NULL
+)
 }
 \arguments{
-\item{station_code}{A string with the station code for the station of
-interest.}
+\item{station_code}{A \code{character} string with the station code for the
+station of interest.}
 
-\item{type}{A string with the type of extreme weather to return. Defaults to
-'all'; and can be a combination of 'frost', 'erosion', 'heat', or 'all'.}
+\item{which_values}{A \code{character} string with the type of extreme weather to
+return.  See \strong{Available Values} for a full list of valid values.  Defaults
+to 'all', returning the full list of values unless otherwise specified.}
 
-\item{api_key}{User's \acronym{API} key from \acronym{DPIRD}
-(\url{https://www.agric.wa.gov.au/web-apis})}
+\item{group}{Filter the stations to a predefined group. These need to be
+supported on the back end; 'all' returns all stations, 'api' returns the
+default stations in use with the \acronym{API}, 'web' returns the list in
+use by the \url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations
+with scientifically complete data sets. Defaults to 'rtd'.}
+
+\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}. If set to
+\code{TRUE} the query returns closed and open stations. Closed stations are those
+that have been turned off and no longer report data.  They may be useful for
+historical purposes.}
+
+\item{api_key}{A \code{character} string containing your \acronym{API} key from
+\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
+\acronym{DPIRD} Weather 2.0 \acronym{API}.
+\subsection{Available Values for \code{which_values}}{
+\itemize{
+\item all (returns all of the following values),
+\item erosionCondition,
+\item erosionConditionLast7Days,
+\item erosionConditionLast7DaysDays,
+\item erosionConditionLast7DaysMinutes,
+\item erosionConditionLast14Days,
+\item erosionConditionLast14DaysDays,
+\item erosionConditionLast14DaysMinutes,
+\item erosionConditionMonthToDate,
+\item erosionConditionMonthToDateDays,
+\item erosionConditionMonthToDateMinutes,
+\item erosionConditionMonthToDateStartTime,
+\item erosionConditionSince12AM,
+\item erosionConditionSince12AMMinutes,
+\item erosionConditionSince12AMStartTime,
+\item erosionConditionYearToDate,
+\item erosionConditionYearToDateDays,
+\item erosionConditionYearToDateMinutes,
+\item erosionConditionYearToDateStartTime,
+\item frostCondition,
+\item frostConditionLast7Days,
+\item frostConditionLast7DaysDays,
+\item frostConditionLast7DaysMinutes,
+\item frostConditionLast14Days,
+\item frostConditionLast14DaysDays,
+\item frostConditionLast14DaysMinutes,
+\item frostConditionMonthToDate,
+\item frostConditionMonthToDateDays,
+\item frostConditionMonthToDateMinutes,
+\item frostConditionMonthToDateStartTime,
+\item frostConditionSince9AM,
+\item frostConditionSince9AMMinutes,
+\item frostConditionSince9AMStartTime,
+\item frostConditionTo9AM,
+\item frostConditionTo9AMMinutes,
+\item frostConditionTo9AMStartTime,
+\item frostConditionYearToDate,
+\item frostConditionYearToDate,
+\item frostConditionYearToDateMinutes,
+\item frostConditionYearToDateStartTime,
+\item heatCondition,
+\item heatConditionLast7Days,
+\item heatConditionLast7DaysDays,
+\item heatConditionLast7DaysMinutes,
+\item heatConditionLast14Days,
+\item heatConditionLast14DaysDays,
+\item heatConditionLast14DaysMinutes,
+\item heatConditionMonthToDate,
+\item heatConditionMonthToDateDays,
+\item heatConditionMonthToDateMinutes,
+\item heatConditionMonthToDateStartTime,
+\item heatConditionSince12AM,
+\item heatConditionSince12AMMinutes,
+\item heatConditionSince12AMStartTime,
+\item heatConditionYearToDate,
+\item heatConditionYearToDateDays,
+\item heatConditionYearToDateMinutes, and
+\item heatConditionYearToDateStartTime
+}
+}}
 }
 \value{
-a \code{data.table} of one row with 'station_code', 'station_name',
-'latitude', 'longitude', 'dateTime' of the query and the extreme weather
-information according to the type(s) selected.
+a \link[data.table:data.table]{data.table::data.table} of one row with 'station_code',
+'station_name', 'latitude', 'longitude', 'date_time' of the query and the
+extreme weather information according to the value(s) selected.
 }
 \description{
 Get extreme weather event summaries for a single DPIRD station
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
 # You must have an DPIRD API key to proceed
 my_key <- rstudioapi::askForSecret()
 
@@ -51,7 +132,8 @@ outputs <- lapply(these_stations,
                   api_key = my_key)
 
 df <- data.table::rbindlist(outputs)
-\dontshow{\}) # examplesIf}
+}
+
 }
 \seealso{
 Other DPIRD: 
@@ -59,6 +141,7 @@ Other DPIRD:
 \code{\link{get_dpird_summaries}()}
 }
 \author{
-Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H.
+Sparks, \email{adam.sparks@dpird.wa.gov.au}.
 }
 \concept{DPIRD}

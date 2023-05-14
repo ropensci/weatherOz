@@ -15,7 +15,7 @@ done.}
 file(s) to parse. See Details for more.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} of Australia \acronym{BOM} précis
+A \link[data.table:data.table]{data.table::data.table} of Australia \acronym{BOM} précis
 seven day forecasts for \acronym{BOM} selected towns.
 }
 \description{
@@ -25,7 +25,7 @@ territory or all Australia.  Ported from \pkg{bomrang}.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
-or all using \code{AUS}.
+or all using 'AUS'.
 \describe{
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}

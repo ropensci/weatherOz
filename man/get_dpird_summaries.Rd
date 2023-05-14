@@ -6,42 +6,147 @@
 \usage{
 get_dpird_summaries(
   station_code,
-  first,
-  last = Sys.Date(),
-  api_key,
+  start_date,
+  end_date = Sys.Date(),
   interval = "daily",
-  which_vars = "all"
+  which_values = "all",
+  group = "rtd",
+  include_closed = FALSE,
+  api_key
 )
 }
 \arguments{
 \item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
 station code(s) for the station(s) of interest.}
 
-\item{first}{A \code{character} string representing the start date of the query in
-the format 'yyyymmdd'.}
+\item{start_date}{A \code{character} string representing the beginning of the
+range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+inclusive of this range.}
 
-\item{last}{A \code{character} string representing the start date of the query in
-the format 'yyyymmdd'.  Defaults to the current system date.}
-
-\item{api_key}{A \code{character} string containing your \acronym{API} key from
-\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.}
+\item{end_date}{A \code{character} string representing the end of the range query
+in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
+range.  Defaults to the current system date.}
 
 \item{interval}{A \code{character} string that indicates the time interval to
 summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
 'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
-covered will be midnight to midnight, with the last time interval being
+covered will be midnight to midnight, with the end_date time interval being
 before midnight - hour/minute values are for the end of the time period.
 Data for shorter intervals ('15min', '30min') are available from January of
 the previous year.}
 
-\item{which_vars}{A \code{character} string selecting the desired weather summary.
-Defaults to 'all'.  Can be one of 'all', 'rain', 'wind', 'temp', 'soil' or
-'erosion'.}
+\item{which_values}{A \code{character} string with the type of summarised weather
+to return.  See \strong{Available Values} for a full list of valid values.
+Optional, as you may specify a \code{value_group} and query several related
+values or all types at once.  Defaults to 'all' with all values being
+returned.}
+
+\item{group}{Filter the stations to a predefined group. These need to be
+supported on the back end; 'all' returns all stations, 'api' returns the
+default stations in use with the \acronym{API}, 'web' returns the list in
+use by the \url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations
+with scientifically complete data sets. Defaults to 'rtd'.}
+
+\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}. If set to
+\code{TRUE} the query returns closed and open stations. Closed stations are those
+that have been turned off and no longer report data. They may be useful for
+historical purposes.}
+
+\item{api_key}{A \code{character} string containing your \acronym{API} key from
+\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
+\acronym{DPIRD} Weather 2.0 \acronym{API}.
+\subsection{Available Values for \code{which_values}}{
+\itemize{
+\item all (which will return all of the following values),
+\item airTemperature,
+\item airTemperatureAvg,
+\item airTemperatureMax,
+\item airTemperatureMaxTime,
+\item airTemperatureMin,
+\item airTemperatureMinTime,
+\item apparentAirTemperature,
+\item apparentAirTemperatureAvg,
+\item apparentAirTemperatureMax,
+\item apparentAirTemperatureMaxTime,
+\item apparentAirTemperatureMin,
+\item apparentAirTemperatureMinTime,
+\item barometricPressure,
+\item barometricPressureAvg,
+\item barometricPressureMax,
+\item barometricPressureMaxTime,
+\item barometricPressureMin,
+\item barometricPressureMinTime,
+\item battery,
+\item batteryMinVoltage,
+\item batteryMinVoltageDateTime,
+\item chillHours,
+\item deltaT,
+\item deltaTAvg,
+\item deltaTMax,
+\item deltaTMaxTime,
+\item deltaTMin,
+\item deltaTMinTime,
+\item dewPoint,
+\item dewPointAvg,
+\item dewPointMax,
+\item dewPointMaxTime,
+\item dewPointMin,
+\item dewPointMinTime,
+\item erosionCondition,
+\item erosionConditionMinutes,
+\item erosionConditionStartTime,
+\item errors,
+\item etoShortCrop,
+\item etoTallCrop,
+\item evapotranspiration,
+\item frostCondition,
+\item frostConditionMinutes,
+\item frostConditionStartTime,
+\item heatCondition,
+\item heatConditionMinutes,
+\item heatConditionStartTime,
+\item observations,
+\item observationsCount,
+\item observationsPercentage,
+\item panEvaporation,
+\item period,
+\item periodDay,
+\item periodFrom,
+\item periodHour,
+\item periodMinute,
+\item periodMonth,
+\item periodTo,
+\item periodYear,
+\item rainfall,
+\item relativeHumidity,
+\item relativeHumidityAvg,
+\item relativeHumidityMax,
+\item relativeHumidityMaxTime,
+\item relativeHumidityMin,
+\item relativeHumidityMinTime,
+\item richardsonUnits,
+\item soilTemperature,
+\item soilTemperatureAvg,
+\item soilTemperatureMax,
+\item soilTemperatureMaxTime,
+\item soilTemperatureMin,
+\item soilTemperatureMinTime,
+\item solarExposure,
+\item wetBulb,
+\item wetBulbAvg,
+\item wetBulbMax,
+\item wetBulbMaxTime,
+\item wetBulbMin,
+\item wetBulbMinTime,
+\item wind,
+\item windAvgSpeed, and
+\item windMaxSpeed
+}
+}}
 }
 \value{
-a \code{data.table} with 'station_code' and date interval queried together
-with the requested weather variables.
+a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and date interval
+queried together with the requested weather variables.
 }
 \description{
 Nicely formatted individual station weather summaries from the
@@ -61,10 +166,10 @@ start_date <- "20171028"
 # Use default for end data (current system date)
 output <- get_dpird_summaries(
             station_code = "CL001",
-            first = start_date,
+            start_date = start_date,
             api_key = "YOUR API KEY",
             interval = "yearly",
-            which_vars = "rain")
+            which_values = "rain")
 
 # Only for wind and erosion conditions for daily time interval
 # define start and end date
@@ -73,11 +178,11 @@ end_date <- "20220502"
 
 output <- get_dpird_summaries(
             station_code = "BI",
-            first = start_date,
-            last = end_date,
+            start_date = start_date,
+            end_date = end_date,
             api_key = "YOUR API KEY",
             interval = "daily",
-            which_vars = c("wind", "erosion"))
+            which_values = c("wind", "erosion"))
 }
 }
 \seealso{

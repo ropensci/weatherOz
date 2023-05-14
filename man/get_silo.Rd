@@ -43,8 +43,8 @@ for the request. The query will return an error if a valid email address is
 not provided.}
 }
 \value{
-A \code{data.table} containing the retrieved data from the \acronym{SILO}
-\acronym{API}.
+A \link[data.table:data.table]{data.table::data.table} containing the retrieved data from the
+\acronym{SILO} \acronym{API}.
 }
 \description{
 Download weather data from the \acronym{SILO} \acronym{API} from both
