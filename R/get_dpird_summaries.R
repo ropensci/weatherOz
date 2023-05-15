@@ -301,9 +301,16 @@ get_dpird_summaries <- function(station_code,
     base_url <- paste0(base_url, "yearly")
   }
 
-  out <- .query_dpird_api(.base_url = base_url,
-                          .query_list = query_list,
-                          .limit = 1000)
+  out <-
+    .parse_summary(
+      .ret_list = .query_dpird_api(
+        .base_url = base_url,
+        .query_list = query_list,
+        .limit = 1000
+      ),
+      .which_vars = which_vars
+    )
+
   .set_snake_case_names(out)
   data.table::setcolorder(out, order(names(out)))
 
@@ -360,5 +367,177 @@ get_dpird_summaries <- function(station_code,
   }
   data.table::setkey(x = out, cols = station_code)
 
+  return(out)
+}
+
+
+#' .parse_summary
+#'
+#' Internal function that parses and tidy up data as returned by
+#'  `.query_dpird_summaries()`
+#'
+#' @param .ret_list a list with the DPIRD weather API response
+#' @param .which_vars a character vector with the variables to query. See the
+#' `.query_dpird_summaries()` for further details.
+#'
+#' @return a tidy `data.table` with station id and request weather summaries
+#'
+#' @noRd
+#' @keywords Internal
+#'
+.parse_summary <- function(.ret_list,
+                           .which_vars) {
+
+  col_classes <- vapply(.ret_list, class, FUN.VALUE = character(1))
+
+  # get the nested list columns
+  col_lists <- which(col_classes == "list")
+
+  new_df <- vector(mode = "list", length = length(col_lists))
+  for (i in col_lists) {
+    j <- 1
+    new_df[[j]] <-
+      data.table::rbindlist(lapply(X = .ret_list[[i]],
+                                   FUN = data.table::as.data.table))
+    j <- j + 1
+  }
+
+  if (length(new_df > 1)) {
+    new_df <- data.table::rbindlist(new_df)
+  }
+
+  # Get query time interval
+  out_period <- .ret_list$summaries$period
+
+  # Remove empty columns (eg minute for hourly summaries) and grab number of
+  # records in the data collection
+  out_period <- out_period[, !apply(is.na(out_period), 2, all)]
+  nrec <- nrow(out_period)
+
+  # Airtemp
+  if (any(c("all", "temp") %in% .which_vars)) {
+    out_temp <- .ret_list$summaries$airTemperature
+    names(out_temp) <- paste0("airtemp.",
+                              names(out_temp))
+
+  } else {
+    out_temp <- data.frame()[1:nrec,]
+  }
+
+  # Rainfall
+  if (any(c("all", "rain") %in% .which_vars)) {
+    out_rain <- .ret_list$summaries$rainfall
+
+  } else {
+    out_rain <- data.frame()[1:nrec,]
+  }
+
+  # Wind
+  if (any(c("all", "wind") %in% .which_vars)) {
+    temp <- .ret_list$summaries$wind
+    temp <- lapply(temp, data.table::data.table)
+
+    out_wind <- data.table::rbindlist(temp)
+    names(out_wind) <- paste0("wind.",
+                              names(out_wind))
+
+  } else {
+    out_wind <- data.frame()[1:nrec,]
+  }
+
+  # Wind erosion
+  if (any(c("all", "erosion") %in% .which_vars)) {
+    out_erosion <- .ret_list$summaries$erosionCondition
+    names(out_erosion) <- paste0("wind.erosion.",
+                                 names(out_erosion))
+
+  } else {
+    out_erosion <- data.frame()[1:nrec,]
+  }
+
+  # Soil temperature
+  if (any(c("all", "soil") %in% .which_vars)) {
+    out_soil <- .ret_list$summaries$soilTemperature
+    names(out_soil) <- paste0("soil.",
+                              names(out_soil))
+
+  } else {
+    out_soil <- data.table::data.table()[1:nrec,]
+  }
+
+  # Put together
+  out <- data.table::data.table(
+    station_id = .ret_list$stationCode,
+    out_period,
+    out_temp,
+    rain = out_rain,
+    out_wind,
+    out_erosion,
+    out_soil,
+    row.names = NULL
+  )
+
+  names(out) <- tolower(names(out))
+  names(out) <- gsub("[.]", "_", names(out))
+
+  out[, to := format(
+    lubridate::as_datetime(lubridate::ymd_hms(to),
+                           tz = "Australia/Perth"),
+    "%Y-%m-%d %H:%M:%S %Z"
+  )]
+
+  out[, from := format(
+    lubridate::as_datetime(lubridate::ymd_hms(from),
+                           tz = "Australia/Perth"),
+    "%Y-%m-%d %H:%M:%S %Z"
+  )]
+
+  if ("airtemp_mintime" %in% colnames(out)) {
+    out[, airtemp_mintime := format(
+      lubridate::as_datetime(lubridate::ymd_hms(airtemp_mintime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
+  }
+
+  if ("airtemp_maxtime" %in% colnames(out)) {
+    out[, airtemp_maxtime := format(
+      lubridate::as_datetime(lubridate::ymd_hms(airtemp_maxtime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
+  }
+
+  if ("wind_max_time" %in% colnames(out)) {
+    out[, wind_max_time := format(
+      lubridate::as_datetime(lubridate::ymd_hms(wind_max_time),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
+  }
+
+  if ("wind_erosion_starttime" %in% colnames(out)) {
+    out[, wind_erosion_starttime := format(
+      lubridate::as_datetime(lubridate::ymd_hms(wind_erosion_starttime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
+  }
+
+  if ("soil_mintime" %in% colnames(out)) {
+    out[, soil_mintime := format(
+      lubridate::as_datetime(lubridate::ymd_hms(soil_mintime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
+  }
+
+  if ("soil_maxtime" %in% colnames(out)) {
+    out[, soil_maxtime := format(
+      lubridate::as_datetime(lubridate::ymd_hms(soil_maxtime),
+                             tz = "Australia/Perth"),
+      "%Y-%m-%d %H:%M:%S %Z"
+    )]
+  }
   return(out)
 }
