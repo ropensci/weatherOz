@@ -10,14 +10,14 @@ get_dpird_summaries(
   end_date = Sys.Date(),
   interval = "daily",
   which_values = "all",
-  group = "rtd",
+  api_group = "rtd",
   include_closed = FALSE,
   api_key
 )
 }
 \arguments{
-\item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
-station code(s) for the station(s) of interest.}
+\item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
+for the station of interest.}
 
 \item{start_date}{A \code{character} string representing the beginning of the
 range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
@@ -37,11 +37,9 @@ the previous year.}
 
 \item{which_values}{A \code{character} string with the type of summarised weather
 to return.  See \strong{Available Values} for a full list of valid values.
-Optional, as you may specify a \code{value_group} and query several related
-values or all types at once.  Defaults to 'all' with all values being
-returned.}
+Defaults to 'all' with all available values being returned.}
 
-\item{group}{Filter the stations to a predefined group. These need to be
+\item{api_group}{Filter the stations to a predefined group. These need to be
 supported on the back end; 'all' returns all stations, 'api' returns the
 default stations in use with the \acronym{API}, 'web' returns the list in
 use by the \url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations
@@ -146,7 +144,13 @@ historical purposes.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and date interval
-queried together with the requested weather variables.
+queried together with the requested weather variables. Note that the name
+of the date column will vary according to the interval that has been
+requested, \emph{e.g.}, 'year' interval will return a 'year' column, 'monthly' or
+'daily' will return a 'date' column, 'hourly', '30min' or '15min' will
+return a 'date_time' column.  The first three columns will be
+'station_code', 'station_name' and the year/date/time column. Value columns
+will be returned in alphabetical order.
 }
 \description{
 Nicely formatted individual station weather summaries from the
@@ -169,7 +173,7 @@ output <- get_dpird_summaries(
             start_date = start_date,
             api_key = "YOUR API KEY",
             interval = "yearly",
-            which_values = "rain")
+            which_values = "rainfall")
 
 # Only for wind and erosion conditions for daily time interval
 # define start and end date
