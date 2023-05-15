@@ -115,6 +115,7 @@ get_dpird_minute <- function(station_code,
     end_date_time = lubridate::format_ISO8601(
       hour_sequence[length(total_recs_req)], usetz = "Z"),
     api_key = api_key,
+    api_group = NULL,
     interval = "minute",
     which_values = which_values,
     limit = total_recs_req,
@@ -138,6 +139,11 @@ get_dpird_minute <- function(station_code,
   out <- .query_dpird_api(.base_url = minute_base_url,
                           .query_list = query_list,
                           .limit = length(hour_sequence))
+  parsed <- vector(mode = "list", length = length(out))
+  for (i in seq_len(length(out))) {
+    parsed[[i]] <- data.table::data.table(out$collection)
+    out <- data.table::rbindlist(parsed)
+  }
   .set_snake_case_names(out)
   out[, date_time := hour_sequence]
   out[, station_code := station_code]

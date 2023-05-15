@@ -388,23 +388,44 @@ get_dpird_summaries <- function(station_code,
 .parse_summary <- function(.ret_list,
                            .which_vars) {
 
-  col_classes <- vapply(.ret_list, class, FUN.VALUE = character(1))
+  # pull data out into `data.table`
+  parsed <- vector(mode = "list", length = length(.ret_list))
+
+  for (i in seq_len(length(.ret_list))) {
+    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
+    if ("summaries" %in% names(x$collection)) {
+      dpird_stations <- data.table::as.data.table(x$collection$summaries)
+      dpird_stations[, station_code := x$collection$stationCode]
+      dpird_stations[, station_name := x$collection$stationName]
+    }
+  }
+
+  col_classes <- vapply(parsed, class, FUN.VALUE = character(1))
 
   # get the nested list columns
   col_lists <- which(col_classes == "list")
 
   new_df <- vector(mode = "list", length = length(col_lists))
+  names(new_df) <- names(col_lists)
   for (i in col_lists) {
     j <- 1
     new_df[[j]] <-
       data.table::rbindlist(lapply(X = .ret_list[[i]],
                                    FUN = data.table::as.data.table))
+
+    # assign the prefix to the column names, e.g., 'wind.height'
+    names(new_df[[j]]) <-
+      paste(names(new_df[j]), names(new_df[[j]]), sep = ".")
+
+    # drop the list column from the org data.table
+    .ret_list[, names(new_df[j]) := NULL]
+
     j <- j + 1
   }
 
-  if (length(new_df > 1)) {
-    new_df <- data.table::rbindlist(new_df)
-  }
+  new_df <- do.call(what = cbind, args = new_df)
+
+  out <- cbind(.ret_list, new_df)
 
   # Get query time interval
   out_period <- .ret_list$summaries$period

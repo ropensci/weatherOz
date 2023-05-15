@@ -149,20 +149,5 @@
   }
 
   response[[1]]$raise_for_status()
-
-  # pull data out into `data.table`
-  parsed <- vector(mode = "list", length = length(response))
-  for (i in seq_len(length(response))) {
-    x <- jsonlite::fromJSON(response[[i]]$parse("UTF8"))
-    if ("summaries" %in% names(x$collection)) {
-      dpird_stations <- data.table::as.data.table(x$collection$summaries)
-      dpird_stations[, station_code := x$collection$stationCode]
-      dpird_stations[, station_name := x$collection$stationName]
-    } else {
-    parsed[[i]] <- data.table::data.table(x$collection)
-    dpird_stations <- data.table::rbindlist(parsed)
-    }
-  }
-
-  return(dpird_stations)
+  return(response)
 }
