@@ -2,6 +2,7 @@
 utils::globalVariables(
   c(
     "AAC_codes",
+    "all_values",
     "actual_state",
     "airtemp_mintime",
     "airtemp_maxtime",
@@ -16,6 +17,9 @@ utils::globalVariables(
     "date_time",
     "dist",
     "distance",
+    "dpird_extreme_weather_values",
+    "dpird_minute_values",
+    "dpird_summary_values",
     "email",
     "end",
     "end_date",
