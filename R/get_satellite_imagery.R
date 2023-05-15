@@ -64,19 +64,20 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #' <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#' [terra::SpatRaster()] object of 'GeoTIFF' files. Files are available at ten
+#' [terra::SpatRaster] object of 'GeoTIFF' files. Files are available at ten
 #'  minutes update frequency with a 24-hour delete time.  It is suggested to
 #'  check file availability first by using [get_available_imagery()].
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID to download in
-#' 'GeoTIFF' format and import as a [terra::SpatRaster()] object.  A
-#' vector of values from [get_available_imagery()] may be used here.
-#' Value is required.
+#' 'GeoTIFF' format and import as a [terra::SpatRaster] or [stars::stars]
+#' class object.  A vector of values from [get_available_imagery()] may be
+#' used here. Value is required.
 #' @param scans `Numeric`. Number of scans to download, starting with most
 #' recent and progressing backwards, *e.g.*, 1 - the most recent single scan
 #' available , 6 - the most recent hour available, 12 - the most recent 2 hours
 #' available, etc.  Negating will return the oldest files first.  Defaults to 1.
 #' Value is optional.
+#' @param
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
 #' \var{product_id} include:
@@ -107,7 +108,7 @@ get_available_imagery <- function(product_id = "all") {
 #' [get_available_imagery()]
 #'
 #' @return
-#' A `SpatRaster` object of GeoTIFF images with layers named by
+#' A [terra::SpatRaster] object of GeoTIFF images with layers named by
 #'  \acronym{BOM} Product ID, timestamp and band.
 #'
 #' @note The original \pkg{bomrang} version of this function supported local
@@ -120,7 +121,7 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-#' # GEOS GIS `SpatRaster` object for most recent single scan available
+#' # GEOS GIS [terra::SpatRaster] object for most recent single scan available
 #'
 #' imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 #'
@@ -136,7 +137,8 @@ get_available_imagery <- function(product_id = "all") {
 
 get_satellite_imagery <- get_satellite <-
   function(product_id,
-           scans = 1) {
+           scans = 1,
+           pkg = "terra") {
     if (length(unique(substr(product_id, 1, 8))) != 1) {
       stop("\nweatherOz only supports working with one Product ID at a time\n")
     }
