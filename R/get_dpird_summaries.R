@@ -1,4 +1,4 @@
-#
+
 # file: /R/get_dpird_summaries.R
 #
 # This file is part of the R-package weatherOz
@@ -11,8 +11,8 @@
 #' Nicely formatted individual station weather summaries from the
 #'  \acronym{DPIRD} weather station network.
 #'
-#' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
-#'  station code(s) for the station(s) of interest.
+#' @param station_code A `character` string of the \acronym{DPIRD} station code
+#'  for the station of interest.
 #' @param start_date A `character` string representing the beginning of the
 #'  range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 #'  inclusive of this range.
@@ -28,10 +28,8 @@
 #'  the previous year.
 #' @param which_values A `character` string with the type of summarised weather
 #'  to return.  See **Available Values** for a full list of valid values.
-#'  Optional, as you may specify a `value_group` and query several related
-#'  values or all types at once.  Defaults to 'all' with all values being
-#'  returned.
-#' @param group Filter the stations to a predefined group. These need to be
+#'  Defaults to 'all' with all available values being returned.
+#' @param api_group Filter the stations to a predefined group. These need to be
 #'  supported on the back end; 'all' returns all stations, 'api' returns the
 #'  default stations in use with the \acronym{API}, 'web' returns the list in
 #'  use by the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations
@@ -131,7 +129,13 @@
 #' * windMaxSpeed
 #'
 #' @return a [data.table::data.table]  with 'station_code' and date interval
-#'  queried together with the requested weather variables.
+#'  queried together with the requested weather variables. Note that the name
+#'  of the date column will vary according to the interval that has been
+#'  requested, *e.g.*, 'year' interval will return a 'year' column, 'monthly' or
+#'  'daily' will return a 'date' column, 'hourly', '30min' or '15min' will
+#'  return a 'date_time' column.  The first three columns will be
+#'  'station_code', 'station_name' and the year/date/time column. Value columns
+#'  will be returned in alphabetical order.
 #'
 #' @note Please note this function converts date-time columns from Coordinated
 #'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
@@ -151,7 +155,7 @@
 #'             start_date = start_date,
 #'             api_key = "YOUR API KEY",
 #'             interval = "yearly",
-#'             which_values = "rain")
+#'             which_values = "rainfall")
 #'
 #' # Only for wind and erosion conditions for daily time interval
 #' # define start and end date
@@ -173,7 +177,7 @@ get_dpird_summaries <- function(station_code,
                                 end_date = Sys.Date(),
                                 interval = "daily",
                                 which_values = "all",
-                                group = "rtd",
+                                api_group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
   if (missing(station_code)) {
@@ -194,13 +198,16 @@ get_dpird_summaries <- function(station_code,
     )
   }
 
-  if (which_values != "all" & which_values %notin% dpird_summary_values) {
-    stop(call. = FALSE,
-         "You have specified invalid weather values.")
-  }
-
-  if (which_values == "all") {
+  # if "all" is found in `which_values`, disregard everything and just return
+  # all values else
+  if (any(which_values == "all")) {
     which_values <- dpird_summary_values
+  } else {
+    if (any(which_values %notin% dpird_summary_values)) {
+      stop(call. = FALSE,
+           "You have specified invalid weather values.")
+    }
+    which_values <- c("stationCode", "stationName", which_values)
   }
 
   # validate user provided date
@@ -265,16 +272,18 @@ get_dpird_summaries <- function(station_code,
     end_date_time = end_date,
     interval = interval,
     which_values = which_values,
-    group = group,
+    api_group = api_group,
     include_closed = include_closed,
     api_key = api_key
   )
 
   # Define the query URL by OS due to issues with WindowsOS
   if (Sys.info()[["sysname"]] == "Windows") {
-    base_url <- "https://api.agric.wa.gov.au/v2/weather/stations/summaries/"
+    base_url <-
+      "https://api.agric.wa.gov.au/v2/weather/stations/summaries/"
   } else {
-    base_url <- "https://api.agric.wa.gov.au/v2/weather/stations/summaries/"
+    base_url <-
+      "https://api.dpird.wa.gov.au/v2/weather/stations/summaries/"
   }
 
   # set base URL according to interval
@@ -296,11 +305,60 @@ get_dpird_summaries <- function(station_code,
                           .query_list = query_list,
                           .limit = 1000)
   .set_snake_case_names(out)
-  out[, date_time := hour_sequence]
-  out[, station_code := station_code]
+  data.table::setcolorder(out, order(names(out)))
+
+  if (interval == "yearly") {
+    year <- format(seq(
+      from = as.Date(start_date),
+      to = as.Date(end_date),
+      by = "year"
+    ), "%Y")
+
+    # because the DPIRD data is inclusive of start and end dates, we have
+    # to append the end year
+    if (format(end_date, "%Y") == format(Sys.Date(), "%Y") &
+        year[length(year)] != format(end_date, "%Y")) {
+      year <- c(year, format(Sys.Date(), "%Y"))
+    }
+    out[, year := year]
+    data.table::setcolorder(out, c("station_code", "station_name", "year"))
+  } else if (interval == "monthly") {
+    out[, date := format(seq(
+      from = as.Date(start_date),
+      to = as.Date(end_date),
+      by = "month"
+    ), "%Y-%m")]
+    data.table::setcolorder(out, c("station_code", "station_name", "date"))
+  } else if (interval == "daily") {
+    out[, date := format(seq(
+      from = as.Date(start_date),
+      to = as.Date(end_date),
+      by = "day"
+    ), "%Y-%m-%d")]
+    data.table::setcolorder(out, c("station_code", "station_name", "date"))
+  } else if (interval == "hourly") {
+    out[, date_time := seq(
+      from = lubridate::ymd_hm(sprintf("%s 00:00", start_date)),
+      to = lubridate::ymd_hm(sprintf("%s 00:00", end_date)),
+      by = "hour"
+    )]
+    data.table::setcolorder(out, c("station_code", "station_name", "date_time"))
+  } else if (interval == "30min") {
+    out[, date_time := seq(
+      from = lubridate::ymd_hm(sprintf("%s 00:00", start_date)),
+      to = lubridate::ymd_hm(sprintf("%s 00:00", end_date)),
+      by = "30 mins"
+    )]
+    data.table::setcolorder(out, c("station_code", "station_name", "date_time"))
+  } else if (interval == "15min") {
+    out[, date_time := seq(
+      from = lubridate::ymd_hm(sprintf("%s 00:00", start_date)),
+      to = lubridate::ymd_hm(sprintf("%s 00:00", end_date)),
+      by = "15 mins"
+    )]
+    data.table::setcolorder(out, c("station_code", "station_name", "date_time"))
+  }
   data.table::setkey(x = out, cols = station_code)
-  data.table::setcolorder(out, c("station_code", "date_time"))
+
   return(out)
-
 }
-

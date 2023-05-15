@@ -40,9 +40,13 @@
                          end_date_time,
                          interval,
                          which_values,
-                         group,
+                         api_group,
                          include_closed,
                          api_key) {
+
+  # the API only accepts "true" or "false" in all lowercase
+  include_closed <- tolower(as.character(include_closed))
+
   if (interval == "minute") {
     query_list <- list(
       startDateTime = start_date_time,
@@ -53,48 +57,48 @@
   } else if (interval %in% c("15min", "30min", "hourly")) {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(start_date, "%Y-%m-%d"),
-      endDateTime = format(end_date + lubridate::days(1), "%Y-%m-%d"),
+      startDateTime = format(start_date_time, "%Y-%m-%d"),
+      endDateTime = format(end_date_time + lubridate::days(1), "%Y-%m-%d"),
       interval = interval,
-      select = which_values,
-      group = all,
+      select = paste(which_values, collapse = ","),
+      group = api_group,
       includeClosed = include_closed,
       api_key = api_key
     )
   } else if (interval == "daily") {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(start_date, "%Y-%m-%d"),
-      endDateTime = format(end_date, "%Y-%m-%d"),
-      select = which_values,
-      group = all,
+      startDate = format(start_date_time, "%Y-%m-%d"),
+      endDate = format(end_date_time, "%Y-%m-%d"),
+      select = paste(which_values, collapse = ","),
+      group = api_group,
       includeClosed = include_closed,
       api_key = api_key
     )
   } else if (interval == "monthly") {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(start_date, "%Y-%"),
-      endDateTime = format(end_date, "%Y-%m"),
+      startMonth = format(start_date_time, "%Y-%"),
+      endMonth = format(end_date_time, "%Y-%m"),
       limit = ceiling(as.double(
         difftime(
-          format(end_date, "%Y-%m-%d"),
-          format(start_date, "%Y-%m-%d"),
+          format(end_date_time, "%Y-%m-%d"),
+          format(start_date_time, "%Y-%m-%d"),
           units = "days"
         ) / 365
       ) * 12),
-      select = which_values,
-      group = all,
+      select = paste(which_values, collapse = ","),
+      group = api_group,
       includeClosed = include_closed,
       api_key = api_key
     )
   }  else {
     query_list <- list(
       stationCode = station_code,
-      startDateTime = format(start_date, "%Y"),
-      endDateTime = format(end_date, "%Y"),
-      select = which_values,
-      group = all,
+      startYear = format(start_date_time, "%Y"),
+      endYear = format(end_date_time, "%Y"),
+      select = paste(which_values, collapse = ","),
+      group = api_group,
       includeClosed = include_closed,
       api_key = api_key
     )
@@ -107,8 +111,7 @@
 #'
 #' @param .base_url the base URL for the API query
 #' @param .query_list a list of values in the API to query
-#' @param .limit (numeric/integer) the maximum records wanted. Defaults to 1000
-#'  as per the Weather 2.0 API
+#' @param .limit (numeric/integer) the maximum records wanted
 #'
 #' @return A `data.table` of data for manipulating before returning to the user
 #'
@@ -151,8 +154,15 @@
   parsed <- vector(mode = "list", length = length(response))
   for (i in seq_len(length(response))) {
     x <- jsonlite::fromJSON(response[[i]]$parse("UTF8"))
+    if ("summaries" %in% names(x$collection)) {
+      dpird_stations <- data.table::as.data.table(x$collection$summaries)
+      dpird_stations[, station_code := x$collection$stationCode]
+      dpird_stations[, station_name := x$collection$stationName]
+    } else {
     parsed[[i]] <- data.table::data.table(x$collection)
+    dpird_stations <- data.table::rbindlist(parsed)
+    }
   }
-  dpird_stations <- data.table::rbindlist(parsed)
+
   return(dpird_stations)
 }
