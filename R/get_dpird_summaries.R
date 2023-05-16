@@ -401,7 +401,7 @@ get_dpird_summaries <- function(station_code,
   }
 
   # get the nested list columns and convert them to data.table objects
-  col_classes <- vapply(.ret_list, class, FUN.VALUE = character(1))
+  col_classes <- vapply(dpird_stations, class, FUN.VALUE = character(1))
 
   col_lists <- which(col_classes == "list")
 
@@ -410,7 +410,7 @@ get_dpird_summaries <- function(station_code,
   for (i in col_lists) {
     j <- 1
     new_df[[j]] <-
-      data.table::rbindlist(lapply(X = .ret_list[[i]],
+      data.table::rbindlist(lapply(X = dpird_stations[[i]],
                                    FUN = data.table::as.data.table))
 
     # assign the prefix to the column names, e.g., 'wind.height'
@@ -418,14 +418,14 @@ get_dpird_summaries <- function(station_code,
       paste(names(new_df[j]), names(new_df[[j]]), sep = ".")
 
     # drop the list column from the org data.table
-    .ret_list[, names(new_df[j]) := NULL]
+    dpird_stations[, names(new_df[j]) := NULL]
 
     j <- j + 1
   }
 
   new_df <- do.call(what = cbind, args = new_df)
 
-  out <- cbind(.ret_list, new_df)
+  out <- cbind(dpird_stations, new_df)
 
   # now clean up queries as necessary
 
