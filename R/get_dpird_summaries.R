@@ -388,7 +388,6 @@ get_dpird_summaries <- function(station_code,
 .parse_summary <- function(.ret_list,
                            .which_vars) {
 
-<<<<<<< Updated upstream
   # pull data out into `data.table`
   parsed <- vector(mode = "list", length = length(.ret_list))
 
@@ -401,13 +400,8 @@ get_dpird_summaries <- function(station_code,
     }
   }
 
-  col_classes <- vapply(parsed, class, FUN.VALUE = character(1))
-||||||| Stash base
-  col_classes <- vapply(.ret_list, class, FUN.VALUE = character(1))
-=======
   # get the nested list columns and convert them to data.table objects
   col_classes <- vapply(.ret_list, class, FUN.VALUE = character(1))
->>>>>>> Stashed changes
 
   col_lists <- which(col_classes == "list")
 
