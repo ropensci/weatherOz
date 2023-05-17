@@ -44,6 +44,8 @@ utils::globalVariables(
     "obs_time_utc",
     "online",
     "owner",
+    "period.from",
+    "period.to",
     "preamble",
     "precipitation_range",
     "product_footer",
