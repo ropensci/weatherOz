@@ -31,8 +31,8 @@
 #'  Defaults to 'all' with all available values being returned.
 #' @param api_group Filter the stations to a predefined group one of 'all',
 #'  'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
-#'  stations in use with the \acronym{API}, 'web' returns the list in use by the
-#'  <https:://weather.agric.wa.gov.au> and 'rtd' returns stations with
+#'  stations in use with the \acronym{API} and 'web' returns the list in use by
+#'  the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations with
 #'  scientifically complete data sets. Defaults to 'rtd'.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
 #'  `TRUE` the query returns closed and open stations. Closed stations are those
