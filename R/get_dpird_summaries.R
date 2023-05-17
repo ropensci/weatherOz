@@ -29,11 +29,11 @@
 #' @param which_values A `character` string with the type of summarised weather
 #'  to return.  See **Available Values** for a full list of valid values.
 #'  Defaults to 'all' with all available values being returned.
-#' @param api_group Filter the stations to a predefined group. These need to be
-#'  supported on the back end; 'all' returns all stations, 'api' returns the
-#'  default stations in use with the \acronym{API}, 'web' returns the list in
-#'  use by the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations
-#'  with scientifically complete data sets. Defaults to 'rtd'.
+#' @param api_group Filter the stations to a predefined group one of 'all',
+#'  'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
+#'  stations in use with the \acronym{API}, 'web' returns the list in use by the
+#'  <https:://weather.agric.wa.gov.au> and 'rtd' returns stations with
+#'  scientifically complete data sets. Defaults to 'rtd'.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
 #'  `TRUE` the query returns closed and open stations. Closed stations are those
 #'  that have been turned off and no longer report data. They may be useful for
@@ -196,9 +196,6 @@ get_dpird_summaries <- function(station_code,
     )
   }
 
-  # TODO: remove period and period values from valid list object and documentation
-  # if "all" is found in `which_values`, disregard everything and just return
-  # all values else
   if (any(which_values == "all")) {
     which_values <- dpird_summary_values
   } else {
@@ -225,6 +222,13 @@ get_dpird_summaries <- function(station_code,
                            "yearly"),
                          several.ok = FALSE),
                silent = TRUE)
+
+  # check API group
+  if (api_group %notin5% c("rtd", "all", "web")) {
+    stop(call. = FALSE,
+         "The `api_group` should be one of 'rtd', 'all' or 'web'."
+         )
+  }
 
   # Stop if query is for monthly and interval is wrong
   if (m_int %in% c("monthly") &&
