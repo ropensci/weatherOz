@@ -133,6 +133,7 @@
 #'  * 'period.day',
 #'  * 'period.hour',
 #'  * 'period.minute'
+#'  * 'date' (a combination of year, month, day, hour, minute as appropriate)
 #'
 #' @note Please note this function converts date-time columns from Coordinated
 #'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
@@ -311,6 +312,56 @@ get_dpird_summaries <- function(station_code,
     )
 
   .set_snake_case_names(out)
+
+  out[, period.from := NULL]
+  out[, period.to := NULL]
+  if (interval == "monthly") {
+    out[, date := lubridate::ym(paste0(out$period.year,
+                                       "-",
+                                       out$period.month))]
+  }
+  if (interval == "daily") {
+    out[, date := lubridate::ymd(paste0(out$period.year,
+                                        "-",
+                                        out$period.month,
+                                        "-",
+                                        out$period.day))]
+  }
+  if (interval == "hour") {
+    out[, date := lubridate::ymd_h(
+      paste0(
+        out$period.year,
+        "-",
+        out$period.month,
+        "-",
+        out$period.day,
+        " ",
+        out$period.hour
+      ),
+      tz = "Australia/West"
+    )]
+  }
+  if (interval == "30min" || interval == "15min") {
+    out[, date := lubridate::ymd_hm(
+      paste0(
+        out$period.year,
+        "-",
+        out$period.month,
+        "-",
+        out$period.day,
+        " ",
+        out$period.hour,
+        " ",
+        out$period.minute
+      ),
+      tz = "Australia/West"
+    )]
+  }
+
+  out[, grep("time", colnames(out)) := lapply(.SD, lubridate::ymd_hm,
+                                              tz = "Australia/West"),
+      .SDcols = grep("time", colnames(out))]
+
   data.table::setcolorder(out, order(names(out)))
   data.table::setcolorder(
     out,
@@ -326,12 +377,6 @@ get_dpird_summaries <- function(station_code,
       "period.minute"
     )
   )
-
-  out[, period.from := lubridate::ymd_hms(period.from, tz = "Australia/West")]
-  out[, period.to := lubridate::ymd_hms(period.to, tz = "Australia/West")]
-  out[, grep("time", colnames(out)) := lapply(.SD, lubridate::ymd_hms,
-                                              tz = "Australia/West"),
-      .SDcols = grep("time", colnames(out))]
 
   data.table::setkey(x = out, cols = station_code)
 
