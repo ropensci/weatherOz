@@ -5,7 +5,7 @@
 \alias{dpird_summary_values}
 \title{Summary weather data values available from the DPIRD Weather 2.0 'API'}
 \format{
-A \link{vector} object of 84 items.
+A \link{vector} object of 75 items.
 }
 \source{
 \url{https://www.agric.wa.gov.au/weather-api-20}
@@ -14,7 +14,7 @@ A \link{vector} object of 84 items.
 dpird_summary_values
 }
 \description{
-A \link{vector} object containing 84 items representing valid values to supply
+A \link{vector} object containing 75 items representing valid values to supply
 to \code{get_dpird_summary()}'s \code{values} argument.
 }
 \keyword{datasets}

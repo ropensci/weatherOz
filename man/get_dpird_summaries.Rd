@@ -107,14 +107,6 @@ historical purposes.}
 \item observationsCount,
 \item observationsPercentage,
 \item panEvaporation,
-\item period,
-\item periodDay,
-\item periodFrom,
-\item periodHour,
-\item periodMinute,
-\item periodMonth,
-\item periodTo,
-\item periodYear,
 \item rainfall,
 \item relativeHumidity,
 \item relativeHumidityAvg,
@@ -144,13 +136,20 @@ historical purposes.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and date interval
-queried together with the requested weather variables. Note that the name
-of the date column will vary according to the interval that has been
-requested, \emph{e.g.}, 'year' interval will return a 'year' column, 'monthly' or
-'daily' will return a 'date' column, 'hourly', '30min' or '15min' will
-return a 'date_time' column.  The first three columns will be
-'station_code', 'station_name' and the year/date/time column. Value columns
-will be returned in alphabetical order.
+queried together with the requested weather variables in alphabetical order.
+The first nine columns will always be:
+\itemize{
+\item 'station_code',
+\item 'station_name',
+\item 'period.from',
+\item 'period.to',
+\item 'period.year',
+\item 'period.month',
+\item 'period.day',
+\item 'period.hour',
+\item 'period.minute'
+\item 'date' (a combination of year, month, day, hour, minute as appropriate)
+}
 }
 \description{
 Nicely formatted individual station weather summaries from the
