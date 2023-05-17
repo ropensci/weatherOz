@@ -122,7 +122,7 @@
 #'
 #' @return a [data.table::data.table]  with 'station_code' and date interval
 #'  queried together with the requested weather variables in alphabetical order.
-#'  The first nine columns will always be:
+#'  The first ten columns will always be:
 #'
 #'  * 'station_code',
 #'  * 'station_name',
@@ -133,7 +133,7 @@
 #'  * 'period.day',
 #'  * 'period.hour',
 #'  * 'period.minute'
-#'  * 'date' (a combination of year, month, day, hour, minute as appropriate)
+#'  * 'date' (a combination of year, month, day, hour, minute as appropriate).
 #'
 #' @note Please note this function converts date-time columns from Coordinated
 #'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
@@ -414,7 +414,6 @@ get_dpird_summaries <- function(station_code,
       nested_list_objects[, station_code := x$collection$stationCode]
       nested_list_objects[, station_name := x$collection$stationName]
     }
-    rm(x)
   }
 
   # get the nested list columns and convert them to data.table objects

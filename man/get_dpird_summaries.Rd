@@ -39,11 +39,11 @@ the previous year.}
 to return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all' with all available values being returned.}
 
-\item{api_group}{Filter the stations to a predefined group. These need to be
-supported on the back end; 'all' returns all stations, 'api' returns the
-default stations in use with the \acronym{API}, 'web' returns the list in
-use by the \url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations
-with scientifically complete data sets. Defaults to 'rtd'.}
+\item{api_group}{Filter the stations to a predefined group one of 'all',
+'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
+stations in use with the \acronym{API}, 'web' returns the list in use by the
+\url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations with
+scientifically complete data sets. Defaults to 'rtd'.}
 
 \item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}. If set to
 \code{TRUE} the query returns closed and open stations. Closed stations are those
@@ -137,7 +137,7 @@ historical purposes.}
 \value{
 a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and date interval
 queried together with the requested weather variables in alphabetical order.
-The first nine columns will always be:
+The first ten columns will always be:
 \itemize{
 \item 'station_code',
 \item 'station_name',
@@ -148,7 +148,7 @@ The first nine columns will always be:
 \item 'period.day',
 \item 'period.hour',
 \item 'period.minute'
-\item 'date' (a combination of year, month, day, hour, minute as appropriate)
+\item 'date' (a combination of year, month, day, hour, minute as appropriate).
 }
 }
 \description{
