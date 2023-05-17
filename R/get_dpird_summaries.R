@@ -335,13 +335,11 @@ get_dpird_summaries <- function(station_code,
     )
   )
 
-  out[, period.from := lubridate::ymd_hms(period.from, tz = "AWST")]
-  out[, period.to := lubridate::ymd_hms(period.to, tz = "AWST")]
-
-  # TODO: add other time cols that may appear in dataset, e.g. erosion...
-  if ("wind.max.time" %in% names(out)) {
-    out[, wind.max.time := lubridate::ymd_hms(wind.max.time, tz = "AWST")]
-  }
+  out[, period.from := lubridate::ymd_hms(period.from, tz = "Australia/West")]
+  out[, period.to := lubridate::ymd_hms(period.to, tz = "Australia/West")]
+  out[, grep("time", colnames(out)) := lapply(.SD, lubridate::ymd_hms,
+                                              tz = "Australia/West"),
+      .SDcols = grep("time", colnames(out))]
 
   data.table::setkey(x = out, cols = station_code)
 
