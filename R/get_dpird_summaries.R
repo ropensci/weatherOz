@@ -129,13 +129,18 @@
 #' * windMaxSpeed
 #'
 #' @return a [data.table::data.table]  with 'station_code' and date interval
-#'  queried together with the requested weather variables. Note that the name
-#'  of the date column will vary according to the interval that has been
-#'  requested, *e.g.*, 'year' interval will return a 'year' column, 'monthly' or
-#'  'daily' will return a 'date' column, 'hourly', '30min' or '15min' will
-#'  return a 'date_time' column.  The first three columns will be
-#'  'station_code', 'station_name' and the year/date/time column. Value columns
-#'  will be returned in alphabetical order.
+#'  queried together with the requested weather variables in alphabetical order.
+#'  The first nine columns will always be:
+#'
+#'  * 'station_code',
+#'  * 'station_name',
+#'  * 'period.from',
+#'  * 'period.to',
+#'  * 'period.year',
+#'  * 'period.month',
+#'  * 'period.day',
+#'  * 'period.hour',
+#'  * 'period.minute'
 #'
 #' @note Please note this function converts date-time columns from Coordinated
 #'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
@@ -198,6 +203,7 @@ get_dpird_summaries <- function(station_code,
     )
   }
 
+  # TODO: remove period and period values from valid list object and documentation
   # if "all" is found in `which_values`, disregard everything and just return
   # all values else
   if (any(which_values == "all")) {
@@ -207,7 +213,8 @@ get_dpird_summaries <- function(station_code,
       stop(call. = FALSE,
            "You have specified invalid weather values.")
     }
-    which_values <- c("stationCode", "stationName", which_values)
+    which_values <-
+      c("stationCode", "stationName", "period", which_values)
   }
 
   # validate user provided date
@@ -308,63 +315,34 @@ get_dpird_summaries <- function(station_code,
         .query_list = query_list,
         .limit = 1000
       ),
-      .which_vars = which_vars
+      .which_values = which_values
     )
 
   .set_snake_case_names(out)
   data.table::setcolorder(out, order(names(out)))
+  data.table::setcolorder(
+    out,
+    c(
+      "station_code",
+      "station_name",
+      "period.from",
+      "period.to",
+      "period.year",
+      "period.month",
+      "period.day",
+      "period.hour",
+      "period.minute"
+    )
+  )
 
-  if (interval == "yearly") {
-    year <- format(seq(
-      from = as.Date(start_date),
-      to = as.Date(end_date),
-      by = "year"
-    ), "%Y")
+  out[, period.from := lubridate::ymd_hms(period.from, tz = "AWST")]
+  out[, period.to := lubridate::ymd_hms(period.to, tz = "AWST")]
 
-    # because the DPIRD data is inclusive of start and end dates, we have
-    # to append the end year
-    if (format(end_date, "%Y") == format(Sys.Date(), "%Y") &
-        year[length(year)] != format(end_date, "%Y")) {
-      year <- c(year, format(Sys.Date(), "%Y"))
-    }
-    out[, year := year]
-    data.table::setcolorder(out, c("station_code", "station_name", "year"))
-  } else if (interval == "monthly") {
-    out[, date := format(seq(
-      from = as.Date(start_date),
-      to = as.Date(end_date),
-      by = "month"
-    ), "%Y-%m")]
-    data.table::setcolorder(out, c("station_code", "station_name", "date"))
-  } else if (interval == "daily") {
-    out[, date := format(seq(
-      from = as.Date(start_date),
-      to = as.Date(end_date),
-      by = "day"
-    ), "%Y-%m-%d")]
-    data.table::setcolorder(out, c("station_code", "station_name", "date"))
-  } else if (interval == "hourly") {
-    out[, date_time := seq(
-      from = lubridate::ymd_hm(sprintf("%s 00:00", start_date)),
-      to = lubridate::ymd_hm(sprintf("%s 00:00", end_date)),
-      by = "hour"
-    )]
-    data.table::setcolorder(out, c("station_code", "station_name", "date_time"))
-  } else if (interval == "30min") {
-    out[, date_time := seq(
-      from = lubridate::ymd_hm(sprintf("%s 00:00", start_date)),
-      to = lubridate::ymd_hm(sprintf("%s 00:00", end_date)),
-      by = "30 mins"
-    )]
-    data.table::setcolorder(out, c("station_code", "station_name", "date_time"))
-  } else if (interval == "15min") {
-    out[, date_time := seq(
-      from = lubridate::ymd_hm(sprintf("%s 00:00", start_date)),
-      to = lubridate::ymd_hm(sprintf("%s 00:00", end_date)),
-      by = "15 mins"
-    )]
-    data.table::setcolorder(out, c("station_code", "station_name", "date_time"))
+  # TODO: add other time cols that may appear in dataset, e.g. erosion...
+  if ("wind.max.time" %in% names(out)) {
+    out[, wind.max.time := lubridate::ymd_hms(wind.max.time, tz = "AWST")]
   }
+
   data.table::setkey(x = out, cols = station_code)
 
   return(out)
@@ -377,7 +355,7 @@ get_dpird_summaries <- function(station_code,
 #'  `.query_dpird_summaries()`
 #'
 #' @param .ret_list a list with the DPIRD weather API response
-#' @param .which_vars a character vector with the variables to query. See the
+#' @param .which_values a character vector with the variables to query. See the
 #' `.query_dpird_summaries()` for further details.
 #'
 #' @return a tidy `data.table` with station id and request weather summaries
@@ -386,181 +364,39 @@ get_dpird_summaries <- function(station_code,
 #' @keywords Internal
 #'
 .parse_summary <- function(.ret_list,
-                           .which_vars) {
-
-  # pull data out into `data.table`
-  parsed <- vector(mode = "list", length = length(.ret_list))
+                           .which_values) {
 
   for (i in seq_len(length(.ret_list))) {
     x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
     if ("summaries" %in% names(x$collection)) {
-      dpird_stations <- data.table::as.data.table(x$collection$summaries)
-      dpird_stations[, station_code := x$collection$stationCode]
-      dpird_stations[, station_name := x$collection$stationName]
+      nested_list_objects <-
+        data.table::as.data.table(x$collection$summaries)
+      # insert `station_name` and `station_code` into the nested_list_objects df
+      nested_list_objects[, station_code := x$collection$stationCode]
+      nested_list_objects[, station_name := x$collection$stationName]
     }
+    rm(x)
   }
 
   # get the nested list columns and convert them to data.table objects
-  col_classes <- vapply(dpird_stations, class, FUN.VALUE = character(1))
+  col_classes <-
+    vapply(nested_list_objects, class, FUN.VALUE = character(1))
 
   col_lists <- which(col_classes == "list")
 
-  new_df <- vector(mode = "list", length = length(col_lists))
-  names(new_df) <- names(col_lists)
+  new_df_list <- vector(mode = "list", length = length(col_lists))
+  names(new_df_list) <- names(col_lists)
   for (i in col_lists) {
     j <- 1
-    new_df[[j]] <-
-      data.table::rbindlist(lapply(X = dpird_stations[[i]],
+    new_df_list[[j]] <-
+      data.table::rbindlist(lapply(X = nested_list_objects[[i]],
                                    FUN = data.table::as.data.table))
 
-    # assign the prefix to the column names, e.g., 'wind.height'
-    names(new_df[[j]]) <-
-      paste(names(new_df[j]), names(new_df[[j]]), sep = ".")
-
     # drop the list column from the org data.table
-    dpird_stations[, names(new_df[j]) := NULL]
+    nested_list_objects[, names(new_df_list[j]) := NULL]
 
     j <- j + 1
   }
 
-  new_df <- do.call(what = cbind, args = new_df)
-
-  out <- cbind(dpird_stations, new_df)
-
-  # now clean up queries as necessary
-
-  # Get query time interval
-  out_period <- .ret_list$summaries$period
-
-  # Remove empty columns (eg minute for hourly summaries) and grab number of
-  # records in the data collection
-  out_period <- out_period[, !apply(is.na(out_period), 2, all)]
-  nrec <- nrow(out_period)
-
-  # Airtemp
-  if (any(c("all", "temp") %in% .which_vars)) {
-    out_temp <- .ret_list$summaries$airTemperature
-    names(out_temp) <- paste0("airtemp.",
-                              names(out_temp))
-
-  } else {
-    out_temp <- data.frame()[1:nrec,]
-  }
-
-  # Rainfall
-  if (any(c("all", "rain") %in% .which_vars)) {
-    out_rain <- .ret_list$summaries$rainfall
-
-  } else {
-    out_rain <- data.frame()[1:nrec,]
-  }
-
-  # Wind
-  if (any(c("all", "wind") %in% .which_vars)) {
-    temp <- .ret_list$summaries$wind
-    temp <- lapply(temp, data.table::data.table)
-
-    out_wind <- data.table::rbindlist(temp)
-    names(out_wind) <- paste0("wind.",
-                              names(out_wind))
-
-  } else {
-    out_wind <- data.frame()[1:nrec,]
-  }
-
-  # Wind erosion
-  if (any(c("all", "erosion") %in% .which_vars)) {
-    out_erosion <- .ret_list$summaries$erosionCondition
-    names(out_erosion) <- paste0("wind.erosion.",
-                                 names(out_erosion))
-
-  } else {
-    out_erosion <- data.frame()[1:nrec,]
-  }
-
-  # Soil temperature
-  if (any(c("all", "soil") %in% .which_vars)) {
-    out_soil <- .ret_list$summaries$soilTemperature
-    names(out_soil) <- paste0("soil.",
-                              names(out_soil))
-
-  } else {
-    out_soil <- data.table::data.table()[1:nrec,]
-  }
-
-  # Put together
-  out <- data.table::data.table(
-    station_id = .ret_list$stationCode,
-    out_period,
-    out_temp,
-    rain = out_rain,
-    out_wind,
-    out_erosion,
-    out_soil,
-    row.names = NULL
-  )
-
-  names(out) <- tolower(names(out))
-  names(out) <- gsub("[.]", "_", names(out))
-
-  out[, to := format(
-    lubridate::as_datetime(lubridate::ymd_hms(to),
-                           tz = "Australia/Perth"),
-    "%Y-%m-%d %H:%M:%S %Z"
-  )]
-
-  out[, from := format(
-    lubridate::as_datetime(lubridate::ymd_hms(from),
-                           tz = "Australia/Perth"),
-    "%Y-%m-%d %H:%M:%S %Z"
-  )]
-
-  if ("airtemp_mintime" %in% colnames(out)) {
-    out[, airtemp_mintime := format(
-      lubridate::as_datetime(lubridate::ymd_hms(airtemp_mintime),
-                             tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z"
-    )]
-  }
-
-  if ("airtemp_maxtime" %in% colnames(out)) {
-    out[, airtemp_maxtime := format(
-      lubridate::as_datetime(lubridate::ymd_hms(airtemp_maxtime),
-                             tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z"
-    )]
-  }
-
-  if ("wind_max_time" %in% colnames(out)) {
-    out[, wind_max_time := format(
-      lubridate::as_datetime(lubridate::ymd_hms(wind_max_time),
-                             tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z"
-    )]
-  }
-
-  if ("wind_erosion_starttime" %in% colnames(out)) {
-    out[, wind_erosion_starttime := format(
-      lubridate::as_datetime(lubridate::ymd_hms(wind_erosion_starttime),
-                             tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z"
-    )]
-  }
-
-  if ("soil_mintime" %in% colnames(out)) {
-    out[, soil_mintime := format(
-      lubridate::as_datetime(lubridate::ymd_hms(soil_mintime),
-                             tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z"
-    )]
-  }
-
-  if ("soil_maxtime" %in% colnames(out)) {
-    out[, soil_maxtime := format(
-      lubridate::as_datetime(lubridate::ymd_hms(soil_maxtime),
-                             tz = "Australia/Perth"),
-      "%Y-%m-%d %H:%M:%S %Z"
-    )]
-  }
-  return(out)
+  return(cbind(nested_list_objects, do.call(what = cbind, args = new_df_list)))
 }
