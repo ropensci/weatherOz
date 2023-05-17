@@ -42,6 +42,7 @@
                          which_values,
                          api_group,
                          include_closed,
+                         limit,
                          api_key) {
 
   # the API only accepts "true" or "false" in all lowercase

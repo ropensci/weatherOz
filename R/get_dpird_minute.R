@@ -52,7 +52,9 @@
 #'                  start_date_time = yesterday,
 #'                  minutes = 1440,
 #'                  api_key = YOUR_API_KEY,
-#'                  which_values = c("airTemperature", "solarIrradiance"))
+#'                  which_values = c("airTemperature",
+#'                                   "solarIrradiance",
+#'                                   "wind"))
 #' }
 #' @family DPIRD
 #' @export
@@ -76,22 +78,15 @@ get_dpird_minute <- function(station_code,
     )
   }
 
-  if (which_values != "all" & which_values %notin% dpird_minute_values) {
-    stop(
+  if (any(which_values %notin% dpird_minute_values)) {
+    if (which_values != "all") {
       stop(call. = FALSE,
            "You have specified a value not found in the 'API'.")
-    )
+    }
   }
 
-  if (which_values == "all") {
+  if ("all" %in% which_values) {
     which_values <- dpird_minute_values
-  }
-
-  # TODO: add feedback for the user including which values are invalid
-  if (any(which_values %notin% all_values)) {
-    stop(call. = FALSE,
-         "You have specified a 'value' in `which_values`\n",
-         "that is not available in the 'API'.\n")
   }
 
   start_date_time <- .check_date_time(start_date_time)
@@ -112,15 +107,13 @@ get_dpird_minute <- function(station_code,
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
-    end_date_time = lubridate::format_ISO8601(
-      hour_sequence[length(total_recs_req)], usetz = "Z"),
+    end_date_time = lubridate::format_ISO8601(hour_sequence[length(total_recs_req)], usetz = "Z"),
     api_key = api_key,
     api_group = NULL,
     interval = "minute",
     which_values = which_values,
     limit = total_recs_req,
-    include_closed = NULL,
-    group = NULL
+    include_closed = NULL
   )
 
   # Check the operating system
@@ -139,11 +132,20 @@ get_dpird_minute <- function(station_code,
   out <- .query_dpird_api(.base_url = minute_base_url,
                           .query_list = query_list,
                           .limit = length(hour_sequence))
+
   parsed <- vector(mode = "list", length = length(out))
+
   for (i in seq_len(length(out))) {
-    parsed[[i]] <- data.table::data.table(out$collection)
-    out <- data.table::rbindlist(parsed)
+    x <- jsonlite::fromJSON(out[[i]]$parse("UTF8"))
+    parsed[[i]] <- data.table::data.table(x$collection)
   }
+
+  if (nrow(parsed[[1]]) == 0) {
+    return(message("There are no available minute data for this query."))
+  }
+
+  out <- data.table::rbindlist(parsed)
+
   .set_snake_case_names(out)
   out[, date_time := hour_sequence]
   out[, station_code := station_code]
