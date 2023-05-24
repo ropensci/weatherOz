@@ -87,6 +87,8 @@ get_dpird_minute <- function(station_code,
 
   if ("all" %in% which_values) {
     which_values <- dpird_minute_values
+  } else {
+    which_values <- c(which_values, "dateTime")
   }
 
   start_date_time <- .check_date_time(start_date_time)
@@ -147,7 +149,8 @@ get_dpird_minute <- function(station_code,
   out <- data.table::rbindlist(parsed)
 
   .set_snake_case_names(out)
-  out[, date_time := hour_sequence]
+
+  out[, date_time := lubridate::ymd_hms(out$date_time, tz = "Australia/Perth")]
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code", "date_time"))
