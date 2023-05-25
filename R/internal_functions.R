@@ -77,6 +77,7 @@
         "or a valid `station_code`."
       )
     }
+    return(invisible(NULL))
   }
 
 #' Check user-input longitude and latitude values for validity
@@ -165,15 +166,14 @@
 
   if (length(likely_states) > 1) {
     message(
-      "Multiple states match state.",
-      "'\ndid you mean:\n\tstate = '",
-      paste(likely_states[1],
-            "or",
-            likely_states[2],
-            "or",
-            likely_states[3]),
-      "'?"
-    )
+      "Multiple states match 'state', '",
+      state,
+      "'. Did you mean:\n\tstate = ",
+      sprintf("'%s', '%s' or '%s?'",
+              likely_states[1],
+              likely_states[2],
+              likely_states[3]
+    ))
   }
 }
 
@@ -187,7 +187,7 @@
   if (which_api %notin% c("all", "silo", "dpird")) {
     stop(
       call. = FALSE,
-      "You have provided an invalide value for `which_api`.\n",
+      "You have provided an invalid value for `which_api`.\n",
       "Valid values are 'all', 'silo' or 'dpird'."
     )
   }
