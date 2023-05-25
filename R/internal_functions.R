@@ -61,6 +61,248 @@
   }
 }
 
+#' Check user inputs for lat, lon or station_code
+#' @param .latitude latitude passed from another function
+#' @param .longitude longitude passed from another function
+#' @param .station_code station_code passed from another function
+#' @noRd
+#' @return invisible `NULL`, called for its side-effects
+.check_location_params <-
+  function(.latitude, .longitude, .station_code) {
+    if (((is.null(.latitude)) ||
+         (is.null(.longitude))) && (is.null(.station_code))) {
+      stop(
+        call. = FALSE,
+        "Provide valid `latitude` and `longitude` coordinates\n",
+        "or a valid `station_code`."
+      )
+    }
+  }
+
+#' Check user-input longitude and latitude values for validity
+#'
+#' @param longitude user provided numeric value as decimal degrees
+#' @param latitude user provided numeric value as decimal degrees
+#' @noRd
+#' @return invisible `NULL`, called for its side-effects
+
+.check_lonlat <- function(longitude, latitude) {
+  if (longitude < 114.5 || longitude > 152.5) {
+    stop(
+      call. = FALSE,
+      "Please check your longitude, `",
+      paste0(longitude),
+      "`, to be sure it is valid for Australian data.\n"
+    )
+  }
+  if (latitude < -38.5 || latitude > -23) {
+    stop(
+      call. = FALSE,
+      "Please check your latitude, `",
+      paste0(latitude),
+      "`, value to be sure it is valid for Australian data.\n"
+    )
+    return(invisible(NULL))
+  }
+}
+
+
+#' @noRd
+# Check states for précis and ag bulletin, use fuzzy matching
+
+.check_states <- function(state) {
+  state <- toupper(state)
+
+  states <- c(
+    "ACT",
+    "NSW",
+    "NT",
+    "QLD",
+    "SA",
+    "TAS",
+    "VIC",
+    "WA",
+    "CANBERRA",
+    "NEW SOUTH WALES",
+    "NORTHERN TERRITORY",
+    "QUEENSLAND",
+    "SOUTH AUSTRALIA",
+    "TASMANIA",
+    "VICTORIA",
+    "WESTERN AUSTRALIA",
+    "AUSTRALIA",
+    "AU",
+    "AUS",
+    "OZ"
+  )
+
+  if (state %in% states) {
+    the_state <- state
+    return(the_state)
+  } else {
+    likely_states <- agrep(pattern = state,
+                           x = states,
+                           value = TRUE)
+
+    if (length(likely_states) == 1) {
+      the_state <- toupper(likely_states)
+      message(
+        paste0(
+          "\nUsing state = ",
+          likely_states,
+          ".\n",
+          "If this is not what you intended, please check your entry."
+        )
+      )
+      return(the_state)
+    } else if (length(likely_states) == 0) {
+      stop(
+        "\nA state or territory matching what you entered was not found. ",
+        "Please check and try again.\n"
+      )
+    }
+  }
+
+  if (length(likely_states) > 1) {
+    message(
+      "Multiple states match state.",
+      "'\ndid you mean:\n\tstate = '",
+      paste(likely_states[1],
+            "or",
+            likely_states[2],
+            "or",
+            likely_states[3]),
+      "'?"
+    )
+  }
+}
+
+#' Check user-input API value
+#' @param which_api user-provided value for `which_api`
+#' @return A lower-case string of a valid API value for \pkg{weatherOz}
+#' @noRd
+.check_which_api <- function(which_api) {
+  which_api <- tolower(which_api)
+
+  if (which_api %notin% c("all", "silo", "dpird")) {
+    stop(
+      call. = FALSE,
+      "You have provided an invalide value for `which_api`.\n",
+      "Valid values are 'all', 'silo' or 'dpird'."
+    )
+  }
+  return(which_api)
+}
+
+
+#' convert_state
+#'
+#' Convert state to standard abbreviation
+#' @noRd
+.convert_state <- function(state) {
+  state <- gsub(" ", "", state)
+  state <-
+    substring(gsub("[[:punct:]]", "", tolower(state)), 1, 2)
+
+  state_code <- c(
+    "AUS",
+    "AUS",
+    "AUS",
+    "NSW",
+    "NSW",
+    "VIC",
+    "VIC",
+    "QLD",
+    "QLD",
+    "QLD",
+    "WA",
+    "WA",
+    "WA",
+    "SA",
+    "SA",
+    "SA",
+    "TAS",
+    "TAS",
+    "ACT",
+    "NT",
+    "NT"
+  )
+  state_names <- c(
+    "au",
+    "oz",
+    "as",
+    "ne",
+    "ns",
+    "vi",
+    "v",
+    "ql",
+    "qe",
+    "q",
+    "wa",
+    "we",
+    "w",
+    "s",
+    "sa",
+    "so",
+    "ta",
+    "t",
+    "ac",
+    "no",
+    "nt"
+  )
+  state <- state_code[pmatch(state, state_names)]
+
+  if (any(is.na(state)))
+    stop("Unable to determine state")
+
+  return(state)
+}
+
+
+#' Create the base URL/file location of BOM files for all XML functions
+#'
+#' Takes the XML file name and creates the full file path or URL
+#'
+#' @param AUS_XML a vector of XML file names for BOM products
+#' @param .the_state user provided state argument for requested data
+#' @param .file_loc file path for use with the `parse_` functions
+#'
+#' @noRd
+
+.create_bom_file <- function(AUS_XML, .the_state, .file_loc) {
+  if (.the_state != "AUS") {
+    xml_url <-
+      data.table::fcase(
+        .the_state == "ACT" |
+          .the_state == "CANBERRA",
+        paste0(.file_loc, "/", AUS_XML[1]),
+        .the_state == "NSW" |
+          .the_state == "NEW SOUTH WALES",
+        paste0(.file_loc, "/", AUS_XML[1]),
+        .the_state == "NT" |
+          .the_state == "NORTHERN TERRITORY",
+        paste0(.file_loc,
+               "/", AUS_XML[2]),
+        .the_state == "QLD" |
+          .the_state == "QUEENSLAND",
+        paste0(.file_loc, "/", AUS_XML[3]),
+        .the_state == "SA" |
+          .the_state == "SOUTH AUSTRALIA",
+        paste0(.file_loc, "/", AUS_XML[4]),
+        .the_state == "TAS" |
+          .the_state == "TASMANIA",
+        paste0(.file_loc, "/", AUS_XML[5]),
+        .the_state == "VIC" |
+          .the_state == "VICTORIA",
+        paste0(.file_loc, "/", AUS_XML[6]),
+        .the_state == "WA" |
+          .the_state == "WESTERN AUSTRALIA",
+        paste0(.file_loc, "/", AUS_XML[7])
+      )
+  }
+  return(xml_url)
+}
+
 #' Get response from a BOM URL
 #'
 #' Gets response from a BOM URL, checks the server for response first, then
@@ -73,7 +315,7 @@
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
-#'
+
 .get_url <- function(remote_file) {
   # define custom useragent and handle for communicating with BOM servers
   USERAGENT <- paste0("{weatherOz} R package (",
@@ -155,137 +397,80 @@
   }
 }
 
-#' @noRd
-# Check states for précis and ag bulletin, use fuzzy matching
+# Distance over a great circle. Reasonable approximation.
+.haversine_distance <- function(lat1, lon1, lat2, lon2) {
+  # to radians
+  lat1 <- lat1 * 0.01745
+  lat2 <- lat2 * 0.01745
+  lon1 <- lon1 * 0.01745
+  lon2 <- lon2 * 0.01745
 
-.check_states <- function(state) {
-  state <- toupper(state)
+  delta_lat <- abs(lat1 - lat2)
+  delta_lon <- abs(lon1 - lon2)
 
-  states <- c(
-    "ACT",
-    "NSW",
-    "NT",
-    "QLD",
-    "SA",
-    "TAS",
-    "VIC",
-    "WA",
-    "CANBERRA",
-    "NEW SOUTH WALES",
-    "NORTHERN TERRITORY",
-    "QUEENSLAND",
-    "SOUTH AUSTRALIA",
-    "TASMANIA",
-    "VICTORIA",
-    "WESTERN AUSTRALIA",
-    "AUSTRALIA",
-    "AU",
-    "AUS",
-    "OZ"
-  )
-
-  if (state %in% states) {
-    the_state <- state
-    return(the_state)
-  } else {
-    likely_states <- agrep(pattern = state,
-                           x = states,
-                           value = TRUE)
-
-    if (length(likely_states) == 1) {
-      the_state <- toupper(likely_states)
-      message(
-        paste0(
-          "\nUsing state = ",
-          likely_states,
-          ".\n",
-          "If this is not what you intended, please check your entry."
-        )
-      )
-      return(the_state)
-    } else if (length(likely_states) == 0) {
-      stop(
-        "\nA state or territory matching what you entered was not found. ",
-        "Please check and try again.\n"
-      )
-    }
-  }
-
-  if (length(likely_states) > 1) {
-    message(
-      "Multiple states match state.",
-      "'\ndid you mean:\n\tstate = '",
-      paste(likely_states[1],
-            "or",
-            likely_states[2],
-            "or",
-            likely_states[3]),
-      "'?"
-    )
-  }
+  # radius of earth
+  12742 * asin(sqrt(`+`(
+    (sin(delta_lat / 2)) ^ 2,
+    cos(lat1) * cos(lat2) * (sin(delta_lon / 2)) ^ 2
+  )))
 }
 
-#' convert_state
+#' Internal function to rename column names
 #'
-#' Convert state to standard abbreviation
+#' @param df_out data.frame returned from DPIRD API query with camel case
+#' column names
+#' @param which_api a string with the chosen API, either 'weather' or 'silo'
+#' @keywords internal
 #' @noRd
-.convert_state <- function(state) {
-  state <- gsub(" ", "", state)
-  state <-
-    substring(gsub("[[:punct:]]", "", tolower(state)), 1, 2)
+#'
 
-  state_code <- c(
-    "AUS",
-    "AUS",
-    "AUS",
-    "NSW",
-    "NSW",
-    "VIC",
-    "VIC",
-    "QLD",
-    "QLD",
-    "QLD",
-    "WA",
-    "WA",
-    "WA",
-    "SA",
-    "SA",
-    "SA",
-    "TAS",
-    "TAS",
-    "ACT",
-    "NT",
-    "NT"
-  )
-  state_names <- c(
-    "au",
-    "oz",
-    "as",
-    "ne",
-    "ns",
-    "vi",
-    "v",
-    "ql",
-    "qe",
-    "q",
-    "wa",
-    "we",
-    "w",
-    "s",
-    "sa",
-    "so",
-    "ta",
-    "t",
-    "ac",
-    "no",
-    "nt"
-  )
-  state <- state_code[pmatch(state, state_names)]
+.rename_cols <- function(df_out,
+                         which_api = "dpird") {
+  if (which_api == "dpird") {
+    df_out <- data.table::data.table(df_out)
+    df_out[, stationName := .strcap(x = stationName)]
 
-  if (any(is.na(state)))
-    stop("Unable to determine state")
+    # Split the vector into two with an underscore between the names
+    new_names <- lapply(names(df_out), function(x) {
+      paste(strsplit(x,
+                     "(?<=[a-z])(?=[A-Z])",
+                     perl = TRUE)[[1]],
+            collapse = "_")
+    })
 
-  return(state)
+    # Transform to lower case and rename df_out
+    names(df_out) <- gsub("[.]", "_", tolower(unlist(new_names)))
+  }
+
+  if (which_api == 'silo') {
+    df_out <- data.table::data.table(df_out)
+    df_out[, name := .strcap(x = name)]
+    names(df_out)[1] <- "station_code"
+    names(df_out)[3] <- "station_name"
+  }
+
+  return(df_out)
+}
+
+#' Convert camelCase names from DPIRD API to snake_case
+#' @param x a `data.table` of results from a DPIRD Weather 2.0 API query with
+#'  camelCase field names
+#'
+#' @return Modifies the the colnames of `x` in place
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @keywords internal
+#' @noRd
+
+.set_snake_case_names <- function(x) {
+  if (isFALSE(inherits(x, "data.table"))) {
+    stop(call. = FALSE,
+         "this function only works on `data.tables`")
+  }
+  return(data.table::setnames(x, old = names(x),
+                              new = gsub(" ", "_", tolower(
+                                gsub("(.)([A-Z])", "\\1 \\2",
+                                     names(x))
+                              ))))
 }
 
 #' splits time cols and removes extra chars for forecast XML objects
@@ -330,190 +515,6 @@
   return(x)
 }
 
-#' Validate user entered filepath value or return BOM URL
-#'
-#' @param filepath User provided value for checking
-#'
-#' @noRd
-.validate_filepath <- function(filepath) {
-  if (is.null(filepath)) {
-    location <- "ftp://ftp.bom.gov.au/anon/gen/fwo"
-    return(location)
-  } else {
-    location <- trimws(filepath)
-    if (!file.exists(location)) {
-      stop("\nDirectory does not exist: ", filepath,
-           call. = FALSE)
-    } else if (tolower(tools::file_ext(location)) == "xml") {
-      stop("\nYou have provided a file, not a directory containing a file.",
-           call. = FALSE)
-    }
-    return(location)
-  }
-}
-
-#' Create the base URL/file location of BOM files for all XML functions
-#'
-#' Takes the XML file name and creates the full file path or URL
-#'
-#' @param AUS_XML a vector of XML file names for BOM products
-#' @param .the_state user provided state argument for requested data
-#' @param .file_loc file path for use with the `parse_` functions
-#'
-#' @noRd
-
-.create_bom_file <- function(AUS_XML, .the_state, .file_loc) {
-  if (.the_state != "AUS") {
-    xml_url <-
-      data.table::fcase(
-        .the_state == "ACT" |
-          .the_state == "CANBERRA",
-        paste0(.file_loc, "/", AUS_XML[1]),
-        .the_state == "NSW" |
-          .the_state == "NEW SOUTH WALES",
-        paste0(.file_loc, "/", AUS_XML[1]),
-        .the_state == "NT" |
-          .the_state == "NORTHERN TERRITORY",
-        paste0(.file_loc,
-               "/", AUS_XML[2]),
-        .the_state == "QLD" |
-          .the_state == "QUEENSLAND",
-        paste0(.file_loc, "/", AUS_XML[3]),
-        .the_state == "SA" |
-          .the_state == "SOUTH AUSTRALIA",
-        paste0(.file_loc, "/", AUS_XML[4]),
-        .the_state == "TAS" |
-          .the_state == "TASMANIA",
-        paste0(.file_loc, "/", AUS_XML[5]),
-        .the_state == "VIC" |
-          .the_state == "VICTORIA",
-        paste0(.file_loc, "/", AUS_XML[6]),
-        .the_state == "WA" |
-          .the_state == "WESTERN AUSTRALIA",
-        paste0(.file_loc, "/", AUS_XML[7])
-      )
-  }
-  return(xml_url)
-}
-
-#' Internal function to rename column names
-#'
-#' @param df_out data.frame returned from DPIRD API query with camel case
-#' column names
-#' @param which_api a string with the chosen API, either 'weather' or 'silo'
-#' @keywords internal
-#' @noRd
-#'
-
-.rename_cols <- function(df_out,
-                         which_api = "dpird") {
-  if (which_api == "dpird") {
-    df_out <- data.table::data.table(df_out)
-    df_out[, stationName := .strcap(x = stationName)]
-
-    # Split the vector into two with an underscore between the names
-    new_names <- lapply(names(df_out), function(x) {
-      paste(strsplit(x,
-                     "(?<=[a-z])(?=[A-Z])",
-                     perl = TRUE)[[1]],
-            collapse = "_")
-    })
-
-    # Transform to lower case and rename df_out
-    names(df_out) <- gsub("[.]", "_", tolower(unlist(new_names)))
-  }
-
-  if (which_api == 'silo') {
-    df_out <- data.table::data.table(df_out)
-    df_out[, name := .strcap(x = name)]
-    names(df_out)[1] <- "station_code"
-    names(df_out)[3] <- "station_name"
-  }
-
-  return(df_out)
-}
-
-#' Check user-input longitude and latitude values for validity
-#'
-#' @param longitude user provided numeric value as decimal degrees
-#' @param latitude user provided numeric value as decimal degrees
-#' @noRd
-#' @return invisible `NULL`, called for its side-effects
-
-.check_lonlat <- function(longitude, latitude) {
-  if (longitude < 114.5 || longitude > 152.5) {
-    stop(
-      call. = FALSE,
-      "Please check your longitude, `",
-      paste0(longitude),
-      "`, to be sure it is valid for Australian data.\n"
-    )
-  }
-  if (latitude < -38.5 || latitude > -23) {
-    stop(
-      call. = FALSE,
-      "Please check your latitude, `",
-      paste0(latitude),
-      "`, value to be sure it is valid for Australian data.\n"
-    )
-    return(invisible(NULL))
-  }
-}
-
-# Distance over a great circle. Reasonable approximation.
-.haversine_distance <- function(lat1, lon1, lat2, lon2) {
-  # to radians
-  lat1 <- lat1 * 0.01745
-  lat2 <- lat2 * 0.01745
-  lon1 <- lon1 * 0.01745
-  lon2 <- lon2 * 0.01745
-
-  delta_lat <- abs(lat1 - lat2)
-  delta_lon <- abs(lon1 - lon2)
-
-  # radius of earth
-  12742 * asin(sqrt(`+`(
-    (sin(delta_lat / 2)) ^ 2,
-    cos(lat1) * cos(lat2) * (sin(delta_lon / 2)) ^ 2
-  )))
-}
-
-
-#' Check user inputs for lat, lon or station_code
-#' @param .latitude latitude passed from another function
-#' @param .longitude longitude passed from another function
-#' @param .station_code station_code passed from another function
-#' @noRd
-#' @return invisible `NULL`, called for its side-effects
-.check_location_params <-
-  function(.latitude, .longitude, .station_code) {
-    if (((is.null(.latitude)) ||
-         (is.null(.longitude))) && (is.null(.station_code))) {
-      stop(
-        call. = FALSE,
-        "Provide valid `latitude` and `longitude` coordinates\n",
-        "or a valid `station_code`."
-      )
-    }
-  }
-
-#' Check user-input API value
-#' @param which_api user-provided value for `which_api`
-#' @return A lower-case string of a valid API value for \pkg{weatherOz}
-#' @noRd
-.check_which_api <- function(which_api) {
-  which_api <- tolower(which_api)
-
-  if (which_api %notin% c("all", "silo", "dpird")) {
-    stop(
-      call. = FALSE,
-      "You have provided an invalide value for `which_api`.\n",
-      "Valid values are 'all', 'silo' or 'dpird'."
-    )
-  }
-  return(which_api)
-}
-
 #' Capitalise the First Letters of Words in a String
 #'
 #' Capitalise the first letter of each element of the string vector.
@@ -545,23 +546,24 @@
   return(res)
 }
 
-#' Convert camelCase names from DPIRD API to snake_case
-#' @param x a `data.table` of results from a DPIRD Weather 2.0 API query with
-#'  camelCase field names
+#' Validate user entered filepath value or return BOM URL
 #'
-#' @return Modifies the the colnames of `x` in place
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
-#' @keywords internal
+#' @param filepath User provided value for checking
+#'
 #' @noRd
-
-.set_snake_case_names <- function(x) {
-  if (isFALSE(inherits(x, "data.table"))) {
-    stop(call. = FALSE,
-         "this function only works on `data.tables`")
+.validate_filepath <- function(filepath) {
+  if (is.null(filepath)) {
+    location <- "ftp://ftp.bom.gov.au/anon/gen/fwo"
+    return(location)
+  } else {
+    location <- trimws(filepath)
+    if (!file.exists(location)) {
+      stop("\nDirectory does not exist: ", filepath,
+           call. = FALSE)
+    } else if (tolower(tools::file_ext(location)) == "xml") {
+      stop("\nYou have provided a file, not a directory containing a file.",
+           call. = FALSE)
+    }
+    return(location)
   }
-  return(data.table::setnames(x, old = names(x),
-                              new = gsub(" ", "_", tolower(
-                                gsub("(.)([A-Z])", "\\1 \\2",
-                                     names(x))
-                              ))))
 }
