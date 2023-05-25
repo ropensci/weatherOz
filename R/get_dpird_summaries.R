@@ -224,7 +224,7 @@ get_dpird_summaries <- function(station_code,
                silent = TRUE)
 
   # check API group
-  if (api_group %notin5% c("rtd", "all", "web")) {
+  if (api_group %notin% c("rtd", "all", "web")) {
     stop(call. = FALSE,
          "The `api_group` should be one of 'rtd', 'all' or 'web'."
          )
