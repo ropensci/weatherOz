@@ -8,8 +8,8 @@ get_silo(
   station_code = NULL,
   latitude = NULL,
   longitude = NULL,
-  first,
-  last = Sys.Date(),
+  start_date,
+  end_date = Sys.Date(),
   data_format = "alldata",
   email
 )
@@ -28,11 +28,11 @@ point-of-interest. Defaults to \code{NULL} and when used, queries with
 point-of-interest. Defaults to \code{NULL} and when used, queries with
 \code{station_code} inputs are not permitted.  Requires \code{latitude} to be provided.}
 
-\item{first}{A \code{character} string representing the start date of the query in
-the format 'yyyymmdd'.}
+\item{start_date}{A \code{character} string representing the start date of the
+query in the format 'yyyymmdd'.}
 
-\item{last}{A \code{character} string representing the start date of the query in
-the format 'yyyymmdd'.  Defaults to the current system date.}
+\item{end_date}{A \code{character} string representing the start date of the query
+in the format 'yyyymmdd'.  Defaults to the current system date.}
 
 \item{data_format}{A \code{character} string specifying the type of data to
 retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
@@ -59,8 +59,8 @@ return stations observations from the 'DataDrill' endpoint while queries with
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Source observation data for station Wongan Hills station, WA (8137)
 wd <- get_silo(station_code = 8137,
-               first = "20210601",
-               last = "20210701",
+               start_dte = "20210601",
+               end_date = "20210701",
                data_format = "alldata",
                email = "your@email")
 
@@ -68,8 +68,8 @@ wd <- get_silo(station_code = 8137,
 # Southwood, QLD in the 'apsim' format.
 wd <- get_silo(latitude = -27.85,
                longitude = 150.05,
-               first = "20221001",
-               last = "20221201",
+               start_date = "20221001",
+               end_date = "20221201",
                data_format = "apsim",
                email = "your@email")
 \dontshow{\}) # examplesIf}

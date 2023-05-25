@@ -37,3 +37,8 @@ test_that("a `date` entered in incorrect format and corrected", {
                regexp = "*Please enter a valid date format.")
 })
 
+test_that("reversed dates are caught", {
+  start <- "2022-01-02"
+  end <- "2021-12-31"
+  expect_error(.check_date_order(.start_date = start, .end_date = end))
+})

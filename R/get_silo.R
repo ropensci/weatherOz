@@ -26,10 +26,10 @@
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'  point-of-interest. Defaults to `NULL` and when used, queries with
 #'  `station_code` inputs are not permitted.  Requires `latitude` to be provided.
-#' @param first A `character` string representing the start date of the query in
-#'  the format 'yyyymmdd'.
-#' @param last A `character` string representing the start date of the query in
-#'  the format 'yyyymmdd'.  Defaults to the current system date.
+#' @param start_date A `character` string representing the start date of the
+#'  query in the format 'yyyymmdd'.
+#' @param end_date A `character` string representing the start date of the query
+#'  in the format 'yyyymmdd'.  Defaults to the current system date.
 #' @param data_format A `character` string specifying the type of data to
 #'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
 #'  'alldata' retrieve daily data.
@@ -45,8 +45,8 @@
 #' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (8137)
 #' wd <- get_silo(station_code = 8137,
-#'                first = "20210601",
-#'                last = "20210701",
+#'                start_dte = "20210601",
+#'                end_date = "20210701",
 #'                data_format = "alldata",
 #'                email = "your@@email")
 #'
@@ -54,8 +54,8 @@
 #' # Southwood, QLD in the 'apsim' format.
 #' wd <- get_silo(latitude = -27.85,
 #'                longitude = 150.05,
-#'                first = "20221001",
-#'                last = "20221201",
+#'                start_date = "20221001",
+#'                end_date = "20221201",
 #'                data_format = "apsim",
 #'                email = "your@@email")
 #'
@@ -64,8 +64,8 @@
 get_silo <- function(station_code = NULL,
                      latitude = NULL,
                      longitude = NULL,
-                     first,
-                     last = Sys.Date(),
+                     start_date,
+                     end_date = Sys.Date(),
                      data_format = "alldata",
                      email) {
   if (missing(first))
@@ -76,9 +76,9 @@ get_silo <- function(station_code = NULL,
               length(latitude) == length(longitude))
 
   # validate user provided date
-  first <- gsub("-", "", .check_date(first))
-  last <-  gsub("-", "", .check_date(last))
-  .check_date_order(first, last)
+  start_date <- gsub("-", "", .check_date(start_date))
+  end_date <-  gsub("-", "", .check_date(end_date))
+  .check_date_order(start_date, end_date)
 
   # query a single point and return the values ----
   # if a single station or single lat/lon is requested, return values, else

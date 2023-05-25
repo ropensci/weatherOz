@@ -1,7 +1,4 @@
 
-
-"%||%" <- function(a, b) if (!is.null(a)) a else b
-
 #' Add %notin% function
 #'
 #' Negates `%in%` for easier (mis)matching.
@@ -56,10 +53,10 @@
 #' @param .last a user supplied date for the end of data query
 #' @noRd
 
-.check_date_order <- function(.first, .last) {
-  if (.last < .first) {
+.check_date_order <- function(.start_date, .end_date) {
+  if (.end_date < .start_date) {
     stop(call. = FALSE,
-         "The first and last dates appear to be reversed.")
+         "The start and end dates appear to be reversed.")
     return(invisible(NULL))
   }
 }
