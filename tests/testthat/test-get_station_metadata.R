@@ -22,4 +22,9 @@ test_that("get_station_metadata functions properly", {
       "wmo"
     )
   )
+
+  rm(x)
+
+  x <-
+    get_station_metadata(which_api = "dpird")
 })
