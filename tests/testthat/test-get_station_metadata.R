@@ -1,5 +1,5 @@
 
-test_that("get_station_metadata functions properly", {
+test_that("get_station_metadata() functions properly for SILO", {
   skip_on_cran()
   skip_if_offline()
   x <-
@@ -22,9 +22,9 @@ test_that("get_station_metadata functions properly", {
       "wmo"
     )
   )
+})
 
-  rm(x)
-
-  x <-
-    get_station_metadata(which_api = "dpird")
+test_that("get_station_metadata() errors if no API key is provide for DPIRD",{
+  expect_error(get_station_metadata(which_api = "dpird"))
+  expect_error(get_station_metadata(which_api = "all"))
 })

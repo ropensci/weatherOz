@@ -54,7 +54,7 @@
 #' @export
 
 get_station_metadata <-
-  function(api_key = NULL,
+  function(api_key,
            which_api = "silo") {
 
     which_api <- .check_which_api(which_api)
@@ -62,8 +62,16 @@ get_station_metadata <-
     if (which_api == "silo") {
       out <- .fetch_silo_metadata()
     } else if (which_api == "dpird") {
+      if (is.missing(api_key)) {
+        stop(call. = FALSE,
+             "You must provide an API key for this query.")
+      }
       out <- .fetch_dpird_metadata(.api_key = api_key)
     } else if (which_api == "all") {
+      if (is.missing(api_key)) {
+        stop(call. = FALSE,
+             "You must provide an API key for this query.")
+      }
       silo <- .fetch_silo_metadata()
       dpird <- .fetch_dpird_metadata(.api_key = api_key)
       out <- data.table::rbindlist(list(silo, dpird))
