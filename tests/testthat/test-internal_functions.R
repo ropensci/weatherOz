@@ -88,9 +88,26 @@ test_that("check user-input for `which_api`", {
   }
 })
 
-## .check_states ----
+## .check_states() ----
 
-test_that(".check_states will return reasonable values", {
-  state_code <- "ans"
-  expect_message(.check_states(state_code))
+test_that(".check_states() will return reasonable values", {
+  expect_message(.check_states(state = "ans"))
+  expect_message(.check_states(state = "Quld"))
 })
+
+## .convert_state() ----
+
+test_that(".convert_state() will return the proper match", {
+  expect_equal(.convert_state(state = "WA"), "WA")
+  expect_equal(.convert_state(state = "Western Australia"), "WA")
+  expect_error(.convert_state(state = "Kansas"))
+})
+
+## .set_snake_case_names() ----
+test_that(".snake_case_names() converts CamelCase colnames to snake_case", {
+  x <- data.table("UpperCase" = 1)
+  expect_equal(names(.set_snake_case_names(x)), "upper_case")
+  expect_error(.set_snake_case_names(c("UpperCase" = 1)))
+})
+
+
