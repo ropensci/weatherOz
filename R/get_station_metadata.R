@@ -225,12 +225,16 @@ get_station_metadata <-
     api_key = .api_key
   )
 
-  dpird_stations <- .query_dpird_api(.base_url = base_url,
+  response <- .query_dpird_api(.base_url = base_url,
                                      .query_list = query_list,
                                      .limit = 300)
 
+  parsed <- jsonlite::fromJSON(response[[1]]$parse("UTF8"))
+
+  out <- data.table::setDT(parsed$collection)
+
   data.table::setnames(
-    dpird_stations,
+    out,
     old = c(
       "stationCode",
       "stationName",
@@ -249,11 +253,11 @@ get_station_metadata <-
     )
   )
 
-  dpird_stations[, wmo := NA]
-  dpird_stations[, state := "WA"]
+  out[, wmo := NA]
+  out[, state := "WA"]
 
   data.table::setcolorder(
-    dpird_stations,
+    out,
     neworder = c(
       "station_code",
       "station_name",
@@ -268,5 +272,5 @@ get_station_metadata <-
       "wmo"
     )
   )
-  return(dpird_stations[])
+  return(out[])
 }
