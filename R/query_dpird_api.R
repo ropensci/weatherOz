@@ -150,5 +150,6 @@
   }
 
   response[[1]]$raise_for_status()
+  response[[1]]$raise_for_ct_json()
   return(response)
 }
