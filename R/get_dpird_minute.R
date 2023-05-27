@@ -97,8 +97,8 @@ get_dpird_minute <- function(station_code,
   hour_sequence <- clock::date_seq(from = start_date_time,
                   by = clock::duration_minutes(1),
                   total_size = minutes)
-  total_recs_req <- length(hour_sequence)
-  if (total_recs_req > 1440) {
+  total_records_req <- length(hour_sequence)
+  if (total_records_req > 1440) {
     stop(call. = FALSE,
          "The API only supports queries for a maximum 24hr interval.")
   }
@@ -110,12 +110,12 @@ get_dpird_minute <- function(station_code,
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
-    end_date_time = lubridate::format_ISO8601(hour_sequence[length(total_recs_req)], usetz = "Z"),
+    end_date_time = lubridate::format_ISO8601(hour_sequence[length(total_records_req)], usetz = "Z"),
     api_key = api_key,
     api_group = NULL,
     interval = "minute",
     which_values = which_values,
-    limit = total_recs_req,
+    limit = total_records_req,
     include_closed = NULL
   )
 

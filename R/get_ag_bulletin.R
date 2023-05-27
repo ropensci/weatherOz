@@ -1,5 +1,4 @@
 
-
 #' Get BOM agriculture bulletin information for select stations
 #'
 #' Fetch the \acronym{BOM} agricultural bulletin information and return it in a
