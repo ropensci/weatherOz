@@ -15,5 +15,7 @@ if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
 
 invisible(vcr::vcr_configure(
   dir = vcr_dir,
-  filter_request_headers = list(Authorization = "My bearer token is safe")
+  filter_sensitive_data =
+    list("<<<dpird_api_key>>>" = Sys.getenv("DPIRD_API_KEY"),
+         "<<<silo_api_key>>>" = Sys.getenv("SILO_API_KEY"))
 ))
