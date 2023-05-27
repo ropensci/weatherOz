@@ -166,7 +166,7 @@
 #'             end_date = end_date,
 #'             api_key = "YOUR API KEY",
 #'             interval = "daily",
-#'             which_values = c("wind", "erosion"))
+#'             which_values = "wind")
 #' }
 #' @export get_dpird_summaries
 
