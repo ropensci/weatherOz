@@ -211,7 +211,7 @@ get_dpird_summaries <- function(station_code,
     .check_date_order(start_date, end_date)
 
   # Match time interval query to user requests
-  m_int <- try(match.arg(interval,
+  interval <- try(match.arg(interval,
                          c("15min",
                            "30min",
                            "hourly",
@@ -233,20 +233,20 @@ get_dpird_summaries <- function(station_code,
                                           tzone = "Australia/Perth")
 
   # Stop if query is for monthly and interval is wrong
-  if (m_int %in% c("monthly") && request_interval < 0) {
+  if (interval %in% c("monthly") && request_interval < 0) {
     stop(call. = FALSE,
          "For monthly intervals the interval should be at least one month.")
   }
 
   # Stop if query is for daily and interval is wrong
-  if (m_int %in% c("daily") && request_interval < 0) {
+  if (interval %in% c("daily") && request_interval < 0) {
     stop(call. = FALSE,
          "For daily intervals the interval should be at least one day.")
   }
 
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly or yearly
-  if (methods::is(m_int, "try-error")) {
+  if (methods::is(interval, "try-error")) {
     stop(call. = FALSE,
          "\"", interval, "\" is not a supported time interval")
   }
@@ -255,9 +255,9 @@ get_dpird_summaries <- function(station_code,
   # year in the past
   this_year <- lubridate::year(lubridate::today())
 
-  if (m_int %in% c("15min", "30min") & lubridate::year(start_date) <
+  if (interval %in% c("15min", "30min") & lubridate::year(start_date) <
       this_year - 1 |
-      m_int %in% c("15min", "30min") & lubridate::year(end_date) <
+      interval %in% c("15min", "30min") & lubridate::year(end_date) <
       this_year - 1) {
     stop(
       call. = FALSE,
