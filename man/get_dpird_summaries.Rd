@@ -141,8 +141,6 @@ The first ten columns will always be:
 \itemize{
 \item 'station_code',
 \item 'station_name',
-\item 'period.from',
-\item 'period.to',
 \item 'period.year',
 \item 'period.month',
 \item 'period.day',
@@ -185,7 +183,7 @@ output <- get_dpird_summaries(
             end_date = end_date,
             api_key = "YOUR API KEY",
             interval = "daily",
-            which_values = c("wind", "erosion"))
+            which_values = "wind")
 }
 }
 \seealso{

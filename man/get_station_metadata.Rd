@@ -4,7 +4,7 @@
 \alias{get_station_metadata}
 \title{Get the latest DPIRD and SILO weather station metadata}
 \usage{
-get_station_metadata(api_key = NULL, which_api = "silo")
+get_station_metadata(api_key, which_api = "silo")
 }
 \arguments{
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
