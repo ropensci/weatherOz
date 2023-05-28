@@ -307,17 +307,17 @@ get_dpird_summaries <- function(station_code,
 
   # set base URL according to interval
   if (interval == "15min") {
-    base_url <- paste0(base_url, "15min")
+    base_url <- sprintf("%s15min", base_url)
   } else if (interval == "30min") {
-    base_url <- paste0(base_url, "30min")
+    base_url <- sprintf("%s30min", base_url)
   } else if (interval == "hourly") {
-    base_url <- paste0(base_url, "hourly")
+    base_url <- sprintf("%shourly", base_url)
   } else if (interval == "daily") {
-    base_url <- paste0(base_url, "daily")
+    base_url <- sprintf("%sdaily", base_url)
   } else if (interval == "monthly") {
-    base_url <- paste0(base_url, "monthly")
+    base_url <- sprintf("%smonthly", base_url)
   } else if (interval == "yearly") {
-    base_url <- paste0(base_url, "yearly")
+    base_url <- sprintf("%syearly", base_url)
   }
 
   out <-
