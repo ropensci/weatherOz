@@ -393,16 +393,16 @@ get_dpird_summaries <- function(station_code,
 }
 
 
-#' .parse_summary
+#' Parse DPIRD API summary data
 #'
 #' Internal function that parses and tidy up data as returned by
-#'  `.query_dpird_summaries()`
+#'  `.query_dpird_api()`
 #'
 #' @param .ret_list a list with the DPIRD weather API response
 #' @param .which_values a character vector with the variables to query. See the
-#' `.query_dpird_summaries()` for further details.
+#' `get_dpird_summaries()` for further details.
 #'
-#' @return a tidy `data.table` with station id and request weather summaries
+#' @return a tidy `data.table` with station id and requested weather summaries
 #'
 #' @noRd
 #' @keywords Internal
