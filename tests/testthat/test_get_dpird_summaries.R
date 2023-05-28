@@ -173,5 +173,101 @@ test_that("get_dpird_summaries() returns hourly values",
             expect_type(x$period.day, "integer")
             expect_type(x$period.hour, "integer")
             expect_type(x$period.minute, "logical")
+            expect_s3_class(x$date, "POSIXct")
             expect_s3_class(x$wind.max.time, "POSIXct")
           })
+
+test_that("get_dpird_summaries() returns 30min values",
+          {
+            vcr::use_cassette("dpird_30min_summaries", {
+              skip_if_offline()
+              x <- get_dpird_summaries(
+                station_code = "BI",
+                start_date = "20221028",
+                end_date = "20221029",
+                api_key = Sys.getenv("DPIRD_API_KEY"),
+                interval = "30min",
+                which_values = "wind"
+              )
+            })
+            expect_s3_class(x, "data.table")
+            expect_equal(ncol(x), 16)
+            expect_named(
+              x,
+              c(
+                "station_code",
+                "station_name",
+                "period.year",
+                "period.month",
+                "period.day",
+                "period.hour",
+                "period.minute",
+                "date",
+                "wind.avg.direction.compass_point",
+                "wind.avg.direction.degrees",
+                "wind.avg.speed",
+                "wind.height",
+                "wind.max.direction.compass_point",
+                "wind.max.direction.degrees",
+                "wind.max.speed",
+                "wind.max.time"
+              )
+            )
+            expect_type(x$station_code, "character")
+            expect_type(x$station_name, "character")
+            expect_type(x$period.year, "integer")
+            expect_type(x$period.month, "integer")
+            expect_type(x$period.day, "integer")
+            expect_type(x$period.hour, "integer")
+            expect_type(x$period.minute, "integer")
+            expect_s3_class(x$date, "POSIXct")
+            expect_s3_class(x$wind.max.time, "POSIXct")
+          })
+
+test_that("get_dpird_summaries() returns 15min values",
+          {
+            vcr::use_cassette("dpird_15min_summaries", {
+              skip_if_offline()
+              x <- get_dpird_summaries(
+                station_code = "BI",
+                start_date = "20221028",
+                end_date = "20221029",
+                api_key = Sys.getenv("DPIRD_API_KEY"),
+                interval = "15min",
+                which_values = "wind"
+              )
+            })
+            expect_s3_class(x, "data.table")
+            expect_equal(ncol(x), 16)
+            expect_named(
+              x,
+              c(
+                "station_code",
+                "station_name",
+                "period.year",
+                "period.month",
+                "period.day",
+                "period.hour",
+                "period.minute",
+                "date",
+                "wind.avg.direction.compass_point",
+                "wind.avg.direction.degrees",
+                "wind.avg.speed",
+                "wind.height",
+                "wind.max.direction.compass_point",
+                "wind.max.direction.degrees",
+                "wind.max.speed",
+                "wind.max.time"
+              )
+            )
+            expect_type(x$station_code, "character")
+            expect_type(x$station_name, "character")
+            expect_type(x$period.year, "integer")
+            expect_type(x$period.month, "integer")
+            expect_type(x$period.day, "integer")
+            expect_type(x$period.hour, "integer")
+            expect_type(x$period.minute, "integer")
+            expect_s3_class(x$date, "POSIXct")
+            expect_s3_class(x$wind.max.time, "POSIXct")
+          })
+
