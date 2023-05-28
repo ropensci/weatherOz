@@ -375,11 +375,15 @@ get_dpird_summaries <- function(station_code,
     )]
   }
 
+
   if (any(grep("time", colnames(out)))) {
-    out[, grep("time", colnames(out)) := lapply(.SD, lubridate::ymd_hms,
-                                                truncated = 3,
-                                                tz = "Australia/West"),
-        .SDcols = grep("time", colnames(out))]
+    out[, grep("time", colnames(out)) := suppressMessages(lapply(
+      .SD,
+      lubridate::ymd_hms,
+      truncated = 3,
+      tz = "Australia/West"
+    )),
+    .SDcols = grep("time", colnames(out))]
   }
 
   data.table::setcolorder(out, order(names(out)))
