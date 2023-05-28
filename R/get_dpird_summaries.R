@@ -126,8 +126,6 @@
 #'
 #'  * 'station_code',
 #'  * 'station_name',
-#'  * 'period.from',
-#'  * 'period.to',
 #'  * 'period.year',
 #'  * 'period.month',
 #'  * 'period.day',
@@ -389,8 +387,6 @@ get_dpird_summaries <- function(station_code,
     c(
       "station_code",
       "station_name",
-      "period.from",
-      "period.to",
       "period.year",
       "period.month",
       "period.day",
