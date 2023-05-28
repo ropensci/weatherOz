@@ -82,6 +82,7 @@ test_that("get_dpird_summaries() returns monthly values",
             expect_type(x$period.day, "logical")
             expect_type(x$period.hour, "logical")
             expect_type(x$period.minute, "logical")
+            expect_s3_class(x$date, "Date")
             expect_s3_class(x$wind.max.time, "POSIXct")
           })
 
@@ -127,6 +128,7 @@ test_that("get_dpird_summaries() returns daily values",
             expect_type(x$period.day, "integer")
             expect_type(x$period.hour, "logical")
             expect_type(x$period.minute, "logical")
+            expect_s3_class(x$date, "Date")
             expect_s3_class(x$wind.max.time, "POSIXct")
           })
 
