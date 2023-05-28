@@ -94,9 +94,11 @@ get_dpird_minute <- function(station_code,
 
   start_date_time <- .check_date_time(start_date_time)
 
-  hour_sequence <- clock::date_seq(from = start_date_time,
-                  by = clock::duration_minutes(1),
-                  total_size = minutes)
+  hour_sequence <- clock::date_seq(
+    from = start_date_time,
+    by = clock::duration_minutes(1),
+    total_size = minutes
+  )
   total_records_req <- length(hour_sequence)
   if (total_records_req > 1440) {
     stop(call. = FALSE,
@@ -110,7 +112,8 @@ get_dpird_minute <- function(station_code,
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
-    end_date_time = lubridate::format_ISO8601(hour_sequence[length(total_records_req)], usetz = "Z"),
+    end_date_time = lubridate::format_ISO8601(
+      hour_sequence[length(total_records_req)], usetz = "Z"),
     api_key = api_key,
     api_group = NULL,
     interval = "minute",
@@ -130,28 +133,20 @@ get_dpird_minute <- function(station_code,
   }
 
   minute_base_url = sprintf("%sweather/stations/%s/data",
-                     base_dpird_url,
-                     station_code)
-  out <- .query_dpird_api(.base_url = minute_base_url,
-                          .query_list = query_list,
-                          .limit = length(hour_sequence))
+                            base_dpird_url,
+                            station_code)
+  out <- .query_dpird_api(
+    .base_url = minute_base_url,
+    .query_list = query_list,
+    .limit = length(hour_sequence)
+  )
 
-  parsed <- vector(mode = "list", length = length(out))
-
-  for (i in seq_len(length(out))) {
-    x <- jsonlite::fromJSON(out[[i]]$parse("UTF8"))
-    parsed[[i]] <- data.table::data.table(x$collection)
-  }
-
-  if (nrow(parsed[[1]]) == 0) {
-    return(message("There are no available minute data for this query."))
-  }
-
-  out <- data.table::rbindlist(parsed)
+  # TODO: extract nested data.frames using .parse_minute()
 
   .set_snake_case_names(out)
 
-  out[, date_time := lubridate::ymd_hms(out$date_time, tz = "Australia/Perth")]
+  out[, date_time := suppressMessages(
+    lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code", "date_time"))
