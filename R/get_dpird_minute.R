@@ -1,4 +1,5 @@
 
+
 #' Get minute weather data from DPIRD Weather 2.0 API
 #'
 #' Nicely formatted minute weather station data from the \acronym{DPIRD} weather
@@ -197,3 +198,56 @@ get_dpird_minute <- function(station_code,
   )
   return(x)
 }
+
+#' Parse minute data returned from DPIRD Weather 2.0 API
+#'
+#' Internal function that parses and tidies up data as returned by
+#'  `.query_dpird_api()` for minute data
+#'
+#' @param .ret_list a list with the DPIRD weather API response
+#' @param .which_values a character vector with the variables to query. See the
+#' `get_dpird_minute()` for further details.
+#'
+#' @return a tidy `data.table` with station id and request weather summaries
+#'
+#' @noRd
+#' @keywords Internal
+#'
+.parse_minute <- function(.ret_list,
+                           .which_values) {
+
+  parsed <- vector(mode = "list", length = length(.ret_list))
+
+  for (i in seq_len(length(.ret_list))) {
+    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
+    parsed[[i]] <- data.table::data.table(x$collection)
+  }
+
+  if (nrow(parsed[[1]]) == 0) {
+    return(message("There are no available minute data for this query."))
+  }
+
+  out <- data.table::rbindlist(parsed)
+
+  # get the nested list columns and convert them to data.table objects
+  col_classes <-
+    vapply(out, class, FUN.VALUE = character(1))
+
+  col_lists <- which(col_classes == "list")
+
+  new_df_list <- vector(mode = "list", length = length(col_lists))
+  names(new_df_list) <- names(col_lists)
+  for (i in col_lists) {
+    j <- 1
+    new_df_list[[j]] <-
+      lapply(X = .ret_list[[i]], FUN = data.table::as.data.table)
+
+    # drop the list column from the org data.table
+    .ret_list[, names(new_df_list[j]) := NULL]
+
+    j <- j + 1
+  }
+
+  return(cbind(nested_list_objects, do.call(what = cbind, args = new_df_list)))
+}
+
