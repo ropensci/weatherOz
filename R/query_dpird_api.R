@@ -79,7 +79,7 @@
   } else if (interval == "monthly") {
     query_list <- list(
       stationCode = station_code,
-      startMonth = format(start_date_time, "%Y-%"),
+      startMonth = format(start_date_time, "%Y-%m"),
       endMonth = format(end_date_time, "%Y-%m"),
       limit = ceiling(as.double(
         difftime(
