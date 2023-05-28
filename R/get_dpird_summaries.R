@@ -323,7 +323,7 @@ get_dpird_summaries <- function(station_code,
       .ret_list = .query_dpird_api(
         .base_url = base_url,
         .query_list = query_list,
-        .limit = 1000
+        .limit = total_records_req
       ),
       .which_values = which_values
     )
@@ -333,9 +333,9 @@ get_dpird_summaries <- function(station_code,
   out[, period.from := NULL]
   out[, period.to := NULL]
   if (interval == "monthly") {
-    out[, date := lubridate::ym(paste0(out$period.year,
+    out[, date := format(lubridate::ym(paste0(out$period.year,
                                        "-",
-                                       out$period.month))]
+                                       out$period.month)), "%Y-%m")]
   }
   if (interval == "daily") {
     out[, date := lubridate::ymd(paste0(out$period.year,
