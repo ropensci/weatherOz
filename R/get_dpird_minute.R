@@ -51,7 +51,6 @@
 #'
 #' get_dpird_minute(station_code = "SP",
 #'                  start_date_time = "2018-02-01 13:00:00",
-#'                  "end_date = "2018-02-01 14:00:00""
 #'                  minutes = 1440,
 #'                  api_key = YOUR_API_KEY,
 #'                  which_values = c("airTemperature",
