@@ -270,15 +270,15 @@ get_dpird_summaries <- function(station_code,
   # with default user arguments
   total_records_req <- data.table::fcase(
     interval == "yearly",
-      floor(lubridate::time_length(request_interval, unit = "year")),
+    floor(lubridate::time_length(request_interval, unit = "year")),
     interval == "monthly",
-      floor(lubridate::time_length(request_interval, unit = "month")),
+    floor(lubridate::time_length(request_interval, unit = "month")),
     interval == "hourly",
-      floor(lubridate::time_length(request_interval, unit = "hour")),
+    floor(lubridate::time_length(request_interval, unit = "hour")),
     interval == "30min",
-      lubridate::hour(lubridate::as.period(request_interval)) * 2,
+    floor(lubridate::time_length(request_interval, unit = "hour")) * 2,
     interval == "15min",
-      lubridate::hour(lubridate::as.period(request_interval)) * 4,
+    floor(lubridate::time_length(request_interval, unit = "hour")) * 4,
     default = floor(lubridate::time_length(request_interval, unit = "day"))
   )
 
@@ -333,9 +333,9 @@ get_dpird_summaries <- function(station_code,
   out[, period.from := NULL]
   out[, period.to := NULL]
   if (interval == "monthly") {
-    out[, date := format(lubridate::ym(paste0(out$period.year,
+    out[, date := lubridate::ym(paste0(out$period.year,
                                        "-",
-                                       out$period.month)), "%Y-%m")]
+                                       out$period.month))]
   }
   if (interval == "daily") {
     out[, date := lubridate::ymd(paste0(out$period.year,
