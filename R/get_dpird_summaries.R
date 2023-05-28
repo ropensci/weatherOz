@@ -344,7 +344,7 @@ get_dpird_summaries <- function(station_code,
                                         "-",
                                         out$period.day))]
   }
-  if (interval == "hour") {
+  if (interval == "hourly") {
     out[, date := lubridate::ymd_h(
       paste0(
         out$period.year,
@@ -374,7 +374,6 @@ get_dpird_summaries <- function(station_code,
       tz = "Australia/West"
     )]
   }
-
 
   if (any(grep("time", colnames(out)))) {
     out[, grep("time", colnames(out)) := suppressMessages(lapply(
