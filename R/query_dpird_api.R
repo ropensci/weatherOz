@@ -138,13 +138,12 @@
   #   explanation of the code, and message from the server
   # check response from start_date item in list, should be same across all
   if (response[[1]]$status_code > 201) {
-    mssg <- jsonlite::fromJSON(response[[1]]$parse("UTF-8"))$message
-    x <- response$status_http()
+    x <- jsonlite::fromJSON(response[[1]]$parse("UTF8"))$error$errors
     stop(sprintf(
       "HTTP (%s) - %s\n  %s",
-      x$status_code,
-      x$message,
-      x$explanation
+      x[, "code"],
+      x[, "message"],
+      x[, "description"]
     ),
     call. = FALSE)
   }
