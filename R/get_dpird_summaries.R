@@ -232,18 +232,6 @@ get_dpird_summaries <- function(station_code,
                                           end_date,
                                           tzone = "Australia/Perth")
 
-  # Stop if query is for monthly and interval is wrong
-  if (interval %in% c("monthly") && request_interval < 0) {
-    stop(call. = FALSE,
-         "For monthly intervals the interval should be at least one month.")
-  }
-
-  # Stop if query is for daily and interval is wrong
-  if (interval %in% c("daily") && request_interval < 0) {
-    stop(call. = FALSE,
-         "For daily intervals the interval should be at least one day.")
-  }
-
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly or yearly
   if (methods::is(interval, "try-error")) {
