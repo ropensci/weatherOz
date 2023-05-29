@@ -429,8 +429,8 @@ get_dpird_summaries <- function(station_code,
 
   new_df_list <- vector(mode = "list", length = length(col_lists))
   names(new_df_list) <- names(col_lists)
+  j <- 1
   for (i in col_lists) {
-    j <- 1
     new_df_list[[j]] <-
       data.table::rbindlist(lapply(X = nested_list_objects[[i]],
                                    FUN = data.table::as.data.table))
