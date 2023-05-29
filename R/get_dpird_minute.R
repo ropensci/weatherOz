@@ -234,14 +234,10 @@ get_dpird_minute <- function(station_code,
   for (i in col_lists) {
     j <- 1
     new_df_list[[j]] <-
-      lapply(X = .ret_list[[i]], FUN = data.table::as.data.table)
-
-    # drop the list column from the org data.table
-    .ret_list[, names(new_df_list[j]) := NULL]
-
+      lapply(X = out[[i]], FUN = data.table::as.data.table)
     j <- j + 1
   }
 
-  return(cbind(nested_list_objects, do.call(what = cbind, args = new_df_list)))
+  return(cbind(out, do.call(what = cbind, args = new_df_list)))
 }
 
