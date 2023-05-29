@@ -113,7 +113,7 @@ get_dpird_minute <- function(station_code,
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
     end_date_time = lubridate::format_ISO8601(
-      hour_sequence[length(total_records_req)], usetz = "Z"),
+      hour_sequence[total_records_req], usetz = "Z"),
     api_key = api_key,
     api_group = NULL,
     interval = "minute",
