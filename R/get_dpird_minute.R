@@ -213,8 +213,10 @@ get_dpird_minute <- function(station_code,
   parsed <- vector(mode = "list", length = length(.ret_list))
 
   for (i in seq_len(length(.ret_list))) {
-    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
-    parsed[[i]] <- data.table::data.table(x$collection)
+    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"),
+                              simplifyVector = TRUE)
+    parsed[[i]] <- x$collection
+
   }
 
   if (nrow(parsed[[1]]) == 0) {
@@ -231,13 +233,24 @@ get_dpird_minute <- function(station_code,
 
   new_df_list <- vector(mode = "list", length = length(col_lists))
   names(new_df_list) <- names(col_lists)
+
+  j <- 1
   for (i in col_lists) {
-    j <- 1
-    new_df_list[[j]] <-
-      lapply(X = out[[i]], FUN = data.table::as.data.table)
+
+    # TODO: extract wind height or other as with station_code in get_summaries()
+
+    new_df_list[[j]] <- data.table::setDT(rrapply(out[[i]], f = \(x) x,
+                                   classes = "numeric",
+                                   how = "bind"))
+    data.table::setnames(new_df_list[[j]], old = names(new_df_list[[j]]),
+                         new = sprintf("wind.%s", names(new_df_list[[j]])))
+
     j <- j + 1
   }
 
+
+  # drop the column that's now in the new list to be added to `out`
+  out[, names(new_df_list[j]) := NULL]
   return(cbind(out, do.call(what = cbind, args = new_df_list)))
 }
 

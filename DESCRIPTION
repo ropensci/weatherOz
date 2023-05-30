@@ -122,6 +122,7 @@ Imports:
     magick,
     methods,
     readr (>= 1.1.1),
+    rrapply,
     stringi,
     stars,
     terra,
