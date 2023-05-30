@@ -1,5 +1,4 @@
 
-
 #' Get minute weather data from DPIRD Weather 2.0 API
 #'
 #' Nicely formatted minute weather station data from the \acronym{DPIRD} weather
@@ -216,7 +215,6 @@ get_dpird_minute <- function(station_code,
     x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"),
                               simplifyVector = TRUE)
     parsed[[i]] <- x$collection
-
   }
 
   if (nrow(parsed[[1]]) == 0) {
@@ -236,16 +234,13 @@ get_dpird_minute <- function(station_code,
 
   j <- 1
   for (i in col_lists) {
-
     # TODO: extract wind height or other as with station_code in get_summaries()
-
-    new_df_list[[j]] <- data.table::setDT(rrapply(out[[i]], f = \(x) x,
-                                   classes = "numeric",
-                                   how = "bind"))
-    data.table::setnames(new_df_list[[j]], old = names(new_df_list[[j]]),
-                         new = sprintf("wind.%s", names(new_df_list[[j]])))
-
-    j <- j + 1
+    for (j in seq_len(out[[i]])) {
+      new_df_list[[j]] <-
+       do.call(rbind,
+                                  unlist(out[[i]][[j]],
+                                         recursive = FALSE))
+    }
   }
 
 
