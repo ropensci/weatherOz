@@ -134,15 +134,47 @@ get_dpird_minute <- function(station_code,
   minute_base_url = sprintf("%sweather/stations/%s/data",
                             base_dpird_url,
                             station_code)
-  out <- .query_dpird_api(
+
+  return_list <- .query_dpird_api(
     .base_url = minute_base_url,
     .query_list = query_list,
     .limit = length(hour_sequence)
   )
 
-  # TODO: extract nested data.frames using .parse_minute()
+  out <- .parse_minute(.ret_list = return_list)
 
   .set_snake_case_names(out)
+
+  if ("wind.height1" %in% names(out)) {
+    data.table::setnames(
+      out,
+      old = c(
+        "wind.avg.speed1",
+        "wind.avg.speed2",
+        "wind.avg.direction.compass_point1",
+        "wind.avg.direction.compass_point2",
+        "wind.avg.direction.degrees1",
+        "wind.avg.direction.degrees2",
+        "wind.min.speed1",
+        "wind.min.speed2",
+        "wind.max.speed1",
+        "wind.max.speed2"
+      ),
+      new = c(
+        "wind_avg_speed.3m",
+        "wind_avg_speed.10m",
+        "wind_avg_direction_compass_point.3m",
+        "wind_avg_direction_compass_point.10m",
+        "wind_avg_direction_degrees.3m",
+        "wind_avg_direction_degrees.10m",
+        "wind_min_speed.3m",
+        "wind_min_speed.10m",
+        "wind_max_speed.3m",
+        "wind_max_speed.10m"
+      )
+    )
+    out[, c("wind.height1", "wind.height2") := NULL]
+  }
 
   out[, date_time := suppressMessages(
     lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
@@ -206,8 +238,7 @@ get_dpird_minute <- function(station_code,
 #' @noRd
 #' @keywords Internal
 #'
-.parse_minute <- function(.ret_list,
-                           .which_values) {
+.parse_minute <- function(.ret_list) {
 
   parsed <- vector(mode = "list", length = length(.ret_list))
 
@@ -234,18 +265,17 @@ get_dpird_minute <- function(station_code,
 
   j <- 1
   for (i in col_lists) {
-    # TODO: extract wind height or other as with station_code in get_summaries()
-    for (j in seq_len(out[[i]])) {
-      new_df_list[[j]] <-
-       do.call(rbind,
-                                  unlist(out[[i]][[j]],
-                                         recursive = FALSE))
-    }
+    new_df_list[[j]] <-
+      data.table::rbindlist(lapply(out[[i]],
+                                   function(x)
+                                     as.data.frame(t(unlist(
+                                       x
+                                     )))))
+    # drop the column that's now in the new list to be added to `out`
+    out[, names(new_df_list[j]) := NULL]
+    j <- j + 1
   }
 
-
-  # drop the column that's now in the new list to be added to `out`
-  out[, names(new_df_list[j]) := NULL]
   return(cbind(out, do.call(what = cbind, args = new_df_list)))
 }
 
