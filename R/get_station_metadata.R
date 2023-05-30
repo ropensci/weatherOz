@@ -226,8 +226,8 @@ get_station_metadata <-
   )
 
   response <- .query_dpird_api(.base_url = base_url,
-                                     .query_list = query_list,
-                                     .limit = 300)
+                               .query_list = query_list,
+                               .limit = 300)
 
   parsed <- jsonlite::fromJSON(response[[1]]$parse("UTF8"))
 
