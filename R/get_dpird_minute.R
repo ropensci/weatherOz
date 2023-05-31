@@ -258,13 +258,19 @@ get_dpird_minute <- function(station_code,
   if ("wind.height1" %in% names(out)) {
     out = data.table::melt(
       out,
-      measure = data.table::patterns(
-        "^wind.height",
-        "^wind.avg.speed",
-        "^wind.avg.direction.compassPoint",
-        "^wind.avg.direction.degrees",
-        "^wind.min.speed",
-        "^wind.max.speed"
+      measure = list(
+        "wind.height1",
+        "wind.height2",
+        "wind.avg.speed1",
+        "wind.avg.speed2",
+        "wind.avg.direction.compassPoint1",
+        "wind.avg.direction.compassPoint2",
+        "wind.avg.direction.degrees1",
+        "wind.avg.direction.degrees2",
+        "wind.min.speed1",
+        "wind.min.speed2",
+        "wind.max.speed1",
+        "wind.max.speed2"
       ),
       value.name = c(
         "wind.height",
