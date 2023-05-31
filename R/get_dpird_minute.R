@@ -145,41 +145,13 @@ get_dpird_minute <- function(station_code,
 
   .set_snake_case_names(out)
 
-  if ("wind.height1" %in% names(out)) {
-    data.table::setnames(
-      out,
-      old = c(
-        "wind.avg.speed1",
-        "wind.avg.speed2",
-        "wind.avg.direction.compass_point1",
-        "wind.avg.direction.compass_point2",
-        "wind.avg.direction.degrees1",
-        "wind.avg.direction.degrees2",
-        "wind.min.speed1",
-        "wind.min.speed2",
-        "wind.max.speed1",
-        "wind.max.speed2"
-      ),
-      new = c(
-        "wind_avg_speed.3m",
-        "wind_avg_speed.10m",
-        "wind_avg_direction_compass_point.3m",
-        "wind_avg_direction_compass_point.10m",
-        "wind_avg_direction_degrees.3m",
-        "wind_avg_direction_degrees.10m",
-        "wind_min_speed.3m",
-        "wind_min_speed.10m",
-        "wind_max_speed.3m",
-        "wind_max_speed.10m"
-      )
-    )
-    out[, c("wind.height1", "wind.height2") := NULL]
-  }
+  out <- type.convert(out, as.is = TRUE)
 
   out[, date_time := suppressMessages(
     lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
+
   data.table::setcolorder(out, c("station_code", "date_time"))
   return(out)
 }
@@ -227,24 +199,22 @@ get_dpird_minute <- function(station_code,
 #' Parse minute data returned from DPIRD Weather 2.0 API
 #'
 #' Internal function that parses and tidies up data as returned by
-#'  `.query_dpird_api()` for minute data
+#'  `.query_dpird_api()` for minute data.
 #'
 #' @param .ret_list a list with the DPIRD weather API response
-#' @param .which_values a character vector with the variables to query. See the
-#' `get_dpird_minute()` for further details.
 #'
-#' @return a tidy `data.table` with station id and request weather summaries
+#' @return a tidy (long) `data.table` with station id and requested weather
+#'  data.
 #'
 #' @noRd
 #' @keywords Internal
 #'
 .parse_minute <- function(.ret_list) {
-
   parsed <- vector(mode = "list", length = length(.ret_list))
 
   for (i in seq_len(length(.ret_list))) {
     x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"),
-                              simplifyVector = TRUE)
+                            simplifyVector = TRUE)
     parsed[[i]] <- x$collection
   }
 
@@ -276,6 +246,30 @@ get_dpird_minute <- function(station_code,
     j <- j + 1
   }
 
-  return(cbind(out, do.call(what = cbind, args = new_df_list)))
-}
+  out <- cbind(out, do.call(what = cbind, args = new_df_list))
 
+  if ("wind.height1" %in% names(out)) {
+    out = data.table::melt(
+      out,
+      measure = patterns(
+        "^wind.height",
+        "^wind.avg.speed",
+        "^wind.avg.direction.compassPoint",
+        "^wind.avg.direction.degrees",
+        "^wind.min.speed",
+        "^wind.max.speed"
+      ),
+      value.name = c(
+        "wind.height",
+        "wind.avg.speed",
+        "wind.avg.direction.compassPoint",
+        "wind.avg.direction.degrees",
+        "wind.min.speed",
+        "wind.max.speed"
+      )
+    )
+
+    out[, variable := NULL]
+  }
+  return(out)
+}
