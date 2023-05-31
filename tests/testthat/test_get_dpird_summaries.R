@@ -103,7 +103,7 @@ test_that("get_dpird_summaries() returns yearly values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20171028",
-                end_date = "20231028",
+                end_date = "20221028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "yearly",
                 which_values = "wind"
@@ -148,7 +148,7 @@ test_that("get_dpird_summaries() returns monthly values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20171028",
-                end_date = "20231028",
+                end_date = "20221028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "monthly",
                 which_values = "wind"
