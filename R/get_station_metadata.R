@@ -307,8 +307,13 @@ get_station_metadata <-
 
   parsed <- jsonlite::fromJSON(response[[1]]$parse("UTF8"))
 
-  dpird_stations <- data.table::setDT(cbind(parsed$collection[, c(1:10, 12:13)],
-                                 parsed$collection$capabilities))
+  if (.rich) {
+    dpird_stations <-
+      data.table::as.data.table(cbind(parsed$collection[, c(1:10, 12:13)],
+                                      parsed$collection$capabilities))
+  } else {
+    dpird_stations <- data.table::as.data.table(parsed$collection)
+  }
 
   dpird_stations[, wmo := NA]
   dpird_stations[, state := "WA"]
