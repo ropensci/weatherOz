@@ -59,7 +59,7 @@
          "The start and end dates appear to be reversed.")
     return(invisible(NULL))
   }
-  if (.start_date > lubridate::today() || (.end_date > lubridate::today())) {
+  if (.start_date > Sys.Date() || .end_date > Sys.Date()) {
     stop(
       call. = FALSE,
       sprintf("The `start_date` nor `end_date` can neither one be past %s",
