@@ -466,11 +466,13 @@
     stop(call. = FALSE,
          "This function only works on `data.tables`.")
   }
-  return(data.table::setnames(x, old = names(x),
+  data.table::setnames(x, old = names(x),
                               new = gsub(" ", "_", tolower(
                                 gsub("(.)([A-Z])", "\\1 \\2",
                                      names(x))
-                              ))))
+                              )))
+  data.table::setnames(x, old = names(x),
+                       new = gsub(".", "_", names(x), fixed = TRUE))
 }
 
 #' splits time cols and removes extra chars for forecast XML objects
