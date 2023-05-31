@@ -4,22 +4,31 @@
 \alias{get_station_metadata}
 \title{Get the latest DPIRD and SILO weather station metadata}
 \usage{
-get_station_metadata(api_key, which_api = "silo")
+get_station_metadata(which_api = "silo", api_key, status = FALSE, rich = FALSE)
 }
 \arguments{
+\item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
+Defaults to 'silo'. Valid values are 'all', for both \acronym{SILO}}
+
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.}
-
-\item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
-Defaults to 'silo'. Valid values are 'all', for both \acronym{SILO}
+\acronym{DPIRD} Weather 2.0 \acronym{API}.
 (\acronym{BOM}) and \acronym{DPIRD} \acronym{API}s; 'silo' for only stations
 from the \acronym{SILO} \acronym{API}; or 'dpird' for stations from the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
+
+\item{status}{A \code{Boolean} string indicating whether to include closed
+stations' metadata.  Defaults to \code{FALSE}.}
+
+\item{rich}{A \code{Boolean} string indicating whether to return rich information
+about DPIRD's weather station(s), this does not affect the SILO stations'
+metadata.  Defaults to \code{FALSE}.}
 }
 \value{
 a \code{data.table} of \acronym{BOM} weather stations' metadata for
-stations available from \acronym{SILO} with the following columns.
+stations available from \acronym{SILO} and weather stations' metadata
+for stations available from \acronym{DPIRD}'s Weather 2.0 \acronym{API} with
+the following columns sorted by 'state' and 'station_name'.
 \tabular{rl}{
 \strong{station_code}:\tab Unique station code. \code{factor}\cr
 \strong{station_name}:\tab Unique station name. \code{character}\cr
@@ -28,12 +37,19 @@ stations available from \acronym{SILO} with the following columns.
 \strong{latitude}:\tab Latitude in decimal degrees. \code{numeric}\cr
 \strong{longitude}:\tab Longitude in decimal degrees. \code{numeric}\cr
 \strong{state}:\tab State in which the station is located. \code{character}\cr
-\strong{elev.m}:\tab Station elevation in metres. \code{numeric}\cr
+\strong{elev_m}:\tab Station elevation in metres. \code{numeric}\cr
 \strong{source}:\tab Organisation responsible for the data or station
 maintenance. \code{character}\cr
 \strong{status}:\tab Station status, one of 'open' or 'closed'. \code{character}\cr
 \strong{wmo}:\tab World Meteorological Organisation, (\acronym{WMO}), number if
 applicable. \code{numeric}\cr
+\strong{\code{rich} values}\tab\cr
+\strong{capabilities}:\tab a list of the station's capabilities (data that it
+records). \code{character}\cr
+\strong{probe_height}:\tab temperature probe height in metres. \code{double}\cr
+\strong{rain_gauge_height}\tab rain gauge height in metres. \code{double}\cr
+\strong{wind_probe_heights}:\tab wind probe heights always 3 metres, though some
+have 10 metre probes. \code{integer}\cr
 }
 }
 \description{
