@@ -141,11 +141,11 @@ The first ten columns will always be:
 \itemize{
 \item 'station_code',
 \item 'station_name',
-\item 'period.year',
-\item 'period.month',
-\item 'period.day',
-\item 'period.hour',
-\item 'period.minute'
+\item 'period_year',
+\item 'period_month',
+\item 'period_day',
+\item 'period_hour',
+\item 'period_minute' and if 'period_month' or finer is present,
 \item 'date' (a combination of year, month, day, hour, minute as appropriate).
 }
 }

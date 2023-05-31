@@ -146,7 +146,7 @@ get_dpird_minute <- function(station_code,
   # autoconvert numeric cols from character to numeric formats
   col_classes <-
     vapply(out, class, FUN.VALUE = character(1))
-  out[, (which(col_classes == "character")) := lapply(.SD, type.convert,
+  out[, (which(col_classes == "character")) := lapply(.SD, utils::type.convert,
                                                       as.is = TRUE),
       .SDcols = which(col_classes == "character")]
 
@@ -258,7 +258,7 @@ get_dpird_minute <- function(station_code,
   if ("wind.height1" %in% names(out)) {
     out = data.table::melt(
       out,
-      measure = patterns(
+      measure = data.table::patterns(
         "^wind.height",
         "^wind.avg.speed",
         "^wind.avg.direction.compassPoint",
