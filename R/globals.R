@@ -73,6 +73,7 @@ utils::globalVariables(
     "tropical_system_location",
     "to",
     "values",
+    "variable",
     "warning_summary_footer",
     "wind_max_time",
     "wind_erosion_starttime",
