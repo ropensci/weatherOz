@@ -1,3 +1,58 @@
+test_that("user-input checks stop if invalid values are provided", {
+  # missing station code
+  expect_error(
+    get_dpird_minute(
+      start_date_time = "2018-02-01 13:00:00",
+      minutes = 1440,
+      api_key = Sys.getenv("DPIRD_API_KEY"),
+      which_values = "wind"
+    )
+  )
+
+  # malformed date/time
+  expect_error(
+    get_dpird_minute(
+      station_code = "BI",
+      start_date_time = "2018-02-31 13:00:00",
+      minutes = 1440,
+      api_key = Sys.getenv("DPIRD_API_KEY"),
+      which_values = "wind"
+    )
+  )
+
+  # missing api key
+  expect_error(
+    get_dpird_minute(
+      station_code = "BI",
+      start_date_time = "2018-02-01 13:00:00",
+      minutes = 1440,
+      which_values = "wind"
+    )
+  )
+
+  # invalid 'which_values'
+  expect_error(
+    get_dpird_minute(
+      station_code = "BI",
+      start_date_time = "2018-02-01 13:00:00",
+      minutes = 1440,
+      api_key = Sys.getenv("DPIRD_API_KEY"),
+      which_values = "phytophthora"
+    )
+  )
+
+  # 'minutes' too long
+  expect_error(
+    get_dpird_minute(
+      station_code = "BI",
+      start_date_time = "2018-02-01 13:00:00",
+      minutes = 1450,
+      api_key = Sys.getenv("DPIRD_API_KEY"),
+      which_values = "wind"
+    )
+  )
+})
+
 
 test_that("get_dpird_minute() returns minute values", {
   vcr::use_cassette("dpird_minute_summaries", {
