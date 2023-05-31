@@ -54,8 +54,10 @@
 #' @export
 
 get_station_metadata <-
-  function(api_key,
-           which_api = "silo") {
+  function(which_api = "silo",
+           api_key,
+           status = FALSE,
+           rich = FALSE) {
 
     which_api <- .check_which_api(which_api)
 
@@ -66,19 +68,19 @@ get_station_metadata <-
         stop(call. = FALSE,
              "You must provide an API key for this query.")
       }
-      out <- .fetch_dpird_metadata(.api_key = api_key)
+      out <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
     } else if (which_api == "all") {
       if (missing(api_key)) {
         stop(call. = FALSE,
              "You must provide an API key for this query.")
       }
       silo <- .fetch_silo_metadata()
-      dpird <- .fetch_dpird_metadata(.api_key = api_key)
-      out <- data.table::rbindlist(list(silo, dpird))
+      dpird <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
+      out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
     }
 
-    data.table::setkey(out, "station_code")
     data.table::setorderv(out, cols = c("state", "station_name"))
+
     out[, start := data.table::fifelse(is.na(start),
                                        as.character(lubridate::year(Sys.Date())),
                                        as.character(start))]
@@ -94,18 +96,37 @@ get_station_metadata <-
                                      paste(end, "01", "01", sep = "-"),
                                      end)]
     out[, end := lubridate::ymd(end)]
-    return(out)
+
+    # lastly, if user wants all stations return them, else return only open ones
+    if (isTRUE(status)) {
+      return(out)
+    } else {
+      data.table::setkey(out, status)
+      return(out[J("open")])
+    }
   }
+
+
+#' Returns metadata about stations in the SILO network
+#'
+#' Fetches metadata directly from BOM and then fetches a station list from SILO
+#' to use in matching against BOM metadata. Returns only stations in SILO's
+#' network to the user. A bit slow and clunky but SILO doesn't have a proper
+#' way to do this.
+#'
+#' @return A `data.table` of SILO station metadata
+#' @keywords Internal
+#' @noRd
 
 .fetch_silo_metadata <- function() {
   tryCatch({
-    curl::curl_download(
-      url =
-        "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
-      destfile = file.path(tempdir(), "stations.zip"),
-      mode = "wb",
-      quiet = TRUE
-    )
+      curl::curl_download(
+        url =
+          "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
+        destfile = file.path(tempdir(), "stations.zip"),
+        mode = "wb",
+        quiet = TRUE
+      )
   },
   error = function(x)
     stop(
@@ -133,7 +154,7 @@ get_station_metadata <-
           "lon" = c(81, 90),
           "source" = c(91, 105),
           "state" = c(106, 109),
-          "elev.m" = c(110, 120),
+          "elev_m" = c(110, 120),
           "bar_height.m" = c(121, 129),
           "wmo" = c(130, 136)
         ),
@@ -147,7 +168,7 @@ get_station_metadata <-
           lon = readr::col_double(),
           source = readr::col_character(),
           state = readr::col_character(),
-          elev.m = readr::col_double(),
+          elev_m = readr::col_double(),
           bar_height.m = readr::col_double(),
           wmo = readr::col_integer()
         ),
@@ -176,7 +197,7 @@ get_station_metadata <-
       "lat",
       "lon",
       "state",
-      "elev.m",
+      "elev_m",
       "source",
       "status",
       "wmo"
@@ -200,30 +221,69 @@ get_station_metadata <-
   return(bom_stations[station_name %in% silo_stations$station_name])
 }
 
+#' Returns metadata about stations in the DPIRD network
+#'
+#' Fetches metadata directly from DPIRD's API.
+#'
+#' @param api_key the user's API key as provided by them
+#' @param .rich `TRUE`/`FALSE` values indicating whether to return rich
+#'  metadata about the weather stations
+#'
+#' @return A `data.table` of DPIRD station metadata
+#' @keywords Internal
+#' @noRd
 
-.fetch_dpird_metadata <- function(.api_key = api_key) {
+
+.fetch_dpird_metadata <- function(.api_key = api_key, .rich) {
   base_url = "https://api.dpird.wa.gov.au/v2/weather/stations/"
 
-  query_list <- list(
-    offset = "0",
-    includeClosed = "true",
-    select = paste0(
-      list(
-        "altitude",
-        "startDate",
-        "endDate",
-        "stationCode",
-        "stationName",
-        "latitude",
-        "longitude",
-        "owner",
-        "status"
+  if (isFALSE(.rich)) {
+    query_list <- list(
+      offset = "0",
+      includeClosed = "true",
+      select = paste0(
+        list(
+          "altitude",
+          "startDate",
+          "endDate",
+          "stationCode",
+          "stationName",
+          "latitude",
+          "longitude",
+          "owner",
+          "status"
+        ),
+        collapse = ","
       ),
-      collapse = ","
-    ),
-    group = "api",
-    api_key = .api_key
-  )
+      group = "api",
+      api_key = .api_key
+    )
+  } else {
+    query_list <- list(
+      offset = "0",
+      includeClosed = "true",
+      select = paste0(
+        list(
+          "altitude",
+          "startDate",
+          "endDate",
+          "stationCode",
+          "stationName",
+          "latitude",
+          "longitude",
+          "owner",
+          "status",
+          "capabilities",
+          "probeHeight",
+          "rainGaugeHeight",
+          "windProbeHeights"
+        ),
+        collapse = ","
+      ),
+      group = "api",
+      api_key = .api_key
+    )
+  }
 
   response <- .query_dpird_api(.base_url = base_url,
                                .query_list = query_list,
@@ -231,33 +291,20 @@ get_station_metadata <-
 
   parsed <- jsonlite::fromJSON(response[[1]]$parse("UTF8"))
 
-  out <- data.table::setDT(parsed$collection)
+  dpird_stations <- data.table::setDT(cbind(parsed$collection[, c(1:10, 12:13)],
+                                 parsed$collection$capabilities))
 
+  dpird_stations[, wmo := NA]
+  dpird_stations[, state := "WA"]
   data.table::setnames(
-    out,
-    old = c(
-      "stationCode",
-      "stationName",
-      "altitude",
-      "startDate",
-      "endDate",
-      "owner"
-    ),
-    new = c(
-      "station_code",
-      "station_name",
-      "elev.m",
-      "start",
-      "end",
-      "source"
-    )
+    dpird_stations,
+    old = c("startDate", "endDate", "altitude", "owner"),
+    new = c("start", "end", "elev_m", "source")
   )
 
-  out[, wmo := NA]
-  out[, state := "WA"]
-
+  .set_snake_case_names(dpird_stations)
   data.table::setcolorder(
-    out,
+    dpird_stations,
     neworder = c(
       "station_code",
       "station_name",
@@ -266,11 +313,11 @@ get_station_metadata <-
       "latitude",
       "longitude",
       "state",
-      "elev.m",
+      "elev_m",
       "source",
       "status",
       "wmo"
     )
   )
-  return(out[])
+  return(dpird_stations[])
 }
