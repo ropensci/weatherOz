@@ -320,6 +320,7 @@ get_dpird_summaries <- function(station_code,
 
   out[, period.from := NULL]
   out[, period.to := NULL]
+
   if (interval == "monthly") {
     out[, date := lubridate::ym(paste0(out$period.year,
                                        "-",
