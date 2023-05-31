@@ -159,7 +159,7 @@ Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 }
 \examples{
 \dontrun{
-# You must have an DPIRD API key to proceed
+# You must have a DPIRD API key to proceed
 # Set date interval for yearly request
 # Get rainfall summary
 start_date <- "20171028"
