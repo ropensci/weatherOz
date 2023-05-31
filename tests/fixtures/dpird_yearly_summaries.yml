@@ -1,12 +1,12 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.dpird.wa.gov.au/v2/weather/stations/summaries/yearly?stationCode=BI&startYear=2017&endYear=2023&select=stationCode%2CstationName%2Cperiod%2Cwind&group=rtd&includeClosed=false&api_key=<<<dpird_api_key>>>&offset=0&limit=6
+    uri: https://api.dpird.wa.gov.au/v2/weather/stations/summaries/yearly?stationCode=BI&startYear=2017&endYear=2022&select=stationCode%2CstationName%2Cperiod%2Cwind&group=rtd&includeClosed=false&api_key=<<<dpird_api_key>>>&offset=0&limit=5
     body:
       encoding: ''
       string: ''
     headers:
-      User-Agent: libcurl/7.87.0 r-curl/5.0.0 crul/1.3
+      User-Agent: libcurl/7.88.1 r-curl/5.0.0 crul/1.4.0
       Accept-Encoding: gzip, deflate
       Accept: application/json, text/xml, application/xml, */*
   response:
@@ -18,9 +18,9 @@ http_interactions:
       cache-control: no-cache, must-revalidate
       connection: keep-alive
       content-language: en
-      content-length: '3340'
+      content-length: '2937'
       content-type: application/json; charset=utf-8
-      date: Sun, 28 May 2023 10:22:55 GMT
+      date: Wed, 31 May 2023 12:33:59 GMT
       expires: '0'
       ratelimit-limit: '10'
       ratelimit-remaining: '9'
@@ -33,16 +33,16 @@ http_interactions:
       via: kong/2.1.4.6-enterprise-edition
       x-api-name: weather
       x-api-version: v2.7.0
-      x-correlation-id: 02115d6d-0c83-430b-a642-4eb6a5be8001
-      x-kong-proxy-latency: '9'
-      x-kong-upstream-latency: '238'
+      x-correlation-id: 99e1a987-3711-475f-8738-51b2e0f16546
+      x-kong-proxy-latency: '5'
+      x-kong-upstream-latency: '528'
       x-ratelimit-limit-hour: '4000'
       x-ratelimit-limit-second: '10'
-      x-ratelimit-remaining-hour: '3983'
+      x-ratelimit-remaining-hour: '3992'
       x-ratelimit-remaining-second: '9'
     body:
       encoding: ''
       file: no
-      string: '{"metadata":{"status":200,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/summaries\/yearly?endYear=2023&group=rtd&includeClosed=false&limit=6&offset=0&select=stationCode%2CstationName%2Cperiod%2Cwind&startYear=2017&stationCode=BI"}],"collection":{"count":7,"limit":6,"offset":0,"links":[{"rel":"first","href":null},{"rel":"previous","href":null},{"rel":"next","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/summaries\/yearly?endYear=2023&group=rtd&includeClosed=false&limit=6&select=stationCode%2CstationName%2Cperiod%2Cwind&startYear=2017&stationCode=BI&offset=6"},{"rel":"last","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/summaries\/yearly?endYear=2023&group=rtd&includeClosed=false&limit=6&select=stationCode%2CstationName%2Cperiod%2Cwind&startYear=2017&stationCode=BI&offset=6"}]}},"collection":[{"stationCode":"BI","stationName":"Binnu","summaries":[{"period":{"from":"2016-12-31T16:00:00Z","to":"2017-12-31T16:00:00Z","year":2017,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":13.51},"max":{"speed":71.24,"time":"2017-02-18T08:04:00Z","direction":{"degrees":157,"compassPoint":"SSE"}}},{"height":10,"avg":{"speed":18.38},"max":{"speed":81.9,"time":"18-FEB-17","direction":{"degrees":129,"compassPoint":"SE"}}}]},{"period":{"from":"2017-12-31T16:00:00Z","to":"2018-12-31T16:00:00Z","year":2018,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":14.92},"max":{"speed":88.85,"time":"2018-08-29T01:36:00Z","direction":{"degrees":256,"compassPoint":"WSW"}}},{"height":10,"avg":{"speed":19.38},"max":{"speed":84.49,"time":"01-AUG-18","direction":{"degrees":247,"compassPoint":"WSW"}}}]},{"period":{"from":"2018-12-31T16:00:00Z","to":"2019-12-31T16:00:00Z","year":2019,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":15.52},"max":{"speed":98.1,"time":"2019-03-27T06:16:00Z","direction":{"degrees":208,"compassPoint":"SSW"}}},{"height":10,"avg":{"speed":19.75},"max":{"speed":76.5,"time":"12-NOV-19","direction":{"degrees":83,"compassPoint":"E"}}}]},{"period":{"from":"2019-12-31T16:00:00Z","to":"2020-12-31T16:00:00Z","year":2020,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":14.09},"max":{"speed":77.11,"time":"2020-05-24T01:56:00Z","direction":{"degrees":33,"compassPoint":"NNE"}}},{"height":10,"avg":{"speed":18.99},"max":{"speed":149.33,"time":"05-AUG-20","direction":{"degrees":130,"compassPoint":"SE"}}}]},{"period":{"from":"2020-12-31T16:00:00Z","to":"2021-12-31T16:00:00Z","year":2021,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":13.24},"max":{"speed":147.6,"time":"2021-04-11T12:30:00Z","direction":{"degrees":338,"compassPoint":"NNW"}}},{"height":10,"avg":{"speed":19},"max":{"speed":159.23,"time":"16-MAR-21","direction":{"degrees":353,"compassPoint":"N"}}}]},{"period":{"from":"2021-12-31T16:00:00Z","to":"2022-12-31T16:00:00Z","year":2022,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":13.74},"max":{"speed":72.94,"time":"2022-02-04T07:19:00Z","direction":{"degrees":116,"compassPoint":"ESE"}}},{"height":10,"avg":{"speed":19.1},"max":{"speed":76.61,"time":"23-MAY-22","direction":{"degrees":285,"compassPoint":"WNW"}}}]}]}]}'
-  recorded_at: 2023-05-28 10:23:00 GMT
+      string: '{"metadata":{"status":200,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/summaries\/yearly?endYear=2022&group=rtd&includeClosed=false&limit=5&offset=0&select=stationCode%2CstationName%2Cperiod%2Cwind&startYear=2017&stationCode=BI"}],"collection":{"count":6,"limit":5,"offset":0,"links":[{"rel":"first","href":null},{"rel":"previous","href":null},{"rel":"next","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/summaries\/yearly?endYear=2022&group=rtd&includeClosed=false&limit=5&select=stationCode%2CstationName%2Cperiod%2Cwind&startYear=2017&stationCode=BI&offset=5"},{"rel":"last","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/summaries\/yearly?endYear=2022&group=rtd&includeClosed=false&limit=5&select=stationCode%2CstationName%2Cperiod%2Cwind&startYear=2017&stationCode=BI&offset=5"}]}},"collection":[{"stationCode":"BI","stationName":"Binnu","summaries":[{"period":{"from":"2016-12-31T16:00:00Z","to":"2017-12-31T16:00:00Z","year":2017,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":13.51},"max":{"speed":71.24,"time":"2017-02-18T08:04:00Z","direction":{"degrees":157,"compassPoint":"SSE"}}},{"height":10,"avg":{"speed":18.38},"max":{"speed":81.9,"time":"18-FEB-17","direction":{"degrees":129,"compassPoint":"SE"}}}]},{"period":{"from":"2017-12-31T16:00:00Z","to":"2018-12-31T16:00:00Z","year":2018,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":14.92},"max":{"speed":88.85,"time":"2018-08-29T01:36:00Z","direction":{"degrees":256,"compassPoint":"WSW"}}},{"height":10,"avg":{"speed":19.38},"max":{"speed":84.49,"time":"01-AUG-18","direction":{"degrees":247,"compassPoint":"WSW"}}}]},{"period":{"from":"2018-12-31T16:00:00Z","to":"2019-12-31T16:00:00Z","year":2019,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":15.52},"max":{"speed":98.1,"time":"2019-03-27T06:16:00Z","direction":{"degrees":208,"compassPoint":"SSW"}}},{"height":10,"avg":{"speed":19.75},"max":{"speed":76.5,"time":"12-NOV-19","direction":{"degrees":83,"compassPoint":"E"}}}]},{"period":{"from":"2019-12-31T16:00:00Z","to":"2020-12-31T16:00:00Z","year":2020,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":14.09},"max":{"speed":77.11,"time":"2020-05-24T01:56:00Z","direction":{"degrees":33,"compassPoint":"NNE"}}},{"height":10,"avg":{"speed":18.99},"max":{"speed":149.33,"time":"05-AUG-20","direction":{"degrees":130,"compassPoint":"SE"}}}]},{"period":{"from":"2020-12-31T16:00:00Z","to":"2021-12-31T16:00:00Z","year":2021,"month":null,"day":null,"hour":null,"minute":null},"wind":[{"height":3,"avg":{"speed":13.24},"max":{"speed":147.6,"time":"2021-04-11T12:30:00Z","direction":{"degrees":338,"compassPoint":"NNW"}}},{"height":10,"avg":{"speed":19},"max":{"speed":159.23,"time":"16-MAR-21","direction":{"degrees":353,"compassPoint":"N"}}}]}]}]}'
+  recorded_at: 2023-05-31 12:34:00 GMT
   recorded_with: vcr/1.2.0, webmockr/0.9.0
