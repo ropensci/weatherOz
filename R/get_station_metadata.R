@@ -3,14 +3,20 @@
 #'
 #' Download the latest station locations and metadata for stations in the
 #'  \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.
+#'
+#' @param which_api A `string` value that indicates which \acronym{API} to use.
+#'  Defaults to 'silo'. Valid values are 'all', for both \acronym{SILO}
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#' @param which_api A `string` value that indicates which \acronym{API} to use.
-#'  Defaults to 'silo'. Valid values are 'all', for both \acronym{SILO}
 #'  (\acronym{BOM}) and \acronym{DPIRD} \acronym{API}s; 'silo' for only stations
 #'  from the \acronym{SILO} \acronym{API}; or 'dpird' for stations from the
 #'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#' @param status A `Boolean` string indicating whether to include closed
+#'  stations' metadata.  Defaults to `FALSE`.
+#' @param rich A `Boolean` string indicating whether to return rich information
+#'  about DPIRD's weather station(s), this does not affect the SILO stations'
+#'  metadata.  Defaults to `FALSE`.
 #'
 #' @note For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
 #'  not report the exact date on which stations opened or closed, only the year.
@@ -26,7 +32,9 @@
 #' get_station_metadata()
 #'
 #' @return a `data.table` of \acronym{BOM} weather stations' metadata for
-#'  stations available from \acronym{SILO} with the following columns.
+#'  stations available from \acronym{SILO} and weather stations' metadata
+#'  for stations available from \acronym{DPIRD}'s Weather 2.0 \acronym{API} with
+#'  the following columns sorted by 'state' and 'station_name'.
 #'  \tabular{rl}{
 #'   **station_code**:\tab Unique station code. `factor`\cr
 #'   **station_name**:\tab Unique station name. `character`\cr
@@ -35,13 +43,21 @@
 #'   **latitude**:\tab Latitude in decimal degrees. `numeric`\cr
 #'   **longitude**:\tab Longitude in decimal degrees. `numeric`\cr
 #'   **state**:\tab State in which the station is located. `character`\cr
-#'   **elev.m**:\tab Station elevation in metres. `numeric`\cr
+#'   **elev_m**:\tab Station elevation in metres. `numeric`\cr
 #'   **source**:\tab Organisation responsible for the data or station
 #'    maintenance. `character`\cr
 #'   **status**:\tab Station status, one of 'open' or 'closed'. `character`\cr
 #'   **wmo**:\tab World Meteorological Organisation, (\acronym{WMO}), number if
 #'    applicable. `numeric`\cr
+#'   **`rich` values**\tab\cr
+#'   **capabilities**:\tab a list of the station's capabilities (data that it
+#'    records). `character`\cr
+#'   **probe_height**:\tab temperature probe height in metres. `double`\cr
+#'   **rain_gauge_height**\tab rain gauge height in metres. `double`\cr
+#'   **wind_probe_heights**:\tab wind probe heights always 3 metres, though some
+#'    have 10 metre probes. `integer`\cr
 #'   }
+#'
 #'
 #' @references
 #' Station location and other metadata are sourced from the Australian Bureau of
