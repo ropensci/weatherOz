@@ -17,6 +17,7 @@ DPIRD's
 DataDrill
 DaysDays
 DaysMinutes
+DaysSince
 GEOS
 GeoTIFF
 HL
@@ -66,6 +67,14 @@ apparentAirTemperatureMaxTime
 apparentAirTemperatureMin
 apparentAirTemperatureMinTime
 apsim
+availabilityCurrentHour
+availabilityLast
+availabilityMonthToDateSince
+availabilityMonthToDateTo
+availabilitySince
+availabilityTo
+availabilityYearToDateSince
+availabilityYearToDateTo
 barometricPressure
 barometricPressureAvg
 barometricPressureMax
