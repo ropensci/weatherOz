@@ -116,27 +116,27 @@ test_that("get_dpird_summaries() returns yearly values",
               c(
                 "station_code",
                 "station_name",
-                "period.year",
-                "period.month",
-                "period.day",
-                "period.hour",
-                "period.minute",
-                "wind.avg.speed",
-                "wind.height",
-                "wind.max.direction.compass_point",
-                "wind.max.direction.degrees",
-                "wind.max.speed",
-                "wind.max.time"
+                "period_year",
+                "period_month",
+                "period_day",
+                "period_hour",
+                "period_minute",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period.year, "integer")
-            expect_type(x$period.month, "logical")
-            expect_type(x$period.day, "logical")
-            expect_type(x$period.hour, "logical")
-            expect_type(x$period.minute, "logical")
-            expect_s3_class(x$wind.max.time, "POSIXct")
+            expect_type(x$period_year, "integer")
+            expect_type(x$period_month, "logical")
+            expect_type(x$period_day, "logical")
+            expect_type(x$period_hour, "logical")
+            expect_type(x$period_minute, "logical")
+            expect_s3_class(x$wind_max_time, "POSIXct")
           })
 
 ## monthly ----
@@ -161,29 +161,29 @@ test_that("get_dpird_summaries() returns monthly values",
               c(
                 "station_code",
                 "station_name",
-                "period.year",
-                "period.month",
-                "period.day",
-                "period.hour",
-                "period.minute",
+                "period_year",
+                "period_month",
+                "period_day",
+                "period_hour",
+                "period_minute",
                 "date",
-                "wind.avg.speed",
-                "wind.height",
-                "wind.max.direction.compass_point",
-                "wind.max.direction.degrees",
-                "wind.max.speed",
-                "wind.max.time"
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period.year, "integer")
-            expect_type(x$period.month, "integer")
-            expect_type(x$period.day, "logical")
-            expect_type(x$period.hour, "logical")
-            expect_type(x$period.minute, "logical")
+            expect_type(x$period_year, "integer")
+            expect_type(x$period_month, "integer")
+            expect_type(x$period_day, "logical")
+            expect_type(x$period_hour, "logical")
+            expect_type(x$period_minute, "logical")
             expect_s3_class(x$date, "Date")
-            expect_s3_class(x$wind.max.time, "POSIXct")
+            expect_s3_class(x$wind_max_time, "POSIXct")
           })
 
 ## daily ----
@@ -208,29 +208,29 @@ test_that("get_dpird_summaries() returns daily values",
               c(
                 "station_code",
                 "station_name",
-                "period.year",
-                "period.month",
-                "period.day",
-                "period.hour",
-                "period.minute",
+                "period_year",
+                "period_month",
+                "period_day",
+                "period_hour",
+                "period_minute",
                 "date",
-                "wind.avg.speed",
-                "wind.height",
-                "wind.max.direction.compass_point",
-                "wind.max.direction.degrees",
-                "wind.max.speed",
-                "wind.max.time"
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period.year, "integer")
-            expect_type(x$period.month, "integer")
-            expect_type(x$period.day, "integer")
-            expect_type(x$period.hour, "logical")
-            expect_type(x$period.minute, "logical")
+            expect_type(x$period_year, "integer")
+            expect_type(x$period_month, "integer")
+            expect_type(x$period_day, "integer")
+            expect_type(x$period_hour, "logical")
+            expect_type(x$period_minute, "logical")
             expect_s3_class(x$date, "Date")
-            expect_s3_class(x$wind.max.time, "POSIXct")
+            expect_s3_class(x$wind_max_time, "POSIXct")
           })
 
 ## hourly ----
@@ -255,31 +255,31 @@ test_that("get_dpird_summaries() returns hourly values",
               c(
                 "station_code",
                 "station_name",
-                "period.year",
-                "period.month",
-                "period.day",
-                "period.hour",
-                "period.minute",
+                "period_year",
+                "period_month",
+                "period_day",
+                "period_hour",
+                "period_minute",
                 "date",
-                "wind.avg.direction.compass_point",
-                "wind.avg.direction.degrees",
-                "wind.avg.speed",
-                "wind.height",
-                "wind.max.direction.compass_point",
-                "wind.max.direction.degrees",
-                "wind.max.speed",
-                "wind.max.time"
+                "wind_avg_direction_compass_point",
+                "wind_avg_direction_degrees",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period.year, "integer")
-            expect_type(x$period.month, "integer")
-            expect_type(x$period.day, "integer")
-            expect_type(x$period.hour, "integer")
-            expect_type(x$period.minute, "logical")
+            expect_type(x$period_year, "integer")
+            expect_type(x$period_month, "integer")
+            expect_type(x$period_day, "integer")
+            expect_type(x$period_hour, "integer")
+            expect_type(x$period_minute, "logical")
             expect_s3_class(x$date, "POSIXct")
-            expect_s3_class(x$wind.max.time, "POSIXct")
+            expect_s3_class(x$wind_max_time, "POSIXct")
           })
 
 ## 30min ----
@@ -304,31 +304,31 @@ test_that("get_dpird_summaries() returns 30min values",
               c(
                 "station_code",
                 "station_name",
-                "period.year",
-                "period.month",
-                "period.day",
-                "period.hour",
-                "period.minute",
+                "period_year",
+                "period_month",
+                "period_day",
+                "period_hour",
+                "period_minute",
                 "date",
-                "wind.avg.direction.compass_point",
-                "wind.avg.direction.degrees",
-                "wind.avg.speed",
-                "wind.height",
-                "wind.max.direction.compass_point",
-                "wind.max.direction.degrees",
-                "wind.max.speed",
-                "wind.max.time"
+                "wind_avg_direction_compass_point",
+                "wind_avg_direction_degrees",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period.year, "integer")
-            expect_type(x$period.month, "integer")
-            expect_type(x$period.day, "integer")
-            expect_type(x$period.hour, "integer")
-            expect_type(x$period.minute, "integer")
+            expect_type(x$period_year, "integer")
+            expect_type(x$period_month, "integer")
+            expect_type(x$period_day, "integer")
+            expect_type(x$period_hour, "integer")
+            expect_type(x$period_minute, "integer")
             expect_s3_class(x$date, "POSIXct")
-            expect_s3_class(x$wind.max.time, "POSIXct")
+            expect_s3_class(x$wind_max_time, "POSIXct")
           })
 
 ## 15min ----
@@ -353,29 +353,29 @@ test_that("get_dpird_summaries() returns 15min values",
               c(
                 "station_code",
                 "station_name",
-                "period.year",
-                "period.month",
-                "period.day",
-                "period.hour",
-                "period.minute",
+                "period_year",
+                "period_month",
+                "period_day",
+                "period_hour",
+                "period_minute",
                 "date",
-                "wind.avg.direction.compass_point",
-                "wind.avg.direction.degrees",
-                "wind.avg.speed",
-                "wind.height",
-                "wind.max.direction.compass_point",
-                "wind.max.direction.degrees",
-                "wind.max.speed",
-                "wind.max.time"
+                "wind_avg_direction_compass_point",
+                "wind_avg_direction_degrees",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period.year, "integer")
-            expect_type(x$period.month, "integer")
-            expect_type(x$period.day, "integer")
-            expect_type(x$period.hour, "integer")
-            expect_type(x$period.minute, "integer")
+            expect_type(x$period_year, "integer")
+            expect_type(x$period_month, "integer")
+            expect_type(x$period_day, "integer")
+            expect_type(x$period_hour, "integer")
+            expect_type(x$period_minute, "integer")
             expect_s3_class(x$date, "POSIXct")
-            expect_s3_class(x$wind.max.time, "POSIXct")
+            expect_s3_class(x$wind_max_time, "POSIXct")
           })
