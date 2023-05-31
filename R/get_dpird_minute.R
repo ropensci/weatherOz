@@ -143,8 +143,6 @@ get_dpird_minute <- function(station_code,
 
   out <- .parse_minute(.ret_list = return_list)
 
-  .set_snake_case_names(out)
-
   # autoconvert numeric cols from character to numeric formats
   col_classes <-
     vapply(out, class, FUN.VALUE = character(1))
@@ -152,9 +150,12 @@ get_dpird_minute <- function(station_code,
                                                       as.is = TRUE),
       .SDcols = which(col_classes == "character")]
 
+  .set_snake_case_names(out)
+
   # convert dates
   out[, date_time := suppressMessages(
     lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
+
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
 
@@ -279,3 +280,4 @@ get_dpird_minute <- function(station_code,
   }
   return(out)
 }
+
