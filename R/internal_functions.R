@@ -24,13 +24,6 @@
 #' @keywords internal
 #' @noRd
 .check_date <- function(x) {
-  if (start_date > lubridate::today() || (end_date > lubridate::today())) {
-    stop(
-      call. = FALSE,
-      sprintf("The `start_date` nor `end_date` can neither one be past %s",
-              lubridate::today())
-    )
-  }
   tryCatch(
     x <- lubridate::parse_date_time(x,
                                     c(
@@ -65,6 +58,13 @@
     stop(call. = FALSE,
          "The start and end dates appear to be reversed.")
     return(invisible(NULL))
+  }
+  if (.start_date > lubridate::today() || (.end_date > lubridate::today())) {
+    stop(
+      call. = FALSE,
+      sprintf("The `start_date` nor `end_date` can neither one be past %s",
+              lubridate::today())
+    )
   }
 }
 
