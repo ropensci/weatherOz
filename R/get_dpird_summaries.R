@@ -126,11 +126,11 @@
 #'
 #'  * 'station_code',
 #'  * 'station_name',
-#'  * 'period.year',
-#'  * 'period.month',
-#'  * 'period.day',
-#'  * 'period.hour',
-#'  * 'period.minute'
+#'  * 'period_year',
+#'  * 'period_month',
+#'  * 'period_day',
+#'  * 'period_hour',
+#'  * 'period_minute' and if 'period_month' or finer is present,
 #'  * 'date' (a combination of year, month, day, hour, minute as appropriate).
 #'
 #' @note Please note this function converts date-time columns from Coordinated
@@ -316,8 +316,6 @@ get_dpird_summaries <- function(station_code,
       .which_values = which_values
     )
 
-  .set_snake_case_names(out)
-
   out[, period.from := NULL]
   out[, period.to := NULL]
 
@@ -374,17 +372,19 @@ get_dpird_summaries <- function(station_code,
     .SDcols = grep("time", colnames(out))]
   }
 
+  .set_snake_case_names(out)
+
   data.table::setcolorder(out, order(names(out)))
   data.table::setcolorder(
     out,
     c(
       "station_code",
       "station_name",
-      "period.year",
-      "period.month",
-      "period.day",
-      "period.hour",
-      "period.minute"
+      "period_year",
+      "period_month",
+      "period_day",
+      "period_hour",
+      "period_minute"
     )
   )
 
