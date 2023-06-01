@@ -180,7 +180,7 @@
               likely_states[1],
               likely_states[2],
               likely_states[3]
-    ))
+      ))
   }
 }
 
@@ -474,10 +474,10 @@
          "This function only works on `data.tables`.")
   }
   data.table::setnames(x, old = names(x),
-                              new = gsub(" ", "_", tolower(
-                                gsub("(.)([A-Z])", "\\1 \\2",
-                                     names(x))
-                              )))
+                       new = gsub(" ", "_", tolower(
+                         gsub("(.)([A-Z])", "\\1 \\2",
+                              names(x))
+                       )))
   data.table::setnames(x, old = names(x),
                        new = gsub(".", "_", names(x), fixed = TRUE))
 }
