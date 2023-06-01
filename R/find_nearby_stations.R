@@ -11,7 +11,7 @@
 #'   (DD) (WGS84).
 #' @param longitude A `numeric` value for longitude expressed as decimal degrees
 #'  (DD) (WGS84).
-#' @param station_code A `string` with the station code for the station of
+#' @param station_code A `string` with the station ID code for the station of
 #' interest. Optional and defaults to `NULL`.
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'  the station or location of interest.  Defaults to 100 km.
@@ -286,6 +286,10 @@ find_nearby_stations <- function(latitude = NULL,
         )
       )
 
+    x <-
+      x[distance %in%
+          x[(distance <= distance_km)]$distance]
+
     return(x)
 
   } else if (is.null(station_code)) {
@@ -519,10 +523,10 @@ find_nearby_stations <- function(latitude = NULL,
   r[, distance := round(distance, 1)]
   data.table::setkey(r, "station_code")
   data.table::setcolorder(r, c(1:5, 6, 8, 7))
+  data.table::setorderv(r, "distance")
 
   return(r[])
 }
-
 
 #' DPIRD API query parser for stations list
 #' Takes results from an API query to the DPIRD Weather API and formats it to a
@@ -564,6 +568,7 @@ find_nearby_stations <- function(latitude = NULL,
   data.table::setcolorder(out, c(1:4, 8, 5, 6, 7))
   data.table::setnames(out, c(6, 7), c("elev_m", "owner"))
   out <- out[owner %notin% "DPIRDTST"]
+  data.table::setorderv(out, "distance")
 
   return(out)
 }
