@@ -85,15 +85,32 @@ get_dpird_availability <-
       .check_date_order(start_date, end_date)
     }
 
+    # set up "&select=values"
+    ## if 'start_date' is not set, we append station_code and station_name
     which_values <- c(which_values, "stationCode", "stationName")
 
-    query_list <- list(
-      stationCode = station_code,
-      startDate = start_date,
-      endDate = end_date,
-      select = paste(which_values, collapse = ","),
-      api_key = api_key
-    )
+    ## if 'start_date' is specified, we only request the availability for the
+    ## period and the station_code and station_name
+    if (!is.null(start_date)) {
+      which_values <- c("stationCode", "stationName", "availabilityPeriod")
+    }
+
+    if (!is.null(station_code)) {
+      query_list <- list(
+        select = paste(which_values, collapse = ","),
+        stationCode = paste(station_code, collapse = ","),
+        startDate = start_date,
+        endDate = end_date,
+        api_key = api_key
+      )
+    } else {
+      query_list <- list(
+        select = paste(which_values, collapse = ","),
+        startDate = start_date,
+        endDate = end_date,
+        api_key = api_key
+      )
+    }
 
     # Define the query URL by OS due to issues with WindowsOS
     if (Sys.info()[["sysname"]] == "Windows") {
@@ -108,14 +125,34 @@ get_dpird_availability <-
                                     .query_list = query_list,
                                     .limit = 1000)
 
-    out <- .parse_availability(.ret_list = return_list)
+    out <- .parse_availability(.ret_list = return_list,
+                               .start_date = start_date)
 
     .set_snake_case_names(out)
 
-    out[, station_code := station_code]
+    if (!is.null(start_date)) {
+      out[, start_date := start_date]
+      out[, end_date := end_date]
+      data.table::setnames(
+        out,
+        old = c("9_am", "12_am"),
+        new = c("availability_since_9_am",
+                "availability_since_12_am")
+      )
+
+      data.table::setcolorder(out,
+                              c("station_code",
+                                "station_name",
+                                "start_date",
+                                "end_date"))
+    }
+
+    data.table::setcolorder(out,
+                            c("station_code",
+                              "station_name"))
+
     data.table::setkey(x = out, cols = station_code)
 
-    data.table::setcolorder(out, c("station_code", "station_name"))
     return(out)
   }
 
@@ -132,17 +169,36 @@ get_dpird_availability <-
 #' @noRd
 #' @keywords Internal
 #'
-.parse_availability <- function(.ret_list) {
+.parse_availability <- function(.ret_list, .start_date) {
+
   x <- jsonlite::fromJSON(.ret_list[[1]]$parse("UTF8"),
                           simplifyVector = TRUE)
 
+  # start with no specific period requested and parse the resulting df, easy
+  if (is.null(.start_date)) {
+    y <- data.table::setDT(
+      list(
+        stationCode = x$collection$stationCode,
+        stationName = x$collection$stationName
+      )
+    )
+
+    out <- data.table::as.data.table(cbind(
+      y, data.table::as.data.table(x$collection$availability)
+    ))
+
+    out[, period := NULL]
+
+  } else {
   y <- data.table::setDT(
     list(
       stationCode = x$collection$stationCode,
       stationName = x$collection$stationName
-    )
-  )
+    ))
 
-  y <-
-    data.table::as.data.table(cbind(y, data.table::as.data.table(x$collection$availability)))
+    out <- data.table::as.data.table(cbind(
+      y, x$collection$availability$period
+    ))
+  }
+  return(out)
 }
