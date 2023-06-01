@@ -20,7 +20,7 @@ find_nearby_stations(
 \item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
 (DD) (WGS84).}
 
-\item{station_code}{A \code{string} with the station ID code for the station of
+\item{station_code}{A \code{string} with the station code for the station of
 interest. Optional and defaults to \code{NULL}.}
 
 \item{distance_km}{A \code{numeric} value for distance to limit the search from
