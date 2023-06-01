@@ -16,10 +16,11 @@ http_interactions:
       explanation: Request fulfilled, document follows
     headers:
       cache-control: no-cache, must-revalidate
+      connection: keep-alive
       content-language: en
       content-length: '1059'
       content-type: application/json; charset=utf-8
-      date: Thu, 01 Jun 2023 05:26:02 GMT
+      date: Thu, 01 Jun 2023 05:56:10 GMT
       expires: '0'
       ratelimit-limit: '10'
       ratelimit-remaining: '9'
@@ -32,13 +33,12 @@ http_interactions:
       via: kong/2.1.4.6-enterprise-edition
       x-api-name: weather
       x-api-version: v2.7.0
-      x-cnection: close
-      x-correlation-id: d942eb20-7f7a-4615-b563-9abcf01c571d
-      x-kong-proxy-latency: '7'
-      x-kong-upstream-latency: '275'
+      x-correlation-id: 5d0aa83e-f242-42fd-a846-88edc54a9be3
+      x-kong-proxy-latency: '8'
+      x-kong-upstream-latency: '305'
       x-ratelimit-limit-hour: '4000'
       x-ratelimit-limit-second: '10'
-      x-ratelimit-remaining-hour: '3985'
+      x-ratelimit-remaining-hour: '3972'
       x-ratelimit-remaining-second: '9'
     body:
       encoding: ''
@@ -46,5 +46,5 @@ http_interactions:
       string: '{"metadata":{"status":200,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/availability\/?endDate=2023-04-30&limit=1000&offset=0&select=stationCode%2CstationName%2CavailabilityPeriod&startDate=2023-04-01&stationCode=BD002%2CSP"}],"collection":{"count":2,"limit":1000,"offset":0,"links":[{"rel":"first","href":null},{"rel":"previous","href":null},{"rel":"next","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/availability\/?endDate=2023-04-30&limit=1000&select=stationCode%2CstationName%2CavailabilityPeriod&startDate=2023-04-01&stationCode=BD002%2CSP&offset=0"},{"rel":"last","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/availability\/?endDate=2023-04-30&limit=1000&select=stationCode%2CstationName%2CavailabilityPeriod&startDate=2023-04-01&stationCode=BD002%2CSP&offset=0"}]}},"collection":[{"stationCode":"BD002","stationName":"Mount
         Ney","availability":{"period":{"9AM":null,"12AM":null}}},{"stationCode":"SP","stationName":"South
         Perth","availability":{"period":{"9AM":100,"12AM":100}}}]}'
-  recorded_at: 2023-06-01 05:26:04 GMT
+  recorded_at: 2023-06-01 05:56:11 GMT
   recorded_with: vcr/1.2.0, webmockr/0.9.0
