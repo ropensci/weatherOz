@@ -25,7 +25,7 @@
 #'  network.
 #'
 #' @return a [data.table::data.table] with 'station_code', 'station_name',
-#'  'latitude', 'longitude', 'elevation', 'state', 'owner', and 'distance'.
+#'  'latitude', 'longitude', 'elev_m', 'state', 'owner', and 'distance'.
 #'  Data are sorted by increasing distance from station or location of interest.
 #'
 #' @note You can request your own \acronym{API} key from \acronym{DPIRD} for
@@ -484,7 +484,7 @@ find_nearby_stations <- function(latitude = NULL,
                 "latitude",
                 "longitude",
                 "state",
-                "elevation",
+                "elev_m",
                 "distance")
 
   # if `.station_code` is not provided, fetch all stations in AU. Otherwise, use
@@ -562,7 +562,7 @@ find_nearby_stations <- function(latitude = NULL,
 
   out[, state := "WA"]
   data.table::setcolorder(out, c(1:4, 8, 5, 6, 7))
-  data.table::setnames(out, c(6, 7), c("elevation", "owner"))
+  data.table::setnames(out, c(6, 7), c("elev_m", "owner"))
   out <- out[owner %notin% "DPIRDTST"]
 
   return(out)
