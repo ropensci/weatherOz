@@ -4,3 +4,5 @@ R/zzz.R
 # exclude print function file
 R/weatherOz_print_functions.R
 
+# exclude global objects
+R/globals.R
