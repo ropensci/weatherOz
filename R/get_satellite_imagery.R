@@ -144,7 +144,7 @@ get_satellite_imagery <- get_satellite <-
            scans = 1,
            compat = "terra") {
     if (length(unique(substr(product_id, 1, 8))) != 1) {
-      stop("\nweatherOz only supports working with one Product ID at a time\n")
+      stop("{weatherOz} only supports working with one Product ID at a time\n")
     }
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
@@ -216,15 +216,8 @@ get_satellite_imagery <- get_satellite <-
         read_tif <- stars::read_stars(.x = files)
       }
     } else {
-      stop(
-        paste0(
-          "\nCannot create a `SpatRaster` object of ",
-          files,
-          ".\n",
-          "\nPerhaps the file download corrupted?\n",
-          "\nYou might also check your cache directory for the files.\n"
-        )
-      )
+      stop(call. = FALSE,
+           sprintf("Cannot read the files using {%s} for '%s'.", compat, files))
     }
     return(read_tif)
   }
@@ -267,8 +260,8 @@ get_satellite_imagery <- get_satellite <-
 #' @noRd
 .ftp_images <- function(product_id, bom_server) {
   # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- paste0("{weatherOz} R package (",
-                      utils::packageVersion("weatherOz"))
+  USERAGENT <- sprintf("{weatherOz} R package (%s)",
+                       utils::packageVersion("weatherOz"))
   # set a custom user-agent, restore original settings on exit
   # required for #130 - BOM returns 403 for RStudio
   op <- options()
@@ -371,7 +364,8 @@ get_satellite_imagery <- get_satellite <-
   # check if the Product ID requested provides any files on server
   if (length(tif_files) == 0 |
       tif_files[1] == "ftp://ftp.bom.gov.au/anon/gen/gms/") {
-    stop(paste0("\nSorry, no files are currently available for ", product_id))
+    stop("Sorry, no files are currently available for ", product_id, ".",
+         call. = FALSE)
   }
   return(tif_files)
 }
