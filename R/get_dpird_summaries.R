@@ -206,26 +206,26 @@ get_dpird_summaries <- function(station_code,
   }
 
   # validate user provided dates
-    start_date <- .check_date(start_date)
-    end_date <- .check_date(end_date)
-    .check_date_order(start_date, end_date)
+  start_date <- .check_date(start_date)
+  end_date <- .check_date(end_date)
+  .check_date_order(start_date, end_date)
 
   # Match time interval query to user requests
   interval <- try(match.arg(interval,
-                         c("15min",
-                           "30min",
-                           "hourly",
-                           "daily",
-                           "monthly",
-                           "yearly"),
-                         several.ok = FALSE),
-               silent = TRUE)
+                            c("15min",
+                              "30min",
+                              "hourly",
+                              "daily",
+                              "monthly",
+                              "yearly"),
+                            several.ok = FALSE),
+                  silent = TRUE)
 
   # check API group
   if (api_group %notin% c("rtd", "all", "web")) {
     stop(call. = FALSE,
          "The `api_group` should be one of 'rtd', 'all' or 'web'."
-         )
+    )
   }
 
   request_interval <- lubridate::interval(start_date,
