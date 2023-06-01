@@ -1,12 +1,12 @@
 test_that("Error handling", {
-  skip_on_cran()
+  skip_if_offline()
   expect_error(get_available_imagery(product_id = "abcdc"))
   expect_error(get_satellite_imagery(product_id = "abcdc"))
   expect_error(get_satellite_imagery())
 })
 
-test_that("get_available_imagery functions properly", {
-  skip_on_cran()
+test_that("get_available_imagery returns a {terra} object properly", {
+  skip_if_offline()
   i <- get_available_imagery()
   expect_type(i, "character")
   expect_error(get_satellite_imagery(product_id = c("IDE00425", "IDE00420")))
@@ -16,8 +16,17 @@ test_that("get_available_imagery functions properly", {
   expect_s4_class(j, "SpatRaster")
 })
 
+test_that("get_available_imagery returns a {stars} object properly", {
+  skip_if_offline()
+  j <-
+    get_satellite_imagery(product_id = "IDE00425",
+                          scans = 1,
+                          compat = "stars")
+  expect_s3_class(j, "stars")
+})
+
 test_that("product ID urls are properly handled", {
-  skip_on_cran()
+  skip_if_offline()
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
 
   pid <- "IDE00420"
