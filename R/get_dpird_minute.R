@@ -229,11 +229,11 @@ get_dpird_minute <- function(station_code,
     return(message("There are no available minute data for this query."))
   }
 
-  out <- data.table::rbindlist(parsed)
+  parsed_dt <- data.table::rbindlist(parsed)
 
   # get the nested list columns and convert them to data.table objects
   col_classes <-
-    vapply(out, class, FUN.VALUE = character(1))
+    vapply(parsed_dt, class, FUN.VALUE = character(1))
 
   col_lists <- which(col_classes == "list")
 
@@ -243,47 +243,104 @@ get_dpird_minute <- function(station_code,
   j <- 1
   for (i in col_lists) {
     new_df_list[[j]] <-
-      data.table::rbindlist(lapply(out[[i]],
+      data.table::rbindlist(lapply(parsed_dt[[i]],
                                    function(x)
                                      as.data.frame(t(unlist(
                                        x
                                      )))))
-    # drop the column that's now in the new list to be added to `out`
-    out[, names(new_df_list[j]) := NULL]
+    # drop the column that's now in the new list to be added to `parsed_dt`
+    parsed_dt[, names(new_df_list[j]) := NULL]
     j <- j + 1
   }
 
-  out <- cbind(out, do.call(what = cbind, args = new_df_list))
+  parsed_dt <- cbind(parsed_dt, do.call(what = cbind, args = new_df_list))
 
-  if ("wind.height1" %in% names(out)) {
-    out = data.table::melt(
-      out,
-      measure = list(
-        "wind.height1",
-        "wind.height2",
-        "wind.avg.speed1",
-        "wind.avg.speed2",
-        "wind.avg.direction.compassPoint1",
-        "wind.avg.direction.compassPoint2",
-        "wind.avg.direction.degrees1",
-        "wind.avg.direction.degrees2",
-        "wind.min.speed1",
-        "wind.min.speed2",
-        "wind.max.speed1",
-        "wind.max.speed2"
-      ),
-      value.name = c(
-        "wind.height",
-        "wind.avg.speed",
-        "wind.avg.direction.compassPoint",
-        "wind.avg.direction.degrees",
-        "wind.min.speed",
-        "wind.max.speed"
+  if ("wind.height1" %in% names(parsed_dt)) {
+
+    ## TODO: enable this when {data.table} gets its act together and exports
+    #        `patterns` properly to avoid CRAN NOTES
+    # out <- data.table::melt(
+    #   out,
+    #   measure = patterns(
+    #     "wind.height",
+    #     "wind.avg.speed",
+    #     "wind.avg.direction.compassPoint",
+    #     "wind.avg.direction.degrees",
+    #     "wind.min.speed",
+    #     "wind.max.speed"
+    #   ),
+    #   value.name = c(
+    #     "wind.height",
+    #     "wind.avg.speed",
+    #     "wind.avg.direction.compassPoint",
+    #     "wind.avg.direction.degrees",
+    #     "wind.min.speed",
+    #     "wind.max.speed"
+    #   )
+    # )
+    # out[, variable := NULL]
+
+    out <- data.table::as.data.table(
+      stats::reshape(
+        parsed_dt,
+        idvar = "dateTime",
+        direction = "long",
+        varying = list(
+          c(
+            which(names(parsed_dt) %in% "wind.avg.speed1"),
+            which(names(parsed_dt) %in% "wind.avg.speed2")
+          ),
+          c(
+            which(names(parsed_dt) %in% "wind.avg.direction.compassPoint1"),
+            which(names(parsed_dt) %in% "wind.avg.direction.compassPoint2")
+          ),
+          c(
+            which(names(parsed_dt) %in% "wind.avg.direction.degrees1"),
+            which(names(parsed_dt) %in% "wind.avg.direction.degrees2")
+          ),
+          c(
+            which(names(parsed_dt) %in% "wind.min.speed1"),
+            which(names(parsed_dt) %in% "wind.min.speed2")
+          ),
+          c(
+            which(names(parsed_dt) %in% "wind.max.speed1"),
+            which(names(parsed_dt) %in% "wind.max.speed2")
+          )
+        ),
+        timevar = "wind.height",
+        times = c(parsed_dt$wind.height1[[1]],
+                  parsed_dt$wind.height2[[1]]),
+        v.names = c(
+          "wind.avg.speed",
+          "wind.avg.direction.compassPoint",
+          "wind.avg.direction.degrees",
+          "wind.min.speed",
+          "wind.max.speed"
+        )
       )
     )
 
-    out[, variable := NULL]
+    out[, wind.height1 := NULL]
+    out[, wind.height2 := NULL]
   }
   return(out)
 }
 
+dw <- read.table(
+  header = T,
+  text = '
+ sbj f1.avg f1.sd f2.avg f2.sd  blabla
+   A   10    6     50     10      bA
+   B   12    5     70     11      bB
+   C   20    7     20     8       bC
+   D   22    8     22     9       bD
+ '
+)
+
+reshape(
+  dw,
+  idvar = "sbj",
+  varying = list(c(2, 4), c(3, 5)),
+  v.names = c("ave", "sd"),
+  direction = "long"
+)
