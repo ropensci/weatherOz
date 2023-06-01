@@ -15,7 +15,6 @@ if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
   }
 }
 
-
 invisible(vcr::vcr_configure(
   dir = vcr_dir,
   filter_sensitive_data =

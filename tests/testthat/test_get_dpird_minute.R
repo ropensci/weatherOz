@@ -1,3 +1,4 @@
+
 test_that("user-input checks stop if invalid values are provided", {
   # missing station code
   expect_error(
@@ -53,9 +54,8 @@ test_that("user-input checks stop if invalid values are provided", {
   )
 })
 
-
 test_that("get_dpird_minute() returns minute values", {
-  vcr::use_cassette("dpird_minute_summaries", {
+  vcr::use_cassette("dpird_minute_values", {
     skip_if_offline()
     x <- get_dpird_minute(
       station_code = "BI",
