@@ -47,6 +47,8 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       # DPIRD API key for tests
       DPIRD_API_KEY: ${{secrets.DPIRD_API_KEY}}
+      # SILO API key for tests
+      SILO_API_KEY: ${{secrets.SILO_API_KEY}}
 
     steps:
       - uses: actions/checkout@v3
