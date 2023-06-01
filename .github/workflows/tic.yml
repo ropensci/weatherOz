@@ -45,6 +45,8 @@ jobs:
       BUILD_PKGDOWN: ${{ matrix.config.pkgdown }}
       # use GITHUB_TOKEN from GitHub to workaround rate limits in {remotes}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # DPIRD API key for tests
+      DPIRD_API_KEY: ${{secrets.DPIRD_API_KEY}}
 
     steps:
       - uses: actions/checkout@v3
