@@ -1,4 +1,5 @@
 
+
 #' Get DPIRD weather station availability metadata
 #'
 #' Get the availability metadata weather stations.
@@ -58,7 +59,6 @@ get_dpird_availability <-
            end_date = NULL,
            which_values = "availability",
            api_key) {
-
     # Error if api_key is not provided
     if (missing(api_key)) {
       stop(
@@ -85,9 +85,7 @@ get_dpird_availability <-
       .check_date_order(start_date, end_date)
     }
 
-    if (!is.null(station_code)) {
-      which_values <- c(which_values, "stationCode", "stationName", "dateTime")
-    }
+    which_values <- c(which_values, "stationCode", "stationName")
 
     query_list <- list(
       stationCode = station_code,
@@ -145,5 +143,6 @@ get_dpird_availability <-
     )
   )
 
-  y <- cbind(y, x$collection$availability)
+  y <-
+    data.table::as.data.table(cbind(y, data.table::as.data.table(x$collection$availability)))
 }
