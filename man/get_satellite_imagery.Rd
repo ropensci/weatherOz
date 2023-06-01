@@ -4,30 +4,38 @@
 \alias{get_satellite_imagery}
 \title{Get \acronym{BOM} Satellite GeoTIFF Imagery}
 \usage{
-get_satellite_imagery(product_id, scans = 1, pkg = "terra")
+get_satellite_imagery(product_id, scans = 1, compat = "terra")
 }
 \arguments{
 \item{product_id}{\code{Character}. \acronym{BOM} product ID to download in
-'GeoTIFF' format and import as a \link[terra:SpatRaster-class]{terra::SpatRaster} or \link[stars:stars]{stars::stars}
-class object.  A vector of values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be
-used here. Value is required.}
+'GeoTIFF' format and import as a \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class
+object.  A vector of values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.
+Value is required.}
 
-\item{scans}{\code{Numeric}. Number of scans to download, starting with most
+\item{scans}{\code{Integer}. Number of scans to download, starting with most
 recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
 available , 6 - the most recent hour available, 12 - the most recent 2 hours
-available, etc.  Negating will return the oldest files first.  Defaults to 1.
-Value is optional.}
+available, etc.  Negating will return the oldest files first.  Defaults to
+\enumerate{
+\item Value is optional.
+}}
+
+\item{compat}{\code{Character}. A string indicating the \R package with which the
+returned imagery should be formatted for use, one of \link{terra} or
+\link{stars}.  Defaults to 'terra'.}
 }
 \value{
-A \link[terra:SpatRaster-class]{terra::SpatRaster} object of GeoTIFF images with layers named by
-\acronym{BOM} Product ID, timestamp and band.
+A \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} object as selected by the user by
+specifying \code{compat} of GeoTIFF images with layers named by \acronym{BOM}
+product ID, timestamp and band.
 }
 \description{
 Fetch \acronym{BOM} satellite GeoTIFF imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a raster
-\link[terra:SpatRaster-class]{terra::SpatRaster} object of 'GeoTIFF' files. Files are available at ten
-minutes update frequency with a 24-hour delete time.  It is suggested to
-check file availability first by using \code{\link[=get_available_imagery]{get_available_imagery()}}.
+\link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} object of 'GeoTIFF' files. Files are
+available at ten minutes update frequency with a 24-hour delete time.  It is
+suggested to check file availability first by using
+\code{\link[=get_available_imagery]{get_available_imagery()}}.
 }
 \details{
 Valid \acronym{BOM} satellite Product IDs for use with

@@ -9,8 +9,8 @@
 #' function.
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID of interest for which
-#' a list of available images will be returned.  Defaults to all images
-#' currently available.
+#'  a list of available images will be returned.  Defaults to all images
+#'  currently available.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for 'GeoTIFF' files
 #'  include:
@@ -63,21 +63,24 @@ get_available_imagery <- function(product_id = "all") {
 #' Get \acronym{BOM} Satellite GeoTIFF Imagery
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
-#' <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#' [terra::SpatRaster] object of 'GeoTIFF' files. Files are available at ten
-#'  minutes update frequency with a 24-hour delete time.  It is suggested to
-#'  check file availability first by using [get_available_imagery()].
+#'  <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
+#'  [terra::SpatRaster] or [stars] object of 'GeoTIFF' files. Files are
+#'  available at ten minutes update frequency with a 24-hour delete time.  It is
+#'  suggested to check file availability first by using
+#'  [get_available_imagery()].
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID to download in
-#' 'GeoTIFF' format and import as a [terra::SpatRaster] or [stars::stars]
-#' class object.  A vector of values from [get_available_imagery()] may be
-#' used here. Value is required.
-#' @param scans `Numeric`. Number of scans to download, starting with most
-#' recent and progressing backwards, *e.g.*, 1 - the most recent single scan
-#' available , 6 - the most recent hour available, 12 - the most recent 2 hours
-#' available, etc.  Negating will return the oldest files first.  Defaults to 1.
-#' Value is optional.
-#' @param
+#'  'GeoTIFF' format and import as a [terra::SpatRaster] or [stars] class
+#'  object.  A vector of values from [get_available_imagery()] may be used here.
+#'  Value is required.
+#' @param scans `Integer`. Number of scans to download, starting with most
+#'  recent and progressing backwards, *e.g.*, 1 - the most recent single scan
+#'  available , 6 - the most recent hour available, 12 - the most recent 2 hours
+#'  available, etc.  Negating will return the oldest files first.  Defaults to
+#'  1.  Value is optional.
+#' @param compat `Character`. A string indicating the \R package with which the
+#'  returned imagery should be formatted for use, one of [terra] or
+#'  [stars].  Defaults to 'terra'.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
 #' \var{product_id} include:
@@ -108,8 +111,9 @@ get_available_imagery <- function(product_id = "all") {
 #' [get_available_imagery()]
 #'
 #' @return
-#' A [terra::SpatRaster] object of GeoTIFF images with layers named by
-#'  \acronym{BOM} Product ID, timestamp and band.
+#' A [terra::SpatRaster] or [stars] object as selected by the user by
+#' specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
+#' product ID, timestamp and band.
 #'
 #' @note The original \pkg{bomrang} version of this function supported local
 #' file caching using \CRANpkg{hoardr}. This version does not support this
@@ -138,7 +142,7 @@ get_available_imagery <- function(product_id = "all") {
 get_satellite_imagery <- get_satellite <-
   function(product_id,
            scans = 1,
-           pkg = "terra") {
+           compat = "terra") {
     if (length(unique(substr(product_id, 1, 8))) != 1) {
       stop("\nweatherOz only supports working with one Product ID at a time\n")
     }
@@ -199,14 +203,18 @@ get_satellite_imagery <- get_satellite <-
                     package = "weatherOz")
       ))
     })
-    # create SpatRaster object of the GeoTIFF files
+    # create SpatRaster or stars object of the GeoTIFF files
     files <-
       list.files(tempdir(), pattern = "\\.tif$", full.names = TRUE)
     files <-
       basename(files)[basename(files) %in% basename(tif_files)]
     files <- file.path(tempdir(), files)
     if (all(substr(files, nchar(files) - 3, nchar(files)) == ".tif")) {
-      read_tif <- terra::rast(files)
+      if (compat == "terra") {
+        read_tif <- terra::rast(x = files)
+      } else {
+        read_tif <- stars::read_stars(.x = files)
+      }
     } else {
       stop(
         paste0(
