@@ -151,8 +151,8 @@ get_extreme_weather <- function(station_code,
 
   if (which_values != "all" &
       which_values %notin% dpird_extreme_weather_values) {
-      stop(call. = FALSE,
-           "You have specified a value not found in the 'API'.")
+    stop(call. = FALSE,
+         "You have specified a value not found in the 'API'.")
   }
 
   if (which_values == "all") {
@@ -171,9 +171,9 @@ get_extreme_weather <- function(station_code,
   )
 
   out <- .query_dpird_api(.base_url =
-                     "https://api.dpird.wa.gov.au/v2/weather/stations/extreme-conditions",
-                   .query_list = query_list,
-                   .limit = 1L)
+                            "https://api.dpird.wa.gov.au/v2/weather/stations/extreme-conditions",
+                          .query_list = query_list,
+                          .limit = 1L)
   .set_snake_case_names(out)
 
   out[, station_code := station_code]
