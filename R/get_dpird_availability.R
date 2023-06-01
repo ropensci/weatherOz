@@ -1,5 +1,4 @@
 
-
 #' Get DPIRD weather station availability metadata
 #'
 #' Get the availability metadata weather stations.
@@ -92,7 +91,8 @@ get_dpird_availability <-
     ## if 'start_date' is specified, we only request the availability for the
     ## period and the station_code and station_name
     if (!is.null(start_date)) {
-      which_values <- c("stationCode", "stationName", "availabilityPeriod")
+      which_values <-
+        c("stationCode", "stationName", "availabilityPeriod")
     }
 
     if (!is.null(station_code)) {
@@ -170,7 +170,6 @@ get_dpird_availability <-
 #' @keywords Internal
 #'
 .parse_availability <- function(.ret_list, .start_date) {
-
   x <- jsonlite::fromJSON(.ret_list[[1]]$parse("UTF8"),
                           simplifyVector = TRUE)
 
@@ -183,22 +182,20 @@ get_dpird_availability <-
       )
     )
 
-    out <- data.table::as.data.table(cbind(
-      y, data.table::as.data.table(x$collection$availability)
-    ))
+    out <- data.table::as.data.table(
+      cbind(y, data.table::as.data.table(x$collection$availability)))
 
     out[, period := NULL]
 
   } else {
-  y <- data.table::setDT(
-    list(
-      stationCode = x$collection$stationCode,
-      stationName = x$collection$stationName
-    ))
+    y <- data.table::setDT(
+      list(
+        stationCode = x$collection$stationCode,
+        stationName = x$collection$stationName
+      )
+    )
 
-    out <- data.table::as.data.table(cbind(
-      y, x$collection$availability$period
-    ))
+    out <- data.table::as.data.table(cbind(y, x$collection$availability$period))
   }
   return(out)
 }
