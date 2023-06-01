@@ -25,7 +25,7 @@ returned imagery should be formatted for use, one of \link{terra} or
 \link{stars}.  Defaults to 'terra'.}
 }
 \value{
-A \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} object as selected by the user by
+A \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class object as selected by the user by
 specifying \code{compat} of GeoTIFF images with layers named by \acronym{BOM}
 product ID, timestamp and band.
 }

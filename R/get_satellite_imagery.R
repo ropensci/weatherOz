@@ -111,7 +111,7 @@ get_available_imagery <- function(product_id = "all") {
 #' [get_available_imagery()]
 #'
 #' @return
-#' A [terra::SpatRaster] or [stars] object as selected by the user by
+#' A [terra::SpatRaster] or [stars] class object as selected by the user by
 #' specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
 #' product ID, timestamp and band.
 #'
