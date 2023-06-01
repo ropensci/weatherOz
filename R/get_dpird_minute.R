@@ -256,30 +256,6 @@ get_dpird_minute <- function(station_code,
   parsed_dt <- cbind(parsed_dt, do.call(what = cbind, args = new_df_list))
 
   if ("wind.height1" %in% names(parsed_dt)) {
-
-    ## TODO: enable this when {data.table} gets its act together and exports
-    #        `patterns` properly to avoid CRAN NOTES
-    # out <- data.table::melt(
-    #   out,
-    #   measure = patterns(
-    #     "wind.height",
-    #     "wind.avg.speed",
-    #     "wind.avg.direction.compassPoint",
-    #     "wind.avg.direction.degrees",
-    #     "wind.min.speed",
-    #     "wind.max.speed"
-    #   ),
-    #   value.name = c(
-    #     "wind.height",
-    #     "wind.avg.speed",
-    #     "wind.avg.direction.compassPoint",
-    #     "wind.avg.direction.degrees",
-    #     "wind.min.speed",
-    #     "wind.max.speed"
-    #   )
-    # )
-    # out[, variable := NULL]
-
     out <- data.table::as.data.table(
       stats::reshape(
         parsed_dt,
