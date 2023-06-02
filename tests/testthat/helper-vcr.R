@@ -6,15 +6,14 @@ if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
   if (dir.exists(vcr_dir)) {
     # Fake API token to fool our package
     Sys.setenv("GITHUB_PAT" = "foobar")
-    Sys.setenv("DPIRD_API_KEY" = "foobar")
-    Sys.setenv("SILO_API_KEY" = "foobar")
   } else {
     # If there's no mock files nor API token, impossible to run tests
     stop("No API key nor cassettes, tests cannot be run.",
          call. = FALSE)
   }
 }
-
+withr::local_envvar("DPIRD_API_KEY" = "blablabla")
+withr::local_envvar("SILO_API_KEY" = "blablabla")
 invisible(vcr::vcr_configure(
   dir = vcr_dir,
   filter_sensitive_data =
