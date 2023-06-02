@@ -23,6 +23,8 @@ if (Sys.getenv("SILO_API_KEY") == "") {
   Sys.setenv("SILO_API_KEY" = "abc123")
 }
 
+Sys.setenv("VCR_VERBOSE_ERRORS" = TRUE)
+
 invisible(vcr::vcr_configure(
   dir = vcr_dir,
   filter_sensitive_data =
