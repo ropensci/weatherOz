@@ -104,10 +104,6 @@ get_dpird_minute <- function(station_code,
          "The API only supports queries for a maximum 24hr interval.")
   }
 
-  # the `station_code` is null here because we assemble it next due to issues
-  # Windows accessing the API properly at the proper URL
-  # TODO: Figure out how to fix this
-
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
@@ -122,13 +118,13 @@ get_dpird_minute <- function(station_code,
   )
 
   # Check the operating system
-  os <- Sys.info()[["sysname"]]
+  # os <- Sys.info()[["sysname"]]
 
   # Define the query URLs
   # if (os == "Windows") {
-  #   base_dpird_url <- "https://api.agric.wa.gov.au/v2/"
+     base_dpird_url <- "https://api.agric.wa.gov.au/v2/"
   # } else {
-    base_dpird_url <- "https://api.dpird.wa.gov.au/v2/"
+  #  base_dpird_url <- "https://api.dpird.wa.gov.au/v2/"
   # }
 
   minute_base_url = sprintf("%sweather/stations/%s/data",
