@@ -12,8 +12,17 @@ if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
          call. = FALSE)
   }
 }
-withr::local_envvar("DPIRD_API_KEY" = "blablabla")
-withr::local_envvar("SILO_API_KEY" = "blablabla")
+
+# Set up a fake API key if none is saved
+if (Sys.getenv("DPIRD_API_KEY") == "") {
+  Sys.setenv("DPIRD_API_KEY" = "1234")
+}
+
+# Set up a fake API key if none is saved
+if (Sys.getenv("SILO_API_KEY") == "") {
+  Sys.setenv("SILO_API_KEY" = "1234")
+}
+
 invisible(vcr::vcr_configure(
   dir = vcr_dir,
   filter_sensitive_data =
