@@ -124,7 +124,12 @@ get_dpird_minute <- function(station_code,
   # Check the operating system
   os <- Sys.info()[["sysname"]]
 
+  # Define the query URLs
+  # if (os == "Windows") {
+  #   base_dpird_url <- "https://api.agric.wa.gov.au/v2/"
+  # } else {
     base_dpird_url <- "https://api.dpird.wa.gov.au/v2/"
+  # }
 
   minute_base_url = sprintf("%sweather/stations/%s/data",
                             base_dpird_url,
