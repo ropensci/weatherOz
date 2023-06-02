@@ -13,14 +13,14 @@ if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
   }
 }
 
-# Set up a fake API key if none is saved
+# Set up a fake API key if none is available in the environment
 if (Sys.getenv("DPIRD_API_KEY") == "") {
-  Sys.setenv("DPIRD_API_KEY" = "1234")
+  Sys.setenv("DPIRD_API_KEY" = "ou812")
 }
 
 # Set up a fake API key if none is saved
 if (Sys.getenv("SILO_API_KEY") == "") {
-  Sys.setenv("SILO_API_KEY" = "1234")
+  Sys.setenv("SILO_API_KEY" = "abc123")
 }
 
 invisible(vcr::vcr_configure(

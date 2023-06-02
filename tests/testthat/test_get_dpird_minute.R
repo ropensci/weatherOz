@@ -60,7 +60,7 @@ test_that("get_dpird_minute() returns minute values", {
     x <- get_dpird_minute(
       station_code = "BI",
       start_date_time = "2018-02-01 13:00:00",
-      minutes = 1440,
+      minutes = 30,
       api_key = Sys.getenv("DPIRD_API_KEY"),
       which_values = c("airTemperature",
                        "solarIrradiance",
