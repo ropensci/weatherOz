@@ -66,7 +66,9 @@ test_that("get_dpird_minute() returns minute values", {
                        "solarIrradiance",
                        "wind")
     )
-  })
+  },
+  record = "new_episodes"
+  )
   expect_s3_class(x, "data.table")
   expect_equal(ncol(x), 10)
   expect_named(

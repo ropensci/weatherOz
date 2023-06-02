@@ -34,7 +34,9 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
                                      status = TRUE,
                                      rich = FALSE
                                      )
-            })
+            },
+            record = "new_episodes"
+            )
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 11)
             expect_named(
@@ -62,7 +64,9 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
               x <-
                 get_station_metadata(which_api = "all",
                                      api_key = Sys.getenv("DPIRD_API_KEY"))
-            })
+            },
+            record = "new_episodes"
+            )
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 11)
             expect_named(

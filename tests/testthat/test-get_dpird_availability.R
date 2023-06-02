@@ -23,7 +23,9 @@ test_that("get_dpird_availability() returns values",
                 end_date = "20230430",
                 api_key = Sys.getenv("DPIRD_API_KEY")
               )
-            })
+            },
+            record = "new_episodes"
+            )
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 6)
             expect_named(
@@ -50,7 +52,9 @@ test_that("get_dpird_availability() returns values",
               skip_if_offline()
               x <- get_dpird_availability(api_key = Sys.getenv("DPIRD_API_KEY")
               )
-            })
+            },
+            record = "new_episodes"
+            )
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 15)
             expect_named(
