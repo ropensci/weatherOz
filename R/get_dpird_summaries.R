@@ -210,18 +210,33 @@ get_dpird_summaries <- function(station_code,
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
 
+  # Use `agrep()` to fuzzy match the user-requested time interval
+  approved_intervals <- c("15min",
+                          "30min",
+                          "hourly",
+                          "daily",
+                          "monthly",
+                          "yearly")
+
+  likely_interval <- agrep(
+    pattern = interval,
+    x = c("15min",
+          "30min",
+          "hourly",
+          "daily",
+          "monthly",
+          "yearly")
+  )
+
   # Match time interval query to user requests
-  interval <- try(match.arg(interval,
-                            c("15min",
-                              "30min",
-                              "hourly",
-                              "daily",
-                              "monthly",
-                              "yearly"),
+  interval <- try(match.arg(approved_intervals[likely_interval],
+                            approved_intervals,
                             several.ok = FALSE),
-                  silent = TRUE)
+                  silent = FALSE
+  )
 
   # check API group
+  api_group <- tolower(api_group)
   if (api_group %notin% c("rtd", "all", "web")) {
     stop(call. = FALSE,
          "The `api_group` should be one of 'rtd', 'all' or 'web'."
@@ -282,34 +297,19 @@ get_dpird_summaries <- function(station_code,
     limit = total_records_req
   )
 
-  # # Define the query URL by OS due to issues with WindowsOS
-  # if (Sys.info()[["sysname"]] == "Windows") {
-    base_url <-
-      "https://api.dpird.wa.gov.au/v2/weather/stations/summaries/"
-  # } else {
-  #   base_url <-
-  #     "https://api.dpird.wa.gov.au/v2/weather/stations/summaries/"
-  # }
-
   # set base URL according to interval
-  if (interval == "15min") {
-    base_url <- sprintf("%s15min", base_url)
-  } else if (interval == "30min") {
-    base_url <- sprintf("%s30min", base_url)
-  } else if (interval == "hourly") {
-    base_url <- sprintf("%shourly", base_url)
-  } else if (interval == "daily") {
-    base_url <- sprintf("%sdaily", base_url)
-  } else if (interval == "monthly") {
-    base_url <- sprintf("%smonthly", base_url)
-  } else if (interval == "yearly") {
-    base_url <- sprintf("%syearly", base_url)
-  }
+  end_point <- data.table::fcase(
+    interval == "15min", "stations/summaries/15min",
+    interval == "30min", "stations/summaries/30min",
+    interval == "hourly", "stations/summaries/hourly",
+    interval == "daily", "stations/summaries/daily",
+    interval == "monthly", "stations/summaries/monthly",
+    default = "stations/summaries/yearly")
 
   out <-
     .parse_summary(
       .ret_list = .query_dpird_api(
-        .base_url = base_url,
+        .end_point = end_point,
         .query_list = query_list,
         .limit = total_records_req
       ),
