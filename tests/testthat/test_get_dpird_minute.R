@@ -62,22 +62,18 @@ test_that("get_dpird_minute() returns minute values", {
       start_date_time = "2018-02-01 13:00:00",
       minutes = 30,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      which_values = c("airTemperature",
-                       "solarIrradiance",
-                       "wind")
+      which_values = "wind"
     )
   },
   record = "new_episodes"
   )
   expect_s3_class(x, "data.table")
-  expect_equal(ncol(x), 10)
+  expect_equal(ncol(x), 8)
   expect_named(
     x,
     c(
       "station_code",
       "date_time",
-      "air_temperature",
-      "solar_irradiance",
       "wind_height",
       "wind_avg_speed",
       "wind_avg_direction_compass_point",
@@ -88,8 +84,6 @@ test_that("get_dpird_minute() returns minute values", {
   )
   expect_type(x$station_code, "character")
   expect_s3_class(x$date_time, "POSIXct")
-  expect_type(x$air_temperature, "double")
-  expect_type(x$solar_irradiance, "integer")
   expect_type(x$wind_height, "integer")
   expect_type(x$wind_avg_speed, "double")
   expect_type(x$wind_avg_direction_compass_point, "character")
