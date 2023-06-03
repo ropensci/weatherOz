@@ -400,5 +400,101 @@ http_interactions:
         Department of Primary Industries and Regional Development (DPIRD)","startDate":"2016-03-24","endDate":null,"status":"open"},{"stationCode":"YU003","stationName":"Yuna
         North","latitude":-28.120861,"longitude":114.962611,"altitude":264,"owner":"WA
         Department of Primary Industries and Regional Development (DPIRD)","startDate":"2018-08-08","endDate":null,"status":"open"}]}'
-  recorded_at: 2023-06-02 05:41:53 GMT
+  recorded_at: 2023-06-03 09:17:29 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0
+- request:
+    method: get
+    uri: https://api.dpird.wa.gov.au/v2/weather/stations/stations/?offset=0&includeClosed=true&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus&group=api&api_key=<<<dpird_api_key>>>&offset=0&limit=300
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.88.1 r-curl/5.0.0 crul/1.4.0
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '404'
+      message: Not Found
+      explanation: Nothing matches the given URI
+    headers:
+      cache-control: no-cache, must-revalidate
+      connection: keep-alive
+      content-language: en
+      content-length: '389'
+      content-type: application/json; charset=utf-8
+      date: Sat, 03 Jun 2023 09:12:01 GMT
+      expires: '0'
+      ratelimit-limit: '10'
+      ratelimit-remaining: '9'
+      ratelimit-reset: '1'
+      server: Apache/2.4.38 (Debian)
+      status: HTTP/1.1 404 Not Found
+      vary:
+      - Accept
+      - Origin, Accept-Encoding
+      via: kong/2.1.4.6-enterprise-edition
+      x-api-name: weather
+      x-api-version: v2.7.0
+      x-correlation-id: 4deac189-7003-4686-872f-510323bfbfcf
+      x-kong-proxy-latency: '6'
+      x-kong-upstream-latency: '190'
+      x-ratelimit-limit-hour: '4000'
+      x-ratelimit-limit-second: '10'
+      x-ratelimit-remaining-hour: '3996'
+      x-ratelimit-remaining-second: '9'
+    body:
+      encoding: ''
+      file: no
+      string: '{"metadata":{"status":404,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/stations\/?group=api&includeClosed=true&limit=300&offset=0&offset=0&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus"}]},"error":{"code":404,"message":"Not
+        Found","description":"Invalid station code specified: stations"}}'
+  recorded_at: 2023-06-03 09:17:29 GMT
+  recorded_with: vcr/1.2.0, webmockr/0.9.0
+- request:
+    method: get
+    uri: https://api.dpird.wa.gov.au/v2/weather/stations/stations?offset=0&includeClosed=true&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus&group=api&api_key=<<<dpird_api_key>>>&offset=0&limit=300
+    body:
+      encoding: ''
+      string: ''
+    headers:
+      User-Agent: libcurl/7.88.1 r-curl/5.0.0 crul/1.4.0
+      Accept-Encoding: gzip, deflate
+      Accept: application/json, text/xml, application/xml, */*
+  response:
+    status:
+      status_code: '404'
+      message: Not Found
+      explanation: Nothing matches the given URI
+    headers:
+      cache-control: no-cache, must-revalidate
+      connection: keep-alive
+      content-language: en
+      content-length: '387'
+      content-type: application/json; charset=utf-8
+      date: Sat, 03 Jun 2023 09:17:29 GMT
+      expires: '0'
+      ratelimit-limit: '10'
+      ratelimit-remaining: '9'
+      ratelimit-reset: '1'
+      server: Apache/2.4.38 (Debian)
+      status: HTTP/1.1 404 Not Found
+      vary:
+      - Accept
+      - Origin, Accept-Encoding
+      via: kong/2.1.4.6-enterprise-edition
+      x-api-name: weather
+      x-api-version: v2.7.0
+      x-correlation-id: 455b5c76-3e55-4091-a661-3d999d84e82a
+      x-kong-proxy-latency: '4'
+      x-kong-upstream-latency: '213'
+      x-ratelimit-limit-hour: '4000'
+      x-ratelimit-limit-second: '10'
+      x-ratelimit-remaining-hour: '3993'
+      x-ratelimit-remaining-second: '9'
+    body:
+      encoding: ''
+      file: no
+      string: '{"metadata":{"status":404,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/stations?group=api&includeClosed=true&limit=300&offset=0&offset=0&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus"}]},"error":{"code":404,"message":"Not
+        Found","description":"Invalid station code specified: stations"}}'
+  recorded_at: 2023-06-03 09:17:29 GMT
   recorded_with: vcr/1.2.0, webmockr/0.9.0
