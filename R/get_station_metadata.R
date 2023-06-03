@@ -250,8 +250,7 @@ get_station_metadata <-
 #' @noRd
 
 
-.fetch_dpird_metadata <- function(.api_key = api_key, .rich) {
-  base_url = "https://api.dpird.wa.gov.au/v2/weather/stations/"
+.fetch_dpird_metadata <- function(.api_key, .rich) {
 
   if (isFALSE(.rich)) {
     query_list <- list(
@@ -301,7 +300,7 @@ get_station_metadata <-
     )
   }
 
-  response <- .query_dpird_api(.base_url = base_url,
+  response <- .query_dpird_api(.end_point = "stations/",
                                .query_list = query_list,
                                .limit = 300)
 

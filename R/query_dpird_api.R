@@ -110,7 +110,7 @@
 
 #' Query the DPIRD API using {crul}
 #'
-#' @param .base_url the base URL for the API query
+#' @param .end_point the DPIRD Weather 2.0 API end point
 #' @param .query_list a list of values in the API to query
 #' @param .limit (numeric/integer) the maximum records wanted
 #'
@@ -119,9 +119,12 @@
 #' @noRd
 #' @keywords internal
 
-.query_dpird_api <- function(.base_url,
+.query_dpird_api <- function(.end_point,
                              .query_list,
                              .limit) {
+
+  .base_url <- sprintf("https://api.dpird.wa.gov.au/v2/weather/%s", .end_point)
+
   connection <- crul::HttpClient$new(url = .base_url)
 
   client <- crul::Paginator$new(

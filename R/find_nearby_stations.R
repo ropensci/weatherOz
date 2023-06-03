@@ -358,6 +358,7 @@ find_nearby_stations <- function(latitude = NULL,
     )
   }
 
+  ## TODO: convert this to use {crul}
   if (!missing(.station_code)) {
     base_url <-
       "https://api.dpird.wa.gov.au/v2/weather/stations?stationCode="

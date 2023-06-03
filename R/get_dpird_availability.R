@@ -112,16 +112,8 @@ get_dpird_availability <-
       )
     }
 
-    # Define the query URL by OS due to issues with WindowsOS
-    #if (Sys.info()[["sysname"]] == "Windows") {
-      base_url <-
-        "https://api.dpird.wa.gov.au/v2/weather/stations/availability/"
-    # } else {
-    #   base_url <-
-    #     "https://api.dpird.wa.gov.au/v2/weather/stations/availability/"
-    # }
 
-    return_list <- .query_dpird_api(.base_url = base_url,
+    return_list <- .query_dpird_api(.end_point = "availability",
                                     .query_list = query_list,
                                     .limit = 1000)
 
