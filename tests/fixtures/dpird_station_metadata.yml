@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.dpird.wa.gov.au/v2/weather/stations/?offset=0&includeClosed=true&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus&group=api&api_key=<<<dpird_api_key>>>&offset=0&limit=300
+    uri: https://api.agric.wa.gov.au/v2/weather/stations/?offset=0&includeClosed=true&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus&group=api&api_key=<<<dpird_api_key>>>&offset=0&limit=300
     body:
       encoding: ''
       string: ''

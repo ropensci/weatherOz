@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.dpird.wa.gov.au/v2/weather/stations/summaries/30min?stationCode=BI&startDateTime=2022-10-28&endDateTime=2022-10-30&interval=30min&select=stationCode%2CstationName%2Cperiod%2Cwind&group=rtd&includeClosed=false&api_key=<<<dpird_api_key>>>&offset=0&limit=48
+    uri: https://api.agric.wa.gov.au/v2/weather/stations/summaries/30min?stationCode=BI&startDateTime=2022-10-28&endDateTime=2022-10-30&interval=30min&select=stationCode%2CstationName%2Cperiod%2Cwind&group=rtd&includeClosed=false&api_key=<<<dpird_api_key>>>&offset=0&limit=48
     body:
       encoding: ''
       string: ''
