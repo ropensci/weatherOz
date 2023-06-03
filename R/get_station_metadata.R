@@ -300,7 +300,7 @@ get_station_metadata <-
     )
   }
 
-  response <- .query_dpird_api(.end_point = "stations/",
+  response <- .query_dpird_api(.end_point = NULL,
                                .query_list = query_list,
                                .limit = 300)
 

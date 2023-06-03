@@ -118,7 +118,7 @@ get_dpird_minute <- function(station_code,
   )
 
   return_list <- .query_dpird_api(
-    .end_point = sprintf("stations/%s/data", station_code),
+    .end_point = sprintf("%s/data", station_code),
     .query_list = query_list,
     .limit = length(hour_sequence)
   )

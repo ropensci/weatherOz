@@ -299,12 +299,12 @@ get_dpird_summaries <- function(station_code,
 
   # set base URL according to interval
   end_point <- data.table::fcase(
-    interval == "15min", "stations/summaries/15min",
-    interval == "30min", "stations/summaries/30min",
-    interval == "hourly", "stations/summaries/hourly",
-    interval == "daily", "stations/summaries/daily",
-    interval == "monthly", "stations/summaries/monthly",
-    default = "stations/summaries/yearly")
+    interval == "15min", "summaries/15min",
+    interval == "30min", "summaries/30min",
+    interval == "hourly", "summaries/hourly",
+    interval == "daily", "summaries/daily",
+    interval == "monthly", "summaries/monthly",
+    default = "summaries/yearly")
 
   out <-
     .parse_summary(

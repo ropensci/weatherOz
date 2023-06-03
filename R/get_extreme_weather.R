@@ -170,7 +170,7 @@ get_extreme_weather <- function(station_code,
     api_key = api_key
   )
 
-  out <- .query_dpird_api(.end_point = "stations/extreme-conditions",
+  out <- .query_dpird_api(.end_point = "extreme-conditions",
                           .query_list = query_list,
                           .limit = 1L)
   .set_snake_case_names(out)

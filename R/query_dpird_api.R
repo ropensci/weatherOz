@@ -123,7 +123,12 @@
                              .query_list,
                              .limit) {
 
-  .base_url <- sprintf("https://api.dpird.wa.gov.au/v2/weather/%s", .end_point)
+  if (!is.null(.end_point)) {
+  .base_url <- sprintf("https://api.dpird.wa.gov.au/v2/weather/stations/%s",
+                       .end_point)
+  } else {
+    .base_url <- "https://api.dpird.wa.gov.au/v2/weather/stations/"
+  }
 
   connection <- crul::HttpClient$new(url = .base_url)
 
