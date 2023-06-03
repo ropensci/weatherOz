@@ -122,7 +122,7 @@ get_dpird_minute <- function(station_code,
 
   # Define the query URLs
   # if (os == "Windows") {
-     base_dpird_url <- "https://api.agric.wa.gov.au/v2/"
+     base_dpird_url <- "https://api.dpird.wa.gov.au/v2/"
   # } else {
   #  base_dpird_url <- "https://api.dpird.wa.gov.au/v2/"
   # }

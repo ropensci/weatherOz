@@ -115,7 +115,7 @@ get_dpird_availability <-
     # Define the query URL by OS due to issues with WindowsOS
     #if (Sys.info()[["sysname"]] == "Windows") {
       base_url <-
-        "https://api.agric.wa.gov.au/v2/weather/stations/availability/"
+        "https://api.dpird.wa.gov.au/v2/weather/stations/availability/"
     # } else {
     #   base_url <-
     #     "https://api.dpird.wa.gov.au/v2/weather/stations/availability/"

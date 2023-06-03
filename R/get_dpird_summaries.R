@@ -285,7 +285,7 @@ get_dpird_summaries <- function(station_code,
   # # Define the query URL by OS due to issues with WindowsOS
   # if (Sys.info()[["sysname"]] == "Windows") {
     base_url <-
-      "https://api.agric.wa.gov.au/v2/weather/stations/summaries/"
+      "https://api.dpird.wa.gov.au/v2/weather/stations/summaries/"
   # } else {
   #   base_url <-
   #     "https://api.dpird.wa.gov.au/v2/weather/stations/summaries/"

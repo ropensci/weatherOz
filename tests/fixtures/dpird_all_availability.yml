@@ -1,7 +1,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.agric.wa.gov.au/v2/weather/stations/availability/?select=availability%2CstationCode%2CstationName&api_key=<<<dpird_api_key>>>&offset=0&limit=1000
+    uri: https://api.dpird.wa.gov.au/v2/weather/stations/availability/?select=availability%2CstationCode%2CstationName&api_key=<<<dpird_api_key>>>&offset=0&limit=1000
     body:
       encoding: ''
       string: ''
