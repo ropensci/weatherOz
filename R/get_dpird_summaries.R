@@ -320,26 +320,23 @@ get_dpird_summaries <- function(station_code,
   out[, period.to := NULL]
 
   if (interval == "monthly") {
-    out[, date := lubridate::ym(paste0(out$period.year,
-                                       "-",
-                                       out$period.month))]
+    out[, date := lubridate::ym(sprintf("%s-%s",
+                                        out$period.year,
+                                        out$period.month))]
   }
   if (interval == "daily") {
-    out[, date := lubridate::ymd(paste0(out$period.year,
-                                        "-",
-                                        out$period.month,
-                                        "-",
-                                        out$period.day))]
+    out[, date := lubridate::ymd(sprintf("%s-%s-%s",
+                                         out$period.year,
+                                         out$period.month,
+                                         out$period.day))]
   }
   if (interval == "hourly") {
     out[, date := lubridate::ymd_h(
-      paste0(
+      sprintf(
+        "%s-%s-%s-%s",
         out$period.year,
-        "-",
         out$period.month,
-        "-",
         out$period.day,
-        " ",
         out$period.hour
       ),
       tz = "Australia/West"
@@ -347,15 +344,12 @@ get_dpird_summaries <- function(station_code,
   }
   if (interval == "30min" || interval == "15min") {
     out[, date := lubridate::ymd_hm(
-      paste0(
+      sprintf(
+        "%s-%s-%s-%s-%s",
         out$period.year,
-        "-",
         out$period.month,
-        "-",
         out$period.day,
-        " ",
         out$period.hour,
-        " ",
         out$period.minute
       ),
       tz = "Australia/West"

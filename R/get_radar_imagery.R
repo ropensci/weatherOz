@@ -135,7 +135,7 @@ get_radar_imagery <- get_radar <-
     }
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar"
-    fp <- file.path(ftp_base, paste0(product_id, ".gif"))
+    fp <- file.path(ftp_base, sprintf("%s.gif", product_id))
 
     if (is.null(path)) {
       path <- tempfile(fileext = ".gif", tmpdir = tempdir())

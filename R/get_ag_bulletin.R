@@ -113,7 +113,7 @@ get_ag_bulletin <- function(state = "AUS") {
     }
     return(bulletin_out[])
   } else {
-    file_list <- paste0(file_loc, "/", AUS_XML)
+    file_list <- sprintf("%s/%s", file_loc, AUS_XML)
     bulletin_out <-
       lapply(X = file_list, FUN = .parse_bulletin)
     bulletin_out <- data.table::rbindlist(bulletin_out, fill = TRUE)

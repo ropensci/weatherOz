@@ -101,7 +101,7 @@ get_coastal_forecast <- function(state = "AUS") {
     }
     return(coastal_out[])
   } else {
-    file_list <- paste0(file_loc, "/", AUS_XML)
+    file_list <- sprintf("%s/%s", file_loc, AUS_XML)
     coastal_out <-
       lapply(X = file_list, FUN = .parse_coastal_forecast)
     coastal_out <- data.table::rbindlist(coastal_out, fill = TRUE)

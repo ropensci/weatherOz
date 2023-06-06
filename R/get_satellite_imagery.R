@@ -169,7 +169,7 @@ get_satellite_imagery <- get_satellite <-
       tif_files <- utils::tail(tif_files, scans)
     }
 
-    tif_files <- paste0(ftp_base, tif_files)
+    tif_files <- sprintf("%s%s", ftp_base, tif_files)
 
     # download files from server
 
@@ -356,7 +356,7 @@ get_satellite_imagery <- get_satellite <-
       tif_files[grepl("IDE00439",
                       tif_files)]
     )
-    paste0(bom_server, tif_files)
+    sprintf("%s%s", bom_server, tif_files)
   } else {
     tif_files
   }
