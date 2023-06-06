@@ -19,7 +19,7 @@ http_interactions:
       connection: keep-alive
       content-language: en
       content-type: application/json; charset=utf-8
-      date: Fri, 02 Jun 2023 05:41:51 GMT
+      date: Tue, 06 Jun 2023 05:15:03 GMT
       expires: '0'
       ratelimit-limit: '10'
       ratelimit-remaining: '9'
@@ -32,12 +32,12 @@ http_interactions:
       via: kong/2.1.4.6-enterprise-edition
       x-api-name: weather
       x-api-version: v2.7.0
-      x-correlation-id: 3d8e6084-edf0-4004-ae82-3e9f879073c6
-      x-kong-proxy-latency: '6'
-      x-kong-upstream-latency: '288'
+      x-correlation-id: f82874d9-4ca7-439c-8d45-43c16f3b7e24
+      x-kong-proxy-latency: '5'
+      x-kong-upstream-latency: '292'
       x-ratelimit-limit-hour: '4000'
       x-ratelimit-limit-second: '10'
-      x-ratelimit-remaining-hour: '3988'
+      x-ratelimit-remaining-hour: '3987'
       x-ratelimit-remaining-second: '9'
     body:
       encoding: ''
@@ -100,21 +100,21 @@ http_interactions:
         Department of Biodiversity, Conservation and Attractions (DBCA)","startDate":"2014-02-12","endDate":null,"status":"closed"},{"stationCode":"BCAA","stationName":"DBCA-A
         Portable","latitude":-33.935,"longitude":115.0842,"altitude":101,"owner":"WA
         Department of Biodiversity, Conservation and Attractions (DBCA)","startDate":"2021-01-23","endDate":null,"status":"open"},{"stationCode":"BCAB","stationName":"DBCA-B
-        Portable","latitude":-30.2761,"longitude":115.0923,"altitude":60,"owner":"WA
+        Portable","latitude":-30.2762,"longitude":115.0922,"altitude":59,"owner":"WA
         Department of Biodiversity, Conservation and Attractions (DBCA)","startDate":"2020-12-04","endDate":null,"status":"open"},{"stationCode":"BTSA","stationName":"DFES-A
-        Portable","latitude":-25.055,"longitude":115.2096,"altitude":149,"owner":"WA
+        Portable","latitude":-25.055,"longitude":115.2096,"altitude":146,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2020-04-21","endDate":null,"status":"open"},{"stationCode":"BTSB","stationName":"DFES-B
-        Talbot West","latitude":-31.9606,"longitude":116.6898,"altitude":355,"owner":"WA
+        Talbot West","latitude":-31.9606,"longitude":116.6898,"altitude":356,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2020-08-27","endDate":null,"status":"open"},{"stationCode":"BTSC","stationName":"DFES-C
         Portable","latitude":-27.6868,"longitude":114.2618,"altitude":162,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2020-09-03","endDate":null,"status":"open"},{"stationCode":"BTSD","stationName":"DFES-D
-        Boorabbin","latitude":-31.2143,"longitude":120.2593,"altitude":459,"owner":"WA
+        Boorabbin","latitude":-31.2143,"longitude":120.2593,"altitude":458,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2020-09-14","endDate":null,"status":"open"},{"stationCode":"BTSE","stationName":"DFES-E
-        Portable","latitude":-16.4203,"longitude":126.4412,"altitude":514,"owner":"WA
+        Portable","latitude":-16.4203,"longitude":126.4411,"altitude":516,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2021-01-03","endDate":null,"status":"open"},{"stationCode":"BTSF","stationName":"DFES-F
-        Portable","latitude":-33.3425,"longitude":116.1367,"altitude":210,"owner":"WA
+        Portable","latitude":-33.3424,"longitude":116.1367,"altitude":210,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2022-02-06","endDate":null,"status":"open"},{"stationCode":"BTSG","stationName":"DFES-G
-        Portable","latitude":-32.5079,"longitude":115.8137,"altitude":7,"owner":"WA
+        Portable","latitude":-32.508,"longitude":115.8137,"altitude":6,"owner":"WA
         Department of Fire and Emergency Services (DFES)","startDate":"2022-02-06","endDate":null,"status":"open"},{"stationCode":"DG001","stationName":"Dandaragan
         East","latitude":-30.826939,"longitude":115.763161,"altitude":184,"owner":"WA
         Department of Primary Industries and Regional Development (DPIRD)","startDate":"2020-12-15","endDate":null,"status":"open"},{"stationCode":"DA","stationName":"Dardanup
@@ -400,101 +400,5 @@ http_interactions:
         Department of Primary Industries and Regional Development (DPIRD)","startDate":"2016-03-24","endDate":null,"status":"open"},{"stationCode":"YU003","stationName":"Yuna
         North","latitude":-28.120861,"longitude":114.962611,"altitude":264,"owner":"WA
         Department of Primary Industries and Regional Development (DPIRD)","startDate":"2018-08-08","endDate":null,"status":"open"}]}'
-  recorded_at: 2023-06-03 09:17:29 GMT
-  recorded_with: vcr/1.2.0, webmockr/0.9.0
-- request:
-    method: get
-    uri: https://api.dpird.wa.gov.au/v2/weather/stations/stations/?offset=0&includeClosed=true&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus&group=api&api_key=<<<dpird_api_key>>>&offset=0&limit=300
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      User-Agent: libcurl/7.88.1 r-curl/5.0.0 crul/1.4.0
-      Accept-Encoding: gzip, deflate
-      Accept: application/json, text/xml, application/xml, */*
-  response:
-    status:
-      status_code: '404'
-      message: Not Found
-      explanation: Nothing matches the given URI
-    headers:
-      cache-control: no-cache, must-revalidate
-      connection: keep-alive
-      content-language: en
-      content-length: '389'
-      content-type: application/json; charset=utf-8
-      date: Sat, 03 Jun 2023 09:12:01 GMT
-      expires: '0'
-      ratelimit-limit: '10'
-      ratelimit-remaining: '9'
-      ratelimit-reset: '1'
-      server: Apache/2.4.38 (Debian)
-      status: HTTP/1.1 404 Not Found
-      vary:
-      - Accept
-      - Origin, Accept-Encoding
-      via: kong/2.1.4.6-enterprise-edition
-      x-api-name: weather
-      x-api-version: v2.7.0
-      x-correlation-id: 4deac189-7003-4686-872f-510323bfbfcf
-      x-kong-proxy-latency: '6'
-      x-kong-upstream-latency: '190'
-      x-ratelimit-limit-hour: '4000'
-      x-ratelimit-limit-second: '10'
-      x-ratelimit-remaining-hour: '3996'
-      x-ratelimit-remaining-second: '9'
-    body:
-      encoding: ''
-      file: no
-      string: '{"metadata":{"status":404,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/stations\/?group=api&includeClosed=true&limit=300&offset=0&offset=0&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus"}]},"error":{"code":404,"message":"Not
-        Found","description":"Invalid station code specified: stations"}}'
-  recorded_at: 2023-06-03 09:17:29 GMT
-  recorded_with: vcr/1.2.0, webmockr/0.9.0
-- request:
-    method: get
-    uri: https://api.dpird.wa.gov.au/v2/weather/stations/stations?offset=0&includeClosed=true&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus&group=api&api_key=<<<dpird_api_key>>>&offset=0&limit=300
-    body:
-      encoding: ''
-      string: ''
-    headers:
-      User-Agent: libcurl/7.88.1 r-curl/5.0.0 crul/1.4.0
-      Accept-Encoding: gzip, deflate
-      Accept: application/json, text/xml, application/xml, */*
-  response:
-    status:
-      status_code: '404'
-      message: Not Found
-      explanation: Nothing matches the given URI
-    headers:
-      cache-control: no-cache, must-revalidate
-      connection: keep-alive
-      content-language: en
-      content-length: '387'
-      content-type: application/json; charset=utf-8
-      date: Sat, 03 Jun 2023 09:17:29 GMT
-      expires: '0'
-      ratelimit-limit: '10'
-      ratelimit-remaining: '9'
-      ratelimit-reset: '1'
-      server: Apache/2.4.38 (Debian)
-      status: HTTP/1.1 404 Not Found
-      vary:
-      - Accept
-      - Origin, Accept-Encoding
-      via: kong/2.1.4.6-enterprise-edition
-      x-api-name: weather
-      x-api-version: v2.7.0
-      x-correlation-id: 455b5c76-3e55-4091-a661-3d999d84e82a
-      x-kong-proxy-latency: '4'
-      x-kong-upstream-latency: '213'
-      x-ratelimit-limit-hour: '4000'
-      x-ratelimit-limit-second: '10'
-      x-ratelimit-remaining-hour: '3993'
-      x-ratelimit-remaining-second: '9'
-    body:
-      encoding: ''
-      file: no
-      string: '{"metadata":{"status":404,"links":[{"rel":"self","href":"https:\/\/api.dpird.wa.gov.au\/v2\/weather\/stations\/stations?group=api&includeClosed=true&limit=300&offset=0&offset=0&select=altitude%2CstartDate%2CendDate%2CstationCode%2CstationName%2Clatitude%2Clongitude%2Cowner%2Cstatus"}]},"error":{"code":404,"message":"Not
-        Found","description":"Invalid station code specified: stations"}}'
-  recorded_at: 2023-06-03 09:17:29 GMT
+  recorded_at: 2023-06-06 05:15:03 GMT
   recorded_with: vcr/1.2.0, webmockr/0.9.0
