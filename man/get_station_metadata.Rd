@@ -4,17 +4,17 @@
 \alias{get_station_metadata}
 \title{Get the latest DPIRD and SILO weather station metadata}
 \usage{
-get_station_metadata(which_api = "silo", api_key, status = FALSE, rich = FALSE)
+get_station_metadata(which_api, api_key, status = FALSE, rich = FALSE)
 }
 \arguments{
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
-Defaults to 'silo'. Valid values are 'all', for both \acronym{SILO}}
+Valid values are 'all', for both \acronym{SILO} (\acronym{BOM} data) and
+\acronym{DPIRD} \acronym{API}s; 'silo' for only stations from the
+\acronym{SILO} \acronym{API} (\acronym{BOM} data); or 'dpird' for stations
+from the \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.
-(\acronym{BOM}) and \acronym{DPIRD} \acronym{API}s; 'silo' for only stations
-from the \acronym{SILO} \acronym{API}; or 'dpird' for stations from the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
 \item{status}{A \code{Boolean} string indicating whether to include closed
@@ -22,7 +22,8 @@ stations' metadata.  Defaults to \code{FALSE}.}
 
 \item{rich}{A \code{Boolean} string indicating whether to return rich information
 about DPIRD's weather station(s), this does not affect the SILO stations'
-metadata.  Defaults to \code{FALSE}.}
+metadata, the variables for these observations will be \code{NA}.  Defaults to
+\code{FALSE}.}
 }
 \value{
 a \code{data.table} of \acronym{BOM} weather stations' metadata for
