@@ -2,29 +2,33 @@
 % Please edit documentation in R/find_nearby_stations.R
 \name{find_nearby_stations}
 \alias{find_nearby_stations}
-\title{Find nearby weather stations given geographic coordinates or a station code}
+\title{Find nearby weather stations given geographic coordinates or a station code.
+Either a combination of \code{latitude} and \code{longitude} or \code{station_code} must
+be provided as a starting point.}
 \usage{
 find_nearby_stations(
   latitude = NULL,
   longitude = NULL,
   station_code = NULL,
-  distance_km = 100,
+  distance_km,
   api_key = NULL,
   which_api = "silo"
 )
 }
 \arguments{
 \item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
-(DD) (WGS84).}
+(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \code{longitude}
+is not \code{NULL.}}
 
 \item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
-(DD) (WGS84).}
+(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \code{latitude} is
+not \code{NULL}.}
 
 \item{station_code}{A \code{string} with the station code for the station of
-interest. Optional and defaults to \code{NULL}.}
+interest.  Optional and defaults to \code{NULL}.}
 
 \item{distance_km}{A \code{numeric} value for distance to limit the search from
-the station or location of interest.  Defaults to 100 km.}
+the station or location of interest.  Defaults to 100 km.}
 
 \item{api_key}{A \code{string} value that is the user's \acronym{API} key from
 \acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).  Only used
@@ -39,14 +43,18 @@ network.}
 \value{
 a \link[data.table:data.table]{data.table::data.table} with 'station_code', 'station_name',
 'latitude', 'longitude', 'elev_m', 'state', 'owner', and 'distance'.
-Data are sorted by increasing distance from station or location of interest.
+Data are sorted by increasing distance from station or location of
+interest.
 }
 \description{
-Find nearby weather stations given geographic coordinates or a station code
+Find nearby weather stations given geographic coordinates or a station code.
+Either a combination of \code{latitude} and \code{longitude} or \code{station_code} must
+be provided as a starting point.
 }
 \note{
 You can request your own \acronym{API} key from \acronym{DPIRD} for
-free by filling out the form found at \url{https://www.agric.wa.gov.au/web-apis}.
+free by filling out the form found at
+\url{https://www.agric.wa.gov.au/web-apis}.
 }
 \examples{
 \dontrun{
