@@ -99,7 +99,7 @@
     stop(
       call. = FALSE,
       "Please check your longitude, `",
-      paste0(longitude),
+      longitude,
       "`, to be sure it is valid for Australian data.\n"
     )
   }
@@ -107,7 +107,7 @@
     stop(
       call. = FALSE,
       "Please check your latitude, `",
-      paste0(latitude),
+      latitude,
       "`, value to be sure it is valid for Australian data.\n"
     )
     return(invisible(NULL))
@@ -155,13 +155,11 @@
     if (length(likely_states) == 1) {
       the_state <- toupper(likely_states)
       message(
-        paste0(
-          "\nUsing state = ",
+          "Using state = ",
           likely_states,
           ".\n",
           "If this is not what you intended, please check your entry."
         )
-      )
       return(the_state)
     } else if (length(likely_states) == 0) {
       stop(
@@ -280,31 +278,27 @@
   if (.the_state != "AUS") {
     xml_url <-
       data.table::fcase(
-        .the_state == "ACT" |
-          .the_state == "CANBERRA",
-        paste0(.file_loc, "/", AUS_XML[1]),
-        .the_state == "NSW" |
-          .the_state == "NEW SOUTH WALES",
-        paste0(.file_loc, "/", AUS_XML[1]),
-        .the_state == "NT" |
+        .the_state == "ACT" ||
+          .the_state == "CANBERRA" ||
+          .the_state == "NSW" ||
+          .the_state == "New South Wales",
+        sprintf("%s/%s", .file_loc, AUS_XML[1]),
+        .the_state == "NT" ||
           .the_state == "NORTHERN TERRITORY",
-        paste0(.file_loc,
-               "/", AUS_XML[2]),
-        .the_state == "QLD" |
+        sprintf("%s/%s", .file_loc, AUS_XML[2]),
+        .the_state == "QLD" ||
           .the_state == "QUEENSLAND",
-        paste0(.file_loc, "/", AUS_XML[3]),
-        .the_state == "SA" |
+        sprintf("%s/%s", .file_loc, AUS_XML[3]),
+        .the_state == "SA" ||
           .the_state == "SOUTH AUSTRALIA",
-        paste0(.file_loc, "/", AUS_XML[4]),
-        .the_state == "TAS" |
+        sprintf("%s/%s", .file_loc, AUS_XML[4]),
+        .the_state == "TAS" ||
           .the_state == "TASMANIA",
-        paste0(.file_loc, "/", AUS_XML[5]),
-        .the_state == "VIC" |
+        sprintf("%s/%s", .file_loc, AUS_XML[5]),
+        .the_state == "VIC" ||
           .the_state == "VICTORIA",
-        paste0(.file_loc, "/", AUS_XML[6]),
-        .the_state == "WA" |
-          .the_state == "WESTERN AUSTRALIA",
-        paste0(.file_loc, "/", AUS_XML[7])
+        sprintf("%s/%s", .file_loc, AUS_XML[6]),
+        default = sprintf("%s/%s", .file_loc, AUS_XML[7])
       )
   }
   return(xml_url)
@@ -325,9 +319,8 @@
 
 .get_url <- function(remote_file) {
   # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- paste0("{weatherOz} R package (",
-                      utils::packageVersion("weatherOz"),
-                      ")")
+  USERAGENT <- sprintf("{weatherOz} R package (%s)",
+                       utils::packageVersion("weatherOz"))
   # set a custom user-agent, restore original settings on exit
   op <- options()
   on.exit(options(op))

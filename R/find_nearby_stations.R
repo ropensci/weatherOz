@@ -276,14 +276,12 @@ find_nearby_stations <- function(latitude = NULL,
     # Warn user if there are no stations within the input radius and return data
     if (nrow(x) == 0L)
       message(
-        paste0(
           "No SILO stations found around a radius of < ",
           distance_km,
           " km\n",
           " from station ",
           station_code,
           ".\n"
-        )
       )
 
     return(x)
@@ -312,7 +310,6 @@ find_nearby_stations <- function(latitude = NULL,
 
     if (nrow(x) == 0L)
       message(
-        paste0(
           "No SILO stations found around a radius of < ",
           distance_km,
           " km\n",
@@ -320,8 +317,7 @@ find_nearby_stations <- function(latitude = NULL,
           latitude,
           " and ",
           longitude,
-          " (lat/lon)\n"
-        )
+          " (lat/lon).\n"
       )
 
     return(x)
@@ -394,14 +390,12 @@ find_nearby_stations <- function(latitude = NULL,
 
     if (is.null(nrow(ret$collection))) {
       message(
-        paste0(
           "No DPIRD stations found around a radius of < ",
           .distance_km,
           " km\n",
           " from station ",
           .station_code,
           "."
-        )
       )
 
     } else {
@@ -430,7 +424,6 @@ find_nearby_stations <- function(latitude = NULL,
     # Warn user if there are no stations within the input radius and return data
     if (is.null(nrow(ret$collection))) {
       message(
-        paste0(
           "No DPIRD stations found around a radius of < ",
           .distance_km,
           " km\n",
@@ -438,8 +431,7 @@ find_nearby_stations <- function(latitude = NULL,
           .latitude,
           " and ",
           .longitude,
-          " (lat/lon)\n"
-        )
+          " (lat/lon).\n"
       )
     } else {
       return(.parse_dpird_stations(ret))
