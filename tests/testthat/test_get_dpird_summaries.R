@@ -98,7 +98,7 @@ test_that("user-input checks stop if invalid values are provided", {
 ## yearly ----
 test_that("get_dpird_summaries() returns yearly values",
           {
-            vcr::use_cassette("dpird_yearly_summaries", {
+            vcr::use_cassette("dpird_summaries_yearly", {
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
@@ -143,7 +143,7 @@ test_that("get_dpird_summaries() returns yearly values",
 
 test_that("get_dpird_summaries() returns monthly values",
           {
-            vcr::use_cassette("dpird_monthly_summaries", {
+            vcr::use_cassette("dpird_summaries_monthly", {
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
@@ -190,7 +190,7 @@ test_that("get_dpird_summaries() returns monthly values",
 
 test_that("get_dpird_summaries() returns daily values",
           {
-            vcr::use_cassette("dpird_daily_summaries", {
+            vcr::use_cassette("dpird_summaries_daily", {
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
@@ -237,7 +237,7 @@ test_that("get_dpird_summaries() returns daily values",
 
 test_that("get_dpird_summaries() returns hourly values",
           {
-            vcr::use_cassette("dpird_hourly_summaries", {
+            vcr::use_cassette("dpird_summaries_hourly", {
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
@@ -286,7 +286,7 @@ test_that("get_dpird_summaries() returns hourly values",
 
 test_that("get_dpird_summaries() returns 30min values",
           {
-            vcr::use_cassette("dpird_30min_summaries", {
+            vcr::use_cassette("dpird_summaries_30min", {
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
@@ -335,7 +335,7 @@ test_that("get_dpird_summaries() returns 30min values",
 
 test_that("get_dpird_summaries() returns 15min values",
           {
-            vcr::use_cassette("dpird_15min_summaries", {
+            vcr::use_cassette("dpird_summaries_15min", {
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
