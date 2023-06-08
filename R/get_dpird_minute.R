@@ -283,22 +283,3 @@ get_dpird_minute <- function(station_code,
   }
   return(out)
 }
-
-dw <- read.table(
-  header = T,
-  text = '
- sbj f1.avg f1.sd f2.avg f2.sd  blabla
-   A   10    6     50     10      bA
-   B   12    5     70     11      bB
-   C   20    7     20     8       bC
-   D   22    8     22     9       bD
- '
-)
-
-reshape(
-  dw,
-  idvar = "sbj",
-  varying = list(c(2, 4), c(3, 5)),
-  v.names = c("ave", "sd"),
-  direction = "long"
-)
