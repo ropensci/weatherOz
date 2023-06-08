@@ -2,11 +2,11 @@
 #' Find nearest BOM forecast towns for a given location by lat and lon
 #'
 #' @param latitude  A `numeric` value of latitude in decimal degree (DD)
-#'  format. By default, Canberra (approximately).
+#'   format. By default, Canberra (approximately).
 #' @param longitude A `numeric` value of longitude in decimal degree (DD)
-#'  format. By default, Canberra (approximately).
+#'   format. By default, Canberra (approximately).
 #' @param distance_km A `numeric` value of the distance in kilometres from the
-#'  `latitude` and `longitude` point beyond which values will not be returned.
+#'   `latitude` and `longitude` point beyond which values will not be returned.
 #'
 #' @examples
 #'
@@ -14,10 +14,10 @@
 #' find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
 #'
 #' @return A [data.table::data.table] of all forecast towns (in this package)
-#'  sorted by distance from \var{latlon}, ascending.
+#'   sorted by distance from \var{latlon}, ascending.
 #' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com} and
-#'  James Goldie, \email{me@@jamesgoldie.dev} and Adam Sparks,
-#'  \email{adam.sparks@@dpird.wa.gov.au}
+#'   James Goldie, \email{me@@jamesgoldie.dev} and Adam Sparks,
+#'   \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family bomrang-ported
 #'
