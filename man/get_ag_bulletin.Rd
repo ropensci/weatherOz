@@ -8,8 +8,8 @@ get_ag_bulletin(state = "AUS")
 }
 \arguments{
 \item{state}{Australian state or territory as full name or postal code.
-Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to
-"AUS" returning all state bulletins, see Details for more.}
+Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to "AUS"
+returning all state bulletins, see Details for more.}
 }
 \value{
 A data frame as a \code{weatherOz_tbl} object (inherits and is fully compatible
@@ -18,7 +18,7 @@ bulletin information.
 }
 \description{
 Fetch the \acronym{BOM} agricultural bulletin information and return it in a
-data frame.  Ported from \pkg{bomrang}.
+\link{data.table}.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
@@ -51,7 +51,7 @@ ag_bulletin
 }
 \references{
 Agricultural observations are retrieved from the Australian Bureau of
-Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins, \cr
+Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
 \url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}
 
 and
@@ -61,7 +61,7 @@ Observation of Rainfall, \cr
 \url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}
 
 Station location and other metadata are sourced from the Australian Bureau of
-Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers: \cr
+Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
 }
 \seealso{
