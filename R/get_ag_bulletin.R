@@ -42,7 +42,7 @@
 #'   Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
 #'   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
 #'
-#' And also
+#' And also,
 #'
 #' Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
 #'   Observation of Rainfall, \cr

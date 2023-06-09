@@ -125,34 +125,34 @@ get_silo <- function(station_code = NULL,
 #' response.
 #'
 #' @param station_code `Integer`, An integer or vector of integers representing
-#'  station number(s) available from the \acronym{SILO} network.
+#'   station number(s) available from the \acronym{SILO} network.
 #' @param latitude `Numeric`. A single value or a vector, representing the
-#'  latitude(s) of the point(s)-of-interest.
+#'   latitude(s) of the point(s)-of-interest.
 #' @param longitude `Numeric`. A single value or vector, representing the
-#'  longitude(s) of the point(s)-of-interest.
+#'   longitude(s) of the point(s)-of-interest.
 #' @param first `Integer`. A string representing the start date of the query in
-#'  the format 'yyyymmdd' (ISO-8601).
+#'   the format 'yyyymmdd' (ISO-8601).
 #' @param last `Integer`. A string representing the end date of the query in the
-#' format 'yyyymmdd' (ISO-8601).
+#'   format 'yyyymmdd' (ISO-8601).
 #' @param data_format `Character`. A string specifying the type of data to
-#'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
-#'  'alldata' retrieve daily data.
+#'   retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
+#'   'alldata' retrieve daily data.
 #' @param email `Character`. A string specifying a valid email address to use
-#'  for the request. The query will return an error if a valid email address is
-#'  not provided.
+#'   for the request. The query will return an error if a valid email address is
+#'   not provided.
 #'
 #' @examples
 #' .query_silo(station_code = 8137)
 #'
 #' @noRd
 #' @keywords Internal
-.query_silo <- function(.station_code = station_code,
-                        .latitude = latitude,
-                        .longitude = longitude,
-                        .first = first,
-                        .last = last,
-                        .data_format = data_format,
-                        .email = email) {
+.query_silo <- function(.station_code,
+                        .latitude,
+                        .longitude,
+                        .first,
+                        .last,
+                        .data_format,
+                        .email) {
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   # Retrieve data for queries with lat lon coordinates
@@ -202,26 +202,27 @@ get_silo <- function(station_code = NULL,
 
 
 #' SILO API query parser
+
 #' Takes results from an API query to the SILO database and formats it to a
-#' flat `data.table` or a list object of `data.tables` if querying multiple
-#' sites. The function also converts character columns to date and numerical
-#' classes, according to the data represented in the column.
+#'   flat `data.table` or a list object of `data.tables` if querying multiple
+#'   sites. The function also converts character columns to date and numerical
+#'   classes, according to the data represented in the column.
+
 #' @note For the 'monthly' `data_format` the function also renames the
-#' columns from "Yr.Mth", "Avg TMax (oC)", "Avg TMin (oC)", "Tot Rain (mm)"
-#' "Tot Evap (mm)", "Avg Rad (MJ/m2)", "Avg VP (hPa)" to "year_month", "
-#' tmax_avg", "tmin_avg", "total_rainfall", "total_evap", "radiation_avg" and
-#' "vapour_pressure_avg", respectively.
+#'   columns from "Yr.Mth", "Avg TMax (oC)", "Avg TMin (oC)", "Tot Rain (mm)"
+#'   "Tot Evap (mm)", "Avg Rad (MJ/m2)", "Avg VP (hPa)" to "year_month", "
+#'   tmax_avg", "tmin_avg", "total_rainfall", "total_evap", "radiation_avg" and
+#'   "vapour_pressure_avg", respectively.
 #' @param query_response data returned by the SILO API, usually a list of
-#' character data.
+#'   character data.
 #' @param this_format A string, user defined by the query details. One of
-#' 'alldata', 'apsim' and 'monthly'. Internally inherited from
-#' `get_silo()`.
+#'   'alldata', 'apsim' and 'monthly'. Internally inherited from `get_silo()`.
 #' @param this_date A string, user defined by the query details and represents
-#' the start date of the query. Internally inherited from `get_silo()`.
+#'   the start date of the query. Internally inherited from `get_silo()`.
 #' @param station_code A string, user defined by the query details and represents
-#' the station code. Internally inherited from `get_silo()`.
+#'   the station code. Internally inherited from `get_silo()`.
 #' @return A `data.table` with date class column(s) and numeric class columns
-#' for the weather variables.
+#'   for the weather variables.
 #' @keywords internal
 #' @noRd
 
@@ -355,20 +356,20 @@ get_silo <- function(station_code = NULL,
 #' Check SILO data codes
 #'
 #' Checks if any SILO data codes for interpolated data are present in the
-#' requested station observation data. If any such codes are found, a message
-#' will be reported with a suggestion to check the data source columns
-#' and `get_silo()` documentation for further details on codes and references.
+#'   requested station observation data. If any such codes are found, a message
+#'   will be reported with a suggestion to check the data source columns
+#'   and `get_silo()` documentation for further details on codes and references.
 #'
 #' @param dt A `data.table`, defaults to the SILO API query result object from
-#' `.query_silo()`.
+#'   `.query_silo()`.
 #' @param .this_format A string specifying the format of the input
 #'   data. Valid values are 'alldata' and 'apsim'. Default is to 'this_format'
 #'   variable passed to the `data_format` argument in `get_silo()`.
 #'
 #' @return An `invisible(NULL)`. This function returns no value, only a friendly
-#' message. It is used for checking and reporting the presence of interpolated
-#' data codes in the station observation data (for API queries performed using a
-#' station_code/code).
+#'   message. It is used for checking and reporting the presence of interpolated
+#'   data codes in the station observation data (for API queries performed using
+#'   a station_code/code).
 #'
 #' @noRd
 .check_silo_codes <- function(dt,
