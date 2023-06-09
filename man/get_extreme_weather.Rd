@@ -17,8 +17,9 @@ get_extreme_weather(
 station of interest.}
 
 \item{which_values}{A \code{character} string with the type of extreme weather to
-return.  See \strong{Available Values} for a full list of valid values.  Defaults
-to 'all', returning the full list of values unless otherwise specified.}
+return.  See \strong{Available Values} for a full list of valid values.
+Defaults to 'all', returning the full list of values unless otherwise
+specified.}
 
 \item{group}{Filter the stations to a predefined group. These need to be
 supported on the back end; 'all' returns all stations, 'api' returns the
@@ -27,9 +28,9 @@ use by the \url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations
 with scientifically complete data sets. Defaults to 'rtd'.}
 
 \item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}. If set to
-\code{TRUE} the query returns closed and open stations. Closed stations are those
-that have been turned off and no longer report data.  They may be useful for
-historical purposes.}
+\code{TRUE} the query returns closed and open stations. Closed stations are
+those that have been turned off and no longer report data.  They may be
+useful for historical purposes.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the

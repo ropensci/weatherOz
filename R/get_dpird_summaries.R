@@ -9,132 +9,133 @@
 #' Get weather data from DPIRD Weather 2.0 API summarised by time interval
 #'
 #' Nicely formatted individual station weather summaries from the
-#'  \acronym{DPIRD} weather station network.
+#'   \acronym{DPIRD} weather station network.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
-#'  for the station of interest.
+#'   for the station of interest.
 #' @param start_date A `character` string representing the beginning of the
-#'  range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'  inclusive of this range.
+#'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+#'   inclusive of this range.
 #' @param end_date A `character` string representing the end of the range query
-#'  in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-#'  range.  Defaults to the current system date.
+#'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
+#'   range.  Defaults to the current system date.
 #' @param interval A `character` string that indicates the time interval to
-#'  summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
-#'  'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
-#'  covered will be midnight to midnight, with the end_date time interval being
-#'  before midnight - hour/minute values are for the end of the time period.
-#'  Data for shorter intervals ('15min', '30min') are available from January of
-#'  the previous year.
+#'   summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
+#'   'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
+#'   covered will be midnight to midnight, with the end_date time interval being
+#'   before midnight - hour/minute values are for the end of the time period.
+#'   Data for shorter intervals ('15min', '30min') are available from January of
+#'   the previous year.
 #' @param which_values A `character` string with the type of summarised weather
-#'  to return.  See **Available Values** for a full list of valid values.
-#'  Defaults to 'all' with all available values being returned.
+#'   to return.  See **Available Values** for a full list of valid values.
+#'   Defaults to 'all' with all available values being returned.
 #' @param api_group Filter the stations to a predefined group one of 'all',
-#'  'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
-#'  stations in use with the \acronym{API} and 'web' returns the list in use by
-#'  the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations with
-#'  scientifically complete data sets. Defaults to 'rtd'.
+#'   'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
+#'   stations in use with the \acronym{API} and 'web' returns the list in use by
+#'   the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations with
+#'   scientifically complete data sets. Defaults to 'rtd'.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
-#'  `TRUE` the query returns closed and open stations. Closed stations are those
-#'  that have been turned off and no longer report data. They may be useful for
-#'  historical purposes.
+#'   `TRUE` the query returns closed and open stations. Closed stations are
+#'   those that have been turned off and no longer report data. They may be
+#'   useful for historical purposes.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' ## Available Values for `which_values`
-#' * all (which will return all of the following values),
-#' * airTemperature,
-#' * airTemperatureAvg,
-#' * airTemperatureMax,
-#' * airTemperatureMaxTime,
-#' * airTemperatureMin,
-#' * airTemperatureMinTime,
-#' * apparentAirTemperature,
-#' * apparentAirTemperatureAvg,
-#' * apparentAirTemperatureMax,
-#' * apparentAirTemperatureMaxTime,
-#' * apparentAirTemperatureMin,
-#' * apparentAirTemperatureMinTime,
-#' * barometricPressure,
-#' * barometricPressureAvg,
-#' * barometricPressureMax,
-#' * barometricPressureMaxTime,
-#' * barometricPressureMin,
-#' * barometricPressureMinTime,
-#' * battery,
-#' * batteryMinVoltage,
-#' * batteryMinVoltageDateTime,
-#' * chillHours,
-#' * deltaT,
-#' * deltaTAvg,
-#' * deltaTMax,
-#' * deltaTMaxTime,
-#' * deltaTMin,
-#' * deltaTMinTime,
-#' * dewPoint,
-#' * dewPointAvg,
-#' * dewPointMax,
-#' * dewPointMaxTime,
-#' * dewPointMin,
-#' * dewPointMinTime,
-#' * erosionCondition,
-#' * erosionConditionMinutes,
-#' * erosionConditionStartTime,
-#' * errors,
-#' * etoShortCrop,
-#' * etoTallCrop,
-#' * evapotranspiration,
-#' * frostCondition,
-#' * frostConditionMinutes,
-#' * frostConditionStartTime,
-#' * heatCondition,
-#' * heatConditionMinutes,
-#' * heatConditionStartTime,
-#' * observations,
-#' * observationsCount,
-#' * observationsPercentage,
-#' * panEvaporation,
-#' * rainfall,
-#' * relativeHumidity,
-#' * relativeHumidityAvg,
-#' * relativeHumidityMax,
-#' * relativeHumidityMaxTime,
-#' * relativeHumidityMin,
-#' * relativeHumidityMinTime,
-#' * richardsonUnits,
-#' * soilTemperature,
-#' * soilTemperatureAvg,
-#' * soilTemperatureMax,
-#' * soilTemperatureMaxTime,
-#' * soilTemperatureMin,
-#' * soilTemperatureMinTime,
-#' * solarExposure,
-#' * wetBulb,
-#' * wetBulbAvg,
-#' * wetBulbMax,
-#' * wetBulbMaxTime,
-#' * wetBulbMin,
-#' * wetBulbMinTime,
-#' * wind,
-#' * windAvgSpeed, and
-#' * windMaxSpeed
+#' ## Available Values for `which_values`:
 #'
-#' @return a [data.table::data.table]  with 'station_code' and date interval
-#'  queried together with the requested weather variables in alphabetical order.
-#'  The first ten columns will always be:
+#'   * all (which will return all of the following values),
+#'   * airTemperature,
+#'   * airTemperatureAvg,
+#'   * airTemperatureMax,
+#'   * airTemperatureMaxTime,
+#'   * airTemperatureMin,
+#'   * airTemperatureMinTime,
+#'   * apparentAirTemperature,
+#'   * apparentAirTemperatureAvg,
+#'   * apparentAirTemperatureMax,
+#'   * apparentAirTemperatureMaxTime,
+#'   * apparentAirTemperatureMin,
+#'   * apparentAirTemperatureMinTime,
+#'   * barometricPressure,
+#'   * barometricPressureAvg,
+#'   * barometricPressureMax,
+#'   * barometricPressureMaxTime,
+#'   * barometricPressureMin,
+#'   * barometricPressureMinTime,
+#'   * battery,
+#'   * batteryMinVoltage,
+#'   * batteryMinVoltageDateTime,
+#'   * chillHours,
+#'   * deltaT,
+#'   * deltaTAvg,
+#'   * deltaTMax,
+#'   * deltaTMaxTime,
+#'   * deltaTMin,
+#'   * deltaTMinTime,
+#'   * dewPoint,
+#'   * dewPointAvg,
+#'   * dewPointMax,
+#'   * dewPointMaxTime,
+#'   * dewPointMin,
+#'   * dewPointMinTime,
+#'   * erosionCondition,
+#'   * erosionConditionMinutes,
+#'   * erosionConditionStartTime,
+#'   * errors,
+#'   * etoShortCrop,
+#'   * etoTallCrop,
+#'   * evapotranspiration,
+#'   * frostCondition,
+#'   * frostConditionMinutes,
+#'   * frostConditionStartTime,
+#'   * heatCondition,
+#'   * heatConditionMinutes,
+#'   * heatConditionStartTime,
+#'   * observations,
+#'   * observationsCount,
+#'   * observationsPercentage,
+#'   * panEvaporation,
+#'   * rainfall,
+#'   * relativeHumidity,
+#'   * relativeHumidityAvg,
+#'   * relativeHumidityMax,
+#'   * relativeHumidityMaxTime,
+#'   * relativeHumidityMin,
+#'   * relativeHumidityMinTime,
+#'   * richardsonUnits,
+#'   * soilTemperature,
+#'   * soilTemperatureAvg,
+#'   * soilTemperatureMax,
+#'   * soilTemperatureMaxTime,
+#'   * soilTemperatureMin,
+#'   * soilTemperatureMinTime,
+#'   * solarExposure,
+#'   * wetBulb,
+#'   * wetBulbAvg,
+#'   * wetBulbMax,
+#'   * wetBulbMaxTime,
+#'   * wetBulbMin,
+#'   * wetBulbMinTime,
+#'   * wind,
+#'   * windAvgSpeed, and
+#'   * windMaxSpeed
 #'
-#'  * 'station_code',
-#'  * 'station_name',
-#'  * 'period_year',
-#'  * 'period_month',
-#'  * 'period_day',
-#'  * 'period_hour',
-#'  * 'period_minute' and if 'period_month' or finer is present,
-#'  * 'date' (a combination of year, month, day, hour, minute as appropriate).
+#' @return a [data.table::data.table] with 'station_code' and date interval
+#'   queried together with the requested weather variables in alphabetical
+#'   order. The first ten columns will always be:
+#'
+#'   * 'station_code',
+#'   * 'station_name',
+#'   * 'period_year',
+#'   * 'period_month',
+#'   * 'period_day',
+#'   * 'period_hour',
+#'   * 'period_minute' and if 'period_month' or finer is present,
+#'   * 'date' (a combination of year, month, day, hour, minute as appropriate).
 #'
 #' @note Please note this function converts date-time columns from Coordinated
-#'  Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
+#'   Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 #'
 #' @family DPIRD
 #'

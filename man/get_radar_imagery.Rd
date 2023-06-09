@@ -24,12 +24,11 @@ a \code{NULL} return value with the download path printed in the console as a
 message.
 }
 \description{
-Fetch \acronym{BOM} radar imagery from
-\url{ftp://ftp.bom.gov.au/anon/gen/radar/} and return a
-\code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} layer object.  Files available are the most
-recent radar snapshot which are updated approximately every 6 to 10 minutes.
-Suggested to check file availability first by using
-\code{\link[=get_available_radar]{get_available_radar()}}.
+Fetch \acronym{BOM} radar imagery from \url{ftp://ftp.bom.gov.au/anon/gen/radar/}
+and return a \code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} layer object.  Files available are the
+most recent radar snapshot which are updated approximately every 6 to 10
+minutes.
+Suggested to check file availability first by using \code{\link[=get_available_radar]{get_available_radar()}}.
 }
 \details{
 Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery

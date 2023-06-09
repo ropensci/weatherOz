@@ -2,46 +2,46 @@
 #' Get a listing of available BOM satellite GeoTIFF imagery
 #'
 #' Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
-#' <ftp://ftp.bom.gov.au/anon/gen/gms/> to determine which files are
-#' currently available for download. Files are available at ten minute update
-#' frequency with a 24-hour delete time. It is useful to know the most recent
-#' files available and then specify in the [get_satellite_imagery()]
-#' function.
+#'   <ftp://ftp.bom.gov.au/anon/gen/gms/> to determine which files are
+#'   currently available for download. Files are available at ten minute update
+#'   frequency with a 24-hour delete time. It is useful to know the most recent
+#'   files available and then specify in the [get_satellite_imagery()]
+#'   function.
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID of interest for which
-#'  a list of available images will be returned.  Defaults to all images
-#'  currently available.
+#'   a list of available images will be returned.  Defaults to all images
+#'   currently available.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for 'GeoTIFF' files
-#'  include:
-#' \describe{
-#' \item{IDE00420}{AHI cloud cover only 2km FD GEOS GIS}
-#' \item{IDE00421}{AHI IR (Ch13) greyscale 2km FD GEOS GIS}
-#' \item{IDE00422}{AHI VIS (Ch3) greyscale 2km FD GEOS GIS}
-#' \item{IDE00423}{AHI IR (Ch13) Zehr 2km FD GEOS GIS}
-#' \item{IDE00425}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-#' GEOS GIS}
-#' \item{IDE00426}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km FD
-#' GEOS GIS}
-#' \item{IDE00427}{AHI WV (Ch8) 2km FD GEOS GIS}
-#' \item{IDE00430}{AHI cloud cover only 2km AUS equirect. GIS}
-#' \item{IDE00431}{AHI IR (Ch13) greyscale 2km AUS equirect. GIS}
-#' \item{IDE00432}{AHI VIS (Ch3) greyscale 2km AUS equirect. GIS}
-#' \item{IDE00433}{AHI IR (Ch13) Zehr 2km AUS equirect. GIS}
-#' \item{IDE00435}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km AUS
-#' equirect. GIS}
-#' \item{IDE00436}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km AUS
-#' equirect. GIS}
-#' \item{IDE00437}{AHI WV (Ch8) 2km AUS equirect. GIS}
-#' \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
-#' }
+#'   include:
+#'   \describe{
+#'    \item{IDE00420}{AHI cloud cover only 2km FD GEOS GIS}
+#'    \item{IDE00421}{AHI IR (Ch13) greyscale 2km FD GEOS GIS}
+#'    \item{IDE00422}{AHI VIS (Ch3) greyscale 2km FD GEOS GIS}
+#'    \item{IDE00423}{AHI IR (Ch13) Zehr 2km FD GEOS GIS}
+#'    \item{IDE00425}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km
+#'      FD GEOS GIS}
+#'    \item{IDE00426}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km
+#'      FD GEOS GIS}
+#'    \item{IDE00427}{AHI WV (Ch8) 2km FD GEOS GIS}
+#'    \item{IDE00430}{AHI cloud cover only 2km AUS equirect. GIS}
+#'    \item{IDE00431}{AHI IR (Ch13) greyscale 2km AUS equirect. GIS}
+#'    \item{IDE00432}{AHI VIS (Ch3) greyscale 2km AUS equirect. GIS}
+#'    \item{IDE00433}{AHI IR (Ch13) Zehr 2km AUS equirect. GIS}
+#'    \item{IDE00435}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km
+#'      AUS equirect. GIS}
+#'    \item{IDE00436}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km
+#'      AUS equirect. GIS}
+#'    \item{IDE00437}{AHI WV (Ch8) 2km AUS equirect. GIS}
+#'    \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
+#'   }
 #'
 #' @return
 #' A `vector` of all available files for the requested Product ID(s).
 #'
 #' @references
 #' Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
-#' images <http://www.bom.gov.au/australia/satellite/index.shtml>
+#'   images <http://www.bom.gov.au/australia/satellite/index.shtml>
 #'
 #' @examplesIf interactive()
 #' # Check availability of AHI VIS (true colour) / IR (Ch13 greyscale) composite
@@ -63,47 +63,47 @@ get_available_imagery <- function(product_id = "all") {
 #' Get \acronym{BOM} Satellite GeoTIFF Imagery
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
-#'  <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#'  [terra::SpatRaster] or [stars] object of 'GeoTIFF' files. Files are
-#'  available at ten minutes update frequency with a 24-hour delete time.  It is
-#'  suggested to check file availability first by using
-#'  [get_available_imagery()].
+#'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
+#'   [terra::SpatRaster] or [stars] object of 'GeoTIFF' files. Files are
+#'   available at ten minutes update frequency with a 24-hour delete time.  It
+#'   is suggested to check file availability first by using
+#'   [get_available_imagery()].
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID to download in
-#'  'GeoTIFF' format and import as a [terra::SpatRaster] or [stars] class
-#'  object.  A vector of values from [get_available_imagery()] may be used here.
-#'  Value is required.
+#'   'GeoTIFF' format and import as a [terra::SpatRaster] or [stars] class
+#'   object.  A vector of values from [get_available_imagery()] may be used here.
+#'   Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
-#'  recent and progressing backwards, *e.g.*, 1 - the most recent single scan
-#'  available , 6 - the most recent hour available, 12 - the most recent 2 hours
-#'  available, etc.  Negating will return the oldest files first.  Defaults to
-#'  1.  Value is optional.
+#'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan
+#'   available , 6 - the most recent hour available, 12 - the most recent 2 hours
+#'   available, etc.  Negating will return the oldest files first.  Defaults to
+#'   1.  Value is optional.
 #' @param compat `Character`. A string indicating the \R package with which the
-#'  returned imagery should be formatted for use, one of [terra] or
-#'  [stars].  Defaults to 'terra'.
+#'   returned imagery should be formatted for use, one of [terra] or [stars].
+#'   Defaults to 'terra'.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
-#' \var{product_id} include:
-#' \describe{
-#' \item{IDE00420}{AHI cloud cover only 2km FD GEOS GIS}
-#' \item{IDE00421}{AHI IR (Ch13) greyscale 2km FD GEOS GIS}
-#' \item{IDE00422}{AHI VIS (Ch3) greyscale 2km FD GEOS GIS}
-#' \item{IDE00423}{AHI IR (Ch13) Zehr 2km FD GEOS GIS}
-#' \item{IDE00425}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-#'  GEOS GIS}
-#' \item{IDE00426}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km FD
-#'  GEOS GIS}
-#' \item{IDE00427}{AHI WV (Ch8) 2km FD GEOS GIS}
-#' \item{IDE00430}{AHI cloud cover only 2km AUS equirect. GIS}
-#' \item{IDE00431}{AHI IR (Ch13) greyscale 2km AUS equirect. GIS}
-#' \item{IDE00432}{AHI VIS (Ch3) greyscale 2km AUS equirect. GIS}
-#' \item{IDE00433}{AHI IR (Ch13) Zehr 2km AUS equirect. GIS}
-#' \item{IDE00435}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km AUS
-#'  equirect. GIS}
-#' \item{IDE00436}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km AUS
-#'  equirect. GIS}
-#' \item{IDE00437}{AHI WV (Ch8) 2km AUS equirect. GIS}
-#' \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
+#'   \var{product_id} include:
+#'    \describe{
+#'    \item{IDE00420}{AHI cloud cover only 2km FD GEOS GIS}
+#'    \item{IDE00421}{AHI IR (Ch13) greyscale 2km FD GEOS GIS}
+#'    \item{IDE00422}{AHI VIS (Ch3) greyscale 2km FD GEOS GIS}
+#'    \item{IDE00423}{AHI IR (Ch13) Zehr 2km FD GEOS GIS}
+#'    \item{IDE00425}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km
+#'        FD GEOS GIS}
+#'    \item{IDE00426}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km
+#'        FD GEOS GIS}
+#'    \item{IDE00427}{AHI WV (Ch8) 2km FD GEOS GIS}
+#'    \item{IDE00430}{AHI cloud cover only 2km AUS equirect. GIS}
+#'    \item{IDE00431}{AHI IR (Ch13) greyscale 2km AUS equirect. GIS}
+#'    \item{IDE00432}{AHI VIS (Ch3) greyscale 2km AUS equirect. GIS}
+#'    \item{IDE00433}{AHI IR (Ch13) Zehr 2km AUS equirect. GIS}
+#'    \item{IDE00435}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km
+#'        AUS equirect. GIS}
+#'    \item{IDE00436}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km
+#'        AUS equirect. GIS}
+#'    \item{IDE00437}{AHI WV (Ch8) 2km AUS equirect. GIS}
+#'    \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
 #' }
 #'
 #' @family bomrang-ported
@@ -112,16 +112,16 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @return
 #' A [terra::SpatRaster] or [stars] class object as selected by the user by
-#' specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
-#' product ID, timestamp and band.
+#'   specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
+#'    product ID, timestamp and band.
 #'
 #' @note The original \pkg{bomrang} version of this function supported local
-#' file caching using \CRANpkg{hoardr}. This version does not support this
-#' functionality any longer.
+#'   file caching using \CRANpkg{hoardr}. This version does not support this
+#'   functionality any longer.
 #'
 #' @references
 #' Australian Bureau of Meteorology (BOM) high-definition satellite images \cr
-#' <http://www.bom.gov.au/australia/satellite/index.shtml>
+#'    <http://www.bom.gov.au/australia/satellite/index.shtml>
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD

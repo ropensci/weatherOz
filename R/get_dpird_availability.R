@@ -1,44 +1,46 @@
 
 #' Get DPIRD weather station availability metadata
 #'
-#' Get the availability metadata weather stations.
+#' Get the availability metadata of weather stations in the \acronym{DPIRD}
+#'   weather station network.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
-#'  for the station of interest. Defaults to `NULL`, returning metadata for all
-#'  stations during the requested `start_date` and `end_date` interval.
+#'   for the station of interest. Defaults to `NULL`, returning metadata for all
+#'   stations during the requested `start_date` and `end_date` interval.
 #' @param start_date A `character` string representing the beginning of the
-#'  range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'  inclusive of this range.  Defaults to `NULL`, returning data for the current
-#'  year-to-date.  Must be sent along with an `end_date`.
+#'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+#'   inclusive of this range.  Defaults to `NULL`, returning data for the
+#'   current year-to-date.  Must be sent along with an `end_date`.
 #' @param end_date A `character` string representing the end of the range query
-#'  in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-#'  range.  Defaults to `NULL`, returning data for the current
-#'  year-to-date.  Must be sent with a `start_date`.
+#'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
+#'   range.  Defaults to `NULL`, returning data for the current year-to-date.
+#'   Must be sent with a `start_date`.
 #' @param which_values A `character` string with the type of availability
-#'  metadata to return.  See **Available Values** for a full list of valid
-#'  values.  Defaults to 'availability', returning metadata for all stations.
+#'    metadata to return.  See **Available Values** for a full list of valid
+#'    values.  Defaults to 'availability', returning metadata for all stations.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'    \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'    \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' ## Available Values for `which_values`:
-#'  * availability (which will return all of the following values),
-#'  * availabilityCurrentHour,
-#'  * availabilityLast7DaysSince9AM,
-#'  * availabilityLast7DaysSince12AM,
-#'  * availabilityLast14DaysSince9AM,
-#'  * availabilityLast14DaysSince12AM,
-#'  * availabilityLast24Hours,
-#'  * availabilityMonthToDateSince12AM,
-#'  * availabilityMonthToDateTo9AM,
-#'  * availabilitySince9AM,
-#'  * availabilitySince12AM,
-#'  * availabilityTo9AM,
-#'  * availabilityYearToDateSince12AM, and
-#'  * availabilityYearToDateTo9AM
+#'
+#'   * availability (which will return all of the following values),
+#'   * availabilityCurrentHour,
+#'   * availabilityLast7DaysSince9AM,
+#'   * availabilityLast7DaysSince12AM,
+#'   * availabilityLast14DaysSince9AM,
+#'   * availabilityLast14DaysSince12AM,
+#'   * availabilityLast24Hours,
+#'   * availabilityMonthToDateSince12AM,
+#'   * availabilityMonthToDateTo9AM,
+#'   * availabilitySince9AM,
+#'   * availabilitySince12AM,
+#'   * availabilityTo9AM,
+#'   * availabilityYearToDateSince12AM, and
+#'   * availabilityYearToDateTo9AM
 #'
 #' @return a [data.table::data.table]  with 'station_code' and the requested
-#' metadata.
+#'   metadata.
 #'
 #' @examples
 #' \dontrun{

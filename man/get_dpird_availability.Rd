@@ -19,13 +19,13 @@ stations during the requested \code{start_date} and \code{end_date} interval.}
 
 \item{start_date}{A \code{character} string representing the beginning of the
 range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.  Defaults to \code{NULL}, returning data for the current
-year-to-date.  Must be sent along with an \code{end_date}.}
+inclusive of this range.  Defaults to \code{NULL}, returning data for the
+current year-to-date.  Must be sent along with an \code{end_date}.}
 
 \item{end_date}{A \code{character} string representing the end of the range query
 in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-range.  Defaults to \code{NULL}, returning data for the current
-year-to-date.  Must be sent with a \code{start_date}.}
+range.  Defaults to \code{NULL}, returning data for the current year-to-date.
+Must be sent with a \code{start_date}.}
 
 \item{which_values}{A \code{character} string with the type of availability
 metadata to return.  See \strong{Available Values} for a full list of valid
@@ -58,7 +58,8 @@ a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and 
 metadata.
 }
 \description{
-Get the availability metadata weather stations.
+Get the availability metadata of weather stations in the \acronym{DPIRD}
+weather station network.
 }
 \examples{
 \dontrun{

@@ -1,16 +1,15 @@
 
 #' Parse local BOM agriculture bulletin XML file(s) for select stations
 #'
-#' Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) and
-#' return a data frame for a specified state or territory or all Australia.
-#' Ported from \pkg{bomrang}.
+#' Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) for a
+#'   specified state or territory or all Australia.  Ported from \pkg{bomrang}.
 #'
 #' @param state Required value of an Australian state or territory as full name
-#'  or postal code.  Fuzzy string matching via [base::agrep()] is
-#'  done.
+#'   or postal code.  Fuzzy string matching via [base::agrep()] is
+#'   done.
 #'
 #' @param filepath A string providing the directory location of the précis
-#' file(s) to parse. See Details for more.
+#'   file(s) to parse. See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
 #' or all using 'AUS'.
@@ -27,13 +26,13 @@
 #'  }
 #'
 #' @details The \var{filepath} argument will only accept a directory where files
-#' are located for parsing. DO NOT supply the full path including the file name.
-#' This function will only parse the requested state or all of Australia in the
-#' same fashion as [get_precis_forecast()], provided that the files
-#' are all present in the directory.
+#'   are located for parsing. DO NOT supply the full path including the file
+#'   name.  This function will only parse the requested state or all of
+#'   Australia in the same fashion as [get_precis_forecast()], provided that the
+#'   files are all present in the directory.
 #'
-#' @return A [data.table::data.table] of Australia \acronym{BOM}
-#'  agricultural bulletin information.
+#' @return A [data.table::data.table] of Australia \acronym{BOM} agricultural
+#'   bulletin information.
 #'
 #' @examplesIf interactive()
 #' # parse the ag bulletin for Western Australia
@@ -48,18 +47,18 @@
 #'
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of
-#' Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins, \cr
-#' <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>
+#'   Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
+#'   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
 #'
 #' and
 #'
 #' Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
-#' Observation of Rainfall, \cr
-#' <http://www.bom.gov.au/climate/how/observations/rain-measure.shtml>
+#'   Observation of Rainfall, \cr
+#'   <http://www.bom.gov.au/climate/how/observations/rain-measure.shtml>.
 #'
 #' Station location and other metadata are sourced from the Australian Bureau of
-#' Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers: \cr
-#' <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>
+#'   Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
+#'   <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Paul Melloy
 #' \email{paul@@melloy.com.au}

@@ -8,26 +8,26 @@
 #' Get extreme weather event summaries for a single DPIRD station
 #'
 #' @param station_code A `character` string with the station code for the
-#'  station of interest.
+#'   station of interest.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param which_values A `character` string with the type of extreme weather to
-#'  return.  See **Available Values** for a full list of valid values.  Defaults
-#'  to 'all', returning the full list of values unless otherwise specified.
+#'   return.  See **Available Values** for a full list of valid values.
+#'   Defaults to 'all', returning the full list of values unless otherwise
+#'   specified.
 #' @param group Filter the stations to a predefined group. These need to be
-#'  supported on the back end; 'all' returns all stations, 'api' returns the
-#'  default stations in use with the \acronym{API}, 'web' returns the list in
-#'  use by the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations
-#'  with scientifically complete data sets. Defaults to 'rtd'.
+#'   supported on the back end; 'all' returns all stations, 'api' returns the
+#'   default stations in use with the \acronym{API}, 'web' returns the list in
+#'   use by the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations
+#'   with scientifically complete data sets. Defaults to 'rtd'.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
-#'  `TRUE` the query returns closed and open stations. Closed stations are those
-#'  that have been turned off and no longer report data.  They may be useful for
-#'  historical purposes.
+#'   `TRUE` the query returns closed and open stations. Closed stations are
+#'   those that have been turned off and no longer report data.  They may be
+#'   useful for historical purposes.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'  \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'  \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#'
+#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' ## Available Values for `which_values`
 #'
@@ -91,8 +91,8 @@
 #' * heatConditionYearToDateStartTime
 #'
 #' @return a [data.table::data.table] of one row with 'station_code',
-#'  'station_name', 'latitude', 'longitude', 'date_time' of the query and the
-#'  extreme weather information according to the value(s) selected.
+#'   'station_name', 'latitude', 'longitude', 'date_time' of the query and the
+#'   extreme weather information according to the value(s) selected.
 #'
 #' @family DPIRD
 #'

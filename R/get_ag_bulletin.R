@@ -1,8 +1,7 @@
 
 #' Get BOM agriculture bulletin information for select stations
 #'
-#' Fetch the \acronym{BOM} agricultural bulletin information and return it in a
-#'   [data.table].
+#' Fetch the \acronym{BOM} agricultural bulletin information.
 #'
 #' @param state Australian state or territory as full name or postal code.
 #'   Fuzzy string matching via [base::agrep()] is done.  Defaults to "AUS"
@@ -41,17 +40,17 @@
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of
 #'   Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
-#'   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>
+#'   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
 #'
-#' and
+#' And also
 #'
 #' Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
 #'   Observation of Rainfall, \cr
-#'   <http://www.bom.gov.au/climate/how/observations/rain-measure.shtml>
+#'   <http://www.bom.gov.au/climate/how/observations/rain-measure.shtml>.
 #'
 #' Station location and other metadata are sourced from the Australian Bureau of
 #'   Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
-#'   <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>
+#'   <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Paul Melloy
 #' \email{paul@@melloy.com.au}

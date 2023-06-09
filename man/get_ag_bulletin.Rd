@@ -17,8 +17,7 @@ with \link[data.table:data.table]{data.table::data.table}) of Australia \acronym
 bulletin information.
 }
 \description{
-Fetch the \acronym{BOM} agricultural bulletin information and return it in a
-\link{data.table}.
+Fetch the \acronym{BOM} agricultural bulletin information.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
@@ -52,17 +51,17 @@ ag_bulletin
 \references{
 Agricultural observations are retrieved from the Australian Bureau of
 Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
-\url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}
+\url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}.
 
-and
+And also
 
 Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
 Observation of Rainfall, \cr
-\url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}
+\url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}.
 
 Station location and other metadata are sourced from the Australian Bureau of
 Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
-\url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
+\url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}.
 }
 \seealso{
 \link{parse_ag_bulletin}

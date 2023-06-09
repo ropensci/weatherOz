@@ -8,19 +8,18 @@ parse_coastal_forecast(state, filepath)
 }
 \arguments{
 \item{state}{Required value of an Australian state or territory as full name
-or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is
-done.}
+or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.}
 
 \item{filepath}{A string providing the directory location of the coastal
 forecast file(s) to parse. See Details for more.}
 }
 \value{
-A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{BOM}
-Coastal Waters Forecast.
+A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{BOM} Coastal Waters
+Forecast.
 }
 \description{
 Parse local \acronym{BOM} daily coastal waters forecast \acronym{XML} file(s)
-and return a data frame for a specified state or territory or all Australia.
+for a specified state or territory or all of Australia.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
@@ -38,10 +37,10 @@ or all using 'AUS'.
 }
 
 The \var{filepath} argument will only accept a directory where files
-are located for parsing. DO NOT supply the full path including the file name.
-This function will only parse the requested state or all of Australia in the
-same fashion as \code{\link[=get_coastal_forecast]{get_coastal_forecast()}}, provided that the files
-are all present in the directory.
+are located for parsing. DO NOT supply the full path including the file
+name.  This function will only parse the requested state or all of
+Australia in the same fashion as \code{\link[=get_coastal_forecast]{get_coastal_forecast()}}, provided that
+the files are all present in the directory.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -62,14 +61,13 @@ coastal_forecast
 }
 \references{
 Forecast data come from Australian Bureau of Meteorology (BOM) Weather Data
-Services \cr
-\url{http://www.bom.gov.au/catalogue/data-feeds.shtml}
+Services\cr \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}.
 
 Location data and other metadata come from the \acronym{BOM} anonymous
 \acronym{FTP} server with spatial data \cr
 \url{ftp://ftp.bom.gov.au/anon/home/adfd/spatial/}, specifically the
 \acronym{DBF} file portion of a shapefile, \cr
-\url{ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf}
+\url{ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf}.
 }
 \seealso{
 \link{get_coastal_forecast}

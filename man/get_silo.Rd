@@ -16,17 +16,18 @@ get_silo(
 }
 \arguments{
 \item{station_code}{An \code{integer} representing the station number
-available from the \acronym{SILO} network. Defaults to
-\code{NULL} and when used, queries with latitude and longitude input are not
-permitted.}
+available from the \acronym{SILO} network. Defaults to \code{NULL} and when
+used, queries with latitude and longitude input are not permitted.}
 
 \item{latitude}{A single \code{numeric} value representing the latitude of the
 point-of-interest. Defaults to \code{NULL} and when used, queries with
-\code{station_code} input are not permitted. Requires \code{longitude} to be provided.}
+\code{station_code} input are not permitted. Requires \code{longitude} to be
+provided.}
 
 \item{longitude}{A single \code{numeric} value  representing the longitude of the
 point-of-interest. Defaults to \code{NULL} and when used, queries with
-\code{station_code} inputs are not permitted.  Requires \code{latitude} to be provided.}
+\code{station_code} inputs are not permitted.  Requires \code{latitude} to be
+provided.}
 
 \item{start_date}{A \code{character} string representing the start date of the
 query in the format 'yyyymmdd'.}
@@ -50,10 +51,10 @@ A \link[data.table:data.table]{data.table::data.table} containing the retrieved 
 Download weather data from the \acronym{SILO} \acronym{API} from both
 station observations (DataDrill) and gridded data (PatchedPointData). There
 are three formats available: 'alldata' and 'apsim' with daily frequency and
-'monthly' with, that's right, monthly frequency. Queries with \code{station_code}
-return stations observations from the 'DataDrill' endpoint while queries with
-\code{latitude} and \code{longitude} coordinates return gridded data from the
-'PatchedPointData'.
+'monthly' with, that's right, monthly frequency. Queries with
+\code{station_code} return stations observations from the 'DataDrill' endpoint
+while queries with \code{latitude} and \code{longitude} coordinates return gridded
+data from the 'PatchedPointData'.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

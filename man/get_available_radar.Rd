@@ -7,12 +7,12 @@
 get_available_radar(radar_id = "all")
 }
 \arguments{
-\item{radar_id}{\code{Numeric}. \acronym{BOM} radar of interest for
-which a list of available images will be returned.  Defaults to all images
-currently available.}
+\item{radar_id}{\code{Numeric}. \acronym{BOM} radar of interest for which a list
+of available images will be returned.  Defaults to all images currently
+available.}
 }
 \value{
-A data frame of all selected \acronym{radar} locations with location
+A \link[data.table:data.table]{data.table::data.table} of all selected \acronym{radar} locations with location
 information and \var{product_ids}.
 }
 \description{

@@ -2,17 +2,16 @@
 #' Parse local BOM coastal waters forecast XML files
 #'
 #' Parse local \acronym{BOM} daily coastal waters forecast \acronym{XML} file(s)
-#'  and return a data frame for a specified state or territory or all Australia.
+#'   for a specified state or territory or all of Australia.
 #'
 #' @param state Required value of an Australian state or territory as full name
-#'  or postal code.  Fuzzy string matching via [base::agrep()] is
-#'  done.
+#'   or postal code.  Fuzzy string matching via [base::agrep()] is done.
 #'
 #' @param filepath A string providing the directory location of the coastal
 #'  forecast file(s) to parse. See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using 'AUS'.
+#'  or all using 'AUS'.
 #'  \describe{
 #'    \item{ACT}{Australian Capital Territory (will return NSW)}
 #'    \item{NSW}{New South Wales}
@@ -26,14 +25,14 @@
 #'  }
 #'
 #' @details The \var{filepath} argument will only accept a directory where files
-#' are located for parsing. DO NOT supply the full path including the file name.
-#' This function will only parse the requested state or all of Australia in the
-#' same fashion as [get_coastal_forecast()], provided that the files
-#' are all present in the directory.
+#'   are located for parsing. DO NOT supply the full path including the file
+#'   name.  This function will only parse the requested state or all of
+#'   Australia in the same fashion as [get_coastal_forecast()], provided that
+#'   the files are all present in the directory.
 #'
 #' @return
-#' A [data.table::data.table] of an Australia \acronym{BOM}
-#' Coastal Waters Forecast.
+#' A [data.table::data.table] of an Australia \acronym{BOM} Coastal Waters
+#'   Forecast.
 #'
 #' @family bomrang-ported
 #'
@@ -53,14 +52,13 @@
 #'}
 #' @references
 #' Forecast data come from Australian Bureau of Meteorology (BOM) Weather Data
-#' Services \cr
-#' <http://www.bom.gov.au/catalogue/data-feeds.shtml>
+#'   Services\cr <http://www.bom.gov.au/catalogue/data-feeds.shtml>.
 #'
 #' Location data and other metadata come from the \acronym{BOM} anonymous
-#' \acronym{FTP} server with spatial data \cr
-#' <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the
-#' \acronym{DBF} file portion of a shapefile, \cr
-#' <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf>
+#'   \acronym{FTP} server with spatial data \cr
+#'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the
+#'   \acronym{DBF} file portion of a shapefile, \cr
+#'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf>.
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Paul Melloy
 #' \email{paul@@melloy.com.au}

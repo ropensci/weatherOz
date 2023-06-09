@@ -2,30 +2,30 @@
 #' Get BOM daily précis forecast for select towns from BOM
 #'
 #' Fetch the \acronym{BOM} daily précis forecast and return a data frame of the
-#' seven-day town forecasts for a specified state or territory.  Ported from
-#' \pkg{bomrang}.
+#'   seven-day town forecasts for a specified state or territory.  Ported from
+#'   \pkg{bomrang}.
 #'
 #' @param state Australian state or territory as full name or postal code.
-#'  Fuzzy string matching via [base::agrep()] is done.  Defaults to 'AUS'
-#'  returning all state bulletins, see Details for more.
+#'   Fuzzy string matching via [base::agrep()] is done.  Defaults to 'AUS'
+#'   returning all state bulletins, see Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
-#' or all using 'AUS'.
-#'  \describe{
-#'    \item{ACT}{Australian Capital Territory (will return NSW)}
-#'    \item{NSW}{New South Wales}
-#'    \item{NT}{Northern Territory}
-#'    \item{QLD}{Queensland}
-#'    \item{SA}{South Australia}
-#'    \item{TAS}{Tasmania}
-#'    \item{VIC}{Victoria}
-#'    \item{WA}{Western Australia}
-#'    \item{AUS}{Australia, returns forecast for all states, NT and ACT}
+#'   or all using 'AUS'.
+#'    \describe{
+#'      \item{ACT}{Australian Capital Territory (will return NSW)}
+#'      \item{NSW}{New South Wales}
+#'      \item{NT}{Northern Territory}
+#'      \item{QLD}{Queensland}
+#'      \item{SA}{South Australia}
+#'      \item{TAS}{Tasmania}
+#'      \item{VIC}{Victoria}
+#'      \item{WA}{Western Australia}
+#'      \item{AUS}{Australia, returns forecast for all states, NT and ACT}
 #'  }
 #'
 #' @return
 #' A [data.table::data.table] of an Australia \acronym{BOM} précis seven day
-#'  forecasts for \acronym{BOM} selected towns.
+#'   forecasts for \acronym{BOM} selected towns.
 #'
 #' @examplesIf interactive()
 #'

@@ -1,16 +1,15 @@
 
 #' Parse local BOM daily précis forecast XML file(s) for select towns
 #'
-#' Parse local \acronym{BOM} daily précis forecast \acronym{XML} file(s) and
-#' return a data frame of the seven-day town forecasts for a specified state or
-#' territory or all Australia.  Ported from \pkg{bomrang}.
+#' Parse local \acronym{BOM} daily précis forecast \acronym{XML} file(s) of the
+#'  seven-day town forecasts for a specified state or territory or all
+#'  Australia.  Ported from \pkg{bomrang}.
 #'
 #' @param state Required value of an Australian state or territory as full name
-#'  or postal code.  Fuzzy string matching via [base::agrep()] is
-#'  done.
+#'   or postal code.  Fuzzy string matching via [base::agrep()] is done.
 #'
 #' @param filepath A string providing the directory location of the précis
-#'  file(s) to parse. See Details for more.
+#'   file(s) to parse. See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
 #' or all using 'AUS'.
@@ -27,14 +26,14 @@
 #'  }
 #'
 #' @details The \var{filepath} argument will only accept a directory where files
-#' are located for parsing. DO NOT supply the full path including the file name.
-#' This function will only parse the requested state or all of Australia in the
-#' same fashion as [get_precis_forecast()], provided that the files
-#' are all present in the directory.
+#'   are located for parsing. DO NOT supply the full path including the file
+#'   name.  This function will only parse the requested state or all of
+#'   Australia in the same fashion as [get_precis_forecast()], provided that the
+#'   files are all present in the directory.
 #'
 #' @return
-#' A [data.table::data.table] of Australia \acronym{BOM} précis
-#' seven day forecasts for \acronym{BOM} selected towns.
+#' A [data.table::data.table] of Australia \acronym{BOM} précis seven day
+#'   forecasts for \acronym{BOM} selected towns.
 #'
 #' @examplesIf interactive()
 #'

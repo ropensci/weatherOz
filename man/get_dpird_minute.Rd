@@ -17,16 +17,16 @@ get_dpird_minute(
 station code for the station of interest.}
 
 \item{start_date_time}{A \code{character} string representing the start date and
-time of the query in the format 'yyyy-mm-dd-hh-mm'. Defaults to 24 hours
+time of the query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to 24 hours
 before the current local system time, returning the most recent 24 hour
-observations rounded to the nearest minute. This function does its best to
+observations rounded to the nearest minute.  This function does its best to
 decipher many date and time formats but prefers ISO8601.}
 
 \item{minutes}{An \code{integer} value that provides the number of observations to
-be returned. Defaults to 1440 minutes for 24 hours of observations.}
+be returned.  Defaults to 1440 minutes for 24 hours of observations.}
 
 \item{which_values}{A \code{vector} of weather values to query from the
-\acronym{API}. See \strong{Available Values} section for valid available codes.
+\acronym{API}.  See \strong{Available Values} section for valid available codes.
 Defaults to all available values, "all".}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
@@ -55,8 +55,8 @@ a \link[data.table:data.table]{data.table::data.table} with 'station_code' and d
 queried together with the requested weather variables.
 }
 \description{
-Nicely formatted minute weather station data from the \acronym{DPIRD} weather
-station network over a maximum 24 hour period.
+Get nicely formatted minute weather station data from the \acronym{DPIRD}
+weather station network over a maximum 24 hour period.
 }
 \note{
 Please note this function converts date-time columns from Coordinated

@@ -15,13 +15,12 @@ done.}
 file(s) to parse. See Details for more.}
 }
 \value{
-A \link[data.table:data.table]{data.table::data.table} of Australia \acronym{BOM}
-agricultural bulletin information.
+A \link[data.table:data.table]{data.table::data.table} of Australia \acronym{BOM} agricultural
+bulletin information.
 }
 \description{
-Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) and
-return a data frame for a specified state or territory or all Australia.
-Ported from \pkg{bomrang}.
+Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) for a
+specified state or territory or all Australia.  Ported from \pkg{bomrang}.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
@@ -39,10 +38,10 @@ or all using 'AUS'.
 }
 
 The \var{filepath} argument will only accept a directory where files
-are located for parsing. DO NOT supply the full path including the file name.
-This function will only parse the requested state or all of Australia in the
-same fashion as \code{\link[=get_precis_forecast]{get_precis_forecast()}}, provided that the files
-are all present in the directory.
+are located for parsing. DO NOT supply the full path including the file
+name.  This function will only parse the requested state or all of
+Australia in the same fashion as \code{\link[=get_precis_forecast]{get_precis_forecast()}}, provided that the
+files are all present in the directory.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -59,18 +58,18 @@ parse_ag_bulletin(state = "WA", filepath = tempdir())
 }
 \references{
 Agricultural observations are retrieved from the Australian Bureau of
-Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins, \cr
-\url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}
+Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
+\url{http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml}.
 
 and
 
 Australian Bureau of Meteorology (\acronym{BOM})) Weather Data Services
 Observation of Rainfall, \cr
-\url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}
+\url{http://www.bom.gov.au/climate/how/observations/rain-measure.shtml}.
 
 Station location and other metadata are sourced from the Australian Bureau of
-Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers: \cr
-\url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}
+Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
+\url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml}.
 }
 \seealso{
 \link{get_ag_bulletin}

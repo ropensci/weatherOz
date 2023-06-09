@@ -21,8 +21,8 @@ available, etc.  Negating will return the oldest files first.  Defaults to
 }}
 
 \item{compat}{\code{Character}. A string indicating the \R package with which the
-returned imagery should be formatted for use, one of \link{terra} or
-\link{stars}.  Defaults to 'terra'.}
+returned imagery should be formatted for use, one of \link{terra} or \link{stars}.
+Defaults to 'terra'.}
 }
 \value{
 A \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class object as selected by the user by
@@ -33,8 +33,8 @@ product ID, timestamp and band.
 Fetch \acronym{BOM} satellite GeoTIFF imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a raster
 \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} object of 'GeoTIFF' files. Files are
-available at ten minutes update frequency with a 24-hour delete time.  It is
-suggested to check file availability first by using
+available at ten minutes update frequency with a 24-hour delete time.  It
+is suggested to check file availability first by using
 \code{\link[=get_available_imagery]{get_available_imagery()}}.
 }
 \details{
@@ -45,19 +45,19 @@ Valid \acronym{BOM} satellite Product IDs for use with
 \item{IDE00421}{AHI IR (Ch13) greyscale 2km FD GEOS GIS}
 \item{IDE00422}{AHI VIS (Ch3) greyscale 2km FD GEOS GIS}
 \item{IDE00423}{AHI IR (Ch13) Zehr 2km FD GEOS GIS}
-\item{IDE00425}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-GEOS GIS}
-\item{IDE00426}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km FD
-GEOS GIS}
+\item{IDE00425}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km
+FD GEOS GIS}
+\item{IDE00426}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km
+FD GEOS GIS}
 \item{IDE00427}{AHI WV (Ch8) 2km FD GEOS GIS}
 \item{IDE00430}{AHI cloud cover only 2km AUS equirect. GIS}
 \item{IDE00431}{AHI IR (Ch13) greyscale 2km AUS equirect. GIS}
 \item{IDE00432}{AHI VIS (Ch3) greyscale 2km AUS equirect. GIS}
 \item{IDE00433}{AHI IR (Ch13) Zehr 2km AUS equirect. GIS}
-\item{IDE00435}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km AUS
-equirect. GIS}
-\item{IDE00436}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km AUS
-equirect. GIS}
+\item{IDE00435}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km
+AUS equirect. GIS}
+\item{IDE00436}{AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km
+AUS equirect. GIS}
 \item{IDE00437}{AHI WV (Ch8) 2km AUS equirect. GIS}
 \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
 }

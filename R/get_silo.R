@@ -9,36 +9,37 @@
 #' Get weather data from SILO (Scientific Information for Land Owners) API
 #'
 #' Download weather data from the \acronym{SILO} \acronym{API} from both
-#' station observations (DataDrill) and gridded data (PatchedPointData). There
-#' are three formats available: 'alldata' and 'apsim' with daily frequency and
-#' 'monthly' with, that's right, monthly frequency. Queries with `station_code`
-#' return stations observations from the 'DataDrill' endpoint while queries with
-#' `latitude` and `longitude` coordinates return gridded data from the
-#' 'PatchedPointData'.
+#'   station observations (DataDrill) and gridded data (PatchedPointData). There
+#'   are three formats available: 'alldata' and 'apsim' with daily frequency and
+#'   'monthly' with, that's right, monthly frequency. Queries with
+#'   `station_code` return stations observations from the 'DataDrill' endpoint
+#'   while queries with `latitude` and `longitude` coordinates return gridded
+#'   data from the 'PatchedPointData'.
 #'
 #' @param station_code An `integer` representing the station number
-#'  available from the \acronym{SILO} network. Defaults to
-#'  `NULL` and when used, queries with latitude and longitude input are not
-#'  permitted.
+#'   available from the \acronym{SILO} network. Defaults to `NULL` and when
+#'   used, queries with latitude and longitude input are not permitted.
 #' @param latitude A single `numeric` value representing the latitude of the
-#' point-of-interest. Defaults to `NULL` and when used, queries with
-#' `station_code` input are not permitted. Requires `longitude` to be provided.
+#'   point-of-interest. Defaults to `NULL` and when used, queries with
+#'   `station_code` input are not permitted. Requires `longitude` to be
+#'   provided.
 #' @param longitude A single `numeric` value  representing the longitude of the
-#'  point-of-interest. Defaults to `NULL` and when used, queries with
-#'  `station_code` inputs are not permitted.  Requires `latitude` to be provided.
+#'    point-of-interest. Defaults to `NULL` and when used, queries with
+#'    `station_code` inputs are not permitted.  Requires `latitude` to be
+#'    provided.
 #' @param start_date A `character` string representing the start date of the
-#'  query in the format 'yyyymmdd'.
+#'    query in the format 'yyyymmdd'.
 #' @param end_date A `character` string representing the start date of the query
-#'  in the format 'yyyymmdd'.  Defaults to the current system date.
+#'    in the format 'yyyymmdd'.  Defaults to the current system date.
 #' @param data_format A `character` string specifying the type of data to
-#'  retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
-#'  'alldata' retrieve daily data.
+#'   retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
+#'   'alldata' retrieve daily data.
 #' @param email A `character `string specifying a valid email address to use
-#'  for the request. The query will return an error if a valid email address is
-#'  not provided.
+#'   for the request. The query will return an error if a valid email address is
+#'   not provided.
 #'
 #' @return A [data.table::data.table] containing the retrieved data from the
-#'  \acronym{SILO} \acronym{API}.
+#'   \acronym{SILO} \acronym{API}.
 #'
 #' @family SILO
 #'
@@ -68,7 +69,7 @@ get_silo <- function(station_code = NULL,
                      end_date = Sys.Date(),
                      data_format = "alldata",
                      email) {
-  if (missing(first))
+  if (missing(start_date))
     stop("Provide a start date", call. = FALSE)
   if (missing(email))
     stop("Provide a valid email address", call. = FALSE)
