@@ -243,7 +243,7 @@ get_silo <- function(station_code = NULL,
     names(out)[1] <- "year"
     out$date <-
       as.Date(out[, "day"] - 1, paste0(out[, "year"], "-01-01"))
-    out <- data.table::setDT(out)
+    data.table::setDT(out)
   }
 
   # monthly data
@@ -293,7 +293,7 @@ get_silo <- function(station_code = NULL,
     for (i in which(numeric_columns)) {
       out[[i]] <- as.numeric(as.character(out[[i]]))
     }
-    out <- data.table::setDT(out)
+    data.table::setDT(out)
   }
 
   # 'alldata' data (complete data with quality colums)
