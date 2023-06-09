@@ -77,9 +77,13 @@ get_silo <- function(station_code = NULL,
               length(latitude) == length(longitude))
 
   # validate user provided date
-  start_date <- gsub("-", "", .check_date(start_date))
-  end_date <-  gsub("-", "", .check_date(end_date))
+  start_date <- .check_date(start_date)
+  end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
+
+  # reformat date for sending to SILO
+  start_date <- gsub("-", "", start_date)
+  end_date <- gsub("-", "", start_date)
 
   # query a single point and return the values ----
   # if a single station or single lat/lon is requested, return values, else
@@ -92,8 +96,8 @@ get_silo <- function(station_code = NULL,
           .station_code = station_code,
           .latitude = latitude,
           .longitude = longitude,
-          .first = first,
-          .last = last,
+          .first = start_date,
+          .last = end_date,
           .data_format = data_format,
           .email = email
         )
@@ -105,8 +109,8 @@ get_silo <- function(station_code = NULL,
           .station_code = station_code,
           .latitude = latitude,
           .longitude = longitude,
-          .first = first,
-          .last = last,
+          .first = start_date,
+          .last = end_date,
           .data_format = data_format,
           .email = email
         )
