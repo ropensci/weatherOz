@@ -341,7 +341,7 @@ get_silo <- function(station_code = NULL,
     for (i in which(numeric_columns)) {
       out[[i]] <- as.numeric(as.character(out[[i]]))
     }
-    out <- data.table::setDT(out)
+    data.table::setDT(out)
   }
 
   # if querying station observation data, check data
