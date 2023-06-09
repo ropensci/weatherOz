@@ -169,7 +169,7 @@ get_dpird_availability <-
 
   # start with no specific period requested and parse the resulting df, easy
   if (is.null(.start_date)) {
-    y <- data.table::setDT(
+    y <- data.table::as.data.table(
       list(
         stationCode = x$collection$stationCode,
         stationName = x$collection$stationName
@@ -182,7 +182,7 @@ get_dpird_availability <-
     out[, period := NULL]
 
   } else {
-    y <- data.table::setDT(
+    y <- data.table::as.data.table(
       list(
         stationCode = x$collection$stationCode,
         stationName = x$collection$stationName
