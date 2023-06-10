@@ -1,10 +1,10 @@
 
-#' Find nearest BOM forecast towns for a given location by lat and lon
+#' Find nearest BOM forecast towns for a given location by latitude and longitude
 #'
-#' @param latitude  A `numeric` value of latitude in decimal degree (DD)
-#'   format. By default, Canberra (approximately).
+#' @param latitude A `numeric` value of latitude in decimal degree (DD)
+#'   format.  By default, Canberra (approximately).
 #' @param longitude A `numeric` value of longitude in decimal degree (DD)
-#'   format. By default, Canberra (approximately).
+#'   format.  By default, Canberra (approximately).
 #' @param distance_km A `numeric` value of the distance in kilometres from the
 #'   `latitude` and `longitude` point beyond which values will not be returned.
 #'
@@ -27,24 +27,23 @@ find_forecast_towns <-
   function(latitude = -35.3,
            longitude = 149.2,
            distance_km = 100) {
+    .check_lonlat(longitude = longitude, latitude = latitude)
 
-  .check_lonlat(longitude = longitude, latitude = latitude)
+    # Load JSON URL list
+    load(system.file(
+      "extdata",
+      "AAC_codes.rda",
+      package = "weatherOz",
+      mustWork = TRUE
+    ))
 
-  # Load JSON URL list
-  load(system.file(
-    "extdata",
-    "AAC_codes.rda",
-    package = "weatherOz",
-    mustWork = TRUE
-  ))
-
-  forecast_towns <- data.table::copy(AAC_codes)
-  forecast_towns[, "distance" := .haversine_distance(latitude,
-                                                     longitude,
-                                                     lat,
-                                                     lon)] |>
-    data.table::setorderv("distance")
-  forecast_towns[distance %in%
-                   forecast_towns[(distance <= distance_km)]$distance]
-  return(forecast_towns[])
-}
+    forecast_towns <- data.table::copy(AAC_codes)
+    forecast_towns[, "distance" := .haversine_distance(latitude,
+                                                       longitude,
+                                                       lat,
+                                                       lon)] |>
+      data.table::setorderv("distance")
+    forecast_towns[distance %in%
+                     forecast_towns[(distance <= distance_km)]$distance]
+    return(forecast_towns[])
+  }

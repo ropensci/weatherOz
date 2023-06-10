@@ -16,16 +16,16 @@ get_silo(
 }
 \arguments{
 \item{station_code}{An \code{integer} representing the station number
-available from the \acronym{SILO} network. Defaults to \code{NULL} and when
+available from the \acronym{SILO} network.  Defaults to \code{NULL} and when
 used, queries with latitude and longitude input are not permitted.}
 
 \item{latitude}{A single \code{numeric} value representing the latitude of the
-point-of-interest. Defaults to \code{NULL} and when used, queries with
+point-of-interest.  Defaults to \code{NULL} and when used, queries with
 \code{station_code} input are not permitted. Requires \code{longitude} to be
 provided.}
 
 \item{longitude}{A single \code{numeric} value  representing the longitude of the
-point-of-interest. Defaults to \code{NULL} and when used, queries with
+point-of-interest.  Defaults to \code{NULL} and when used, queries with
 \code{station_code} inputs are not permitted.  Requires \code{latitude} to be
 provided.}
 
@@ -36,7 +36,7 @@ query in the format 'yyyymmdd'.}
 in the format 'yyyymmdd'.  Defaults to the current system date.}
 
 \item{data_format}{A \code{character} string specifying the type of data to
-retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
+retrieve.  Limited to 'alldata', 'monthly' or 'apsim'.  Note 'apsim' and
 'alldata' retrieve daily data.}
 
 \item{email}{A \code{character }string specifying a valid email address to use

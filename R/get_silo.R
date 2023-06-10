@@ -17,14 +17,14 @@
 #'   data from the 'PatchedPointData'.
 #'
 #' @param station_code An `integer` representing the station number
-#'   available from the \acronym{SILO} network. Defaults to `NULL` and when
+#'   available from the \acronym{SILO} network.  Defaults to `NULL` and when
 #'   used, queries with latitude and longitude input are not permitted.
 #' @param latitude A single `numeric` value representing the latitude of the
-#'   point-of-interest. Defaults to `NULL` and when used, queries with
+#'   point-of-interest.  Defaults to `NULL` and when used, queries with
 #'   `station_code` input are not permitted. Requires `longitude` to be
 #'   provided.
 #' @param longitude A single `numeric` value  representing the longitude of the
-#'    point-of-interest. Defaults to `NULL` and when used, queries with
+#'    point-of-interest.  Defaults to `NULL` and when used, queries with
 #'    `station_code` inputs are not permitted.  Requires `latitude` to be
 #'    provided.
 #' @param start_date A `character` string representing the start date of the
@@ -32,7 +32,7 @@
 #' @param end_date A `character` string representing the start date of the query
 #'    in the format 'yyyymmdd'.  Defaults to the current system date.
 #' @param data_format A `character` string specifying the type of data to
-#'   retrieve.  Limited to 'alldata', 'monthly' or 'apsim'. Note 'apsim' and
+#'   retrieve.  Limited to 'alldata', 'monthly' or 'apsim'.  Note 'apsim' and
 #'   'alldata' retrieve daily data.
 #' @param email A `character `string specifying a valid email address to use
 #'   for the request. The query will return an error if a valid email address is

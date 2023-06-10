@@ -2,16 +2,16 @@
 % Please edit documentation in R/find_forecast_towns.R
 \name{find_forecast_towns}
 \alias{find_forecast_towns}
-\title{Find nearest BOM forecast towns for a given location by lat and lon}
+\title{Find nearest BOM forecast towns for a given location by latitude and longitude}
 \usage{
 find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 100)
 }
 \arguments{
 \item{latitude}{A \code{numeric} value of latitude in decimal degree (DD)
-format. By default, Canberra (approximately).}
+format.  By default, Canberra (approximately).}
 
 \item{longitude}{A \code{numeric} value of longitude in decimal degree (DD)
-format. By default, Canberra (approximately).}
+format.  By default, Canberra (approximately).}
 
 \item{distance_km}{A \code{numeric} value of the distance in kilometres from the
 \code{latitude} and \code{longitude} point beyond which values will not be returned.}
@@ -21,7 +21,7 @@ A \link[data.table:data.table]{data.table::data.table} of all forecast towns (in
 sorted by distance from \var{latlon}, ascending.
 }
 \description{
-Find nearest BOM forecast towns for a given location by lat and lon
+Find nearest BOM forecast towns for a given location by latitude and longitude
 }
 \examples{
 
