@@ -45,7 +45,7 @@
 #'
 #' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (8137)
-#' wd <- get_silo(station_code = 8137,
+#' wd <- get_silo(station_code = "8137",
 #'                start_date = "20210601",
 #'                end_date = "20210701",
 #'                data_format = "alldata",
@@ -83,7 +83,7 @@ get_silo <- function(station_code = NULL,
 
   # reformat date for sending to SILO
   start_date <- gsub("-", "", start_date)
-  end_date <- gsub("-", "", start_date)
+  end_date <- gsub("-", "", end_date)
 
   # query a single point and return the values ----
   # if a single station or single lat/lon is requested, return values, else
