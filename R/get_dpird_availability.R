@@ -16,11 +16,11 @@
 #'   range.  Defaults to `NULL`, returning data for the current year-to-date.
 #'   Must be sent with a `start_date`.
 #' @param which_values A `character` string with the type of availability
-#'    metadata to return.  See **Available Values** for a full list of valid
-#'    values.  Defaults to 'availability', returning metadata for all stations.
+#'   metadata to return.  See **Available Values** for a full list of valid
+#'   values.  Defaults to 'availability', returning metadata for all stations.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'    \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'    \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' ## Available Values for `which_values`:
 #'
