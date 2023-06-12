@@ -5,8 +5,8 @@
 #'   weather station network.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
-#'   for the station of interest. Defaults to `NULL`, returning metadata for all
-#'   stations during the requested `start_date` and `end_date` interval.
+#'   for the station of interest. Defaults to `NULL`, returning metadata for
+#'   all stations during the requested `start_date` and `end_date` interval.
 #' @param start_date A `character` string representing the beginning of the
 #'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 #'   inclusive of this range.  Defaults to `NULL`, returning data for the
