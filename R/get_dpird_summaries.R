@@ -230,11 +230,18 @@ get_dpird_summaries <- function(station_code,
   )
 
   # Match time interval query to user requests
-  interval <- try(match.arg(approved_intervals[likely_interval],
+  checked_interval <- try(match.arg(approved_intervals[likely_interval],
                             approved_intervals,
                             several.ok = FALSE),
-                  silent = FALSE
+                  silent = TRUE
   )
+
+  # Error if summary interval is not available. API only allows for daily,
+  # 15 min, 30 min, hourly, monthly or yearly
+  if (methods::is(checked_interval, "try-error")) {
+    stop(call. = FALSE,
+         "\"", interval, "\" is not a supported time interval")
+  }
 
   # check API group
   api_group <- tolower(api_group)
@@ -248,20 +255,13 @@ get_dpird_summaries <- function(station_code,
                                           end_date,
                                           tzone = "Australia/Perth")
 
-  # Error if summary interval is not available. API only allows for daily,
-  # 15 min, 30 min, hourly, monthly or yearly
-  if (methods::is(interval, "try-error")) {
-    stop(call. = FALSE,
-         "\"", interval, "\" is not a supported time interval")
-  }
-
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past
   this_year <- lubridate::year(lubridate::today())
 
-  if (interval %in% c("15min", "30min") & lubridate::year(start_date) <
+  if (checked_interval %in% c("15min", "30min") & lubridate::year(start_date) <
       this_year - 1 |
-      interval %in% c("15min", "30min") & lubridate::year(end_date) <
+      checked_interval %in% c("15min", "30min") & lubridate::year(end_date) <
       this_year - 1) {
     stop(
       call. = FALSE,
@@ -290,7 +290,7 @@ get_dpird_summaries <- function(station_code,
     station_code = station_code,
     start_date_time = start_date,
     end_date_time = end_date,
-    interval = interval,
+    interval = checked_interval,
     which_values = which_values,
     api_group = api_group,
     include_closed = include_closed,
@@ -300,11 +300,11 @@ get_dpird_summaries <- function(station_code,
 
   # set base URL according to interval
   end_point <- data.table::fcase(
-    interval == "15min", "summaries/15min",
-    interval == "30min", "summaries/30min",
-    interval == "hourly", "summaries/hourly",
-    interval == "daily", "summaries/daily",
-    interval == "monthly", "summaries/monthly",
+    checked_interval == "15min", "summaries/15min",
+    checked_interval == "30min", "summaries/30min",
+    checked_interval == "hourly", "summaries/hourly",
+    checked_interval == "daily", "summaries/daily",
+    checked_interval == "monthly", "summaries/monthly",
     default = "summaries/yearly")
 
   out <-
