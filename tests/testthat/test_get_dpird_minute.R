@@ -55,6 +55,7 @@ test_that("user-input checks stop if invalid values are provided", {
 })
 
 test_that("get_dpird_minute() returns minute values", {
+  withr::local_timezone(tz = "Australia/Perth")
   vcr::use_cassette("dpird_minute_values", {
     skip_if_offline()
     x <- get_dpird_minute(
@@ -64,8 +65,7 @@ test_that("get_dpird_minute() returns minute values", {
       api_key = Sys.getenv("DPIRD_API_KEY"),
       which_values = "wind"
     )
-  },
-  record = "new_episodes"
+  }
   )
   expect_s3_class(x, "data.table")
   expect_equal(ncol(x), 8)
