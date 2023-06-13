@@ -115,12 +115,13 @@ get_station_metadata <-
                                      end)]
     out[, end := lubridate::ymd(end)]
 
+    data.table::setkey(out, station_code)
+
     # lastly, if user wants all stations return them, else return only open ones
     if (isTRUE(status)) {
       return(out)
     } else {
-      data.table::setkey(out, status)
-      return(out[J("open")])
+      return(subset(out, status == "open"))
     }
   }
 
