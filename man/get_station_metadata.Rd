@@ -4,7 +4,6 @@
 \alias{get_station_metadata}
 \title{Get the latest DPIRD and SILO weather station metadata}
 \usage{
-<<<<<<< HEAD
 get_station_metadata(which_api = "all", api_key, status = FALSE, rich = FALSE)
 }
 \arguments{
@@ -20,20 +19,6 @@ from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to "all".}
 
 \item{status}{A \code{Boolean} string indicating whether to include closed
 stations' metadata.  Use \code{TRUE} to include.  Defaults to \code{FALSE}.}
-=======
-get_station_metadata(which_api = "silo", api_key = NULL)
-}
-\arguments{
-\item{which_api}{A \code{string} value that indicates which API to use.  Defaults
-to "silo". Valid values are "all", for both \acronym{SILO} (\acronym{BOM})
-and \acronym{DPIRD} weather station networks; "silo" for only stations in
-the \acronym{SILO} network; or "dpird" for stations in the \acronym{DPIRD}
-network.}
-
-\item{api_key}{A \code{character} string containing your \acronym{API} key from
-\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} weather \acronym{API}.
->>>>>>> main
 
 \item{rich}{A \code{Boolean} string indicating whether to return rich information
 about DPIRD's weather station(s), this does not affect the SILO stations'
@@ -73,7 +58,6 @@ some have 10 metre probes. \code{integer}\cr
 Download the latest station locations and metadata for stations in the
 \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.
 }
-<<<<<<< HEAD
 \note{
 For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
 not report the exact date on which stations opened or closed, only the
@@ -84,8 +68,6 @@ stations that are closed for the current year, this indicates that the
 station closed sometime during the current year prior to the request being
 made. \code{NA} in the current year indicates a station is still open.
 }
-=======
->>>>>>> main
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # fetch SILO metadata
