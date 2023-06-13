@@ -8,12 +8,12 @@
 #'   Valid values are 'all', for both \acronym{SILO} (\acronym{BOM} data) and
 #'   \acronym{DPIRD} \acronym{API}s; 'silo' for only stations from the
 #'   \acronym{SILO} \acronym{API} (\acronym{BOM} data); or 'dpird' for stations
-#'   from the \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to "all".
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param status A `Boolean` string indicating whether to include closed
-#'   stations' metadata.  Defaults to `FALSE`.
+#'   stations' metadata.  Use `TRUE` to include.  Defaults to `FALSE`.
 #' @param rich A `Boolean` string indicating whether to return rich information
 #'   about DPIRD's weather station(s), this does not affect the SILO stations'
 #'   metadata, the variables for these observations will be `NA`.  Defaults to
@@ -72,7 +72,7 @@
 #' @export
 
 get_station_metadata <-
-  function(which_api,
+  function(which_api = "all",
            api_key,
            status = FALSE,
            rich = FALSE) {
