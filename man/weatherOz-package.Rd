@@ -36,6 +36,7 @@ Authors:
 
 Other contributors:
 \itemize{
+  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to {vcr} not recognising the URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/DPIRD-FSI/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.) [contributor]
   \item Western Australia Agriculture Authority (WAAA) [copyright holder]
 }
 
