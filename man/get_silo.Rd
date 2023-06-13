@@ -59,7 +59,7 @@ data from the 'PatchedPointData'.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Source observation data for station Wongan Hills station, WA (8137)
-wd <- get_silo(station_code = 8137,
+wd <- get_silo(station_code = "8137",
                start_date = "20210601",
                end_date = "20210701",
                data_format = "alldata",

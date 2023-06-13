@@ -14,8 +14,8 @@ get_dpird_availability(
 }
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
-for the station of interest. Defaults to \code{NULL}, returning metadata for all
-stations during the requested \code{start_date} and \code{end_date} interval.}
+for the station of interest. Defaults to \code{NULL}, returning metadata for
+all stations during the requested \code{start_date} and \code{end_date} interval.}
 
 \item{start_date}{A \code{character} string representing the beginning of the
 range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
