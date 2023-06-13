@@ -221,12 +221,7 @@ get_dpird_summaries <- function(station_code,
 
   likely_interval <- agrep(
     pattern = interval,
-    x = c("15min",
-          "30min",
-          "hourly",
-          "daily",
-          "monthly",
-          "yearly")
+    x = approved_intervals
   )
 
   # Match time interval query to user requests
