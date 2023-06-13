@@ -28,7 +28,7 @@ Authors:
   \item James Goldie \email{me@jamesgoldie.dev} (\href{https://orcid.org/0000-0002-5024-6207}{ORCID})
   \item Dean Marchiori \email{deanmarchiori@gmail.com}
   \item Paul Melloy \email{paul@melloy.com.au} (\href{https://orcid.org/0000-0003-4253-7167}{ORCID})
-  \item Mark Padgham \email{mark.padgham@email.com} (\href{https://orcid.org/0000-0003-2172-5265}{ORCID}) [reviewer]
+  \item Mark Padgham \email{mark.padgham@email.com} (\href{https://orcid.org/0000-0003-2172-5265}{ORCID})
   \item Hugh Parsonage \email{hugh.parsonage@gmail.com} (\href{https://orcid.org/0000-0003-4055-0835}{ORCID})
   \item Keith Pembleton \email{keith.pembleton@usq.edu.au} (\href{https://orcid.org/0000-0002-1896-4516}{ORCID})
   \item Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
