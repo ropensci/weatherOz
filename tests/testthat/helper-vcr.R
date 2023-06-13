@@ -1,6 +1,7 @@
 library("vcr")
 
 vcr_dir <- vcr::vcr_test_path("fixtures")
+vcr::vcr_configure(serialize_with = "json")
 
 if (!nzchar(Sys.getenv("GITHUB_PAT"))) {
   if (dir.exists(vcr_dir)) {
