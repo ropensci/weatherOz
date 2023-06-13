@@ -1,5 +1,5 @@
 ## tic GitHub Actions template: linux-macos-windows-deploy
-## revision date: 2022-11-23
+## revision date: 2023-05-22
 on:
   workflow_dispatch:
   push:
@@ -7,7 +7,6 @@ on:
     - main
     - master
     - cran-*
-    - develop
   pull_request:
     branches:
     - main
@@ -45,6 +44,10 @@ jobs:
       BUILD_PKGDOWN: ${{ matrix.config.pkgdown }}
       # use GITHUB_TOKEN from GitHub to workaround rate limits in {remotes}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # DPIRD API key for tests
+      DPIRD_API_KEY: ${{secrets.DPIRD_API_KEY}}
+      # SILO API key for tests
+      SILO_API_KEY: ${{secrets.SILO_API_KEY}}
 
     steps:
       - uses: actions/checkout@v3
@@ -89,7 +92,7 @@ jobs:
 
       - name: "[Stage] Upload R CMD check artifacts"
         if: failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
