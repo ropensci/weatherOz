@@ -196,8 +196,8 @@ get_station_metadata <-
       )
     )
 
-  bom_stations[, station_code := as.factor(station_code)]
-  #bom_stations[, station_name := .strcap(x = station_name)]
+  bom_stations[, station_code := as.factor(trimws(station_code))]
+  bom_stations[, station_name := .strcap(x = trimws(station_name))]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
   bom_stations[, status := ifelse(!is.na(end), "closed", "open")]
@@ -237,7 +237,7 @@ get_station_metadata <-
       which_api = "silo"
     )
 
-  return(bom_stations[station_name %in% silo_stations$station_name])
+  return(bom_stations[station_code %in% silo_stations$station_code])
 }
 
 #' Returns metadata about stations in the DPIRD network
