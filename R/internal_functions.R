@@ -537,9 +537,14 @@
 
   na <- is.na(x)
 
+  # here `x` has to be wrapped in `as.character()` to handle some of the
+  # station names in the BOM data when merging BOM metadata with SILO station
+  # lists
   res <-
-    unlist(lapply(lapply(strsplit(x, split = "\\b\\W+\\b"), .cap),
-                  paste, collapse = " "))
+    unlist(lapply(lapply(
+      strsplit(as.character(x), split = "\\b\\W+\\b"), .cap
+    ),
+    paste, collapse = " "))
 
   res[na] <- NA
   return(res)
