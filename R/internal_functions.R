@@ -516,11 +516,9 @@
   return(x)
 }
 
-#' Capitalise the First Letters of Words in a String
+#' Capitalise the First Letters of Words in a Vector of Strings
 #'
-#' Capitalise the first letter of each element of the string vector.
-#'
-#' @param x `string` to be capitalized.
+#' @param x `vector` of `string` values to be capitalized.
 #'
 #' @note Taken from \CRANpkg{Hmisc} with modifications to simplify by
 #'  Adam Sparks.
