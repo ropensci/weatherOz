@@ -196,7 +196,8 @@ get_station_metadata <-
       )
     )
 
-  bom_stations[, station_code := as.factor(trimws(station_code))]
+  bom_stations[, station_code := trimws(station_code)]
+  bom_stations[, station_code := as.factor(sprintf("%06s", station_code))]
   bom_stations[, station_name := trimws(station_name)]
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
