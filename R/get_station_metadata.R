@@ -17,11 +17,11 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param status A `Boolean` string indicating whether to include closed
-#'   stations' metadata.  Use `TRUE` to include.  Defaults to `FALSE`.
+#'   stations' metadata.  Use `TRUE` to include these.  Defaults to `FALSE`.
 #' @param rich A `Boolean` string indicating whether to return rich information
-#'   about DPIRD's weather station(s), this does not affect the SILO stations'
-#'   metadata, the variables for these observations will be `NA`.  Defaults to
-#'   `FALSE`.
+#'   about \acronym{DPIRD}'s weather station(s), this does not affect the
+#'   \acronym{SILO} stations' metadata, the variables for these observations
+#'   will be `NA`.  Defaults to `FALSE`.
 #'
 #' @note For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
 #'   not report the exact date on which stations opened or closed, only the

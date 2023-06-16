@@ -18,12 +18,12 @@ from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to "all".}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
 \item{status}{A \code{Boolean} string indicating whether to include closed
-stations' metadata.  Use \code{TRUE} to include.  Defaults to \code{FALSE}.}
+stations' metadata.  Use \code{TRUE} to include these.  Defaults to \code{FALSE}.}
 
 \item{rich}{A \code{Boolean} string indicating whether to return rich information
-about DPIRD's weather station(s), this does not affect the SILO stations'
-metadata, the variables for these observations will be \code{NA}.  Defaults to
-\code{FALSE}.}
+about \acronym{DPIRD}'s weather station(s), this does not affect the
+\acronym{SILO} stations' metadata, the variables for these observations
+will be \code{NA}.  Defaults to \code{FALSE}.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table} of \acronym{BOM} weather stations'
