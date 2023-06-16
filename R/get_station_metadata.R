@@ -239,7 +239,7 @@ get_station_metadata <-
       which_api = "silo"
     )
 
-  return(bom_stations[station_code %in% silo_stations$station_code])
+  return(merge(silo_stations, bom_stations, all.x = TRUE))
 }
 
 #' Returns metadata about stations in the DPIRD network
