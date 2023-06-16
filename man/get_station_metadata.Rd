@@ -56,7 +56,11 @@ some have 10 metre probes. \code{integer}\cr
 }
 \description{
 Download the latest station locations and metadata for stations in the
-\acronym{SILO} and \acronym{DPIRD} \acronym{API}s.
+\acronym{SILO} and \acronym{DPIRD} \acronym{API}s.  For \acronym{BOM}
+stations that exist in \acronym{SILO}, but lack metadata from
+\acronym{BOM}, the rows will exist to indicate that the station is in the
+\acronym{SILO} data set, but there is no corresponding \acronym{BOM}
+metadata available.
 }
 \note{
 For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does

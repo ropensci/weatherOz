@@ -2,7 +2,11 @@
 #' Get the latest DPIRD and SILO weather station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
-#'   \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.
+#'   \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.  For \acronym{BOM}
+#'   stations that exist in \acronym{SILO}, but lack metadata from
+#'   \acronym{BOM}, the rows will exist to indicate that the station is in the
+#'   \acronym{SILO} data set, but there is no corresponding \acronym{BOM}
+#'   metadata available.
 #'
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Valid values are 'all', for both \acronym{SILO} (\acronym{BOM} data) and
