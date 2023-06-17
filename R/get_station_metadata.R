@@ -101,8 +101,6 @@ get_station_metadata <-
       out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
     }
 
-    data.table::setorderv(out, cols = c("state", "station_name"))
-
     out[, start := data.table::fifelse(is.na(start),
                                        as.character(lubridate::year(Sys.Date())),
                                        as.character(start))]
@@ -120,6 +118,22 @@ get_station_metadata <-
     out[, end := lubridate::ymd(end)]
 
     data.table::setkey(out, station_code)
+
+    data.table::setorderv(out, cols = c("state",
+                                        "station_name"))
+    data.table::setcolorder(out, c(
+      "station_code",
+      "station_name",
+      "start",
+      "end",
+      "latitude",
+      "longitude",
+      "state",
+      "elev_m",
+      "source",
+      "status",
+      "wmo"
+    ))
 
     # lastly, if user wants all stations return them, else return only open ones
     if (isTRUE(status)) {
@@ -243,7 +257,11 @@ get_station_metadata <-
       which_api = "silo"
     )
 
-  return(merge(silo_stations, bom_stations, all.x = TRUE))
+  station_metadata <- merge(silo_stations, bom_stations, all.x = TRUE)
+  # drops the unwanted columns that are added after using `find_nearby_stations`
+  station_metadata[, owner := NULL]
+  station_metadata[, distance := NULL]
+  return(station_metadata)
 }
 
 #' Returns metadata about stations in the DPIRD network
