@@ -2,6 +2,8 @@
 utils::globalVariables(
   c(
     "AAC_codes",
+    "Date",
+    "Date2",
     "all_values",
     "actual_state",
     "airtemp_mintime",
