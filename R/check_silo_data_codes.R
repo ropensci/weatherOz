@@ -18,6 +18,8 @@
 .check_silo_codes <- function(dt) {
   # TODO: grep for "source" in column names and check with ones need non-zeros
   # counted
+
+  grep("source", names(dt))
   if (.this_format == "alldata") {
     code_cols <- c("Smx",
                    "Smn",
