@@ -132,7 +132,7 @@ get_patched_point <- function(station_code,
   }
 
   if (any(which_values == "all")) {
-    .which_values <- names(silo_daily_values)
+    .which_values <- unname(silo_daily_values)
   } else {
     if (any(which_values %notin% names(silo_daily_values))) {
       stop(call. = FALSE,
@@ -169,9 +169,11 @@ get_patched_point <- function(station_code,
   silo_return <- .query_silo_api(.station_code = station_code,
                                  .start_date = start_date,
                                  .end_date = end_date,
-                                 .which_values = which_values,
+                                 .which_values = .which_values,
                                  .api_key = api_key,
                                  .dataset = "PatchedPoint")
+
+
 
 }
 
@@ -229,8 +231,27 @@ get_patched_point <- function(station_code,
          domain = NA)
   }
 
-  response <- data.table::fread(I(response$parse("UTF8")))
+  response_data <- data.table::fread(response$parse("UTF8"))
 
+  if (.dataset == "PatchedPoint") {
+    response_data[, station_name :=
+                   trimws(gsub("name=", "",
+                               response_data$metadata[
+                                 grep("name", response_data$metadata)]))]
+    }
+  response_data[, latitude :=
+                trimws(gsub("latitude=", "",
+                            response_data$metadata[
+                              grep("latitude", response_data$metadata)]))]
+  response_data[, longitude :=
+                  trimws(gsub("longitude=", "",
+                              response_data$metadata[
+                                grep("longitude", response_data$metadata)]))]
+  response_data[, elev_m :=
+                  trimws(gsub("elevation=", "",
+                              response_data$metadata[
+                                grep("elevation", response_data$metadata)]))]
+  response_data[, metadata := NULL]
 }
 
 #' Query the SILO API using {crul}
