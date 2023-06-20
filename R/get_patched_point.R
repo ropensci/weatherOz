@@ -165,7 +165,7 @@ get_patched_point <- function(station_code,
                           silent = TRUE
   )
 
-  silo_return <- .silo_api_query(
+  silo_return <- .query_silo_api(
     .station_code = station_code,
     .start_date = start_date,
     .end_date = end_date,

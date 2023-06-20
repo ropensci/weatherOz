@@ -173,7 +173,7 @@ get_data_drill <- function(longitude,
                           silent = TRUE
   )
 
-  silo_return <- .silo_api_query(
+  silo_return <- .query_silo_api(
     .longitude = longitude,
     .latitude = latitude,
     .start_date = start_date,
