@@ -4,10 +4,11 @@
 #' Checks if any SILO data codes for interpolated data are present in the
 #'   requested station observation data. If any such codes are found, a message
 #'   will be reported with a suggestion to check the data source columns
-#'   and `get_silo()` documentation for further details on codes and references.
+#'   and `get_data_drill()` or `get_patched_point()` documentation for further
+#'   details on codes and references.
 #'
 #' @param dt A `data.table`, defaults to the SILO API query result object from
-#'   `.query_silo()`.
+#'   `.query_silo_api()`.
 #'
 #' @return An `invisible(NULL)`. This function returns no value, only a friendly
 #'   message. It is used for checking and reporting the presence of interpolated
