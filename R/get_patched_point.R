@@ -1,6 +1,9 @@
 
 #' Get PatchedPoint weather data from the SILO API
 #'
+#' Download weather data from the \acronym{SILO} \acronym{API} from
+#'   \acronym{BOM} station observations (PatchedPoint) data.
+#'
 #' @param station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
 #' @param start_date A `character` string representing the beginning of the

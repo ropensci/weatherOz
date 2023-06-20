@@ -1,6 +1,9 @@
 
 #' Get DataDrill weather data from the SILO API
 #'
+#' Download weather data from the \acronym{SILO} \acronym{API} for gridded data
+#'   (PatchedPointData).
+#'
 #' @param latitude A single `numeric` value representing the latitude of the
 #'   point-of-interest.
 #' @param longitude A single `numeric` value  representing the longitude of the
