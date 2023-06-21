@@ -110,9 +110,17 @@
 #'   and Software*, Volume 16/4, 309-330. DOI:
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
-#' @examples
+#' @examplesIf interactive()
 #'
-#' @family SILo
+#' #' # Source data from latitude and longitude coordinates (gridded data)
+#' # Southwood, QLD.
+#' wd <- get_silo(latitude = -27.85,
+#'                longitude = 150.05,
+#'                start_date = "20221001",
+#'                end_date = "20221201",
+#'                api_key = "your@@email")
+#'
+#' @family SILO
 #'
 #' @export
 
