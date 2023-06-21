@@ -125,14 +125,16 @@
 #'   queried together with the requested weather variables in alphabetical
 #'   order. The first ten columns will always be:
 #'
-#'   * 'station_code',
-#'   * 'station_name',
-#'   * 'period_year',
-#'   * 'period_month',
-#'   * 'period_day',
-#'   * 'period_hour',
-#'   * 'period_minute' and if 'period_month' or finer is present,
-#'   * 'date' (a combination of year, month, day, hour, minute as appropriate).
+#'   * station_code,
+#'   * station_name,
+#'   * latitude,
+#'   * longitude,
+#'   * year,
+#'   * month,
+#'   * day,
+#'   * hour,
+#'   * minute, and if month or finer is present,
+#'   * date (a combination of year, month, day, hour, minute as appropriate).
 #'
 #' @note Please note this function converts date-time columns from Coordinated
 #'   Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
@@ -377,6 +379,8 @@ get_dpird_summaries <- function(station_code,
       "period_minute"
     )
   )
+
+  data.table::setnames(out, gsub("period_", "", names(out)))
 
   data.table::setkey(x = out, cols = station_code)
 
