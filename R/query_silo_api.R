@@ -103,4 +103,5 @@
                               response_data$metadata[
                                 grep("elevation", response_data$metadata)]))]
   response_data[, metadata := NULL]
+  response_data[, station := sprintf("%06d", station)]
 }
