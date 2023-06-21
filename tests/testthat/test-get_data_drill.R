@@ -1,4 +1,56 @@
 
+test_that("get_data_drill() user-input checks stop on invalid values", {
+  # no longitude
+  expect_error(
+    get_data_drill(
+      latitude = -27.85,
+      start_date = "20220501",
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY")
+    )
+  )
+
+  # no latitude
+  expect_error(
+    get_data_drill(
+      longitude = 150.05,
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY")
+    )
+  )
+
+  # no start date
+  expect_error(
+    get_data_drill(
+      latitude = -27.85,
+      longitude = 150.05,
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY")
+    )
+  )
+
+  # no api_key
+  expect_error(
+    get_data_drill(
+      latitude = -27.85,
+      longitude = 150.05,
+      start_date = "20220501"
+    )
+  )
+
+  # bad values
+  expect_error(
+    get_data_drill(
+      latitude = -27.85,
+      longitude = 150.05,
+      start_date = "20220501",
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY"),
+      which_values = "Fusarium_thapsinum"
+    )
+  )
+})
+
 test_that("get_data_drill() returns daily values", {
   vcr::use_cassette("silo_get_data_drill_daily_values", {
     skip_if_offline()

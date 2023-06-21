@@ -1,4 +1,40 @@
+test_that("get_patched_point() user-input checks stop on invalid values", {
+  # missing station code
+  expect_error(
+    get_patched_point(
+      start_date = "20220501",
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY")
+    )
+  )
 
+
+  expect_error(
+    get_patched_point(
+      station_code = "008137",
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY")
+    )
+  )
+
+  expect_error(
+    get_patched_point(
+      station_code = "008137",
+      start_date = "20220501",
+      end_date = "20220501"
+    )
+  )
+
+  expect_error(
+    get_patched_point(
+      station_code = "008137",
+      start_date = "20220501",
+      end_date = "20220501",
+      api_key = Sys.getenv("SILO_API_KEY"),
+      which_values = "Fusarium_verticilliodes"
+    )
+  )
+})
 
 test_that("get_patched_point() returns daily values", {
   vcr::use_cassette("silo_get_patched_point_daily_values", {
