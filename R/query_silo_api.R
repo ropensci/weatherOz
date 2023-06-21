@@ -25,8 +25,7 @@
                             .end_date,
                             .which_values,
                             .api_key,
-                            .dataset,
-                            .interval) {
+                            .dataset) {
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   end_point <- data.table::fcase(
@@ -85,14 +84,6 @@
 
   response_data <- data.table::fread(response$parse("UTF8"))
 
-  response_data[, latitude :=
-                  trimws(gsub("latitude=", "",
-                              response_data$metadata[
-                                grep("latitude", response_data$metadata)]))]
-  response_data[, longitude :=
-                  trimws(gsub("longitude=", "",
-                              response_data$metadata[
-                                grep("longitude", response_data$metadata)]))]
   response_data[, elev_m :=
                   trimws(gsub("elevation=", "",
                               response_data$metadata[
@@ -100,42 +91,38 @@
 
   data.table::setnames(response_data, old = "YYYY-MM-DD", new = "date")
   response_data[, year := lubridate::year(date)]
+  response_data[, month := lubridate::year(date)]
+  response_data[, day := lubridate::year(date)]
 
   if (.dataset == "PatchedPoint") {
-    response_data[, station := sprintf("%06d", station)]
+    response_data[, station_code := sprintf("%06s", station)]
+    response_data[, station := NULL]
     response_data[, station_name :=
                     trimws(gsub("name=", "",
                                 response_data$metadata[
                                   grep("name", response_data$metadata)]))]
-    data.table::setcolorder(response_data,
-                            c("longitude",
-                              "latitude",
-                              "year"))
+    response_data[, latitude :=
+                    trimws(gsub("latitude=", "",
+                                response_data$metadata[
+                                  grep("latitude", response_data$metadata)]))]
+    response_data[, longitude :=
+                    trimws(gsub("longitude=", "",
+                                response_data$metadata[
+                                  grep("longitude", response_data$metadata)]))]
+    .check_silo_codes(response_data)
   }
 
-  if (.interval == "monthly") {
-   response_data[, month := lubridate::month(date)]
-   data.table::setcolorder(response_data,
-                            c("longitude",
-                              "latitude",
-                              "year",
-                              "month"))
-  }
-
-  if (.interval == "daily") {
-    response_data[, month := lubridate::month(date)]
-    response_data[, day := lubridate::day(date)]
-    data.table::setcolorder(response_data,
-                            c("longitude",
-                              "latitude",
-                              "year",
-                              "month",
-                              "day",
-                              "date"))
-  }
+  data.table::setcolorder(response_data,
+                          c("longitude",
+                            "latitude",
+                            "elev_m",
+                            "date",
+                            "year",
+                            "month",
+                            "day"))
 
   response_data[, metadata := NULL]
-
+  return(response_data[])
 }
 
 
