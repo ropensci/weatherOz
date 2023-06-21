@@ -10,7 +10,6 @@ get_data_drill(
   start_date,
   end_date = Sys.Date(),
   which_values = "all",
-  interval = "daily",
   api_key
 )
 }
@@ -33,25 +32,26 @@ inclusive of this range.  Defaults to the current system date.}
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all' with all available values being returned.}
 
-\item{interval}{A \code{character} string that indicates the time interval
-requested.  Default is "daily", optionally "monthly" and "yearly" are
-available.  See Details for more.}
-
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
+
+\item{interval}{A \code{character} string that indicates the time interval
+requested.  Default is "daily", optionally "monthly" and "yearly" are
+available.  See Details for more.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with \code{longitude} and \code{latitude} along with
-the date interval queried together with the requested weather variables in
-alphabetical order. The first six columns will always be:
+a \link[data.table:data.table]{data.table::data.table} with the weather data queried with the
+weather variables in alphabetical order. The first eight columns will
+always be:
 \itemize{
 \item longitude,
 \item latitude,
+\item elev_m,
+\item date (ISO8601 format, "YYYYMMDD"),
 \item year,
-\item month (if daily or monthly)
-\item day (if daily), and
-\item date (if daily or monthly ISO8601 format, "YYYYMMDD")
+\item month,
+\item day
 }
 }
 \description{
@@ -60,12 +60,6 @@ interpolated weather data (DataDrill).  The daily climate surfaces have
 been derived either by splining or kriging the observational data.  The
 grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
 0.05° longitude (approximately 5 km × 5 km).
-}
-\details{
-When \code{interval} is a summary, \emph{i.e.}, "monthly" or "yearly", (i) monthly or
-yearly totals for rainfall and evaporation; and (ii) monthly or yearly
-means for maximum and minimum temperatures, solar radiation and vapour
-pressure are returned.
 }
 \section{Available Values}{
 

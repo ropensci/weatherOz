@@ -9,7 +9,6 @@ get_patched_point(
   start_date,
   end_date = Sys.Date(),
   which_values = "all",
-  interval = "daily",
   api_key
 )
 }
@@ -29,27 +28,24 @@ inclusive of this range.  Defaults to the current system date.}
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all' with all available values being returned.}
 
-\item{interval}{A \code{character} string that indicates the time interval
-requested.  Default is "daily", optionally "monthly" and "yearly" are
-available.  See Details for more.}
-
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with "station_code" and the date interval
-queried together with the requested weather variables in alphabetical
-order. The first eight columns will always be:
+a \link[data.table:data.table]{data.table::data.table} with the weather data queried with the
+weather variables in alphabetical order. The first eight columns will
+always be:
 \itemize{
 \item station_code,
 \item station_name,
 \item longitude,
 \item latitude,
+\item elev_m,
+\item date (ISO8601 format, "YYYYMMDD"),
 \item year,
-\item month (if daily or monthly)
-\item day (if daily), and
-\item date (if daily or monthly ISO8601 format, "YYYYMMDD")
+\item month,
+\item day,
 }
 }
 \description{
@@ -72,11 +68,6 @@ data are taken from the SILO gridded datasets and are available at any
 pixel on a 0.05° × 0.05° grid over the land area of Australia (including
 some islands).}
 }
-
-When \code{interval} is a summary, \emph{i.e.}, "monthly" or "yearly", (i) monthly or
-yearly totals for rainfall and evaporation; and (ii) monthly or yearly
-means for maximum and minimum temperatures, solar radiation and vapour
-pressure are returned.
 }
 \section{Available Values}{
 
@@ -125,9 +116,10 @@ Evaporation and evapotranspiration: an overview of the variables provided by
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Source observation data for station Wongan Hills station, WA (008137)
-wd <- get_silo(station_code = "008137",
+wd <- get_patched_point(station_code = "008137",
                start_date = "2021-06-01",
                end_date = "2021-07-01",
+               which_values = "all",
                api_key = "your@email")
 \dontshow{\}) # examplesIf}
 }
