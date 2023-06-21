@@ -196,7 +196,8 @@ get_data_drill <- function(longitude,
     .end_date = end_date,
     .which_values = .which_values,
     .api_key = api_key,
-    .dataset = "DataDrill"
+    .dataset = "DataDrill",
+    .interval = checked_interval
   )
 
   silo_return[]
