@@ -150,7 +150,7 @@ Suggests:
     withr
 Config/testthat/edition: 3
 Depends: 
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 X-schema.org-applicationCategory: Tools
 X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
     australia, weather, weather-data, meteorology, western-australia,
