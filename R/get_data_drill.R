@@ -67,22 +67,17 @@
 #'   \acronym{SILO} is available here,
 #'   <https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf>.
 #'
-#' @details
-#' When `interval` is a summary, _i.e._, "monthly" or "yearly", (i) monthly or
-#'   yearly totals for rainfall and evaporation; and (ii) monthly or yearly
-#'   means for maximum and minimum temperatures, solar radiation and vapour
-#'   pressure are returned.
-#'
-#' @return a [data.table::data.table] with `longitude` and `latitude` along with
-#'   the date interval queried together with the requested weather variables in
-#'   alphabetical order. The first six columns will always be:
+#' @return a [data.table::data.table] with the weather data queried with the
+#'   weather variables in alphabetical order. The first eight columns will
+#'   always be:
 #'
 #'   * longitude,
 #'   * latitude,
+#'   * elev_m,
+#'   * date (ISO8601 format, "YYYYMMDD"),
 #'   * year,
-#'   * month (if daily or monthly)
-#'   * day (if daily), and
-#'   * date (if daily or monthly ISO8601 format, "YYYYMMDD")
+#'   * month,
+#'   * day
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.
@@ -129,9 +124,7 @@ get_data_drill <- function(longitude,
                            start_date,
                            end_date = Sys.Date(),
                            which_values = "all",
-                           interval = "daily",
                            api_key) {
-
 
   if (missing(longitude) || missing(latitude)) {
     stop(call. = FALSE,
@@ -174,20 +167,6 @@ get_data_drill <- function(longitude,
   start_date <- gsub("-", "", start_date)
   end_date <- gsub("-", "", end_date)
 
-  # Use `agrep()` to fuzzy match the user-requested time interval
-  approved_intervals <- c("daily",
-                          "monthly",
-                          "yearly")
-
-  likely_interval <- agrep(pattern = interval,
-                           x = approved_intervals)
-
-  # Match time interval query to user requests
-  checked_interval <- try(match.arg(approved_intervals[likely_interval],
-                                    approved_intervals,
-                                    several.ok = FALSE),
-                          silent = TRUE
-  )
 
   silo_return <- .query_silo_api(
     .longitude = longitude,
@@ -196,8 +175,7 @@ get_data_drill <- function(longitude,
     .end_date = end_date,
     .which_values = .which_values,
     .api_key = api_key,
-    .dataset = "DataDrill",
-    .interval = checked_interval
+    .dataset = "DataDrill"
   )
 
   silo_return[]

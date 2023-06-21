@@ -31,9 +31,6 @@
 #' @param which_values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
-#' @param interval A `character` string that indicates the time interval
-#'   requested.  Default is "daily", optionally "monthly" and "yearly" are
-#'   available.  See Details for more.
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
@@ -78,24 +75,19 @@
 #'   \acronym{SILO} is available here,
 #'   <https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf>.
 #'
-#' @details
-#' When `interval` is a summary, _i.e._, "monthly" or "yearly", (i) monthly or
-#'   yearly totals for rainfall and evaporation; and (ii) monthly or yearly
-#'   means for maximum and minimum temperatures, solar radiation and vapour
-#'   pressure are returned.
-#'
-#' @return a [data.table::data.table] with "station_code" and the date interval
-#'   queried together with the requested weather variables in alphabetical
-#'   order. The first eight columns will always be:
+#' @return a [data.table::data.table] with the weather data queried with the
+#'   weather variables in alphabetical order. The first eight columns will
+#'   always be:
 #'
 #'   * station_code,
 #'   * station_name,
 #'   * longitude,
 #'   * latitude,
+#'   * elev_m,
+#'   * date (ISO8601 format, "YYYYMMDD"),
 #'   * year,
-#'   * month (if daily or monthly)
-#'   * day (if daily), and
-#'   * date (if daily or monthly ISO8601 format, "YYYYMMDD")
+#'   * month,
+#'   * day,
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.
@@ -127,9 +119,10 @@
 #'
 #' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (008137)
-#' wd <- get_silo(station_code = "008137",
+#' wd <- get_patched_point(station_code = "008137",
 #'                start_date = "2021-06-01",
 #'                end_date = "2021-07-01",
+#'                which_values = "all",
 #'                api_key = "your@@email")
 #'
 #' @export
@@ -138,7 +131,6 @@ get_patched_point <- function(station_code,
                               start_date,
                               end_date = Sys.Date(),
                               which_values = "all",
-                              interval = "daily",
                               api_key) {
 
   if (missing(station_code)) {
@@ -178,29 +170,13 @@ get_patched_point <- function(station_code,
   start_date <- gsub("-", "", start_date)
   end_date <- gsub("-", "", end_date)
 
-  # Use `agrep()` to fuzzy match the user-requested time interval
-  approved_intervals <- c("daily",
-                          "monthly",
-                          "yearly")
-
-  likely_interval <- agrep(pattern = interval,
-                           x = approved_intervals)
-
-  # Match time interval query to user requests
-  checked_interval <- try(match.arg(approved_intervals[likely_interval],
-                                    approved_intervals,
-                                    several.ok = FALSE),
-                          silent = TRUE
-  )
-
   silo_return <- .query_silo_api(
     .station_code = station_code,
     .start_date = start_date,
     .end_date = end_date,
     .which_values = .which_values,
     .api_key = api_key,
-    .dataset = "PatchedPoint",
-    .interval = checked_interval
+    .dataset = "PatchedPoint"
   )
 
   data.table::setcolorder(silo_return, c("station_code", "station_name"))
