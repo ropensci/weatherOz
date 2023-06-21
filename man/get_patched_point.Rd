@@ -113,6 +113,28 @@ Evaporation and evapotranspiration: an overview of the variables provided by
 \url{https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf}.
 }
 
+\section{Data codes}{
+
+Data codes
+Where possible (depending on the file format), the data are supplied with
+codes indicating how each datum was obtained.
+
+\tabular{rl}{
+\strong{Code}\tab \strong{Source}\cr
+\strong{0}:\tab Official observation as supplied by the Bureau of
+Meteorology.\cr
+\strong{15}:\tab Deaccumulated rainfall (original observation was recorded
+over a period exceeding the standard 24 hour observation period).\cr
+\strong{25}:\tab Interpolated from daily observations for that date.\cr
+\strong{26}:\tab Synthetic Class A pan evaporation, calculated from
+temperatures, radiation and vapour pressure.\cr
+\strong{35}:\tab Interpolated from daily observations using an anomaly
+interpolation method.\cr
+\strong{75}:\tab Interpolated from the long term averages of daily
+observations for that day of year.\cr
+}
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Source observation data for station Wongan Hills station, WA (008137)
