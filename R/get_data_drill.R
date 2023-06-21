@@ -1,13 +1,16 @@
 
 #' Get DataDrill weather data from the SILO API
 #'
-#' Download weather data from the \acronym{SILO} \acronym{API} for gridded data
-#'   (PatchedPointData).
+#' Download weather data from the \acronym{SILO} \acronym{API} for spatially
+#'   interpolated weather data (DataDrill).  The daily climate surfaces have
+#'   been derived either by splining or kriging the observational data.  The
+#'   grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
+#'   0.05° longitude (approximately 5 km × 5 km).
 #'
-#' @param latitude A single `numeric` value representing the latitude of the
-#'   point-of-interest.
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
+#' @param latitude A single `numeric` value representing the latitude of the
+#'   point-of-interest.
 #' @param start_date A `character` string representing the beginning of the
 #'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 #'   inclusive of this range.
@@ -109,6 +112,8 @@
 #'
 #' @examples
 #'
+#' @family SILo
+#'
 #' @export
 
 get_data_drill <- function(longitude,
@@ -183,7 +188,7 @@ get_data_drill <- function(longitude,
     .end_date = end_date,
     .which_values = .which_values,
     .api_key = api_key,
-    .dataset = "PatchedPoint"
+    .dataset = "DataDrill"
   )
 
   silo_return[]
