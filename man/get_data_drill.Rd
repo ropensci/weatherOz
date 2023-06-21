@@ -21,13 +21,13 @@ point-of-interest.}
 \item{latitude}{A single \code{numeric} value representing the latitude of the
 point-of-interest.}
 
-\item{start_date}{A \code{character} string representing the beginning of the
-range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.}
+\item{start_date}{A \code{character} string or \code{Date} object representing the
+beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
+return data inclusive of this range.}
 
-\item{end_date}{A \code{character} string representing the end of the range query
-in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-range.  Defaults to the current system date.}
+\item{end_date}{A \code{character} string or \code{Date} object representing the end of
+the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+inclusive of this range.  Defaults to the current system date.}
 
 \item{which_values}{A \code{character} string with the type of weather data to
 return.  See \strong{Available Values} for a full list of valid values.
@@ -118,8 +118,8 @@ Evaporation and evapotranspiration: an overview of the variables provided by
 # Southwood, QLD.
 wd <- get_silo(latitude = -27.85,
                longitude = 150.05,
-               start_date = "20221001",
-               end_date = "20221201",
+               start_date = "2022-10-01",
+               end_date = "2022-12-01",
                api_key = "your@email")
 \dontshow{\}) # examplesIf}
 }

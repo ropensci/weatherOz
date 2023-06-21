@@ -17,13 +17,13 @@ get_patched_point(
 \item{station_code}{A \code{character} string of the \acronym{BOM} station code
 for the station of interest.}
 
-\item{start_date}{A \code{character} string representing the beginning of the
-range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.}
+\item{start_date}{A \code{character} string or \code{Date} object representing the
+beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
+return data inclusive of this range.}
 
-\item{end_date}{A \code{character} string representing the end of the range query
-in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-range.  Defaults to the current system date.}
+\item{end_date}{A \code{character} string or \code{Date} object representing the end of
+the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+inclusive of this range.  Defaults to the current system date.}
 
 \item{which_values}{A \code{character} string with the type of weather data to
 return.  See \strong{Available Values} for a full list of valid values.
@@ -126,9 +126,8 @@ Evaporation and evapotranspiration: an overview of the variables provided by
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Source observation data for station Wongan Hills station, WA (008137)
 wd <- get_silo(station_code = "008137",
-               start_date = "20210601",
-               end_date = "20210701",
-               data_format = "alldata",
+               start_date = "2021-06-01",
+               end_date = "2021-07-01",
                api_key = "your@email")
 \dontshow{\}) # examplesIf}
 }

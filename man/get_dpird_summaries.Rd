@@ -19,13 +19,13 @@ get_dpird_summaries(
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
 for the station of interest.}
 
-\item{start_date}{A \code{character} string representing the beginning of the
-range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.}
+\item{start_date}{A \code{character} string or \code{Date} object representing the
+beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
+return data inclusive of this range.}
 
-\item{end_date}{A \code{character} string representing the end of the range query
-in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-range.  Defaults to the current system date.}
+\item{end_date}{A \code{character} string or \code{Date} object representing the end of
+the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+inclusive of this range.  Defaults to the current system date.}
 
 \item{interval}{A \code{character} string that indicates the time interval to
 summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
@@ -139,14 +139,16 @@ a \link[data.table:data.table]{data.table::data.table} with 'station_code' and d
 queried together with the requested weather variables in alphabetical
 order. The first ten columns will always be:
 \itemize{
-\item 'station_code',
-\item 'station_name',
-\item 'period_year',
-\item 'period_month',
-\item 'period_day',
-\item 'period_hour',
-\item 'period_minute' and if 'period_month' or finer is present,
-\item 'date' (a combination of year, month, day, hour, minute as appropriate).
+\item station_code,
+\item station_name,
+\item latitude,
+\item longitude,
+\item year,
+\item month,
+\item day,
+\item hour,
+\item minute, and if month or finer is present,
+\item date (a combination of year, month, day, hour, minute as appropriate).
 }
 }
 \description{

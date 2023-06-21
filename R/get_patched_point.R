@@ -22,12 +22,12 @@
 #'
 #' @param station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
-#' @param start_date A `character` string representing the beginning of the
-#'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.
-#' @param end_date A `character` string representing the end of the range query
-#'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-#'   range.  Defaults to the current system date.
+#' @param start_date A `character` string or `Date` object representing the
+#'   beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
+#'   return data inclusive of this range.
+#' @param end_date A `character` string or `Date` object representing the end of
+#'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+#'   inclusive of this range.  Defaults to the current system date.
 #' @param which_values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
@@ -128,8 +128,8 @@
 #' @examplesIf interactive()
 #' # Source observation data for station Wongan Hills station, WA (008137)
 #' wd <- get_silo(station_code = "008137",
-#'                start_date = "20210601",
-#'                end_date = "20210701",
+#'                start_date = "2021-06-01",
+#'                end_date = "2021-07-01",
 #'                api_key = "your@@email")
 #'
 #' @export

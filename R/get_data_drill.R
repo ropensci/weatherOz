@@ -11,12 +11,12 @@
 #'    point-of-interest.
 #' @param latitude A single `numeric` value representing the latitude of the
 #'   point-of-interest.
-#' @param start_date A `character` string representing the beginning of the
-#'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.
-#' @param end_date A `character` string representing the end of the range query
-#'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-#'   range.  Defaults to the current system date.
+#' @param start_date A `character` string or `Date` object representing the
+#'   beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
+#'   return data inclusive of this range.
+#' @param end_date A `character` string or `Date` object representing the end of
+#'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+#'   inclusive of this range.  Defaults to the current system date.
 #' @param which_values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
@@ -116,8 +116,8 @@
 #' # Southwood, QLD.
 #' wd <- get_silo(latitude = -27.85,
 #'                longitude = 150.05,
-#'                start_date = "20221001",
-#'                end_date = "20221201",
+#'                start_date = "2022-10-01",
+#'                end_date = "2022-12-01",
 #'                api_key = "your@@email")
 #'
 #' @family SILO
