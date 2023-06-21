@@ -3,7 +3,9 @@
 #'
 #' Download weather data from the \acronym{SILO} \acronym{API} for spatially
 #'   interpolated weather data (DataDrill).  The daily climate surfaces have
-#'   been derived either by splining or kriging the observational data.  The
+#'   been derived either by splining or kriging the observational data.   The
+#'   returned values contain "source" columns, which denote how the observations
+#'   were derived.  The
 #'   grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
 #'   0.05° longitude (approximately 5 km × 5 km).
 #'
@@ -66,6 +68,26 @@
 #' Evaporation and evapotranspiration: an overview of the variables provided by
 #'   \acronym{SILO} is available here,
 #'   <https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf>.
+#'
+#' @section Data codes:
+#' Data codes
+#' Where possible (depending on the file format), the data are supplied with
+#'   codes indicating how each datum was obtained.
+#'
+#'   \tabular{rl}{
+#'     **Code**\tab **Source**\cr
+#'     **0**:\tab Official observation as supplied by the Bureau of
+#'       Meteorology.\cr
+#'     **15**:\tab Deaccumulated rainfall (original observation was recorded
+#'       over a period exceeding the standard 24 hour observation period).\cr
+#'     **25**:\tab Interpolated from daily observations for that date.\cr
+#'     **26**:\tab Synthetic Class A pan evaporation, calculated from
+#'       temperatures, radiation and vapour pressure.\cr
+#'     **35**:\tab Interpolated from daily observations using an anomaly
+#'       interpolation method.\cr
+#'     **75**:\tab Interpolated from the long term averages of daily
+#'       observations for that day of year.\cr
+#'   }
 #'
 #' @return a [data.table::data.table] with the weather data queried with the
 #'   weather variables in alphabetical order. The first eight columns will
