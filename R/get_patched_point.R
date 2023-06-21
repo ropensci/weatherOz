@@ -4,6 +4,22 @@
 #' Download weather data from the \acronym{SILO} \acronym{API} from
 #'   \acronym{BOM} station observations (PatchedPoint) data.
 #'
+#' @details The \acronym{SILO} documentation provides the following information
+#'   for the PatchedPoint data.
+#'
+#'   *These data are a continuous daily time series of data at either recording
+#'   stations or grid points across Australia:*
+#'
+#'   * *Data at station locations consists of observational records which have
+#'   been supplemented by interpolated estimates when observed data are missing.
+#'   Datasets are available at approximately 8,000 Bureau of Meteorology
+#'   recording stations around Australia.*
+#'
+#'   * *Data at grid points consists entirely of interpolated estimates. The
+#'   data are taken from the SILO gridded datasets and are available at any
+#'   pixel on a 0.05° × 0.05° grid over the land area of Australia (including
+#'   some islands).*
+#'
 #' @param station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
 #' @param start_date A `character` string representing the beginning of the
@@ -105,7 +121,15 @@
 #'   and Software*, Volume 16/4, 309-330. DOI:
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
-#' @examples
+#' @family SILO
+#'
+#' @examplesIf interactive()
+#' # Source observation data for station Wongan Hills station, WA (008137)
+#' wd <- get_silo(station_code = "008137",
+#'                start_date = "20210601",
+#'                end_date = "20210701",
+#'                data_format = "alldata",
+#'                api_key = "your@@email")
 #'
 #' @export
 
