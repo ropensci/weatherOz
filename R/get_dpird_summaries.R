@@ -283,6 +283,14 @@ get_dpird_summaries <- function(station_code,
     default = floor(lubridate::time_length(request_interval, unit = "day"))
   )
 
+  if (total_records_req < 1) {
+    stop(
+      call. = FALSE,
+      "You have submitted a query with 0 total records.\n",
+      "Please extend the dates requested."
+    )
+  }
+
   query_list <- .build_query(
     station_code = station_code,
     start_date_time = start_date,
