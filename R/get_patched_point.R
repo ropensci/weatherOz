@@ -84,12 +84,14 @@
 #'   means for maximum and minimum temperatures, solar radiation and vapour
 #'   pressure are returned.
 #'
-#' @return a [data.table::data.table] with 'station_code' and date interval
+#' @return a [data.table::data.table] with "station_code" and the date interval
 #'   queried together with the requested weather variables in alphabetical
-#'   order. The first six columns will always be:
+#'   order. The first eight columns will always be:
 #'
 #'   * station_code,
 #'   * station_name,
+#'   * longitude,
+#'   * latitude,
 #'   * year,
 #'   * month (if daily or monthly)
 #'   * day (if daily), and
