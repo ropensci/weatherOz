@@ -112,6 +112,9 @@
     .check_silo_codes(response_data)
   }
 
+  # put columns in alphabetical order, then move others to front
+  data.table::setcolorder(response_data, c(order(names(response_data))))
+
   data.table::setcolorder(response_data,
                           c("longitude",
                             "latitude",
@@ -130,9 +133,9 @@
 #'
 #' Checks if any SILO data codes for interpolated data are present in the
 #'   requested station observation data. If any such codes are found, a message
-#'   will be reported with a suggestion to check the data source columns
-#'   and `get_data_drill()` or `get_patched_point()` documentation for further
-#'   details on codes and references.
+#'   will be reported with a suggestion to check the data source columns.  See
+#'   `get_patched_point()` documentation for further details on codes and
+#'   references.
 #'
 #' @param dt A `data.table`, defaults to the SILO API query result object from
 #'   `.query_silo_api()`.
@@ -157,7 +160,7 @@
     "evap_pan_source"
   )
 
-  dt <- dt[, ..primary_cols]
+  dt <- dt[, .SD, .SDcols = primary_cols[primary_cols %in% names(dt)]]
 
   if (ncol(dt) > 0) {
     if (any(dt[, lapply(
