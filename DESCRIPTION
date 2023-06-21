@@ -126,7 +126,6 @@ Imports:
     data.table,
     foreign,
     grDevices,
-    httr,
     jsonlite,
     knitr,
     lubridate,
