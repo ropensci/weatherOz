@@ -130,7 +130,6 @@
 #' wd <- get_silo(station_code = "008137",
 #'                start_date = "20210601",
 #'                end_date = "20210701",
-#'                data_format = "alldata",
 #'                api_key = "your@@email")
 #'
 #' @export
@@ -200,8 +199,11 @@ get_patched_point <- function(station_code,
     .end_date = end_date,
     .which_values = .which_values,
     .api_key = api_key,
-    .dataset = "PatchedPoint"
+    .dataset = "PatchedPoint",
+    .interval = checked_interval
   )
+
+  data.table::setcolorder(silo_return, c("station_code", "station_name"))
 
   silo_return[]
 }
