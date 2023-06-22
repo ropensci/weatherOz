@@ -532,6 +532,7 @@
   .cap <- function(x) {
     capped <- grep('^[^A-Z]*', x, perl = TRUE)
     substr(x[capped], 1, 1) <- toupper(tolower(substr(x[capped], 1, 1)))
+    x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl = TRUE)
     return(x)
   }
 
