@@ -35,10 +35,6 @@ Defaults to 'all' with all available values being returned.}
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
-
-\item{interval}{A \code{character} string that indicates the time interval
-requested.  Default is "daily", optionally "monthly" and "yearly" are
-available.  See Details for more.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table} with the weather data queried with the
@@ -165,7 +161,7 @@ and Software}, Volume 16/4, 309-330. DOI:
 }
 }
 \seealso{
-Other SILO:
+Other SILO: 
 \code{\link{get_patched_point}()}
 }
 \concept{SILO}
