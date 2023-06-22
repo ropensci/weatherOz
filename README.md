@@ -27,10 +27,10 @@ Rainfall estimates are also available at virtual stations (_i.e._, where no obse
 You can install the development version of {weatherOz} like so:
 
 ```r
-if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes")
+if (!requireNamespace("pak", quietly = TRUE)) {
+    install.packages("pak")
 }
-remotes::install_github("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
+pak::pkg_install("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
 ```
 
 ## Example 1
@@ -59,12 +59,15 @@ Source data from latitude and longitude coordinates (gridded data - SILO API) So
 
 ```r
 wd <- get_data_drill(
-    latitude = -27.85,
-    longitude = 150.05,
-    start_date = "20221001",
-    end_date = "20221201",
-    which_values = c("max_temp", "min_temp", "rain"),
-    api_key = "your@email"
+  latitude = -27.85,
+  longitude = 150.05,
+  start_date = "20221001",
+  end_date = "20221201",
+  which_values = c("max_temp",
+                   "min_temp",
+                   "rain"
+  ),
+  api_key = "your@email"
 )
 ```
 
