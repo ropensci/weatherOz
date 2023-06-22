@@ -22,9 +22,6 @@
 #' @param which_values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
-#' @param interval A `character` string that indicates the time interval
-#'   requested.  Default is "daily", optionally "monthly" and "yearly" are
-#'   available.  See Details for more.
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
