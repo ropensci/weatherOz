@@ -9,9 +9,6 @@
 #'
 #' @param station_code A `character` string with the station code for the
 #'   station of interest.
-#' @param api_key A `character` string containing your \acronym{API} key from
-#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param which_values A `character` string with the type of extreme weather to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all', returning the full list of values unless otherwise
@@ -29,8 +26,7 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' ## Available Values for `which_values`
-#'
+#' @section Available Values for `which_values`:
 #' * all (returns all of the following values),
 #' * erosionCondition,
 #' * erosionConditionLast7Days,
@@ -99,30 +95,14 @@
 #' @examples
 #' \dontrun{
 #' # You must have an DPIRD API key to proceed
-#' my_key <- rstudioapi::askForSecret()
-#'
 #' # Query Bonnie Rock station for wind erosion and heat extreme events.
-#' my_station <- "BR"
-#' my_events <- c("erosion", "heat")
 #'
-#' output <- get_extreme_weather(
-#'   station_code = my_station,
-#'   type = my_events,
+#' xtreme <- get_extreme_weather(
+#'   station_code = "BR",
+#'   type = c("erosionCondition",
+#'            "heatCondition),
 #'   api_key = my_key
 #' )
-#'
-#' # Query multiple stations for all extreme events
-#' # Provide a list of station (as strings)
-#' these_stations <- list("MN", "ES", "KARI", "NO", "KA002", "CO001", "MA002")
-#'
-#' # Row bind output lists (one for each station)
-#' # together with [data.table::rbindlist]
-#' outputs <- lapply(these_stations,
-#'                   get_extreme_weather,
-#'                   type = "all",
-#'                   api_key = my_key)
-#'
-#' df <- data.table::rbindlist(outputs)
 #' }
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
@@ -134,7 +114,7 @@ get_extreme_weather <- function(station_code,
                                 which_values = "all",
                                 group = "rtd",
                                 include_closed = FALSE,
-                                api_key = NULL) {
+                                api_key) {
   if (missing(station_code)) {
     stop(
       call. = FALSE,
@@ -149,15 +129,28 @@ get_extreme_weather <- function(station_code,
          "This function only handles one site per query.")
   }
 
-  if (which_values != "all" &
-      which_values %notin% dpird_extreme_weather_values) {
-    stop(call. = FALSE,
-         "You have specified a value not found in the 'API'.")
+  # Error if api_key is not provided
+  if (missing(api_key)) {
+    stop(
+      "A valid DPIRD API key must be provided, please visit\n",
+      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
+      call. = FALSE
+    )
   }
 
-  if (which_values == "all") {
-    which_values <- dpird_extreme_weather_values
+  if (any(which_values == "all")) {
+    .which_values <- dpird_extreme_weather_values
+  } else {
+    if (any(which_values %notin% dpird_extreme_weather_values)) {
+      stop(call. = FALSE,
+           "You have specified invalid extreme weather values.")
+    }
+    .which_values <-
+      dpird_extreme_weather_values[names(
+        dpird_extreme_weather_values) %in% which_values]
   }
+
+
 
   values <- c("stationCode", "dateTime", "latitude", "longitude", which_values)
 
@@ -180,3 +173,55 @@ get_extreme_weather <- function(station_code,
   data.table::setcolorder(out, c("station_code", "date_time"))
   return(out)
 }
+
+#' Parse DPIRD API summary data
+#'
+#' Internal function that parses and tidy up data as returned by
+#'  `.query_dpird_api()`
+#'
+#' @param .ret_list a list with the DPIRD weather API response
+#' @param .which_values a character vector with the variables to query. See the
+#' `get_dpird_summaries()` for further details.
+#'
+#' @return a tidy `data.table` with station id and requested weather summaries
+#'
+#' @noRd
+#' @keywords Internal
+#'
+.parse_extreme <- function(.ret_list,
+                           .which_values) {
+
+  for (i in seq_len(length(.ret_list))) {
+    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
+    if ("summaries" %in% names(x$collection)) {
+      nested_list_objects <-
+        data.table::as.data.table(x$collection$summaries)
+      # insert `station_name` and `station_code` into the nested_list_objects df
+      nested_list_objects[, station_code := x$collection$stationCode]
+      nested_list_objects[, station_name := x$collection$stationName]
+    }
+  }
+
+  # get the nested list columns and convert them to data.table objects
+  col_classes <-
+    vapply(nested_list_objects, class, FUN.VALUE = character(1))
+
+  col_lists <- which(col_classes == "list")
+
+  new_df_list <- vector(mode = "list", length = length(col_lists))
+  names(new_df_list) <- names(col_lists)
+  j <- 1
+  for (i in col_lists) {
+    new_df_list[[j]] <-
+      data.table::rbindlist(lapply(X = nested_list_objects[[i]],
+                                   FUN = data.table::as.data.table))
+
+    # drop the list column from the org data.table
+    nested_list_objects[, names(new_df_list[j]) := NULL]
+
+    j <- j + 1
+  }
+
+  return(cbind(nested_list_objects, do.call(what = cbind, args = new_df_list)))
+}
+
