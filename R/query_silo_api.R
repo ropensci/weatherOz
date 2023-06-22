@@ -93,6 +93,11 @@
   response_data[, year := lubridate::year(date)]
   response_data[, month := lubridate::year(date)]
   response_data[, day := lubridate::year(date)]
+  response_data[, extracted :=
+                  lubridate::as_date(
+                    trimws(gsub("extracted=", "",
+                                response_data$metadata[
+                                  grep("extracted", response_data$metadata)])))]
 
   if (.dataset == "PatchedPoint") {
     response_data[, station_code := sprintf("%06s", station)]
@@ -109,10 +114,6 @@
                     trimws(gsub("longitude=", "",
                                 response_data$metadata[
                                   grep("longitude", response_data$metadata)]))]
-    response_data[, extracted :=
-                    lubridate::as_date(trimws(gsub("extracted=", "",
-                                response_data$metadata[
-                                  grep("extracted", response_data$metadata)])))]
     .check_silo_codes(response_data)
   }
 

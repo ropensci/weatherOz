@@ -51,6 +51,7 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
 test_that("get_data_drill() returns all daily values", {
   vcr::use_cassette("silo_get_data_drill_all_daily_values", {
     skip_if_offline()
+    withr::local_timezone(tz = "Australia/Perth")
     wd <- get_data_drill(
       latitude = -27.85,
       longitude = 150.05,
@@ -60,7 +61,7 @@ test_that("get_data_drill() returns all daily values", {
     )
   })
   expect_equal(nrow(wd), 31)
-  expect_length(wd, 43)
+  expect_length(wd, 44)
   expect_named(
     wd,
     c(
@@ -71,6 +72,7 @@ test_that("get_data_drill() returns all daily values", {
       "year",
       "month",
       "day",
+      "extracted",
       "daily_rain",
       "daily_rain_source",
       "et_morton_actual",
@@ -115,6 +117,7 @@ test_that("get_data_drill() returns all daily values", {
 test_that("get_data_drill() returns selected daily values", {
   vcr::use_cassette("silo_get_data_drill_selected_daily_values", {
     skip_if_offline()
+    withr::local_timezone(tz = "Australia/Perth")
     wd <- get_data_drill(
       latitude = -27.85,
       longitude = 150.05,
@@ -125,7 +128,7 @@ test_that("get_data_drill() returns selected daily values", {
     )
   })
   expect_equal(nrow(wd), 31)
-  expect_length(wd, 13)
+  expect_length(wd, 14)
   expect_named(
     wd,
     c(
@@ -136,6 +139,7 @@ test_that("get_data_drill() returns selected daily values", {
       "year",
       "month",
       "day",
+      "extracted",
       "daily_rain",
       "daily_rain_source",
       "max_temp",

@@ -92,7 +92,7 @@
 #'
 #'   * longitude,
 #'   * latitude,
-#'   * elev_m,
+#'   * elev_m (elevation in metres),
 #'   * date (ISO8601 format, "YYYYMMDD"),
 #'   * year,
 #'   * month,
