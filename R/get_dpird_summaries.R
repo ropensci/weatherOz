@@ -42,8 +42,7 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' ## Available Values for `which_values`:
-#'
+#' @section Available Values for `which_values`:
 #'   * all (which will return all of the following values),
 #'   * airTemperature,
 #'   * airTemperatureAvg,
@@ -144,30 +143,31 @@
 #' @examples
 #' \dontrun{
 #' # You must have a DPIRD API key to proceed
-#' # Set date interval for yearly request
-#' # Get rainfall summary
-#' start_date <- "20171028"
 #'
-#' # Use default for end data (current system date)
-#' output <- get_dpird_summaries(
-#'             station_code = "CL001",
-#'             start_date = start_date,
-#'             api_key = "YOUR API KEY",
-#'             interval = "yearly",
-#'             which_values = "rainfall")
+#' # Use default for end data (current system date) to get rainfall
+#' wd <- get_dpird_summaries(
+#'    station_code = "CL001",
+#'    start_date = "20171028",
+#'    api_key = "YOUR API KEY",
+#'    interval = "yearly",
+#'    which_values = "rainfall"
+#' )
 #'
 #' # Only for wind and erosion conditions for daily time interval
-#' # define start and end date
-#' start_date <- "20220501"
-#' end_date <- "20220502"
 #'
-#' output <- get_dpird_summaries(
-#'             station_code = "BI",
-#'             start_date = start_date,
-#'             end_date = end_date,
-#'             api_key = "YOUR API KEY",
-#'             interval = "daily",
-#'             which_values = "wind")
+#' wd <- get_dpird_summaries(
+#'   station_code = "BI",
+#'   start_date = "20220501",
+#'   end_date = "20220502",
+#'   api_key = "your_key",
+#'   interval = "daily",
+#'   which_values = c(
+#'     "wind",
+#'     "erosionCondition",
+#'     "erosionConditionMinutes",
+#'     "erosionConditionStartTime"
+#'     )
+#' )
 #' }
 #' @export get_dpird_summaries
 

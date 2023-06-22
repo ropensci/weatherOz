@@ -41,7 +41,7 @@ always be:
 \item station_name,
 \item longitude,
 \item latitude,
-\item elev_m,
+\item elev_m (elevation in metres),
 \item date (ISO8601 format, "YYYYMMDD"),
 \item year,
 \item month,

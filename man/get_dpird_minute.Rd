@@ -31,8 +31,23 @@ Defaults to all available values, "all".}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.
-\subsection{Available Values:}{
+\acronym{DPIRD} Weather 2.0 \acronym{API}.}
+}
+\value{
+a \link[data.table:data.table]{data.table::data.table} with 'station_code' and date interval
+queried together with the requested weather variables.
+}
+\description{
+Get nicely formatted minute weather station data from the \acronym{DPIRD}
+weather station network over a maximum 24 hour period.
+}
+\note{
+Please note this function converts date-time columns from Coordinated
+Universal Time 'UTC' returned by the \acronym{API} to Australian Western
+Standard Time 'AWST'.
+}
+\section{Available Values for \code{which_values}}{
+
 \itemize{
 \item all (includes all of the following),
 \item airTemperature,
@@ -48,21 +63,8 @@ Defaults to all available values, "all".}
 \item windMaxSpeed, and
 \item windMinSpeed
 }
-}}
 }
-\value{
-a \link[data.table:data.table]{data.table::data.table} with 'station_code' and date interval
-queried together with the requested weather variables.
-}
-\description{
-Get nicely formatted minute weather station data from the \acronym{DPIRD}
-weather station network over a maximum 24 hour period.
-}
-\note{
-Please note this function converts date-time columns from Coordinated
-Universal Time 'UTC' returned by the \acronym{API} to Australian Western
-Standard Time 'AWST'.
-}
+
 \examples{
 \dontrun{
 library(lubridate)

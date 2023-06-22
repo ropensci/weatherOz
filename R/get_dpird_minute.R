@@ -20,8 +20,7 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' ## Available Values:
-#'
+#' @section Available Values for `which_values`:
 #'   * all (includes all of the following),
 #'   * airTemperature,
 #'   * dateTime,

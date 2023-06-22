@@ -35,33 +35,37 @@ remotes::install_github("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
 
 ## Example 1
 
-Source wind and erosion conditions for daily time interval from the DPIRD Weather API.
+Source hourly wind and erosion conditions for daily time interval from the DPIRD Weather 2.0 API.
 
 ```r
-# define start and end date
-start_date <- "2022-05-01"
-end_date <- "2022-05-02"
-
-output <- get_dpird_summaries(
-            site = "BI",
-            first = start_date,
-            last = end_date,
-            api_key = mykey,
-            interval = "hourly",
-            which_vars = c("wind", "erosion"))
+wd <- get_dpird_summaries(
+  station_code = "BI",
+  start_date = "20220501",
+  end_date = "20220502",
+  api_key = "your_key",
+  interval = "daily",
+  which_values = c(
+    "wind",
+    "erosionCondition",
+    "erosionConditionMinutes",
+    "erosionConditionStartTime"
+  )
+)
 ```
 
 ## Example 2
 
-Source data from latitude and longitude coordinates (gridded data - SILO API) Southwood, QLD in the 'apsim' format.
+Source data from latitude and longitude coordinates (gridded data - SILO API) Southwood, QLD for max and min temperature and rainfall.
 
 ```r
-wd <- get_silo(latitude = -27.85,
-               longitude = 150.05,
-               first = "20221001",
-               last = "20221201",
-               data_format = "apsim",
-               email = "your@email")
+wd <- get_data_drill(
+    latitude = -27.85,
+    longitude = 150.05,
+    start_date = "20221001",
+    end_date = "20221201",
+    which_values = c("max_temp", "min_temp", "rain"),
+    api_key = "your@email"
+)
 ```
 
 ## Notes on Data and API Endpoints

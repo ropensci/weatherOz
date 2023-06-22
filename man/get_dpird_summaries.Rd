@@ -52,8 +52,35 @@ useful for historical purposes.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.
-\subsection{Available Values for \code{which_values}:}{
+\acronym{DPIRD} Weather 2.0 \acronym{API}.}
+}
+\value{
+a \link[data.table:data.table]{data.table::data.table} with 'station_code' and date interval
+queried together with the requested weather variables in alphabetical
+order. The first ten columns will always be:
+\itemize{
+\item station_code,
+\item station_name,
+\item latitude,
+\item longitude,
+\item year,
+\item month,
+\item day,
+\item hour,
+\item minute, and if month or finer is present,
+\item date (a combination of year, month, day, hour, minute as appropriate).
+}
+}
+\description{
+Nicely formatted individual station weather summaries from the
+\acronym{DPIRD} weather station network.
+}
+\note{
+Please note this function converts date-time columns from Coordinated
+Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
+}
+\section{Available Values for \code{which_values}}{
+
 \itemize{
 \item all (which will return all of the following values),
 \item airTemperature,
@@ -132,60 +159,36 @@ useful for historical purposes.}
 \item windAvgSpeed, and
 \item windMaxSpeed
 }
-}}
 }
-\value{
-a \link[data.table:data.table]{data.table::data.table} with 'station_code' and date interval
-queried together with the requested weather variables in alphabetical
-order. The first ten columns will always be:
-\itemize{
-\item station_code,
-\item station_name,
-\item latitude,
-\item longitude,
-\item year,
-\item month,
-\item day,
-\item hour,
-\item minute, and if month or finer is present,
-\item date (a combination of year, month, day, hour, minute as appropriate).
-}
-}
-\description{
-Nicely formatted individual station weather summaries from the
-\acronym{DPIRD} weather station network.
-}
-\note{
-Please note this function converts date-time columns from Coordinated
-Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
-}
+
 \examples{
 \dontrun{
 # You must have a DPIRD API key to proceed
-# Set date interval for yearly request
-# Get rainfall summary
-start_date <- "20171028"
 
-# Use default for end data (current system date)
-output <- get_dpird_summaries(
-            station_code = "CL001",
-            start_date = start_date,
-            api_key = "YOUR API KEY",
-            interval = "yearly",
-            which_values = "rainfall")
+# Use default for end data (current system date) to get rainfall
+wd <- get_dpird_summaries(
+   station_code = "CL001",
+   start_date = "20171028",
+   api_key = "YOUR API KEY",
+   interval = "yearly",
+   which_values = "rainfall"
+)
 
 # Only for wind and erosion conditions for daily time interval
-# define start and end date
-start_date <- "20220501"
-end_date <- "20220502"
 
-output <- get_dpird_summaries(
-            station_code = "BI",
-            start_date = start_date,
-            end_date = end_date,
-            api_key = "YOUR API KEY",
-            interval = "daily",
-            which_values = "wind")
+wd <- get_dpird_summaries(
+  station_code = "BI",
+  start_date = "20220501",
+  end_date = "20220502",
+  api_key = "your_key",
+  interval = "daily",
+  which_values = c(
+    "wind",
+    "erosionCondition",
+    "erosionConditionMinutes",
+    "erosionConditionStartTime"
+    )
+)
 }
 }
 \seealso{
