@@ -19,7 +19,7 @@ Access to the SILO API is conditioned to supplying a valid email address with th
 Follow the API Terms and Conditions for the [DPIRD](https://www.agric.wa.gov.au/apis/api-terms-and-conditions) and [SILO](https://siloapi.longpaddock.qld.gov.au/silo/about/access-data/) APIs.
 
 Observation data from the DPIRD's weather station network is also available via a [web interface](https://weather.agric.wa.gov.au).
-The data available is a mirror of the DPIRD Weather API endpoints.
+The data available is a mirror of the DPIRD Weather 2.0 API endpoints.
 Rainfall estimates are also available at virtual stations (_i.e._, where no observational data is present) and is sourced from the Doppler radar service provided by the Bureau of Meteorology under license.
 
 ## Installation instructions
