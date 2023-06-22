@@ -17,11 +17,13 @@ utils::globalVariables(
     "comments",
     "data_format",
     "date_time",
+    "day",
     "dist",
     "distance",
     "dpird_extreme_weather_values",
     "dpird_minute_values",
     "dpird_summary_values",
+    "elev_m",
     "email",
     "end",
     "end_date",
@@ -40,7 +42,9 @@ utils::globalVariables(
     "longitude",
     "marine_AAC_codes",
     "marine_forecast",
+    "metadata",
     "model",
+    "month",
     "name",
     "obs_time_local",
     "obs_time_utc",
@@ -63,6 +67,7 @@ utils::globalVariables(
     "start_date",
     "start_time_local",
     "state",
+    "station",
     "station_code",
     "station_name",
     "stationName",
@@ -85,6 +90,7 @@ utils::globalVariables(
     "windProbeHeights",
     "windProbeHeights.10m",
     "windProbeHeights.3m",
-    "wmo"
+    "wmo",
+    "year"
   )
 )
