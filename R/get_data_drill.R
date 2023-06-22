@@ -139,6 +139,10 @@
 #'   api_key = "your@email"
 #' )
 #' }
+#'
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
+#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}.
+#'
 #' @family SILO
 #'
 #' @export

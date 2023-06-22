@@ -136,6 +136,9 @@
 #'   and Software*, Volume 16/4, 309-330. DOI:
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
+#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}.
+#'
 #' @family SILO
 #'
 #' @examples
