@@ -127,13 +127,16 @@
 #'
 #' @examplesIf interactive()
 #'
-#' #' # Source data from latitude and longitude coordinates (gridded data)
-#' # Southwood, QLD.
-#' wd <- get_silo(latitude = -27.85,
-#'                longitude = 150.05,
-#'                start_date = "2022-10-01",
-#'                end_date = "2022-12-01",
-#'                api_key = "your@@email")
+#' # Source data from latitude and longitude coordinates (gridded data) for
+#' # max and minimum temperature and rainfall for Southwood, QLD.
+#' wd <- get_data_drill(
+#'   latitude = -27.85,
+#'   longitude = 150.05,
+#'   start_date = "20221001",
+#'   end_date = "20221201",
+#'   which_values = c("max_temp", "min_temp", "rain"),
+#'   api_key = "your@email"
+#' )
 #'
 #' @family SILO
 #'
