@@ -46,6 +46,7 @@ always be:
 \item year,
 \item month,
 \item day,
+\item extracted (the date on which the query was made)
 }
 }
 \description{

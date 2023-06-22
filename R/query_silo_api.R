@@ -109,6 +109,10 @@
                     trimws(gsub("longitude=", "",
                                 response_data$metadata[
                                   grep("longitude", response_data$metadata)]))]
+    response_data[, extracted :=
+                    lubridate::as_date(trimws(gsub("extracted=", "",
+                                response_data$metadata[
+                                  grep("extracted", response_data$metadata)])))]
     .check_silo_codes(response_data)
   }
 
@@ -122,7 +126,8 @@
                             "date",
                             "year",
                             "month",
-                            "day"))
+                            "day",
+                            "extracted"))
 
   response_data[, metadata := NULL]
   return(response_data[])

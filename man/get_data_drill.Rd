@@ -47,7 +47,8 @@ always be:
 \item date (ISO8601 format, "YYYYMMDD"),
 \item year,
 \item month,
-\item day
+\item day,
+\item extracted (the date on which the query was made)
 }
 }
 \description{

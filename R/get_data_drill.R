@@ -96,7 +96,8 @@
 #'   * date (ISO8601 format, "YYYYMMDD"),
 #'   * year,
 #'   * month,
-#'   * day
+#'   * day,
+#'   * extracted (the date on which the query was made)
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.
