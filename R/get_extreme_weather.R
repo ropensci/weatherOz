@@ -150,8 +150,6 @@ get_extreme_weather <- function(station_code,
         dpird_extreme_weather_values) %in% which_values]
   }
 
-
-
   values <- c("stationCode", "dateTime", "latitude", "longitude", which_values)
 
   query_list <- list(
@@ -193,13 +191,7 @@ get_extreme_weather <- function(station_code,
 
   for (i in seq_len(length(.ret_list))) {
     x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
-    if ("summaries" %in% names(x$collection)) {
-      nested_list_objects <-
-        data.table::as.data.table(x$collection$summaries)
-      # insert `station_name` and `station_code` into the nested_list_objects df
-      nested_list_objects[, station_code := x$collection$stationCode]
-      nested_list_objects[, station_name := x$collection$stationName]
-    }
+    data.table::data.table(x$collection)
   }
 
   # get the nested list columns and convert them to data.table objects
