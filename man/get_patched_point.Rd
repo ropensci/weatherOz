@@ -137,14 +137,15 @@ observations for that day of year.\cr
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontrun{
+# requires an API key as your email address
 # Source observation data for station Wongan Hills station, WA (008137)
 wd <- get_patched_point(station_code = "008137",
                start_date = "2021-06-01",
                end_date = "2021-07-01",
                which_values = "all",
                api_key = "your@email")
-\dontshow{\}) # examplesIf}
+}
 }
 \references{
 \enumerate{

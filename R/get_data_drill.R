@@ -125,8 +125,9 @@
 #'   and Software*, Volume 16/4, 309-330. DOI:
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
-#' @examplesIf interactive()
-#'
+#' @examples
+#' \dontrun{
+#' # requires an API key as your email address
 #' # Source data from latitude and longitude coordinates (gridded data) for
 #' # max and minimum temperature and rainfall for Southwood, QLD.
 #' wd <- get_data_drill(
@@ -137,7 +138,7 @@
 #'   which_values = c("max_temp", "min_temp", "rain"),
 #'   api_key = "your@email"
 #' )
-#'
+#' }
 #' @family SILO
 #'
 #' @export

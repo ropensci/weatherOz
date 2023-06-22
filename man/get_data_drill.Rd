@@ -127,8 +127,8 @@ observations for that day of year.\cr
 }
 
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
+\dontrun{
+# requires an API key as your email address
 # Source data from latitude and longitude coordinates (gridded data) for
 # max and minimum temperature and rainfall for Southwood, QLD.
 wd <- get_data_drill(
@@ -139,7 +139,7 @@ wd <- get_data_drill(
   which_values = c("max_temp", "min_temp", "rain"),
   api_key = "your@email"
 )
-\dontshow{\}) # examplesIf}
+}
 }
 \references{
 \enumerate{
