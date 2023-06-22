@@ -28,6 +28,7 @@ utils::globalVariables(
     "end",
     "end_date",
     "end_time_local",
+    "extracted",
     "first",
     "forecast_swell2",
     "forecast_caution",
