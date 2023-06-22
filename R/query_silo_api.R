@@ -103,9 +103,9 @@
     response_data[, station_code := sprintf("%06s", station)]
     response_data[, station := NULL]
     response_data[, station_name :=
-                    trimws(gsub("name=", "",
-                                response_data$metadata[
-                                  grep("name", response_data$metadata)]))]
+                    .strcap(trimws(gsub("name=", "",
+                                        response_data$metadata[
+                                          grep("name", response_data$metadata)])))]
     response_data[, latitude :=
                     trimws(gsub("latitude=", "",
                                 response_data$metadata[
