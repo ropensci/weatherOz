@@ -119,7 +119,7 @@
 #' @noRd
 #' @keywords internal
 
-.query_dpird_api <- function(.end_point,
+.query_dpird_api <- function(.end_point = NULL,
                              .query_list,
                              .limit) {
 
@@ -139,24 +139,34 @@
     offset_param = "offset",
     chunk = 1000
   )
-  response <- client$get(query = .query_list)
+  response_data <- client$get(query = .query_list)
 
   # check to see if request failed or succeeded
   # - a custom approach this time combining status code,
   #   explanation of the code, and message from the server
   # check response from start_date item in list, should be same across all
-  if (response[[1]]$status_code > 201) {
-    x <- jsonlite::fromJSON(response[[1]]$parse("UTF8"))$error$errors
-    stop(sprintf(
-      "HTTP (%s) - %s\n  %s",
-      x[, "code"],
-      x[, "message"],
-      x[, "description"]
-    ),
-    call. = FALSE)
+  if (response_data[[1]]$status_code > 201) {
+    if (length(
+      jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors) > 0) {
+      x <-
+        jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors
+      stop(sprintf("HTTP (%s) - %s\n  %s",
+                   x[, "code"],
+                   x[, "message"],
+                   x[, "description"]),
+           call. = FALSE)
+    } else if (length(
+      jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))) > 0) {
+        stop(call. = FALSE,
+             domain = NA,
+             gettextf(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))))
+    } else {
+      stop(call. = FALSE,
+           "An unidentified error has occurred with your query.")
+    }
   }
 
-  response[[1]]$raise_for_status()
-  response[[1]]$raise_for_ct_json()
-  return(response)
+  response_data[[1]]$raise_for_status()
+  response_data[[1]]$raise_for_ct_json()
+  return(response_data)
 }

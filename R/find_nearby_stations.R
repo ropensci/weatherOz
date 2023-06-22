@@ -513,6 +513,8 @@ find_nearby_stations <- function(latitude = NULL,
   }
 
   # Manipulate cols
+  r[, station_code := trimws(station_code)]
+  r[, station_code := as.factor(sprintf("%06s", station_code))]
   r[, station_name := .strcap(x = station_name)]
   r[, owner := "BOM"]
   r[, distance := round(distance, 1)]

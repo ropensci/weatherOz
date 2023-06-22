@@ -116,11 +116,11 @@ test_that("get_dpird_summaries() returns yearly values",
               c(
                 "station_code",
                 "station_name",
-                "period_year",
-                "period_month",
-                "period_day",
-                "period_hour",
-                "period_minute",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "minute",
                 "wind_avg_speed",
                 "wind_height",
                 "wind_max_direction_compass_point",
@@ -131,11 +131,11 @@ test_that("get_dpird_summaries() returns yearly values",
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period_year, "integer")
-            expect_type(x$period_month, "logical")
-            expect_type(x$period_day, "logical")
-            expect_type(x$period_hour, "logical")
-            expect_type(x$period_minute, "logical")
+            expect_type(x$year, "integer")
+            expect_type(x$month, "logical")
+            expect_type(x$day, "logical")
+            expect_type(x$hour, "logical")
+            expect_type(x$minute, "logical")
             expect_s3_class(x$wind_max_time, "POSIXct")
           })
 
@@ -161,11 +161,11 @@ test_that("get_dpird_summaries() returns monthly values",
               c(
                 "station_code",
                 "station_name",
-                "period_year",
-                "period_month",
-                "period_day",
-                "period_hour",
-                "period_minute",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "minute",
                 "date",
                 "wind_avg_speed",
                 "wind_height",
@@ -177,11 +177,11 @@ test_that("get_dpird_summaries() returns monthly values",
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period_year, "integer")
-            expect_type(x$period_month, "integer")
-            expect_type(x$period_day, "logical")
-            expect_type(x$period_hour, "logical")
-            expect_type(x$period_minute, "logical")
+            expect_type(x$year, "integer")
+            expect_type(x$month, "integer")
+            expect_type(x$day, "logical")
+            expect_type(x$hour, "logical")
+            expect_type(x$minute, "logical")
             expect_s3_class(x$date, "Date")
             expect_s3_class(x$wind_max_time, "POSIXct")
           })
@@ -208,11 +208,11 @@ test_that("get_dpird_summaries() returns daily values",
               c(
                 "station_code",
                 "station_name",
-                "period_year",
-                "period_month",
-                "period_day",
-                "period_hour",
-                "period_minute",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "minute",
                 "date",
                 "wind_avg_speed",
                 "wind_height",
@@ -224,11 +224,11 @@ test_that("get_dpird_summaries() returns daily values",
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period_year, "integer")
-            expect_type(x$period_month, "integer")
-            expect_type(x$period_day, "integer")
-            expect_type(x$period_hour, "logical")
-            expect_type(x$period_minute, "logical")
+            expect_type(x$year, "integer")
+            expect_type(x$month, "integer")
+            expect_type(x$day, "integer")
+            expect_type(x$hour, "logical")
+            expect_type(x$minute, "logical")
             expect_s3_class(x$date, "Date")
             expect_s3_class(x$wind_max_time, "POSIXct")
           })
@@ -255,11 +255,11 @@ test_that("get_dpird_summaries() returns hourly values",
               c(
                 "station_code",
                 "station_name",
-                "period_year",
-                "period_month",
-                "period_day",
-                "period_hour",
-                "period_minute",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "minute",
                 "date",
                 "wind_avg_direction_compass_point",
                 "wind_avg_direction_degrees",
@@ -273,11 +273,11 @@ test_that("get_dpird_summaries() returns hourly values",
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period_year, "integer")
-            expect_type(x$period_month, "integer")
-            expect_type(x$period_day, "integer")
-            expect_type(x$period_hour, "integer")
-            expect_type(x$period_minute, "logical")
+            expect_type(x$year, "integer")
+            expect_type(x$month, "integer")
+            expect_type(x$day, "integer")
+            expect_type(x$hour, "integer")
+            expect_type(x$minute, "logical")
             expect_s3_class(x$date, "POSIXct")
             expect_s3_class(x$wind_max_time, "POSIXct")
           })
@@ -304,11 +304,11 @@ test_that("get_dpird_summaries() returns 30min values",
               c(
                 "station_code",
                 "station_name",
-                "period_year",
-                "period_month",
-                "period_day",
-                "period_hour",
-                "period_minute",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "minute",
                 "date",
                 "wind_avg_direction_compass_point",
                 "wind_avg_direction_degrees",
@@ -322,11 +322,11 @@ test_that("get_dpird_summaries() returns 30min values",
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period_year, "integer")
-            expect_type(x$period_month, "integer")
-            expect_type(x$period_day, "integer")
-            expect_type(x$period_hour, "integer")
-            expect_type(x$period_minute, "integer")
+            expect_type(x$year, "integer")
+            expect_type(x$month, "integer")
+            expect_type(x$day, "integer")
+            expect_type(x$hour, "integer")
+            expect_type(x$minute, "integer")
             expect_s3_class(x$date, "POSIXct")
             expect_s3_class(x$wind_max_time, "POSIXct")
           })
@@ -353,11 +353,11 @@ test_that("get_dpird_summaries() returns 15min values",
               c(
                 "station_code",
                 "station_name",
-                "period_year",
-                "period_month",
-                "period_day",
-                "period_hour",
-                "period_minute",
+                "year",
+                "month",
+                "day",
+                "hour",
+                "minute",
                 "date",
                 "wind_avg_direction_compass_point",
                 "wind_avg_direction_degrees",
@@ -371,11 +371,11 @@ test_that("get_dpird_summaries() returns 15min values",
             )
             expect_type(x$station_code, "character")
             expect_type(x$station_name, "character")
-            expect_type(x$period_year, "integer")
-            expect_type(x$period_month, "integer")
-            expect_type(x$period_day, "integer")
-            expect_type(x$period_hour, "integer")
-            expect_type(x$period_minute, "integer")
+            expect_type(x$year, "integer")
+            expect_type(x$month, "integer")
+            expect_type(x$day, "integer")
+            expect_type(x$hour, "integer")
+            expect_type(x$minute, "integer")
             expect_s3_class(x$date, "POSIXct")
             expect_s3_class(x$wind_max_time, "POSIXct")
           })

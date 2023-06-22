@@ -516,11 +516,9 @@
   return(x)
 }
 
-#' Capitalise the First Letters of Words in a String
+#' Capitalise the First Letters of Words in a Vector of Strings
 #'
-#' Capitalise the first letter of each element of the string vector.
-#'
-#' @param x `string` to be capitalized.
+#' @param x `vector` of `string` values to be capitalized.
 #'
 #' @note Taken from \CRANpkg{Hmisc} with modifications to simplify by
 #'  Adam Sparks.
@@ -539,9 +537,14 @@
 
   na <- is.na(x)
 
+  # here `x` has to be wrapped in `as.character()` to handle some of the
+  # station names in the BOM data when merging BOM metadata with SILO station
+  # lists
   res <-
-    unlist(lapply(lapply(strsplit(x, split = "\\b\\W+\\b"), .cap),
-                  paste, collapse = " "))
+    unlist(lapply(lapply(
+      strsplit(as.character(x), split = "\\b\\W+\\b"), .cap
+    ),
+    paste, collapse = " "))
 
   res[na] <- NA
   return(res)

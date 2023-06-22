@@ -13,12 +13,12 @@
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.
-#' @param start_date A `character` string representing the beginning of the
-#'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.
-#' @param end_date A `character` string representing the end of the range query
-#'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-#'   range.  Defaults to the current system date.
+#' @param start_date A `character` string or `Date` object representing the
+#'   beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
+#'   return data inclusive of this range.
+#' @param end_date A `character` string or `Date` object representing the end of
+#'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
+#'   inclusive of this range.  Defaults to the current system date.
 #' @param interval A `character` string that indicates the time interval to
 #'   summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
 #'   'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
@@ -125,14 +125,16 @@
 #'   queried together with the requested weather variables in alphabetical
 #'   order. The first ten columns will always be:
 #'
-#'   * 'station_code',
-#'   * 'station_name',
-#'   * 'period_year',
-#'   * 'period_month',
-#'   * 'period_day',
-#'   * 'period_hour',
-#'   * 'period_minute' and if 'period_month' or finer is present,
-#'   * 'date' (a combination of year, month, day, hour, minute as appropriate).
+#'   * station_code,
+#'   * station_name,
+#'   * latitude,
+#'   * longitude,
+#'   * year,
+#'   * month,
+#'   * day,
+#'   * hour,
+#'   * minute, and if month or finer is present,
+#'   * date (a combination of year, month, day, hour, minute as appropriate).
 #'
 #' @note Please note this function converts date-time columns from Coordinated
 #'   Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
@@ -281,6 +283,14 @@ get_dpird_summaries <- function(station_code,
     default = floor(lubridate::time_length(request_interval, unit = "day"))
   )
 
+  if (total_records_req < 1) {
+    stop(
+      call. = FALSE,
+      "You have submitted a query with 0 total records.\n",
+      "Please extend the dates requested."
+    )
+  }
+
   query_list <- .build_query(
     station_code = station_code,
     start_date_time = start_date,
@@ -377,6 +387,8 @@ get_dpird_summaries <- function(station_code,
       "period_minute"
     )
   )
+
+  data.table::setnames(out, gsub("period_", "", names(out)))
 
   data.table::setkey(x = out, cols = station_code)
 

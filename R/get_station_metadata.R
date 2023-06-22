@@ -2,7 +2,11 @@
 #' Get the latest DPIRD and SILO weather station metadata
 #'
 #' Download the latest station locations and metadata for stations in the
-#'   \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.
+#'   \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.  For \acronym{BOM}
+#'   stations that exist in \acronym{SILO}, but lack metadata from
+#'   \acronym{BOM}, the rows will exist to indicate that the station is in the
+#'   \acronym{SILO} data set, but there is no corresponding \acronym{BOM}
+#'   metadata available.
 #'
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Valid values are 'all', for both \acronym{SILO} (\acronym{BOM} data) and
@@ -13,11 +17,11 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @param status A `Boolean` string indicating whether to include closed
-#'   stations' metadata.  Use `TRUE` to include.  Defaults to `FALSE`.
+#'   stations' metadata.  Use `TRUE` to include these.  Defaults to `FALSE`.
 #' @param rich A `Boolean` string indicating whether to return rich information
-#'   about DPIRD's weather station(s), this does not affect the SILO stations'
-#'   metadata, the variables for these observations will be `NA`.  Defaults to
-#'   `FALSE`.
+#'   about \acronym{DPIRD}'s weather station(s), this does not affect the
+#'   \acronym{SILO} stations' metadata, the variables for these observations
+#'   will be `NA`.  Defaults to `FALSE`.
 #'
 #' @note For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
 #'   not report the exact date on which stations opened or closed, only the
@@ -97,8 +101,6 @@ get_station_metadata <-
       out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
     }
 
-    data.table::setorderv(out, cols = c("state", "station_name"))
-
     out[, start := data.table::fifelse(is.na(start),
                                        as.character(lubridate::year(Sys.Date())),
                                        as.character(start))]
@@ -116,6 +118,22 @@ get_station_metadata <-
     out[, end := lubridate::ymd(end)]
 
     data.table::setkey(out, station_code)
+
+    data.table::setorderv(out, cols = c("state",
+                                        "station_name"))
+    data.table::setcolorder(out, c(
+      "station_code",
+      "station_name",
+      "start",
+      "end",
+      "latitude",
+      "longitude",
+      "state",
+      "elev_m",
+      "source",
+      "status",
+      "wmo"
+    ))
 
     # lastly, if user wants all stations return them, else return only open ones
     if (isTRUE(status)) {
@@ -196,7 +214,9 @@ get_station_metadata <-
       )
     )
 
-  bom_stations[, station_code := as.factor(station_code)]
+  bom_stations[, station_code := trimws(station_code)]
+  bom_stations[, station_code := as.factor(sprintf("%06s", station_code))]
+  bom_stations[, station_name := trimws(station_name)]
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
@@ -237,7 +257,11 @@ get_station_metadata <-
       which_api = "silo"
     )
 
-  return(bom_stations[station_name %in% silo_stations$station_name])
+  station_metadata <- merge(silo_stations, bom_stations, all.x = TRUE)
+  # drops the unwanted columns that are added after using `find_nearby_stations`
+  station_metadata[, owner := NULL]
+  station_metadata[, distance := NULL]
+  return(station_metadata)
 }
 
 #' Returns metadata about stations in the DPIRD network
