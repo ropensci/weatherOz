@@ -6,7 +6,7 @@ test_that("user-input checks stop if invalid values are provided", {
       start_date_time = "2018-02-01 13:00:00",
       minutes = 1440,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      which_values = "wind"
+      values = "wind"
     )
   )
 
@@ -17,7 +17,7 @@ test_that("user-input checks stop if invalid values are provided", {
       start_date_time = "2018-02-31 13:00:00",
       minutes = 1440,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      which_values = "wind"
+      values = "wind"
     )
   )
 
@@ -27,18 +27,18 @@ test_that("user-input checks stop if invalid values are provided", {
       station_code = "BI",
       start_date_time = "2018-02-01 13:00:00",
       minutes = 1440,
-      which_values = "wind"
+      values = "wind"
     )
   )
 
-  # invalid 'which_values'
+  # invalid 'values'
   expect_error(
     get_dpird_minute(
       station_code = "BI",
       start_date_time = "2018-02-01 13:00:00",
       minutes = 1440,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      which_values = "phytophthora"
+      values = "phytophthora"
     )
   )
 
@@ -49,7 +49,7 @@ test_that("user-input checks stop if invalid values are provided", {
       start_date_time = "2018-02-01 13:00:00",
       minutes = 1450,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      which_values = "wind"
+      values = "wind"
     )
   )
 })
@@ -63,7 +63,7 @@ test_that("get_dpird_minute() returns minute values", {
       start_date_time = "2018-02-01 13:00:00",
       minutes = 30,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      which_values = "wind"
+      values = "wind"
     )
   }
   )

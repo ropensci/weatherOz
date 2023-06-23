@@ -8,7 +8,7 @@ get_dpird_availability(
   station_code = NULL,
   start_date = NULL,
   end_date = NULL,
-  which_values = "availability",
+  values = "availability",
   api_key
 )
 }
@@ -27,14 +27,14 @@ in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
 range.  Defaults to \code{NULL}, returning data for the current year-to-date.
 Must be sent with a \code{start_date}.}
 
-\item{which_values}{A \code{character} string with the type of availability
+\item{values}{A \code{character} string with the type of availability
 metadata to return.  See \strong{Available Values} for a full list of valid
 values.  Defaults to 'availability', returning metadata for all stations.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.
-\subsection{Available Values for \code{which_values}:}{
+\subsection{Available Values for \code{values}:}{
 \itemize{
 \item availability (which will return all of the following values),
 \item availabilityCurrentHour,

@@ -31,7 +31,7 @@ test_that("get_patched_point() user-input checks stop on invalid values", {
       start_date = "20220501",
       end_date = "20220501",
       api_key = Sys.getenv("SILO_API_KEY"),
-      which_values = "Fusarium_verticilliodes"
+      values = "Fusarium_verticilliodes"
     )
   )
 })
@@ -115,7 +115,7 @@ test_that("get_patched_point() returns selected daily values", {
       expect_message(
         wd <- get_patched_point(
           station_code = "008137",
-          which_values = c("rain", "max_temp", "min_temp"),
+          values = c("rain", "max_temp", "min_temp"),
           start_date = "2021-06-01",
           end_date = "2021-07-01",
           api_key = "slavish_moo_0k@icloud.com"

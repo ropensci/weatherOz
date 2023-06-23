@@ -8,7 +8,7 @@
 #' @param .end_date A `character` string representing the end of the range query
 #'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
 #'   range.
-#' @param .which_values A `character` string with the type of weather data to
+#' @param .values A `character` string with the type of weather data to
 #'   return.
 #' @param .dataset A SILO dataset, either "PatchedPoint" or "DataDrill".
 #' @param .api_key A valid e-mail address.
@@ -23,7 +23,7 @@
                             .latitude = NULL,
                             .start_date,
                             .end_date,
-                            .which_values,
+                            .values,
                             .api_key,
                             .dataset) {
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
@@ -39,7 +39,7 @@
       start = as.character(.start_date),
       finish = as.character(.end_date),
       format = "csv",
-      comment = paste(.which_values, collapse = ""),
+      comment = paste(.values, collapse = ""),
       username = .api_key,
       password = "api_request"
     )
@@ -50,7 +50,7 @@
       start = as.character(.start_date),
       finish = as.character(.end_date),
       format = "csv",
-      comment = paste(.which_values, collapse = ""),
+      comment = paste(.values, collapse = ""),
       username = .api_key,
       password = "api_request"
     )

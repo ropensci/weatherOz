@@ -8,7 +8,7 @@ get_patched_point(
   station_code,
   start_date,
   end_date = Sys.Date(),
-  which_values = "all",
+  values = "all",
   api_key
 )
 }
@@ -24,7 +24,7 @@ return data inclusive of this range.}
 the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 inclusive of this range.  Defaults to the current system date.}
 
-\item{which_values}{A \code{character} string with the type of weather data to
+\item{values}{A \code{character} string with the type of weather data to
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all' with all available values being returned.}
 
@@ -143,7 +143,7 @@ observations for that day of year.\cr
 wd <- get_patched_point(station_code = "008137",
                start_date = "2021-06-01",
                end_date = "2021-07-01",
-               which_values = "all",
+               values = "all",
                api_key = "your@email")
 }
 }

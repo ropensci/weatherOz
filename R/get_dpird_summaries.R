@@ -26,7 +26,7 @@
 #'   before midnight - hour/minute values are for the end of the time period.
 #'   Data for shorter intervals ('15min', '30min') are available from January of
 #'   the previous year.
-#' @param which_values A `character` string with the type of summarised weather
+#' @param values A `character` string with the type of summarised weather
 #'   to return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
 #' @param api_group Filter the stations to a predefined group one of 'all',
@@ -42,7 +42,7 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values for `which_values`:
+#' @section Available Values for `values`:
 #'   * all (which will return all of the following values),
 #'   * airTemperature,
 #'   * airTemperatureAvg,
@@ -150,7 +150,7 @@
 #'    start_date = "20171028",
 #'    api_key = "YOUR API KEY",
 #'    interval = "yearly",
-#'    which_values = "rainfall"
+#'    values = "rainfall"
 #' )
 #'
 #' # Only for wind and erosion conditions for daily time interval
@@ -161,7 +161,7 @@
 #'   end_date = "20220502",
 #'   api_key = "your_key",
 #'   interval = "daily",
-#'   which_values = c(
+#'   values = c(
 #'     "wind",
 #'     "erosionCondition",
 #'     "erosionConditionMinutes",
@@ -175,7 +175,7 @@ get_dpird_summaries <- function(station_code,
                                 start_date,
                                 end_date = Sys.Date(),
                                 interval = "daily",
-                                which_values = "all",
+                                values = "all",
                                 api_group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
@@ -197,15 +197,15 @@ get_dpird_summaries <- function(station_code,
     )
   }
 
-  if (any(which_values == "all")) {
-    which_values <- dpird_summary_values
+  if (any(values == "all")) {
+    values <- dpird_summary_values
   } else {
-    if (any(which_values %notin% dpird_summary_values)) {
+    if (any(values %notin% dpird_summary_values)) {
       stop(call. = FALSE,
            "You have specified invalid weather values.")
     }
-    which_values <-
-      c("stationCode", "stationName", "period", which_values)
+    values <-
+      c("stationCode", "stationName", "period", values)
   }
 
   # validate user provided dates
@@ -296,7 +296,7 @@ get_dpird_summaries <- function(station_code,
     start_date_time = start_date,
     end_date_time = end_date,
     interval = checked_interval,
-    which_values = which_values,
+    values = values,
     api_group = api_group,
     include_closed = include_closed,
     api_key = api_key,
@@ -319,7 +319,7 @@ get_dpird_summaries <- function(station_code,
         .query_list = query_list,
         .limit = total_records_req
       ),
-      .which_values = which_values
+      .values = values
     )
 
   out[, period.from := NULL]
@@ -402,7 +402,7 @@ get_dpird_summaries <- function(station_code,
 #'  `.query_dpird_api()`
 #'
 #' @param .ret_list a list with the DPIRD weather API response
-#' @param .which_values a character vector with the variables to query. See the
+#' @param .values a character vector with the variables to query. See the
 #' `get_dpird_summaries()` for further details.
 #'
 #' @return a tidy `data.table` with station id and requested weather summaries
@@ -411,7 +411,7 @@ get_dpird_summaries <- function(station_code,
 #' @keywords Internal
 #'
 .parse_summary <- function(.ret_list,
-                           .which_values) {
+                           .values) {
 
   for (i in seq_len(length(.ret_list))) {
     x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))

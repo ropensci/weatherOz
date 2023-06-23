@@ -15,14 +15,14 @@
 #'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
 #'   range.  Defaults to `NULL`, returning data for the current year-to-date.
 #'   Must be sent with a `start_date`.
-#' @param which_values A `character` string with the type of availability
+#' @param values A `character` string with the type of availability
 #'   metadata to return.  See **Available Values** for a full list of valid
 #'   values.  Defaults to 'availability', returning metadata for all stations.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' ## Available Values for `which_values`:
+#' ## Available Values for `values`:
 #'
 #'   * availability (which will return all of the following values),
 #'   * availabilityCurrentHour,
@@ -58,7 +58,7 @@ get_dpird_availability <-
   function(station_code = NULL,
            start_date = NULL,
            end_date = NULL,
-           which_values = "availability",
+           values = "availability",
            api_key) {
     # Error if api_key is not provided
     if (missing(api_key)) {
@@ -88,18 +88,18 @@ get_dpird_availability <-
 
     # set up "&select=values"
     ## if 'start_date' is not set, we append station_code and station_name
-    which_values <- c(which_values, "stationCode", "stationName")
+    values <- c(values, "stationCode", "stationName")
 
     ## if 'start_date' is specified, we only request the availability for the
     ## period and the station_code and station_name
     if (!is.null(start_date)) {
-      which_values <-
+      values <-
         c("stationCode", "stationName", "availabilityPeriod")
     }
 
     if (!is.null(station_code)) {
       query_list <- list(
-        select = paste(which_values, collapse = ","),
+        select = paste(values, collapse = ","),
         stationCode = paste(station_code, collapse = ","),
         startDate = start_date,
         endDate = end_date,
@@ -107,7 +107,7 @@ get_dpird_availability <-
       )
     } else {
       query_list <- list(
-        select = paste(which_values, collapse = ","),
+        select = paste(values, collapse = ","),
         startDate = start_date,
         endDate = end_date,
         api_key = api_key

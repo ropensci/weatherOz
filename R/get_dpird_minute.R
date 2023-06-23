@@ -13,14 +13,14 @@
 #'   decipher many date and time formats but prefers ISO8601.
 #' @param minutes An `integer` value that provides the number of observations to
 #'   be returned.  Defaults to 1440 minutes for 24 hours of observations.
-#' @param which_values A `vector` of weather values to query from the
+#' @param values A `vector` of weather values to query from the
 #'   \acronym{API}.  See **Available Values** section for valid available codes.
 #'   Defaults to all available values, "all".
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values for `which_values`:
+#' @section Available Values for `values`:
 #'   * all (includes all of the following),
 #'   * airTemperature,
 #'   * dateTime,
@@ -52,7 +52,7 @@
 #'                  start_date_time = "2018-02-01 13:00:00",
 #'                  minutes = 1440,
 #'                  api_key = YOUR_API_KEY,
-#'                  which_values = c("airTemperature",
+#'                  values = c("airTemperature",
 #'                                   "solarIrradiance",
 #'                                   "wind"))
 #' }
@@ -63,7 +63,7 @@ get_dpird_minute <- function(station_code,
                              start_date_time = lubridate::now() -
                                lubridate::hours(24L),
                              minutes = 1440L,
-                             which_values = "all",
+                             values = "all",
                              api_key) {
   if (missing(station_code)) {
     stop(call. = FALSE,
@@ -78,17 +78,17 @@ get_dpird_minute <- function(station_code,
     )
   }
 
-  if (any(which_values %notin% dpird_minute_values)) {
-    if (which_values != "all") {
+  if (any(values %notin% dpird_minute_values)) {
+    if (values != "all") {
       stop(call. = FALSE,
            "You have specified a value not found in the 'API'.")
     }
   }
 
-  if ("all" %in% which_values) {
-    which_values <- dpird_minute_values
+  if ("all" %in% values) {
+    values <- dpird_minute_values
   } else {
-    which_values <- c(which_values, "dateTime")
+    values <- c(values, "dateTime")
   }
 
   start_date_time <- .check_date_time(start_date_time)
@@ -112,7 +112,7 @@ get_dpird_minute <- function(station_code,
     api_key = api_key,
     api_group = NULL,
     interval = "minute",
-    which_values = which_values,
+    values = values,
     limit = total_records_req,
     include_closed = NULL
   )

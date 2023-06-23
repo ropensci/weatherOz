@@ -9,7 +9,7 @@ get_dpird_summaries(
   start_date,
   end_date = Sys.Date(),
   interval = "daily",
-  which_values = "all",
+  values = "all",
   api_group = "rtd",
   include_closed = FALSE,
   api_key
@@ -35,7 +35,7 @@ before midnight - hour/minute values are for the end of the time period.
 Data for shorter intervals ('15min', '30min') are available from January of
 the previous year.}
 
-\item{which_values}{A \code{character} string with the type of summarised weather
+\item{values}{A \code{character} string with the type of summarised weather
 to return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all' with all available values being returned.}
 
@@ -79,7 +79,7 @@ Nicely formatted individual station weather summaries from the
 Please note this function converts date-time columns from Coordinated
 Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 }
-\section{Available Values for \code{which_values}}{
+\section{Available Values for \code{values}}{
 
 \itemize{
 \item all (which will return all of the following values),
@@ -171,7 +171,7 @@ wd <- get_dpird_summaries(
    start_date = "20171028",
    api_key = "YOUR API KEY",
    interval = "yearly",
-   which_values = "rainfall"
+   values = "rainfall"
 )
 
 # Only for wind and erosion conditions for daily time interval
@@ -182,7 +182,7 @@ wd <- get_dpird_summaries(
   end_date = "20220502",
   api_key = "your_key",
   interval = "daily",
-  which_values = c(
+  values = c(
     "wind",
     "erosionCondition",
     "erosionConditionMinutes",

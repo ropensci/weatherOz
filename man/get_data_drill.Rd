@@ -9,7 +9,7 @@ get_data_drill(
   latitude,
   start_date,
   end_date = Sys.Date(),
-  which_values = "all",
+  values = "all",
   api_key
 )
 }
@@ -28,7 +28,7 @@ return data inclusive of this range.}
 the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 inclusive of this range.  Defaults to the current system date.}
 
-\item{which_values}{A \code{character} string with the type of weather data to
+\item{values}{A \code{character} string with the type of weather data to
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all' with all available values being returned.}
 
@@ -136,7 +136,7 @@ wd <- get_data_drill(
   longitude = 150.05,
   start_date = "20221001",
   end_date = "20221201",
-  which_values = c("max_temp", "min_temp", "rain"),
+  values = c("max_temp", "min_temp", "rain"),
   api_key = "your@email"
 )
 }

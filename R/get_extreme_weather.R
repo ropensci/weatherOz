@@ -9,7 +9,7 @@
 #'
 #' @param station_code A `character` string with the station code for the
 #'   station of interest.
-#' @param which_values A `character` string with the type of extreme weather to
+#' @param values A `character` string with the type of extreme weather to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all', returning the full list of values unless otherwise
 #'   specified.
@@ -26,7 +26,7 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values for `which_values`:
+#' @section Available Values for `values`:
 #' * all (returns all of the following values),
 #' * erosionCondition,
 #' * erosionConditionLast7Days,
@@ -100,7 +100,7 @@
 #' xtreme <- get_extreme_weather(
 #'   station_code = "BR",
 #'   type = c("erosionCondition",
-#'            "heatCondition),
+#'            "heatCondition"),
 #'   api_key = my_key
 #' )
 #' }
@@ -111,22 +111,22 @@
 #' @export
 
 get_extreme_weather <- function(station_code,
-                                which_values = "all",
+                                values = "all",
                                 group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
   if (missing(station_code)) {
     stop(
       call. = FALSE,
-      "Provide a station code via the `site` argument. It should take a string
-         e.g., `AN001` for Allanooka station."
+      "Please provide a station code via the `station_code` argument.\n",
+      "It should take a string e.g., `AN001` for Allanooka station.\n"
     )
   }
 
   if (length(station_code) != 1L) {
     stop(call. = FALSE,
-         "Wrong number of sites.\n",
-         "This function only handles one site per query.")
+         "You have provided more than one `station_code`.\n",
+         "This function only handles one `station_code` per query.\n")
   }
 
   # Error if api_key is not provided
@@ -138,19 +138,19 @@ get_extreme_weather <- function(station_code,
     )
   }
 
-  if (any(which_values == "all")) {
-    .which_values <- dpird_extreme_weather_values
+  if (any(values == "all")) {
+    .values <- dpird_extreme_weather_values
   } else {
-    if (any(which_values %notin% dpird_extreme_weather_values)) {
+    if (any(values %notin% dpird_extreme_weather_values)) {
       stop(call. = FALSE,
            "You have specified invalid extreme weather values.")
     }
-    .which_values <-
+    .values <-
       dpird_extreme_weather_values[names(
-        dpird_extreme_weather_values) %in% which_values]
+        dpird_extreme_weather_values) %in% values]
   }
 
-  values <- c("stationCode", "dateTime", "latitude", "longitude", which_values)
+  values <- c("stationCode", "dateTime", "latitude", "longitude", values)
 
   query_list <- list(
     stationCode = station_code,
@@ -216,4 +216,3 @@ get_extreme_weather <- function(station_code,
 
   return(cbind(nested_list_objects, do.call(what = cbind, args = new_df_list)))
 }
-

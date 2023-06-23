@@ -44,7 +44,7 @@ wd <- get_dpird_summaries(
   end_date = "20220502",
   api_key = "your_key",
   interval = "daily",
-  which_values = c(
+  values = c(
     "wind",
     "erosionCondition",
     "erosionConditionMinutes",
@@ -63,7 +63,7 @@ wd <- get_data_drill(
   longitude = 150.05,
   start_date = "20221001",
   end_date = "20221201",
-  which_values = c("max_temp",
+  values = c("max_temp",
                    "min_temp",
                    "rain"
   ),

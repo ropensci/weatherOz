@@ -43,7 +43,7 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
       start_date = "20220501",
       end_date = "20220501",
       api_key = Sys.getenv("SILO_API_KEY"),
-      which_values = "Fusarium_thapsinum"
+      values = "Fusarium_thapsinum"
     )
   )
 })
@@ -121,7 +121,7 @@ test_that("get_data_drill() returns selected daily values", {
     wd <- get_data_drill(
       latitude = -27.85,
       longitude = 150.05,
-      which_values = c("rain", "max_temp", "min_temp"),
+      values = c("rain", "max_temp", "min_temp"),
       start_date = "2021-06-01",
       end_date = "2021-07-01",
       api_key = "slavish_moo_0k@icloud.com"

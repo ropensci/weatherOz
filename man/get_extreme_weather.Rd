@@ -6,7 +6,7 @@
 \usage{
 get_extreme_weather(
   station_code,
-  which_values = "all",
+  values = "all",
   group = "rtd",
   include_closed = FALSE,
   api_key = NULL
@@ -16,7 +16,7 @@ get_extreme_weather(
 \item{station_code}{A \code{character} string with the station code for the
 station of interest.}
 
-\item{which_values}{A \code{character} string with the type of extreme weather to
+\item{values}{A \code{character} string with the type of extreme weather to
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to 'all', returning the full list of values unless otherwise
 specified.}
@@ -35,7 +35,7 @@ useful for historical purposes.}
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.
-\subsection{Available Values for \code{which_values}}{
+\subsection{Available Values for \code{values}}{
 \itemize{
 \item all (returns all of the following values),
 \item erosionCondition,

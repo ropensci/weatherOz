@@ -19,7 +19,7 @@
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 #'   inclusive of this range.  Defaults to the current system date.
-#' @param which_values A `character` string with the type of weather data to
+#' @param values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
 #' @param api_key A `character `string specifying a valid email address to use
@@ -135,7 +135,7 @@
 #'   longitude = 150.05,
 #'   start_date = "20221001",
 #'   end_date = "20221201",
-#'   which_values = c("max_temp", "min_temp", "rain"),
+#'   values = c("max_temp", "min_temp", "rain"),
 #'   api_key = "your@email"
 #' )
 #' }
@@ -151,7 +151,7 @@ get_data_drill <- function(longitude,
                            latitude,
                            start_date,
                            end_date = Sys.Date(),
-                           which_values = "all",
+                           values = "all",
                            api_key) {
 
   if (missing(longitude) || missing(latitude)) {
@@ -174,16 +174,16 @@ get_data_drill <- function(longitude,
   # validate user-provided lon and lat values
   .check_lonlat(longitude = longitude, latitude = latitude)
 
-  # validate user-provided data values and return .which_values object
-  if (any(which_values == "all")) {
-    .which_values <- unname(silo_daily_values)
+  # validate user-provided data values and return .values object
+  if (any(values == "all")) {
+    .values <- unname(silo_daily_values)
   } else {
-    if (any(which_values %notin% names(silo_daily_values))) {
+    if (any(values %notin% names(silo_daily_values))) {
       stop(call. = FALSE,
            "You have specified invalid weather values.")
     }
-    .which_values <- silo_daily_values[names(silo_daily_values) %in%
-                                        which_values]
+    .values <- silo_daily_values[names(silo_daily_values) %in%
+                                        values]
   }
 
   # validate user provided dates
@@ -201,7 +201,7 @@ get_data_drill <- function(longitude,
     .latitude = latitude,
     .start_date = start_date,
     .end_date = end_date,
-    .which_values = .which_values,
+    .values = .values,
     .api_key = api_key,
     .dataset = "DataDrill"
   )

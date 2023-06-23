@@ -8,7 +8,7 @@ get_dpird_minute(
   station_code,
   start_date_time = lubridate::now() - lubridate::hours(24L),
   minutes = 1440L,
-  which_values = "all",
+  values = "all",
   api_key
 )
 }
@@ -25,7 +25,7 @@ decipher many date and time formats but prefers ISO8601.}
 \item{minutes}{An \code{integer} value that provides the number of observations to
 be returned.  Defaults to 1440 minutes for 24 hours of observations.}
 
-\item{which_values}{A \code{vector} of weather values to query from the
+\item{values}{A \code{vector} of weather values to query from the
 \acronym{API}.  See \strong{Available Values} section for valid available codes.
 Defaults to all available values, "all".}
 
@@ -46,7 +46,7 @@ Please note this function converts date-time columns from Coordinated
 Universal Time 'UTC' returned by the \acronym{API} to Australian Western
 Standard Time 'AWST'.
 }
-\section{Available Values for \code{which_values}}{
+\section{Available Values for \code{values}}{
 
 \itemize{
 \item all (includes all of the following),
@@ -75,7 +75,7 @@ get_dpird_minute(station_code = "SP",
                  start_date_time = "2018-02-01 13:00:00",
                  minutes = 1440,
                  api_key = YOUR_API_KEY,
-                 which_values = c("airTemperature",
+                 values = c("airTemperature",
                                   "solarIrradiance",
                                   "wind"))
 }

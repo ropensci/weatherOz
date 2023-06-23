@@ -6,7 +6,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      which_values = "wind",
+      values = "wind",
       api_group = "rtd",
       include_closed = FALSE
     )
@@ -19,7 +19,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      which_values = "wind",
+      values = "wind",
       api_group = "rtd",
       include_closed = FALSE
     )
@@ -32,13 +32,13 @@ test_that("user-input checks stop if invalid values are provided", {
       start_date = "20220501",
       end_date = "20220501",
       interval = "daily",
-      which_values = "wind",
+      values = "wind",
       api_group = "rtd",
       include_closed = FALSE
     )
   )
 
-  # invalid 'which_values'
+  # invalid 'values'
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
@@ -46,7 +46,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      which_values = "phytophthora",
+      values = "phytophthora",
       api_group = "rtd",
       include_closed = FALSE
     )
@@ -60,7 +60,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "fortnightly",
-      which_values = "wind",
+      values = "wind",
       api_group = "rtd",
       include_closed = FALSE
     )
@@ -74,7 +74,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      which_values = "wind",
+      values = "wind",
       api_group = "swordfish trombones",
       include_closed = FALSE
     )
@@ -88,7 +88,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "30min",
-      which_values = "wind",
+      values = "wind",
       api_group = "rtd",
       include_closed = FALSE
     )
@@ -106,7 +106,7 @@ test_that("get_dpird_summaries() returns yearly values",
                 end_date = "20221028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "yearly",
-                which_values = "wind"
+                values = "wind"
               )
             })
             expect_s3_class(x, "data.table")
@@ -151,7 +151,7 @@ test_that("get_dpird_summaries() returns monthly values",
                 end_date = "20221028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "monthly",
-                which_values = "wind"
+                values = "wind"
               )
             })
             expect_s3_class(x, "data.table")
@@ -198,7 +198,7 @@ test_that("get_dpird_summaries() returns daily values",
                 end_date = "20181028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "daily",
-                which_values = "wind"
+                values = "wind"
               )
             })
             expect_s3_class(x, "data.table")
@@ -245,7 +245,7 @@ test_that("get_dpird_summaries() returns hourly values",
                 end_date = "20171031",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "hourly",
-                which_values = "wind"
+                values = "wind"
               )
             })
             expect_s3_class(x, "data.table")
@@ -294,7 +294,7 @@ test_that("get_dpird_summaries() returns 30min values",
                 end_date = "20221029",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "30min",
-                which_values = "wind"
+                values = "wind"
               )
             })
             expect_s3_class(x, "data.table")
@@ -343,7 +343,7 @@ test_that("get_dpird_summaries() returns 15min values",
                 end_date = "20221029",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "15min",
-                which_values = "wind"
+                values = "wind"
               )
             })
             expect_s3_class(x, "data.table")

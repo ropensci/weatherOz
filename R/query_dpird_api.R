@@ -20,7 +20,7 @@
 #'  'daily', 'monthly' or 'yearly'.
 #' @param limit The pagination limit parameter restricts the number of entries
 #'   returned.
-#' @param which_values Values to query from the API
+#' @param values Values to query from the API
 #' @param group A `string` used to filter the stations to a predefined group.
 #'   These need to be supported on the back end. 'all' returns all stations,
 #'   'api' returns the default stations in use with the API, 'web' returns the
@@ -39,7 +39,7 @@
                          start_date_time,
                          end_date_time,
                          interval,
-                         which_values,
+                         values,
                          api_group,
                          include_closed,
                          limit,
@@ -53,7 +53,7 @@
       startDateTime = start_date_time,
       endDateTime = end_date_time,
       api_key = api_key,
-      select = paste(which_values, collapse = ",")
+      select = paste(values, collapse = ",")
     )
   } else if (interval %in% c("15min", "30min", "hourly")) {
     query_list <- list(
@@ -61,7 +61,7 @@
       startDateTime = format(start_date_time, "%Y-%m-%d"),
       endDateTime = format(end_date_time + lubridate::days(1), "%Y-%m-%d"),
       interval = interval,
-      select = paste(which_values, collapse = ","),
+      select = paste(values, collapse = ","),
       group = api_group,
       includeClosed = include_closed,
       api_key = api_key
@@ -71,7 +71,7 @@
       stationCode = station_code,
       startDate = format(start_date_time, "%Y-%m-%d"),
       endDate = format(end_date_time, "%Y-%m-%d"),
-      select = paste(which_values, collapse = ","),
+      select = paste(values, collapse = ","),
       group = api_group,
       includeClosed = include_closed,
       api_key = api_key
@@ -88,7 +88,7 @@
           units = "days"
         ) / 365
       ) * 12),
-      select = paste(which_values, collapse = ","),
+      select = paste(values, collapse = ","),
       group = api_group,
       includeClosed = include_closed,
       api_key = api_key
@@ -98,7 +98,7 @@
       stationCode = station_code,
       startYear = format(start_date_time, "%Y"),
       endYear = format(end_date_time, "%Y"),
-      select = paste(which_values, collapse = ","),
+      select = paste(values, collapse = ","),
       group = api_group,
       includeClosed = include_closed,
       api_key = api_key

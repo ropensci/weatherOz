@@ -28,7 +28,7 @@
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 #'   inclusive of this range.  Defaults to the current system date.
-#' @param which_values A `character` string with the type of weather data to
+#' @param values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to 'all' with all available values being returned.
 #' @param api_key A `character `string specifying a valid email address to use
@@ -148,7 +148,7 @@
 #' wd <- get_patched_point(station_code = "008137",
 #'                start_date = "2021-06-01",
 #'                end_date = "2021-07-01",
-#'                which_values = "all",
+#'                values = "all",
 #'                api_key = "your@@email")
 #' }
 #' @export
@@ -156,7 +156,7 @@
 get_patched_point <- function(station_code,
                               start_date,
                               end_date = Sys.Date(),
-                              which_values = "all",
+                              values = "all",
                               api_key) {
 
   if (missing(station_code)) {
@@ -176,15 +176,15 @@ get_patched_point <- function(station_code,
     )
   }
 
-  if (any(which_values == "all")) {
-    .which_values <- unname(silo_daily_values)
+  if (any(values == "all")) {
+    .values <- unname(silo_daily_values)
   } else {
-    if (any(which_values %notin% names(silo_daily_values))) {
+    if (any(values %notin% names(silo_daily_values))) {
       stop(call. = FALSE,
            "You have specified invalid weather values.")
     }
-    .which_values <- silo_daily_values[names(silo_daily_values) %in%
-                                        which_values]
+    .values <- silo_daily_values[names(silo_daily_values) %in%
+                                        values]
   }
 
   # validate user provided dates
@@ -200,7 +200,7 @@ get_patched_point <- function(station_code,
     .station_code = station_code,
     .start_date = start_date,
     .end_date = end_date,
-    .which_values = .which_values,
+    .values = .values,
     .api_key = api_key,
     .dataset = "PatchedPoint"
   )
