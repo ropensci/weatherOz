@@ -20,30 +20,29 @@ get_dpird_summaries(
 for the station of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
-beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
-return data inclusive of this range.}
+beginning of the range to query in the format \dQuote{yyyy-mm-dd}
+(ISO8601).  Data returned is inclusive of this range.}
 
 \item{end_date}{A \code{character} string or \code{Date} object representing the end of
-the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.  Defaults to the current system date.}
+the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
+returned is inclusive of this range.  Defaults to the current system date.}
 
 \item{interval}{A \code{character} string that indicates the time interval to
-summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
-'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
+\code{monthly} or \code{yearly}.  For intervals shorter than 1 day, the time period
 covered will be midnight to midnight, with the end_date time interval being
 before midnight - hour/minute values are for the end of the time period.
-Data for shorter intervals ('15min', '30min') are available from January of
+Data for shorter intervals (\verb{15min}, \verb{30min}) are available from January of
 the previous year.}
 
 \item{values}{A \code{character} string with the type of summarised weather
 to return.  See \strong{Available Values} for a full list of valid values.
-Defaults to 'all' with all available values being returned.}
+Defaults to \code{all} with all available values being returned.}
 
-\item{api_group}{Filter the stations to a predefined group one of 'all',
-'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
-stations in use with the \acronym{API} and 'web' returns the list in use by
-the \url{https:://weather.agric.wa.gov.au} and 'rtd' returns stations with
-scientifically complete data sets. Defaults to 'rtd'.}
+\item{api_group}{Filter the stations to a predefined group one of \code{all},
+\code{web} or \code{rtd}; \code{all} returns all stations, \code{api} returns the default
+stations in use with the \acronym{API} and \code{web} returns the list in use by
+the \url{https://weather.agric.wa.gov.au} and \code{rtd} returns stations with
+scientifically complete data sets.  Defaults to \code{rtd}.}
 
 \item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}. If set to
 \code{TRUE} the query returns closed and open stations. Closed stations are

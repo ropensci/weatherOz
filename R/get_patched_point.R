@@ -23,14 +23,14 @@
 #' @param station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
 #' @param start_date A `character` string or `Date` object representing the
-#'   beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
-#'   return data inclusive of this range.
+#'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
+#'   (ISO8601).  Data returned is inclusive of this range.
 #' @param end_date A `character` string or `Date` object representing the end of
-#'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.  Defaults to the current system date.
+#'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
+#'   returned is inclusive of this range.  Defaults to the current system date.
 #' @param values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
-#'   Defaults to 'all' with all available values being returned.
+#'   Defaults to `all` with all available values being returned.
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.

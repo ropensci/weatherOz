@@ -4,23 +4,24 @@
 #' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API} of
 #'   spatially interpolated weather data (DataDrill).  The daily climate
 #'   surfaces have been derived either by splining or kriging the observational
-#'   data.  The returned values contain "source" columns, which denote how the
-#'   observations were derived.  The grid spans 112° to 154°, -10° to -44° with
-#'   resolution 0.05° latitude by 0.05° longitude (approximately 5 km × 5 km).
+#'   data.  The returned values contain \dQuote{source} columns, which denote
+#'   how the observations were derived.  The grid spans 112° to 154°, -10° to
+#'   -44° with resolution 0.05° latitude by 0.05° longitude (approximately 5 km
+#'   × 5 km).
 #'
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
 #' @param latitude A single `numeric` value representing the latitude of the
 #'   point-of-interest.
 #' @param start_date A `character` string or `Date` object representing the
-#'   beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
-#'   return data inclusive of this range.
+#'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
+#'   (ISO8601).  Data returned is inclusive of this range.
 #' @param end_date A `character` string or `Date` object representing the end of
-#'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.  Defaults to the current system date.
+#'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
+#'   returned is inclusive of this range.  Defaults to the current system date.
 #' @param values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
-#'   Defaults to 'all' with all available values being returned.
+#'   Defaults to `all` with all available values being returned.
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
@@ -92,7 +93,7 @@
 #'   * longitude,
 #'   * latitude,
 #'   * elev_m (elevation in metres),
-#'   * date (ISO8601 format, "YYYYMMDD"),
+#'   * date (ISO8601 format, YYYYMMDD),
 #'   * year,
 #'   * month,
 #'   * day,

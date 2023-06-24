@@ -7,26 +7,26 @@
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.
 #' @param start_date A `character` string or `Date` object representing the
-#'   beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
-#'   return data inclusive of this range.
+#'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
+#'   (ISO8601).  Data returned is inclusive of this range.
 #' @param end_date A `character` string or `Date` object representing the end of
-#'   the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.  Defaults to the current system date.
+#'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
+#'   returned is inclusive of this range.  Defaults to the current system date.
 #' @param interval A `character` string that indicates the time interval to
-#'   summarise over.  Default is 'daily'; others are '15min', '30min', 'hourly',
-#'   'monthly' or 'yearly'.  For intervals shorter than 1 day, the time period
+#`   summarise over.  Default is `daily`; others are `15min`, `30min`, `hourly`,
+#'   `monthly` or `yearly`.  For intervals shorter than 1 day, the time period
 #'   covered will be midnight to midnight, with the end_date time interval being
 #'   before midnight - hour/minute values are for the end of the time period.
-#'   Data for shorter intervals ('15min', '30min') are available from January of
+#'   Data for shorter intervals (`15min`, `30min`) are available from January of
 #'   the previous year.
 #' @param values A `character` string with the type of summarised weather
 #'   to return.  See **Available Values** for a full list of valid values.
-#'   Defaults to 'all' with all available values being returned.
-#' @param api_group Filter the stations to a predefined group one of 'all',
-#'   'web' or 'rtd'; 'all' returns all stations, 'api' returns the default
-#'   stations in use with the \acronym{API} and 'web' returns the list in use by
-#'   the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations with
-#'   scientifically complete data sets. Defaults to 'rtd'.
+#'   Defaults to `all` with all available values being returned.
+#' @param api_group Filter the stations to a predefined group one of `all`,
+#'   `web` or `rtd`; `all` returns all stations, `api` returns the default
+#'   stations in use with the \acronym{API} and `web` returns the list in use by
+#'   the <https://weather.agric.wa.gov.au> and `rtd` returns stations with
+#'   scientifically complete data sets.  Defaults to `rtd`.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
 #'   `TRUE` the query returns closed and open stations. Closed stations are
 #'   those that have been turned off and no longer report data. They may be

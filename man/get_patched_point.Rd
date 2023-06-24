@@ -17,16 +17,16 @@ get_patched_point(
 for the station of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
-beginning of the range to query in the format 'yyyy-mm-dd' (ISO8601).  Will
-return data inclusive of this range.}
+beginning of the range to query in the format \dQuote{yyyy-mm-dd}
+(ISO8601).  Data returned is inclusive of this range.}
 
 \item{end_date}{A \code{character} string or \code{Date} object representing the end of
-the range query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.  Defaults to the current system date.}
+the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
+returned is inclusive of this range.  Defaults to the current system date.}
 
 \item{values}{A \code{character} string with the type of weather data to
 return.  See \strong{Available Values} for a full list of valid values.
-Defaults to 'all' with all available values being returned.}
+Defaults to \code{all} with all available values being returned.}
 
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address

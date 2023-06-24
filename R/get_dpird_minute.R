@@ -7,15 +7,16 @@
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
 #'   station code for the station of interest.
 #' @param start_date_time A `character` string representing the start date and
-#'   time of the query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to 24 hours
-#'   before the current local system time, returning the most recent 24 hour
-#'   observations rounded to the nearest minute.  This function does its best to
-#'   decipher many date and time formats but prefers ISO8601.
+#'   time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO 8601).
+#'   Defaults to 24 hours before the current local system time, returning the
+#'   most recent 24 hour observations rounded to the nearest minute.  This
+#'   function does its best to decipher many date and time formats but prefers
+#'   ISO8601.
 #' @param minutes An `integer` value that provides the number of observations to
 #'   be returned.  Defaults to 1440 minutes for 24 hours of observations.
 #' @param values A `vector` of weather values to query from the
 #'   \acronym{API}.  See **Available Values** section for valid available codes.
-#'   Defaults to all available values, "all".
+#'   Defaults to all available values, `all`.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.

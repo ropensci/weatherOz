@@ -33,14 +33,14 @@ the station or location of interest.  Defaults to 100 km.}
 when \code{which_api} is 'DPIRD' or 'all'.}
 
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
-Defaults to "silo" only. Valid values are "all", for both \acronym{SILO}
-(\acronym{BOM}) and \acronym{DPIRD} weather station networks; "silo" for
-only stations in the \acronym{SILO} network; or "dpird" for stations in the
+Defaults to \code{silo} only. Valid values are \code{all}, for both \acronym{SILO}
+(\acronym{BOM}) and \acronym{DPIRD} weather station networks; \code{silo} for
+only stations in the \acronym{SILO} network; or \code{dpird} for stations in the
 \acronym{DPIRD} network.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with "station_code", "station_name",
-"latitude", "longitude", "elev_m", "state", "owner", and "distance".
+a \link[data.table:data.table]{data.table::data.table} with \code{station_code}, \code{station_name},
+\code{latitude}, \code{longitude}, \code{elev_m}, \code{state}, \code{owner}, and \code{distance}.
 Data are sorted by increasing distance from station or location of
 interest.
 }

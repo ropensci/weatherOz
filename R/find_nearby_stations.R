@@ -25,13 +25,13 @@
 #'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
 #'   when `which_api` is 'DPIRD' or 'all'.
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
-#'   Defaults to "silo" only. Valid values are "all", for both \acronym{SILO}
-#'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; "silo" for
-#'   only stations in the \acronym{SILO} network; or "dpird" for stations in the
+#'   Defaults to `silo` only. Valid values are `all`, for both \acronym{SILO}
+#'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; `silo` for
+#'   only stations in the \acronym{SILO} network; or `dpird` for stations in the
 #'   \acronym{DPIRD} network.
 #'
-#' @return a [data.table::data.table] with "station_code", "station_name",
-#'   "latitude", "longitude", "elev_m", "state", "owner", and "distance".
+#' @return a [data.table::data.table] with `station_code`, `station_name`,
+#'   `latitude`, `longitude`, `elev_m`, `state`, `owner`, and `distance`.
 #'   Data are sorted by increasing distance from station or location of
 #'   interest.
 #'

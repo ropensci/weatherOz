@@ -17,17 +17,18 @@ get_dpird_minute(
 station code for the station of interest.}
 
 \item{start_date_time}{A \code{character} string representing the start date and
-time of the query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to 24 hours
-before the current local system time, returning the most recent 24 hour
-observations rounded to the nearest minute.  This function does its best to
-decipher many date and time formats but prefers ISO8601.}
+time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO 8601).
+Defaults to 24 hours before the current local system time, returning the
+most recent 24 hour observations rounded to the nearest minute.  This
+function does its best to decipher many date and time formats but prefers
+ISO8601.}
 
 \item{minutes}{An \code{integer} value that provides the number of observations to
 be returned.  Defaults to 1440 minutes for 24 hours of observations.}
 
 \item{values}{A \code{vector} of weather values to query from the
 \acronym{API}.  See \strong{Available Values} section for valid available codes.
-Defaults to all available values, "all".}
+Defaults to all available values, \code{all}.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the

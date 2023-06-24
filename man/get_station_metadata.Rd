@@ -8,10 +8,10 @@ get_station_metadata(which_api = "all", api_key, status = FALSE, rich = FALSE)
 }
 \arguments{
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
-Valid values are 'all', for both \acronym{SILO} (\acronym{BOM} data) and
-\acronym{DPIRD} \acronym{API}s; 'silo' for only stations from the
-\acronym{SILO} \acronym{API} (\acronym{BOM} data); or 'dpird' for stations
-from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to "all".}
+Valid values are \code{all}, for both \acronym{SILO} (\acronym{BOM} data) and
+\acronym{DPIRD} \acronym{API}s; \code{silo} for only stations from the
+\acronym{SILO} \acronym{API} (\acronym{BOM} data); or \code{dpird} for stations
+from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to \code{all}.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
@@ -64,7 +64,7 @@ set, but there is no corresponding \acronym{BOM} metadata available.
 \note{
 For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
 not report the exact date on which stations opened or closed, only the
-year. Therefore the 'start' and 'end' columns will indicate January 1 of
+year. Therefore the \code{start} and \code{end} columns will indicate January 1 of
 the year that a station opened or closed, whereas stations in the
 \acronym{DPIRD} network have the date to the day. For \acronym{BOM}
 stations that are closed for the current year, this indicates that the

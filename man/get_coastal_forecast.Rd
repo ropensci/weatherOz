@@ -23,6 +23,7 @@ or region.
 Allowed state and territory postal codes, only one state per request
 or all using 'AUS':
 \describe{
+\item{AUS}{Australia, returns forecast for all states, NT and ACT}
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}
 \item{NT}{Northern Territory}
@@ -31,7 +32,6 @@ or all using 'AUS':
 \item{TAS}{Tasmania}
 \item{VIC}{Victoria}
 \item{WA}{Western Australia}
-\item{AUS}{Australia, returns forecast for all states, NT and ACT}
 }
 }
 \examples{
@@ -56,7 +56,7 @@ Location data and other metadata come from the \acronym{BOM} anonymous
 \seealso{
 \link{parse_coastal_forecast}
 
-Other bomrang:
+Other bomrang: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},

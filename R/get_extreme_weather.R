@@ -8,15 +8,15 @@
 #'   station of interest.
 #' @param values A `character` string with the type of extreme weather to
 #'   return.  See **Available Values** for a full list of valid values.
-#'   Defaults to 'all', returning the full list of values unless otherwise
+#'   Defaults to `all`, returning the full list of values unless otherwise
 #'   specified.
-#' @param group Filter the stations to a predefined group. These need to be
-#'   supported on the back end; 'all' returns all stations, 'api' returns the
-#'   default stations in use with the \acronym{API}, 'web' returns the list in
-#'   use by the <https:://weather.agric.wa.gov.au> and 'rtd' returns stations
-#'   with scientifically complete data sets. Defaults to 'rtd'.
-#' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
-#'   `TRUE` the query returns closed and open stations. Closed stations are
+#' @param api_group Filter the stations to a predefined group one of `all`,
+#'   `web` or `rtd`; `all` returns all stations, `api` returns the default
+#'   stations in use with the \acronym{API} and `web` returns the list in use by
+#'   the <https://weather.agric.wa.gov.au> and `rtd` returns stations with
+#'   scientifically complete data sets.  Defaults to `rtd`.
+#' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
+#'   `TRUE` the query returns closed and open stations.  Closed stations are
 #'   those that have been turned off and no longer report data.  They may be
 #'   useful for historical purposes.
 #' @param api_key A `character` string containing your \acronym{API} key from

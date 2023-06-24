@@ -11,6 +11,7 @@
 #' @details Allowed state and territory postal codes, only one state per request
 #'   or all using 'AUS':
 #'    \describe{
+#'      \item{AUS}{Australia, returns forecast for all states, NT and ACT}
 #'      \item{ACT}{Australian Capital Territory (will return NSW)}
 #'      \item{NSW}{New South Wales}
 #'      \item{NT}{Northern Territory}
@@ -19,7 +20,6 @@
 #'      \item{TAS}{Tasmania}
 #'      \item{VIC}{Victoria}
 #'      \item{WA}{Western Australia}
-#'      \item{AUS}{Australia, returns forecast for all states, NT and ACT}
 #'  }
 #'
 #' @return

@@ -18,18 +18,18 @@ for the station of interest. Defaults to \code{NULL}, returning metadata for
 all stations during the requested \code{start_date} and \code{end_date} interval.}
 
 \item{start_date}{A \code{character} string representing the beginning of the
-range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-inclusive of this range.  Defaults to \code{NULL}, returning data for the
-current year-to-date.  Must be sent along with an \code{end_date}.}
+range to query in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function
+will return data inclusive of this range.  Defaults to \code{NULL}, returning
+data for the current year-to-date.  Must be sent along with an \code{end_date}.}
 
 \item{end_date}{A \code{character} string representing the end of the range query
-in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
-range.  Defaults to \code{NULL}, returning data for the current year-to-date.
-Must be sent with a \code{start_date}.}
+in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function will return
+data inclusive of this range.  Defaults to \code{NULL}, returning data for the
+current year-to-date.  Must be sent with a \code{start_date}.}
 
-\item{values}{A \code{character} string with the type of availability
-metadata to return.  See \strong{Available Values} for a full list of valid
-values.  Defaults to 'availability', returning metadata for all stations.}
+\item{values}{A \code{character} string with the type of availability metadata to
+return.  See \strong{Available Values} for a full list of valid values.
+Defaults to 'availability', returning metadata for all stations.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the

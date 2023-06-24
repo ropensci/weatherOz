@@ -8,7 +8,7 @@ get_ag_bulletin(state = "AUS")
 }
 \arguments{
 \item{state}{Australian state or territory as full name or postal code.
-Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to "AUS"
+Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to \code{AUS}
 returning all state bulletins, see Details for more.}
 }
 \value{
@@ -24,6 +24,7 @@ station or stations.
 Allowed state and territory postal codes, only one state per request
 or all using 'AUS'.
 \describe{
+\item{AUS}{Australia, returns forecast for all states, NT and ACT}
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}
 \item{NT}{Northern Territory}
@@ -32,7 +33,6 @@ or all using 'AUS'.
 \item{TAS}{Tasmania}
 \item{VIC}{Victoria}
 \item{WA}{Western Australia}
-\item{AUS}{Australia, returns forecast for all states, NT and ACT}
 }
 }
 \note{

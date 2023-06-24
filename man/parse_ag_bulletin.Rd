@@ -23,8 +23,9 @@ specified state or territory or all Australia.  Ported from \pkg{bomrang}.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
-or all using 'AUS'.
+or all using \code{AUS}.
 \describe{
+\item{AUS}{Australia, returns forecast for all states, NT and ACT}
 \item{ACT}{Australian Capital Territory (will return NSW)}
 \item{NSW}{New South Wales}
 \item{NT}{Northern Territory}
@@ -33,7 +34,6 @@ or all using 'AUS'.
 \item{TAS}{Tasmania}
 \item{VIC}{Victoria}
 \item{WA}{Western Australia}
-\item{AUS}{Australia, returns forecast for all states, NT and ACT}
 }
 
 The \var{filepath} argument will only accept a directory where files
