@@ -164,55 +164,24 @@ get_extreme_weather <- function(station_code,
   out <- .query_dpird_api(.end_point = "extreme-conditions",
                           .query_list = query_list,
                           .limit = 1L)
+
+  out <- jsonlite::fromJSON(out[[1]]$parse("UTF8"))
+  out <- data.table::data.table(out$collection)
+
   .set_snake_case_names(out)
+
+  if (any(grep("time", colnames(out)))) {
+    out[, grep("time", colnames(out)) := suppressMessages(lapply(
+      .SD,
+      lubridate::ymd_hms,
+      truncated = 3,
+      tz = "Australia/West"
+    )),
+    .SDcols = grep("time", colnames(out))]
+  }
 
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code", "date_time"))
   return(out)
-}
-
-#' Parse DPIRD API summary data
-#'
-#' Internal function that parses and tidy up data as returned by
-#'  `.query_dpird_api()`
-#'
-#' @param .ret_list a list with the DPIRD weather API response
-#' @param .which_values a character vector with the variables to query. See the
-#' `get_dpird_summaries()` for further details.
-#'
-#' @return a tidy `data.table` with station id and requested weather summaries
-#'
-#' @noRd
-#' @keywords Internal
-#'
-.parse_extreme <- function(.ret_list,
-                           .which_values) {
-
-  for (i in seq_len(length(.ret_list))) {
-    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
-    data.table::data.table(x$collection)
-  }
-
-  # get the nested list columns and convert them to data.table objects
-  col_classes <-
-    vapply(nested_list_objects, class, FUN.VALUE = character(1))
-
-  col_lists <- which(col_classes == "list")
-
-  new_df_list <- vector(mode = "list", length = length(col_lists))
-  names(new_df_list) <- names(col_lists)
-  j <- 1
-  for (i in col_lists) {
-    new_df_list[[j]] <-
-      data.table::rbindlist(lapply(X = nested_list_objects[[i]],
-                                   FUN = data.table::as.data.table))
-
-    # drop the list column from the org data.table
-    nested_list_objects[, names(new_df_list[j]) := NULL]
-
-    j <- j + 1
-  }
-
-  return(cbind(nested_list_objects, do.call(what = cbind, args = new_df_list)))
 }
