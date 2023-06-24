@@ -84,7 +84,7 @@ Authors@R: c(
   person(
     given = "Jimmy",
     family = "Ng",
-    role = "ctb",
+    role = "aut",
     email = "jimmy.ng@dpird.wa.gov.au"
   ),
   person(
