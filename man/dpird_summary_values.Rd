@@ -15,7 +15,7 @@ dpird_summary_values
 }
 \description{
 A \link{vector} object containing 75 items representing valid values to supply
-to \code{get_dpird_summary()}'s \code{values} argument taken from the documentation
+to \code{get_dpird_summary()}'s \var{values} argument taken from the documentation
 for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \seealso{

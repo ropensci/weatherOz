@@ -15,8 +15,8 @@ dpird_minute_values
 }
 \description{
 A \link{vector} object containing 12 items representing valid values to supply
-to \code{get_dpird_minute()}'s \code{values} argument  \code{values} argument taken from
-the documentation for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
+to \code{get_dpird_minute()}'s \var{values} argument taken from the
+documentation for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \seealso{
 Other DPIRD: 

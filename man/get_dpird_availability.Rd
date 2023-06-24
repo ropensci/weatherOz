@@ -15,28 +15,30 @@ get_dpird_availability(
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
 for the station of interest. Defaults to \code{NULL}, returning metadata for
-all stations during the requested \code{start_date} and \code{end_date} interval.}
+all stations during the requested \var{start_date} and \var{end_date}
+interval.}
 
 \item{start_date}{A \code{character} string representing the beginning of the
 range to query in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function
 will return data inclusive of this range.  Defaults to \code{NULL}, returning
-data for the current year-to-date.  Must be sent along with an \code{end_date}.}
+data for the current year-to-date.  Must be sent along with an
+\var{end_date}.}
 
 \item{end_date}{A \code{character} string representing the end of the range query
 in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function will return
 data inclusive of this range.  Defaults to \code{NULL}, returning data for the
-current year-to-date.  Must be sent with a \code{start_date}.}
+current year-to-date.  Must be sent with a \var{start_date}.}
 
 \item{values}{A \code{character} string with the type of availability metadata to
 return.  See \strong{Available Values} for a full list of valid values.
-Defaults to 'availability', returning metadata for all stations.}
+Defaults to \code{availability}, returning metadata for all stations.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and the requested
+a \link[data.table:data.table]{data.table::data.table}  with \code{station_code} and the requested
 metadata.
 }
 \description{

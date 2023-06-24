@@ -41,14 +41,14 @@ a \link[data.table:data.table]{data.table::data.table} with the weather data que
 weather variables in alphabetical order. The first eight columns will
 always be:
 \itemize{
-\item longitude,
-\item latitude,
-\item elev_m (elevation in metres),
-\item date (ISO8601 format, YYYYMMDD),
-\item year,
-\item month,
-\item day,
-\item extracted (the date on which the query was made)
+\item \code{longitude},
+\item \code{latitude},
+\item \code{elev_m} (elevation in metres),
+\item \code{date} (ISO8601 format, YYYYMMDD),
+\item \code{year},
+\item \code{month},
+\item \code{day},
+\item \code{extracted} (the date on which the query was made)
 }
 }
 \description{

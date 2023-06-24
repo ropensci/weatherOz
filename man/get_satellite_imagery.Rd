@@ -7,10 +7,9 @@
 get_satellite_imagery(product_id, scans = 1, compat = "terra")
 }
 \arguments{
-\item{product_id}{\code{Character}. \acronym{BOM} product ID to download in
-'GeoTIFF' format and import as a \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class
-object.  A vector of values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.
-Value is required.}
+\item{product_id}{\code{Character}. \acronym{BOM} product \acronym{ID} to download
+and import as a \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class object.  A vector of
+values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.  Value is required.}
 
 \item{scans}{\code{Integer}. Number of scans to download, starting with most
 recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
@@ -27,12 +26,12 @@ Defaults to 'terra'.}
 \value{
 A \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class object as selected by the user by
 specifying \code{compat} of GeoTIFF images with layers named by \acronym{BOM}
-product ID, timestamp and band.
+product \acronym{ID}, timestamp and band.
 }
 \description{
 Fetch \acronym{BOM} satellite GeoTIFF imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a raster
-\link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} object of 'GeoTIFF' files. Files are
+\link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} object of GeoTIFF files.  Files are
 available at ten minutes update frequency with a 24-hour delete time.  It
 is suggested to check file availability first by using
 \code{\link[=get_available_imagery]{get_available_imagery()}}.  Ported from \pkg{bomrang} with modifications.
@@ -64,8 +63,9 @@ AUS equirect. GIS}
 }
 \note{
 The original \pkg{bomrang} version of this function supported local
-file caching using \CRANpkg{hoardr}. This version does not support this
-functionality any longer.
+file caching using \CRANpkg{hoardr}.  This version does not support this
+functionality any longer due to issues with \acronym{CRAN} and
+\CRANpkg{hoardr}.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
@@ -82,8 +82,8 @@ imagery <- get_satellite_imagery(product_id = avail, scans = 2)
 \dontshow{\}) # examplesIf}
 }
 \references{
-Australian Bureau of Meteorology (BOM) high-definition satellite images \cr
-\url{http://www.bom.gov.au/australia/satellite/index.shtml}
+Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
+images \cr \url{http://www.bom.gov.au/australia/satellite/index.shtml}.
 }
 \seealso{
 \code{\link[=get_available_imagery]{get_available_imagery()}}

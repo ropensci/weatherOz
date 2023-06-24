@@ -44,9 +44,9 @@ stations in use with the \acronym{API} and \code{web} returns the list in use by
 the \url{https://weather.agric.wa.gov.au} and \code{rtd} returns stations with
 scientifically complete data sets.  Defaults to \code{rtd}.}
 
-\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}. If set to
-\code{TRUE} the query returns closed and open stations. Closed stations are
-those that have been turned off and no longer report data. They may be
+\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}.  If set to
+\code{TRUE} the query returns closed and open stations.  Closed stations are
+those that have been turned off and no longer report data.  They may be
 useful for historical purposes.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
@@ -54,20 +54,20 @@ useful for historical purposes.}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with 'station_code' and date interval
+a \link[data.table:data.table]{data.table::data.table} with \code{station_code} and the date interval
 queried together with the requested weather variables in alphabetical
-order. The first ten columns will always be:
+order.  The first ten columns will always be:
 \itemize{
-\item station_code,
-\item station_name,
-\item latitude,
-\item longitude,
-\item year,
-\item month,
-\item day,
-\item hour,
-\item minute, and if month or finer is present,
-\item date (a combination of year, month, day, hour, minute as appropriate).
+\item \code{station_code},
+\item \code{station_name},
+\item \code{latitude},
+\item \code{longitude},
+\item \code{year},
+\item \code{month},
+\item \code{day},
+\item \code{hour},
+\item \code{minute}, and if \code{month} or finer is present,
+\item \code{date} (a combination of year, month, day, hour, minute as appropriate).
 }
 }
 \description{
@@ -76,7 +76,8 @@ Fetch nicely formatted individual station weather summaries from the
 }
 \note{
 Please note this function converts date-time columns from Coordinated
-Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
+Universal Time \sQuote{UTC} to Australian Western Standard Time
+\sQuote{AWST}.
 }
 \section{Available Values}{
 

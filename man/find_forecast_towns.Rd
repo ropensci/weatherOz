@@ -18,7 +18,7 @@ format.  By default, Canberra (approximately).}
 }
 \value{
 A \link[data.table:data.table]{data.table::data.table} of all forecast towns (in this package)
-sorted by distance from \var{latlon}, ascending.
+sorted by distance from \var{latitude} and \var{longitude}, ascending.
 }
 \description{
 For a given \code{latitude} and \code{longitude}, find the nearest town that the

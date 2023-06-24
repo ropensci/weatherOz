@@ -7,23 +7,23 @@
 get_available_imagery(product_id = "all")
 }
 \arguments{
-\item{product_id}{\code{Character}. \acronym{BOM} product ID of interest for which
-a list of available images will be returned.  Defaults to all images
-currently available.}
+\item{product_id}{\code{Character}. \acronym{BOM} product \acronym{ID} of interest
+for which a list of available images will be returned.  Defaults to all
+images currently available.}
 }
 \value{
 A \code{vector} of all available files for the requested Product ID(s).
 }
 \description{
-Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
+Fetch a listing of \acronym{BOM} GeoTIFF satellite imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/gms/} to determine which files are
-currently available for download. Files are available at ten minute update
-frequency with a 24-hour delete time. It is useful to know the most recent
+currently available for download.  Files are available at ten minute update
+frequency with a 24-hour delete time.  It is useful to know the most recent
 files available and then specify in the \code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
 function.  Ported from \pkg{bomrang}.
 }
 \details{
-Valid \acronym{BOM} satellite Product IDs for 'GeoTIFF' files
+Valid \acronym{BOM} satellite Product IDs for GeoTIFF files
 include:
 \describe{
 \item{IDE00420}{AHI cloud cover only 2km FD GEOS GIS}

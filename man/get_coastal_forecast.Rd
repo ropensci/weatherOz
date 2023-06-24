@@ -8,7 +8,7 @@ get_coastal_forecast(state = "AUS")
 }
 \arguments{
 \item{state}{Australian state or territory as full name or postal code.
-Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to "AUS"
+Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defaults to \code{AUS}
 returning all state forecasts, see details for further information.}
 }
 \value{

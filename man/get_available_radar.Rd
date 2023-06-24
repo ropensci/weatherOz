@@ -12,8 +12,8 @@ of available images will be returned.  Defaults to all images currently
 available.}
 }
 \value{
-A \link[data.table:data.table]{data.table::data.table} of all selected \acronym{radar} locations with location
-information and \var{product_ids}.
+A \link[data.table:data.table]{data.table::data.table} of all selected \acronym{radar} locations with
+location information and \var{product_ids}.
 }
 \description{
 Fetch a listing of available \acronym{BOM} \acronym{radar} imagery from

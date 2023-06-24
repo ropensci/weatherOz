@@ -28,25 +28,25 @@ returned is inclusive of this range.  Defaults to the current system date.}
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to \code{all} with all available values being returned.}
 
-\item{api_key}{A \code{character }string specifying a valid email address to use
+\item{api_key}{A \code{character} string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table} with the weather data queried with the
-weather variables in alphabetical order. The first eight columns will
+weather variables in alphabetical order.  The first eight columns will
 always be:
 \itemize{
-\item station_code,
-\item station_name,
-\item longitude,
-\item latitude,
-\item elev_m (elevation in metres),
-\item date (ISO8601 format, "YYYYMMDD"),
-\item year,
-\item month,
-\item day,
-\item extracted (the date on which the query was made)
+\item \code{station_code},
+\item \code{station_name},
+\item \code{longitude},
+\item \code{latitude},
+\item \code{elev_m} (elevation in metres),
+\item \code{date} (ISO8601 format, "YYYYMMDD"),
+\item \code{year},
+\item \code{month},
+\item \code{day},
+\item \code{extracted} (the date on which the query was made)
 }
 }
 \description{
@@ -116,9 +116,8 @@ Evaporation and evapotranspiration: an overview of the variables provided by
 
 \section{Data codes}{
 
-Data codes
-Where possible (depending on the file format), the data are supplied with
-codes indicating how each datum was obtained.
+
+The data are supplied with codes indicating how each datum was obtained.
 
 \tabular{rl}{
 \strong{Code}\tab \strong{Source}\cr

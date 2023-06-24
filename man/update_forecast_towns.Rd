@@ -7,8 +7,9 @@
 update_forecast_towns()
 }
 \value{
-An updated internal package database of \acronym{BOM} précis forecast
-towns
+Called for it's side-effects this returns an invisible \code{NULL}
+resulting in an updated internal package database of \acronym{BOM} précis
+forecast towns.
 }
 \description{
 Download the latest select forecast towns from the \acronym{BOM} server and

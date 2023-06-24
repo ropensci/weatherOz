@@ -11,10 +11,10 @@ parse_precis_forecast(state, filepath)
 or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.}
 
 \item{filepath}{A string providing the directory location of the précis
-file(s) to parse. See Details for more.}
+file(s) to parse.  See Details for more.}
 }
 \value{
-A \link[data.table:data.table]{data.table::data.table} of Australia \acronym{BOM} précis seven day
+A \link[data.table:data.table]{data.table::data.table} of Australia \acronym{BOM} précis seven-day
 forecasts for \acronym{BOM} selected towns.
 }
 \description{

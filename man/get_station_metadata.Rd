@@ -29,8 +29,8 @@ will be \code{NA}.  Defaults to \code{FALSE}.}
 a \link[data.table:data.table]{data.table::data.table} of \acronym{BOM} weather stations'
 metadata for stations available from \acronym{SILO} and weather stations'
 metadata for stations available from \acronym{DPIRD}'s Weather 2.0
-\acronym{API} with the following columns sorted by 'state' and
-'station_name'.
+\acronym{API} with the following columns sorted by \code{state} and
+\code{station_name}.
 \tabular{rl}{
 \strong{station_code}:\tab Unique station code. \code{factor}\cr
 \strong{station_name}:\tab Unique station name. \code{character}\cr
@@ -64,9 +64,9 @@ set, but there is no corresponding \acronym{BOM} metadata available.
 \note{
 For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
 not report the exact date on which stations opened or closed, only the
-year. Therefore the \code{start} and \code{end} columns will indicate January 1 of
+year.  Therefore the \code{start} and \code{end} columns will indicate January 1 of
 the year that a station opened or closed, whereas stations in the
-\acronym{DPIRD} network have the date to the day. For \acronym{BOM}
+\acronym{DPIRD} network have the date to the day.  For \acronym{BOM}
 stations that are closed for the current year, this indicates that the
 station closed sometime during the current year prior to the request being
 made. \code{NA} in the current year indicates a station is still open.

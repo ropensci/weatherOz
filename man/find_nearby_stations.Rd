@@ -15,18 +15,18 @@ find_nearby_stations(
 }
 \arguments{
 \item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \code{longitude}
-is not \code{NULL.}}
+(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if
+\var{longitude} is not \code{NULL.}}
 
 \item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \code{latitude} is
-not \code{NULL}.}
+(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \var{latitude}
+is not \code{NULL}.}
 
 \item{station_code}{A \code{string} with the station code for the station of
 interest.  Optional and defaults to \code{NULL}.}
 
 \item{distance_km}{A \code{numeric} value for distance to limit the search from
-the station or location of interest.  Defaults to 100 km.}
+the station or location of interest.  Defaults to 100 km.}
 
 \item{api_key}{A \code{string} value that is the user's \acronym{API} key from
 \acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).  Only used
@@ -46,8 +46,8 @@ interest.
 }
 \description{
 Find nearby weather stations given geographic coordinates or a station code.
-Either a combination of \code{latitude} and \code{longitude} or \code{station_code} must
-be provided.
+Either a combination of \var{latitude} and \var{longitude} or
+\var{station_code} must be provided.
 }
 \note{
 You can request your own \acronym{API} key from \acronym{DPIRD} for

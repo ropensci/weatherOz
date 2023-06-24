@@ -7,14 +7,14 @@
 get_radar_imagery(product_id, path = NULL, download_only = FALSE)
 }
 \arguments{
-\item{product_id}{Character. \acronym{BOM} product ID to download and import
+\item{product_id}{\code{Character}. \acronym{BOM} product ID to download and import
 as a \CRANpkg{magick} object.  Value is required.}
 
-\item{path}{Character. A character string with the name where the downloaded
+\item{path}{\code{Character}. A character string with the name where the downloaded
 file is saved.  If not provided, the default value \code{NULL} is used which
 saves the file in an \R session temp directory.}
 
-\item{download_only}{Logical. Whether the radar image is loaded into the
+\item{download_only}{\code{Logical}. Whether the radar image is loaded into the
 environment as a \CRANpkg{magick} object or just downloaded.}
 }
 \value{
@@ -27,8 +27,8 @@ message.
 Fetch \acronym{BOM} radar imagery from \url{ftp://ftp.bom.gov.au/anon/gen/radar/}
 and return a \code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} layer object.  Files available are the
 most recent radar snapshot which are updated approximately every 6 to 10
-minutes.
-Suggested to check file availability first by using \code{\link[=get_available_radar]{get_available_radar()}}.
+minutes.  It is suggested to check file availability first by using
+\code{\link[=get_available_radar]{get_available_radar()}}.
 }
 \details{
 Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery
