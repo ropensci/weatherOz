@@ -7,8 +7,9 @@
 # {weatherOz}: An API Client for Australian Weather and Climate Data Resources
 
 {weatherOz} aims to facilitate access and download of a range of weather and climate data for Australia.
-Data are sourced from from the Western Australian Department of Primary Industries and Regional Development (DPIRD) and the Scientific Information for Land Owners (SILO) API endpoints and the Australian Government Bureau of Meteorology (BOM).
-The package queries the APIs and returns data as a data frame or radar and satellite imagery in your R session.
+Data are sourced from from the Western Australian Department of Primary Industries and Regional Development (DPIRD) and the Scientific Information for Land Owners (SILO) API endpoints and the Australian Government Bureau of Meteorology's (BOM) FTP server.
+
+The package queries the APIs or an FTP server and returns data as a data frame or radar and satellite imagery in your R session.
 Observation data from the DPIRD's weather station network are available via the [Science](https://www.agric.wa.gov.au/science-api-20) and [Weather](https://www.agric.wa.gov.au/weather-api-20) APIs.
 SILO data is obtained from the Long Paddock initiative (Jeffery et al. 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112°E to 154°E, 10°S to 44°S), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
 Visit the [SILO website](https://siloapi.longpaddock.qld.gov.au/silo/) for more details about how the data is prepared and which climate data are available.
