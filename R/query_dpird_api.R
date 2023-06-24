@@ -47,7 +47,6 @@
                          include_closed,
                          limit,
                          api_key) {
-
   # the API only accepts "true" or "false" in all lowercase
   include_closed <- tolower(as.character(include_closed))
 
@@ -128,10 +127,10 @@
 .query_dpird_api <- function(.end_point = NULL,
                              .query_list,
                              .limit) {
-
   if (!is.null(.end_point)) {
-  .base_url <- sprintf("https://api.dpird.wa.gov.au/v2/weather/stations/%s",
-                       .end_point)
+    .base_url <-
+      sprintf("https://api.dpird.wa.gov.au/v2/weather/stations/%s",
+              .end_point)
   } else {
     .base_url <- "https://api.dpird.wa.gov.au/v2/weather/stations/"
   }
@@ -152,8 +151,7 @@
   #   explanation of the code, and message from the server
   # check response from start_date item in list, should be same across all
   if (response_data[[1]]$status_code > 201) {
-    if (length(
-      jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors) > 0) {
+    if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors) > 0) {
       x <-
         jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors
       stop(sprintf("HTTP (%s) - %s\n  %s",
@@ -161,11 +159,21 @@
                    x[, "message"],
                    x[, "description"]),
            call. = FALSE)
-    } else if (length(
-      jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))) > 0) {
+    } else if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))) > 0) {
+      if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$message) > 0) {
+        x <- jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error
+
+        stop(sprintf("HTTP (%s) - %s\n",
+                     x["code"],
+                     x["message"]),
+             call. = FALSE)
+      } else {
         stop(call. = FALSE,
              domain = NA,
-             gettextf(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))))
+             gettextf(
+               jsonlite::fromJSON(response_data[[1]]$parse("UTF8")$error$message)
+             ))
+      }
     } else {
       stop(call. = FALSE,
            "An unidentified error has occurred with your query.")
