@@ -84,8 +84,8 @@
 #' * heatConditionYearToDateMinutes, and
 #' * heatConditionYearToDateStartTime
 #'
-#' @return a [data.table::data.table] of one row with 'station_code',
-#'   'station_name', 'latitude', 'longitude', 'date_time' of the query and the
+#' @return a [data.table::data.table] of one row with `station_code`,
+#'   `station_name`, `latitude`, `longitude`, `date_time` of the query and the
 #'   extreme weather information according to the value(s) selected.
 #'
 #' @family DPIRD
@@ -110,7 +110,7 @@
 
 get_dpird_extremes <- function(station_code,
                                 values = "all",
-                                group = "rtd",
+                                api_group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
   if (missing(station_code)) {
