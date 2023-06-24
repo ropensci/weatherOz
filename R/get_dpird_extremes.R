@@ -154,7 +154,7 @@ get_dpird_extremes <- function(station_code,
     stationCode = station_code,
     offset = 0L,
     select = paste(values, collapse = ","),
-    group = group,
+    group = api_group,
     includeClosed = include_closed,
     api_key = api_key
   )
