@@ -5,7 +5,7 @@
 #'   or region.
 #'
 #' @param state Australian state or territory as full name or postal code.
-#'   Fuzzy string matching via [base::agrep()] is done.  Defaults to "AUS"
+#'   Fuzzy string matching via [base::agrep()] is done.  Defaults to `AUS`
 #'   returning all state forecasts, see details for further information.
 #'
 #' @details Allowed state and territory postal codes, only one state per request

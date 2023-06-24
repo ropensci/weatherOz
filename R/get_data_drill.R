@@ -90,14 +90,14 @@
 #'   weather variables in alphabetical order. The first eight columns will
 #'   always be:
 #'
-#'   * longitude,
-#'   * latitude,
-#'   * elev_m (elevation in metres),
-#'   * date (ISO8601 format, YYYYMMDD),
-#'   * year,
-#'   * month,
-#'   * day,
-#'   * extracted (the date on which the query was made)
+#'   * `longitude`,
+#'   * `latitude`,
+#'   * `elev_m` (elevation in metres),
+#'   * `date` (ISO8601 format, YYYYMMDD),
+#'   * `year`,
+#'   * `month`,
+#'   * `day`,
+#'   * `extracted` (the date on which the query was made)
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.

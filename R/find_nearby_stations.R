@@ -8,19 +8,19 @@
 #' Find Nearby Stations
 #'
 #' Find nearby weather stations given geographic coordinates or a station code.
-#'   Either a combination of `latitude` and `longitude` or `station_code` must
-#'   be provided.
+#'   Either a combination of \var{latitude} and \var{longitude} or
+#'   \var{station_code} must be provided.
 #'
 #' @param latitude A `numeric` value for latitude expressed as decimal degrees
-#'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if `longitude`
-#'   is not `NULL.`
+#'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if
+#'   \var{longitude} is not `NULL.`
 #' @param longitude A `numeric` value for longitude expressed as decimal degrees
-#'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if `latitude` is
-#'   not `NULL`.
+#'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if \var{latitude}
+#'   is not `NULL`.
 #' @param station_code A `string` with the station code for the station of
 #'   interest.  Optional and defaults to `NULL`.
 #' @param distance_km A `numeric` value for distance to limit the search from
-#'   the station or location of interest.  Defaults to 100&nbsp;km.
+#'   the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `string` value that is the user's \acronym{API} key from
 #'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
 #'   when `which_api` is 'DPIRD' or 'all'.

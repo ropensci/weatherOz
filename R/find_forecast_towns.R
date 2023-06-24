@@ -17,7 +17,7 @@
 #' find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
 #'
 #' @return A [data.table::data.table] of all forecast towns (in this package)
-#'   sorted by distance from \var{latlon}, ascending.
+#'   sorted by distance from \var{latitude} and \var{longitude}, ascending.
 #' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com} and James Goldie,
 #'   \email{me@@jamesgoldie.dev} and Adam H. Sparks
 #'   \email{adam.sparks@@dpird.wa.gov.au}

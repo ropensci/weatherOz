@@ -9,7 +9,7 @@
 #'   or postal code.  Fuzzy string matching via [base::agrep()] is done.
 #'
 #' @param filepath A string providing the directory location of the précis
-#'   file(s) to parse. See Details for more.
+#'   file(s) to parse.  See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
 #' or all using 'AUS'.
@@ -32,7 +32,7 @@
 #'   files are all present in the directory.
 #'
 #' @return
-#' A [data.table::data.table] of Australia \acronym{BOM} précis seven day
+#' A [data.table::data.table] of Australia \acronym{BOM} précis seven-day
 #'   forecasts for \acronym{BOM} selected towns.
 #'
 #' @examplesIf interactive()

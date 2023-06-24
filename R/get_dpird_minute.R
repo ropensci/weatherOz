@@ -7,7 +7,7 @@
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
 #'   station code for the station of interest.
 #' @param start_date_time A `character` string representing the start date and
-#'   time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO 8601).
+#'   time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO8601).
 #'   Defaults to 24 hours before the current local system time, returning the
 #'   most recent 24 hour observations rounded to the nearest minute.  This
 #'   function does its best to decipher many date and time formats but prefers
@@ -38,10 +38,10 @@
 #'   * windMinSpeed
 #'
 #' @note Please note this function converts date-time columns from Coordinated
-#'   Universal Time 'UTC' returned by the \acronym{API} to Australian Western
-#'   Standard Time 'AWST'.
+#'   Universal Time \sQuote{UTC} returned by the \acronym{API} to Australian
+#'   Western Standard Time \sQuote{AWST}.
 #'
-#' @return a [data.table::data.table] with 'station_code' and date interval
+#' @return a [data.table::data.table] with `station_code` and the date interval
 #'   queried together with the requested weather variables.
 #'
 #' @examples

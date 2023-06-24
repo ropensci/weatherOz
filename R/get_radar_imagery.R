@@ -14,8 +14,8 @@
 #' @details Valid \acronym{BOM} \acronym{radar} ID for each location required.
 #'
 #' @return
-#' A [data.table::data.table] of all selected \acronym{radar} locations with location
-#'   information and \var{product_ids}.
+#' A [data.table::data.table] of all selected \acronym{radar} locations with
+#'   location information and \var{product_ids}.
 #'
 #' @references
 #' Australian Bureau of Meteorology (BOM) radar image
@@ -82,17 +82,17 @@ get_available_radar <- function(radar_id = "all") {
 #' Fetch \acronym{BOM} radar imagery from <ftp://ftp.bom.gov.au/anon/gen/radar/>
 #'   and return a [terra::SpatRaster()] layer object.  Files available are the
 #'   most recent radar snapshot which are updated approximately every 6 to 10
-#'   minutes.
-#' Suggested to check file availability first by using [get_available_radar()].
+#'   minutes.  It is suggested to check file availability first by using
+#'   [get_available_radar()].
 #'
-#' @param product_id Character. \acronym{BOM} product ID to download and import
+#' @param product_id `Character`. \acronym{BOM} product ID to download and import
 #'   as a \CRANpkg{magick} object.  Value is required.
 #'
-#' @param path Character. A character string with the name where the downloaded
+#' @param path `Character`. A character string with the name where the downloaded
 #'   file is saved.  If not provided, the default value `NULL` is used which
 #'   saves the file in an \R session temp directory.
 #'
-#' @param download_only Logical. Whether the radar image is loaded into the
+#' @param download_only `Logical`. Whether the radar image is loaded into the
 #'   environment as a \CRANpkg{magick} object or just downloaded.
 #'
 #' @details Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery

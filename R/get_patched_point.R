@@ -31,7 +31,7 @@
 #' @param values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all` with all available values being returned.
-#' @param api_key A `character `string specifying a valid email address to use
+#' @param api_key A `character` string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
 #'
@@ -76,9 +76,8 @@
 #'   <https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf>.
 #'
 #' @section Data codes:
-#' Data codes
-#' Where possible (depending on the file format), the data are supplied with
-#'   codes indicating how each datum was obtained.
+#'
+#' The data are supplied with codes indicating how each datum was obtained.
 #'
 #'   \tabular{rl}{
 #'     **Code**\tab **Source**\cr
@@ -96,19 +95,19 @@
 #'   }
 #'
 #' @return a [data.table::data.table] with the weather data queried with the
-#'   weather variables in alphabetical order. The first eight columns will
+#'   weather variables in alphabetical order.  The first eight columns will
 #'   always be:
 #'
-#'   * station_code,
-#'   * station_name,
-#'   * longitude,
-#'   * latitude,
-#'   * elev_m (elevation in metres),
-#'   * date (ISO8601 format, "YYYYMMDD"),
-#'   * year,
-#'   * month,
-#'   * day,
-#'   * extracted (the date on which the query was made)
+#'   * `station_code`,
+#'   * `station_name`,
+#'   * `longitude`,
+#'   * `latitude`,
+#'   * `elev_m` (elevation in metres),
+#'   * `date` (ISO8601 format, "YYYYMMDD"),
+#'   * `year`,
+#'   * `month`,
+#'   * `day`,
+#'   * `extracted` (the date on which the query was made)
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.

@@ -1,18 +1,18 @@
 
 #' Available BOM Satellite Imagery
 #'
-#' Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
+#' Fetch a listing of \acronym{BOM} GeoTIFF satellite imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> to determine which files are
-#'   currently available for download. Files are available at ten minute update
-#'   frequency with a 24-hour delete time. It is useful to know the most recent
+#'   currently available for download.  Files are available at ten minute update
+#'   frequency with a 24-hour delete time.  It is useful to know the most recent
 #'   files available and then specify in the [get_satellite_imagery()]
 #'   function.  Ported from \pkg{bomrang}.
 #'
-#' @param product_id `Character`. \acronym{BOM} product ID of interest for which
-#'   a list of available images will be returned.  Defaults to all images
-#'   currently available.
+#' @param product_id `Character`. \acronym{BOM} product \acronym{ID} of interest
+#'   for which a list of available images will be returned.  Defaults to all
+#'   images currently available.
 #'
-#' @details Valid \acronym{BOM} satellite Product IDs for 'GeoTIFF' files
+#' @details Valid \acronym{BOM} satellite Product IDs for GeoTIFF files
 #'   include:
 #'   \describe{
 #'    \item{IDE00420}{AHI cloud cover only 2km FD GEOS GIS}
@@ -64,15 +64,14 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#'   [terra::SpatRaster] or [stars] object of 'GeoTIFF' files. Files are
+#'   [terra::SpatRaster] or [stars] object of GeoTIFF files.  Files are
 #'   available at ten minutes update frequency with a 24-hour delete time.  It
 #'   is suggested to check file availability first by using
 #'   [get_available_imagery()].  Ported from \pkg{bomrang} with modifications.
 #'
-#' @param product_id `Character`. \acronym{BOM} product ID to download in
-#'   'GeoTIFF' format and import as a [terra::SpatRaster] or [stars] class
-#'   object.  A vector of values from [get_available_imagery()] may be used here.
-#'   Value is required.
+#' @param product_id `Character`. \acronym{BOM} product \acronym{ID} to download
+#'   and import as a [terra::SpatRaster] or [stars] class object.  A vector of
+#'   values from [get_available_imagery()] may be used here.  Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
 #'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan
 #'   available , 6 - the most recent hour available, 12 - the most recent 2 hours
@@ -113,15 +112,16 @@ get_available_imagery <- function(product_id = "all") {
 #' @return
 #' A [terra::SpatRaster] or [stars] class object as selected by the user by
 #'   specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
-#'    product ID, timestamp and band.
+#'    product \acronym{ID}, timestamp and band.
 #'
 #' @note The original \pkg{bomrang} version of this function supported local
-#'   file caching using \CRANpkg{hoardr}. This version does not support this
-#'   functionality any longer.
+#'   file caching using \CRANpkg{hoardr}.  This version does not support this
+#'   functionality any longer due to issues with \acronym{CRAN} and
+#'   \CRANpkg{hoardr}.
 #'
 #' @references
-#' Australian Bureau of Meteorology (BOM) high-definition satellite images \cr
-#'    <http://www.bom.gov.au/australia/satellite/index.shtml>
+#' Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
+#'   images \cr <http://www.bom.gov.au/australia/satellite/index.shtml>.
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD

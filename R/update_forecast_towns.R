@@ -14,8 +14,9 @@
 #'
 #' update_forecast_towns()
 #'
-#' @return An updated internal package database of \acronym{BOM} précis forecast
-#'  towns
+#' @return Called for it's side-effects this returns an invisible `NULL`
+#'   resulting in an updated internal package database of \acronym{BOM} précis
+#'   forecast towns.
 #'
 #' @references
 #' Data are sourced from: Australian Bureau of Meteorology (\acronym{BOM})

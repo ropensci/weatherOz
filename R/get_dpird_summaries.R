@@ -27,9 +27,9 @@
 #'   stations in use with the \acronym{API} and `web` returns the list in use by
 #'   the <https://weather.agric.wa.gov.au> and `rtd` returns stations with
 #'   scientifically complete data sets.  Defaults to `rtd`.
-#' @param include_closed A `Boolean` value that defaults to `FALSE`. If set to
-#'   `TRUE` the query returns closed and open stations. Closed stations are
-#'   those that have been turned off and no longer report data. They may be
+#' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
+#'   `TRUE` the query returns closed and open stations.  Closed stations are
+#'   those that have been turned off and no longer report data.  They may be
 #'   useful for historical purposes.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
@@ -114,23 +114,24 @@
 #'   * windAvgSpeed, and
 #'   * windMaxSpeed
 #'
-#' @return a [data.table::data.table] with 'station_code' and date interval
+#' @return a [data.table::data.table] with `station_code` and the date interval
 #'   queried together with the requested weather variables in alphabetical
-#'   order. The first ten columns will always be:
+#'   order.  The first ten columns will always be:
 #'
-#'   * station_code,
-#'   * station_name,
-#'   * latitude,
-#'   * longitude,
-#'   * year,
-#'   * month,
-#'   * day,
-#'   * hour,
-#'   * minute, and if month or finer is present,
-#'   * date (a combination of year, month, day, hour, minute as appropriate).
+#'   * `station_code`,
+#'   * `station_name`,
+#'   * `latitude`,
+#'   * `longitude`,
+#'   * `year`,
+#'   * `month`,
+#'   * `day`,
+#'   * `hour`,
+#'   * `minute`, and if `month` or finer is present,
+#'   * `date` (a combination of year, month, day, hour, minute as appropriate).
 #'
 #' @note Please note this function converts date-time columns from Coordinated
-#'   Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
+#'   Universal Time \sQuote{UTC} to Australian Western Standard Time
+#'   \sQuote{AWST}.
 #'
 #' @family DPIRD
 #'
