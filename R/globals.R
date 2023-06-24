@@ -61,6 +61,7 @@ utils::globalVariables(
     "postamble",
     "r",
     "ret",
+    "silo_daily_values",
     "site",
     "soil_mintime",
     "soil_maxtime",
