@@ -1,13 +1,12 @@
 
-#' Get DataDrill weather data from the SILO API
+#' Get DataDrill Weather Data
 #'
-#' Download weather data from the \acronym{SILO} \acronym{API} for spatially
-#'   interpolated weather data (DataDrill).  The daily climate surfaces have
-#'   been derived either by splining or kriging the observational data.   The
-#'   returned values contain "source" columns, which denote how the observations
-#'   were derived.  The
-#'   grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
-#'   0.05° longitude (approximately 5 km × 5 km).
+#' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API} of
+#'   spatially interpolated weather data (DataDrill).  The daily climate
+#'   surfaces have been derived either by splining or kriging the observational
+#'   data.  The returned values contain "source" columns, which denote how the
+#'   observations were derived.  The grid spans 112° to 154°, -10° to -44° with
+#'   resolution 0.05° latitude by 0.05° longitude (approximately 5 km × 5 km).
 #'
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
@@ -141,7 +140,7 @@
 #' }
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
-#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}.
+#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
 #'

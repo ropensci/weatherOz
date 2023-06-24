@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_precis_forecast.R
 \name{get_precis_forecast}
 \alias{get_precis_forecast}
-\title{Get BOM daily précis forecast for select towns from BOM}
+\title{BOM Daily Précis Forecasts}
 \usage{
 get_precis_forecast(state = "AUS")
 }
@@ -16,9 +16,9 @@ A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{
 forecasts for \acronym{BOM} selected towns.
 }
 \description{
-Fetch the \acronym{BOM} daily précis forecast and return a data frame of the
-seven-day town forecasts for a specified state or territory.  Ported from
-\pkg{bomrang}.
+Fetch nicely formatted daily précis forecast from the \acronym{BOM}, which
+contains seven-day town forecasts for a specified state or territory.
+Ported from \pkg{bomrang}.
 }
 \details{
 Allowed state and territory postal codes, only one state per request
@@ -47,22 +47,24 @@ Forecast data come from Australian Bureau of Meteorology (\acronym{BOM})
 Weather Data Services \cr
 \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}
 
-Location data and other metadata for towns come from
-the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
+Location data and other metadata for towns come from the \acronym{BOM}
+anonymous \acronym{FTP} server with spatial data \cr
 \url{ftp://ftp.bom.gov.au/anon/home/adfd/spatial/}, specifically the
 \acronym{DBF} file portion of a shapefile, \cr
-\url{ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf}
+\url{ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf}.
 }
 \seealso{
 \link{parse_precis_forecast}
 
-Other bomrang-ported: 
+Other bomrang: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
+\code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
+\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
@@ -72,4 +74,4 @@ Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Keith
 Pembleton, \email{keith.pembleton@usq.edu.au} and Paul Melloy,
 \email{paul@melloy.com.au}
 }
-\concept{bomrang-ported}
+\concept{bomrang}

@@ -1,5 +1,8 @@
 
-#' Query the SILO API using {crul}
+#' Query the SILO API
+#'
+#' Use {crul} to query the SILO API.
+#'
 #' @param .station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
 #' @param .start_date A `character` string representing the beginning of the
@@ -135,7 +138,7 @@
 }
 
 
-#' Check SILO data codes
+#' Check SILO Data Codes
 #'
 #' Checks if any SILO data codes for interpolated data are present in the
 #'   requested station observation data. If any such codes are found, a message

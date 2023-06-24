@@ -1,8 +1,8 @@
 
-#' Get minute weather data from DPIRD Weather 2.0 API
+#' DPIRD Minute Weather Data
 #'
-#' Get nicely formatted minute weather station data from the \acronym{DPIRD}
-#'   weather station network over a maximum 24 hour period.
+#' Fetch nicely formatted minute weather station data from the \acronym{DPIRD}
+#'   Weather 2.0 \acronym{API} over a maximum 24 hour period.
 #'
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
 #'   station code for the station of interest.
@@ -20,7 +20,8 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values for `values`:
+#' @section Available Values:
+#'
 #'   * all (includes all of the following),
 #'   * airTemperature,
 #'   * dateTime,
@@ -56,7 +57,10 @@
 #'                                   "solarIrradiance",
 #'                                   "wind"))
 #' }
+#'
 #' @family DPIRD
+#'
+#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
 #' @export
 
 get_dpird_minute <- function(station_code,

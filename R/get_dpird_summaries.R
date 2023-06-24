@@ -1,15 +1,8 @@
 
-# file: /R/get_dpird_summaries.R
-#
-# This file is part of the R-package weatherOz
-#
-# Copyright (C) 2023 DPIRD
-#	<https://www.dpird.wa.gov.au>
-
-#' Get weather data from DPIRD Weather 2.0 API summarised by time interval
+#' DPIRD Summarised Weather Data
 #'
-#' Nicely formatted individual station weather summaries from the
-#'   \acronym{DPIRD} weather station network.
+#' Fetch nicely formatted individual station weather summaries from the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.
@@ -42,7 +35,8 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values for `values`:
+#' @section Available Values:
+#'
 #'   * all (which will return all of the following values),
 #'   * airTemperature,
 #'   * airTemperatureAvg,
@@ -139,6 +133,9 @@
 #'   Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 #'
 #' @family DPIRD
+#'
+#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au} and Rodrigo Pires,
+#'   \email{rodrigo.pires@@dpird.wa.gov.au}
 #'
 #' @examples
 #' \dontrun{

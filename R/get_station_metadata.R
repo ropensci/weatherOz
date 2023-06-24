@@ -1,12 +1,11 @@
 
-#' Get the latest DPIRD and SILO weather station metadata
+#' Weather Station Metadata
 #'
 #' Download the latest station locations and metadata for stations in the
-#'   \acronym{SILO} and \acronym{DPIRD} \acronym{API}s.  For \acronym{BOM}
-#'   stations that exist in \acronym{SILO}, but lack metadata from
-#'   \acronym{BOM}, the rows will exist to indicate that the station is in the
-#'   \acronym{SILO} data set, but there is no corresponding \acronym{BOM}
-#'   metadata available.
+#'   \acronym{SILO} and \acronym{DPIRD} networks.  For \acronym{BOM} stations
+#'   that exist in \acronym{SILO}, but lack metadata from \acronym{BOM}, the
+#'   rows will exist to indicate that the station is in the \acronym{SILO} data
+#'   set, but there is no corresponding \acronym{BOM} metadata available.
 #'
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Valid values are 'all', for both \acronym{SILO} (\acronym{BOM} data) and
@@ -32,9 +31,11 @@
 #'   station closed sometime during the current year prior to the request being
 #'   made. `NA` in the current year indicates a station is still open.
 #'
-#' @examplesIf interactive()
-#' # fetch SILO metadata
-#' get_station_metadata()
+#' @examples
+#' \dontrun{
+#' # fetch metadata for all stations available in {weatherOz}
+#' get_station_metadata(api_key = "your_api_key")
+#' }
 #'
 #' @return a [data.table::data.table] of \acronym{BOM} weather stations'
 #'   metadata for stations available from \acronym{SILO} and weather stations'
@@ -64,7 +65,6 @@
 #'       some have 10 metre probes. `integer`\cr
 #'   }
 #'
-#'
 #' @references
 #' Station location and other metadata are sourced from the Australian Bureau of
 #'   Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
@@ -73,6 +73,10 @@
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#'
+#' @family DPIRD
+#' @family SILO
+#'
 #' @export
 
 get_station_metadata <-
@@ -144,6 +148,8 @@ get_station_metadata <-
   }
 
 
+#' SILO Metadata
+#'
 #' Returns metadata about stations in the SILO network
 #'
 #' Fetches metadata directly from BOM and then fetches a station list from SILO
@@ -264,6 +270,8 @@ get_station_metadata <-
   return(station_metadata)
 }
 
+#' DPIRD Metadata
+#'
 #' Returns metadata about stations in the DPIRD network
 #'
 #' Fetches metadata directly from DPIRD's API.

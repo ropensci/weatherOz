@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dpird_availability.R
 \name{get_dpird_availability}
 \alias{get_dpird_availability}
-\title{Get DPIRD weather station availability metadata}
+\title{DPIRD Weather Station Availability}
 \usage{
 get_dpird_availability(
   station_code = NULL,
@@ -33,8 +33,18 @@ values.  Defaults to 'availability', returning metadata for all stations.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.
-\subsection{Available Values for \code{values}:}{
+\acronym{DPIRD} Weather 2.0 \acronym{API}.}
+}
+\value{
+a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and the requested
+metadata.
+}
+\description{
+Fetch the availability metadata of weather stations in the \acronym{DPIRD}
+weather station network from the Weather 2.0 \acronym{API}.
+}
+\section{Available Values}{
+
 \itemize{
 \item availability (which will return all of the following values),
 \item availabilityCurrentHour,
@@ -51,16 +61,8 @@ values.  Defaults to 'availability', returning metadata for all stations.}
 \item availabilityYearToDateSince12AM, and
 \item availabilityYearToDateTo9AM
 }
-}}
 }
-\value{
-a \link[data.table:data.table]{data.table::data.table}  with 'station_code' and the requested
-metadata.
-}
-\description{
-Get the availability metadata of weather stations in the \acronym{DPIRD}
-weather station network.
-}
+
 \examples{
 \dontrun{
 # You must have a DPIRD API key to proceed
@@ -69,7 +71,22 @@ output <- get_dpird_availability(
             station_code = "BI",
             start_date = "20170101",
             end_date = "20171231",
-            api_key = "YOUR API KEY")
+            api_key = "your_api_key")
 }
 
 }
+\seealso{
+Other DPIRD: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_station_metadata}()}
+}
+\author{
+Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au}
+}
+\concept{DPIRD}

@@ -1,8 +1,8 @@
 
-#' Get PatchedPoint weather data from the SILO API
+#' PatchedPoint Weather Data
 #'
-#' Download weather data from the \acronym{SILO} \acronym{API} from
-#'   \acronym{BOM} station observations (PatchedPoint) data.
+#' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API}
+#'   derived from the \acronym{BOM} station observations (PatchedPoint) data.
 #'
 #' @details The \acronym{SILO} documentation provides the following information
 #'   for the PatchedPoint data.
@@ -136,8 +136,8 @@
 #'   and Software*, Volume 16/4, 309-330. DOI:
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
-#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}.
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam
+#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
 #'

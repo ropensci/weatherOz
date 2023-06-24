@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_station_metadata.R
 \name{get_station_metadata}
 \alias{get_station_metadata}
-\title{Get the latest DPIRD and SILO weather station metadata}
+\title{Weather Station Metadata}
 \usage{
 get_station_metadata(which_api = "all", api_key, status = FALSE, rich = FALSE)
 }
@@ -56,11 +56,10 @@ some have 10 metre probes. \code{integer}\cr
 }
 \description{
 Download the latest station locations and metadata for stations in the
-\acronym{SILO} and \acronym{DPIRD} \acronym{API}s.  For \acronym{BOM}
-stations that exist in \acronym{SILO}, but lack metadata from
-\acronym{BOM}, the rows will exist to indicate that the station is in the
-\acronym{SILO} data set, but there is no corresponding \acronym{BOM}
-metadata available.
+\acronym{SILO} and \acronym{DPIRD} networks.  For \acronym{BOM} stations
+that exist in \acronym{SILO}, but lack metadata from \acronym{BOM}, the
+rows will exist to indicate that the station is in the \acronym{SILO} data
+set, but there is no corresponding \acronym{BOM} metadata available.
 }
 \note{
 For stations in the \acronym{SILO} \acronym{API}, \acronym{BOM} does
@@ -73,10 +72,11 @@ station closed sometime during the current year prior to the request being
 made. \code{NA} in the current year indicates a station is still open.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# fetch SILO metadata
-get_station_metadata()
-\dontshow{\}) # examplesIf}
+\dontrun{
+# fetch metadata for all stations available in {weatherOz}
+get_station_metadata(api_key = "your_api_key")
+}
+
 }
 \references{
 Station location and other metadata are sourced from the Australian Bureau of
@@ -85,6 +85,25 @@ Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \url{http://www.bom.gov.au/climate/data/lists_by_element/stations.txt} and the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
+\seealso{
+Other DPIRD: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()}
+
+Other SILO: 
+\code{\link{find_nearby_stations}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_patched_point}()},
+\code{\link{silo_daily_values}}
+}
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
+\concept{DPIRD}
+\concept{SILO}

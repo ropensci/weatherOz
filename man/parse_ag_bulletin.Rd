@@ -2,17 +2,16 @@
 % Please edit documentation in R/parse_ag_bulletin.R
 \name{parse_ag_bulletin}
 \alias{parse_ag_bulletin}
-\title{Parse local BOM agriculture bulletin XML file(s) for select stations}
+\title{Parse BOM Agriculture Bulletin XML Files}
 \usage{
 parse_ag_bulletin(state, filepath)
 }
 \arguments{
 \item{state}{Required value of an Australian state or territory as full name
-or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is
-done.}
+or postal code.  Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.}
 
 \item{filepath}{A string providing the directory location of the précis
-file(s) to parse. See Details for more.}
+file(s) to parse.  See Details for more.}
 }
 \value{
 A \link[data.table:data.table]{data.table::data.table} of Australia \acronym{BOM} agricultural
@@ -73,8 +72,22 @@ Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 }
 \seealso{
 \link{get_ag_bulletin}
+
+Other bomrang: 
+\code{\link{find_forecast_towns}()},
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()},
+\code{\link{get_satellite_imagery}()},
+\code{\link{parse_coastal_forecast}()},
+\code{\link{parse_precis_forecast}()},
+\code{\link{update_forecast_towns}()}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Paul Melloy
 \email{paul@melloy.com.au}
 }
+\concept{bomrang}

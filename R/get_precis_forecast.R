@@ -1,9 +1,9 @@
 
-#' Get BOM daily précis forecast for select towns from BOM
+#' BOM Daily Précis Forecasts
 #'
-#' Fetch the \acronym{BOM} daily précis forecast and return a data frame of the
-#'   seven-day town forecasts for a specified state or territory.  Ported from
-#'   \pkg{bomrang}.
+#' Fetch nicely formatted daily précis forecast from the \acronym{BOM}, which
+#'   contains seven-day town forecasts for a specified state or territory.
+#'   Ported from \pkg{bomrang}.
 #'
 #' @param state Australian state or territory as full name or postal code.
 #'   Fuzzy string matching via [base::agrep()] is done.  Defaults to 'AUS'
@@ -37,11 +37,11 @@
 #' Weather Data Services \cr
 #' <http://www.bom.gov.au/catalogue/data-feeds.shtml>
 #'
-#' Location data and other metadata for towns come from
-#' the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
-#' <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the
-#' \acronym{DBF} file portion of a shapefile, \cr
-#' <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>
+#' Location data and other metadata for towns come from the \acronym{BOM}
+#'   anonymous \acronym{FTP} server with spatial data \cr
+#'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the
+#'   \acronym{DBF} file portion of a shapefile, \cr
+#'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Keith
 #'  Pembleton, \email{keith.pembleton@@usq.edu.au} and Paul Melloy,
@@ -49,7 +49,7 @@
 #'
 #' @seealso [parse_precis_forecast]
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #'
 #' @export get_precis_forecast
 

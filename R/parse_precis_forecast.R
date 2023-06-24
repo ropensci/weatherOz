@@ -64,7 +64,7 @@
 #'
 #' @seealso [get_precis_forecast]
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #'
 #' @export parse_precis_forecast
 #'

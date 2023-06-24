@@ -20,7 +20,7 @@
 #' @return Validated date string as a `POSIXct` object.
 #' @note This was taken from \CRANpkg{nasapower}.
 #' @example .check_date(x)
-#' @author Adam Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
 #' @keywords internal
 #' @noRd
 .check_date <- function(x) {

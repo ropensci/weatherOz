@@ -2,9 +2,7 @@
 % Please edit documentation in R/find_nearby_stations.R
 \name{find_nearby_stations}
 \alias{find_nearby_stations}
-\title{Find nearby weather stations given geographic coordinates or a station code.
-Either a combination of \code{latitude} and \code{longitude} or \code{station_code} must
-be provided as a starting point.}
+\title{Find Nearby Stations}
 \usage{
 find_nearby_stations(
   latitude = NULL,
@@ -34,22 +32,22 @@ the station or location of interest.  Defaults to 100 km.}
 \acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).  Only used
 when \code{which_api} is 'DPIRD' or 'all'.}
 
-\item{which_api}{A \code{string} value that indicates which API to use.  Defaults
-to 'silo'. Valid values are 'all', for both \acronym{SILO} (\acronym{BOM})
-and \acronym{DPIRD} weather station networks; "silo" for only stations in
-the \acronym{SILO} network; or 'dpird' for stations in the \acronym{DPIRD}
-network.}
+\item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
+Defaults to "silo" only. Valid values are "all", for both \acronym{SILO}
+(\acronym{BOM}) and \acronym{DPIRD} weather station networks; "silo" for
+only stations in the \acronym{SILO} network; or "dpird" for stations in the
+\acronym{DPIRD} network.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with 'station_code', 'station_name',
-'latitude', 'longitude', 'elev_m', 'state', 'owner', and 'distance'.
+a \link[data.table:data.table]{data.table::data.table} with "station_code", "station_name",
+"latitude", "longitude", "elev_m", "state", "owner", and "distance".
 Data are sorted by increasing distance from station or location of
 interest.
 }
 \description{
 Find nearby weather stations given geographic coordinates or a station code.
 Either a combination of \code{latitude} and \code{longitude} or \code{station_code} must
-be provided as a starting point.
+be provided.
 }
 \note{
 You can request your own \acronym{API} key from \acronym{DPIRD} for
@@ -63,7 +61,7 @@ free by filling out the form found at
 wa_stn <- find_nearby_stations(
   station_code = "NO",
   distance_km = 50,
-  api_key = "YOUR API KEY",
+  api_key = "your_api_key",
   which_api = "DPIRD"
 )
 
@@ -77,6 +75,26 @@ wagga_stn <- find_nearby_stations(
 }
 
 }
-\author{
-Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
+\seealso{
+Other DPIRD: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_station_metadata}()}
+
+Other SILO: 
+\code{\link{get_data_drill}()},
+\code{\link{get_patched_point}()},
+\code{\link{get_station_metadata}()},
+\code{\link{silo_daily_values}}
 }
+\author{
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H. Sparks
+\email{adam.sparks@dpird.wa.gov.au}
+}
+\concept{DPIRD}
+\concept{SILO}

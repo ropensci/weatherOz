@@ -1,12 +1,12 @@
 
-#' Get a listing of available BOM satellite GeoTIFF imagery
+#' Available BOM Satellite Imagery
 #'
 #' Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> to determine which files are
 #'   currently available for download. Files are available at ten minute update
 #'   frequency with a 24-hour delete time. It is useful to know the most recent
 #'   files available and then specify in the [get_satellite_imagery()]
-#'   function.
+#'   function.  Ported from \pkg{bomrang}.
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID of interest for which
 #'   a list of available images will be returned.  Defaults to all images
@@ -48,7 +48,7 @@
 #' # 1km FD GEOS GIS images
 #' imagery <- get_available_imagery(product_id = "IDE00425")
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @export get_available_imagery
@@ -60,14 +60,14 @@ get_available_imagery <- function(product_id = "all") {
   return(tif_list)
 }
 
-#' Get \acronym{BOM} Satellite GeoTIFF Imagery
+#' BOM Satellite Imagery
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
 #'   [terra::SpatRaster] or [stars] object of 'GeoTIFF' files. Files are
 #'   available at ten minutes update frequency with a 24-hour delete time.  It
 #'   is suggested to check file availability first by using
-#'   [get_available_imagery()].
+#'   [get_available_imagery()].  Ported from \pkg{bomrang} with modifications.
 #'
 #' @param product_id `Character`. \acronym{BOM} product ID to download in
 #'   'GeoTIFF' format and import as a [terra::SpatRaster] or [stars] class
@@ -106,7 +106,7 @@ get_available_imagery <- function(product_id = "all") {
 #'    \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
 #' }
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #' @seealso
 #' [get_available_imagery()]
 #'

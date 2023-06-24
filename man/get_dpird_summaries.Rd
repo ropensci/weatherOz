@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dpird_summaries.R
 \name{get_dpird_summaries}
 \alias{get_dpird_summaries}
-\title{Get weather data from DPIRD Weather 2.0 API summarised by time interval}
+\title{DPIRD Summarised Weather Data}
 \usage{
 get_dpird_summaries(
   station_code,
@@ -72,14 +72,14 @@ order. The first ten columns will always be:
 }
 }
 \description{
-Nicely formatted individual station weather summaries from the
-\acronym{DPIRD} weather station network.
+Fetch nicely formatted individual station weather summaries from the
+\acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \note{
 Please note this function converts date-time columns from Coordinated
 Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 }
-\section{Available Values for \code{values}}{
+\section{Available Values}{
 
 \itemize{
 \item all (which will return all of the following values),
@@ -169,7 +169,7 @@ Universal Time 'UTC' to Australian Western Standard Time 'AWST'.
 wd <- get_dpird_summaries(
    station_code = "CL001",
    start_date = "20171028",
-   api_key = "YOUR API KEY",
+   api_key = "your_api_key",
    interval = "yearly",
    values = "rainfall"
 )
@@ -180,7 +180,7 @@ wd <- get_dpird_summaries(
   station_code = "BI",
   start_date = "20220501",
   end_date = "20220502",
-  api_key = "your_key",
+  api_key = "your_api_key",
   interval = "daily",
   values = c(
     "wind",
@@ -193,7 +193,17 @@ wd <- get_dpird_summaries(
 }
 \seealso{
 Other DPIRD: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
-\code{\link{get_extreme_weather}()}
+\code{\link{get_station_metadata}()}
+}
+\author{
+Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} and Rodrigo Pires,
+\email{rodrigo.pires@dpird.wa.gov.au}
 }
 \concept{DPIRD}

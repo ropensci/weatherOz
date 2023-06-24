@@ -5,9 +5,11 @@
 # Copyright (C) 2023 DPIRD
 #	<https://www.dpird.wa.gov.au>
 
+#' Find Nearby Stations
+#'
 #' Find nearby weather stations given geographic coordinates or a station code.
 #'   Either a combination of `latitude` and `longitude` or `station_code` must
-#'   be provided as a starting point.
+#'   be provided.
 #'
 #' @param latitude A `numeric` value for latitude expressed as decimal degrees
 #'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if `longitude`
@@ -22,14 +24,14 @@
 #' @param api_key A `string` value that is the user's \acronym{API} key from
 #'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
 #'   when `which_api` is 'DPIRD' or 'all'.
-#' @param which_api A `string` value that indicates which API to use.  Defaults
-#'   to 'silo'. Valid values are 'all', for both \acronym{SILO} (\acronym{BOM})
-#'   and \acronym{DPIRD} weather station networks; "silo" for only stations in
-#'   the \acronym{SILO} network; or 'dpird' for stations in the \acronym{DPIRD}
-#'   network.
+#' @param which_api A `string` value that indicates which \acronym{API} to use.
+#'   Defaults to "silo" only. Valid values are "all", for both \acronym{SILO}
+#'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; "silo" for
+#'   only stations in the \acronym{SILO} network; or "dpird" for stations in the
+#'   \acronym{DPIRD} network.
 #'
-#' @return a [data.table::data.table] with 'station_code', 'station_name',
-#'   'latitude', 'longitude', 'elev_m', 'state', 'owner', and 'distance'.
+#' @return a [data.table::data.table] with "station_code", "station_name",
+#'   "latitude", "longitude", "elev_m", "state", "owner", and "distance".
 #'   Data are sorted by increasing distance from station or location of
 #'   interest.
 #'
@@ -44,7 +46,7 @@
 #' wa_stn <- find_nearby_stations(
 #'   station_code = "NO",
 #'   distance_km = 50,
-#'   api_key = "YOUR API KEY",
+#'   api_key = "your_api_key",
 #'   which_api = "DPIRD"
 #' )
 #'
@@ -57,7 +59,12 @@
 #' )
 #' }
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H. Sparks
+#'   \email{adam.sparks@@dpird.wa.gov.au}
+#'
+#' @family DPIRD
+#' @family SILO
+#'
 #' @export
 
 find_nearby_stations <- function(latitude = NULL,

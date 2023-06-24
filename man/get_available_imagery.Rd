@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_satellite_imagery.R
 \name{get_available_imagery}
 \alias{get_available_imagery}
-\title{Get a listing of available BOM satellite GeoTIFF imagery}
+\title{Available BOM Satellite Imagery}
 \usage{
 get_available_imagery(product_id = "all")
 }
@@ -20,7 +20,7 @@ Fetch a listing of \acronym{BOM} 'GeoTIFF' satellite imagery from
 currently available for download. Files are available at ten minute update
 frequency with a 24-hour delete time. It is useful to know the most recent
 files available and then specify in the \code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
-function.
+function.  Ported from \pkg{bomrang}.
 }
 \details{
 Valid \acronym{BOM} satellite Product IDs for 'GeoTIFF' files
@@ -59,13 +59,15 @@ Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
 images \url{http://www.bom.gov.au/australia/satellite/index.shtml}
 }
 \seealso{
-Other bomrang-ported: 
+Other bomrang: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
+\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
@@ -73,4 +75,4 @@ Other bomrang-ported:
 \author{
 Adam H. Sparks, \email{adamhsparks@gmail.com}
 }
-\concept{bomrang-ported}
+\concept{bomrang}

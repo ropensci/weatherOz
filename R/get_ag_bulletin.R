@@ -1,7 +1,8 @@
 
-#' Get BOM agriculture bulletin information for select stations
+#' Get BOM Agriculture Bulletin Information
 #'
-#' Fetch the \acronym{BOM} agricultural bulletin information.
+#' Fetch the \acronym{BOM} agricultural bulletin information for a specified
+#'   station or stations.
 #'
 #' @param state Australian state or territory as full name or postal code.
 #'   Fuzzy string matching via [base::agrep()] is done.  Defaults to "AUS"
@@ -57,7 +58,7 @@
 #'
 #' @seealso [parse_ag_bulletin]
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #'
 #' @export get_ag_bulletin
 

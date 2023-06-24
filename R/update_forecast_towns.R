@@ -1,14 +1,13 @@
 
-#' Update internal database with latest BOM forecast towns
+#' Update Internal Database of BOM Forecast Towns
 #'
-#' @description
 #' Download the latest select forecast towns from the \acronym{BOM} server and
 #'   update internal database of précis forecast town names and \acronym{AAC}
 #'   codes used by [get_precis_forecast()].  There is no need to use
 #'   this unless you know that a forecast town exists in a more current version
 #'   of the \acronym{BOM} précis forecast town name database that is not
-#'   available in the database distributed with \pkg{weatherOz}.  In fact, for
-#'   reproducibility purposes, users are discouraged from using this function.
+#'   available in the database distributed with \pkg{weatherOz}.  **In fact, for
+#'   reproducibility purposes, users are discouraged from using this function.**
 #'   Ported from \pkg{bomrang}.
 #'
 #' @examplesIf interactive()
@@ -23,7 +22,7 @@
 #' webpage, "Weather Data Services",
 #' <http://www.bom.gov.au/catalogue/data-feeds.shtml>.
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @export update_forecast_towns

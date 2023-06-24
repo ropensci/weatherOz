@@ -2,7 +2,7 @@
 % Please edit documentation in R/update_forecast_towns.R
 \name{update_forecast_towns}
 \alias{update_forecast_towns}
-\title{Update internal database with latest BOM forecast towns}
+\title{Update Internal Database of BOM Forecast Towns}
 \usage{
 update_forecast_towns()
 }
@@ -16,8 +16,8 @@ update internal database of précis forecast town names and \acronym{AAC}
 codes used by \code{\link[=get_precis_forecast]{get_precis_forecast()}}.  There is no need to use
 this unless you know that a forecast town exists in a more current version
 of the \acronym{BOM} précis forecast town name database that is not
-available in the database distributed with \pkg{weatherOz}.  In fact, for
-reproducibility purposes, users are discouraged from using this function.
+available in the database distributed with \pkg{weatherOz}.  \strong{In fact, for
+reproducibility purposes, users are discouraged from using this function.}
 Ported from \pkg{bomrang}.
 }
 \examples{
@@ -32,18 +32,20 @@ webpage, "Weather Data Services",
 \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}.
 }
 \seealso{
-Other bomrang-ported: 
+Other bomrang: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
+\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang-ported}
+\concept{bomrang}

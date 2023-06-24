@@ -1,8 +1,8 @@
 
-#' Get DPIRD weather station availability metadata
+#' DPIRD Weather Station Availability
 #'
-#' Get the availability metadata of weather stations in the \acronym{DPIRD}
-#'   weather station network.
+#' Fetch the availability metadata of weather stations in the \acronym{DPIRD}
+#'   weather station network from the Weather 2.0 \acronym{API}.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest. Defaults to `NULL`, returning metadata for
@@ -22,7 +22,7 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' ## Available Values for `values`:
+#' @section Available Values:
 #'
 #'   * availability (which will return all of the following values),
 #'   * availabilityCurrentHour,
@@ -41,6 +41,10 @@
 #'
 #' @return a [data.table::data.table]  with 'station_code' and the requested
 #'   metadata.
+#'
+#' @family DPIRD
+#'
+#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @examples
 #' \dontrun{

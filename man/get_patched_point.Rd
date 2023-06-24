@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_patched_point.R
 \name{get_patched_point}
 \alias{get_patched_point}
-\title{Get PatchedPoint weather data from the SILO API}
+\title{PatchedPoint Weather Data}
 \usage{
 get_patched_point(
   station_code,
@@ -50,8 +50,8 @@ always be:
 }
 }
 \description{
-Download weather data from the \acronym{SILO} \acronym{API} from
-\acronym{BOM} station observations (PatchedPoint) data.
+Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API}
+derived from the \acronym{BOM} station observations (PatchedPoint) data.
 }
 \details{
 The \acronym{SILO} documentation provides the following information
@@ -172,6 +172,13 @@ and Software}, Volume 16/4, 309-330. DOI:
 }
 \seealso{
 Other SILO: 
-\code{\link{get_data_drill}()}
+\code{\link{find_nearby_stations}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_station_metadata}()},
+\code{\link{silo_daily_values}}
+}
+\author{
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam
+Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{SILO}

@@ -1,5 +1,8 @@
 
-#' Find nearest BOM forecast towns for a given location by latitude and longitude
+#' Find Nearest BOM Forecast Town
+#'
+#' For a given `latitude` and `longitude`, find the nearest town that the
+#'   \acronym{BOM} provides a forecast for.
 #'
 #' @param latitude A `numeric` value of latitude in decimal degree (DD)
 #'   format.  By default, Canberra (approximately).
@@ -15,11 +18,11 @@
 #'
 #' @return A [data.table::data.table] of all forecast towns (in this package)
 #'   sorted by distance from \var{latlon}, ascending.
-#' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com} and
-#'   James Goldie, \email{me@@jamesgoldie.dev} and Adam Sparks,
+#' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com} and James Goldie,
+#'   \email{me@@jamesgoldie.dev} and Adam H. Sparks
 #'   \email{adam.sparks@@dpird.wa.gov.au}
 #'
-#' @family bomrang-ported
+#' @family bomrang
 #'
 #' @export
 

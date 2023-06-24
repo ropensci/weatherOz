@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_forecast_towns.R
 \name{find_forecast_towns}
 \alias{find_forecast_towns}
-\title{Find nearest BOM forecast towns for a given location by latitude and longitude}
+\title{Find Nearest BOM Forecast Town}
 \usage{
 find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 100)
 }
@@ -21,7 +21,8 @@ A \link[data.table:data.table]{data.table::data.table} of all forecast towns (in
 sorted by distance from \var{latlon}, ascending.
 }
 \description{
-Find nearest BOM forecast towns for a given location by latitude and longitude
+For a given \code{latitude} and \code{longitude}, find the nearest town that the
+\acronym{BOM} provides a forecast for.
 }
 \examples{
 
@@ -30,20 +31,22 @@ find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
 
 }
 \seealso{
-Other bomrang-ported: 
+Other bomrang: 
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
+\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
 }
 \author{
-Hugh Parsonage, \email{hugh.parsonage@gmail.com} and
-James Goldie, \email{me@jamesgoldie.dev} and Adam Sparks,
+Hugh Parsonage, \email{hugh.parsonage@gmail.com} and James Goldie,
+\email{me@jamesgoldie.dev} and Adam H. Sparks
 \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang-ported}
+\concept{bomrang}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{dpird_extreme_weather_values}
 \alias{dpird_extreme_weather_values}
-\title{Extreme weather data values available from the DPIRD Weather 2.0 'API'}
+\title{Extreme Weather Data Values}
 \format{
 A \link{vector} object of 57 items.
 }
@@ -15,6 +15,19 @@ dpird_extreme_weather_values
 }
 \description{
 A \link{vector} object containing 57 items representing valid values to supply
-to \code{get_extreme_weather()}'s \code{values} argument.
+to \code{get_dpird_extremes()}'s \code{values} argument taken from the documentation
+for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
+\seealso{
+Other DPIRD: 
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_station_metadata}()}
+}
+\concept{DPIRD}
 \keyword{datasets}

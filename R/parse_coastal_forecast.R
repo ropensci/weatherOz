@@ -1,5 +1,5 @@
 
-#' Parse local BOM coastal waters forecast XML files
+#' Parse BOM Coastal Waters Forecast XML Files
 #'
 #' Parse local \acronym{BOM} daily coastal waters forecast \acronym{XML} file(s)
 #'   for a specified state or territory or all of Australia.
@@ -34,8 +34,6 @@
 #' A [data.table::data.table] of an Australia \acronym{BOM} Coastal Waters
 #'   Forecast.
 #'
-#' @family bomrang-ported
-#'
 #' @examplesIf interactive()
 #' \donttest{
 #' # parse the coastal forecast for Queensland
@@ -62,6 +60,8 @@
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Paul Melloy
 #' \email{paul@@melloy.com.au}
+#'
+#' @family bomrang
 #'
 #' @seealso [get_coastal_forecast]
 #'

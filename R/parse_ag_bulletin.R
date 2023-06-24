@@ -1,15 +1,14 @@
 
-#' Parse local BOM agriculture bulletin XML file(s) for select stations
+#' Parse BOM Agriculture Bulletin XML Files
 #'
 #' Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) for a
 #'   specified state or territory or all Australia.  Ported from \pkg{bomrang}.
 #'
 #' @param state Required value of an Australian state or territory as full name
-#'   or postal code.  Fuzzy string matching via [base::agrep()] is
-#'   done.
+#'   or postal code.  Fuzzy string matching via [base::agrep()] is done.
 #'
 #' @param filepath A string providing the directory location of the précis
-#'   file(s) to parse. See Details for more.
+#'   file(s) to parse.  See Details for more.
 #'
 #' @details Allowed state and territory postal codes, only one state per request
 #' or all using 'AUS'.
@@ -62,6 +61,8 @@
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Paul Melloy
 #' \email{paul@@melloy.com.au}
+#'
+#' @family bomrang
 #'
 #' @seealso [get_ag_bulletin]
 #'

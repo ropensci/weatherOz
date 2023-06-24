@@ -1,11 +1,8 @@
-# file: /R/get_extreme_weather.R
-#
-# This file is part of the R-package weatherOz
-#
-# Copyright (C) 2023 DPIRD
-#	<https://www.dpird.wa.gov.au>
 
-#' Get extreme weather event summaries for a single DPIRD station
+#' Extreme Weather Event Summaries
+#'
+#' Fetch nicely formatted individual extreme weather summaries from the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @param station_code A `character` string with the station code for the
 #'   station of interest.
@@ -26,7 +23,8 @@
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @section Available Values for `values`:
+#' @section Available Values:
+#'
 #' * all (returns all of the following values),
 #' * erosionCondition,
 #' * erosionConditionLast7Days,
@@ -97,7 +95,7 @@
 #' # You must have an DPIRD API key to proceed
 #' # Query Bonnie Rock station for wind erosion and heat extreme events.
 #'
-#' xtreme <- get_extreme_weather(
+#' xtreme <- get_dpird_extremes(
 #'   station_code = "BR",
 #'   type = c("erosionCondition",
 #'            "heatCondition"),
@@ -105,12 +103,12 @@
 #' )
 #' }
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
-#'  Sparks, \email{adam.sparks@@dpird.wa.gov.au}.
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam
+#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @export
 
-get_extreme_weather <- function(station_code,
+get_dpird_extremes <- function(station_code,
                                 values = "all",
                                 group = "rtd",
                                 include_closed = FALSE,

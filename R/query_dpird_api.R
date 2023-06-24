@@ -1,7 +1,10 @@
 
-#' Construct a list of options to pass to the DPIRD API for summary and minute data
+#' Build a DPIRD Weather 2.0 API Query
 #'
-#' Note that `get_extreme_weather()` uses it's own process to build queries and
+#' Construct a list of options to pass to the DPIRD API for summary and minute
+#'   data.
+#'
+#' Note that `get_dpird_extremes()` uses it's own process to build queries and
 #'   query the API in it's own function definition.  This only covers the
 #'   standard weather data from stations.
 #'
@@ -108,7 +111,10 @@
   return(query_list)
 }
 
-#' Query the DPIRD API using {crul}
+
+#' Query the DPIRD API
+#'
+#' Use {crul} to query the DPIRD Weather 2.0 API.
 #'
 #' @param .end_point the DPIRD Weather 2.0 API end point
 #' @param .query_list a list of values in the API to query

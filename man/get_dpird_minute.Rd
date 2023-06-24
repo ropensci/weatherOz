@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dpird_minute.R
 \name{get_dpird_minute}
 \alias{get_dpird_minute}
-\title{Get minute weather data from DPIRD Weather 2.0 API}
+\title{DPIRD Minute Weather Data}
 \usage{
 get_dpird_minute(
   station_code,
@@ -38,15 +38,15 @@ a \link[data.table:data.table]{data.table::data.table} with 'station_code' and d
 queried together with the requested weather variables.
 }
 \description{
-Get nicely formatted minute weather station data from the \acronym{DPIRD}
-weather station network over a maximum 24 hour period.
+Fetch nicely formatted minute weather station data from the \acronym{DPIRD}
+Weather 2.0 \acronym{API} over a maximum 24 hour period.
 }
 \note{
 Please note this function converts date-time columns from Coordinated
 Universal Time 'UTC' returned by the \acronym{API} to Australian Western
 Standard Time 'AWST'.
 }
-\section{Available Values for \code{values}}{
+\section{Available Values}{
 
 \itemize{
 \item all (includes all of the following),
@@ -74,15 +74,25 @@ yesterday <- now() - hours(24)
 get_dpird_minute(station_code = "SP",
                  start_date_time = "2018-02-01 13:00:00",
                  minutes = 1440,
-                 api_key = YOUR_API_KEY,
+                 api_key = "your_api_key",
                  values = c("airTemperature",
                                   "solarIrradiance",
                                   "wind"))
 }
+
 }
 \seealso{
 Other DPIRD: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_summaries}()},
-\code{\link{get_extreme_weather}()}
+\code{\link{get_station_metadata}()}
+}
+\author{
+Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}
