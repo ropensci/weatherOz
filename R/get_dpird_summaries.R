@@ -148,7 +148,7 @@
 #' wd <- get_dpird_summaries(
 #'    station_code = "CL001",
 #'    start_date = "20171028",
-#'    api_key = "YOUR API KEY",
+#'    api_key = "your_api_key",
 #'    interval = "yearly",
 #'    values = "rainfall"
 #' )
@@ -159,7 +159,7 @@
 #'   station_code = "BI",
 #'   start_date = "20220501",
 #'   end_date = "20220502",
-#'   api_key = "your_key",
+#'   api_key = "your_api_key",
 #'   interval = "daily",
 #'   values = c(
 #'     "wind",
