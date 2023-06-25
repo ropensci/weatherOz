@@ -32,8 +32,7 @@ Other DPIRD:
 Other data: 
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
-\code{\link{silo_daily_values}},
-\code{\link{update_forecast_towns}()}
+\code{\link{silo_daily_values}}
 }
 \concept{DPIRD}
 \concept{data}

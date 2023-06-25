@@ -98,8 +98,7 @@ Other BOM:
 \code{\link{get_radar_imagery}()},
 \code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()},
-\code{\link{update_forecast_towns}()}
+\code{\link{parse_precis_forecast}()}
 
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},

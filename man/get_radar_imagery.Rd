@@ -7,25 +7,26 @@
 get_radar_imagery(product_id, path = NULL, download_only = FALSE)
 }
 \arguments{
-\item{product_id}{\code{Character}. \acronym{BOM} product ID to download and import
-as a \CRANpkg{magick} object.  Value is required.}
+\item{product_id}{\code{Character}. \acronym{BOM} product ID to download and
+import.  Value is required.}
 
-\item{path}{\code{Character}. A character string with the name where the downloaded
-file is saved.  If not provided, the default value \code{NULL} is used which
-saves the file in an \R session temp directory.}
+\item{path}{\code{Character}. A character string with the name where the
+downloaded file is saved.  If not provided, the default value \code{NULL} is
+used which saves the file in an \R session temp directory.}
 
-\item{download_only}{\code{Logical}. Whether the radar image is loaded into the
-environment as a \CRANpkg{magick} object or just downloaded.}
+\item{download_only}{\code{Boolean}. Whether the radar image is loaded into the
+environment as a \CRANpkg{magick} object or just downloaded.  Defaults to
+\code{FALSE}}
 }
 \value{
 A \CRANpkg{magick} object of the most recent \acronym{radar} image snapshot
-published by the \acronym{BOM}. If \code{download_only = TRUE} there will be
+published by the \acronym{BOM}.  If \code{download_only = TRUE} there will be
 a \code{NULL} return value with the download path printed in the console as a
 message.
 }
 \description{
 Fetch \acronym{BOM} radar imagery from \url{ftp://ftp.bom.gov.au/anon/gen/radar/}
-and return a \code{\link[terra:SpatRaster-class]{terra::SpatRaster()}} layer object.  Files available are the
+and return a \link{magick} image object.  Files available are the
 most recent radar snapshot which are updated approximately every 6 to 10
 minutes.  It is suggested to check file availability first by using
 \code{\link[=get_available_radar]{get_available_radar()}}.
@@ -59,8 +60,7 @@ Other BOM:
 \code{\link{get_satellite_imagery}()},
 \code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()},
-\code{\link{update_forecast_towns}()}
+\code{\link{parse_precis_forecast}()}
 
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},

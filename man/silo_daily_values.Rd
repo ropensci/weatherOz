@@ -28,8 +28,7 @@ Other SILO:
 Other data: 
 \code{\link{dpird_extreme_weather_values}},
 \code{\link{dpird_minute_values}},
-\code{\link{dpird_summary_values}},
-\code{\link{update_forecast_towns}()}
+\code{\link{dpird_summary_values}}
 }
 \concept{SILO}
 \concept{data}

@@ -83,8 +83,7 @@ Other BOM:
 \code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
 \code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()},
-\code{\link{update_forecast_towns}()}
+\code{\link{parse_precis_forecast}()}
 
 Other parse: 
 \code{\link{parse_coastal_forecast}()},

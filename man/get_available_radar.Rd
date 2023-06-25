@@ -47,8 +47,7 @@ Other BOM:
 \code{\link{get_satellite_imagery}()},
 \code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()},
-\code{\link{update_forecast_towns}()}
+\code{\link{parse_precis_forecast}()}
 
 Other metadata: 
 \code{\link{find_forecast_towns}()},
@@ -58,7 +57,8 @@ Other metadata:
 \code{\link{get_station_metadata}()}
 }
 \author{
-Dean Marchiori, \email{deanmarchiori@gmail.com}
+Dean Marchiori, \email{deanmarchiori@gmail.com} and Adam Sparks,
+\email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{BOM}
 \concept{metadata}
