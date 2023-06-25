@@ -173,8 +173,20 @@ get_precis_forecast <- function(state = "AUS") {
   # clean up and split out time cols into offset and remove extra chars
   .split_time_cols(x = out)
 
+  # fetch database from BOM server
+  curl::curl_download(
+    "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
+    destfile = file.path(tempdir(), "AAC_codes.dbf"),
+    mode = "wb",
+    quiet = TRUE
+  )
+
+  # import BOM dbf file
+  AAC_codes <-
+    foreign::read.dbf(file.path(tempdir(), "AAC_codes.dbf"), as.is = TRUE)
+  AAC_codes <- AAC_codes[, c(2:3, 7:9)]
+
   # merge with aac codes for location information
-  load(system.file("extdata", "AAC_codes.rda", package = "weatherOz"))  # nocov
   data.table::setkey(out, "aac")
   out <- AAC_codes[out, on = c("aac", "town")]
 
