@@ -143,7 +143,7 @@ get_coastal_forecast <- function(state = "AUS") {
                        old = names(marine_AAC_codes),
                        new = (tolower(names(marine_AAC_codes))))
 
-  data.table::setcolorder(marine_AAC_codes, c(1, 3, 4, 5, 6, 7))
+  marine_AAC_codes <- marine_AAC_codes[, c(1, 3, 4:7)]
   data.table::setkey(marine_AAC_codes, "aac")
 
   # merge with aac codes for location information
