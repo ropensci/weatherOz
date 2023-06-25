@@ -35,14 +35,14 @@ find_forecast_towns <-
 
     curl::curl_download(
       "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
-      destfile = paste0(tempdir(), "AAC_codes.dbf"),
+      destfile = file.path(tempdir(), "AAC_codes.dbf"),
       mode = "wb",
       quiet = TRUE
     )
 
     AAC_codes <-
       data.table::data.table(
-        foreign::read.dbf(paste0(tempdir(), "AAC_codes.dbf"), as.is = TRUE))
+        foreign::read.dbf(file.path(tempdir(), "AAC_codes.dbf"), as.is = TRUE))
     data.table::setnames(AAC_codes, names(AAC_codes),
                          tolower(names(AAC_codes)))
     data.table::setcolorder(AAC_codes, c(2:3, 7:9))
