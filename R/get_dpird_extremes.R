@@ -145,11 +145,10 @@ get_dpird_extremes <- function(station_code,
            "You have specified invalid extreme weather values.")
     }
     .values <-
-      dpird_extreme_weather_values[names(
-        dpird_extreme_weather_values) %in% values]
+      dpird_extreme_weather_values[dpird_extreme_weather_values %in% values]
   }
 
-  .values <- c("stationCode", "dateTime", "latitude", "longitude", .values)
+  .values <- c("stationCode", "latitude", "longitude", .values)
 
   query_list <- list(
     stationCode = station_code,
@@ -168,8 +167,6 @@ get_dpird_extremes <- function(station_code,
   out <- data.table::data.table(out$collection)
 
   .set_snake_case_names(out)
-
-  out[, date_time := NULL] # drop the date/time when the request was made
 
   if (any(grep("time", colnames(out)))) {
     out[, grep("time", colnames(out)) := suppressMessages(lapply(
