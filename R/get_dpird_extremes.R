@@ -149,12 +149,12 @@ get_dpird_extremes <- function(station_code,
         dpird_extreme_weather_values) %in% values]
   }
 
-  values <- c("stationCode", "dateTime", "latitude", "longitude", values)
+  .values <- c("stationCode", "dateTime", "latitude", "longitude", .values)
 
   query_list <- list(
     stationCode = station_code,
     offset = 0L,
-    select = paste(values, collapse = ","),
+    select = paste(.values, collapse = ","),
     group = api_group,
     includeClosed = include_closed,
     api_key = api_key
@@ -169,6 +169,8 @@ get_dpird_extremes <- function(station_code,
 
   .set_snake_case_names(out)
 
+  out[, date_time := NULL] # drop the date/time when the request was made
+
   if (any(grep("time", colnames(out)))) {
     out[, grep("time", colnames(out)) := suppressMessages(lapply(
       .SD,
@@ -181,6 +183,6 @@ get_dpird_extremes <- function(station_code,
 
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
-  data.table::setcolorder(out, c("station_code", "date_time"))
+  data.table::setcolorder(out, c("station_code"))
   return(out)
 }
