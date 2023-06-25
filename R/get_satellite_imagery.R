@@ -1,5 +1,5 @@
 
-#' Available BOM Satellite Imagery
+#' Get a List of Available BOM Satellite Imagery
 #'
 #' Fetch a listing of \acronym{BOM} GeoTIFF satellite imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> to determine which files are
@@ -48,7 +48,8 @@
 #' # 1km FD GEOS GIS images
 #' imagery <- get_available_imagery(product_id = "IDE00425")
 #'
-#' @family bomrang
+#' @family BOM
+#' @family metadata
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @export get_available_imagery
@@ -60,7 +61,7 @@ get_available_imagery <- function(product_id = "all") {
   return(tif_list)
 }
 
-#' BOM Satellite Imagery
+#' Get BOM Satellite Imagery
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
@@ -105,7 +106,9 @@ get_available_imagery <- function(product_id = "all") {
 #'    \item{IDE00439}{AHI VIS (Ch3) greyscale 0.5km AUS equirect. GIS}
 #' }
 #'
-#' @family bomrang
+#' @family BOM
+#' @family data fetching
+#'
 #' @seealso
 #' [get_available_imagery()]
 #'
@@ -372,7 +375,7 @@ get_satellite_imagery <- get_satellite <-
 
 ## Reexport plot() for SpatRaster ----
 
-#' Plot a terra SpatRaster object
+#' Make a Map of BOM Satellite Data
 #'
 #' Native plotting of \CRANpkg{terra} `SpatRaster` objects, such as objects
 #' returned from `get_satellite_imagery()` by default.
@@ -381,6 +384,7 @@ get_satellite_imagery <- get_satellite <-
 #' @param x An object of class `SpatRaster`.
 #' @param y Not used.
 #' @param ... Plot parameters forwarded.
+#' @aliases plot
 #' @export
 methods::setMethod(
   "plot",

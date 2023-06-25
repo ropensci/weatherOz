@@ -1,5 +1,5 @@
 
-#' Get DataDrill Weather Data
+#' Get DataDrill Weather Data from SILO
 #'
 #' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API} of
 #'   spatially interpolated weather data (DataDrill).  The daily climate
@@ -144,6 +144,7 @@
 #'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
+#' @family data fetching
 #'
 #' @export
 

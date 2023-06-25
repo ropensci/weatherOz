@@ -1,5 +1,5 @@
 
-#' PatchedPoint Weather Data
+#' Get PatchedPoint Weather Data from SILO
 #'
 #' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API}
 #'   derived from the \acronym{BOM} station observations (PatchedPoint) data.
@@ -139,6 +139,7 @@
 #'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
+#' @family data fetching
 #'
 #' @examples
 #' \dontrun{

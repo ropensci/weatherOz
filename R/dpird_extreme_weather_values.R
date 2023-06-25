@@ -1,5 +1,5 @@
 
-#' Extreme Weather Data Values
+#' A List of DPIRD Extreme Weather Data Values
 #'
 #' A [vector] object containing 57 items representing valid values to supply
 #'   to `get_dpird_extremes()`'s \var{values} argument taken from the
@@ -10,6 +10,7 @@
 #' @keywords datasets
 #'
 #' @family DPIRD
+#' @family data
 #'
 #' @source <https://www.agric.wa.gov.au/weather-api-20>
 #'

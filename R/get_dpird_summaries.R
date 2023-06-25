@@ -1,5 +1,5 @@
 
-#' DPIRD Summarised Weather Data
+#' Get DPIRD Weather Data in Summarised Formats
 #'
 #' Fetch nicely formatted individual station weather summaries from the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
@@ -134,6 +134,7 @@
 #'   \sQuote{AWST}.
 #'
 #' @family DPIRD
+#' @family data fetching
 #'
 #' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au} and Rodrigo Pires,
 #'   \email{rodrigo.pires@@dpird.wa.gov.au}

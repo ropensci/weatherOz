@@ -1,5 +1,5 @@
 
-#' Find Nearest BOM Forecast Town
+#' Find the Nearest Town with a BOM Forecast
 #'
 #' For a given `latitude` and `longitude`, find the nearest town that the
 #'   \acronym{BOM} provides a forecast for.
@@ -22,7 +22,8 @@
 #'   \email{me@@jamesgoldie.dev} and Adam H. Sparks
 #'   \email{adam.sparks@@dpird.wa.gov.au}
 #'
-#' @family bomrang
+#' @family BOM
+#' @family metadata
 #'
 #' @export
 

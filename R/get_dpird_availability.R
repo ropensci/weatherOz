@@ -1,5 +1,5 @@
 
-#' DPIRD Weather Station Availability
+#' Get the Availability for DPIRD Weather Stations
 #'
 #' Fetch the availability metadata of weather stations in the \acronym{DPIRD}
 #'   weather station network from the Weather 2.0 \acronym{API}.
@@ -45,6 +45,7 @@
 #'   metadata.
 #'
 #' @family DPIRD
+#' @family metadata
 #'
 #' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
 #'

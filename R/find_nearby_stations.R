@@ -1,14 +1,9 @@
-# file: /R/get_nearby_stations.R
-#
-# This file is part of the R-package weatherOz
-#
-# Copyright (C) 2023 DPIRD
-#	<https://www.dpird.wa.gov.au>
 
-#' Find Nearby Stations
+#' Find the Nearest Weather Stations to a Given Geographic Point or Known Station
 #'
-#' Find nearby weather stations given geographic coordinates or a station code.
-#'   Either a combination of \var{latitude} and \var{longitude} or
+#' Find nearby weather stations given geographic coordinates or a station code
+#'   for both of the \acronym{DPIRD} and \acronym{SILO} weather station
+#'   networks.  Either a combination of \var{latitude} and \var{longitude} or
 #'   \var{station_code} must be provided.
 #'
 #' @param latitude A `numeric` value for latitude expressed as decimal degrees
@@ -39,23 +34,34 @@
 #'   free by filling out the form found at
 #'   <https://www.agric.wa.gov.au/web-apis>.
 #'
-#' @examples
-#' \dontrun{
-#' # Query WA only stations and return both DPIRD's and BOM's stations for
-#' # the Northam WA station, returning stations with 50 km of this station
+#' @examples \dontrun{
+#' # Query WA only stations and return DPIRD's stations nearest to the
+#'   Northam, WA station, "NO", returning stations with 50 km of this station
+#'
 #' wa_stn <- find_nearby_stations(
 #'   station_code = "NO",
 #'   distance_km = 50,
 #'   api_key = "your_api_key",
-#'   which_api = "DPIRD"
+#'   which_api = "dpird"
 #' )
 #'
-#' # Query Wagga Wagga BOM station.
+#' # Query stations nearest DPIRD's Northam, WA station, "NO" and return both
+#'   DPIRD and SILO/BOM stations within 50 km of this station.
+#'
+#' wa_stn <- find_nearby_stations(
+#'   station_code = "NO",
+#'   distance_km = 50,
+#'   api_key = "your_api_key",
+#'   which_api = "all"
+#' )
+#'
+#' # Query Wagga Wagga BOM station finding stations within 200 km of it.
+#'
 #' wagga_stn <- find_nearby_stations(
 #'   latitude = -35.1583,
 #'   longitude = 147.4575,
 #'   distance_km = 200,
-#'   which_api = "SILO"
+#'   which_api = "silo"
 #' )
 #' }
 #'
@@ -64,6 +70,7 @@
 #'
 #' @family DPIRD
 #' @family SILO
+#' @family metadata
 #'
 #' @export
 

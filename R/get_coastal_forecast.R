@@ -1,5 +1,5 @@
 
-#' Get BOM coastal waters forecast
+#' Get a BOM Coastal Waters Forecast
 #'
 #' Fetch the \acronym{BOM} daily Coastal Waters Forecast for a specified state
 #'   or region.
@@ -46,7 +46,8 @@
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Paul Melloy
 #'   \email{paul@@melloy.com.au}
 #'
-#' @family bomrang
+#' @family BOM
+#' @family data fetching
 #'
 #' @seealso [parse_coastal_forecast]
 #'

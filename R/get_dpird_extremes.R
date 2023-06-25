@@ -1,5 +1,5 @@
 
-#' Extreme Weather Event Summaries
+#' Get DPIRD Extreme Weather Event Summaries
 #'
 #' Fetch nicely formatted individual extreme weather summaries from the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
@@ -89,6 +89,7 @@
 #'   extreme weather information according to the value(s) selected.
 #'
 #' @family DPIRD
+#' @family data fetching
 #'
 #' @examples
 #' \dontrun{

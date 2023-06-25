@@ -62,7 +62,8 @@
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Paul Melloy
 #' \email{paul@@melloy.com.au}
 #'
-#' @family bomrang
+#' @family BOM
+#' @family parse
 #'
 #' @seealso [get_ag_bulletin]
 #'

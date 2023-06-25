@@ -1,5 +1,5 @@
 
-#' BOM Daily Précis Forecasts
+#' Get a BOM Daily Précis Forecast
 #'
 #' Fetch nicely formatted daily précis forecast from the \acronym{BOM}, which
 #'   contains seven-day town forecasts for a specified state or territory.
@@ -49,7 +49,8 @@
 #'
 #' @seealso [parse_precis_forecast]
 #'
-#' @family bomrang
+#' @family BOM
+#' @family data fetching
 #'
 #' @export get_precis_forecast
 

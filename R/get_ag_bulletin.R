@@ -1,5 +1,5 @@
 
-#' Get BOM Agriculture Bulletin Information
+#' Get a BOM Agriculture Bulletin
 #'
 #' Fetch the \acronym{BOM} agricultural bulletin information for a specified
 #'   station or stations.
@@ -58,7 +58,8 @@
 #'
 #' @seealso [parse_ag_bulletin]
 #'
-#' @family bomrang
+#' @family BOM
+#' @family data fetching
 #'
 #' @export get_ag_bulletin
 

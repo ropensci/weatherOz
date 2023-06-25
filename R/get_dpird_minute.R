@@ -1,5 +1,5 @@
 
-#' DPIRD Minute Weather Data
+#' Get DPIRD Weather Data by the Minute
 #'
 #' Fetch nicely formatted minute weather station data from the \acronym{DPIRD}
 #'   Weather 2.0 \acronym{API} over a maximum 24 hour period.
@@ -60,6 +60,7 @@
 #' }
 #'
 #' @family DPIRD
+#' @family data fetching
 #'
 #' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
 #' @export

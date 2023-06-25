@@ -1,5 +1,5 @@
 
-#' Weather Station Metadata
+#' Get Weather Station Metadata for Both DPIRD and SILO Weather Stations
 #'
 #' Download the latest station locations and metadata for stations in the
 #'   \acronym{SILO} and \acronym{DPIRD} networks.  For \acronym{BOM} stations
@@ -76,6 +76,7 @@
 #'
 #' @family DPIRD
 #' @family SILO
+#' @family metadata
 #'
 #' @export
 

@@ -1,5 +1,5 @@
 
-#' Parse local BOM daily précis forecast XML file(s) for select towns
+#' Parse BOM Précis Forecast XML Files
 #'
 #' Parse local \acronym{BOM} daily précis forecast \acronym{XML} file(s) of the
 #'  seven-day town forecasts for a specified state or territory or all
@@ -64,7 +64,8 @@
 #'
 #' @seealso [get_precis_forecast]
 #'
-#' @family bomrang
+#' @family BOM
+#' @family parse
 #'
 #' @export parse_precis_forecast
 #'

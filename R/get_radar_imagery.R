@@ -1,5 +1,5 @@
 
-#' Available BOM Radar Imagery
+#' Get a List of Available BOM Radar Imagery
 #'
 #' Fetch a listing of available \acronym{BOM} \acronym{radar} imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/radar/> to determine which files are
@@ -26,7 +26,8 @@
 #' # Check availability radar imagery for Wollongong (radar_id = 3)
 #' imagery <- get_available_radar(radar_id = 3)
 #'
-#' @family bomrang
+#' @family BOM
+#' @family metadata
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}
 #'
@@ -77,7 +78,7 @@ get_available_radar <- function(radar_id = "all") {
   return(dat)
 }
 
-#' BOM Radar Imagery
+#' Get BOM Radar Imagery
 #'
 #' Fetch \acronym{BOM} radar imagery from <ftp://ftp.bom.gov.au/anon/gen/radar/>
 #'   and return a [terra::SpatRaster()] layer object.  Files available are the
@@ -119,7 +120,8 @@ get_available_radar <- function(radar_id = "all") {
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}
 #'
-#' @family bomrang
+#' @family BOM
+#' @family data fetching
 #'
 #' @rdname get_radar_imagery
 #' @export get_radar_imagery
