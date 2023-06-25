@@ -29,14 +29,14 @@
 #' @family BOM
 #' @family metadata
 #'
-#' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}
+#' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Adam Sparks,
+#'   \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @export get_available_radar
 
 get_available_radar <- function(radar_id = "all") {
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar/"
-  radar_locations <- NULL #nocov
-  load(system.file("extdata", "radar_locations.rda", package = "weatherOz"))
+
   list_files <- curl::new_handle()
   curl::handle_setopt(
     handle = list_files,
@@ -45,6 +45,23 @@ get_available_radar <- function(radar_id = "all") {
     ftp_use_epsv = TRUE,
     dirlistonly = TRUE
   )
+
+  curl::curl_download(
+    "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDR00007.dbf",
+    destfile = file.path(tempdir(), "radar_locations.dbf"),
+    mode = "wb",
+    quiet = TRUE
+  )
+
+  radar_locations <-
+    data.table::data.table(
+      foreign::read.dbf(file.path(tempdir(), "radar_locations.dbf"),
+                        as.is = TRUE))
+
+  data.table::setkey(radar_locations, "Name")
+  radar_locations[, LocationID := sprintf("%02s", LocationID)]
+
+  # get radar image files
   con <- curl::curl(url = ftp_base, "r", handle = list_files)
   files <- readLines(con)
   close(con)
@@ -81,20 +98,21 @@ get_available_radar <- function(radar_id = "all") {
 #' Get BOM Radar Imagery
 #'
 #' Fetch \acronym{BOM} radar imagery from <ftp://ftp.bom.gov.au/anon/gen/radar/>
-#'   and return a [terra::SpatRaster()] layer object.  Files available are the
+#'   and return a [magick] image object.  Files available are the
 #'   most recent radar snapshot which are updated approximately every 6 to 10
 #'   minutes.  It is suggested to check file availability first by using
 #'   [get_available_radar()].
 #'
-#' @param product_id `Character`. \acronym{BOM} product ID to download and import
-#'   as a \CRANpkg{magick} object.  Value is required.
+#' @param product_id `Character`. \acronym{BOM} product ID to download and
+#'   import.  Value is required.
 #'
-#' @param path `Character`. A character string with the name where the downloaded
-#'   file is saved.  If not provided, the default value `NULL` is used which
-#'   saves the file in an \R session temp directory.
+#' @param path `Character`. A character string with the name where the
+#'   downloaded file is saved.  If not provided, the default value `NULL` is
+#'   used which saves the file in an \R session temp directory.
 #'
-#' @param download_only `Logical`. Whether the radar image is loaded into the
-#'   environment as a \CRANpkg{magick} object or just downloaded.
+#' @param download_only `Boolean`. Whether the radar image is loaded into the
+#'   environment as a \CRANpkg{magick} object or just downloaded.  Defaults to
+#'   `FALSE`
 #'
 #' @details Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery
 #'   can be obtained from [get_available_radar()].
@@ -104,7 +122,7 @@ get_available_radar <- function(radar_id = "all") {
 #'
 #' @return
 #' A \CRANpkg{magick} object of the most recent \acronym{radar} image snapshot
-#'   published by the \acronym{BOM}. If `download_only = TRUE` there will be
+#'   published by the \acronym{BOM}.  If `download_only = TRUE` there will be
 #'   a `NULL` return value with the download path printed in the console as a
 #'   message.
 #'
