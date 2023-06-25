@@ -4,9 +4,9 @@
 #' For a given `latitude` and `longitude`, find the nearest town that the
 #'   \acronym{BOM} provides a forecast for.
 #'
-#' @param latitude A `numeric` value of latitude in decimal degree (DD)
-#'   format.  By default, Canberra (approximately).
 #' @param longitude A `numeric` value of longitude in decimal degree (DD)
+#'   format.  By default, Canberra (approximately).
+#' @param latitude A `numeric` value of latitude in decimal degree (DD)
 #'   format.  By default, Canberra (approximately).
 #' @param distance_km A `numeric` value of the distance in kilometres from the
 #'   `latitude` and `longitude` point beyond which values will not be returned.
@@ -28,8 +28,8 @@
 #' @export
 
 find_forecast_towns <-
-  function(latitude = -35.3,
-           longitude = 149.2,
+  function(longitude = 149.2,
+           latitude = -35.3,
            distance_km = 100) {
     .check_lonlat(longitude = longitude, latitude = latitude)
 
@@ -40,16 +40,16 @@ find_forecast_towns <-
       quiet = TRUE
     )
 
-    AAC_codes <-
-      data.table::data.table(
-        foreign::read.dbf(file.path(tempdir(), "AAC_codes.dbf"), as.is = TRUE))
-    data.table::setnames(AAC_codes, names(AAC_codes),
-                         tolower(names(AAC_codes)))
-    data.table::setcolorder(AAC_codes, c(2:3, 7:9))
-    data.table::setnames(AAC_codes, c(2, 5), c("town", "elev"))
-    data.table::setkey(AAC_codes, "aac")
+    forecast_towns <-
+      data.table::data.table(foreign::read.dbf(file.path(tempdir(),
+                                                         "AAC_codes.dbf"),
+                                               as.is = TRUE))
+    data.table::setnames(forecast_towns, names(forecast_towns),
+                         tolower(names(forecast_towns)))
+    data.table::setcolorder(forecast_towns, c(2:3, 7:9))
+    data.table::setnames(forecast_towns, c(2, 5), c("town", "elev"))
+    data.table::setkey(forecast_towns, "aac")
 
-    forecast_towns <- data.table::copy(AAC_codes)
     forecast_towns[, "distance" := .haversine_distance(latitude,
                                                        longitude,
                                                        lat,
@@ -57,5 +57,6 @@ find_forecast_towns <-
       data.table::setorderv("distance")
     forecast_towns[distance %in%
                      forecast_towns[(distance <= distance_km)]$distance]
-    return(forecast_towns[])
+    data.table::setkey(forecast_towns, "aac")
+    return(forecast_towns[, c("aac", "town", "lon", "lat", "elev", "distance")])
   }
