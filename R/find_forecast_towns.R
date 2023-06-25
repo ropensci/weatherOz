@@ -33,13 +33,21 @@ find_forecast_towns <-
            distance_km = 100) {
     .check_lonlat(longitude = longitude, latitude = latitude)
 
-    # Load JSON URL list
-    load(system.file(
-      "extdata",
-      "AAC_codes.rda",
-      package = "weatherOz",
-      mustWork = TRUE
-    ))
+    curl::curl_download(
+      "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
+      destfile = paste0(tempdir(), "AAC_codes.dbf"),
+      mode = "wb",
+      quiet = TRUE
+    )
+
+    AAC_codes <-
+      data.table::data.table(
+        foreign::read.dbf(paste0(tempdir(), "AAC_codes.dbf"), as.is = TRUE))
+    data.table::setnames(AAC_codes, names(AAC_codes),
+                         tolower(names(AAC_codes)))
+    data.table::setcolorder(AAC_codes, c(2:3, 7:9))
+    data.table::setnames(AAC_codes, c(2, 5), c("town", "elev"))
+    data.table::setkey(AAC_codes, "aac")
 
     forecast_towns <- data.table::copy(AAC_codes)
     forecast_towns[, "distance" := .haversine_distance(latitude,
