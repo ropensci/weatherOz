@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_precis_forecast.R
 \name{get_precis_forecast}
 \alias{get_precis_forecast}
-\title{BOM Daily Précis Forecasts}
+\title{Get a BOM Daily Précis Forecast}
 \usage{
 get_precis_forecast(state = "AUS")
 }
@@ -56,7 +56,7 @@ anonymous \acronym{FTP} server with spatial data \cr
 \seealso{
 \link{parse_precis_forecast}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -68,10 +68,22 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other data fetching: 
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_patched_point}()},
+\code{\link{get_radar_imagery}()},
+\code{\link{get_satellite_imagery}()}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Keith
 Pembleton, \email{keith.pembleton@usq.edu.au} and Paul Melloy,
 \email{paul@melloy.com.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{data fetching}

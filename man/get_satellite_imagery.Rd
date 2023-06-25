@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_satellite_imagery.R
 \name{get_satellite_imagery}
 \alias{get_satellite_imagery}
-\title{BOM Satellite Imagery}
+\title{Get BOM Satellite Imagery}
 \usage{
 get_satellite_imagery(product_id, scans = 1, compat = "terra")
 }
@@ -88,7 +88,7 @@ images \cr \url{http://www.bom.gov.au/australia/satellite/index.shtml}.
 \seealso{
 \code{\link[=get_available_imagery]{get_available_imagery()}}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -100,8 +100,20 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other data fetching: 
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_patched_point}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{data fetching}

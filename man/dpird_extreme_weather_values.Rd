@@ -3,7 +3,7 @@
 \docType{data}
 \name{dpird_extreme_weather_values}
 \alias{dpird_extreme_weather_values}
-\title{Extreme Weather Data Values}
+\title{A List of DPIRD Extreme Weather Data Values}
 \format{
 A \link{vector} object of 57 items.
 }
@@ -28,6 +28,13 @@ Other DPIRD:
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
 \code{\link{get_station_metadata}()}
+
+Other data: 
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{silo_daily_values}},
+\code{\link{update_forecast_towns}()}
 }
 \concept{DPIRD}
+\concept{data}
 \keyword{datasets}

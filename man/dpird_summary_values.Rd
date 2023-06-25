@@ -3,7 +3,7 @@
 \docType{data}
 \name{dpird_summary_values}
 \alias{dpird_summary_values}
-\title{Summary Weather Data Values}
+\title{A List of DPIRD Summary Weather Data Values}
 \format{
 A \link{vector} object of 75 items.
 }
@@ -15,8 +15,8 @@ dpird_summary_values
 }
 \description{
 A \link{vector} object containing 75 items representing valid values to supply
-to \code{get_dpird_summary()}'s \var{values} argument taken from the documentation
-for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
+to \code{get_dpird_summary()}'s \var{values} argument taken from the
+documentation for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \seealso{
 Other DPIRD: 
@@ -28,6 +28,13 @@ Other DPIRD:
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
 \code{\link{get_station_metadata}()}
+
+Other data: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{silo_daily_values}},
+\code{\link{update_forecast_towns}()}
 }
 \concept{DPIRD}
+\concept{data}
 \keyword{datasets}

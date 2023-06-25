@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_forecast_towns.R
 \name{find_forecast_towns}
 \alias{find_forecast_towns}
-\title{Find Nearest BOM Forecast Town}
+\title{Find the Nearest Town with a BOM Forecast}
 \usage{
 find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 100)
 }
@@ -31,7 +31,7 @@ find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
 
 }
 \seealso{
-Other bomrang: 
+Other BOM: 
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
@@ -43,10 +43,18 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other metadata: 
+\code{\link{find_nearby_stations}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_station_metadata}()}
 }
 \author{
 Hugh Parsonage, \email{hugh.parsonage@gmail.com} and James Goldie,
 \email{me@jamesgoldie.dev} and Adam H. Sparks
 \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{metadata}

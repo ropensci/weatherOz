@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_radar_imagery.R
 \name{get_available_radar}
 \alias{get_available_radar}
-\title{Available BOM Radar Imagery}
+\title{Get a List of Available BOM Radar Imagery}
 \usage{
 get_available_radar(radar_id = "all")
 }
@@ -37,7 +37,7 @@ Australian Bureau of Meteorology (BOM) radar image
 \url{http://www.bom.gov.au/australia/radar/}.
 }
 \seealso{
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -49,8 +49,16 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other metadata: 
+\code{\link{find_forecast_towns}()},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_station_metadata}()}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{metadata}

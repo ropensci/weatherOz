@@ -2,7 +2,8 @@
 % Please edit documentation in R/get_satellite_imagery.R
 \name{plot,SpatRaster,ANY-method}
 \alias{plot,SpatRaster,ANY-method}
-\title{Plot a terra SpatRaster object}
+\alias{plot}
+\title{Make a Map of BOM Satellite Data}
 \usage{
 \S4method{plot}{SpatRaster,ANY}(x, y = "missing", ...)
 }

@@ -33,7 +33,7 @@ webpage, \dQuote{Weather Data Services},
 \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}.
 }
 \seealso{
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -45,8 +45,15 @@ Other bomrang:
 \code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()}
+
+Other data: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{silo_daily_values}}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{data}

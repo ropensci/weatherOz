@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_station_metadata.R
 \name{get_station_metadata}
 \alias{get_station_metadata}
-\title{Weather Station Metadata}
+\title{Get Weather Station Metadata for Both DPIRD and SILO Weather Stations}
 \usage{
 get_station_metadata(which_api = "all", api_key, status = FALSE, rich = FALSE)
 }
@@ -101,9 +101,17 @@ Other SILO:
 \code{\link{get_data_drill}()},
 \code{\link{get_patched_point}()},
 \code{\link{silo_daily_values}}
+
+Other metadata: 
+\code{\link{find_forecast_towns}()},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_dpird_availability}()}
 }
 \author{
 Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}
 \concept{SILO}
+\concept{metadata}

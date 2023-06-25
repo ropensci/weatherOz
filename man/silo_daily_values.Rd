@@ -3,7 +3,7 @@
 \docType{data}
 \name{silo_daily_values}
 \alias{silo_daily_values}
-\title{SILO Daily Weather Values}
+\title{A List of SILO Daily Weather Values}
 \format{
 A \link{vector} object of 57 items.
 }
@@ -15,8 +15,8 @@ silo_daily_values
 }
 \description{
 A \link{vector} object containing 18 items representing valid values to supply
-to \code{get_patched_point()} and \code{get_data_drill()}'s \code{values} argument taken
-from the documentation for the \acronym{SILO} \acronym{API}.
+to \code{get_patched_point()} and \code{get_data_drill()}'s \var{values} argument
+taken from the documentation for the \acronym{SILO} \acronym{API}.
 }
 \seealso{
 Other SILO: 
@@ -24,6 +24,13 @@ Other SILO:
 \code{\link{get_data_drill}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_station_metadata}()}
+
+Other data: 
+\code{\link{dpird_extreme_weather_values}},
+\code{\link{dpird_minute_values}},
+\code{\link{dpird_summary_values}},
+\code{\link{update_forecast_towns}()}
 }
 \concept{SILO}
+\concept{data}
 \keyword{datasets}

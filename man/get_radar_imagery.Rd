@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_radar_imagery.R
 \name{get_radar_imagery}
 \alias{get_radar_imagery}
-\title{BOM Radar Imagery}
+\title{Get BOM Radar Imagery}
 \usage{
 get_radar_imagery(product_id, path = NULL, download_only = FALSE)
 }
@@ -49,7 +49,7 @@ Australian Bureau of Meteorology (\acronym{BOM}) radar images\cr
 \seealso{
 \code{\link[=get_available_radar]{get_available_radar()}}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -61,8 +61,20 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other data fetching: 
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_patched_point}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_satellite_imagery}()}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{data fetching}

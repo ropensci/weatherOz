@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dpird_availability.R
 \name{get_dpird_availability}
 \alias{get_dpird_availability}
-\title{DPIRD Weather Station Availability}
+\title{Get the Availability for DPIRD Weather Stations}
 \usage{
 get_dpird_availability(
   station_code = NULL,
@@ -87,8 +87,16 @@ Other DPIRD:
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
 \code{\link{get_station_metadata}()}
+
+Other metadata: 
+\code{\link{find_forecast_towns}()},
+\code{\link{find_nearby_stations}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_station_metadata}()}
 }
 \author{
 Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}
+\concept{metadata}

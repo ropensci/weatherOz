@@ -2,7 +2,7 @@
 % Please edit documentation in R/parse_precis_forecast.R
 \name{parse_precis_forecast}
 \alias{parse_precis_forecast}
-\title{Parse local BOM daily précis forecast XML file(s) for select towns}
+\title{Parse BOM Précis Forecast XML Files}
 \usage{
 parse_precis_forecast(state, filepath)
 }
@@ -71,7 +71,7 @@ the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
 \seealso{
 \link{get_precis_forecast}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -83,10 +83,15 @@ Other bomrang:
 \code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other parse: 
+\code{\link{parse_ag_bulletin}()},
+\code{\link{parse_coastal_forecast}()}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Keith
 Pembleton, \email{keith.pembleton@usq.edu.au} and Paul Melloy,
 \email{paul@melloy.com.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{parse}

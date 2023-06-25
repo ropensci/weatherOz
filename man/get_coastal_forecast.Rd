@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_coastal_forecast.R
 \name{get_coastal_forecast}
 \alias{get_coastal_forecast}
-\title{Get BOM coastal waters forecast}
+\title{Get a BOM Coastal Waters Forecast}
 \usage{
 get_coastal_forecast(state = "AUS")
 }
@@ -56,7 +56,7 @@ Location data and other metadata come from the \acronym{BOM} anonymous
 \seealso{
 \link{parse_coastal_forecast}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -68,9 +68,21 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other data fetching: 
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_dpird_extremes}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_patched_point}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()},
+\code{\link{get_satellite_imagery}()}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com} and Paul Melloy
 \email{paul@melloy.com.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{data fetching}

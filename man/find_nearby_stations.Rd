@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_nearby_stations.R
 \name{find_nearby_stations}
 \alias{find_nearby_stations}
-\title{Find Nearby Stations}
+\title{Find the Nearest Weather Stations to a Given Geographic Point or Known Station}
 \usage{
 find_nearby_stations(
   latitude = NULL,
@@ -45,8 +45,9 @@ Data are sorted by increasing distance from station or location of
 interest.
 }
 \description{
-Find nearby weather stations given geographic coordinates or a station code.
-Either a combination of \var{latitude} and \var{longitude} or
+Find nearby weather stations given geographic coordinates or a station code
+for both of the \acronym{DPIRD} and \acronym{SILO} weather station
+networks.  Either a combination of \var{latitude} and \var{longitude} or
 \var{station_code} must be provided.
 }
 \note{
@@ -56,21 +57,33 @@ free by filling out the form found at
 }
 \examples{
 \dontrun{
-# Query WA only stations and return both DPIRD's and BOM's stations for
-# the Northam WA station, returning stations with 50 km of this station
+# Query WA only stations and return DPIRD's stations nearest to the
+  Northam, WA station, "NO", returning stations with 50 km of this station
+
 wa_stn <- find_nearby_stations(
   station_code = "NO",
   distance_km = 50,
   api_key = "your_api_key",
-  which_api = "DPIRD"
+  which_api = "dpird"
 )
 
-# Query Wagga Wagga BOM station.
+# Query stations nearest DPIRD's Northam, WA station, "NO" and return both
+  DPIRD and SILO/BOM stations within 50 km of this station.
+
+wa_stn <- find_nearby_stations(
+  station_code = "NO",
+  distance_km = 50,
+  api_key = "your_api_key",
+  which_api = "all"
+)
+
+# Query Wagga Wagga BOM station finding stations within 200 km of it.
+
 wagga_stn <- find_nearby_stations(
   latitude = -35.1583,
   longitude = 147.4575,
   distance_km = 200,
-  which_api = "SILO"
+  which_api = "silo"
 )
 }
 
@@ -91,6 +104,13 @@ Other SILO:
 \code{\link{get_patched_point}()},
 \code{\link{get_station_metadata}()},
 \code{\link{silo_daily_values}}
+
+Other metadata: 
+\code{\link{find_forecast_towns}()},
+\code{\link{get_available_imagery}()},
+\code{\link{get_available_radar}()},
+\code{\link{get_dpird_availability}()},
+\code{\link{get_station_metadata}()}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H. Sparks
@@ -98,3 +118,4 @@ Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H. Sparks
 }
 \concept{DPIRD}
 \concept{SILO}
+\concept{metadata}

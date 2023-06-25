@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_dpird_extremes.R
 \name{get_dpird_extremes}
 \alias{get_dpird_extremes}
-\title{Extreme Weather Event Summaries}
+\title{Get DPIRD Extreme Weather Event Summaries}
 \usage{
 get_dpird_extremes(
   station_code,
@@ -133,9 +133,21 @@ Other DPIRD:
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
 \code{\link{get_station_metadata}()}
+
+Other data fetching: 
+\code{\link{get_ag_bulletin}()},
+\code{\link{get_coastal_forecast}()},
+\code{\link{get_data_drill}()},
+\code{\link{get_dpird_minute}()},
+\code{\link{get_dpird_summaries}()},
+\code{\link{get_patched_point}()},
+\code{\link{get_precis_forecast}()},
+\code{\link{get_radar_imagery}()},
+\code{\link{get_satellite_imagery}()}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam
 Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}
+\concept{data fetching}

@@ -73,7 +73,7 @@ Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 \seealso{
 \link{get_ag_bulletin}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -85,9 +85,14 @@ Other bomrang:
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other parse: 
+\code{\link{parse_coastal_forecast}()},
+\code{\link{parse_precis_forecast}()}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Paul Melloy
 \email{paul@melloy.com.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{parse}

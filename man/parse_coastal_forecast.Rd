@@ -72,7 +72,7 @@ Location data and other metadata come from the \acronym{BOM} anonymous
 \seealso{
 \link{get_coastal_forecast}
 
-Other bomrang: 
+Other BOM: 
 \code{\link{find_forecast_towns}()},
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
@@ -84,9 +84,14 @@ Other bomrang:
 \code{\link{parse_ag_bulletin}()},
 \code{\link{parse_precis_forecast}()},
 \code{\link{update_forecast_towns}()}
+
+Other parse: 
+\code{\link{parse_ag_bulletin}()},
+\code{\link{parse_precis_forecast}()}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com} and Paul Melloy
 \email{paul@melloy.com.au}
 }
-\concept{bomrang}
+\concept{BOM}
+\concept{parse}
