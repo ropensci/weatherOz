@@ -60,7 +60,7 @@ get_precis_forecast <- function(state = "AUS") {
 
   the_state <- .check_states(state)
   location <- .validate_filepath(filepath)
-  forecast_out <- .return_precis(location, the_state)
+  forecast_out <- .return_precis(file_loc = location, cleaned_state = the_state)
 
   # return(forecast_out)
   return(
@@ -128,26 +128,6 @@ get_precis_forecast <- function(state = "AUS") {
 #' @noRd
 
 .parse_precis_forecast <- function(xml_url) {
-  .SD <- #nocov start
-    AAC_codes <-
-    attrs <-
-    end_time_local <-
-    precipitation_range <-
-    start_time_local <-
-    values <-
-    .N <-
-    .I <-
-    .GRP <-
-    .BY <-
-    .EACHI <-
-    state <-
-    product_id <-
-    probability_of_precipitation <-
-    start_time_utc <-
-    end_time_utc <-
-    upper_precipitation_limit <-
-    lower_precipitation_limit <-
-    forecast_icon_code <- NULL #nocov end
 
   # load the XML from ftp
   if (substr(xml_url, 1, 3) == "ftp") {
@@ -176,15 +156,23 @@ get_precis_forecast <- function(state = "AUS") {
   # fetch database from BOM server
   curl::curl_download(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
-    destfile = file.path(tempdir(), "AAC_codes.dbf"),
+    destfile = paste0(tempdir(), "AAC_codes.dbf"),
     mode = "wb",
     quiet = TRUE
   )
 
-  # import BOM dbf file
   AAC_codes <-
-    foreign::read.dbf(file.path(tempdir(), "AAC_codes.dbf"), as.is = TRUE)
+    data.table::data.table(
+      foreign::read.dbf(paste0(tempdir(), "AAC_codes.dbf"), as.is = TRUE))
+
+  # convert names to lower case for consistency with bomrang output
+  data.table::setnames(AAC_codes,
+                       names(AAC_codes), tolower(names(AAC_codes)))
+
+  # reorder columns
   AAC_codes <- AAC_codes[, c(2:3, 7:9)]
+  data.table::setnames(AAC_codes, c(2, 5), c("town", "elev"))
+  data.table::setkey(AAC_codes, "aac")
 
   # merge with aac codes for location information
   data.table::setkey(out, "aac")
