@@ -125,10 +125,28 @@ get_coastal_forecast <- function(state = "AUS") {
   out <- .parse_coastal_xml(xml_object)
   # clean up and split out time cols into offset and remove extra chars
   .split_time_cols(x = out)
+
+  curl::curl_download(
+    "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf",
+    destfile = paste0(tempdir(), "marine_AAC_codes.dbf"),
+    mode = "wb",
+    quiet = TRUE
+  )
+
+  marine_AAC_codes <-
+    data.table::data.table(
+      foreign::read.dbf(paste0(tempdir(), "marine_AAC_codes.dbf"),
+                        as.is = TRUE))
+
+  # convert names to lower case for consistency with bomrang output
+  data.table::setnames(marine_AAC_codes,
+                       old = names(marine_AAC_codes),
+                       new = (tolower(names(marine_AAC_codes))))
+
+  data.table::setcolorder(marine_AAC_codes, c(1, 3, 4, 5, 6, 7))
+  data.table::setkey(marine_AAC_codes, "aac")
+
   # merge with aac codes for location information
-  load(system.file("extdata",
-                   "marine_AAC_codes.rda",
-                   package = "weatherOz"))  # nocov
   data.table::setkey(out, "aac")
   out <- marine_AAC_codes[out, on = c("aac", "dist_name")]
   # add state field
@@ -206,7 +224,7 @@ get_coastal_forecast <- function(state = "AUS") {
 
 #' extract the values of a coastal forecast item
 #'
-#' @param xml_object coastal forecast xml_object
+#' @param xml_object coastal forecast XML object
 #'
 #' @return a data.table of the forecast for further refining
 #' @keywords internal
