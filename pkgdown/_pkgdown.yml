@@ -1,0 +1,66 @@
+
+home:
+  title: An API Client for Australian Weather and Climate Data Resources
+
+development:
+  mode: auto
+
+reference:
+- title: Data Fetching
+
+- subtitle: BOM
+  desc: >
+    Functions that fetch BOM Data from the FTP server.
+  contents:
+  - get_ag_bulletin
+  - get_coastal_forecast
+  - get_precis_forecast
+  - get_radar_imagery
+  - get_satellite_imagery
+
+- subtitle: DPIRD
+  desc: >
+    Functions that fetch data from the DPIRD Weather 2.0 API.
+  contents:
+  - get_dpird_extremes
+  - get_dpird_minute
+  - get_dpird_summaries
+
+- subtitle: SILO
+  desc: >
+    Functions that fetch data from the SILO API.
+  contents:
+  - get_data_drill
+  - get_patched_point
+
+- title: Metadata Fetching
+  desc: >
+    Functions that get metadata, _.e.g._, station uptime, dataset availability,
+    nearby stations or forecast locations, values that the station records, etc.
+  contents:
+  - find_forecast_towns
+  - find_nearby_stations
+  - get_available_imagery
+  - get_available_radar
+  - get_dpird_availability
+  - get_station_metadata
+
+- title: File Parsing
+  desc: >
+    Functions that parse files that you already downloaded to your computer.
+  contents:
+  - starts_with("parse_")
+
+- title: Built in Datasets
+  desc: >
+    Datasets included in {WeatherOz} and functions for updating them.
+  contents:
+  - starts_with("dpird_")
+  - silo_daily_values
+  - update_forecast_towns
+
+- title: Plotting
+  desc: >
+    Functions for plotting data from {weatherOz}.
+  contents:
+  - plot
