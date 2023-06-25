@@ -53,11 +53,10 @@ reference:
 
 - title: Built in Datasets
   desc: >
-    Datasets included in {WeatherOz} and functions for updating them.
+    Datasets included in {WeatherOz}.
   contents:
   - starts_with("dpird_")
   - silo_daily_values
-  - update_forecast_towns
 
 - title: Plotting
   desc: >
