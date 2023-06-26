@@ -11,7 +11,7 @@
 #' @param distance_km A `numeric` value of the distance in kilometres from the
 #'   `latitude` and `longitude` point beyond which values will not be returned.
 #'
-#' @examples
+#' @examplesIf interactive()
 #'
 #' # find forecast towns near Esperance, WA
 #' find_forecast_towns(longitude = 121.8913, latitude = -33.8614)
