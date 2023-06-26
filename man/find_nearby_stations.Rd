@@ -121,8 +121,8 @@ Other metadata:
 \code{\link{get_station_metadata}()}
 }
 \author{
-Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H. Sparks
-\email{adam.sparks@dpird.wa.gov.au}
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H.
+Sparks \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}
 \concept{SILO}
