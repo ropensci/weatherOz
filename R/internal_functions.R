@@ -95,7 +95,7 @@
 #' @return invisible `NULL`, called for its side-effects
 
 .check_lonlat <- function(longitude, latitude) {
-  if (longitude < 114.5 || longitude > 152.5) {
+  if (longitude < 112 || longitude > 154) {
     stop(
       call. = FALSE,
       "Please check your longitude, `",
@@ -103,7 +103,7 @@
       "`, to be sure it is valid for Australian data.\n"
     )
   }
-  if (latitude < -38.5 || latitude > -23) {
+  if (latitude < -44 || latitude > -10) {
     stop(
       call. = FALSE,
       "Please check your latitude, `",
