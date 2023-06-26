@@ -153,17 +153,19 @@ get_precis_forecast <- function(state = "AUS") {
   # clean up and split out time cols into offset and remove extra chars
   .split_time_cols(x = out)
 
+  dbf_file <- file.path(tempdir(), "AAC_codes.dbf")
+  on.exit(unlink(dbf_file))
+
   # fetch database from BOM server
   curl::curl_download(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
-    destfile = paste0(tempdir(), "AAC_codes.dbf"),
+    destfile = dbf_file,
     mode = "wb",
     quiet = TRUE
   )
 
   AAC_codes <-
-    data.table::data.table(
-      foreign::read.dbf(paste0(tempdir(), "AAC_codes.dbf"), as.is = TRUE))
+    data.table::data.table(foreign::read.dbf(dbf_file), as.is = TRUE)
 
   # convert names to lower case for consistency with bomrang output
   data.table::setnames(AAC_codes,

@@ -37,6 +37,7 @@ find_forecast_towns <-
     user_latitude <- latitude
 
     file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
+    on.exit(unlink(file_dbf))
     curl::curl_download(
       "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
       destfile = file_dbf,
@@ -69,6 +70,5 @@ find_forecast_towns <-
     forecast_towns[distance %in%
                      forecast_towns[(distance <= distance_km)]$distance]
     data.table::setkey(forecast_towns, "aac")
-    file.remove(file_dbf)
     return(forecast_towns)
   }

@@ -46,17 +46,18 @@ get_available_radar <- function(radar_id = "all") {
     dirlistonly = TRUE
   )
 
+  dbf_file <- file.path(tempdir(), "radar_locations.dbf")
+  on.exit(unlink(dbf_file))
+
   curl::curl_download(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDR00007.dbf",
-    destfile = file.path(tempdir(), "radar_locations.dbf"),
+    destfile = dbf_file,
     mode = "wb",
     quiet = TRUE
   )
 
-  radar_locations <-
-    data.table::data.table(
-      foreign::read.dbf(file.path(tempdir(), "radar_locations.dbf"),
-                        as.is = TRUE))
+  radar_locations <- data.table::data.table(foreign::read.dbf(dbf_file),
+                                            as.is = TRUE)
 
   data.table::setkey(radar_locations, "Name")
   radar_locations[, LocationID := sprintf("%02s", LocationID)]
