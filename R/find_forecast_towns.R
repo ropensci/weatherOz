@@ -46,7 +46,14 @@ find_forecast_towns <-
     data.table::setnames(forecast_towns, names(forecast_towns),
                          tolower(names(forecast_towns)))
     data.table::setcolorder(forecast_towns, c(2:3, 7:9))
-    data.table::setnames(forecast_towns, c(2, 5), c("town", "elev"))
+    data.table::setnames(forecast_towns,
+                         old = c("pt_name", "lat", "lon", "elevation"),
+                         new = c("town", "latitude", "longitude", "elev_m"))
+    forecast_towns <- forecast_towns[, c("aac",
+                                         "town",
+                                         "longitude",
+                                         "latitude",
+                                         "elev_m")]
     data.table::setkey(forecast_towns, "aac")
 
     forecast_towns[, "distance" := .haversine_distance(latitude,
@@ -58,5 +65,5 @@ find_forecast_towns <-
                      forecast_towns[(distance <= distance_km)]$distance]
     data.table::setkey(forecast_towns, "aac")
     file.remove(file_dbf)
-    return(forecast_towns[, c("aac", "town", "lon", "lat", "elev", "distance")])
+    return(forecast_towns)
   }
