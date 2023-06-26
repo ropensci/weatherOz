@@ -7,7 +7,6 @@
 get_dpird_extremes(
   station_code,
   values = "all",
-  api_group = "rtd",
   include_closed = FALSE,
   api_key
 )
@@ -20,12 +19,6 @@ station of interest.}
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to \code{all}, returning the full list of values unless otherwise
 specified.}
-
-\item{api_group}{Filter the stations to a predefined group one of \code{all},
-\code{web} or \code{rtd}; \code{all} returns all stations, \code{api} returns the default
-stations in use with the \acronym{API} and \code{web} returns the list in use by
-the \url{https://weather.agric.wa.gov.au} and \code{rtd} returns stations with
-scientifically complete data sets.  Defaults to \code{rtd}.}
 
 \item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}.  If set to
 \code{TRUE} the query returns closed and open stations.  Closed stations are

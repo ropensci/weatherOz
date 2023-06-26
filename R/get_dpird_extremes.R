@@ -10,11 +10,6 @@
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all`, returning the full list of values unless otherwise
 #'   specified.
-#' @param api_group Filter the stations to a predefined group one of `all`,
-#'   `web` or `rtd`; `all` returns all stations, `api` returns the default
-#'   stations in use with the \acronym{API} and `web` returns the list in use by
-#'   the <https://weather.agric.wa.gov.au> and `rtd` returns stations with
-#'   scientifically complete data sets.  Defaults to `rtd`.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
 #'   `TRUE` the query returns closed and open stations.  Closed stations are
 #'   those that have been turned off and no longer report data.  They may be
@@ -111,7 +106,6 @@
 
 get_dpird_extremes <- function(station_code,
                                 values = "all",
-                                api_group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
   if (missing(station_code)) {
@@ -154,7 +148,7 @@ get_dpird_extremes <- function(station_code,
     stationCode = station_code,
     offset = 0L,
     select = paste(.values, collapse = ","),
-    group = api_group,
+    group = "all",
     includeClosed = include_closed,
     api_key = api_key
   )

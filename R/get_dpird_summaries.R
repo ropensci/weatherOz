@@ -22,11 +22,6 @@
 #' @param values A `character` string with the type of summarised weather
 #'   to return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all` with all available values being returned.
-#' @param api_group Filter the stations to a predefined group one of `all`,
-#'   `web` or `rtd`; `all` returns all stations, `api` returns the default
-#'   stations in use with the \acronym{API} and `web` returns the list in use by
-#'   the <https://weather.agric.wa.gov.au> and `rtd` returns stations with
-#'   scientifically complete data sets.  Defaults to `rtd`.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
 #'   `TRUE` the query returns closed and open stations.  Closed stations are
 #'   those that have been turned off and no longer report data.  They may be
@@ -175,7 +170,6 @@ get_dpird_summaries <- function(station_code,
                                 end_date = Sys.Date(),
                                 interval = "daily",
                                 values = "all",
-                                api_group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
   if (missing(station_code)) {
@@ -239,14 +233,6 @@ get_dpird_summaries <- function(station_code,
          "\"", interval, "\" is not a supported time interval")
   }
 
-  # check API group
-  api_group <- tolower(api_group)
-  if (api_group %notin% c("rtd", "all", "web")) {
-    stop(call. = FALSE,
-         "The `api_group` should be one of 'rtd', 'all' or 'web'."
-    )
-  }
-
   request_interval <- lubridate::interval(start_date,
                                           end_date,
                                           tzone = "Australia/Perth")
@@ -296,7 +282,6 @@ get_dpird_summaries <- function(station_code,
     end_date_time = end_date,
     interval = checked_interval,
     values = values,
-    api_group = api_group,
     include_closed = include_closed,
     api_key = api_key,
     limit = total_records_req

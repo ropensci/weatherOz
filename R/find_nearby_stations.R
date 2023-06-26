@@ -24,6 +24,9 @@
 #'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; `silo` for
 #'   only stations in the \acronym{SILO} network; or `dpird` for stations in the
 #'   \acronym{DPIRD} network.
+#' @param include_closed A `Boolean` value that indicates whether closed
+#'   stations in the \acronym{DPIRD} network should be included in the results.
+#'   Defaults to `FALSE` with closed stations not included.
 #'
 #' @return a [data.table::data.table] with `station_code`, `station_name`,
 #'   `latitude`, `longitude`, `elev_m`, `state`, `owner`, and `distance`.
@@ -35,6 +38,9 @@
 #'   <https://www.agric.wa.gov.au/web-apis>.
 #'
 #' @examples \dontrun{
+#'
+#' # Note that queries to the DPIRD API require you to have your own API key.
+#'
 #' # Query WA only stations and return DPIRD's stations nearest to the
 #'   Northam, WA station, "NO", returning stations with 50 km of this station
 #'
@@ -79,7 +85,8 @@ find_nearby_stations <- function(latitude = NULL,
                                  station_code = NULL,
                                  distance_km,
                                  api_key = NULL,
-                                 which_api = "silo") {
+                                 which_api = "silo",
+                                 include_closed = FALSE) {
 
   which_api <- .check_which_api(which_api)
 
@@ -367,7 +374,6 @@ find_nearby_stations <- function(latitude = NULL,
                                 .longitude,
                                 .latitude,
                                 .api_key,
-                                .api_group,
                                 .include_closed) {
 
   # Error if api key not provided
@@ -381,7 +387,7 @@ find_nearby_stations <- function(latitude = NULL,
 
   query_list <- list(
     api_key = .api_key,
-    api_group = .api_group,
+    api_group = "all",
     include_closed = .include_closed
   )
 

@@ -10,7 +10,8 @@ find_nearby_stations(
   station_code = NULL,
   distance_km,
   api_key = NULL,
-  which_api = "silo"
+  which_api = "silo",
+  include_closed = FALSE
 )
 }
 \arguments{
@@ -37,6 +38,10 @@ Defaults to \code{silo} only. Valid values are \code{all}, for both \acronym{SIL
 (\acronym{BOM}) and \acronym{DPIRD} weather station networks; \code{silo} for
 only stations in the \acronym{SILO} network; or \code{dpird} for stations in the
 \acronym{DPIRD} network.}
+
+\item{include_closed}{A \code{Boolean} value that indicates whether closed
+stations in the \acronym{DPIRD} network should be included in the results.
+Defaults to \code{FALSE} with closed stations not included.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table} with \code{station_code}, \code{station_name},
@@ -57,6 +62,9 @@ free by filling out the form found at
 }
 \examples{
 \dontrun{
+
+# Note that queries to the DPIRD API require you to have your own API key.
+
 # Query WA only stations and return DPIRD's stations nearest to the
   Northam, WA station, "NO", returning stations with 50 km of this station
 
