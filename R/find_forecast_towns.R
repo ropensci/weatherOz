@@ -33,6 +33,9 @@ find_forecast_towns <-
            distance_km = 100) {
     .check_lonlat(longitude = longitude, latitude = latitude)
 
+    user_longitude <- longitude
+    user_latitude <- latitude
+
     file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
     curl::curl_download(
       "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
@@ -56,10 +59,12 @@ find_forecast_towns <-
                                          "elev_m")]
     data.table::setkey(forecast_towns, "aac")
 
-    forecast_towns[, "distance" := .haversine_distance(latitude,
-                                                       longitude,
-                                                       lat,
-                                                       lon)] |>
+    forecast_towns[, "distance" := .haversine_distance(
+      lat1 = latitude,
+      lon1 = longitude,
+      lat2 = user_latitude,
+      lon2 = user_longitude
+    )] |>
       data.table::setorderv("distance")
     forecast_towns[distance %in%
                      forecast_towns[(distance <= distance_km)]$distance]
