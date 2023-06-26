@@ -148,7 +148,6 @@ Suggests:
     dplyr,
     mailR,
     rmarkdown,
-    rstudioapi,
     spelling,
     testthat (>= 3.0.0),
     vcr,
