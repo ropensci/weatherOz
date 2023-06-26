@@ -35,7 +35,7 @@ reference:
 
 - title: Metadata Fetching
   desc: >
-    Functions that get metadata, _.e.g._, station uptime, dataset availability,
+    Functions that get metadata, _e.g._, station uptime, dataset availability,
     nearby stations or forecast locations, values that the station records, etc.
   contents:
   - find_forecast_towns
