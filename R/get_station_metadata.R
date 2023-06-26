@@ -277,7 +277,7 @@ get_station_metadata <-
 #'
 #' Fetches metadata directly from DPIRD's API.
 #'
-#' @param api_key the user's API key as provided by them
+#' @param .api_key the user's API key as provided by them
 #' @param .rich `TRUE`/`FALSE` values indicating whether to return rich
 #'  metadata about the weather stations
 #'
