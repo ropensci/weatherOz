@@ -51,7 +51,7 @@ test_that(".check_date_order() catches errors, passes otherwise", {
   expect_error(.check_date_order(.start_date = end, .end_date = start))
 })
 
-## Check lat/lon params
+## Check lat/lon params ---
 
 test_that("if lat lon or station_code are correct, no error", {
   expect_no_error(.check_location_params(
@@ -75,11 +75,11 @@ test_that("if no lat, lon or station code are provided, error", {
 })
 
 test_that("if lon outside Oz bounding box are provided, error", {
-  expect_error(.check_lonlat(latitude = -38.5, longitude = 153))
+  expect_error(.check_lonlat(latitude = -38.5, longitude = 155))
   expect_error(.check_lonlat(latitude = 0, longitude = 151))
 })
 
-## Check user-input for selecting an API
+## Check user-input for selecting an API ----
 
 test_that("check user-input for `which_api`", {
   expect_error(.check_which_api(which_api = "none"))
