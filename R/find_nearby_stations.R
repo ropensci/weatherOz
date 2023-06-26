@@ -344,121 +344,97 @@ find_nearby_stations <- function(latitude = NULL,
   }
 }
 
-#' Create a data.table object of all stations available in DPIRD
+#' Create a data.table Object of DPIRD Stations Within a Given Radius
 #'
 #' @param .station_code A string identifying a station in DPIRD's network, which
 #'  should be used as the centre point to determine stations that fall within
-#'  `.distance_km`
+#'   `.distance_km`.
 #' @param .distance_km A `numeric` value for the distance in kilometres in which
 #'  to search for nearby stations from a given geographic location or known
-#' `.station_code`.
+#'   `.station_code`.
 #' @param .latitude A `numeric` value (Decimal Degrees) passed from another
-#'  function
+#'   function.
 #' @param .longitude A `numeric` value (Decimal Degrees) passed from another
-#'  function
+#'   function.
 #' @param .api_key A `string` value that is the user's \acronym{API} key from
-#'  \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
+#'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
+#' @param .include_closed A `Boolean` value indicating whether to include
+#'   closed stations or not. Defaults to `FALSE`, not including closed stations.
 #'
 #' @noRd
 .get_dpird_stations <- function(.station_code,
                                 .distance_km,
-                                .latitude,
                                 .longitude,
-                                .api_key) {
+                                .latitude,
+                                .api_key,
+                                .api_group,
+                                .include_closed) {
+
   # Error if api key not provided
-  if (is.null(.api_key)) {
+  if (missing(api_key)) {
     stop(
-      call. = FALSE,
-      "Provide a valid DPIRD API key.\n",
-      "Visit: https://www.agric.wa.gov.au/web-apis"
+      "A valid DPIRD API key must be provided, please visit\n",
+      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
+      call. = FALSE
     )
   }
 
-  ## TODO: convert this to use {crul}
-  if (!missing(.station_code)) {
-    base_url <-
-      "https://api.dpird.wa.gov.au/v2/weather/stations?stationCode="
+  query_list <- list(
+    api_key = .api_key,
+    api_group = .api_group,
+    include_closed = .include_closed
+  )
 
-    res <- jsonlite::fromJSON(url(
-      paste0(
-        base_url,
-        .station_code,
-        "&api_key=",
-        .api_key,
-        "&limit=1&group=rtd"
-      )
-    ))
+  # if a station_code is provided, get the metadata for it which has lat/lon
+  # then extract and pass that back to the API to find nearest stations to that
+  # point
+  if (!missing(.station_code) &&
+      missing(.latitude) && missing(.longitude)) {
+    station_meta <- .query_dpird_api(.end_point = .station_code,
+                                     .query_list = query_list,
+                                     .limit = 1000)
+    .latitude <-
+      jsonlite::fromJSON(station_meta[[1]]$parse("UTF8"))$data$latitude
+    .longitude <-
+      jsonlite::fromJSON(station_meta[[1]]$parse("UTF8"))$data$longitude
+  }
 
-    .latlon <- .create_latlon(res)
+  # now either using a supplied lat/lon or the gathered values get the nearest
+  # stations
 
-    ret <- jsonlite::fromJSON(url(
-      paste0(
-        "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-        "latitude=",
-        .latlon[[1]],
-        "&longitude=",
-        .latlon[[2]],
-        "&radius=",
-        .distance_km,
-        "&api_key=",
-        .api_key,
-        "&offset=0",
-        "&limit=1000",
-        "&group=rtd"
-      )
-    ))
+  query_list <- c(
+    query_list,
+    longitude = .longitude,
+    latitude = .latitude,
+    radius = .distance_km
+  )
 
-    if (is.null(nrow(ret$collection))) {
+  out <- .query_dpird_api(.end_point = "nearby",
+                          .query_list = query_list,
+                          .limit = 1000)
+
+  out <-
+    data.table::data.table(
+      jsonlite::fromJSON(out[[1]]$parse("UTF8"))$collection)
+
+  .set_snake_case_names(out)
+  data.table::setkey(out, "station_code")
+
+    if (is.null(nrow(out)) && !missing(station_code)) {
       message(
-          "No DPIRD stations found around a radius of < ",
-          .distance_km,
-          " km\n",
-          " from station ",
-          .station_code,
-          "."
+          "No DPIRD stations found around a radius of < ", .distance_km, "\n",
+          " km from station ", .station_code, "."
       )
-
     } else {
-      return(.parse_dpird_stations(ret))
-    }
-
-  } else if (missing(.station_code)) {
-    # get nearby stations from weather api
-    ret <- jsonlite::fromJSON(url(
-      paste0(
-        "https://api.dpird.wa.gov.au/v2/weather/stations/nearby?",
-        "latitude=",
-        .latitude,
-        "&longitude=",
-        .longitude,
-        "&radius=",
-        .distance_km,
-        "&api_key=",
-        .api_key,
-        "&offset=0",
-        "&limit=1000",
-        "&group=rtd"
-      )
-    ))
-
     # Warn user if there are no stations within the input radius and return data
-    if (is.null(nrow(ret$collection))) {
+    if (is.null(nrow(out))) {
       message(
-          "No DPIRD stations found around a radius of < ",
-          .distance_km,
-          " km\n",
-          " from coordinates ",
-          .latitude,
-          " and ",
-          .longitude,
-          " (lat/lon).\n"
+          "No DPIRD stations found around a radius of <", .distance_km, " km\n",
+          " from coordinates ", .latitude, " and ", .longitude, " (lat/lon).\n"
       )
-    } else {
-      return(.parse_dpird_stations(ret))
     }
   }
 }
-
 
 #' Create a data.table object of all stations available in SILO
 #'
@@ -594,13 +570,3 @@ find_nearby_stations <- function(latitude = NULL,
   return(distance_out)
 }
 
-#' Internal function to create .lat and .lon objects
-#'
-#' @param res a json object from a DPIRD API
-#' @return a vector of latitude and longitude values
-#' @noRd
-
-.create_latlon <- function(res) {
-  list(.lat <- res$collection$latitude,
-       .lon <- res$collection$longitude)
-}
