@@ -16,22 +16,12 @@ vignette: >
 
 ## Introduction
 
-{weatherOz} provides automated downloading, parsing, cleaning, and formatting
-of weather data for Australia through API endpoints provided by the Department
-of Primary Industries and Regional Development (DPIRD) of Western Australia,
-and by the Science and Technology Division of the Queensland Government's
-Department of Environment and Science (DES).
-As well as Australian Government Bureau of Meteorology ('BOM') précis and
-coastal forecasts, agriculture bulletin data, and downloading and importing
+{weatherOz} provides automated downloading, parsing, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia, and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES).
+As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, agriculture bulletin data, and downloading and importing
 radar and satellite imagery files.
-DPIRD weather data are accessed through public APIs provided by DPIRD,
-<https://www.agric.wa.gov.au/weather-api-20>, providing access to weather
-station data from DPIRD's own weather station network.
-Australia-wide weather data are based on data from the Australian Bureau of
-Meteorology (BOM) data and accessed through SILO (Scientific Information for
-Land Owners) (Jeffery et al., 2001).
-BOM also serves several types of data data as XML, JSON and SHTML files.
-This package fetches these files, parses them and return a data frame.
+DPIRD weather data are accessed through public APIs provided by DPIRD, <https://www.agric.wa.gov.au/weather-api-20>, providing access to weather station data from DPIRD's own weather station network.
+Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001).
+BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
 {weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` objects of the GeoTIFF imagery or a magick object of radar image.png files.
 
@@ -87,7 +77,7 @@ Following is an example fetching the forecast for Queensland.
 #>   Please note information at the page 
 #>   <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>
 #>   --------------------------------------------------------------------------------  
-#> data.table [791, 19]
+#> data.table [904, 19]
 #> index                        fct  0 1 2 3 4 5
 #> product_id                   chr  IDQ11295 IDQ11295 IDQ1129~
 #> state                        chr  QLD QLD QLD QLD QLD QLD
@@ -96,17 +86,17 @@ Following is an example fetching the forecast for Queensland.
 #> lat                          dbl  -27.4808 -27.4808 -27.480~
 #> lon                          dbl  153.0389 153.0389 153.038~
 #> elev                         dbl  8.1 8.1 8.1 8.1 8.1 8.1
-#> start_time_local             dttm 2023-05-04 09:18:25 2023-~
-#> end_time_local               dttm 2023-05-05 2023-05-06 202~
+#> start_time_local             dttm 2023-06-26 17:00:00 2023-~
+#> end_time_local               dttm 2023-06-27 2023-06-28 202~
 #> utc_offset                   fct  10:00 10:00 10:00 10:00 1~
-#> start_time_utc               dttm 2023-05-03 23:18:25 2023-~
-#> end_time_utc                 dttm 2023-05-04 14:00:00 2023-~
-#> minimum_temperature          dbl  NA 15 13 14 11 8
-#> maximum_temperature          dbl  27 25 26 26 22 23
+#> start_time_utc               dttm 2023-06-26 07:00:00 2023-~
+#> end_time_utc                 dttm 2023-06-26 14:00:00 2023-~
+#> minimum_temperature          dbl  NA 9 10 15 9 8
+#> maximum_temperature          dbl  NA 22 24 23 22 21
 #> lower_precipitation_limit    dbl  NA NA NA NA NA NA
 #> upper_precipitation_limit    dbl  NA NA NA NA NA NA
-#> precis                       chr  Sunny. Mostly sunny. Most~
-#> probability_of_precipitation dbl  0 5 5 10 5 5
+#> precis                       chr  Clear. Sunny. Partly clou~
+#> probability_of_precipitation dbl  0 0 0 5 0 0
 ```
 
 
@@ -156,23 +146,23 @@ Following is an example fetching the ag bulletin for Queensland.
 #> state          chr  QLD QLD QLD QLD QLD QLD
 #> station        chr  Ayr Birdsville Brisbane Airport Bundabe~
 #> site           fct  33002 38026 40842 39128 31011 44021
-#> obs_time_local dttm 2023-05-04 09:00:00 2023-05-04 09:00:00~
-#> obs_time_utc   dttm 2023-05-03 23:00:00 2023-05-03 23:00:00~
+#> obs_time_local dttm 2023-06-26 09:00:00 2023-06-26 09:00:00~
+#> obs_time_utc   dttm 2023-06-25 23:00:00 2023-06-25 23:00:00~
 #> time_zone      chr  EST EST EST EST EST EST
-#> r              dbl  0 0 0 0 0.8 0
-#> tn             dbl  18.2 11.3 10.2 10.4 23.6 7
-#> tx             dbl  29.7 26.7 25.9 25.9 29.7 26
-#> twd            dbl  NA 5.5 4.6 5.2 4.1 6.2
-#> ev             dbl  NA NA 4 NA NA NA
-#> tg             dbl  NA NA 5.7 NA NA NA
-#> sn             dbl  NA NA 10.2 NA NA NA
-#> solr           dbl  19.4 17.7 16.9 17.3 14 17.3
-#> t5             dbl  NA NA NA 19.9 NA NA
-#> t10            dbl  NA NA NA 20.6 NA NA
-#> t20            dbl  NA NA NA 21.8 NA NA
-#> t50            dbl  NA NA NA 21.1 NA NA
+#> r              dbl  0 0 0 0 0 0
+#> tn             dbl  16.5 11.4 13.4 15.9 20 6.5
+#> tx             dbl  28.1 21.9 23.2 26.8 29.1 24.8
+#> twd            dbl  NA 6.8 9.8 0.1 4.3 7.2
+#> ev             dbl  NA NA 3.8 NA NA NA
+#> tg             dbl  NA NA 7.3 NA NA NA
+#> sn             dbl  NA NA 9.9 NA NA NA
+#> solr           dbl  16.7 14.1 13.9 14.8 16.2 14.4
+#> t5             dbl  NA NA NA 19.4 NA NA
+#> t10            dbl  NA NA NA 19.8 NA NA
+#> t20            dbl  NA NA NA 20.5 NA NA
+#> t50            dbl  NA NA NA 20 NA NA
 #> t1m            dbl  NA NA NA NA NA NA
-#> wr             dbl  NA NA 132 NA NA NA
+#> wr             dbl  NA NA 148 NA NA NA
 ```
 
 ## Using get_coastal_forecast()
@@ -219,7 +209,7 @@ Following is an example fetching the forecast for Queensland.
 #>   Also see 
 #>   <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>.
 #>   --------------------------------------------------------------------------------  
-#> data.table [49, 22]
+#> data.table [64, 22]
 #> index                    fct  NA NA NA NA 0 1
 #> product_id               chr  IDQ11290 IDQ11290 IDQ11290 ID~
 #> type                     chr  NA NA NA NA NA NA
@@ -228,15 +218,15 @@ Following is an example fetching the forecast for Queensland.
 #> pt_1_name                chr  NA NA NA NA NA NA
 #> pt_2_name                chr  NA NA NA NA NA NA
 #> aac                      chr  QLD_FA001 QLD_FA002 QLD_FA003~
-#> start_time_local         dttm 2023-05-04 10:00:27 2023-05-0~
-#> end_time_local           dttm 2023-05-04 10:00:27 2023-05-0~
+#> start_time_local         dttm 2023-06-26 15:50:20 2023-06-2~
+#> end_time_local           dttm 2023-06-26 15:50:20 2023-06-2~
 #> utc_offset               fct  10:00 10:00 10:00 10:00 10:00~
-#> start_time_utc           dttm 2023-05-04 10:00:27 2023-05-0~
-#> end_time_utc             dttm 2023-05-04 10:00:27 2023-05-0~
-#> forecast_seas            chr  NA NA NA NA 1 to 1.5 metres, ~
-#> forecast_weather         chr  NA NA NA NA Mostly sunny. Sun~
-#> forecast_winds           chr  NA NA NA NA East to southeast~
-#> forecast_swell1          chr  NA NA NA NA Below 0.5 metres.~
+#> start_time_utc           dttm 2023-06-26 15:50:20 2023-06-2~
+#> end_time_utc             dttm 2023-06-26 15:50:20 2023-06-2~
+#> forecast_seas            chr  NA NA NA NA Below 1 metre, in~
+#> forecast_weather         chr  NA NA NA NA Clear. Partly clo~
+#> forecast_winds           chr  NA NA NA NA Northeast to sout~
+#> forecast_swell1          chr  NA NA NA NA NA Below 0.5 metr~
 #> forecast_swell2          chr  NA NA NA NA NA NA
 #> forecast_caution         chr  NA NA NA NA NA NA
 #> marine_forecast          chr  NA NA NA NA NA NA
@@ -400,54 +390,75 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 
 ```r
 (avail <- get_available_imagery(product_id = "IDE00425"))
-#>   [1] "IDE00425.202305030010.tif" "IDE00425.202305030020.tif" "IDE00425.202305030030.tif"
-#>   [4] "IDE00425.202305030040.tif" "IDE00425.202305030050.tif" "IDE00425.202305030100.tif"
-#>   [7] "IDE00425.202305030110.tif" "IDE00425.202305030120.tif" "IDE00425.202305030130.tif"
-#>  [10] "IDE00425.202305030140.tif" "IDE00425.202305030150.tif" "IDE00425.202305030200.tif"
-#>  [13] "IDE00425.202305030210.tif" "IDE00425.202305030220.tif" "IDE00425.202305030230.tif"
-#>  [16] "IDE00425.202305030250.tif" "IDE00425.202305030300.tif" "IDE00425.202305030310.tif"
-#>  [19] "IDE00425.202305030320.tif" "IDE00425.202305030330.tif" "IDE00425.202305030340.tif"
-#>  [22] "IDE00425.202305030350.tif" "IDE00425.202305030400.tif" "IDE00425.202305030410.tif"
-#>  [25] "IDE00425.202305030420.tif" "IDE00425.202305030430.tif" "IDE00425.202305030440.tif"
-#>  [28] "IDE00425.202305030450.tif" "IDE00425.202305030500.tif" "IDE00425.202305030510.tif"
-#>  [31] "IDE00425.202305030520.tif" "IDE00425.202305030530.tif" "IDE00425.202305030540.tif"
-#>  [34] "IDE00425.202305030550.tif" "IDE00425.202305030600.tif" "IDE00425.202305030610.tif"
-#>  [37] "IDE00425.202305030620.tif" "IDE00425.202305030630.tif" "IDE00425.202305030640.tif"
-#>  [40] "IDE00425.202305030650.tif" "IDE00425.202305030700.tif" "IDE00425.202305030710.tif"
-#>  [43] "IDE00425.202305030720.tif" "IDE00425.202305030730.tif" "IDE00425.202305030740.tif"
-#>  [46] "IDE00425.202305030750.tif" "IDE00425.202305030800.tif" "IDE00425.202305030810.tif"
-#>  [49] "IDE00425.202305030820.tif" "IDE00425.202305030830.tif" "IDE00425.202305030840.tif"
-#>  [52] "IDE00425.202305030850.tif" "IDE00425.202305030900.tif" "IDE00425.202305030910.tif"
-#>  [55] "IDE00425.202305030920.tif" "IDE00425.202305030930.tif" "IDE00425.202305030940.tif"
-#>  [58] "IDE00425.202305030950.tif" "IDE00425.202305031000.tif" "IDE00425.202305031010.tif"
-#>  [61] "IDE00425.202305031020.tif" "IDE00425.202305031030.tif" "IDE00425.202305031040.tif"
-#>  [64] "IDE00425.202305031050.tif" "IDE00425.202305031100.tif" "IDE00425.202305031110.tif"
-#>  [67] "IDE00425.202305031120.tif" "IDE00425.202305031130.tif" "IDE00425.202305031140.tif"
-#>  [70] "IDE00425.202305031150.tif" "IDE00425.202305031200.tif" "IDE00425.202305031210.tif"
-#>  [73] "IDE00425.202305031220.tif" "IDE00425.202305031230.tif" "IDE00425.202305031240.tif"
-#>  [76] "IDE00425.202305031250.tif" "IDE00425.202305031300.tif" "IDE00425.202305031310.tif"
-#>  [79] "IDE00425.202305031320.tif" "IDE00425.202305031330.tif" "IDE00425.202305031340.tif"
-#>  [82] "IDE00425.202305031350.tif" "IDE00425.202305031400.tif" "IDE00425.202305031410.tif"
-#>  [85] "IDE00425.202305031420.tif" "IDE00425.202305031430.tif" "IDE00425.202305031450.tif"
-#>  [88] "IDE00425.202305031500.tif" "IDE00425.202305031510.tif" "IDE00425.202305031520.tif"
-#>  [91] "IDE00425.202305031530.tif" "IDE00425.202305031540.tif" "IDE00425.202305031550.tif"
-#>  [94] "IDE00425.202305031600.tif" "IDE00425.202305031610.tif" "IDE00425.202305031620.tif"
-#>  [97] "IDE00425.202305031630.tif" "IDE00425.202305031640.tif" "IDE00425.202305031650.tif"
-#> [100] "IDE00425.202305031700.tif" "IDE00425.202305031710.tif" "IDE00425.202305031720.tif"
-#> [103] "IDE00425.202305031730.tif" "IDE00425.202305031740.tif" "IDE00425.202305031750.tif"
-#> [106] "IDE00425.202305031800.tif" "IDE00425.202305031810.tif" "IDE00425.202305031820.tif"
-#> [109] "IDE00425.202305031830.tif" "IDE00425.202305031840.tif" "IDE00425.202305031850.tif"
-#> [112] "IDE00425.202305031900.tif" "IDE00425.202305031910.tif" "IDE00425.202305031920.tif"
-#> [115] "IDE00425.202305031930.tif" "IDE00425.202305031940.tif" "IDE00425.202305031950.tif"
-#> [118] "IDE00425.202305032000.tif" "IDE00425.202305032010.tif" "IDE00425.202305032020.tif"
-#> [121] "IDE00425.202305032030.tif" "IDE00425.202305032040.tif" "IDE00425.202305032050.tif"
-#> [124] "IDE00425.202305032100.tif" "IDE00425.202305032110.tif" "IDE00425.202305032120.tif"
-#> [127] "IDE00425.202305032130.tif" "IDE00425.202305032140.tif" "IDE00425.202305032150.tif"
-#> [130] "IDE00425.202305032200.tif" "IDE00425.202305032210.tif" "IDE00425.202305032220.tif"
-#> [133] "IDE00425.202305032230.tif" "IDE00425.202305032240.tif" "IDE00425.202305032250.tif"
-#> [136] "IDE00425.202305032300.tif" "IDE00425.202305032310.tif" "IDE00425.202305032320.tif"
-#> [139] "IDE00425.202305032330.tif" "IDE00425.202305032340.tif" "IDE00425.202305032350.tif"
-#> [142] "IDE00425.202305040000.tif" "IDE00425.202305040010.tif"
+#>   [1] "IDE00425.202306250810.tif" "IDE00425.202306250820.tif"
+#>   [3] "IDE00425.202306250830.tif" "IDE00425.202306250840.tif"
+#>   [5] "IDE00425.202306250850.tif" "IDE00425.202306250900.tif"
+#>   [7] "IDE00425.202306250910.tif" "IDE00425.202306250920.tif"
+#>   [9] "IDE00425.202306250930.tif" "IDE00425.202306250940.tif"
+#>  [11] "IDE00425.202306250950.tif" "IDE00425.202306251000.tif"
+#>  [13] "IDE00425.202306251010.tif" "IDE00425.202306251020.tif"
+#>  [15] "IDE00425.202306251030.tif" "IDE00425.202306251040.tif"
+#>  [17] "IDE00425.202306251050.tif" "IDE00425.202306251100.tif"
+#>  [19] "IDE00425.202306251110.tif" "IDE00425.202306251120.tif"
+#>  [21] "IDE00425.202306251130.tif" "IDE00425.202306251140.tif"
+#>  [23] "IDE00425.202306251150.tif" "IDE00425.202306251200.tif"
+#>  [25] "IDE00425.202306251210.tif" "IDE00425.202306251220.tif"
+#>  [27] "IDE00425.202306251230.tif" "IDE00425.202306251240.tif"
+#>  [29] "IDE00425.202306251250.tif" "IDE00425.202306251300.tif"
+#>  [31] "IDE00425.202306251310.tif" "IDE00425.202306251320.tif"
+#>  [33] "IDE00425.202306251330.tif" "IDE00425.202306251340.tif"
+#>  [35] "IDE00425.202306251350.tif" "IDE00425.202306251400.tif"
+#>  [37] "IDE00425.202306251410.tif" "IDE00425.202306251420.tif"
+#>  [39] "IDE00425.202306251430.tif" "IDE00425.202306251450.tif"
+#>  [41] "IDE00425.202306251500.tif" "IDE00425.202306251510.tif"
+#>  [43] "IDE00425.202306251540.tif" "IDE00425.202306251550.tif"
+#>  [45] "IDE00425.202306251600.tif" "IDE00425.202306251610.tif"
+#>  [47] "IDE00425.202306251620.tif" "IDE00425.202306251630.tif"
+#>  [49] "IDE00425.202306251640.tif" "IDE00425.202306251650.tif"
+#>  [51] "IDE00425.202306251700.tif" "IDE00425.202306251710.tif"
+#>  [53] "IDE00425.202306251720.tif" "IDE00425.202306251730.tif"
+#>  [55] "IDE00425.202306251740.tif" "IDE00425.202306251750.tif"
+#>  [57] "IDE00425.202306251800.tif" "IDE00425.202306251810.tif"
+#>  [59] "IDE00425.202306251820.tif" "IDE00425.202306251830.tif"
+#>  [61] "IDE00425.202306251840.tif" "IDE00425.202306251850.tif"
+#>  [63] "IDE00425.202306251900.tif" "IDE00425.202306251910.tif"
+#>  [65] "IDE00425.202306251920.tif" "IDE00425.202306251930.tif"
+#>  [67] "IDE00425.202306251940.tif" "IDE00425.202306251950.tif"
+#>  [69] "IDE00425.202306252000.tif" "IDE00425.202306252010.tif"
+#>  [71] "IDE00425.202306252020.tif" "IDE00425.202306252030.tif"
+#>  [73] "IDE00425.202306252040.tif" "IDE00425.202306252050.tif"
+#>  [75] "IDE00425.202306252100.tif" "IDE00425.202306252110.tif"
+#>  [77] "IDE00425.202306252120.tif" "IDE00425.202306252130.tif"
+#>  [79] "IDE00425.202306252140.tif" "IDE00425.202306252150.tif"
+#>  [81] "IDE00425.202306252200.tif" "IDE00425.202306252210.tif"
+#>  [83] "IDE00425.202306252220.tif" "IDE00425.202306252230.tif"
+#>  [85] "IDE00425.202306252240.tif" "IDE00425.202306252250.tif"
+#>  [87] "IDE00425.202306252300.tif" "IDE00425.202306252310.tif"
+#>  [89] "IDE00425.202306252320.tif" "IDE00425.202306252330.tif"
+#>  [91] "IDE00425.202306252340.tif" "IDE00425.202306252350.tif"
+#>  [93] "IDE00425.202306260000.tif" "IDE00425.202306260010.tif"
+#>  [95] "IDE00425.202306260020.tif" "IDE00425.202306260030.tif"
+#>  [97] "IDE00425.202306260040.tif" "IDE00425.202306260050.tif"
+#>  [99] "IDE00425.202306260100.tif" "IDE00425.202306260110.tif"
+#> [101] "IDE00425.202306260120.tif" "IDE00425.202306260130.tif"
+#> [103] "IDE00425.202306260140.tif" "IDE00425.202306260150.tif"
+#> [105] "IDE00425.202306260200.tif" "IDE00425.202306260210.tif"
+#> [107] "IDE00425.202306260220.tif" "IDE00425.202306260230.tif"
+#> [109] "IDE00425.202306260250.tif" "IDE00425.202306260300.tif"
+#> [111] "IDE00425.202306260310.tif" "IDE00425.202306260320.tif"
+#> [113] "IDE00425.202306260330.tif" "IDE00425.202306260340.tif"
+#> [115] "IDE00425.202306260350.tif" "IDE00425.202306260400.tif"
+#> [117] "IDE00425.202306260410.tif" "IDE00425.202306260420.tif"
+#> [119] "IDE00425.202306260430.tif" "IDE00425.202306260440.tif"
+#> [121] "IDE00425.202306260450.tif" "IDE00425.202306260500.tif"
+#> [123] "IDE00425.202306260510.tif" "IDE00425.202306260520.tif"
+#> [125] "IDE00425.202306260530.tif" "IDE00425.202306260540.tif"
+#> [127] "IDE00425.202306260550.tif" "IDE00425.202306260600.tif"
+#> [129] "IDE00425.202306260610.tif" "IDE00425.202306260620.tif"
+#> [131] "IDE00425.202306260630.tif" "IDE00425.202306260640.tif"
+#> [133] "IDE00425.202306260650.tif" "IDE00425.202306260700.tif"
+#> [135] "IDE00425.202306260710.tif" "IDE00425.202306260740.tif"
+#> [137] "IDE00425.202306260800.tif"
 ```
 
 ### Using get_satellite_imagery()
@@ -482,7 +493,10 @@ i <- get_satellite_imagery(product_id = avail, scans = 1)
 plot(i)
 ```
 
-<img src="plot_satellite-1.png" alt="plot of chunk plot_satellite" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="plot_satellite-1.png" alt="plot of chunk plot_satellite"  />
+<p class="caption">plot of chunk plot_satellite</p>
+</div>
 
 ## Using {weatherOz} to retrieve radar imagery
 
@@ -504,21 +518,21 @@ The arguments are:
 x <- get_available_radar()
 head(x)
 #> data.table [6, 15]
-#> product_id chr IDR641 IDR642 IDR643 IDR644 IDR311 IDR312
-#> LocationID chr 64 64 64 64 31 31
-#> range      chr 512km 256km 128km 64km 512km 256km
+#> product_id chr IDR641 IDR642 IDR643 IDR644 IDR31D IDR251
+#> LocationID chr 64 64 64 64 31 25
+#> range      chr 512km 256km 128km 64km NA 512km
 #> Name       chr Adelaide Adelaide Adelaide Adelaide Albany A~
 #> Longitude  dbl 138.4689 138.4689 138.4689 138.4689 117.8163~
 #> Latitude   dbl -34.6169 -34.6169 -34.6169 -34.6169 -34.9418~
-#> Radar_id   int 64 64 64 64 31 31
+#> Radar_id   int 64 64 64 64 31 25
 #> Full_Name  chr Adelaide (Buckland Park) Adelaide (Buckland ~
-#> IDRnn0name chr BuckPk BuckPk BuckPk BuckPk Albany Albany
+#> IDRnn0name chr BuckPk BuckPk BuckPk BuckPk Albany AliceSp
 #> IDRnn1name chr BucklandPk BucklandPk BucklandPk BucklandPk ~
-#> State      chr SA SA SA SA WA WA
-#> Type       chr Doppler Doppler Doppler Doppler Doppler Dopp~
+#> State      chr SA SA SA SA WA NT
+#> Type       chr Doppler Doppler Doppler Doppler Doppler Stan~
 #> Group_     chr Yes Yes Yes Yes Yes Yes
 #> Status     chr Public Public Public Public Public Public
-#> Archive    chr BuckPk BuckPk BuckPk BuckPk Albany Albany
+#> Archive    chr BuckPk BuckPk BuckPk BuckPk Albany AliceSp
 ```
 
 ### Using get_radar_imagery()
@@ -536,11 +550,14 @@ This value must be specified and the function will accept only one at a time.
 
 ```r
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//Rtmp47TcBG/file33021cd79c7.png
+#> file downloaded to:/var/folders/hc/tft3s5bn48gb81cs99mycyf00000gn/T//RtmphuECUG/file12454264e0df9.png
 plot(y)
 ```
 
-<img src="get_radar_imagery-1.png" alt="plot of chunk get_radar_imagery" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="get_radar_imagery-1.png" alt="plot of chunk get_radar_imagery"  />
+<p class="caption">plot of chunk get_radar_imagery</p>
+</div>
 
 ## References
 
