@@ -126,17 +126,17 @@ get_coastal_forecast <- function(state = "AUS") {
   # clean up and split out time cols into offset and remove extra chars
   .split_time_cols(x = out)
 
+  file_dbf <- file.path(tempdir(), "marine_AAC_codes.dbf")
+
   curl::curl_download(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf",
-    destfile = paste0(tempdir(), "marine_AAC_codes.dbf"),
+    destfile = file_dbf,
     mode = "wb",
     quiet = TRUE
   )
 
   marine_AAC_codes <-
-    data.table::data.table(
-      foreign::read.dbf(paste0(tempdir(), "marine_AAC_codes.dbf"),
-                        as.is = TRUE))
+    data.table::data.table(foreign::read.dbf(file_dbf, as.is = TRUE))
 
   # convert names to lower case for consistency with bomrang output
   data.table::setnames(marine_AAC_codes,
@@ -219,6 +219,8 @@ get_coastal_forecast <- function(state = "AUS") {
   out[, c(6:8, 14:20) := lapply(.SD, function(x)
     as.character(x)),
     .SDcols = c(6:8, 14:20)]
+
+  file.remove(file_dbf)
   return(out[])
 }
 

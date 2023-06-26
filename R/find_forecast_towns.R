@@ -33,17 +33,16 @@ find_forecast_towns <-
            distance_km = 100) {
     .check_lonlat(longitude = longitude, latitude = latitude)
 
+    file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
     curl::curl_download(
       "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
-      destfile = file.path(tempdir(), "AAC_codes.dbf"),
+      destfile = file_dbf,
       mode = "wb",
       quiet = TRUE
     )
 
     forecast_towns <-
-      data.table::data.table(foreign::read.dbf(file.path(tempdir(),
-                                                         "AAC_codes.dbf"),
-                                               as.is = TRUE))
+      data.table::data.table(foreign::read.dbf(file_dbf, as.is = TRUE))
     data.table::setnames(forecast_towns, names(forecast_towns),
                          tolower(names(forecast_towns)))
     data.table::setcolorder(forecast_towns, c(2:3, 7:9))
@@ -58,5 +57,6 @@ find_forecast_towns <-
     forecast_towns[distance %in%
                      forecast_towns[(distance <= distance_km)]$distance]
     data.table::setkey(forecast_towns, "aac")
+    file.remove(file_dbf)
     return(forecast_towns[, c("aac", "town", "lon", "lat", "elev", "distance")])
   }
