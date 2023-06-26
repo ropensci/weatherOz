@@ -18,7 +18,7 @@
 #'   the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `string` value that is the user's \acronym{API} key from
 #'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
-#'   when `which_api` is 'DPIRD' or 'all'.
+#'   when \var{which_api} is `DPIRD` or `all`.
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Defaults to `silo` only. Valid values are `all`, for both \acronym{SILO}
 #'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; `silo` for
