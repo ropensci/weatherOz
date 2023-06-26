@@ -4,13 +4,13 @@
 \alias{find_forecast_towns}
 \title{Find the Nearest Town with a BOM Forecast}
 \usage{
-find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 100)
+find_forecast_towns(longitude = 149.2, latitude = -35.3, distance_km = 100)
 }
 \arguments{
-\item{latitude}{A \code{numeric} value of latitude in decimal degree (DD)
+\item{longitude}{A \code{numeric} value of longitude in decimal degree (DD)
 format.  By default, Canberra (approximately).}
 
-\item{longitude}{A \code{numeric} value of longitude in decimal degree (DD)
+\item{latitude}{A \code{numeric} value of latitude in decimal degree (DD)
 format.  By default, Canberra (approximately).}
 
 \item{distance_km}{A \code{numeric} value of the distance in kilometres from the
@@ -27,7 +27,7 @@ For a given \code{latitude} and \code{longitude}, find the nearest town that the
 \examples{
 
 # find forecast towns near Esperance, WA
-find_forecast_towns(latitude = -33.8614, longitude = 121.8913)
+find_forecast_towns(longitude = 121.8913, latitude = -33.8614)
 
 }
 \seealso{
