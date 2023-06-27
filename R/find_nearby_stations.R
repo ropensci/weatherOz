@@ -80,8 +80,8 @@
 #'
 #' @export
 
-find_nearby_stations <- function(latitude = NULL,
-                                 longitude = NULL,
+find_nearby_stations <- function(longitude = NULL,
+                                 latitude = NULL,
                                  station_code = NULL,
                                  distance_km,
                                  api_key = NULL,
@@ -90,8 +90,8 @@ find_nearby_stations <- function(latitude = NULL,
 
   which_api <- .check_which_api(which_api)
 
-  .check_location_params(.latitude = latitude,
-                         .longitude = longitude,
+  .check_location_params(.longitude = longitude,
+                         .latitude = latitude,
                          .station_code = station_code)
 
   if (length(station_code) == 1 ||
@@ -112,8 +112,8 @@ find_nearby_stations <- function(latitude = NULL,
       } else if (which_api == "dpird") {
         out <-
           .get_dpird_stations(
-            .latitude = latitude,
             .longitude = longitude,
+            .latitude = latitude,
             .distance_km = distance_km,
             .api_key = api_key,
             .include_closed = include_closed
@@ -124,8 +124,8 @@ find_nearby_stations <- function(latitude = NULL,
         # return dpird
         out_dpird <-
           .get_dpird_stations(
-            .latitude = latitude,
             .longitude = longitude,
+            .latitude = latitude,
             .distance_km = distance_km,
             .api_key = api_key,
             .include_closed = include_closed
@@ -173,8 +173,8 @@ find_nearby_stations <- function(latitude = NULL,
         .get_dpird_stations(
           .station_code = station_code,
           .distance_km = distance_km,
-          .latitude = latitude,
           .longitude = longitude,
+          .latitude = latitude,
           .api_key = api_key
         )
       return(out[])
@@ -186,8 +186,8 @@ find_nearby_stations <- function(latitude = NULL,
           .get_dpird_stations(
             .station_code = station_code,
             .distance_km = distance_km,
-            .latitude = latitude,
             .longitude = longitude,
+            .latitude = latitude,
             .api_key = api_key
           )
 
@@ -225,8 +225,8 @@ find_nearby_stations <- function(latitude = NULL,
 
         out_dpird <-
           .get_dpird_stations(
-            .latitude = this_coords[1, latitude],
             .longitude = this_coords[1, longitude],
+            .latitude = this_coords[1, latitude],
             .distance_km = distance_km,
             .api_key = api_key
           )
@@ -343,10 +343,10 @@ find_nearby_stations <- function(latitude = NULL,
           distance_km,
           " km\n",
           " from coordinates ",
-          latitude,
-          " and ",
           longitude,
-          " (lat/lon).\n"
+          " and ",
+          latitude,
+          " (lon/lat).\n"
       )
 
     return(x)
@@ -460,41 +460,32 @@ find_nearby_stations <- function(latitude = NULL,
 #'
 #' @noRd
 .get_silo_stations <- function(.station_code, .distance_km) {
+  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
-  if (!is.null(.station_code)) {
-
-    base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
-    silo_query_list <- list(station = .station_code,
-                            format = "near",
-                            radius = .distance_km)
-
-
-
-  } else {
-    r <- data.table::fread(
-      paste0(
-        base_url,
-        "near&station=",
-        .station_code,
-        "&radius=",
-        .distance_km
+  # set up .query_silo_api to handle no dates...
+  if (is.null(.station_code)) {
+    out <- .query_silo_api(
+      query_list = list(
+        station = "015526",
+        radius = 10000,
+        format = "near"
       ),
-      colClasses = col_types,
-      col.names = col_names,
-      verbose = FALSE
+      end_point = "PatchedPoint"
     )
+  } else {
+    out <-
+      .query_silo_api(
+        query_list = list(
+          station = .station_code,
+          radius = .distance_km,
+          format = "near",
+          sortby = "dist"
+        ),
+        end_point = "PatchedPoint"
+      )
   }
 
-  # Manipulate cols
-  r[, station_code := trimws(station_code)]
-  r[, station_code := as.factor(sprintf("%06s", station_code))]
-  r[, station_name := .strcap(x = station_name)]
-  r[, owner := "BOM"]
-  r[, distance := round(distance, 1)]
-  data.table::setkey(r, "station_code")
-  data.table::setcolorder(r, c(1:5, 6, 8, 7))
-
-  return(r[])
+  return(out[])
 }
 
 

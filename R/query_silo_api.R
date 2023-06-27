@@ -101,9 +101,44 @@
 
   response_data <- data.table::fread(response$parse("UTF8"))
 
+  # return the response if we're just looking for the nearest stations
+  if (query_list$format == "near") {
+    data.table::setnames(
+      response_data,
+      old = c(
+        "Number",
+        "Station name",
+        "Latitude",
+        "Longitud",
+        "Stat",
+        "Elevat.",
+        "Distance (km)"
+      ),
+      new = c(
+        "station_code",
+        "station_name",
+        "latitude",
+        "longitude",
+        "state",
+        "elev_m",
+        "distance_km"
+      )
+    )
+    response_data[, station_code := as.factor(trimws(sprintf("%06s",
+                                                             station_code)))]
+    response_data[, station_name := trimws(.strcap(x = station_name))]
+    response_data[, owner := "BOM"]
+    response_data[, distance := round(distance, 1)]
+    data.table::setkey(response_data, "station_code")
+    data.table::setcolorder(response_data, c(1:5, 6, 8, 7))
+    return(response_data)
+  }
+
   response_data[, elev_m :=
-                  trimws(gsub("elevation=", "",
-                              response_data$metadata[grep("elevation", response_data$metadata)]))]
+                  trimws(
+                    gsub("elevation=", "",
+                         response_data$metadata[grep("elevation",
+                                                     response_data$metadata)]))]
 
   data.table::setnames(response_data, old = "YYYY-MM-DD", new = "date")
   response_data[, year := lubridate::year(date)]
@@ -112,21 +147,26 @@
   response_data[, extracted :=
                   lubridate::as_date(trimws(gsub(
                     "extracted=", "",
-                    response_data$metadata[grep("extracted", response_data$metadata)]
+                    response_data$metadata[grep("extracted",
+                                                response_data$metadata)]
                   )))]
 
   if (end_point == "PatchedPointDataset.php") {
     response_data[, station_code := sprintf("%06s", station)]
     response_data[, station := NULL]
     response_data[, station_name :=
-                    .strcap(trimws(gsub("name=", "",
-                                        response_data$metadata[grep("name", response_data$metadata)])))]
+                    .strcap(
+                      trimws(gsub("name=", "",
+                                  response_data$metadata[grep(
+                                    "name", response_data$metadata)])))]
     response_data[, latitude :=
                     trimws(gsub("latitude=", "",
-                                response_data$metadata[grep("latitude", response_data$metadata)]))]
+                                response_data$metadata[grep(
+                                  "latitude", response_data$metadata)]))]
     response_data[, longitude :=
                     trimws(gsub("longitude=", "",
-                                response_data$metadata[grep("longitude", response_data$metadata)]))]
+                                response_data$metadata[grep(
+                                  "longitude", response_data$metadata)]))]
     .check_silo_codes(response_data)
   }
 
