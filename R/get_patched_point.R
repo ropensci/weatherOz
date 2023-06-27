@@ -196,17 +196,20 @@ get_patched_point <- function(station_code,
   start_date <- gsub("-", "", start_date)
   end_date <- gsub("-", "", end_date)
 
-  silo_return <- .query_silo_api(
-    .station_code = station_code,
-    .start_date = start_date,
-    .end_date = end_date,
-    .values = .values,
-    .api_key = api_key,
-    .dataset = "PatchedPoint"
+  out <- .query_silo_api(
+    query_list = .build_silo_query(
+      .station_code = station_code,
+      .start_date = start_date,
+      .end_date = end_date,
+      .values = .values,
+      .api_key = api_key,
+      .dataset = "PatchedPoint"
+    ),
+    end_point = "PatchedPoint"
   )
 
-  data.table::setcolorder(silo_return, c("station_code", "station_name"))
+  data.table::setcolorder(out, c("station_code", "station_name"))
 
-  silo_return[]
+  out[]
 }
 

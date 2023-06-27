@@ -115,7 +115,8 @@ find_nearby_stations <- function(latitude = NULL,
             .latitude = latitude,
             .longitude = longitude,
             .distance_km = distance_km,
-            .api_key = api_key
+            .api_key = api_key,
+            .include_closed = include_closed
           )
         return(out[])
 
@@ -126,7 +127,8 @@ find_nearby_stations <- function(latitude = NULL,
             .latitude = latitude,
             .longitude = longitude,
             .distance_km = distance_km,
-            .api_key = api_key
+            .api_key = api_key,
+            .include_closed = include_closed
           )
         # return silo
         out_silo <-
@@ -459,40 +461,15 @@ find_nearby_stations <- function(latitude = NULL,
 #' @noRd
 .get_silo_stations <- function(.station_code, .distance_km) {
 
-  base_url <-
-    "https://www.longpaddock.qld.gov.au/cgi-bin/silo/PatchedPointDataset.php?format="
+  if (!is.null(.station_code)) {
 
-  # Define column types
-  col_types <- c(
-    Number = "factor",
-    `Station name` = "character",
-    Latitude = "numeric",
-    Longitud = "numeric",
-    Stat = "factor",
-    Elevat. = "numeric",
-    `Distance (km)` = "numeric"
-  )
+    base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
+    silo_query_list <- list(station = .station_code,
+                            format = "near",
+                            radius = .distance_km)
 
-  # Define column names
-  col_names = c("station_code",
-                "station_name",
-                "latitude",
-                "longitude",
-                "state",
-                "elev_m",
-                "distance")
 
-  # if `.station_code` is not provided, fetch all stations in AU. Otherwise, use
-  # the cgi-bin interface to find stations within `.distance_km` of the given
-  # `.station_code`
-  if (is.null(.station_code)) {
-    r <- data.table::fread(
-      paste0(base_url,
-             "near&station=015526&radius=10000"),
-      colClasses = col_types,
-      col.names = col_names,
-      verbose = FALSE
-    )
+
   } else {
     r <- data.table::fread(
       paste0(

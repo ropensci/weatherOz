@@ -1,7 +1,8 @@
 
-#' Query the SILO API
+#' Build a Query List for the SILO API
 #'
-#' Use {crul} to query the SILO API.
+#' Builds a query list for querying weather data from the \acronym{SILO}
+#'   \acronym{API}.
 #'
 #' @param .station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
@@ -21,21 +22,14 @@
 #' @noRd
 #' @keywords internal
 
-.query_silo_api <- function(.station_code = NULL,
-                            .longitude = NULL,
-                            .latitude = NULL,
-                            .start_date,
-                            .end_date,
-                            .values,
-                            .api_key,
-                            .dataset) {
-  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
-
-  end_point <- data.table::fcase(
-    .dataset == "PatchedPoint", "PatchedPointDataset.php",
-    .dataset == "DataDrill", "DataDrillDataset.php"
-  )
-
+.build_silo_query <- function(.station_code = NULL,
+                              .longitude = NULL,
+                              .latitude = NULL,
+                              .start_date,
+                              .end_date,
+                              .values,
+                              .api_key,
+                              .dataset) {
   if (.dataset == "PatchedPoint") {
     silo_query_list <- list(
       station = as.integer(.station_code),
@@ -58,10 +52,30 @@
       password = "api_request"
     )
   }
+}
+
+#' Send a Query to the SILO API Using {crul}
+#'
+#' @param .query_list A list object containing a query list for {crul}
+#' @param .end_point A valid end point for the SILO API, either `PatchedPoint`
+#'   or `DataDrill`
+#'
+#' @keywords internal
+#' @noRd
+
+.query_silo_api <- function(query_list, end_point) {
+  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
+
+  end_point <- data.table::fcase(
+    end_point == "PatchedPoint",
+    "PatchedPointDataset.php",
+    end_point == "DataDrill",
+    "DataDrillDataset.php"
+  )
 
   client <-
     crul::HttpClient$new(url = sprintf("%s%s", base_url, end_point))
-  response <- client$get(query = silo_query_list)
+  response <- client$get(query = query_list)
 
   # check responses for errors
   # check to see if request failed or succeeded
@@ -89,49 +103,49 @@
 
   response_data[, elev_m :=
                   trimws(gsub("elevation=", "",
-                              response_data$metadata[
-                                grep("elevation", response_data$metadata)]))]
+                              response_data$metadata[grep("elevation", response_data$metadata)]))]
 
   data.table::setnames(response_data, old = "YYYY-MM-DD", new = "date")
   response_data[, year := lubridate::year(date)]
   response_data[, month := lubridate::year(date)]
   response_data[, day := lubridate::year(date)]
   response_data[, extracted :=
-                  lubridate::as_date(
-                    trimws(gsub("extracted=", "",
-                                response_data$metadata[
-                                  grep("extracted", response_data$metadata)])))]
+                  lubridate::as_date(trimws(gsub(
+                    "extracted=", "",
+                    response_data$metadata[grep("extracted", response_data$metadata)]
+                  )))]
 
-  if (.dataset == "PatchedPoint") {
+  if (end_point == "PatchedPointDataset.php") {
     response_data[, station_code := sprintf("%06s", station)]
     response_data[, station := NULL]
     response_data[, station_name :=
                     .strcap(trimws(gsub("name=", "",
-                                        response_data$metadata[
-                                          grep("name", response_data$metadata)])))]
+                                        response_data$metadata[grep("name", response_data$metadata)])))]
     response_data[, latitude :=
                     trimws(gsub("latitude=", "",
-                                response_data$metadata[
-                                  grep("latitude", response_data$metadata)]))]
+                                response_data$metadata[grep("latitude", response_data$metadata)]))]
     response_data[, longitude :=
                     trimws(gsub("longitude=", "",
-                                response_data$metadata[
-                                  grep("longitude", response_data$metadata)]))]
+                                response_data$metadata[grep("longitude", response_data$metadata)]))]
     .check_silo_codes(response_data)
   }
 
   # put columns in alphabetical order, then move others to front
   data.table::setcolorder(response_data, c(order(names(response_data))))
 
-  data.table::setcolorder(response_data,
-                          c("longitude",
-                            "latitude",
-                            "elev_m",
-                            "date",
-                            "year",
-                            "month",
-                            "day",
-                            "extracted"))
+  data.table::setcolorder(
+    response_data,
+    c(
+      "longitude",
+      "latitude",
+      "elev_m",
+      "date",
+      "year",
+      "month",
+      "day",
+      "extracted"
+    )
+  )
 
   response_data[, metadata := NULL]
   return(response_data[])
@@ -158,7 +172,6 @@
 #' @keywords internal
 
 .check_silo_codes <- function(dt) {
-
   # these are the only cols that we need to be concerned about being
   # interpolated
   primary_cols <- c(
@@ -169,7 +182,8 @@
     "evap_pan_source"
   )
 
-  dt <- dt[, .SD, .SDcols = primary_cols[primary_cols %in% names(dt)]]
+  dt <-
+    dt[, .SD, .SDcols = primary_cols[primary_cols %in% names(dt)]]
 
   if (ncol(dt) > 0) {
     if (any(dt[, lapply(
