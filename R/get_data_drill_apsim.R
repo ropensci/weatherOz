@@ -1,13 +1,13 @@
 
-#' Get DataDrill Weather Data From SILO
+#' Get DataDrill Weather Data in the APSIM Format From SILO
 #'
-#' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API} of
-#'   spatially interpolated weather data (DataDrill).  The daily climate
-#'   surfaces have been derived either by splining or kriging the observational
-#'   data.  The returned values contain \dQuote{source} columns, which denote
-#'   how the observations were derived.  The grid spans 112° to 154°, -10° to
-#'   -44° with resolution 0.05° latitude by 0.05° longitude (approximately 5 km
-#'   × 5 km).
+#' Fetch \acronym{APSIM} .met file formatted weather data from the weather data
+#'   from the \acronym{SILO} \acronym{API} of spatially interpolated weather
+#'   data (DataDrill).  The daily climate surfaces have been derived either by
+#'   splining or kriging the observational data.  The returned values contain
+#'   \dQuote{source} columns, which denote how the observations were derived.
+#'   The grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
+#'   0.05° longitude (approximately 5 km × 5 km).
 #'
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
@@ -19,39 +19,9 @@
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 #'   returned is inclusive of this range.  Defaults to the current system date.
-#' @param values A `character` string with the type of weather data to
-#'   return.  See **Available Values** for a full list of valid values.
-#'   Defaults to `all` with all available values being returned.
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
-#'
-#' @section Available Values:
-#'
-#' \describe{
-#'  \item{all}{Which will return all of the following values}
-#'  \item{rain}{Rainfall}
-#'  \item{max_temp}{Maximum temperature}
-#'  \item{min_temp}{Minimum temperature}
-#'  \item{vp}{Vapour pressure}
-#'  \item{vp_deficit}{Vapour pressure deficit}
-#'  \item{evap_pan}{Class A pan evaporation}
-#'  \item{evap_syn}{Synthetic estimate^1}
-#'  \item{evap_comb}{Combination (synthetic estimate pre-1970, class A pan 1970
-#'    onwards)}
-#'  \item{evap_morton_lake}{Morton's shallow lake evaporation}
-#'  \item{radiation}{Solar exposure, consisting of both direct and diffuse
-#'    components}
-#'  \item{rh_tmax}{Relative humidity at the time of maximum temperature}
-#'  \item{rh_tmin}{Relative humidity at the time of minimum temperature}
-#'  \item{et_short_crop}{FAO56^4 short crop}
-#'  \item{et_tall_crop}{ASCE^5 tall crop^6}
-#'  \item{et_morton_actual}{Morton's areal actual evapotranspiration}
-#'  \item{et_morton_potential}{Morton's point potential evapotranspiration}
-#'  \item{et_morton_wet}{Morton's wet-environment areal potential
-#'    evapotranspiration over land}
-#'  \item{mslp}{Mean sea level pressure}
-#' }
 #'
 #' @section Value information:
 #'
@@ -86,18 +56,7 @@
 #'       observations for that day of year.\cr
 #'   }
 #'
-#' @return a [data.table::data.table] with the weather data queried with the
-#'   weather variables in alphabetical order. The first eight columns will
-#'   always be:
-#'
-#'   * `longitude`,
-#'   * `latitude`,
-#'   * `elev_m` (elevation in metres),
-#'   * `date` (ISO8601 format, YYYYMMDD),
-#'   * `year`,
-#'   * `month`,
-#'   * `day`,
-#'   * `extracted` (the date on which the query was made)
+#' @return An [apsimx] object of class \sQuote{met} with attributes.
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.
@@ -130,17 +89,16 @@
 #' # requires an API key as your email address
 #' # Source data from latitude and longitude coordinates (gridded data) for
 #' # max and minimum temperature and rainfall for Southwood, QLD.
-#' wd <- get_data_drill(
+#' wd <- get_data_drill_apsim(
 #'   latitude = -27.85,
 #'   longitude = 150.05,
 #'   start_date = "20221001",
 #'   end_date = "20221201",
-#'   values = c("max_temp", "min_temp", "rain"),
 #'   api_key = "your@email"
 #' )
 #' }
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam H.
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
 #'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
@@ -148,21 +106,20 @@
 #'
 #' @export
 
-get_data_drill <- function(longitude,
-                           latitude,
-                           start_date,
-                           end_date = Sys.Date(),
-                           values = "all",
-                           api_key) {
-
+get_data_drill_apsim <- function(longitude,
+                                 latitude,
+                                 start_date,
+                                 end_date = Sys.Date(),
+                                 api_key) {
   if (missing(longitude) || missing(latitude)) {
     stop(call. = FALSE,
          "Please supply a valid values for `longitude` and `latitude`.")
   }
 
-  if (missing(start_date))
+  if (missing(start_date)) {
     stop(call. = FALSE,
          "Please supply a valid start date as `start_date`.")
+  }
 
   # Error if api_key is not provided
   if (missing(api_key)) {
@@ -174,18 +131,6 @@ get_data_drill <- function(longitude,
 
   # validate user-provided lon and lat values
   .check_lonlat(longitude = longitude, latitude = latitude)
-
-  # validate user-provided data values and return .values object
-  if (any(values == "all")) {
-    .values <- unname(silo_daily_values)
-  } else {
-    if (any(values %notin% names(silo_daily_values))) {
-      stop(call. = FALSE,
-           "You have specified invalid weather values.")
-    }
-    .values <- silo_daily_values[names(silo_daily_values) %in%
-                                        values]
-  }
 
   # validate user provided dates
   start_date <- .check_date(start_date)
@@ -202,12 +147,8 @@ get_data_drill <- function(longitude,
     .latitude = latitude,
     .start_date = start_date,
     .end_date = end_date,
-    .values = .values,
-    .format = "csv",
+    .format = "apsim",
     .api_key = api_key,
     .dataset = "DataDrill"
   )
-
-  silo_return[]
 }
-

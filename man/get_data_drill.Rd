@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_data_drill.R
 \name{get_data_drill}
 \alias{get_data_drill}
-\title{Get DataDrill Weather Data from SILO}
+\title{Get DataDrill Weather Data From SILO}
 \usage{
 get_data_drill(
   longitude,

@@ -1,5 +1,5 @@
 
-#' Find the Nearest Town with a BOM Forecast
+#' Find the Nearest Town With a BOM Forecast
 #'
 #' For a given `latitude` and `longitude`, find the nearest town that the
 #'   \acronym{BOM} provides a forecast for.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_forecast_towns.R
 \name{find_forecast_towns}
 \alias{find_forecast_towns}
-\title{Find the Nearest Town with a BOM Forecast}
+\title{Find the Nearest Town With a BOM Forecast}
 \usage{
 find_forecast_towns(longitude = 149.2, latitude = -35.3, distance_km = 100)
 }
