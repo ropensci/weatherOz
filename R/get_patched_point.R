@@ -135,7 +135,7 @@
 #'   and Software*, Volume 16/4, 309-330. DOI:
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
 #'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
@@ -201,6 +201,7 @@ get_patched_point <- function(station_code,
     .start_date = start_date,
     .end_date = end_date,
     .values = .values,
+    .format = "csv",
     .api_key = api_key,
     .dataset = "PatchedPoint"
   )

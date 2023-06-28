@@ -98,7 +98,9 @@ Other DPIRD:
 
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_patched_point_apsim}()},
 \code{\link{get_patched_point}()},
 \code{\link{silo_daily_values}}
 

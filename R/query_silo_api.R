@@ -26,7 +26,8 @@
                             .latitude = NULL,
                             .start_date,
                             .end_date,
-                            .values,
+                            .values = NULL,
+                            .format,
                             .api_key,
                             .dataset) {
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
@@ -36,15 +37,34 @@
     .dataset == "DataDrill", "DataDrillDataset.php"
   )
 
-  if (.dataset == "PatchedPoint") {
+  if (.dataset == "PatchedPoint" && .format == "csv") {
     silo_query_list <- list(
       station = as.integer(.station_code),
       start = as.character(.start_date),
       finish = as.character(.end_date),
-      format = "csv",
+      format = .format,
       comment = paste(.values, collapse = ""),
       username = .api_key,
       password = "api_request"
+    )
+  } else if (.dataset == "DataDrill" && .format == "csv") {
+    silo_query_list <- list(
+      longitude = as.integer(.longitude),
+      latitude = as.integer(.latitude),
+      start = as.character(.start_date),
+      finish = as.character(.end_date),
+      format = .format,
+      comment = paste(.values, collapse = ""),
+      username = .api_key,
+      password = "api_request"
+    )
+  } else if (.dataset == "PatchedPoint" && .format == "apsim") {
+    silo_query_list <- list(
+      station = as.integer(.station_code),
+      start = as.character(.start_date),
+      finish = as.character(.end_date),
+      format = .format,
+      username = .api_key
     )
   } else {
     silo_query_list <- list(
@@ -52,13 +72,10 @@
       latitude = as.integer(.latitude),
       start = as.character(.start_date),
       finish = as.character(.end_date),
-      format = "csv",
-      comment = paste(.values, collapse = ""),
-      username = .api_key,
-      password = "api_request"
+      format = .format,
+      username = .api_key
     )
   }
-
   client <-
     crul::HttpClient$new(url = sprintf("%s%s", base_url, end_point))
   response <- client$get(query = silo_query_list)
@@ -83,6 +100,13 @@
     stop(call. = FALSE,
          gettextf(response$parse("UTF8")),
          domain = NA)
+  }
+
+  if (.format == "apsim") {
+    met_file_path <- file.path(tempdir(), "apsim.met")
+    writeLines(text = response$parse("UTF8"), con = met_file_path)
+    return(apsimx::read_apsim_met(file = "apsim.met", src.dir = tempdir()))
+    unlink(met_file_path)
   }
 
   response_data <- data.table::fread(response$parse("UTF8"))

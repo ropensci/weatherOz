@@ -71,10 +71,12 @@ Other BOM:
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
+\code{\link{get_patched_point_apsim}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()}

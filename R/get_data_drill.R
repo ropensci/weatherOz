@@ -140,7 +140,7 @@
 #' )
 #' }
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam H.
 #'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family SILO
@@ -203,6 +203,7 @@ get_data_drill <- function(longitude,
     .start_date = start_date,
     .end_date = end_date,
     .values = .values,
+    .format = "csv",
     .api_key = api_key,
     .dataset = "DataDrill"
   )
