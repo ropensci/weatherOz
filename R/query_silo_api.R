@@ -104,9 +104,9 @@
 
   if (.format == "apsim") {
     met_file_path <- file.path(tempdir(), "apsim.met")
+    on.exit(unlink(met_file_path))
     writeLines(text = response$parse("UTF8"), con = met_file_path)
     return(apsimx::read_apsim_met(file = "apsim.met", src.dir = tempdir()))
-    unlink(met_file_path)
   }
 
   response_data <- data.table::fread(response$parse("UTF8"))
