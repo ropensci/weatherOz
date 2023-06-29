@@ -5,23 +5,21 @@
 \title{Find the Nearest Weather Stations to a Given Geographic Point or Known Station}
 \usage{
 find_nearby_stations(
-  longitude = NULL,
-  latitude = NULL,
+  longitude = 149.2,
+  latitude = -35.3,
   station_code = NULL,
-  distance_km,
+  distance_km = 100,
   api_key = NULL,
   which_api = "silo",
   include_closed = FALSE
 )
 }
 \arguments{
-\item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \var{latitude}
-is not \code{NULL}.}
+\item{longitude}{A \code{numeric} value of longitude in decimal degree (DD)
+format.  By default, Canberra (approximately).}
 
-\item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if
-\var{longitude} is not \code{NULL.}}
+\item{latitude}{A \code{numeric} value of latitude in decimal degree (DD)
+format.  By default, Canberra (approximately).}
 
 \item{station_code}{A \code{string} with the station code for the station of
 interest.  Optional and defaults to \code{NULL}.}

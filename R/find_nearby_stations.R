@@ -232,7 +232,8 @@ find_nearby_stations <- function(longitude = 149.2,
             .longitude = this_coords[1, longitude],
             .latitude = this_coords[1, latitude],
             .distance_km = distance_km,
-            .api_key = api_key
+            .api_key = api_key,
+            .include_closed = include_closed
           )
 
         if (!is.null(out_dpird) & nrow(out_silo) != 0L) {
@@ -251,113 +252,7 @@ find_nearby_stations <- function(longitude = 149.2,
   }
 }
 
-#' Find stations within a given radius of a geographic point or weather station
-#'
-#' Searches for stations available in the SILO database and returnes values
-#' sorted from nearest to farthest.
-#'
-#' @param distance_km A `numeric` value for the distance in kilometres in which
-#'  to search for nearby stations from a given geographic location or known
-#'  `station_code`. Cannot be used when `longitude` and `latitude` are provided.
-#' @param longitude A `numeric` value for longitude expressed as decimal degrees
-#'  (DD) (WGS84). Required if `latitude` is used. Cannot be used if `station_code`
-#'  is provided.
-#' @param latitude A `numeric` value for latitude expressed as decimal degrees
-#'   (DD) (WGS84). Required if `longitude` is used. Cannot be used if
-#'   `station_code` is provided.
-#' @param station_code A `character` value for a known station from which the
-#' nearby stations are to be identified.
-#'
-#' @examples
-#' # find stations within 50 km of Finke Post Office, NT
-#' .find_nearby_silo_stations(distance_km = 50,
-#'                          station_code = "015526")
-#'
-#' # find stations within 500 km of Esperance, WA
-#' .find_nearby_silo_stations(distance_km = 50,
-#'                           longitude = 121.8913,
-#'                           latitude = -33.8614)
-#'
-#' @return A `data.table` of available stations and associated metadata.
-#'
-#' @noRd
-.find_nearby_silo_stations <- function(distance_km = NULL,
-                                       longitude = NULL,
-                                       latitude = NULL,
-                                       station_code = NULL) {
-
-  if (!is.null(station_code) &&
-      !is.null(longitude) && !is.null(latitude)) {
-    stop(
-      call. = FALSE,
-      "You have provided `station_code` along with `longitude` and \n",
-      "`latitude` values. Please provide only one, either `station_code` \n",
-      "or a pairing of `longitude` and `latitude` values."
-    )
-  }
-  if (!is.null(longitude) || !is.null(latitude)) {
-    stopifnot("Provide both `latitude` and `longitude` values" =
-                length(latitude) == length(longitude))
-    .check_lonlat(longitude = longitude, latitude = latitude)
-  }
-
-  if (!is.null(station_code)) {
-    x <-
-      .get_silo_stations(.station_code = station_code,
-                         .distance_km = distance_km)
-
-    # Warn user if there are no stations within the input radius and return data
-    if (nrow(x) == 0L)
-      message(
-          "No SILO stations found around a radius of < ",
-          distance_km,
-          " km\n",
-          " from station ",
-          station_code,
-          ".\n"
-      )
-
-    return(x)
-
-  } else if (is.null(station_code)) {
-    .latitude = latitude
-    .longitude = longitude
-
-    x <-
-      .get_silo_stations(.station_code = NULL)
-
-    x[, "distance" := round(
-      .haversine_distance(
-        lat1 = .latitude,
-        lon1 = .longitude,
-        lat2 = latitude,
-        lon2 = longitude
-      ),
-      1
-    )] |>
-      data.table::setorderv("distance")
-
-    x <-
-      x[distance %in%
-          x[(distance <= distance_km)]$distance]
-
-    if (nrow(x) == 0L)
-      message(
-          "No SILO stations found around a radius of < ",
-          distance_km,
-          " km\n",
-          " from coordinates ",
-          longitude,
-          " and ",
-          latitude,
-          " (lon/lat).\n"
-      )
-
-    return(x)
-  }
-}
-
-#' Create a data.table Object of DPIRD Stations Within a Given Radius
+#' Query and Return a data.table of DPIRD Stations Within a Given Radius
 #'
 #' @param .station_code A string identifying a station in DPIRD's network, which
 #'  should be used as the centre point to determine stations that fall within
@@ -450,7 +345,7 @@ find_nearby_stations <- function(longitude = 149.2,
   }
 }
 
-#' Create a data.table object of all stations available in SILO
+#' Query and Return a data.table of Stations Available in SILO Within a Given Radius
 #'
 #' @param .station_code A string identifying a BOM station in SILO which should
 #' be used as the centre point to determine stations that fall within
@@ -465,10 +360,12 @@ find_nearby_stations <- function(longitude = 149.2,
 #' Finke Post Office.
 #'
 #' @noRd
-.get_silo_stations <- function(.station_code, .distance_km) {
-  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
+.get_silo_stations <-
+  function(.station_code,
+           .distance_km,
+           .longitude,
+           .latitude) {
 
-  # set up .query_silo_api to handle no dates...
   if (is.null(.station_code)) {
     out <- .query_silo_api(
       query_list = list(
@@ -478,6 +375,17 @@ find_nearby_stations <- function(longitude = 149.2,
       ),
       end_point = "PatchedPoint"
     )
+
+    out[, "distance_km" := .haversine_distance(
+      lat1 = latitude,
+      lon1 = longitude,
+      lat2 = .latitude,
+      lon2 = .longitude
+    )] |>
+      data.table::setorderv("distance_km")
+
+    out <-
+      out[distance_km %in% out[(distance_km <= .distance_km)]$distance_km]
   } else {
     out <-
       .query_silo_api(
@@ -491,62 +399,10 @@ find_nearby_stations <- function(longitude = 149.2,
       )
   }
 
-  return(out[])
+  if (nrow(out) == 0L)
+    message(
+      "No SILO stations found around a radius of < ", .distance_km,
+      " km\n for the given `station_code` or coordinates."
+    )
+    return(out[])
 }
-
-
-#' DPIRD API query parser for stations list
-#' Takes results from an API query to the DPIRD Weather API and formats it to a
-#' flat `data.table`. The function also converts character columns to date and
-#' numerical classes, according to the data represented in the column.
-#' @param query_result A list, with metadata and data collection elements.
-#' @return A `data.table` with date class column(s) and numeric class columns
-#' for the weather variables.
-#' @keywords internal
-#' @noRd
-
-.parse_dpird_stations <- function(query_result = ret) {
-
-  out <- data.table::data.table(query_result$collection)
-  out <- .rename_cols(out, which_api = "dpird")
-
-  out[, distance := round(distance, 1)]
-  out[, links := NULL]
-  out[, model := NULL]
-  out[, owner := NULL]
-  out[, start_date := NULL]
-  out[, end_date := NULL]
-  out[, comments := NULL]
-  out[, job_number := NULL]
-  out[, online := NULL]
-  out[, status := NULL]
-
-  # Filter out missing values in latitude and longitude
-  out <-
-    out[stats::complete.cases(out[, c("latitude",
-                                      "longitude")])]
-
-  # Reverse sign of latitude if it is positive
-  out[, latitude := data.table::fifelse(out$latitude > 0,
-                                        out$latitude * -1,
-                                        out$latitude)]
-
-  out[, state := "WA"]
-  data.table::setcolorder(out, c(1:4, 8, 5, 6, 7))
-  data.table::setnames(out, c(6, 7), c("elev_m", "owner"))
-  out <- out[owner %notin% "DPIRDTST"]
-
-  return(out)
-}
-
-#' Internal function to create a data.table
-#'
-#' @param ret a JSON object returned from the DPIRD API with station information
-#' @noRd
-
-.create_distance_out <- function(ret) {
-  distance_out <- data.table::data.table(ret$collection)
-  distance_out[, links := NULL]
-  return(distance_out)
-}
-
