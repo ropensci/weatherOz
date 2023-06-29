@@ -127,7 +127,7 @@
                                   grep("extracted", response_data$metadata)])))]
 
   if (.dataset == "PatchedPoint") {
-    response_data[, station_code := sprintf("%06s", station)]
+    response_data[, station_code := as.factor(sprintf("%06s", station))]
     response_data[, station := NULL]
     response_data[, station_name :=
                     .strcap(trimws(gsub("name=", "",
