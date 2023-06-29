@@ -82,7 +82,7 @@ test_that("get_dpird_minute() returns minute values", {
       "wind_max_speed"
     )
   )
-  expect_type(x$station_code, "character")
+  expect_type(x$station_code, "integer")
   expect_s3_class(x$date_time, "POSIXct")
   expect_type(x$wind_height, "integer")
   expect_type(x$wind_avg_speed, "double")

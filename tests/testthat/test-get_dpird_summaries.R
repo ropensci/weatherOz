@@ -129,7 +129,7 @@ test_that("get_dpird_summaries() returns yearly values",
                 "wind_max_time"
               )
             )
-            expect_type(x$station_code, "character")
+            expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
             expect_type(x$month, "logical")
@@ -175,7 +175,7 @@ test_that("get_dpird_summaries() returns monthly values",
                 "wind_max_time"
               )
             )
-            expect_type(x$station_code, "character")
+            expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
             expect_type(x$month, "integer")
@@ -222,7 +222,7 @@ test_that("get_dpird_summaries() returns daily values",
                 "wind_max_time"
               )
             )
-            expect_type(x$station_code, "character")
+            expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
             expect_type(x$month, "integer")
@@ -271,7 +271,7 @@ test_that("get_dpird_summaries() returns hourly values",
                 "wind_max_time"
               )
             )
-            expect_type(x$station_code, "character")
+            expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
             expect_type(x$month, "integer")
@@ -320,7 +320,7 @@ test_that("get_dpird_summaries() returns 30min values",
                 "wind_max_time"
               )
             )
-            expect_type(x$station_code, "character")
+            expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
             expect_type(x$month, "integer")
@@ -369,7 +369,7 @@ test_that("get_dpird_summaries() returns 15min values",
                 "wind_max_time"
               )
             )
-            expect_type(x$station_code, "character")
+            expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
             expect_type(x$month, "integer")
