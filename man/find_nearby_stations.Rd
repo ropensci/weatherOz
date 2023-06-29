@@ -5,8 +5,8 @@
 \title{Find the Nearest Weather Stations to a Given Geographic Point or Known Station}
 \usage{
 find_nearby_stations(
-  latitude = NULL,
   longitude = NULL,
+  latitude = NULL,
   station_code = NULL,
   distance_km,
   api_key = NULL,
@@ -15,13 +15,13 @@ find_nearby_stations(
 )
 }
 \arguments{
-\item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if
-\var{longitude} is not \code{NULL.}}
-
 \item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
 (DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \var{latitude}
 is not \code{NULL}.}
+
+\item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
+(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if
+\var{longitude} is not \code{NULL.}}
 
 \item{station_code}{A \code{string} with the station code for the station of
 interest.  Optional and defaults to \code{NULL}.}
@@ -53,7 +53,11 @@ interest.
 Find nearby weather stations given geographic coordinates or a station code
 for both of the \acronym{DPIRD} and \acronym{SILO} weather station
 networks.  Either a combination of \var{latitude} and \var{longitude} or
-\var{station_code} must be provided.
+\var{station_code} must be provided.  A \acronym{DPIRD} \acronym{API} key
+is only necessary to search for stations in the \acronym{DPIRD} network.
+If you are not interested in \acronym{DPIRD} stations in Western Australia,
+you may use this function to query only \acronym{SILO} stations for all of
+Australia without using a key.
 }
 \note{
 You can request your own \acronym{API} key from \acronym{DPIRD} for

@@ -4,7 +4,11 @@
 #' Find nearby weather stations given geographic coordinates or a station code
 #'   for both of the \acronym{DPIRD} and \acronym{SILO} weather station
 #'   networks.  Either a combination of \var{latitude} and \var{longitude} or
-#'   \var{station_code} must be provided.
+#'   \var{station_code} must be provided.  A \acronym{DPIRD} \acronym{API} key
+#'   is only necessary to search for stations in the \acronym{DPIRD} network.
+#'   If you are not interested in \acronym{DPIRD} stations in Western Australia,
+#'   you may use this function to query only \acronym{SILO} stations for all of
+#'   Australia without using a key.
 #'
 #' @param latitude A `numeric` value for latitude expressed as decimal degrees
 #'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if
@@ -379,7 +383,7 @@ find_nearby_stations <- function(longitude = NULL,
                                 .include_closed) {
 
   # Error if api key not provided
-  if (missing(api_key)) {
+  if (missing(.api_key)) {
     stop(
       "A valid DPIRD API key must be provided, please visit\n",
       "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
@@ -426,6 +430,8 @@ find_nearby_stations <- function(longitude = NULL,
       jsonlite::fromJSON(out[[1]]$parse("UTF8"))$collection)
 
   .set_snake_case_names(out)
+  out[, links := NULL]
+  out[, station_code := as.factor(station_code)]
   data.table::setkey(out, "station_code")
 
     if (is.null(nrow(out)) && !missing(station_code)) {
