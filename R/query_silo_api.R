@@ -128,7 +128,7 @@
                                                              station_code)))]
     response_data[, station_name := trimws(.strcap(x = station_name))]
     response_data[, owner := "BOM"]
-    response_data[, distance := round(distance_km, 1)]
+    response_data[, distance_km := round(distance_km, 1)]
     data.table::setkey(response_data, "station_code")
     data.table::setcolorder(response_data, c(1:5, 6, 8, 7))
     return(response_data)
