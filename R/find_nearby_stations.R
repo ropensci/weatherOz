@@ -10,12 +10,10 @@
 #'   you may use this function to query only \acronym{SILO} stations for all of
 #'   Australia without using a key.
 #'
-#' @param latitude A `numeric` value for latitude expressed as decimal degrees
-#'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if
-#'   \var{longitude} is not `NULL.`
-#' @param longitude A `numeric` value for longitude expressed as decimal degrees
-#'   (DD) (WGS84).  Optional and defaults to `NULL`.  Required if \var{latitude}
-#'   is not `NULL`.
+#' @param longitude A `numeric` value of longitude in decimal degree (DD)
+#'   format.  By default, Canberra (approximately).
+#' @param latitude A `numeric` value of latitude in decimal degree (DD)
+#'   format.  By default, Canberra (approximately).
 #' @param station_code A `string` with the station code for the station of
 #'   interest.  Optional and defaults to `NULL`.
 #' @param distance_km A `numeric` value for distance to limit the search from
@@ -84,10 +82,10 @@
 #'
 #' @export
 
-find_nearby_stations <- function(longitude = NULL,
-                                 latitude = NULL,
+find_nearby_stations <- function(longitude = 149.2,
+                                 latitude = -35.3,
                                  station_code = NULL,
-                                 distance_km,
+                                 distance_km = 100,
                                  api_key = NULL,
                                  which_api = "silo",
                                  include_closed = FALSE) {

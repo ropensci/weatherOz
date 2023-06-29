@@ -128,7 +128,7 @@
                                                              station_code)))]
     response_data[, station_name := trimws(.strcap(x = station_name))]
     response_data[, owner := "BOM"]
-    response_data[, distance := round(distance, 1)]
+    response_data[, distance := round(distance_km, 1)]
     data.table::setkey(response_data, "station_code")
     data.table::setcolorder(response_data, c(1:5, 6, 8, 7))
     return(response_data)
@@ -152,7 +152,7 @@
                   )))]
 
   if (end_point == "PatchedPointDataset.php") {
-    response_data[, station_code := sprintf("%06s", station)]
+    response_data[, station_code := as.factor(sprintf("%06s", station))]
     response_data[, station := NULL]
     response_data[, station_name :=
                     .strcap(
