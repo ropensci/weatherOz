@@ -23,40 +23,43 @@
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
 #'
+#' @section Included Values:
+#'
+#' \describe{
+#'  \item{rain (mm)}{Rainfall}
+#'  \item{maxt (˚C)}{Maximum temperature}
+#'  \item{mint (˚C)}{Minimum temperature}
+#'  \item{vp (hPa)}{Vapour pressure}
+#'  \item{evap_pan (mm)}{Class A pan evaporation}
+#'  \item{radiation (Mj/\ifelse{html}{\out{m<sup>1</sup>}}{m\eqn{^1}})}{Solar
+#'    exposure, consisting of both direct and diffuse components}
+#' }
+#'
 #' @section Value information:
 #'
 #' Solar radiation: total incoming downward shortwave radiation on a horizontal
-#'   surface, derived from estimates of cloud oktas and sunshine duration^3.
-#'
-#' Relative humidity: calculated using the vapour pressure measured at 9am, and
-#'   the saturation vapour pressure computed using either the maximum or minimum
-#'   temperature^6.
+#'   surface, derived from estimates of cloud oktas and sunshine
+#'   \ifelse{html}{\out{duration<sup>2</sup>}}{duration\eqn{^2}}.
 #'
 #' Evaporation and evapotranspiration: an overview of the variables provided by
 #'   \acronym{SILO} is available here,
 #'   <https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf>.
 #'
 #' @section Data codes:
-#' Data codes
-#' Where possible (depending on the file format), the data are supplied with
-#'   codes indicating how each datum was obtained.
+#' Where the source code is a 6 digit string comprising the source code for the
+#'   6 variables. The single digit code for each variable is:
 #'
-#'   \tabular{rl}{
-#'     **Code**\tab **Source**\cr
-#'     **0**:\tab Official observation as supplied by the Bureau of
-#'       Meteorology.\cr
-#'     **15**:\tab Deaccumulated rainfall (original observation was recorded
-#'       over a period exceeding the standard 24 hour observation period).\cr
-#'     **25**:\tab Interpolated from daily observations for that date.\cr
-#'     **26**:\tab Synthetic Class A pan evaporation, calculated from
-#'       temperatures, radiation and vapour pressure.\cr
-#'     **35**:\tab Interpolated from daily observations using an anomaly
-#'       interpolation method.\cr
-#'     **75**:\tab Interpolated from the long term averages of daily
-#'       observations for that day of year.\cr
+#'   \describe{
+#'    \item{0}{an actual observation;}
+#'    \item{1}{an actual observation from a composite station;}
+#'    \item{2}{a value interpolated from daily observations;}
+#'    \item{3}{a value interpolated from daily observations using the anomaly
+#'      interpolation method for CLIMARC data;}
+#'    \item{6}{a synthetic pan value; or}
+#'    \item{7}{an interpolated long term average.}
 #'   }
 #'
-#' @return An [apsimx] object of class \sQuote{met} with attributes.
+#' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'
 #' @references
 #' 1. Rayner, D. (2005). Australian synthetic daily Class A pan evaporation.
@@ -66,23 +69,6 @@
 #' 2. Morton, F. I. (1983). Operational estimates of areal evapotranspiration
 #'   and their significance to the science and practice of hydrology, *Journal
 #'   of Hydrology*, Volume 66, 1-76.
-#'
-#' 3. Zajaczkowski, J., Wong, K., & Carter, J. (2013). Improved historical
-#'   solar radiation gridded data for Australia, *Environmental Modelling &
-#'   Software*, Volume 49, 64–77. DOI: \doi{10.1016/j.envsoft.2013.06.013}.
-#'
-#' 4. Food and Agriculture Organization of the United Nations,
-#'   Irrigation and drainage paper 56: Crop evapotranspiration - Guidelines for
-#'   computing crop water requirements, 1998.
-#'
-#' 5. ASCE’s Standardized Reference Evapotranspiration Equation, proceedings of
-#'   the National Irrigation Symposium, Phoenix, Arizona, 2000.
-#'
-#' 6. For further details refer to Jeffrey, S.J., Carter, J.O., Moodie, K.B. and
-#'   Beswick, A.R. (2001). Using spatial interpolation to construct a
-#'   comprehensive archive of Australian climate data, *Environmental Modelling
-#'   and Software*, Volume 16/4, 309-330. DOI:
-#'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
 #' @examples
 #' \dontrun{

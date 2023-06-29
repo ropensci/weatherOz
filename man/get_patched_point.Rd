@@ -75,27 +75,31 @@ some islands).}
 
 \describe{
 \item{all}{Which will return all of the following values}
-\item{rain}{Rainfall}
-\item{max_temp}{Maximum temperature}
-\item{min_temp}{Minimum temperature}
-\item{vp}{Vapour pressure}
-\item{vp_deficit}{Vapour pressure deficit}
-\item{evap_pan}{Class A pan evaporation}
-\item{evap_syn}{Synthetic estimate^1}
-\item{evap_comb}{Combination (synthetic estimate pre-1970, class A pan 1970
-onwards)}
-\item{evap_morton_lake}{Morton's shallow lake evaporation}
-\item{radiation}{Solar exposure, consisting of both direct and diffuse
-components}
-\item{rh_tmax}{Relative humidity at the time of maximum temperature}
-\item{rh_tmin}{Relative humidity at the time of minimum temperature}
-\item{et_short_crop}{FAO56^4 short crop}
-\item{et_tall_crop}{ASCE^5 tall crop^6}
-\item{et_morton_actual}{Morton's areal actual evapotranspiration}
-\item{et_morton_potential}{Morton's point potential evapotranspiration}
-\item{et_morton_wet}{Morton's wet-environment areal potential
+\item{rain (mm)}{Rainfall}
+\item{max_temp (˚C)}{Maximum temperature}
+\item{min_temp (˚C)}{Minimum temperature}
+\item{vp (hPa)}{Vapour pressure}
+\item{vp_deficit (hPa)}{Vapour pressure deficit}
+\item{evap_pan (mm)}{Class A pan evaporation}
+\item{evap_syn (mm)}{Synthetic
+\ifelse{html}{\out{estimate<sup>1</sup>}}{estimate\eqn{^1}}}
+\item{evap_comb (mm)}{Combination (synthetic estimate pre-1970, class A pan
+1970 onwards)}
+\item{evap_morton_lake (mm)}{Morton's shallow lake evaporation}
+\item{radiation (Mj/\ifelse{html}{\out{m<sup>2</sup>}}{m\eqn{^2}})}{Solar
+exposure, consisting of both direct and diffuse components}
+\item{rh_tmax (\%)}{Relative humidity at the time of maximum temperature}
+\item{rh_tmin (\%)}{Relative humidity at the time of minimum temperature}
+\item{et_short_crop (mm)}{
+\ifelse{html}{\out{FAO56<sup>4</sup>}}{FAO56\eqn{^4}} short crop}
+\item{et_tall_crop (mm)}{
+\ifelse{html}{\out{ASCE<sup>5</sup>}}{ASCE\eqn{^5}} tall
+\ifelse{html}{\out{crop<sup>6</sup>}}{crop\eqn{^6}}}
+\item{et_morton_actual (mm)}{Morton's areal actual evapotranspiration}
+\item{et_morton_potential (mm)}{Morton's point potential evapotranspiration}
+\item{et_morton_wet (mm)}{Morton's wet-environment areal potential
 evapotranspiration over land}
-\item{mslp}{Mean sea level pressure}
+\item{mslp (hPa)}{Mean sea level pressure}
 }
 }
 
@@ -103,11 +107,12 @@ evapotranspiration over land}
 
 
 Solar radiation: total incoming downward shortwave radiation on a horizontal
-surface, derived from estimates of cloud oktas and sunshine duration^3.
+surface, derived from estimates of cloud oktas and sunshine
+\ifelse{html}{\out{duration<sup>3</sup>}}{duration\eqn{^3}}.
 
 Relative humidity: calculated using the vapour pressure measured at 9am, and
 the saturation vapour pressure computed using either the maximum or minimum
-temperature^6.
+\ifelse{html}{\out{temperature<sup>6</sup>}}{temperature\eqn{^6}}.
 
 Evaporation and evapotranspiration: an overview of the variables provided by
 \acronym{SILO} is available here,
