@@ -1,7 +1,7 @@
-AAC
 AHI
 AMMinutes
 AMStartTime
+APSIM
 ASCE
 ASCE’s
 AUS
@@ -10,6 +10,7 @@ BOM
 BOM's
 Beswick
 Bhandari
+CLIMARC
 Codecov
 DBF
 DES
@@ -40,6 +41,7 @@ Nayyar
 ORCID
 Organisation
 PatchedPoint
+Précis
 QLD
 Qld
 Rahul
@@ -50,6 +52,7 @@ Seastate
 Siddique
 Southwood
 SpatRaster
+Summarised
 TAS
 TZ
 VH
@@ -71,14 +74,12 @@ airTemperatureMin
 airTemperatureMinTime
 al
 ammin
-api
 apparentAirTemperature
 apparentAirTemperatureAvg
 apparentAirTemperatureMax
 apparentAirTemperatureMaxTime
 apparentAirTemperatureMin
 apparentAirTemperatureMinTime
-apsim
 availabilityCurrentHour
 availabilityLast
 availabilityMonthToDateSince
@@ -95,7 +96,6 @@ barometricPressureMin
 barometricPressureMinTime
 batteryMinVoltage
 batteryMinVoltageDateTime
-bomrang
 chillHours
 colour
 cron
@@ -113,7 +113,6 @@ dewPointMaxTime
 dewPointMin
 dewPointMinTime
 doi
-dpird
 equirect
 erosionCondition
 erosionConditionLast
@@ -196,7 +195,6 @@ relativeHumidityMin
 relativeHumidityMinTime
 reproducibility
 richardsonUnits
-rtd
 soilTemperature
 soilTemperatureAvg
 soilTemperatureMax
@@ -206,7 +204,6 @@ soilTemperatureMinTime
 solarExposure
 solarIrradiance
 splining
-summarise
 summarised
 terra
 timezones
