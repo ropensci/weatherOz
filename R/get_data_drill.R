@@ -76,19 +76,17 @@
 #' Where possible (depending on the file format), the data are supplied with
 #'   codes indicating how each datum was obtained.
 #'
-#'   \tabular{rl}{
-#'     **Code**\tab **Source**\cr
-#'     **0**:\tab Official observation as supplied by the Bureau of
-#'       Meteorology.\cr
-#'     **15**:\tab Deaccumulated rainfall (original observation was recorded
-#'       over a period exceeding the standard 24 hour observation period).\cr
-#'     **25**:\tab Interpolated from daily observations for that date.\cr
-#'     **26**:\tab Synthetic Class A pan evaporation, calculated from
-#'       temperatures, radiation and vapour pressure.\cr
-#'     **35**:\tab Interpolated from daily observations using an anomaly
-#'       interpolation method.\cr
-#'     **75**:\tab Interpolated from the long term averages of daily
-#'       observations for that day of year.\cr
+#'   \describe{
+#'     \item{0}{Official observation as supplied by the Bureau of Meteorology}
+#'     \item{15}{Deaccumulated rainfall (original observation was recorded
+#'       over a period exceeding the standard 24 hour observation period).}
+#'     \item{25}{Interpolated from daily observations for that date.}
+#'     \item{26}{Synthetic Class A pan evaporation, calculated from
+#'       temperatures, radiation and vapour pressure.}
+#'     \item{35}{Interpolated from daily observations using an anomaly
+#'       interpolation method.}
+#'     \item{75}{Interpolated from the long term averages of daily
+#'       observations for that day of year.}
 #'   }
 #'
 #' @return a [data.table::data.table] with the weather data queried with the

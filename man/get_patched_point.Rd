@@ -124,19 +124,17 @@ Evaporation and evapotranspiration: an overview of the variables provided by
 
 The data are supplied with codes indicating how each datum was obtained.
 
-\tabular{rl}{
-\strong{Code}\tab \strong{Source}\cr
-\strong{0}:\tab Official observation as supplied by the Bureau of
-Meteorology.\cr
-\strong{15}:\tab Deaccumulated rainfall (original observation was recorded
-over a period exceeding the standard 24 hour observation period).\cr
-\strong{25}:\tab Interpolated from daily observations for that date.\cr
-\strong{26}:\tab Synthetic Class A pan evaporation, calculated from
-temperatures, radiation and vapour pressure.\cr
-\strong{35}:\tab Interpolated from daily observations using an anomaly
-interpolation method.\cr
-\strong{75}:\tab Interpolated from the long term averages of daily
-observations for that day of year.\cr
+\describe{
+\item{0}{Official observation as supplied by the Bureau of Meteorology}
+\item{15}{Deaccumulated rainfall (original observation was recorded
+over a period exceeding the standard 24 hour observation period).}
+\item{25}{Interpolated from daily observations for that date.}
+\item{26}{Synthetic Class A pan evaporation, calculated from
+temperatures, radiation and vapour pressure.}
+\item{35}{Interpolated from daily observations using an anomaly
+interpolation method.}
+\item{75}{Interpolated from the long term averages of daily
+observations for that day of year.}
 }
 }
 
