@@ -106,13 +106,13 @@ find_nearby_stations <- function(longitude = 149.2,
         # Calculate distance from lat/lon coordinates, sort and filter data to
         # distance threshold. Round distance in km to .0
 
-        out <- .find_nearby_silo_stations(distance_km = distance_km,
-                                          longitude = longitude,
-                                          latitude = latitude)
-        return(out[])
+        out_silo <- .get_silo_stations(distance_km = distance_km,
+                                       longitude = longitude,
+                                       latitude = latitude)
+        return(out_silo[])
 
       } else if (which_api == "dpird") {
-        out <-
+        out_dpird <-
           .get_dpird_stations(
             .longitude = longitude,
             .latitude = latitude,
@@ -120,7 +120,7 @@ find_nearby_stations <- function(longitude = 149.2,
             .api_key = api_key,
             .include_closed = include_closed
           )
-        return(out[])
+        return(out_dpird[])
 
       } else if (which_api == "all") {
         # return dpird
@@ -134,7 +134,7 @@ find_nearby_stations <- function(longitude = 149.2,
           )
         # return silo
         out_silo <-
-          .find_nearby_silo_stations(distance_km = distance_km,
+          .get_silo_stations(distance_km = distance_km,
                                      longitude = longitude,
                                      latitude = latitude)
 
