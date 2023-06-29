@@ -386,6 +386,12 @@ find_nearby_stations <- function(longitude = 149.2,
 
     out <-
       out[distance_km %in% out[(distance_km <= .distance_km)]$distance_km]
+
+    if (nrow(out) == 0L)
+      message(
+        "No SILO stations found around a radius of < ", .distance_km,
+        " km\n for the given `station_code`", .station_code, "."
+      )
   } else {
     out <-
       .query_silo_api(
@@ -397,12 +403,11 @@ find_nearby_stations <- function(longitude = 149.2,
         ),
         end_point = "PatchedPoint"
       )
+    if (nrow(out) == 0L)
+      message(
+        "No SILO stations found around a radius of < ", .distance_km,
+        " km\n for the given coordinates", .longitude, " and ", .latitude, "."
+      )
   }
-
-  if (nrow(out) == 0L)
-    message(
-      "No SILO stations found around a radius of < ", .distance_km,
-      " km\n for the given `station_code` or coordinates."
-    )
     return(out[])
 }
