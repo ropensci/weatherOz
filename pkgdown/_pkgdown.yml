@@ -30,8 +30,10 @@ reference:
   desc: >
     Functions that fetch data from the SILO API.
   contents:
-  - starts_with("get_data_drill")
-  - starts_with("get_patched_point")
+  - get_data_drill
+  - get_patched_point
+  - get_data_drill_apsim
+  - get_patched_point_apsim
 
 - title: Metadata Fetching
   desc: >
