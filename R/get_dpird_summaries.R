@@ -389,6 +389,7 @@ get_dpird_summaries <- function(station_code,
 
   data.table::setnames(out, gsub("period_", "", names(out)))
 
+  out[, station_code := as.factor(station_code)]
   data.table::setkey(x = out, cols = station_code)
 
   return(out)

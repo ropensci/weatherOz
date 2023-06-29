@@ -178,7 +178,7 @@ get_dpird_extremes <- function(station_code,
     .SDcols = grep("time", colnames(out))]
   }
 
-  out[, station_code := station_code]
+  out[, station_code := as.factor(station_code)]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code"))
   return(out)

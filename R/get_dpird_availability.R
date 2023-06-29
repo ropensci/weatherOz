@@ -153,6 +153,7 @@ get_dpird_availability <-
                             c("station_code",
                               "station_name"))
 
+    out[, station_code := as.factor(station_code)]
     data.table::setkey(x = out, cols = station_code)
 
     return(out)

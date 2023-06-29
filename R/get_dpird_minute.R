@@ -144,7 +144,7 @@ get_dpird_minute <- function(station_code,
   out[, date_time := suppressMessages(
     lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
 
-  out[, station_code := station_code]
+  out[, station_code := as.factor(station_code)]
   data.table::setkey(x = out, cols = station_code)
 
   data.table::setcolorder(out, c("station_code", "date_time"))
