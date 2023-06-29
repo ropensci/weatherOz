@@ -241,9 +241,9 @@ get_dpird_minute <- function(station_code,
     j <- j + 1
   }
 
-  parsed_dt <- cbind(parsed_dt, do.call(what = cbind, args = new_df_list))
+  out <- cbind(parsed_dt, do.call(what = cbind, args = new_df_list))
 
-  if ("wind.height1" %in% names(parsed_dt)) {
+  if ("wind.height1" %in% names(out)) {
     out <- data.table::as.data.table(
       stats::reshape(
         parsed_dt,
