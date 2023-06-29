@@ -60,6 +60,7 @@
 #'             api_key = "your_api_key")
 #' }
 #'
+#' @export
 
 get_dpird_availability <-
   function(station_code = NULL,
