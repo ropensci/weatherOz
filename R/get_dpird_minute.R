@@ -217,11 +217,11 @@ get_dpird_minute <- function(station_code,
     return(message("There are no available minute data for this query."))
   }
 
-  parsed_dt <- data.table::rbindlist(parsed)
+  out <- data.table::rbindlist(parsed)
 
   # get the nested list columns and convert them to data.table objects
   col_classes <-
-    vapply(parsed_dt, class, FUN.VALUE = character(1))
+    vapply(out, class, FUN.VALUE = character(1))
 
   col_lists <- which(col_classes == "list")
 
@@ -231,49 +231,49 @@ get_dpird_minute <- function(station_code,
   j <- 1
   for (i in col_lists) {
     new_df_list[[j]] <-
-      data.table::rbindlist(lapply(parsed_dt[[i]],
+      data.table::rbindlist(lapply(out[[i]],
                                    function(x)
                                      as.data.frame(t(unlist(
                                        x
                                      )))))
-    # drop the column that's now in the new list to be added to `parsed_dt`
-    parsed_dt[, names(new_df_list[j]) := NULL]
+    # drop the column that's now in the new list to be added to `out`
+    out[, names(new_df_list[j]) := NULL]
     j <- j + 1
   }
 
-  out <- cbind(parsed_dt, do.call(what = cbind, args = new_df_list))
+  out <- cbind(out, do.call(what = cbind, args = new_df_list))
 
   if ("wind.height1" %in% names(out)) {
     out <- data.table::as.data.table(
       stats::reshape(
-        parsed_dt,
+        out,
         idvar = "dateTime",
         direction = "long",
         varying = list(
           c(
-            which(names(parsed_dt) %in% "wind.avg.speed1"),
-            which(names(parsed_dt) %in% "wind.avg.speed2")
+            which(names(out) %in% "wind.avg.speed1"),
+            which(names(out) %in% "wind.avg.speed2")
           ),
           c(
-            which(names(parsed_dt) %in% "wind.avg.direction.compassPoint1"),
-            which(names(parsed_dt) %in% "wind.avg.direction.compassPoint2")
+            which(names(out) %in% "wind.avg.direction.compassPoint1"),
+            which(names(out) %in% "wind.avg.direction.compassPoint2")
           ),
           c(
-            which(names(parsed_dt) %in% "wind.avg.direction.degrees1"),
-            which(names(parsed_dt) %in% "wind.avg.direction.degrees2")
+            which(names(out) %in% "wind.avg.direction.degrees1"),
+            which(names(out) %in% "wind.avg.direction.degrees2")
           ),
           c(
-            which(names(parsed_dt) %in% "wind.min.speed1"),
-            which(names(parsed_dt) %in% "wind.min.speed2")
+            which(names(out) %in% "wind.min.speed1"),
+            which(names(out) %in% "wind.min.speed2")
           ),
           c(
-            which(names(parsed_dt) %in% "wind.max.speed1"),
-            which(names(parsed_dt) %in% "wind.max.speed2")
+            which(names(out) %in% "wind.max.speed1"),
+            which(names(out) %in% "wind.max.speed2")
           )
         ),
         timevar = "wind.height",
-        times = c(parsed_dt$wind.height1[[1]],
-                  parsed_dt$wind.height2[[1]]),
+        times = c(out$wind.height1[[1]],
+                  out$wind.height2[[1]]),
         v.names = c(
           "wind.avg.speed",
           "wind.avg.direction.compassPoint",
