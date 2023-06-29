@@ -179,7 +179,8 @@ find_nearby_stations <- function(longitude = NULL,
           .distance_km = distance_km,
           .longitude = longitude,
           .latitude = latitude,
-          .api_key = api_key
+          .api_key = api_key,
+          .include_closed = include_closed
         )
       return(out[])
 
@@ -192,7 +193,8 @@ find_nearby_stations <- function(longitude = NULL,
             .distance_km = distance_km,
             .longitude = longitude,
             .latitude = latitude,
-            .api_key = api_key
+            .api_key = api_key,
+            .include_closed = include_closed
           )
 
         this_coords <- out_dpird[1, .(latitude, longitude)]
