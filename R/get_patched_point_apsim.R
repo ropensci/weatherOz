@@ -64,7 +64,7 @@
 #'    \item{1}{an actual observation from a composite station;}
 #'    \item{2}{a value interpolated from daily observations;}
 #'    \item{3}{a value interpolated from daily observations using the anomaly
-#'      interpolation method for CLIMARC data;}
+#'      interpolation method for \acronym{CLIMARC} data;}
 #'    \item{6}{a synthetic pan value; or}
 #'    \item{7}{an interpolated long term average.}
 #'   }
