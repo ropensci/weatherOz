@@ -376,7 +376,10 @@ get_dpird_summaries <- function(station_code,
 
   # drop any empty cols, the setcolorder will create empty cols above if they
   # don't exist, this is faster and easier to remove them if empty
-  out <- out[, Filter(function(x) any(!is.na(x)), .SD)]
+  time_cols <- c("month", "day", "hour", "minute")
+  empty_columns <-
+    !names(colSums(is.na(out) | out == "") == nrow(out)) %in% time_cols
+  out <- out[, empty_columns, with = FALSE]
 
   out[, station_code := as.factor(station_code)]
 
