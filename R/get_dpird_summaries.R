@@ -368,7 +368,8 @@ get_dpird_summaries <- function(station_code,
       "period_month",
       "period_day",
       "period_hour",
-      "period_minute"
+      "period_minute",
+      "date"
     )
   )
 
