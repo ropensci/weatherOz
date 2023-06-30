@@ -372,8 +372,13 @@ get_dpird_summaries <- function(station_code,
       "date"
     )
   )
-
   data.table::setnames(out, gsub("period_", "", names(out)))
+
+  # drop any empty cols, the setcolorder will create empty cols above if they
+  # don't exist, this is faster and easier to remove them if empty
+  out <- out[, Filter(function(x) any(!is.na(x)), .SD)]
+
+  out[, station_code := as.factor(station_code)]
 
   data.table::setkey(x = out, cols = station_code)
 
