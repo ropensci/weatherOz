@@ -199,18 +199,19 @@ get_data_drill <- function(longitude,
   start_date <- gsub("-", "", start_date)
   end_date <- gsub("-", "", end_date)
 
-
-  silo_return <- .query_silo_api(
-    .longitude = longitude,
-    .latitude = latitude,
-    .start_date = start_date,
-    .end_date = end_date,
-    .values = .values,
-    .format = "csv",
-    .api_key = api_key,
-    .dataset = "DataDrill"
+  out <- .query_silo_api(
+    query_list = .build_silo_query(
+      .longitude = longitude,
+      .latitude = latitude,
+      .start_date = start_date,
+      .end_date = end_date,
+      .values = .values,
+      .api_key = api_key,
+      .dataset = "DataDrill"
+    ),
+    end_point = "DataDrill"
   )
 
-  silo_return[]
+  out[]
 }
 

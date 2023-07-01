@@ -22,11 +22,6 @@
 #' @param values A `character` string with the type of summarised weather
 #'   to return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all` with all available values being returned.
-#' @param api_group Filter the stations to a predefined group one of `all`,
-#'   `web` or `rtd`; `all` returns all stations, `api` returns the default
-#'   stations in use with the \acronym{API} and `web` returns the list in use by
-#'   the <https://weather.agric.wa.gov.au> and `rtd` returns stations with
-#'   scientifically complete data sets.  Defaults to `rtd`.
 #' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
 #'   `TRUE` the query returns closed and open stations.  Closed stations are
 #'   those that have been turned off and no longer report data.  They may be
@@ -175,7 +170,6 @@ get_dpird_summaries <- function(station_code,
                                 end_date = Sys.Date(),
                                 interval = "daily",
                                 values = "all",
-                                api_group = "rtd",
                                 include_closed = FALSE,
                                 api_key) {
   if (missing(station_code)) {
@@ -220,31 +214,21 @@ get_dpird_summaries <- function(station_code,
                           "monthly",
                           "yearly")
 
-  likely_interval <- agrep(
-    pattern = interval,
-    x = approved_intervals
-  )
+  likely_interval <- agrep(pattern = interval,
+                           x = approved_intervals)
 
   # Match time interval query to user requests
-  checked_interval <- try(match.arg(approved_intervals[likely_interval],
-                            approved_intervals,
-                            several.ok = FALSE),
-                  silent = TRUE
-  )
+  checked_interval <-
+    try(match.arg(approved_intervals[likely_interval],
+                  approved_intervals,
+                  several.ok = FALSE),
+        silent = TRUE)
 
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly or yearly
   if (methods::is(checked_interval, "try-error")) {
     stop(call. = FALSE,
          "\"", interval, "\" is not a supported time interval")
-  }
-
-  # check API group
-  api_group <- tolower(api_group)
-  if (api_group %notin% c("rtd", "all", "web")) {
-    stop(call. = FALSE,
-         "The `api_group` should be one of 'rtd', 'all' or 'web'."
-    )
   }
 
   request_interval <- lubridate::interval(start_date,
@@ -255,14 +239,18 @@ get_dpird_summaries <- function(station_code,
   # year in the past
   this_year <- lubridate::year(lubridate::today())
 
-  if (checked_interval %in% c("15min", "30min") & lubridate::year(start_date) <
+  if (checked_interval %in% c("15min", "30min") &
+      lubridate::year(start_date) <
       this_year - 1 |
-      checked_interval %in% c("15min", "30min") & lubridate::year(end_date) <
+      checked_interval %in% c("15min", "30min") &
+      lubridate::year(end_date) <
       this_year - 1) {
     stop(
       call. = FALSE,
       "Start date is too early. Data in 15 and 30 min intervals are only ",
-      "available from the the 1st day of ", this_year - 1, "."
+      "available from the the 1st day of ",
+      this_year - 1,
+      "."
     )
   }
 
@@ -296,7 +284,6 @@ get_dpird_summaries <- function(station_code,
     end_date_time = end_date,
     interval = checked_interval,
     values = values,
-    api_group = api_group,
     include_closed = include_closed,
     api_key = api_key,
     limit = total_records_req
@@ -304,12 +291,18 @@ get_dpird_summaries <- function(station_code,
 
   # set base URL according to interval
   end_point <- data.table::fcase(
-    checked_interval == "15min", "summaries/15min",
-    checked_interval == "30min", "summaries/30min",
-    checked_interval == "hourly", "summaries/hourly",
-    checked_interval == "daily", "summaries/daily",
-    checked_interval == "monthly", "summaries/monthly",
-    default = "summaries/yearly")
+    checked_interval == "15min",
+    "summaries/15min",
+    checked_interval == "30min",
+    "summaries/30min",
+    checked_interval == "hourly",
+    "summaries/hourly",
+    checked_interval == "daily",
+    "summaries/daily",
+    checked_interval == "monthly",
+    "summaries/monthly",
+    default = "summaries/yearly"
+  )
 
   out <-
     .parse_summary(
@@ -324,41 +317,111 @@ get_dpird_summaries <- function(station_code,
   out[, period.from := NULL]
   out[, period.to := NULL]
 
+  .set_snake_case_names(out)
+
+  data.table::setcolorder(out, order(names(out)))
+
   if (interval == "monthly") {
     out[, date := lubridate::ym(sprintf("%s-%s",
-                                        out$period.year,
-                                        out$period.month))]
-  }
-  if (interval == "daily") {
-    out[, date := lubridate::ymd(sprintf("%s-%s-%s",
-                                         out$period.year,
-                                         out$period.month,
-                                         out$period.day))]
-  }
-  if (interval == "hourly") {
+                                        out$period_year,
+                                        out$period_month))]
+
+    data.table::setcolorder(out,
+                            c(
+                              "station_code",
+                              "station_name",
+                              "period_year",
+                              "period_month",
+                              "date"
+                            ))
+
+    out[, period_day := NULL]
+    out[, period_hour := NULL]
+    out[, period_minute := NULL]
+  } else if (interval == "daily") {
+    out[, date := lubridate::ymd(sprintf(
+      "%s-%s-%s",
+      out$period_year,
+      out$period_month,
+      out$period_day
+    ))]
+
+    data.table::setcolorder(
+      out,
+      c(
+        "station_code",
+        "station_name",
+        "period_year",
+        "period_month",
+        "period_day",
+        "date"
+      )
+    )
+
+    out[, period_minute := NULL]
+    out[, period_hour := NULL]
+  } else if (interval == "hourly") {
     out[, date := lubridate::ymd_h(
       sprintf(
         "%s-%s-%s-%s",
-        out$period.year,
-        out$period.month,
-        out$period.day,
-        out$period.hour
+        out$period_year,
+        out$period_month,
+        out$period_day,
+        out$period_hour
       ),
       tz = "Australia/West"
     )]
-  }
-  if (interval == "30min" || interval == "15min") {
+
+    data.table::setcolorder(
+      out,
+      c(
+        "station_code",
+        "station_name",
+        "period_year",
+        "period_month",
+        "period_day",
+        "period_hour",
+        "date"
+      )
+    )
+
+    out[, period_minute := NULL]
+
+  } else if (interval == "30min" || interval == "15min") {
     out[, date := lubridate::ymd_hm(
       sprintf(
         "%s-%s-%s-%s-%s",
-        out$period.year,
-        out$period.month,
-        out$period.day,
-        out$period.hour,
-        out$period.minute
+        out$period_year,
+        out$period_month,
+        out$period_day,
+        out$period_hour,
+        out$period_minute
       ),
       tz = "Australia/West"
     )]
+
+    data.table::setcolorder(
+      out,
+      c(
+        "station_code",
+        "station_name",
+        "period_year",
+        "period_month",
+        "period_day",
+        "period_hour",
+        "period_minute",
+        "date"
+      )
+    )
+  } else {
+    data.table::setcolorder(out,
+                            c("station_code",
+                              "station_name",
+                              "period_year"))
+    out[, period_month := NULL]
+    out[, period_day := NULL]
+    out[, period_hour := NULL]
+    out[, period_minute := NULL]
   }
 
   if (any(grep("time", colnames(out)))) {
@@ -371,25 +434,10 @@ get_dpird_summaries <- function(station_code,
     .SDcols = grep("time", colnames(out))]
   }
 
-  .set_snake_case_names(out)
-
-  data.table::setcolorder(out, order(names(out)))
-  data.table::setcolorder(
-    out,
-    c(
-      "station_code",
-      "station_name",
-      "period_year",
-      "period_month",
-      "period_day",
-      "period_hour",
-      "period_minute"
-    )
-  )
-
   data.table::setnames(out, gsub("period_", "", names(out)))
 
   out[, station_code := as.factor(station_code)]
+
   data.table::setkey(x = out, cols = station_code)
 
   return(out)
@@ -412,7 +460,6 @@ get_dpird_summaries <- function(station_code,
 #'
 .parse_summary <- function(.ret_list,
                            .values) {
-
   for (i in seq_len(length(.ret_list))) {
     x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
     if ("summaries" %in% names(x$collection)) {

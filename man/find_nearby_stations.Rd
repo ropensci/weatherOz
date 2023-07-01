@@ -5,38 +5,44 @@
 \title{Find the Nearest Weather Stations to a Given Geographic Point or Known Station}
 \usage{
 find_nearby_stations(
-  latitude = NULL,
   longitude = NULL,
+  latitude = NULL,
   station_code = NULL,
-  distance_km,
+  distance_km = 100,
   api_key = NULL,
-  which_api = "silo"
+  which_api = "silo",
+  include_closed = FALSE
 )
 }
 \arguments{
-\item{latitude}{A \code{numeric} value for latitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if
-\var{longitude} is not \code{NULL.}}
+\item{longitude}{A \code{numeric} value of longitude in decimal degree (DD)
+format.  Optional and defaults to \code{NULL}.  Required if \code{station_code} is
+not provided.}
 
-\item{longitude}{A \code{numeric} value for longitude expressed as decimal degrees
-(DD) (WGS84).  Optional and defaults to \code{NULL}.  Required if \var{latitude}
-is not \code{NULL}.}
+\item{latitude}{A \code{numeric} value of latitude in decimal degree (DD)
+format.  Optional and defaults to \code{NULL}.  Required if \code{station_code} is
+not provided.}
 
 \item{station_code}{A \code{string} with the station code for the station of
-interest.  Optional and defaults to \code{NULL}.}
+interest.  Optional and defaults to \code{NULL}.  Required if \code{longitude} and
+\code{latitude} are not provided.}
 
 \item{distance_km}{A \code{numeric} value for distance to limit the search from
 the station or location of interest.  Defaults to 100 km.}
 
 \item{api_key}{A \code{string} value that is the user's \acronym{API} key from
 \acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).  Only used
-when \code{which_api} is 'DPIRD' or 'all'.}
+when \var{which_api} is \code{DPIRD} or \code{all}.}
 
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
 Defaults to \code{silo} only. Valid values are \code{all}, for both \acronym{SILO}
 (\acronym{BOM}) and \acronym{DPIRD} weather station networks; \code{silo} for
 only stations in the \acronym{SILO} network; or \code{dpird} for stations in the
 \acronym{DPIRD} network.}
+
+\item{include_closed}{A \code{Boolean} value that indicates whether closed
+stations in the \acronym{DPIRD} network should be included in the results.
+Defaults to \code{FALSE} with closed stations not included.}
 }
 \value{
 a \link[data.table:data.table]{data.table::data.table} with \code{station_code}, \code{station_name},
@@ -48,7 +54,11 @@ interest.
 Find nearby weather stations given geographic coordinates or a station code
 for both of the \acronym{DPIRD} and \acronym{SILO} weather station
 networks.  Either a combination of \var{latitude} and \var{longitude} or
-\var{station_code} must be provided.
+\var{station_code} must be provided.  A \acronym{DPIRD} \acronym{API} key
+is only necessary to search for stations in the \acronym{DPIRD} network.
+If you are not interested in \acronym{DPIRD} stations in Western Australia,
+you may use this function to query only \acronym{SILO} stations for all of
+Australia without using a key.
 }
 \note{
 You can request your own \acronym{API} key from \acronym{DPIRD} for
@@ -57,6 +67,9 @@ free by filling out the form found at
 }
 \examples{
 \dontrun{
+
+# Note that queries to the DPIRD API require you to have your own API key.
+
 # Query WA only stations and return DPIRD's stations nearest to the
   Northam, WA station, "NO", returning stations with 50 km of this station
 
@@ -115,8 +128,8 @@ Other metadata:
 \code{\link{get_station_metadata}()}
 }
 \author{
-Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H. Sparks
-\email{adam.sparks@dpird.wa.gov.au}
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam H.
+Sparks \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}
 \concept{SILO}

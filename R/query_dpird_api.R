@@ -43,7 +43,7 @@
                          end_date_time,
                          interval,
                          values,
-                         api_group,
+                         api_group = "all",
                          include_closed,
                          limit,
                          api_key) {

@@ -57,8 +57,8 @@ test_that("get_dpird_extremes() returns all values for a station", {
     x,
     c(
       "station_code",
-      "latitude",
       "longitude",
+      "latitude",
       "frost_condition_since9_am_minutes",
       "frost_condition_since9_am_start_time",
       "frost_condition_to9_am_minutes",
@@ -117,8 +117,8 @@ test_that("get_dpird_extremes() returns selected values for a station", {
     x,
     c(
       "station_code",
-      "latitude",
       "longitude",
+      "latitude",
       "erosion_condition_since12_am_minutes",
       "erosion_condition_since12_am_start_time",
       "erosion_condition_last7_days_minutes",

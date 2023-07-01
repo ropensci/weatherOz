@@ -9,7 +9,6 @@ utils::globalVariables(
     "actual_state",
     "airtemp_mintime",
     "airtemp_maxtime",
-    "api_group",
     "api_key",
     "attrs",
     "bar_height.m",

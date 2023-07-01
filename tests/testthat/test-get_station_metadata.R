@@ -1,9 +1,12 @@
 
 test_that("get_station_metadata() functions properly for which_api = 'SILO'",
           {
-            skip_if_offline()
-            x <-
-              get_station_metadata(which_api = "silo", status = TRUE)
+            vcr::use_cassette("silo_station_metadata", {
+              skip_if_offline()
+              x <-
+                get_station_metadata(which_api = "silo", status = TRUE)
+            }
+            )
             expect_equal(ncol(x), 11)
             expect_s3_class(x, "data.table")
             expect_named(
@@ -34,8 +37,7 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
                                      status = TRUE,
                                      rich = FALSE
                                      )
-            },
-            record = "new_episodes"
+            }
             )
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 11)

@@ -222,6 +222,7 @@ get_station_metadata <-
     )
 
   bom_stations[, station_code := trimws(station_code)]
+  data.table::setkey(x = bom_stations, station_code)
   bom_stations[, station_code := as.factor(sprintf("%06s", station_code))]
   bom_stations[, station_name := trimws(station_name)]
   bom_stations[, station_name := .strcap(x = station_name)]
@@ -256,18 +257,24 @@ get_station_metadata <-
     new = c("latitude", "longitude")
   )
 
-  silo_stations <-
-    find_nearby_stations(
-      latitude = -25.5833,
-      longitude = 134.5667,
-      distance_km = 10000,
-      which_api = "silo"
-    )
+  silo_stations <- .query_silo_api(
+    query_list = list(
+      station = "015526",
+      radius = 10000,
+      format = "near"
+    ),
+    end_point = "PatchedPoint"
+  )
 
-  station_metadata <- merge(silo_stations, bom_stations, all.x = TRUE)
+  station_metadata <- merge(silo_stations, bom_stations, by = c("station_code",
+                                                                "station_name",
+                                                                "longitude",
+                                                                "latitude",
+                                                                "elev_m",
+                                                                "state"))
   # drops the unwanted columns that are added after using `find_nearby_stations`
   station_metadata[, owner := NULL]
-  station_metadata[, distance := NULL]
+  station_metadata[, distance_km := NULL]
   return(station_metadata)
 }
 
@@ -277,7 +284,7 @@ get_station_metadata <-
 #'
 #' Fetches metadata directly from DPIRD's API.
 #'
-#' @param api_key the user's API key as provided by them
+#' @param .api_key the user's API key as provided by them
 #' @param .rich `TRUE`/`FALSE` values indicating whether to return rich
 #'  metadata about the weather stations
 #'
