@@ -130,7 +130,7 @@
     response_data[, owner := "BOM"]
     response_data[, distance_km := round(distance_km, 1)]
     data.table::setkey(response_data, "station_code")
-    data.table::setcolorder(response_data, c(1:5, 6, 8, 7))
+    data.table::setcolorder(response_data, c(1:2, 4:3, 5:6, 8, 7))
     return(response_data)
   }
 

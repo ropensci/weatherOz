@@ -142,7 +142,7 @@ get_dpird_extremes <- function(station_code,
       dpird_extreme_weather_values[dpird_extreme_weather_values %in% values]
   }
 
-  .values <- c("stationCode", "latitude", "longitude", .values)
+  .values <- c("stationCode", "longitude", "latitude", .values)
 
   query_list <- list(
     stationCode = station_code,
@@ -174,6 +174,6 @@ get_dpird_extremes <- function(station_code,
 
   out[, station_code := station_code]
   data.table::setkey(x = out, cols = station_code)
-  data.table::setcolorder(out, c("station_code"))
+  data.table::setcolorder(out, c("station_code", "longitude", "latitude"))
   return(out)
 }
