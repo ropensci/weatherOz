@@ -157,7 +157,6 @@ find_nearby_stations <- function(longitude = NULL,
       )
     } else {
       dpird_out <- .get_dpird_stations(
-        .station_code = NULL,
         .distance_km = distance_km,
         .longitude = silo_out$longitude[1],
         .latitude = silo_out$latitude[1],
@@ -168,7 +167,6 @@ find_nearby_stations <- function(longitude = NULL,
     # get both datasets and rbind
   } else {
     dpird_out <- .get_dpird_stations(
-      .station_code = station_code,
       .distance_km = distance_km,
       .longitude = longitude,
       .latitude = latitude,
@@ -176,7 +174,6 @@ find_nearby_stations <- function(longitude = NULL,
       .include_closed = include_closed
     )
     silo_out <- .get_silo_stations(
-      .station_code = station_code,
       .distance_km = distance_km,
       .longitude = longitude,
       .latitude = latitude
@@ -322,12 +319,10 @@ find_nearby_stations <- function(longitude = NULL,
            .latitude) {
     if (is.null(.station_code)) {
       out <- .query_silo_api(
-        query_list = list(
-          station = "015526",
-          radius = 10000,
-          format = "near"
-        ),
-        end_point = "PatchedPoint"
+        .station_code = "015526",
+        .radius = 10000,
+        .format = "near",
+        .dataset = "PatchedPoint"
       )
 
       out[, "distance_km" := .haversine_distance(
@@ -352,13 +347,11 @@ find_nearby_stations <- function(longitude = NULL,
     } else {
       out <-
         .query_silo_api(
-          query_list = list(
-            station = .station_code,
-            radius = .distance_km,
-            format = "near",
-            sortby = "dist"
-          ),
-          end_point = "PatchedPoint"
+          .station_code = .station_code,
+          .radius = .distance_km,
+          .format = "near",
+          .sortby = "dist",
+          .dataset = "PatchedPoint"
         )
       if (nrow(out) == 0L)
         message(

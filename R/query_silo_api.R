@@ -1,11 +1,14 @@
 
-#' Build a Query List for the SILO API
+#' Query the SILO API
 #'
-#' Builds a query list for querying weather data from the \acronym{SILO}
-#'   \acronym{API}.
+#' Use {crul} to query the SILO API.
 #'
 #' @param .station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
+#' @param .longitude A `numeric` value for the geopgraphic longitude of interest
+#'   in decimal degrees.
+#' @param .latitude A `numeric` value for the geopgraphic latitude of interest
+#'   in decimal degrees.
 #' @param .start_date A `character` string representing the beginning of the
 #'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
 #'   inclusive of this range.
@@ -14,23 +17,35 @@
 #'   range.
 #' @param .values A `character` string with the type of weather data to
 #'   return.
+#' @param .format A `character` string indicating which format to return from
+#'   the API, either `apsim`, `csv` or `near`.
+#' @param .api_key A valid e-mail address
 #' @param .dataset A SILO dataset, either "PatchedPoint" or "DataDrill".
-#' @param .api_key A valid e-mail address.
 #'
-#' @return A `data.table` of data for manipulating before returning to the user
+#' @return A `data.table` of data for manipulating before returning to the user.
 #'
 #' @noRd
 #' @keywords internal
 
-.build_silo_query <- function(.station_code = NULL,
-                              .longitude = NULL,
-                              .latitude = NULL,
-                              .start_date,
-                              .end_date,
-                              .values = NULL,
+.query_silo_api <- function(.station_code = NULL,
+                            .longitude = NULL,
+                            .latitude = NULL,
+                            .start_date = NULL,
+                            .end_date = NULL,
+                            .values = NULL,
                             .format,
-                              .api_key,
-                              .dataset) {
+                            .radius = NULL,
+                            .api_key = NULL,
+                            .dataset) {
+  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
+
+  end_point <- data.table::fcase(
+    .dataset == "PatchedPoint",
+    "PatchedPointDataset.php",
+    .dataset == "DataDrill",
+    "DataDrillDataset.php"
+  )
+
   if (.dataset == "PatchedPoint" && .format == "csv") {
     silo_query_list <- list(
       station = as.integer(.station_code),
@@ -60,7 +75,13 @@
       format = .format,
       username = .api_key
     )
-  } else {
+  } else if (.dataset == "PatchedPoint" && .format == "near") {
+    silo_query_list <- list(
+      station = "015526",
+      radius = 10000,
+      format = .format
+    )
+    } else {
     silo_query_list <- list(
       longitude = as.integer(.longitude),
       latitude = as.integer(.latitude),
@@ -70,30 +91,9 @@
       username = .api_key
     )
   }
-}
-
-#' Send a Query to the SILO API Using {crul}
-#'
-#' @param .query_list A list object containing a query list for {crul}
-#' @param .end_point A valid end point for the SILO API, either `PatchedPoint`
-#'   or `DataDrill`
-#'
-#' @keywords internal
-#' @noRd
-
-.query_silo_api <- function(query_list, end_point) {
-  base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
-
-  end_point <- data.table::fcase(
-    end_point == "PatchedPoint",
-    "PatchedPointDataset.php",
-    end_point == "DataDrill",
-    "DataDrillDataset.php"
-  )
-
   client <-
     crul::HttpClient$new(url = sprintf("%s%s", base_url, end_point))
-  response <- client$get(query = query_list)
+  response <- client$get(query = silo_query_list)
 
   # check responses for errors
   # check to see if request failed or succeeded
@@ -127,7 +127,7 @@
   response_data <- data.table::fread(response$parse("UTF8"))
 
   # return the response if we're just looking for the nearest stations
-  if (query_list$format == "near") {
+  if (.format == "near") {
     data.table::setnames(
       response_data,
       old = c(
@@ -149,6 +149,7 @@
         "distance_km"
       )
     )
+
     response_data[, station_code := as.factor(trimws(sprintf("%06s",
                                                              station_code)))]
     response_data[, station_name := trimws(.strcap(x = station_name))]
@@ -172,22 +173,24 @@
   response_data[, extracted :=
                   lubridate::as_date(trimws(gsub(
                     "extracted=", "",
-                    response_data$metadata[grep("extracted",
-                                                response_data$metadata)]
+                    response_data$metadata[grep(
+                      "extracted", response_data$metadata)]
                   )))]
 
-  if (end_point == "PatchedPointDataset.php") {
-    response_data[, station_code := as.factor(sprintf("%06s", station))]
+  if (.dataset == "PatchedPoint") {
+    response_data[, station_code := sprintf("%06s", station)]
     response_data[, station := NULL]
     response_data[, station_name :=
                     .strcap(
-                      trimws(gsub("name=", "",
-                                  response_data$metadata[grep(
-                                    "name", response_data$metadata)])))]
+                      trimws(gsub(
+                        "name=", "",
+                        response_data$metadata[grep(
+                          "name", response_data$metadata)])))]
     response_data[, latitude :=
-                    trimws(gsub("latitude=", "",
-                                response_data$metadata[grep(
-                                  "latitude", response_data$metadata)]))]
+                    trimws(
+                      gsub("latitude=", "",
+                           response_data$metadata[grep(
+                             "latitude", response_data$metadata)]))]
     response_data[, longitude :=
                     trimws(gsub("longitude=", "",
                                 response_data$metadata[grep(

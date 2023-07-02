@@ -1,5 +1,5 @@
 
-test_that("get_station_metadata() functions properly for which_api = 'SILO'",
+test_that("find_nearby_stations() functions properly for which_api = 'dpird'",
           {
             vcr::use_cassette("nearby_dpird_stations", {
               skip_if_offline()
@@ -27,7 +27,7 @@ test_that("get_station_metadata() functions properly for which_api = 'SILO'",
             )
           })
 
-test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
+test_that("find_nearby_stations() functions properly for which_api = 'all'",
           {
             vcr::use_cassette("nearby_all_stations", {
               skip_if_offline()
@@ -55,7 +55,7 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
             )
           })
 
-test_that("get_station_metata() functions properly for which_api = 'all'",
+test_that("find_nearby_stations() functions properly for which_api = 'silo'",
           {
             vcr::use_cassette("nearby_silo_stations", {
               skip_if_offline()

@@ -258,12 +258,10 @@ get_station_metadata <-
   )
 
   silo_stations <- .query_silo_api(
-    query_list = list(
-      station = "015526",
-      radius = 10000,
-      format = "near"
-    ),
-    end_point = "PatchedPoint"
+      .station_code = "015526",
+      .radius = 10000,
+      .format = "near",
+      .dataset = "PatchedPoint"
   )
 
   station_metadata <- merge(silo_stations, bom_stations, by = c("station_code",

@@ -20,6 +20,7 @@ utils::globalVariables(
     "day",
     "dist",
     "distance",
+    "distance_km",
     "dpird_extreme_weather_values",
     "dpird_minute_values",
     "dpird_summary_values",
@@ -55,6 +56,10 @@ utils::globalVariables(
     "online",
     "owner",
     "period",
+    "period_day",
+    "period_hour",
+    "period_minute",
+    "period_month",
     "period.from",
     "period.to",
     "preamble",
@@ -99,6 +104,7 @@ utils::globalVariables(
     "windProbeHeights.10m",
     "windProbeHeights.3m",
     "wmo",
-    "year"
+    "year",
+    ".format"
   )
 )
