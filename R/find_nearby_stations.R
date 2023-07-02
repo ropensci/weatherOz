@@ -97,13 +97,15 @@ find_nearby_stations <- function(longitude = NULL,
                                  include_closed = FALSE) {
   which_api <- .check_which_api(which_api)
 
-  if (missing(api_key) && which_api == "all" && which_api == "dpird") {
-    stop(
-      "A valid DPIRD API key must be provided for queries to the DPIRD API ",
-      "please visit\n",
-      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
-      call. = FALSE
-    )
+  if (missing(api_key)) {
+    if (which_api == "all" || which_api == "dpird") {
+      stop(
+        "A valid DPIRD API key must be provided for queries to the DPIRD API ",
+        "please visit\n",
+        "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
+        call. = FALSE
+      )
+    }
   }
 
   .check_location_params(
@@ -224,14 +226,6 @@ find_nearby_stations <- function(longitude = NULL,
                                 .latitude,
                                 .api_key,
                                 .include_closed) {
-  # Error if api key not provided
-  if (missing(.api_key)) {
-    stop(
-      "A valid DPIRD API key must be provided, please visit\n",
-      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
-      call. = FALSE
-    )
-  }
 
   dpird_query_list <- list(api_key = .api_key,
                            api_group = "all",
@@ -269,27 +263,16 @@ find_nearby_stations <- function(longitude = NULL,
       jsonlite::fromJSON(dpird_out[[1]]$parse("UTF8"))$collection)
 
   if (nrow(dpird_out) == 0L) {
-    if (!is.null(.station_code)) {
-      message(
-        "No DPIRD stations found around a radius of < ",
-        .distance_km,
-        "\n",
-        " km from station ",
-        .station_code,
-        "."
-      )
-    } else {
-      message(
-        "No DPIRD stations found around a radius of <",
-        .distance_km,
-        " km\n",
-        " from coordinates ",
-        .longitude,
-        " and ",
-        .latitude,
-        " (lon/lat).\n"
-      )
-    }
+    message(
+      "No DPIRD stations found around a radius of <",
+      .distance_km,
+      " km\n",
+      " from coordinates ",
+      .longitude,
+      " and ",
+      .latitude,
+      " (lon/lat).\n"
+    )
     return(invisible(NULL))
   }
 

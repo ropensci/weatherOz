@@ -1,5 +1,6 @@
 test_that("user-input checks stop if invalid values are provided", {
-  # missing station code
+
+  # missing station code -----
   expect_error(
     get_dpird_summaries(
       start_date = "20220501",
@@ -7,12 +8,11 @@ test_that("user-input checks stop if invalid values are provided", {
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "wind",
-      api_group = "rtd",
       include_closed = FALSE
     )
   )
 
-  # missing start_date
+  # missing start_date -----
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
@@ -20,12 +20,24 @@ test_that("user-input checks stop if invalid values are provided", {
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "wind",
-      api_group = "rtd",
       include_closed = FALSE
     )
   )
 
-  # missing api key
+  # reversed dates ----
+  expect_error(
+    get_dpird_summaries(
+      station_code = "BI",
+      start_date = "20220601",
+      end_date = "20220501",
+      api_key = Sys.getenv("DPIRD_API_KEY"),
+      interval = "daily",
+      values = "wind",
+      include_closed = FALSE
+    )
+  )
+
+  # missing api key -----
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
@@ -33,12 +45,11 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       interval = "daily",
       values = "wind",
-      api_group = "rtd",
       include_closed = FALSE
     )
   )
 
-  # invalid 'values'
+  # invalid 'values' -----
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
@@ -47,12 +58,11 @@ test_that("user-input checks stop if invalid values are provided", {
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "phytophthora",
-      api_group = "rtd",
       include_closed = FALSE
     )
   )
 
-  # invalid 'interval'
+  # invalid 'interval' -----
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
@@ -61,21 +71,6 @@ test_that("user-input checks stop if invalid values are provided", {
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "fortnightly",
       values = "wind",
-      api_group = "rtd",
-      include_closed = FALSE
-    )
-  )
-
-  # invalid 'api_group'
-  expect_error(
-    get_dpird_summaries(
-      station_code = "BI",
-      start_date = "20220501",
-      end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
-      interval = "daily",
-      values = "wind",
-      api_group = "swordfish trombones",
       include_closed = FALSE
     )
   )
@@ -89,7 +84,6 @@ test_that("user-input checks stop if invalid values are provided", {
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "30min",
       values = "wind",
-      api_group = "rtd",
       include_closed = FALSE
     )
   )

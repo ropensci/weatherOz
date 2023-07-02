@@ -9,7 +9,7 @@ find_nearby_stations(
   latitude = NULL,
   station_code = NULL,
   distance_km = 100,
-  api_key = NULL,
+  api_key,
   which_api = "silo",
   include_closed = FALSE
 )
@@ -35,7 +35,7 @@ the station or location of interest.  Defaults to 100 km.}
 when \var{which_api} is \code{DPIRD} or \code{all}.}
 
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
-Defaults to \code{silo} only. Valid values are \code{all}, for both \acronym{SILO}
+Defaults to \code{silo} only.  Valid values are \code{all}, for both \acronym{SILO}
 (\acronym{BOM}) and \acronym{DPIRD} weather station networks; \code{silo} for
 only stations in the \acronym{SILO} network; or \code{dpird} for stations in the
 \acronym{DPIRD} network.}
