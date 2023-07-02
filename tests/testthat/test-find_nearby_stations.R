@@ -73,9 +73,9 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ stations",
             )
           })
 
-test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
+test_that("find_nearby_stations() w/ which_api = 'all' & latlon",
           {
-            vcr::use_cassette("nearby_all_stations_DPIRD_station_code", {
+            vcr::use_cassette("nearby_all_stations_latlon", {
               skip_if_offline()
               x <- find_nearby_stations(
                 longitude = 116.694194,
@@ -110,6 +110,35 @@ test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
               x <- find_nearby_stations(
                 station_code = "010111",
                 distance_km = 50,
+                which_api = "all",
+                api_key = Sys.getenv("DPIRD_API_KEY"),
+              )
+            })
+            expect_s3_class(x, "data.table")
+            expect_length(x, 8)
+            expect_named(
+              x,
+              c(
+                "station_code",
+                "station_name",
+                "longitude",
+                "latitude",
+                "state",
+                "elev_m",
+                "owner",
+                "distance_km"
+              )
+            )
+            expect_equal(as.character(x[[1, 1]]), "010111")
+          })
+
+test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
+          {
+            vcr::use_cassette("nearby_all_stations_DPIRD_station_code", {
+              skip_if_offline()
+              x <- find_nearby_stations(
+                station_code = "NO",
+                distance_km = 50,
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 which_api = "all"
               )
@@ -129,7 +158,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
                 "distance_km"
               )
             )
-            expect_equal(as.character(x[[1, 1]]), "010111")
+            expect_equal(as.character(x[[1, 1]]), "NO")
           })
 
 test_that("find_nearby_stations() w/ which_api = 'all' & lonlat",
@@ -220,7 +249,7 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & lonlat",
             expect_equal(as.character(x[[1, 1]]), "072150")
           })
 
-test_that("find_nearby_stations() fails on DPIRD api w/ no key",
+test_that("find_nearby_stations() fails on DPIRD API w/ no key",
           {
               skip_if_offline()
               expect_error(find_nearby_stations(
@@ -229,4 +258,15 @@ test_that("find_nearby_stations() fails on DPIRD api w/ no key",
                 distance_km = 50,
                 which_api = "dpird"
               ))
+          })
+
+test_that("find_nearby_stations() fails on all API w/ no key",
+          {
+            skip_if_offline()
+            expect_error(find_nearby_stations(
+              latitude = -35.1583,
+              longitude = 147.4575,
+              distance_km = 50,
+              which_api = "all"
+            ))
           })
