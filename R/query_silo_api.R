@@ -151,8 +151,8 @@
       )
     )
 
-    response_data[, station_code := as.factor(trimws(sprintf("%06s",
-                                                             station_code)))]
+    response_data[, station_code := as.factor(as.character(
+      trimws(sprintf("%06s", station_code))))]
     response_data[, station_name := trimws(.strcap(x = station_name))]
     response_data[, owner := "BOM"]
     response_data[, distance_km := round(distance_km, 1)]
