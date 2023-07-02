@@ -71,7 +71,7 @@ free by filling out the form found at
 # Note that queries to the DPIRD API require you to have your own API key.
 
 # Query WA only stations and return DPIRD's stations nearest to the
-  Northam, WA station, "NO", returning stations with 50 km of this station
+# Northam, WA station, "NO", returning stations with 50 km of this station
 
 wa_stn <- find_nearby_stations(
   station_code = "NO",
@@ -81,7 +81,7 @@ wa_stn <- find_nearby_stations(
 )
 
 # Query stations nearest DPIRD's Northam, WA station, "NO" and return both
-  DPIRD and SILO/BOM stations within 50 km of this station.
+# DPIRD and SILO/BOM stations within 50 km of this station.
 
 wa_stn <- find_nearby_stations(
   station_code = "NO",
