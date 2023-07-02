@@ -77,8 +77,8 @@
     )
   } else if (.dataset == "PatchedPoint" && .format == "near") {
     silo_query_list <- list(
-      station = "015526",
-      radius = 10000,
+      station = .station_code,
+      radius = .radius,
       format = .format
     )
     } else {
@@ -90,7 +90,8 @@
       format = .format,
       username = .api_key
     )
-  }
+    }
+
   client <-
     crul::HttpClient$new(url = sprintf("%s%s", base_url, end_point))
   response <- client$get(query = silo_query_list)
