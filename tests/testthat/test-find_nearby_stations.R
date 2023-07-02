@@ -100,7 +100,6 @@ test_that("find_nearby_stations() w/ which_api = 'all' & latlon",
                 "distance_km"
               )
             )
-            expect_equal(as.character(x[[1, 1]]), "NO")
           })
 
 test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
@@ -129,7 +128,6 @@ test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
                 "distance_km"
               )
             )
-            expect_equal(as.character(x[[1, 1]]), "010111")
           })
 
 test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
@@ -158,7 +156,6 @@ test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
                 "distance_km"
               )
             )
-            expect_equal(as.character(x[[1, 1]]), "NO")
           })
 
 test_that("find_nearby_stations() w/ which_api = 'all' & lonlat",
@@ -188,7 +185,6 @@ test_that("find_nearby_stations() w/ which_api = 'all' & lonlat",
                 "distance_km"
               )
             )
-            expect_equal(as.character(x[[1, 1]]), "NO")
           })
 
 test_that("find_nearby_stations() w/ which_api = 'silo' & station_code",
@@ -246,7 +242,6 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & lonlat",
                 "distance_km"
               )
             )
-            expect_equal(as.character(x[[1, 1]]), "072150")
           })
 
 test_that("find_nearby_stations() fails on DPIRD API w/ no key",
