@@ -92,7 +92,7 @@ find_nearby_stations <- function(longitude = NULL,
                                  latitude = NULL,
                                  station_code = NULL,
                                  distance_km = 100,
-                                 api_key,
+                                 api_key = NULL,
                                  which_api = "silo",
                                  include_closed = FALSE) {
   which_api <- .check_which_api(which_api)

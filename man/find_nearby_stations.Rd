@@ -9,7 +9,7 @@ find_nearby_stations(
   latitude = NULL,
   station_code = NULL,
   distance_km = 100,
-  api_key,
+  api_key = NULL,
   which_api = "silo",
   include_closed = FALSE
 )
