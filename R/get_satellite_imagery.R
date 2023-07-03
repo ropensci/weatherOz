@@ -360,9 +360,7 @@ get_satellite_imagery <- get_satellite <-
                       tif_files)]
     )
     sprintf("%s%s", bom_server, tif_files)
-  } else {
-    tif_files
-  }
+  } else  NULL
 
   # check if the Product ID requested provides any files on server
   if (length(tif_files) == 0 |

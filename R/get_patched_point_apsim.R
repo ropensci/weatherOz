@@ -128,7 +128,7 @@ get_patched_point_apsim <- function(station_code,
   start_date <- gsub("-", "", start_date)
   end_date <- gsub("-", "", end_date)
 
-  silo_return <- .query_silo_api(
+  .query_silo_api(
     .station_code = station_code,
     .start_date = start_date,
     .end_date = end_date,

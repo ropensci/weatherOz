@@ -33,7 +33,7 @@
 #'   stations in the \acronym{DPIRD} network should be included in the results.
 #'   Defaults to `FALSE` with closed stations not included.
 #'
-#' @return a [data.table::data.table] with `station_code`, `station_name`,
+#' @return A [data.table::data.table] with `station_code`, `station_name`,
 #'   `latitude`, `longitude`, `elev_m`, `state`, `owner`, and `distance`.
 #'   Data are sorted by increasing distance from station or location of
 #'   interest.

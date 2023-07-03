@@ -341,7 +341,7 @@
 
   try_GET <- function(x, ...) {
     tryCatch({
-      response = curl::curl_fetch_memory(url = x, handle = h)
+      curl::curl_fetch_memory(url = x, handle = h)
     },
     error = function(e)
       conditionMessage(e),

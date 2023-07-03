@@ -128,7 +128,7 @@ get_data_drill_apsim <- function(longitude,
   end_date <- gsub("-", "", end_date)
 
 
-  silo_return <- .query_silo_api(
+  .query_silo_api(
     .longitude = longitude,
     .latitude = latitude,
     .start_date = start_date,
