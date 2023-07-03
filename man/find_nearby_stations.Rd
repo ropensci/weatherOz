@@ -45,7 +45,7 @@ stations in the \acronym{DPIRD} network should be included in the results.
 Defaults to \code{FALSE} with closed stations not included.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with \code{station_code}, \code{station_name},
+A \link[data.table:data.table]{data.table::data.table} with \code{station_code}, \code{station_name},
 \code{latitude}, \code{longitude}, \code{elev_m}, \code{state}, \code{owner}, and \code{distance}.
 Data are sorted by increasing distance from station or location of
 interest.
@@ -90,7 +90,9 @@ wa_stn <- find_nearby_stations(
   which_api = "all"
 )
 
-# Query Wagga Wagga BOM station finding stations within 200 km of it.
+# Query Wagga Wagga BOM station finding stations within 200 km of it, note
+# that it is not necessary to provide an `api_key` for SILO queries of
+# nearby stations.
 
 wagga_stn <- find_nearby_stations(
   latitude = -35.1583,
