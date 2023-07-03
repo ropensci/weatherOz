@@ -31,6 +31,11 @@
 #'   station closed sometime during the current year prior to the request being
 #'   made. `NA` in the current year indicates a station is still open.
 #'
+#' @note There are discrepancies between the \acronum{BOM}'s official station
+#'   metadata, *e.g.* longitude and latitude values and \acronym{SILO} metadata.
+#'   In these cases, the \acronym{BOM} metadata is used as it is considered to
+#'   be the authority on the stations' locations.
+#'
 #' @examples
 #' \dontrun{
 #' # fetch metadata for all stations available in {weatherOz}
@@ -264,15 +269,14 @@ get_station_metadata <-
       .dataset = "PatchedPoint"
   )
 
-  station_metadata <- merge(silo_stations, bom_stations, by = c("station_code",
-                                                                "station_name",
-                                                                "longitude",
-                                                                "latitude",
-                                                                "elev_m",
-                                                                "state"))
+  station_metadata <- merge(silo_stations, bom_stations, by = c("station_code"))
   # drops the unwanted columns that are added after using `find_nearby_stations`
+  station_metadata[, grep(".y", names(station_metadata)) := NULL]
   station_metadata[, owner := NULL]
   station_metadata[, distance_km := NULL]
+  data.table::setnames(station_metadata,
+                       names(station_metadata),
+                       gsub(".x", "", names(station_metadata)))
   return(station_metadata)
 }
 
