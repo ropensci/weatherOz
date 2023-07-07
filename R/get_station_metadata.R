@@ -31,7 +31,7 @@
 #'   station closed sometime during the current year prior to the request being
 #'   made. `NA` in the current year indicates a station is still open.
 #'
-#' @note There are discrepancies between the \acronum{BOM}'s official station
+#' @note There are discrepancies between the \acronym{BOM}'s official station
 #'   metadata, *e.g.* longitude and latitude values and \acronym{SILO} metadata.
 #'   In these cases, the \acronym{BOM} metadata is used as it is considered to
 #'   be the authority on the stations' locations.

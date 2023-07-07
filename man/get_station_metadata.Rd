@@ -71,7 +71,7 @@ stations that are closed for the current year, this indicates that the
 station closed sometime during the current year prior to the request being
 made. \code{NA} in the current year indicates a station is still open.
 
-There are discrepancies between the \acronum{BOM}'s official station
+There are discrepancies between the \acronym{BOM}'s official station
 metadata, \emph{e.g.} longitude and latitude values and \acronym{SILO} metadata.
 In these cases, the \acronym{BOM} metadata is used as it is considered to
 be the authority on the stations' locations.
