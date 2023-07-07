@@ -1,10 +1,11 @@
+
+# {weatherOz}: An API Client for Australian Weather and Climate Data Resources  <img src="man/figures/logo.png" align="right" />
+
   <!-- badges: start -->
   [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
   [![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
   [![Codecov test coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
   <!-- badges: end -->
-
-# {weatherOz}: An API Client for Australian Weather and Climate Data Resources
 
 {weatherOz} aims to facilitate access and download weather and climate data for Australia from Australian data sources.
 Data are sourced from from the Western Australian Department of Primary Industries and Regional Development (DPIRD) and the Scientific Information for Land Owners (SILO) API endpoints and the Australian Government Bureau of Meteorology's (BOM) FTP server.
