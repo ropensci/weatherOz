@@ -80,7 +80,7 @@ The station names are returned by both \acronym{API}s in full caps.
 For purposes of cleaner graphs and maps where these data may be sued, this
 function converts them to proper name formats/title case with the first
 letter of every word capitalised excepting words like \dQuote{at} or
-\dQutoe{on} and keeps acronyms like \dQuote{AWS} or \dQuote{PIRSA} or state
+\dQuote{on} and keeps acronyms like \dQuote{AWS} or \dQuote{PIRSA} or state
 abbreviations in the station names as all caps.
 }
 \examples{
