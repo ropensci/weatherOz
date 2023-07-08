@@ -97,6 +97,7 @@
 #'   api_key = "your@@email"
 #' )
 #' }
+#' @encoding UTF-8
 #' @export
 
 get_patched_point_apsim <- function(station_code,

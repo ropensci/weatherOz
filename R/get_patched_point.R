@@ -143,6 +143,7 @@
 #'
 #' @family SILO
 #' @family data fetching
+#' @encoding UTF-8
 #'
 #' @examples
 #' \dontrun{

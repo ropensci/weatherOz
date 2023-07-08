@@ -89,7 +89,7 @@
 #'
 #' @family SILO
 #' @family data fetching
-#'
+#' @encoding UTF-8
 #' @export
 
 get_data_drill_apsim <- function(longitude,
