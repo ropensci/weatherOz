@@ -547,6 +547,30 @@
     ),
     paste, collapse = " "))
 
+  # correct station names that should have all caps in them or where words
+  # should be lower case, e.g., "at" or "on".
+  res <- gsub("\\bAct\\b", "ACT", res)
+  res <- gsub("\\bAt\\b", "at", res)
+  res <- gsub("\\bAws\\b", "AWS", res)
+  res <- gsub("\\bBSL\\b", "BSL", res)
+  res <- gsub("\\bDpi\\b", "DPI", res)
+  res <- gsub("\\bDwr\\b", "DWR", res)
+  res <- gsub("\\bHmsd\\b", "HMSD", res)
+  res <- gsub("\\bMo\\b", "MO", res)
+  res <- gsub("\\bNsw\\b", "NSW", res)
+  res <- gsub("\\bNt\\b", "NT", res)
+  res <- gsub("\\bOn\\b", "on", res)
+  res <- gsub("\\bPirsa\\b", "PIRSA", res)
+  res <- gsub("\\bQld\\b", "QLD", res)
+  res <- gsub("\\bRaaf\\b", "RAAF", res)
+  res <- gsub("\\bRsl\\b", "RSL", res)
+  res <- gsub("\\bSFR\\b", "SFR", res)
+  res <- gsub("\\bStp\\b", "STP", res)
+  res <- gsub("\\bSa\\b", "SA", res)
+  res <- gsub("\\bTas\\b", "TAS", res)
+  res <- gsub("?<!^\\bThe\\b", "the", res)
+  res <- gsub("\\bWa\\b", "\\bWA\\b", res)
+
   res[na] <- NA
   return(res)
 }
