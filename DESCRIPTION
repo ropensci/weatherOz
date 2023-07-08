@@ -154,6 +154,12 @@ Imports:
 Suggests:
     covr,
     dplyr,
+    ggplot2,
+    ggthemes,
+    grid,
+    gridExtra,
+    mapproj,
+    maps,
     mailR,
     rmarkdown,
     spelling,
