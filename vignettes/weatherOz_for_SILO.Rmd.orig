@@ -1,0 +1,8 @@
+
+## Using {weatherOz} With SILO Data
+
+Four functions are provided to streamline fetching data from the SILO API endpoints.
+ * `get_data_drill(), which returns weather data from SILO's 0.05 x 0.05˚ interpolated, gridded weather dataset;
+ * `get_patched_point(), which returns weather data from a given BOM weather station (a point) in the SILO database where missing values are interpolated (patched);
+ * `get_data_drill_apsim(), which returns data drill weather data in an {[apsimx]} `.met` class object with the weather data ready for use in APSIM; and
+ * `get_data_drill_patched_point(), which returns patched point weather data in an {[apsimx]} `.met` class object with the weather data ready for use in APSIM.

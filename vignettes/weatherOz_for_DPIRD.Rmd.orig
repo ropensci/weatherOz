@@ -1,0 +1,5 @@
+
+Three functions are provided to streamline fetching data from the DPIRD Weather 2.0 API endpoints.
+ * `get_dpird_extremes()`, which returns the recorded extreme values for the given station in the DPIRD weather station network.;
+ * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
+ * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.

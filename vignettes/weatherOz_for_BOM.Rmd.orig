@@ -1,0 +1,378 @@
+
+---
+title: "weatherOz for BOM"
+author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham and Hugh Parsonage and Adam H. Sparks"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{weatherOz-for-BOM}
+    %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE,
+                      comment = "#>",
+                      fig.width = 7,
+                      fig.height = 7,
+                      fig.align = "center",
+                      fig.path = "vignettes/")
+```
+
+```{r libraries, echo=FALSE, message=FALSE}
+library(weatherOz)
+```
+
+## Using {weatherOz} With BOM Data
+
+Several functions are provided by {weatherOz} to retrieve Australian Bureau of Meteorology (BOM) data.
+A family of functions retrieve data files from BOM or parse local files from BOM and return data frames;
+ * `get_precis_forecast()` and `parse_precis_forecast(), which return the précis (short) forecast;
+ * `get_ag_bulletin()` and `parse_ag_bulletin(), which return the agriculture bulletin;
+ * `get_coastal_forecast()` and `parse_coastal_forecast(), which return coastal waters forecasts for each state.
+
+And a second family of functions retrieve information pertaining to satellite and radar imagery,
+ * `get_available_imagery()`, which returns available satellite imagery;
+ * `get_satelllite_imagery()` which returns a [terra::SpatRaster] or [stars] object as requested;
+ * `get_available_radar()`, which returns available radar images; and
+ * `get_radar_imagery()` which returns radar images as a [magick] object.
+
+## Using get_precis_forecast()
+
+This function only takes one argument, `state`. The `state` parameter allows the user to select the forecast for just one state or a national forecast.
+States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
+
+- **ACT** - Australian Capital Territory
+
+- **NSW** - New South Wales
+
+- **NT** - Northern Territory
+
+- **QLD** - Queensland
+
+- **SA** - South Australia
+
+- **TAS** - Tasmania
+
+- **VIC** - Victoria
+
+- **WA** - Western Australia
+
+- **AUS** - Australia, returns national forecast including all states, NT and ACT.
+
+### Results
+
+The function, `get_precis_forecast()`, will return a data frame of the weather forecast for the daily forecast for selected towns.
+See Appendix 1 for a full description of the fields and values.
+
+### Example
+
+Following is an example fetching the forecast for Queensland.
+
+```{r precis_forecast, eval=TRUE}
+(QLD_forecast <- get_precis_forecast(state = "QLD"))
+```
+
+## Using get_ag_bulletin()
+
+`get_ag_bulletin()` only takes one argument, `state`.
+The `state` parameter allows the user to select the bulletin for just one state or a national forecast.
+States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
+
+- **NSW** - New South Wales
+
+- **NT** - Northern Territory
+
+- **QLD** - Queensland
+
+- **SA** - South Australia
+
+- **TAS** - Tasmania
+
+- **VIC** - Victoria
+
+- **WA** - Western Australia
+
+- **AUS** - Australia, returns bulletin for all states and NT.
+
+### Results
+
+The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
+See Appendix 3 for a full list and description of the fields and values.
+
+### Example
+
+Following is an example fetching the ag bulletin for Western Australia.
+
+```{r ag_bulletin, eval=TRUE}
+(WA_bulletin <- get_ag_bulletin(state = "WA"))
+```
+
+## Using get_coastal_forecast()
+
+This function only takes one argument, `state`.
+The `state` parameter allows the user to select the forecast for just one state or a national forecast.
+States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`
+
+- **ACT** - Australian Capital Territory
+
+- **NSW** - New South Wales
+
+- **NT** - Northern Territory
+
+- **QLD** - Queensland
+
+- **SA** - South Australia
+
+- **TAS** - Tasmania
+
+- **VIC** - Victoria
+
+- **WA** - Western Australia
+
+- **AUS** - Australia, returns national forecast including all states, NT and ACT.
+
+### Results
+
+The function, `get_coastal_forecast()`, will return a data frame of the coastal waters forecast for marine zones in each state.
+See Appendix 6 for a full description of the fields and values.
+
+### Example
+
+Following is an example fetching the forecast for Queensland.
+
+```{r coastal_forecast, eval=TRUE}
+(QLD_coastal_forecast <- get_coastal_forecast(state = "QLD"))
+```
+
+## Using {weatherOz} to retrieve BOM satellite imagery
+
+{weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
+[Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
+
+Valid BOM satellite Product IDs for GeoTIFF files include:
+
+<table>
+<tr><th>Product ID</th><th>Description</th><th>Type</th><th>Delete time</th></tr>
+<tr><td>IDE00420</td><td>AHI cloud cover only 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00421</td><td>AHI IR (Ch13) greyscale 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00422</td><td>AHI VIS (Ch3) greyscale 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00423</td><td>AHI IR (Ch13) Zehr 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00425</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00426</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00427</td><td>AHI WV (Ch8) 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00430</td><td>AHI cloud cover only 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00431</td><td>AHI IR (Ch13) greyscale 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00432</td><td>AHI VIS (Ch3) greyscale 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00433</td><td>AHI IR (Ch13) Zehr 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00435</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00436</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00437</td><td>AHI WV (Ch8) 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00439</td><td>AHI VIS (Ch3) greyscale 0.5km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td colspan = 3><strong>Information gathered from Australian Bureau of Meteorology (BOM)</strong></td></tr>
+</table>
+
+### Using get_available_imagery()
+
+`get_available_imagery()` only takes one argument, `product_id`, a BOM identifier for the imagery that you wish to check for available imagery.
+Using this function will fetch a listing of BOM GeoTIFF satellite imagery from [ftp://ftp.bom.gov.au/anon/gen/gms/](ftp://ftp.bom.gov.au/anon/gen/gms/) to display which files are currently available for download.
+These files are available at ten minute update frequency with a 24 hour delete time.
+This function can be used see the most recent files available and then specify in the `_imagery()` function.
+If no valid Product ID is supplied, defaults to all GeoTIFF images currently available.
+
+```{r get_available_imagery, eval=TRUE}
+(avail <- get_available_imagery(product_id = "IDE00425"))
+```
+
+### Using get_satellite_imagery()
+
+`get_satellite_imagery()` fetches BOM satellite GeoTIFF imagery, returning a SpatRaster object and takes two arguments.
+Files are available at ten minute update frequency with a 24 hour delete time.
+It is suggested to check file availability first by using `get_available_imagery()`.
+The arguments are:
+
+- `product_id`, a character value of the BOM product ID to download.
+Alternatively, a vector of values from `get_available_imagery()` may be used here.
+This argument is mandatory.
+
+- `scans` a numeric value for the number of scans to download, starting with the most recent and progressing backwards, *e.g.*, `1` - the most recent single scan available , `6` - the most recent hour available, `12` - the most recent 2 hours available, etc.
+Negating will return the oldest files first.
+Defaults to 1.
+This argument is optional.
+
+```{r get_satellite_imagery, eval=TRUE}
+# Specify product ID and scans
+i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
+
+# Same, but use "avail" from prior to specify images for download
+i <- get_satellite_imagery(product_id = avail, scans = 1)
+```
+
+`terra::plot()` has been re-exported to simplify visualising these files while using {weatherOz}.
+
+```{r plot_satellite}
+plot(i)
+```
+
+## Using {weatherOz} to retrieve BOM radar imagery
+
+{weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through public FTP.
+These are the latest snapshots for each radar locations at various radar ranges _e.g._, 512km, 256km, 128km and 64km for some stations.
+
+### Using get_available_radar()
+
+`get_available_radar()` fetches the available radar imagery from the BOM FTP and returns a data frame for reference.
+This data frame contains the product_id, which is required when using the `get_radar_imagery()` function.
+The files available are the latest `.gif` files of BOM radar imagery which are typically updated each 6-10 minutes. Only the most recent image is retrieved for each radar location.
+There are usually several radar ranges available for each radar location, such as 512km, 256km, 128km and possibly 64km.
+The arguments are:
+
+* `radar_id`  which is the BOM radar ID number; this defaults to 'all' which will return a data frame of all radar IDs in Australia.
+
+```{r, get_available_radar}
+x <- get_available_radar()
+head(x)
+```
+
+### Using get_radar_imagery()
+
+`get_radar_imagery()` fetches the latest BOM radar imagery for a given product ID.
+The files available are the latest `.gif` files of BOM radar imagery, which are typically updated each 6-10 minutes.
+Only the most recent image is retrieved for each radar location.
+There are usually several radar ranges available for each radar location, such as 512km, 256km, 128km and possibly 64km.
+The only argument is:
+
+* `product_id` the BOM product_id associated with each radar imagery file.
+These can be obtained from the `get_available_radar()` function.
+This value must be specified and the function will accept only one at a time.
+
+```{r get_radar_imagery, fig.height=9, fig.width=8}
+y <- get_radar_imagery(product_id = "IDR032")
+plot(y)
+```
+
+## References
+
+[Australian Bureau of Meteorology (BOM) Weather Data Services](http://www.bom.gov.au/catalogue/data-feeds.shtml)
+
+[Australian Bureau of Meteorology (BOM) FTP Public Products](http://www.bom.gov.au/catalogue/anon-ftp.shtml)
+
+[Australian Bureau of Meteorology (BOM) Weather Data Services Agriculture Bulletins](http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml)
+
+[Australian Bureau of Meteorology (BOM) Weather Data Services Observation of Rainfall](http://www.bom.gov.au/climate/how/observations/rain-measure.shtml)
+
+[Australian Bureau of Meteorology (BOM) High-definition satellite images](http://www.bom.gov.au/australia/satellite/index.shtml)
+
+Stephen J. Jeffrey, John O. Carter, Keith B. Moodie, Alan R. Beswick, Using spatial interpolation to construct a comprehensive archive of Australian climate data, _Environmental Modelling & Software_, Volume 16, Issue 4, 2001,
+pages 309-330, ISSN 1364-8152, [DOI: 10.1016/S1364-8152(01)00008-1](https://doi.org/10.1016/S1364-8152(01)00008-1).
+
+## Appendix 1 - Output From get_precis_forecast()
+
+The functions, `get_precis_forecast()` or `parse_precis_forecast(), will return a data frame of the 7 day short forecast with the following fields:
+
+<table>
+<tr><th>Field Name</th><th>Description</th></tr>
+<tr><td>index</td><td>Forecast index number, 0 = current day ... 7 day</td></tr>
+<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td>
+</tr>
+<tr><td>state</td><td>State name (postal code abbreviation)</td></tr>
+<tr><td>town</td><td>Town name for forecast location</td></tr>
+<tr><td>aac</td><td>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for
+each location</td></tr>
+<tr><td>lat</td><td>Latitude of named location (decimal degrees)</td></tr>
+<tr><td>lon</td><td>Longitude of named location (decimal degrees)</td></tr>
+<tr><td>elev</td><td>Elevation of named location (metres)</td></tr>
+<tr><td>start_time_local</td><td>Start of forecast date and time in local
+TZ</td></tr>
+<tr><td>end_time_local</td><td>End of forecast date and time in local
+TZ</td></tr>
+<tr><td>UTC_offset</td><td> Hours offset from difference in hours and minutes
+from Coordinated Universal Time (UTC) for `start_time_local` and
+`end_time_local`</td></tr>
+<tr><td>start_time_utc</td><td>Start of forecast date and time in UTC</td></tr>
+<tr><td>end_time_utc</td><td>End of forecast date and time in UTC</td></tr>
+<tr><td>maximum_temperature</td><td>Maximum forecast temperature (degrees
+Celsius)</td></tr>
+<tr><td>minimum_temperature</td><td>Minimum forecast temperature (degrees
+Celsius)</td></tr>
+<tr><td>lower_precipitation_limit</td><td>Lower forecast precipitation limit
+(millimetres)</td></tr>
+<tr><td>upper_precipitation_limit</td><td>Upper forecast precipitation limit
+(millimetres)</td></tr>
+<tr><td>precis</td><td>Précis forecast (a short summary, less than 30
+characters)</td></tr>
+<tr><td>probability_of_precipitation</td><td>Probability of precipitation
+(percent)</td></tr>
+</table>
+
+## Appendix 2 - Output From get_ag_bulletin()
+
+The functions, `get_ag_bulletin()` or `parse_ag_bulletin(), will return a data frame of the agriculture bulletin with the following fields:
+
+<table>
+<tr><th>Field Name</th><th>Description</th></tr>
+<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td>
+</tr>
+<tr><td>state</td><td>State name (postal code abbreviation)</td></tr>
+<tr><td>dist</td><td>BOM rainfall district</td></tr>
+<tr><td>name</td><td>Full station name (some stations have been retired so
+"station" will be same, this is the full designation</td></tr>
+<tr><td>wmo</td><td>World Meteorological Organization number (unique ID used
+worldwide)</td></tr>
+<tr><td>site</td><td>Unique BOM identifier for each station</td></tr>
+<tr><td>station</td><td>Station name</td></tr>
+<tr><td>obs-time-local</td><td>Observation time</td></tr>
+<tr><td>obs-time-utc</td><td>Observation time (time in UTC)</td></tr>
+<tr><td>time-zone</td><td>Time zone for observation</td></tr>
+<tr><td>lat</td><td>Latitude (decimal degrees)</td></tr>
+<tr><td>lon</td><td>Longitude (decimal degrees)</td></tr>
+<tr><td>elev_m</td><td>Station elevation (metres)</td></tr>
+<tr><td>bar_ht</td><td>Bar height (metres)</td></tr>
+<tr><td>station</td><td>BOM station name</td></tr>
+<tr><td>start</td><td>Year data collection starts</td></tr>
+<tr><td>end</td><td>Year data collection ends (will always be current)</td></tr>
+<tr><td>r</td><td>Rain to 9am (millimetres). <em>Trace will be reported as
+0.01</em></td></tr>
+<tr><td>tn</td><td>Minimum temperature (degrees Celsius)</td></tr>
+<tr><td>tx</td><td>Maximum temperature (degrees Celsius)</td></tr>
+<tr><td>twd</td><td>Wet bulb depression (degrees Celsius)</td></tr>
+<tr><td>ev</td><td>Evaporation (millimetres)</td></tr>
+<tr><td>tg</td><td>Terrestrial minimum temperature (degrees Celsius)</td></tr>
+<tr><td>sn</td><td>Sunshine (hours)</td></tr>
+<tr><td>solr</td><td>Solar Radiation MJ/sq m</td></tr>
+<tr><td>t5</td><td>5cm soil temperature (degrees Celsius)</td></tr>
+<tr><td>t10</td><td>10cm soil temperature (degrees Celsius)</td></tr>
+<tr><td>t20</td><td>20cm soil temperature (degrees Celsius)</td></tr>
+<tr><td>t50</td><td>50cm soil temperature (degrees Celsius)</td></tr>
+<tr><td>t1m</td><td>1m soil temperature (degrees Celsius)</td></tr>
+<tr><td>wr</td><td>Wind run (kilometres)</td></tr>
+</table>
+
+## Appendix 3 - Output From get_coastal_forecast()
+
+The output of `get_coastal_forecast()` or `parse_coastal_forecast()` will return a data frame with coastal waters forecast values of each area within the given state with the following fields:
+
+<table>
+<tr><th>Field Name</th><th>Description</th></tr>
+<tr><td>index</td><td>Forecast index number.  0 = current day </td></tr>
+<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td></tr>
+<tr><td>type</td><td>Forecast Region type e.g. Coastal</td></tr>
+<tr><td>state_code</td><td>State name (postal code abbreviation)</td></tr>
+<tr><td>dist_name</td><td>Name of forecast district</td></tr>
+<tr><td>pt_1_name</td><td>Start of forecast district</td></tr>
+<tr><td>pt_2_name</td><td>End of forecast district</td></tr>
+<tr><td>aac</td><td>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for each location</td></tr>
+<tr><td>start_time_local</td><td>Start of forecast date and time in local TZ</td></tr>
+<tr><td>end_time_local</td><td>End of forecast date and time in local TZ</td></tr>
+<tr><td>UTC_offset</td><td>Hours offset from difference in hours and minutes from Coordinated Universal Time (UTC) for `start_time_local` and `end_time_local`</td></tr>
+<tr><td>start_time_utc</td><td>Start of forecast date and time in UTC</td></tr>
+<tr><td>end_time_utc</td><td>End of forecast date and time in UTC</td></tr>
+<tr><td>forecast_seas</td><td>Forecast sea conditions</td></tr>
+<tr><td>forecast_weather</td><td>Forecast weather summary</td></tr>
+<tr><td>forecast_winds</td><td>Forecast winds summary</td></tr>
+<tr><td>forecast_swell1</td><td>Forecast primary swell summary</td></tr>
+<tr><td>forecast_swell2</td><td>Forecast seondary swell summary (not always provided)</td></tr>
+<tr><td>forecast_caution</td><td>Forecast caution issued (not always provided)</td></tr>
+<tr><td>marine_forecast</td><td>Additional marine forecast warning information (not always provided)</td></tr>
+</table><br>

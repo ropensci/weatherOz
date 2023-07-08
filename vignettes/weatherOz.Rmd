@@ -6,7 +6,13 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{weatherOz}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteDepends{ggplot2}
+  %\VignetteDepends{ggthemes}
+  %\VignetteDepends{grid}
+  %\VignetteDepends{gridextra}
+  %\VignetteDepends{mapproj}
+  %\VignetteDepends{maps}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -17,754 +23,276 @@ vignette: >
 ## Introduction
 
 {weatherOz} provides automated downloading, parsing, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia, and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES).
-As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, agriculture bulletin data, and downloading and importing
-radar and satellite imagery files.
+As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files.
+
 DPIRD weather data are accessed through public APIs provided by DPIRD, <https://www.agric.wa.gov.au/weather-api-20>, providing access to weather station data from DPIRD's own weather station network.
+Detailed information on using {weatherOz} with DPIRD data is available in the []() vignette.
+
 Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001).
+More details on using {weatherOz} with SILO data are available in the []() vignette.
+
 BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
-{weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` objects of the GeoTIFF imagery or a magick object of radar image.png files.
+{weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` or {stars} objects of GeoTIFF satellite imagery or a {magick} object of radar image.png files.
+For detailed information on using {weatherOz} with BOM data, please see the [weatherOz for BOM Data Resources](weatherOz-for-BOM-Data-Resources.html) vignette.
 
-## Using {weatherOz}
+Following is a quick demonstration of some common tasks that you may wish to undertake while using {weatherOz}.
 
-Several functions are provided by {weatherOz} to retrieve Australian Bureau of Meteorology (BOM) data.
-A family of functions retrieve weather data and return data frames;
- * `get_precis_forecast()`, which retrieves the précis (short) forecast;
- * `get_ag_bulletin()`, which retrieves the agriculture bulletin;
- * `get_coastal_forecast()`, which fetches coastal waters forecasts for each state; and
-A second family of functions retrieve information pertaining to satellite and radar imagery, `get_available_imagery()` and the imagery itself, `_imagery()` for satellite, and `get_available_radar()` and `get_radar_imagery()` for radar images.
-The last group functions provides internal functionality for {weatherOz} itself; `update_forecast_towns()`, which updates an internal database of forecast locations distributed with the package, `update_ag_station_locations()`, which updates an internal database of the stations reporting ag bulletins and `find_forecast_towns()` and find_nearby_stations()` which returns either the closest forecast locations or the nearest weather stations with an ag bulletin to a given point in Australia.
+## Using {weatherOz} to Fetch Daily Summary DPIRD Data
 
-## Using get_precis_forecast()
-
-This function only takes one argument, `state`. The `state` parameter allows the user to select the forecast for just one state or a national forecast.
-States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
-
-- **ACT** - Australian Capital Territory
-
-- **NSW** - New South Wales
-
-- **NT** - Northern Territory
-
-- **QLD** - Queensland
-
-- **SA** - South Australia
-
-- **TAS** - Tasmania
-
-- **VIC** - Victoria
-
-- **WA** - Western Australia
-
-- **AUS** - Australia, returns national forecast including all states, NT and ACT.
-
-### Results
-
-The function, `get_precis_forecast()`, will return a data frame of the weather forecast for the daily forecast for selected towns.
-See Appendix 1 for a full description of the fields and values.
-
-### Example
-
-Following is an example fetching the forecast for Queensland.
+Daily summary weather data is frequently used.
+The following example will demonstrate how you can find and download weather station data for stations in or near Northam, WA for the year of 2022.
+This example assumes that you have stored your DPIRD API key in your .Renviron file.
 
 
 ```r
-(QLD_forecast <- get_precis_forecast(state = "QLD"))
-#>   -----------  Australian Bureau of Meteorology (BOM) Précis Forecast. -
-#>   The HTML version of Short Form (Précis) Forecast for 
-#>   QLD can be found at:
-#>   <http://www.bom.gov.au/qld/forecasts/state.shtml>
-#>   Please note information at the page 
-#>   <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>
-#>   --------------------------------------------------------------------------------  
-#> data.table [904, 19]
-#> index                        fct  0 1 2 3 4 5
-#> product_id                   chr  IDQ11295 IDQ11295 IDQ1129~
-#> state                        chr  QLD QLD QLD QLD QLD QLD
-#> town                         chr  Brisbane Brisbane Brisban~
-#> aac                          chr  QLD_PT001 QLD_PT001 QLD_P~
-#> lat                          dbl  -27.4808 -27.4808 -27.480~
-#> lon                          dbl  153.0389 153.0389 153.038~
-#> elev                         dbl  8.1 8.1 8.1 8.1 8.1 8.1
-#> start_time_local             dttm 2023-06-26 17:00:00 2023-~
-#> end_time_local               dttm 2023-06-27 2023-06-28 202~
-#> utc_offset                   fct  10:00 10:00 10:00 10:00 1~
-#> start_time_utc               dttm 2023-06-26 07:00:00 2023-~
-#> end_time_utc                 dttm 2023-06-26 14:00:00 2023-~
-#> minimum_temperature          dbl  NA 9 10 15 9 8
-#> maximum_temperature          dbl  NA 22 24 23 22 21
-#> lower_precipitation_limit    dbl  NA NA NA NA NA NA
-#> upper_precipitation_limit    dbl  NA NA NA NA NA NA
-#> precis                       chr  Clear. Sunny. Partly clou~
-#> probability_of_precipitation dbl  0 0 0 5 0 0
+library(weatherOz)
+
+Northam <-
+  find_nearby_stations(
+    longitude = 116.6620,
+    latitude = -31.6540,
+    which_api = "dpird",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    distance_km = 20
+  )
+
+Northam
+#>    station_code station_name longitude  latitude state elev_m
+#> 1:           NO      Northam  116.6942 -31.65161    WA    163
+#> 2:           MK       Muresk  116.6913 -31.72772    WA    251
+#>                                                                   owner distance_km
+#> 1: WA Department of Primary Industries and Regional Development (DPIRD)        3.23
+#> 2: WA Department of Primary Industries and Regional Development (DPIRD)        7.93
 ```
 
-
-## Using get_ag_bulletin()
-
-`get_ag_bulletin()` only takes one argument, `state`.
-The `state` parameter allows the user to select the bulletin for just one state or a national forecast.
-States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
-
-- **NSW** - New South Wales
-
-- **NT** - Northern Territory
-
-- **QLD** - Queensland
-
-- **SA** - South Australia
-
-- **TAS** - Tasmania
-
-- **VIC** - Victoria
-
-- **WA** - Western Australia
-
-- **AUS** - Australia, returns bulletin for all states and NT.
-
-### Results
-
-The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
-See Appendix 3 for a full list and description of the fields and values.
-
-### Example
-
-Following is an example fetching the ag bulletin for Queensland.
+There are two stations within 20km of the coordinates for Northam, WA that we provided.
+We'll choose the closest, Northam, station_code NO to fetch the daily weather data for all air temperature, rainfall and relative humidity values.
 
 
 ```r
-(QLD_bulletin <- get_ag_bulletin(state = "QLD"))
-#>   -----------  Australian Bureau of Meteorology (BOM) Ag Bulletin. -----------
-#>   Please note information at the foot of:
-#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ60604.html>
-#>   the HTML version of Agricultural Observations Bulletin for 
-#>   QLD.  Also see: 
-#>   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
-#>   ----------------------------------------------------------------------------  
-#> data.table [29, 21]
-#> product_id     fct  IDQ60604 IDQ60604 IDQ60604 IDQ60604 IDQ~
-#> state          chr  QLD QLD QLD QLD QLD QLD
-#> station        chr  Ayr Birdsville Brisbane Airport Bundabe~
-#> site           fct  33002 38026 40842 39128 31011 44021
-#> obs_time_local dttm 2023-06-26 09:00:00 2023-06-26 09:00:00~
-#> obs_time_utc   dttm 2023-06-25 23:00:00 2023-06-25 23:00:00~
-#> time_zone      chr  EST EST EST EST EST EST
-#> r              dbl  0 0 0 0 0 0
-#> tn             dbl  16.5 11.4 13.4 15.9 20 6.5
-#> tx             dbl  28.1 21.9 23.2 26.8 29.1 24.8
-#> twd            dbl  NA 6.8 9.8 0.1 4.3 7.2
-#> ev             dbl  NA NA 3.8 NA NA NA
-#> tg             dbl  NA NA 7.3 NA NA NA
-#> sn             dbl  NA NA 9.9 NA NA NA
-#> solr           dbl  16.7 14.1 13.9 14.8 16.2 14.4
-#> t5             dbl  NA NA NA 19.4 NA NA
-#> t10            dbl  NA NA NA 19.8 NA NA
-#> t20            dbl  NA NA NA 20.5 NA NA
-#> t50            dbl  NA NA NA 20 NA NA
-#> t1m            dbl  NA NA NA NA NA NA
-#> wr             dbl  NA NA 148 NA NA NA
-```
-
-## Using get_coastal_forecast()
-
-This function only takes one argument, `state`.
-The `state` parameter allows the user to select the forecast for just one state or a national forecast.
-States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`
-
-- **ACT** - Australian Capital Territory
-
-- **NSW** - New South Wales
-
-- **NT** - Northern Territory
-
-- **QLD** - Queensland
-
-- **SA** - South Australia
-
-- **TAS** - Tasmania
-
-- **VIC** - Victoria
-
-- **WA** - Western Australia
-
-- **AUS** - Australia, returns national forecast including all states, NT and ACT.
-
-### Results
-
-The function, `get_coastal_forecast()`, will return a data frame of the coastal waters forecast for marine zones in each state.
-See Appendix 6 for a full description of the fields and values.
-
-### Example
-
-Following is an example fetching the forecast for Queensland.
-
-
-```r
-(QLD_coastal_forecast <- get_coastal_forecast(state = "QLD"))
-#>   -------  Australian Bureau of Meteorology (BOM) Coastal Waters Forecast. -------
-#>   Please note information at the foot of:
-#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ11290.html>
-#>   the HTML version of Coastal Waters Forecast for 
-#>   QLD.
-#>   Also see 
-#>   <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>.
-#>   --------------------------------------------------------------------------------  
-#> data.table [64, 22]
-#> index                    fct  NA NA NA NA 0 1
-#> product_id               chr  IDQ11290 IDQ11290 IDQ11290 ID~
-#> type                     chr  NA NA NA NA NA NA
-#> state_code               chr  QLD QLD QLD QLD QLD QLD
-#> dist_name                chr  Queensland Queensland Gulf of~
-#> pt_1_name                chr  NA NA NA NA NA NA
-#> pt_2_name                chr  NA NA NA NA NA NA
-#> aac                      chr  QLD_FA001 QLD_FA002 QLD_FA003~
-#> start_time_local         dttm 2023-06-26 15:50:20 2023-06-2~
-#> end_time_local           dttm 2023-06-26 15:50:20 2023-06-2~
-#> utc_offset               fct  10:00 10:00 10:00 10:00 10:00~
-#> start_time_utc           dttm 2023-06-26 15:50:20 2023-06-2~
-#> end_time_utc             dttm 2023-06-26 15:50:20 2023-06-2~
-#> forecast_seas            chr  NA NA NA NA Below 1 metre, in~
-#> forecast_weather         chr  NA NA NA NA Clear. Partly clo~
-#> forecast_winds           chr  NA NA NA NA Northeast to sout~
-#> forecast_swell1          chr  NA NA NA NA NA Below 0.5 metr~
-#> forecast_swell2          chr  NA NA NA NA NA NA
-#> forecast_caution         chr  NA NA NA NA NA NA
-#> marine_forecast          chr  NA NA NA NA NA NA
-#> tropical_system_location lgl  NA NA NA NA NA NA
-#> forecast_waves           lgl  NA NA NA NA NA NA
-```
-
-
-## Using find_nearby_stations()
-
-`sweep_for_stations()` only takes one argument, `latlon`, a length-2 numeric vector.
-By default, this is Canberra (approximately).
-
-### Results
-
-This function will search for weather stations and return a data frame of all weather stations (in this package) sorted by distance from `latlon`, ascending.
-The fields in the data frame are:
-
-**name** - station name
-
-**lat** - latitude (decimal degrees)
-
-**lon** - longitude (decimal degrees)
-
-**distance** - distance from provided `latlon` value (kilometres).
-
-### Example 1
-
-Following is an example sweeping for stations starting with Canberra.
-Note that this code chunk is not executed due to the need of an API key.
-We get the station distances in this function from the DPIRD API so you will need to supply your own API key.
-
-
-```r
-# Show only the first ten stations in the list
-find_nearby_stations(
-  latitude = -35.4,
-  longitude = 149.2,
-  distance_km = 10,
-  api_key = YOUR_API_KEY
+dpird_daily <- get_dpird_summaries(
+  station_code = "NO",
+  start_date = "2022-01-01",
+  end_date = "2022-12-31",
+  values = c("airTemperature", "rainfall", "relativeHumidity"),
+  api_key = Sys.getenv("DPIRD_API_KEY")
 )
+
+dpird_daily
 ```
 
-## Using find_forecast_towns()
+## Using {weatherOz} to Fetch Patched Point SILO Data
 
-`find_forecast_towns()` only takes one argument, `latlon`, a length-2 numeric vector.
-By default, this is Canberra (approximately).
-
-### Results
-
-This function will search for weather stations and return a data frame of all weather stations (in this package) sorted by distance from `latlon`, ascending.
-The fields in the data frame are:
-
-**name** - forecast town
-
-**lat** - latitude (decimal degrees)
-
-**lon** - longitude (decimal degrees)
-
-**distance** - distance from provided `latlon` value (kilometres).
-
-### Example
-
-Following is an example sweeping for forecast towns starting with Canberra.
-As this function is executed locally using great circle distances, it doesn't need an API key.
+Daily weather station observations with interpolated missing values are available from SILO.
+The following example will demonstrate how you can find and download weather station data for stations in or near Toowoomba, Qld for the year of 2022.
+This example assumes that you have stored your SILO API key (email address) in your .Renviron file.
 
 
 ```r
-# Show only the first ten towns in the list
-head(find_forecast_towns(latitude = -35.3, longitude = 149.2, distance_km = 10))
-#> data.table [6, 6]
-#> aac      chr NSW_PT027 NSW_PT235 NSW_PT329 NSW_PT281 NSW_PT~
-#> town     chr Canberra Queanbeyan Portable RFSACT03 Woden Va~
-#> lon      dbl 149.2003 149.2346 149.3162 149.08454 149.06769~
-#> lat      dbl -35.3088 -35.3485 -35.3111 -35.34844 -35.23538~
-#> elev     dbl 577.6 612 719 610 570 621.5
-#> distance dbl 0.978709 6.238937 10.615318 11.77715 13.995264~
+library(weatherOz)
+
+Tbar <-
+  find_nearby_stations(
+    longitude = 151.9507,
+    latitude = -27.5598,
+    which_api = "silo",
+    api_key = Sys.getenv("SILO_API_KEY"),
+    distance_km = 20
+  )
+
+Tbar
+#>     station_code              station_name longitude latitude state elev_m owner
+#>  1:       041103                 Toowoomba  151.9317 -27.5836   QLD  691.0   BOM
+#>  2:       041529         Toowoomba Airport  151.9134 -27.5425   QLD  640.9   BOM
+#>  3:       041369                    Moyola  151.8819 -27.5233   QLD  559.0   BOM
+#>  4:       041039           Gowrie Junction  151.9000 -27.5000   QLD  484.6   BOM
+#>  5:       040421  Spring Bluff Railway Stn  151.9900 -27.4636   QLD  480.0   BOM
+#>  6:       041126                 Westbrook  151.8292 -27.6197   QLD  539.0   BOM
+#>  7:       040153 Murphys Creek Post Office  152.0667 -27.4667   QLD  228.0   BOM
+#>  8:       040096       Helidon Post Office  152.1246 -27.5504   QLD  155.0   BOM
+#>  9:       041031        Geham State School  152.0150 -27.4058   QLD  600.0   BOM
+#> 10:       041011      Cambooya Post Office  151.8650 -27.7072   QLD  476.0   BOM
+#> 11:       041512           Cooby Creek Dam  151.9244 -27.3825   QLD  497.0   BOM
+#>     distance_km
+#>  1:    3.241492
+#>  2:    4.149375
+#>  3:    7.903524
+#>  4:    8.317686
+#>  5:   11.375373
+#>  6:   13.699640
+#>  7:   15.425992
+#>  8:   17.172757
+#>  9:   18.257690
+#> 10:   18.433372
+#> 11:   19.881135
 ```
 
-## Using the update functions
-
-{weatherOz} uses internal databases of station location data from BOM to provide location and other metadata, _e.g._ elevation, station names, WMO codes, etc. to make the process of querying for weather data faster.
-These databases are created and packaged with {weatherOz} for distribution and are updated with new releases.
-Users have the option of updating these databases after installing {weatherOz}.
-While this option gives the users the ability to keep the databases up-to-date and gives {weatherOz}'s authors flexibility in maintaining it, this also means that reproducibility may be affected since the same version of {weatherOz} may have different databases on different machines.
-If reproducibility is necessary, care should be taken to ensure that the version of the databases is the same across different machines.
-
-The databases consist of three files, used by {weatherOz}, `AAC_codes.rda`, `JSONurl_latlon_by_station_name.rda` and `stations_site_list.rda`.
-These files can be located on your local system by using the following command,
+There are 11 stations within 20km of the coordinates for Toowoomba, Qld that we provided in the SILO database.
+We'll choose the closest, Toowoomba, station_code 041103 to fetch the daily weather data for all air temperature, rainfall and relative humidity values.
 
 
 ```r
-paste0(.libPaths(), "/weatherOz/extdata")[1]
+ppd <- get_patched_point(
+  station_code = "041103",
+  start_date = "2022-01-01",
+  end_date = "2022-12-31",
+  values = c("max_temp", "min_temp", "rain", "rh_tmax", "rh_tmin"),
+  api_key = Sys.getenv("SILO_API_KEY")
+)
+
+ppd
+#>      station_code station_name longitude latitude  elev_m       date year month  day
+#>   1:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-01-01 2022  2022 2022
+#>   2:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-01-02 2022  2022 2022
+#>   3:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-01-03 2022  2022 2022
+#>   4:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-01-04 2022  2022 2022
+#>   5:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-01-05 2022  2022 2022
+#>  ---                                                                                
+#> 361:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-27 2022  2022 2022
+#> 362:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-28 2022  2022 2022
+#> 363:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-29 2022  2022 2022
+#> 364:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-30 2022  2022 2022
+#> 365:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-31 2022  2022 2022
+#>       extracted daily_rain daily_rain_source max_temp max_temp_source min_temp
+#>   1: 2023-07-08        7.6                25     22.8              25     16.6
+#>   2: 2023-07-08        0.1                25     27.7              25     14.2
+#>   3: 2023-07-08        0.0                25     29.4              25     13.8
+#>   4: 2023-07-08        0.0                25     30.0              25     16.8
+#>   5: 2023-07-08        0.0                25     29.5              25     17.5
+#>  ---                                                                          
+#> 361: 2023-07-08        0.0                25     26.2              25     15.1
+#> 362: 2023-07-08        0.2                25     26.7              25     13.0
+#> 363: 2023-07-08        0.0                25     27.6              25     14.1
+#> 364: 2023-07-08        0.7                25     27.0              25     17.0
+#> 365: 2023-07-08        0.3                25     27.7              25     16.4
+#>      min_temp_source rh_tmax rh_tmax_source rh_tmin rh_tmin_source
+#>   1:              25    72.1             26   100.0             26
+#>   2:              25    47.1             26   100.0             26
+#>   3:              25    38.8             26   100.0             26
+#>   4:              25    43.1             26    95.7             26
+#>   5:              25    49.2             26   100.0             26
+#>  ---                                                              
+#> 361:              25    47.9             26    95.0             26
+#> 362:              25    43.7             26   100.0             26
+#> 363:              25    44.1             26   100.0             26
+#> 364:              25    60.3             26   100.0             26
+#> 365:              25    50.9             26   100.0             26
 ```
 
-unless you have specified another location for library installations and installed {weatherOz} there, in which case it would still be in `weatherOz/extdata`.
+{weatherOz} offers much more functionality that is detailed in other vignettes that document how to use it to get station metadata for any station in the DPIRD or SILO databases, get extreme weather events for the DPIRD station network, get minute data for DPIRD stations, get APSIM formatted data from SILO, get ag bulletins, précis forecasts and various imagery files from BOM in the respective vignettes for DPIRD, SILO and BOM data available through {weatherOz}.
 
-### Using update_forecast_towns()
-
-`update_forecast_towns()` downloads the latest précis forecast locations from the BOM server and updates {weatherOz}'s internal database of towns used for forecast locations.
-This database is distributed with the package to make the process faster when fetching the forecast.
-
-### Example
-
-Following is an example updating the précis forecast locations internal database.
+## Appendix 1 - Map of DPIRD Station Locations
 
 
 ```r
-update_forecast_towns()
-```
 
-### Using update_station_locations
+# this chunk assumes that you have your DPIRD API key in your .Renviron file
 
-`update_station_locations()` downloads the latest station locations and metadata and updates {weatherOz}'s internal databases that support the use of `get_current_weather()` and `get_ag_bulletin()`.
-There is no need to use this unless you know that a station exists in BOM's database that is not available in the databases distributed with {weatherOz}.
+if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("ggthemes", quietly = TRUE) &&
+    requireNamespace("gridExtra", quietly = TRUE) &&
+    requireNamespace("grid", quietly = TRUE) &&
+    requireNamespace("maps", quietly = TRUE)) {
+  library(ggplot2)
+  library(mapproj)
+  library(maps)
+  library(ggthemes)
+  library(grid)
+  library(gridExtra)
 
-### Example
+  dpird_stations <-
+    get_station_metadata(which_api = "DPIRD",
+                         api_key = Sys.getenv("DPIRD_API_KEY"))
 
-Following is an example updating the précis forecast locations internal database.
+  Aust_map <- map_data("world", region = "Australia")
 
+  dpird_stations <-
+    ggplot(dpird_stations, aes(x = longitude, y = latitude)) +
+    geom_polygon(
+      data = Aust_map,
+      aes(x = long, y = lat, group = group),
+      color = grey(0.7),
+      fill = NA
+    ) +
+    geom_point(color = grDevices::rgb(0.58, 0.20, 0.13),
+               size = 0.05) +
+    coord_map(ylim = c(-44, -10),
+              xlim = c(112, 154)) +
+    theme_map() +
+    labs(title = "DPIRD Station Locations Available in Weather 2.0 API",
+         caption = "Data: Western Australia Department of Primary Industries and Regional Development (DPIRD)")
 
-```r
-update_station_locations()
-```
-
-## Using {weatherOz} to retrieve satellite imagery
-
-{weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
-[Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
-
-Valid BOM satellite Product IDs for GeoTIFF files include:
-
-<table>
-<tr><th>Product ID</th><th>Description</th><th>Type</th><th>Delete time</th></tr>
-<tr><td>IDE00420</td><td>AHI cloud cover only 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00421</td><td>AHI IR (Ch13) greyscale 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00422</td><td>AHI VIS (Ch3) greyscale 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00423</td><td>AHI IR (Ch13) Zehr 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00425</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00426</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00427</td><td>AHI WV (Ch8) 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00430</td><td>AHI cloud cover only 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00431</td><td>AHI IR (Ch13) greyscale 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00432</td><td>AHI VIS (Ch3) greyscale 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00433</td><td>AHI IR (Ch13) Zehr 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00435</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00436</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00437</td><td>AHI WV (Ch8) 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00439</td><td>AHI VIS (Ch3) greyscale 0.5km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td colspan = 3><strong>Information gathered from Australian Bureau of Meteorology (BOM)</strong></td></tr>
-</table>
-
-### Using get_available_imagery()
-
-`get_available_imagery()` only takes one argument, `product_id`, a BOM identifier for the imagery that you wish to check for available imagery.
-Using this function will fetch a listing of BOM GeoTIFF satellite imagery from [ftp://ftp.bom.gov.au/anon/gen/gms/](ftp://ftp.bom.gov.au/anon/gen/gms/) to display which files are currently available for download.
-These files are available at ten minute update frequency with a 24 hour delete time.
-This function can be used see the most recent files available and then specify in the `_imagery()` function.
-If no valid Product ID is supplied, defaults to all GeoTIFF images currently available.
-
-
-```r
-(avail <- get_available_imagery(product_id = "IDE00425"))
-#>   [1] "IDE00425.202306250810.tif" "IDE00425.202306250820.tif"
-#>   [3] "IDE00425.202306250830.tif" "IDE00425.202306250840.tif"
-#>   [5] "IDE00425.202306250850.tif" "IDE00425.202306250900.tif"
-#>   [7] "IDE00425.202306250910.tif" "IDE00425.202306250920.tif"
-#>   [9] "IDE00425.202306250930.tif" "IDE00425.202306250940.tif"
-#>  [11] "IDE00425.202306250950.tif" "IDE00425.202306251000.tif"
-#>  [13] "IDE00425.202306251010.tif" "IDE00425.202306251020.tif"
-#>  [15] "IDE00425.202306251030.tif" "IDE00425.202306251040.tif"
-#>  [17] "IDE00425.202306251050.tif" "IDE00425.202306251100.tif"
-#>  [19] "IDE00425.202306251110.tif" "IDE00425.202306251120.tif"
-#>  [21] "IDE00425.202306251130.tif" "IDE00425.202306251140.tif"
-#>  [23] "IDE00425.202306251150.tif" "IDE00425.202306251200.tif"
-#>  [25] "IDE00425.202306251210.tif" "IDE00425.202306251220.tif"
-#>  [27] "IDE00425.202306251230.tif" "IDE00425.202306251240.tif"
-#>  [29] "IDE00425.202306251250.tif" "IDE00425.202306251300.tif"
-#>  [31] "IDE00425.202306251310.tif" "IDE00425.202306251320.tif"
-#>  [33] "IDE00425.202306251330.tif" "IDE00425.202306251340.tif"
-#>  [35] "IDE00425.202306251350.tif" "IDE00425.202306251400.tif"
-#>  [37] "IDE00425.202306251410.tif" "IDE00425.202306251420.tif"
-#>  [39] "IDE00425.202306251430.tif" "IDE00425.202306251450.tif"
-#>  [41] "IDE00425.202306251500.tif" "IDE00425.202306251510.tif"
-#>  [43] "IDE00425.202306251540.tif" "IDE00425.202306251550.tif"
-#>  [45] "IDE00425.202306251600.tif" "IDE00425.202306251610.tif"
-#>  [47] "IDE00425.202306251620.tif" "IDE00425.202306251630.tif"
-#>  [49] "IDE00425.202306251640.tif" "IDE00425.202306251650.tif"
-#>  [51] "IDE00425.202306251700.tif" "IDE00425.202306251710.tif"
-#>  [53] "IDE00425.202306251720.tif" "IDE00425.202306251730.tif"
-#>  [55] "IDE00425.202306251740.tif" "IDE00425.202306251750.tif"
-#>  [57] "IDE00425.202306251800.tif" "IDE00425.202306251810.tif"
-#>  [59] "IDE00425.202306251820.tif" "IDE00425.202306251830.tif"
-#>  [61] "IDE00425.202306251840.tif" "IDE00425.202306251850.tif"
-#>  [63] "IDE00425.202306251900.tif" "IDE00425.202306251910.tif"
-#>  [65] "IDE00425.202306251920.tif" "IDE00425.202306251930.tif"
-#>  [67] "IDE00425.202306251940.tif" "IDE00425.202306251950.tif"
-#>  [69] "IDE00425.202306252000.tif" "IDE00425.202306252010.tif"
-#>  [71] "IDE00425.202306252020.tif" "IDE00425.202306252030.tif"
-#>  [73] "IDE00425.202306252040.tif" "IDE00425.202306252050.tif"
-#>  [75] "IDE00425.202306252100.tif" "IDE00425.202306252110.tif"
-#>  [77] "IDE00425.202306252120.tif" "IDE00425.202306252130.tif"
-#>  [79] "IDE00425.202306252140.tif" "IDE00425.202306252150.tif"
-#>  [81] "IDE00425.202306252200.tif" "IDE00425.202306252210.tif"
-#>  [83] "IDE00425.202306252220.tif" "IDE00425.202306252230.tif"
-#>  [85] "IDE00425.202306252240.tif" "IDE00425.202306252250.tif"
-#>  [87] "IDE00425.202306252300.tif" "IDE00425.202306252310.tif"
-#>  [89] "IDE00425.202306252320.tif" "IDE00425.202306252330.tif"
-#>  [91] "IDE00425.202306252340.tif" "IDE00425.202306252350.tif"
-#>  [93] "IDE00425.202306260000.tif" "IDE00425.202306260010.tif"
-#>  [95] "IDE00425.202306260020.tif" "IDE00425.202306260030.tif"
-#>  [97] "IDE00425.202306260040.tif" "IDE00425.202306260050.tif"
-#>  [99] "IDE00425.202306260100.tif" "IDE00425.202306260110.tif"
-#> [101] "IDE00425.202306260120.tif" "IDE00425.202306260130.tif"
-#> [103] "IDE00425.202306260140.tif" "IDE00425.202306260150.tif"
-#> [105] "IDE00425.202306260200.tif" "IDE00425.202306260210.tif"
-#> [107] "IDE00425.202306260220.tif" "IDE00425.202306260230.tif"
-#> [109] "IDE00425.202306260250.tif" "IDE00425.202306260300.tif"
-#> [111] "IDE00425.202306260310.tif" "IDE00425.202306260320.tif"
-#> [113] "IDE00425.202306260330.tif" "IDE00425.202306260340.tif"
-#> [115] "IDE00425.202306260350.tif" "IDE00425.202306260400.tif"
-#> [117] "IDE00425.202306260410.tif" "IDE00425.202306260420.tif"
-#> [119] "IDE00425.202306260430.tif" "IDE00425.202306260440.tif"
-#> [121] "IDE00425.202306260450.tif" "IDE00425.202306260500.tif"
-#> [123] "IDE00425.202306260510.tif" "IDE00425.202306260520.tif"
-#> [125] "IDE00425.202306260530.tif" "IDE00425.202306260540.tif"
-#> [127] "IDE00425.202306260550.tif" "IDE00425.202306260600.tif"
-#> [129] "IDE00425.202306260610.tif" "IDE00425.202306260620.tif"
-#> [131] "IDE00425.202306260630.tif" "IDE00425.202306260640.tif"
-#> [133] "IDE00425.202306260650.tif" "IDE00425.202306260700.tif"
-#> [135] "IDE00425.202306260710.tif" "IDE00425.202306260740.tif"
-#> [137] "IDE00425.202306260800.tif"
-```
-
-### Using get_satellite_imagery()
-
-`get_satellite_imagery()` fetches BOM satellite GeoTIFF imagery, returning a SpatRaster object and takes two arguments.
-Files are available at ten minute update frequency with a 24 hour delete time.
-It is suggested to check file availability first by using `get_available_imagery()`.
-The arguments are:
-
-- `product_id`, a character value of the BOM product ID to download.
-Alternatively, a vector of values from `get_available_imagery()` may be used here.
-This argument is mandatory.
-
-- `scans` a numeric value for the number of scans to download, starting with the most recent and progressing backwards, *e.g.*, `1` - the most recent single scan available , `6` - the most recent hour available, `12` - the most recent 2 hours available, etc.
-Negating will return the oldest files first.
-Defaults to 1.
-This argument is optional.
-
-
-```r
-# Specify product ID and scans
-i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
-
-# Same, but use "avail" from prior to specify images for download
-i <- get_satellite_imagery(product_id = avail, scans = 1)
-```
-
-`terra::plot()` has been re-exported to simplify visualising these files while using {weatherOz}.
-
-
-```r
-plot(i)
+  # Using the gridExtra and grid packages add a neatline to the map
+  grid.arrange(dpird_stations, ncol = 1)
+  grid.rect(
+    width = 0.98,
+    height = 0.98,
+    gp = grid::gpar(
+      lwd = 0.25,
+      col = "black",
+      fill = NA
+    )
+  )
+}
 ```
 
 <div class="figure" style="text-align: center">
-<img src="plot_satellite-1.png" alt="plot of chunk plot_satellite"  />
-<p class="caption">plot of chunk plot_satellite</p>
+<img src="dpird-station-locations-map-1.png" alt="plot of chunk dpird-station-locations-map"  />
+<p class="caption">plot of chunk dpird-station-locations-map</p>
 </div>
 
-## Using {weatherOz} to retrieve radar imagery
-
-{weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through public FTP.
-These are the latest snapshots for each radar locations at various radar ranges _e.g._, 512km, 256km, 128km and 64km for some stations.
-
-### Using get_available_radar()
-
-`get_available_radar()` fetches the available radar imagery from the BOM FTP and returns a data frame for reference.
-This data frame contains the product_id, which is required when using the `get_radar_imagery()` function.
-The files available are the latest `.png` files of BOM radar imagery which are typically updated each 6-10 minutes. Only the most recent image is retrieved for each radar location.
-There are usually several radar ranges available for each radar location, such as 512km, 256km, 128km and possibly 64km.
-The arguments are:
-
-* `radar_id`  which is the BOM radar ID number; this defaults to 'all' which will return a data frame of all radar IDs in Australia.
-
-
-```r
-x <- get_available_radar()
-head(x)
-#> data.table [6, 15]
-#> product_id chr IDR641 IDR642 IDR643 IDR644 IDR31D IDR251
-#> LocationID chr 64 64 64 64 31 25
-#> range      chr 512km 256km 128km 64km NA 512km
-#> Name       chr Adelaide Adelaide Adelaide Adelaide Albany A~
-#> Longitude  dbl 138.4689 138.4689 138.4689 138.4689 117.8163~
-#> Latitude   dbl -34.6169 -34.6169 -34.6169 -34.6169 -34.9418~
-#> Radar_id   int 64 64 64 64 31 25
-#> Full_Name  chr Adelaide (Buckland Park) Adelaide (Buckland ~
-#> IDRnn0name chr BuckPk BuckPk BuckPk BuckPk Albany AliceSp
-#> IDRnn1name chr BucklandPk BucklandPk BucklandPk BucklandPk ~
-#> State      chr SA SA SA SA WA NT
-#> Type       chr Doppler Doppler Doppler Doppler Doppler Stan~
-#> Group_     chr Yes Yes Yes Yes Yes Yes
-#> Status     chr Public Public Public Public Public Public
-#> Archive    chr BuckPk BuckPk BuckPk BuckPk Albany AliceSp
-```
-
-### Using get_radar_imagery()
-
-`get_radar_imagery()` fetches the latest BOM radar imagery for a given product ID.
-The files available are the latest `.png` files of BOM radar imagery, which are typically updated each 6-10 minutes.
-Only the most recent image is retrieved for each radar location.
-There are usually several radar ranges available for each radar location, such as 512km, 256km, 128km and possibly 64km.
-The only argument is:
-
-* `product_id` the BOM product_id associated with each radar imagery file.
-These can be obtained from the `get_available_radar()` function.
-This value must be specified and the function will accept only one at a time.
-
-
-```r
-y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/hc/tft3s5bn48gb81cs99mycyf00000gn/T//RtmphuECUG/file12454264e0df9.png
-plot(y)
-```
-
-<div class="figure" style="text-align: center">
-<img src="get_radar_imagery-1.png" alt="plot of chunk get_radar_imagery"  />
-<p class="caption">plot of chunk get_radar_imagery</p>
-</div>
-
-## References
-
-[Australian Bureau of Meteorology (BOM) Weather Data Services](http://www.bom.gov.au/catalogue/data-feeds.shtml)
-
-[Australian Bureau of Meteorology (BOM) FTP Public Products](http://www.bom.gov.au/catalogue/anon-ftp.shtml)
-
-[Australian Bureau of Meteorology (BOM) Weather Data Services Agriculture Bulletins](http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml)
-
-[Australian Bureau of Meteorology (BOM) Weather Data Services Observation of Rainfall](http://www.bom.gov.au/climate/how/observations/rain-measure.shtml)
-
-[Australian Bureau of Meteorology (BOM) High-definition satellite images](http://www.bom.gov.au/australia/satellite/index.shtml)
-
-Stephen J. Jeffrey, John O. Carter, Keith B. Moodie, Alan R. Beswick, Using spatial interpolation to construct a comprehensive archive of Australian climate data, _Environmental Modelling & Software_, Volume 16, Issue 4, 2001,
-pages 309-330, ISSN 1364-8152, [DOI: 10.1016/S1364-8152(01)00008-1](https://doi.org/10.1016/S1364-8152(01)00008-1).
-
-## Appendix 1 - Output from get_precis_forecast()
-
-The function, `get_precis_forecast()`, will return a data frame of the 7 day short forecast with the following fields:
-
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>index</td><td>Forecast index number, 0 = current day ... 7 day</td></tr>
-<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td>
-</tr>
-<tr><td>state</td><td>State name (postal code abbreviation)</td></tr>
-<tr><td>town</td><td>Town name for forecast location</td></tr>
-<tr><td>aac</td><td>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for
-each location</td></tr>
-<tr><td>lat</td><td>Latitude of named location (decimal degrees)</td></tr>
-<tr><td>lon</td><td>Longitude of named location (decimal degrees)</td></tr>
-<tr><td>elev</td><td>Elevation of named location (metres)</td></tr>
-<tr><td>start_time_local</td><td>Start of forecast date and time in local
-TZ</td></tr>
-<tr><td>end_time_local</td><td>End of forecast date and time in local
-TZ</td></tr>
-<tr><td>UTC_offset</td><td> Hours offset from difference in hours and minutes
-from Coordinated Universal Time (UTC) for `start_time_local` and
-`end_time_local`</td></tr>
-<tr><td>start_time_utc</td><td>Start of forecast date and time in UTC</td></tr>
-<tr><td>end_time_utc</td><td>End of forecast date and time in UTC</td></tr>
-<tr><td>maximum_temperature</td><td>Maximum forecast temperature (degrees
-Celsius)</td></tr>
-<tr><td>minimum_temperature</td><td>Minimum forecast temperature (degrees
-Celsius)</td></tr>
-<tr><td>lower_precipitation_limit</td><td>Lower forecast precipitation limit
-(millimetres)</td></tr>
-<tr><td>upper_precipitation_limit</td><td>Upper forecast precipitation limit
-(millimetres)</td></tr>
-<tr><td>precis</td><td>Précis forecast (a short summary, less than 30
-characters)</td></tr>
-<tr><td>probability_of_precipitation</td><td>Probability of precipitation
-(percent)</td></tr>
-</table>
-
-## Appendix 2 - Output from get_ag_bulletin()
-
-The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin with the following fields:
-
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td>
-</tr>
-<tr><td>state</td><td>State name (postal code abbreviation)</td></tr>
-<tr><td>dist</td><td>BOM rainfall district</td></tr>
-<tr><td>name</td><td>Full station name (some stations have been retired so
-"station" will be same, this is the full designation</td></tr>
-<tr><td>wmo</td><td>World Meteorological Organization number (unique ID used
-worldwide)</td></tr>
-<tr><td>site</td><td>Unique BOM identifier for each station</td></tr>
-<tr><td>station</td><td>Station name</td></tr>
-<tr><td>obs-time-local</td><td>Observation time</td></tr>
-<tr><td>obs-time-utc</td><td>Observation time (time in UTC)</td></tr>
-<tr><td>time-zone</td><td>Time zone for observation</td></tr>
-<tr><td>lat</td><td>Latitude (decimal degrees)</td></tr>
-<tr><td>lon</td><td>Longitude (decimal degrees)</td></tr>
-<tr><td>elev_m</td><td>Station elevation (metres)</td></tr>
-<tr><td>bar_ht</td><td>Bar height (metres)</td></tr>
-<tr><td>station</td><td>BOM station name</td></tr>
-<tr><td>start</td><td>Year data collection starts</td></tr>
-<tr><td>end</td><td>Year data collection ends (will always be current)</td></tr>
-<tr><td>r</td><td>Rain to 9am (millimetres). <em>Trace will be reported as
-0.01</em></td></tr>
-<tr><td>tn</td><td>Minimum temperature (degrees Celsius)</td></tr>
-<tr><td>tx</td><td>Maximum temperature (degrees Celsius)</td></tr>
-<tr><td>twd</td><td>Wet bulb depression (degrees Celsius)</td></tr>
-<tr><td>ev</td><td>Evaporation (millimetres)</td></tr>
-<tr><td>tg</td><td>Terrestrial minimum temperature (degrees Celsius)</td></tr>
-<tr><td>sn</td><td>Sunshine (hours)</td></tr>
-<tr><td>solr</td><td>Solar Radiation MJ/sq m</td></tr>
-<tr><td>t5</td><td>5cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t10</td><td>10cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t20</td><td>20cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t50</td><td>50cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t1m</td><td>1m soil temperature (degrees Celsius)</td></tr>
-<tr><td>wr</td><td>Wind run (kilometres)</td></tr>
-</table>
-
-## Appendix 3 - Output from get_weather_bulletin()
-
-The function `get_weather_bulletin()` returns a data frame of weather observations for 0900 or 1500 for a nominated state.
-Observations differ between states, but contain some or all of the following fields.
-All units are metric (temperatures in Celsius; wind speeds in kilometres per hour; rainfall amounts in millimetres; pressure in hectoPascals).
-"AWS" in a station name denotes observations from an Automatic Weather Station.
-
-
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>stations</td><td>Name of observing station</td></tr>
-<tr><td>cld8ths</td><td>Octas (eights) of cloud (0-8); `NA` indicates sky obscured</td></tr>
-<tr><td>wind_dir</td><td>Direction from which wind blows (16 compass directions,
-measured at height of 10m)</td></tr>
-<tr><td>wind_speed_kmh</td><td</td></tr>
-<tr><td>temp / temp_c_dry/_terr</td><td>Ambient dry air temperature measured at height of 1.2 metres</td></tr>
-<tr><td>temp_c_dew</td><td>Dew-point temperature measured at height of 1.2 metres</td></tr>
-<tr><td>temp_c_max</td><td>Maximum temperature for last 24 hours (0900 bulletin) or 6 hours (1500 bulletin).</td></tr>
-<tr><td>temp_c_min</td><td>Minimum temperature for last 24 hours (0900 bulletin only)</td></tr>
-<tr><td>temp_c_gr</td><td>Wet bulb temperature measured at height of 1.2 metres</td></tr>
-<tr><td>rhpercent</td><td>Relative humidity</td></tr>
-<tr><td>barhpa / mslpresshpa</td><td>Barometric pressure</td></tr>
-<tr><td>rain_mm</td><td>Total rainfall since previous bulletin (`NA` denotes amount less than 1mm)</td></tr>
-<tr><td>days</td><td>If present, denotes number of days since previous bulletin</td></tr>
-<tr><td>weather</td><td>Description of current weather</td></tr>
-<tr><td>seastate (QLD only)</td><td>See below for description</td></tr>
-</table><br>
-
-
-Seastate is described by a text string formed from the three components of (sea state, swell, direction). Sea state is denoted "C" (Calm), "SM" (Smooth), "SL" (Slight), "M" (Moderate), "R" (Rough), "VR" (Very Rough), "H" (High), "VH" (Very High), or "PH" (Phenomenal). Swell is denoted "LS" (Low Short), "LA" (Low
-Average), "LL" (Low Long), "MS" (Moderate Short), "MA" (Mod Average), "ML" (Mod Long), "HS" (Heavy Short), "HA" (heavy Average), "HL" (Heavy Long), or "C" (Confused).
-Direction denotes direction from which the swell is coming.
-
-Names of rainfall and temperature variables for some states include prefixes or suffixes defining the time period over which observations apply (for example, "temp_c_6hmax" for maximum temperature between 0980 and 1500, or "temp_c_9ammin" for minimum temperature observed at 9am yet included in 1500 bulletin).
-
-
-## Appendix 4 - Output from get_coastal_forecast()
-
-The output of `get_coastal_forecast()` will return a data frame with coastal waters forecast values of each area within the given state with the following fields:
-
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>index</td><td>Forecast index number.  0 = current day </td></tr>
-<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td></tr>
-<tr><td>type</td><td>Forecast Region type e.g. Coastal</td></tr>
-<tr><td>state_code</td><td>State name (postal code abbreviation)</td></tr>
-<tr><td>dist_name</td><td>Name of forecast district</td></tr>
-<tr><td>pt_1_name</td><td>Start of forecast district</td></tr>
-<tr><td>pt_2_name</td><td>End of forecast district</td></tr>
-<tr><td>aac</td><td>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for each location</td></tr>
-<tr><td>start_time_local</td><td>Start of forecast date and time in local TZ</td></tr>
-<tr><td>end_time_local</td><td>End of forecast date and time in local TZ</td></tr>
-<tr><td>UTC_offset</td><td>Hours offset from difference in hours and minutes from Coordinated Universal Time (UTC) for `start_time_local` and `end_time_local`</td></tr>
-<tr><td>start_time_utc</td><td>Start of forecast date and time in UTC</td></tr>
-<tr><td>end_time_utc</td><td>End of forecast date and time in UTC</td></tr>
-<tr><td>forecast_seas</td><td>Forecast sea conditions</td></tr>
-<tr><td>forecast_weather</td><td>Forecast weather summary</td></tr>
-<tr><td>forecast_winds</td><td>Forecast winds summary</td></tr>
-<tr><td>forecast_swell1</td><td>Forecast primary swell summary</td></tr>
-<tr><td>forecast_swell2</td><td>Forecast seondary swell summary (not always provided)</td></tr>
-<tr><td>forecast_caution</td><td>Forecast caution issued (not always provided)</td></tr>
-<tr><td>marine_forecast</td><td>Additional marine forecast warning information (not always provided)</td></tr>
-</table><br>
-
-## Appendix 5 - Map of station locations
+## Appendix 2 - Map of SILO Station Locations
 
 
 ```r
 if (requireNamespace("ggplot2", quietly = TRUE) &&
     requireNamespace("ggthemes", quietly = TRUE) &&
-    requireNamespace("maps", quietly = TRUE) &&
-    requireNamespace("mapproj", quietly = TRUE) &&
     requireNamespace("gridExtra", quietly = TRUE) &&
-    requireNamespace("grid", quietly = TRUE)) {
+    requireNamespace("grid", quietly = TRUE) &&
+    requireNamespace("maps", quietly = TRUE)) {
   library(ggplot2)
   library(mapproj)
-  library(ggthemes)
   library(maps)
-  library(data.table)
+  library(ggthemes)
   library(grid)
   library(gridExtra)
-  load(system.file("extdata", "stations_site_list.rda", package = "weatherOz"))
-  setDT(stations_site_list)
 
-  Aust_stations <-
-    stations_site_list[(!(state %in% c("ANT", "null"))) & !grepl("VANUATU|HONIARA", name)]
+  silo_stations <- get_station_metadata(which_api = "SILO")
 
   Aust_map <- map_data("world", region = "Australia")
 
-  BOM_stations <- ggplot(Aust_stations, aes(x = lon, y = lat)) +
-    geom_polygon(data = Aust_map, aes(x = long, y = lat, group = group),
-                 color = grey(0.7),
-                 fill = NA) +
-    geom_point(color = "red",
+  SILO_stations <-
+    ggplot(silo_stations, aes(x = longitude, y = latitude)) +
+    geom_polygon(
+      data = Aust_map,
+      aes(x = long, y = lat, group = group),
+      color = grey(0.7),
+      fill = NA
+    ) +
+    geom_point(color = grDevices::rgb(0.58, 0.20, 0.13),
                size = 0.05) +
-    coord_map(ylim = c(-45, -5),
-              xlim = c(96, 167)) +
+    coord_map(ylim = c(-44, -10),
+              xlim = c(112, 154)) +
     theme_map() +
-    labs(title = "BOM Station Locations",
-         subtitle = "Australia, outlying islands and buoys (excl. Antarctic stations)",
-         caption = "Data: Australia Bureau of Meteorology (BOM)\n
-         and NaturalEarthdata, http://naturalearthdata.com")
+    labs(title = "BOM Station Locations Available in SILO Database",
+         caption = "Data: Australia Bureau of Meteorology (BOM)")
 
   # Using the gridExtra and grid packages add a neatline to the map
-  grid.arrange(BOM_stations, ncol = 1)
-  grid.rect(width = 0.98,
-            height = 0.98,
-            gp = grid::gpar(lwd = 0.25,
-                            col = "black",
-                            fill = NA))
+  grid.arrange(SILO_stations, ncol = 1)
+  grid.rect(
+    width = 0.98,
+    height = 0.98,
+    gp = grid::gpar(
+      lwd = 0.25,
+      col = "black",
+      fill = NA
+    )
+  )
 }
 ```
+
+<div class="figure" style="text-align: center">
+<img src="silo-station-locations-map-1.png" alt="plot of chunk silo-station-locations-map"  />
+<p class="caption">plot of chunk silo-station-locations-map</p>
+</div>
