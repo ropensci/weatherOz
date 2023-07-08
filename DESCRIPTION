@@ -84,8 +84,15 @@ Authors@R: c(
   person(
     given = "Jimmy",
     family = "Ng",
-    role = "aut",
+    role = "ctb",
     email = "jimmy.ng@dpird.wa.gov.au"
+  ),
+  person(
+    given = "Steve",
+    family = "Collins",
+    role = "ctb",
+    email = "steve.collins@dpird.wa.gov.au",
+    comment = c("Designed weatherOz's hex logo.")
   ),
   person(
     given = "Adam H.",
