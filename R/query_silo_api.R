@@ -114,7 +114,7 @@
   if (grepl("Sorry", response$parse("UTF8")) ||
       grepl("Request Rejected", response$parse("UTF8"))) {
     stop(call. = FALSE,
-         gettextf(response$parse("UTF8")),
+         gettext(response$parse("UTF8")),
          domain = NA)
   }
 

@@ -170,7 +170,7 @@
       } else {
         stop(call. = FALSE,
              domain = NA,
-             gettextf(
+             gettext(
                jsonlite::fromJSON(response_data[[1]]$parse("UTF8")$error$message)
              ))
       }
