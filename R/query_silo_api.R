@@ -103,7 +103,7 @@
   if (response$status_code > 201) {
     mssg <- response$parse("UTF-8")
     x <- response$status_http()
-    stop(sprintf("HTTP (%s) - %s\n  %s", x$status_code, x$explanation, mssg),
+    stop("HTTP (", x$status_code, ") - ", x$explanation, "\n", mssg,
          call. = FALSE)
   }
   response$raise_for_status()
