@@ -55,11 +55,14 @@
 #' @export get_precis_forecast
 
 get_precis_forecast <- function(state = "AUS") {
-  # this is just a placeholder for functionality with parse_precis_forecast()
-  filepath <- NULL
 
   the_state <- .check_states(state)
-  location <- .validate_filepath(filepath)
+
+  # `NULL` is used for functionality with parse_coastal_forecast(),
+  # this just creates `location` with a string of
+  # <ftp://ftp.bom.gov.au/anon/gen/fwo>
+  location <- .validate_filepath(filepath = NULL)
+
   forecast_out <- .return_precis(file_loc = location, cleaned_state = the_state)
 
   # return(forecast_out)

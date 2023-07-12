@@ -53,11 +53,15 @@
 #' @export get_coastal_forecast
 
 get_coastal_forecast <- function(state = "AUS") {
-  # this is just a placeholder for functionality with parse_coastal_forecast()
-  filepath <- NULL
+
+
   # see internal_functions.R for these functions
   the_state <- .check_states(state)
-  location <- .validate_filepath(filepath)
+
+  # `NULL` is used for functionality with parse_coastal_forecast(),
+  # this just creates `location` with a string of
+  # <ftp://ftp.bom.gov.au/anon/gen/fwo>
+  location <- .validate_filepath(filepath = NULL)
   coastal_out <-
     .return_coastal(file_loc = location, cleaned_state = the_state)
 
