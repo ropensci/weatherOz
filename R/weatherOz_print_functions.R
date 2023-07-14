@@ -35,18 +35,18 @@ print.weatherOz_tbl <- function(x,
       strrep("-", 11),
       "\n"
     )
-    .stylecat("  Please note information at the foot of:\n")
+    .stylecat("  Please note information at the foot of\n")
     for (i in product_id) {
       .stylecat("  <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
                 i,
-                ".html>\n")
+                ".html>,\n")
     }
     .stylecat(
       "  the HTML version of Agricultural Observations Bulletin for \n",
       "  ",
       knitr::combine_words(unlist(state)),
       ".",
-      "  Also see: \n",
+      "  Also see \n",
       "  <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>",
       ".\n",
       "  ",
@@ -65,11 +65,11 @@ print.weatherOz_tbl <- function(x,
       strrep("-", 7),
       "\n"
     )
-    .stylecat("  Please note information at the foot of:\n")
+    .stylecat("  Please note information at the foot of\n")
     for (i in product_id) {
       .stylecat("  <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
                 i,
-                ".html>\n")
+                ".html>,\n")
     }
     .stylecat(
       "  the HTML version of Coastal Waters Forecast for \n",
@@ -115,8 +115,7 @@ print.weatherOz_tbl <- function(x,
     }
     .stylecat(
       "  Please note information at the page \n",
-      "  <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>",
-      "\n",
+      "  <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>.\n",
       "  ",
       strrep("-", 80),
       "  \n"
