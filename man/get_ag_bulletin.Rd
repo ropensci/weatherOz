@@ -45,8 +45,7 @@ accepted the conditions described therein.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-ag_bulletin <- get_ag_bulletin(state = "QLD")
-ag_bulletin
+get_ag_bulletin(state = "QLD")
 \dontshow{\}) # examplesIf}
 }
 \references{

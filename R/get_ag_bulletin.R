@@ -35,8 +35,7 @@
 #'
 #' @examplesIf interactive()
 #'
-#' ag_bulletin <- get_ag_bulletin(state = "QLD")
-#' ag_bulletin
+#' get_ag_bulletin(state = "QLD")
 #'
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of

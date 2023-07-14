@@ -37,8 +37,7 @@ or all using 'AUS':
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 
-coastal_forecast <- get_coastal_forecast(state = "NSW")
-coastal_forecast
+get_coastal_forecast(state = "NSW")
 \dontshow{\}) # examplesIf}
 }
 \references{
