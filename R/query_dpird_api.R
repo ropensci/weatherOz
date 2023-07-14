@@ -154,25 +154,20 @@
     if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors) > 0) {
       x <-
         jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors
-      stop(sprintf("HTTP (%s) - %s\n  %s",
-                   x[, "code"],
-                   x[, "message"],
-                   x[, "description"]),
+      stop("HTTP (", x[, "code"], ") - ", x[, "message"], "\n",
+           x[, "description"],
            call. = FALSE)
     } else if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))) > 0) {
       if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$message) > 0) {
         x <- jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error
 
-        stop(sprintf("HTTP (%s) - %s\n",
-                     x["code"],
-                     x["message"]),
+        stop("HTTP (", x["code"], ") - ", x[, "message"], "\n",
              call. = FALSE)
       } else {
         stop(call. = FALSE,
              domain = NA,
-             gettext(
                jsonlite::fromJSON(response_data[[1]]$parse("UTF8")$error$message)
-             ))
+             )
       }
     } else {
       stop(call. = FALSE,
