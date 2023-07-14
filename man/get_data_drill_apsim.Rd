@@ -49,8 +49,8 @@ The grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
 
 \describe{
 \item{rain (mm)}{Rainfall}
-\item{maxt (˚C)}{Maximum temperature}
-\item{mint (˚C)}{Minimum temperature}
+\item{maxt (degrees C)}{Maximum temperature}
+\item{mint (degrees C)}{Minimum temperature}
 \item{vp (hPa)}{Vapour pressure}
 \item{evap_pan (mm)}{Class A pan evaporation}
 \item{radiation (Mj/\ifelse{html}{\out{m<sup>1</sup>}}{m\eqn{^1}})}{Solar

@@ -77,8 +77,8 @@ some islands).}
 \describe{
 \item{all}{Which will return all of the following values}
 \item{rain (mm)}{Rainfall}
-\item{max_temp (˚C)}{Maximum temperature}
-\item{min_temp (˚C)}{Minimum temperature}
+\item{max_temp (degrees C)}{Maximum temperature}
+\item{min_temp (degrees C)}{Minimum temperature}
 \item{vp (hPa)}{Vapour pressure}
 \item{vp_deficit (hPa)}{Vapour pressure deficit}
 \item{evap_pan (mm)}{Class A pan evaporation}
