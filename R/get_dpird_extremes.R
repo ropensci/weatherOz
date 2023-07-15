@@ -131,6 +131,8 @@ get_dpird_extremes <- function(station_code,
     )
   }
 
+  .check_not_example_api_key(api_key)
+
   if (any(values == "all")) {
     .values <- dpird_extreme_weather_values
   } else {

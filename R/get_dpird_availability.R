@@ -77,6 +77,8 @@ get_dpird_availability <-
       )
     }
 
+    .check_not_example_api_key(api_key)
+
     # validate user provided dates
     if (!is.null(start_date)) {
       if (is.null(end_date)) {

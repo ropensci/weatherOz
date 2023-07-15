@@ -47,6 +47,8 @@
 #' @examples
 #' \dontrun{
 #'
+#' # Note
+#'
 #' get_dpird_minute(
 #'   station_code = "SP",
 #'   start_date_time = "2018-02-01 13:00:00",
@@ -82,6 +84,8 @@ get_dpird_minute <- function(station_code,
       call. = FALSE
     )
   }
+
+  .check_not_example_api_key(api_key)
 
   if (any(values %notin% dpird_minute_values)) {
     if (values != "all") {

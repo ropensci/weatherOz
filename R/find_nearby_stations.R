@@ -110,6 +110,8 @@ find_nearby_stations <- function(longitude = NULL,
     }
   }
 
+  .check_not_example_api_key(api_key)
+
   .check_location_params(
     .longitude = longitude,
     .latitude = latitude,

@@ -69,6 +69,8 @@ Western Standard Time \sQuote{AWST}.
 \examples{
 \dontrun{
 
+# Note
+
 get_dpird_minute(
   station_code = "SP",
   start_date_time = "2018-02-01 13:00:00",

@@ -98,6 +98,8 @@ get_station_metadata <-
            status = FALSE,
            rich = FALSE) {
 
+    .check_not_example_api_key(api_key)
+
     which_api <- .check_which_api(which_api)
 
     if (which_api == "silo") {
