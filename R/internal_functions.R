@@ -126,6 +126,7 @@
     stop("You have copied the example code and not provided a proper API key.",
          call. = FALSE)
   }
+  return(invisible(NULL))
 }
 
 #' @noRd
