@@ -40,7 +40,7 @@ queried together with the requested weather variables.
 }
 \description{
 Fetch nicely formatted minute weather station data from the \acronym{DPIRD}
-Weather 2.0 \acronym{API} over a maximum 24 hour period.
+Weather 2.0 \acronym{API} for a maximum 24-hour period.
 }
 \note{
 Please note this function converts date-time columns from Coordinated
@@ -68,17 +68,16 @@ Western Standard Time \sQuote{AWST}.
 
 \examples{
 \dontrun{
-library(lubridate)
 
-yesterday <- now() - hours(24)
-
-get_dpird_minute(station_code = "SP",
-                 start_date_time = "2018-02-01 13:00:00",
-                 minutes = 1440,
-                 api_key = "your_api_key",
-                 values = c("airTemperature",
-                                  "solarIrradiance",
-                                  "wind"))
+get_dpird_minute(
+  station_code = "SP",
+  start_date_time = "2018-02-01 13:00:00",
+  minutes = 1440,
+  api_key = "your_api_key",
+  values = c("airTemperature",
+             "solarIrradiance",
+             "wind")
+)
 }
 
 }
