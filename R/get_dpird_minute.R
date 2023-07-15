@@ -47,7 +47,7 @@
 #' @examples
 #' \dontrun{
 #'
-#' # Note
+#' # Note that you need to supply your own API key
 #'
 #' get_dpird_minute(
 #'   station_code = "SP",
