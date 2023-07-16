@@ -114,15 +114,13 @@
   }
 }
 
-
-
 #' Check that the user hasn't blindly copied the "your_api_key" string from the
 #' examples
 #'
 #' @noRd
 
 .check_not_example_api_key <- function(.api_key) {
-  if (.api_key == "your_api_key") {
+  if (!is.null(.api_key) && .api_key == "your_api_key") {
     stop("You have copied the example code and not provided a proper API key.",
          call. = FALSE)
   }
