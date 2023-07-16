@@ -66,9 +66,10 @@ wd <- get_data_drill(
   longitude = 150.05,
   start_date = "20221001",
   end_date = "20221201",
-  values = c("max_temp",
-                   "min_temp",
-                   "rain"
+  values = c(
+    "max_temp",
+    "min_temp",
+    "rain"
   ),
   api_key = "your_api_key"
 )
