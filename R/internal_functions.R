@@ -122,7 +122,10 @@
 
 .check_not_example_api_key <- function(.api_key) {
   if (!is.null(.api_key) && .api_key == "your_api_key") {
-    stop("You have copied the example code and not provided a proper API key.",
+    stop("You have copied the example code and not provided a proper API key.
+         An API key may be requested from DPIRD or for SILO you must use your
+         e-mail address as an API key. See the help for the respective functions
+         for more.",
          call. = FALSE)
   }
   return(invisible(NULL))
