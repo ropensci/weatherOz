@@ -130,8 +130,10 @@
 
 #' Check User Provided `state` for précis and ag bulletin
 #' @param state User provided value to check against.
+#'
 #' @return A validated state
-#
+#' @keywords internal
+#' @noRd
 
 .check_states <- function(state) {
   state <- toupper(state)
