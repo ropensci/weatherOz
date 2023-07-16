@@ -22,6 +22,15 @@ test_that("get_dpird_availability() fails with bad user inputs", {
       api_key = Sys.getenv("DPIRD_API_KEY")
     )
   )
+
+  expect_error(
+    get_dpird_availability(
+      station_code = "NO",
+      start_date = "20230430",
+      api_key = "your_api_key"
+    ),
+    regexp = "You have copied the example code *"
+  )
 })
 
 ## custom period availability ----

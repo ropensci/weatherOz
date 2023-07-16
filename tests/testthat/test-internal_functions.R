@@ -27,7 +27,7 @@ test_that("Broken Hill airport to Sydney airport approximately 932158", {
 })
 
 
-## Check date ----
+## Check date order ----
 
 test_that("a `date` entered in incorrect format is corrected", {
   dates <- "Jan-01-1983"
@@ -41,17 +41,15 @@ test_that("a `date` entered in incorrect format and corrected", {
                regexp = "*Please enter a valid date format.")
 })
 
-## Check date order ----
-
 test_that(".check_date_order() catches errors, passes otherwise", {
-  end <- as.Date("2022-01-02")
   start <- as.Date("2021-12-31")
+  end <- as.Date("2022-01-02")
 
-  expect_no_error(.check_date_order(.start_date = start, .end_date = end))
+  expect_invisible(.check_date_order(.start_date = start, .end_date = end))
   expect_error(.check_date_order(.start_date = end, .end_date = start))
 })
 
-## Check lat/lon params ---
+## Check lat/lon params ----
 
 test_that("if lat lon or station_code are correct, no error", {
   expect_no_error(.check_location_params(
@@ -88,6 +86,12 @@ test_that("check user-input for `which_api`", {
   }
 })
 
+## .check_lon_lat() ----
+test_that(".check_lonlat() returns invisible `NULL` if no errors", {
+  expect_invisible(.check_lonlat(latitude = -27.85,
+                                 longitude = 150.05))
+})
+
 ## .check_states() ----
 
 test_that(".check_states() will return reasonable values", {
@@ -109,5 +113,3 @@ test_that(".snake_case_names() converts CamelCase colnames to snake_case", {
   expect_equal(names(.set_snake_case_names(x)), "upper_case")
   expect_error(.set_snake_case_names(c("UpperCase" = 1)))
 })
-
-
