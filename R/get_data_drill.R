@@ -174,6 +174,7 @@ get_data_drill <- function(longitude,
       call. = FALSE
     )
   }
+  .check_not_example_api_key(api_key)
 
   # validate user-provided lon and lat values
   .check_lonlat(longitude = longitude, latitude = latitude)

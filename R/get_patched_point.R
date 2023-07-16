@@ -180,6 +180,8 @@ get_patched_point <- function(station_code,
     )
   }
 
+  .check_not_example_api_key(api_key)
+
   if (any(values == "all")) {
     .values <- unname(silo_daily_values)
   } else {

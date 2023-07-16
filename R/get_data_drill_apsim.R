@@ -115,6 +115,8 @@ get_data_drill_apsim <- function(longitude,
     )
   }
 
+  .check_not_example_api_key(api_key)
+
   # validate user-provided lon and lat values
   .check_lonlat(longitude = longitude, latitude = latitude)
 

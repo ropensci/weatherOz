@@ -120,6 +120,8 @@ get_patched_point_apsim <- function(station_code,
          call. = FALSE)
   }
 
+  .check_not_example_api_key(api_key)
+
   # validate user provided dates
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
