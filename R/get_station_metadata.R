@@ -98,9 +98,7 @@ get_station_metadata <-
            status = FALSE,
            rich = FALSE) {
 
-    .check_not_example_api_key(api_key)
-
-    which_api <- .check_which_api(which_api)
+  which_api <- .check_which_api(which_api)
 
     if (which_api == "silo") {
       out <- .fetch_silo_metadata()
@@ -109,19 +107,22 @@ get_station_metadata <-
         stop(call. = FALSE,
              "You must provide an API key for this query.")
       }
+      .check_not_example_api_key(api_key)
       out <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
     } else if (which_api == "all") {
       if (missing(api_key)) {
         stop(call. = FALSE,
              "You must provide an API key for this query.")
       }
+      .check_not_example_api_key(api_key)
       silo <- .fetch_silo_metadata()
       dpird <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
       out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
     }
 
     out[, start := data.table::fifelse(is.na(start),
-                                       as.character(lubridate::year(Sys.Date())),
+                                       as.character(
+                                         lubridate::year(Sys.Date())),
                                        as.character(start))]
     out[, start := data.table::fifelse(nchar(start) == 4,
                                        paste(start, "01", "01", sep = "-"),
