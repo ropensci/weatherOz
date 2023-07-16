@@ -47,6 +47,8 @@ test_that(".check_date_order() catches errors, passes otherwise", {
 
   expect_invisible(.check_date_order(.start_date = start, .end_date = end))
   expect_error(.check_date_order(.start_date = end, .end_date = start))
+  expect_error(.check_date_order(.start_date = as.Date("2050-01-01"),
+                                 .end_date = as.Date("2050-01-31")))
 })
 
 ## Check lat/lon params ----
@@ -77,6 +79,11 @@ test_that("if lon outside Oz bounding box are provided, error", {
   expect_error(.check_lonlat(latitude = 0, longitude = 151))
 })
 
+test_that(".check_lonlat() returns invisible `NULL` if no errors encountered", {
+  expect_invisible(.check_lonlat(latitude = -38.5,
+                                 longitude = 114.5))
+})
+
 ## Check user-input for selecting an API ----
 
 test_that("check user-input for `which_api`", {
@@ -88,14 +95,14 @@ test_that("check user-input for `which_api`", {
 
 ## .check_lon_lat() ----
 test_that(".check_lonlat() returns invisible `NULL` if no errors", {
-  expect_invisible(.check_lonlat(latitude = -27.85,
-                                 longitude = 150.05))
+  expect_invisible(.check_lonlat(longitude = 150.05,
+                                 latitude = -27.85))
 })
 
 ## .check_states() ----
 
 test_that(".check_states() will return reasonable values", {
-  expect_message(.check_states(state = "ans"))
+  expect_error(.check_states(state = "ans"))
   expect_message(.check_states(state = "Quld"))
 })
 

@@ -58,13 +58,12 @@
   if (.end_date < .start_date) {
     stop(call. = FALSE,
          "The start and end dates appear to be reversed.")
-    return(invisible(NULL))
   }
   if (.start_date > Sys.Date() || .end_date > Sys.Date()) {
     stop(
       call. = FALSE,
-      sprintf("The `start_date` nor `end_date` can neither one be past %s",
-              lubridate::today())
+      "The `start_date` nor `end_date` values can neither one be past ",
+      lubridate::today()
     )
   }
   return(invisible(NULL))
@@ -94,7 +93,7 @@
 #' @param longitude user provided numeric value as decimal degrees
 #' @param latitude user provided numeric value as decimal degrees
 #' @noRd
-#' @return invisible `NULL`, called for its side-effects
+#' @return An invisible `NULL`, called for its side-effects
 
 .check_lonlat <- function(longitude, latitude) {
   if (longitude < 112 || longitude > 154) {
@@ -112,8 +111,8 @@
       latitude,
       "`, value to be sure it is valid for Australian data.\n"
     )
-    return(invisible(NULL))
   }
+  return(invisible(NULL))
 }
 
 #' Check that the user hasn't blindly copied the "your_api_key" string from the
@@ -129,8 +128,10 @@
   return(invisible(NULL))
 }
 
-#' @noRd
-# Check states for précis and ag bulletin, use fuzzy matching
+#' Check User Provided `state` for précis and ag bulletin
+#' @param state User provided value to check against.
+#' @return A validated state
+#
 
 .check_states <- function(state) {
   state <- toupper(state)
@@ -169,11 +170,11 @@
     if (length(likely_states) == 1) {
       the_state <- toupper(likely_states)
       message(
-          "Using state = ",
-          likely_states,
-          ".\n",
-          "If this is not what you intended, please check your entry."
-        )
+        "Using state = ",
+        likely_states,
+        ".\n",
+        "If this is not what you intended, please check your entry."
+      )
       return(the_state)
     } else if (length(likely_states) == 0) {
       stop(
@@ -184,21 +185,25 @@
   }
 
   if (length(likely_states) > 1) {
-    message(
+    stop(
+      call. = FALSE,
       "Multiple states match 'state', '",
       state,
-      "'. Did you mean:\n\tstate = ",
-      sprintf("'%s', '%s' or '%s?'",
-              likely_states[1],
-              likely_states[2],
-              likely_states[3]
-      ))
+      "'. Did you mean:\n\t`state` = ",
+      likely_states[1],
+      ", ",
+      likely_states[2],
+      ", or ",
+      likely_states[3],
+      "?"
+    )
   }
 }
 
-#' Check user-input API value
+#' Check User-Provided API Values
+#'
 #' @param which_api user-provided value for `which_api`
-#' @return A lower-case string of a valid API value for \pkg{weatherOz}
+#' @return A lower-case string of a valid API value
 #' @noRd
 .check_which_api <- function(which_api) {
   which_api <- tolower(which_api)
@@ -214,9 +219,12 @@
 }
 
 
-#' convert_state
+#' Convert `state` to a Standard Abbreviation
 #'
-#' Convert state to standard abbreviation
+#' @param state A user-provided value for the state to be converted.
+#' @return A `string` representing a proper abbreviation of an Australian state
+#'   or territory.
+#'
 #' @noRd
 .convert_state <- function(state) {
   state <- gsub(" ", "", state)
@@ -272,19 +280,23 @@
   state <- state_code[pmatch(state, state_names)]
 
   if (any(is.na(state)))
-    stop("Unable to determine state")
+    stop("Unable to determine state",
+         call. = FALSE)
 
   return(state)
 }
 
 
-#' Create the base URL/file location of BOM files for all XML functions
+#' Create the Base URL or File Location of BOM files for all XML Functions
 #'
-#' Takes the XML file name and creates the full file path or URL
+#' Takes the XML file name and creates the full file path or URL.
 #'
-#' @param AUS_XML a vector of XML file names for BOM products
-#' @param .the_state user provided state argument for requested data
-#' @param .file_loc file path for use with the `parse_` functions
+#' @param AUS_XML a vector of XML file names for BOM products.
+#' @param .the_state user provided state argument for requested data.
+#' @param .file_loc file path for use with the `parse_` functions.
+#'
+#' @return A `string` value of the URL of the requested XML file on BOM's FTP
+#'   server.
 #'
 #' @noRd
 
@@ -318,7 +330,7 @@
   return(xml_url)
 }
 
-#' Get response from a BOM URL
+#' Get A Response From a BOM URL
 #'
 #' Gets response from a BOM URL, checks the server for response first, then
 #' tries to fetch the file or returns an informative message.
@@ -327,6 +339,8 @@
 #'
 #' @details Original execution came from
 #' <https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12>
+#'
+#' @return An XML file (hopefully).
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
@@ -397,21 +411,23 @@
     xml_out <- xml2::read_xml(rawToChar(resp$content))
     return(xml_out)
   }
-  if (tools::file_ext(remote_file) == "json") {
-    json_out <-
-      jsonlite::fromJSON(rawToChar(resp$content))
-    return(json_out)
-  }
-  if (grepl(pattern = "dailyZippedDataFile", x = remote_file)) {
-    csv_out <-
-      data.table::fread(input = remote_file,
-                        header = TRUE,
-                        stringsAsFactors = TRUE)
-    return(csv_out)
-  }
 }
 
-# Distance over a great circle. Reasonable approximation.
+#' Distance Over a Great Circle
+#'
+#' This is a reasonable approximation of distances over great circles for
+#'   finding nearby stations using latitude and longitude.
+#' @param lat1 The known station's latitude
+#' @param lon1 The known stations' longitude
+#' @param lat2 The latitude of the other station to determine the distance to
+#'   from the known station location.
+#' @param lon2 The longitude of the other station to determine the distance to
+#'   from the known station location.
+#'
+#' @return A numeric value representing distance in kilometres.
+#' @keywords internal
+#' @noRd
+
 .haversine_distance <- function(lat1, lon1, lat2, lon2) {
   # to radians
   lat1 <- lat1 * 0.01745
@@ -429,44 +445,8 @@
   )))
 }
 
-#' Internal function to rename column names
+#' Convert camelCase Names From the DPIRD API to snake_case
 #'
-#' @param df_out data.frame returned from DPIRD API query with camel case
-#' column names
-#' @param which_api a string with the chosen API, either 'weather' or 'silo'
-#' @keywords internal
-#' @noRd
-#'
-
-.rename_cols <- function(df_out,
-                         which_api = "dpird") {
-  if (which_api == "dpird") {
-    df_out <- data.table::data.table(df_out)
-    df_out[, stationName := .strcap(x = stationName)]
-
-    # Split the vector into two with an underscore between the names
-    new_names <- lapply(names(df_out), function(x) {
-      paste(strsplit(x,
-                     "(?<=[a-z])(?=[A-Z])",
-                     perl = TRUE)[[1]],
-            collapse = "_")
-    })
-
-    # Transform to lower case and rename df_out
-    names(df_out) <- gsub("[.]", "_", tolower(unlist(new_names)))
-  }
-
-  if (which_api == 'silo') {
-    df_out <- data.table::data.table(df_out)
-    df_out[, name := .strcap(x = name)]
-    names(df_out)[1] <- "station_code"
-    names(df_out)[3] <- "station_name"
-  }
-
-  return(df_out)
-}
-
-#' Convert camelCase names from DPIRD API to snake_case
 #' @param x a `data.table` of results from a DPIRD Weather 2.0 API query with
 #'  camelCase field names
 #'
@@ -481,11 +461,12 @@
          "This function only works on `data.tables`.")
   }
   data.table::setnames(x, old = names(x),
-                       new = gsub(" ", "_", tolower(
-                         gsub("(.)([A-Z])", "\\1 \\2",
-                              names(x))
-                       )))
-  data.table::setnames(x, old = names(x),
+                       new = gsub(" ", "_", tolower(gsub(
+                         "(.)([A-Z])", "\\1 \\2",
+                         names(x)
+                       ))))
+  data.table::setnames(x,
+                       old = names(x),
                        new = gsub(".", "_", names(x), fixed = TRUE))
 }
 
@@ -499,7 +480,6 @@
 #' @noRd
 
 .split_time_cols <- function(x) {
-
   x[, c("start_time_local",
         "UTC_offset_drop") := data.table::tstrsplit(start_time_local,
                                                     "+",
@@ -542,10 +522,10 @@
 #' @noRd
 
 .strcap <- function(x) {
-
   .cap <- function(x) {
     capped <- grep('^[^A-Z]*', x, perl = TRUE)
-    substr(x[capped], 1, 1) <- toupper(tolower(substr(x[capped], 1, 1)))
+    substr(x[capped], 1, 1) <-
+      toupper(tolower(substr(x[capped], 1, 1)))
     x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl = TRUE)
     return(x)
   }
