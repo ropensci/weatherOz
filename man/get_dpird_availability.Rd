@@ -67,8 +67,8 @@ weather station network from the Weather 2.0 \acronym{API}.
 
 \examples{
 \dontrun{
-# You must have a DPIRD API key to proceed
-# Use default for end data (current system date)
+# Note that you need to supply your own API key
+# Here we use the default for end date (current system date)
 output <- get_dpird_availability(
             station_code = "BI",
             start_date = "20170101",

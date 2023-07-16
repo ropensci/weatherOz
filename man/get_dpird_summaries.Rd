@@ -156,9 +156,9 @@ Universal Time \sQuote{UTC} to Australian Western Standard Time
 
 \examples{
 \dontrun{
-# You must have a DPIRD API key to proceed
+# Note that you need to supply your own API key
+# Use default for end date (current system date) to get rainfall
 
-# Use default for end data (current system date) to get rainfall
 wd <- get_dpird_summaries(
    station_code = "CL001",
    start_date = "20171028",
@@ -209,8 +209,8 @@ Other data fetching:
 \code{\link{get_satellite_imagery}()}
 }
 \author{
-Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} and Rodrigo Pires,
-\email{rodrigo.pires@dpird.wa.gov.au}
+Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} and Rodrigo
+Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
 \concept{DPIRD}
 \concept{data fetching}
