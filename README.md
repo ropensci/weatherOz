@@ -45,7 +45,7 @@ wd <- get_dpird_summaries(
   station_code = "BI",
   start_date = "20220501",
   end_date = "20220502",
-  api_key = "your_key",
+  api_key = "your_api_key",
   interval = "daily",
   values = c(
     "wind",
@@ -70,7 +70,7 @@ wd <- get_data_drill(
                    "min_temp",
                    "rain"
   ),
-  api_key = "your@email"
+  api_key = "your_api_key"
 )
 ```
 
