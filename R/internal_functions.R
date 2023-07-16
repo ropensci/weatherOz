@@ -49,8 +49,9 @@
 
 #' Check user input dates to ensure sequential order
 #'
-#' @param .first a user supplied date for the start of data query
-#' @param .last a user supplied date for the end of data query
+#' @param .start_date a user supplied date for the start of data query
+#' @param .end_date a user supplied date for the end of data query
+#' @return Called for its side-effects, returns an invisible `NULL` if no error.
 #' @noRd
 
 .check_date_order <- function(.start_date, .end_date) {
@@ -66,6 +67,7 @@
               lubridate::today())
     )
   }
+  return(invisible(NULL))
 }
 
 #' Check user inputs for lat, lon or station_code
