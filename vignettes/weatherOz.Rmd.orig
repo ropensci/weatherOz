@@ -1,6 +1,6 @@
 ---
 title: "weatherOz"
-author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham and Hugh Parsonage and Adam H. Sparks"
+author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham, Hugh Parsonage, Keith Pembleton and Adam H. Sparks"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -25,25 +25,21 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.path = "vignettes/")
 ```
 
-```{r libraries, echo=FALSE, message=FALSE}
-library(weatherOz)
-```
-
 ## Introduction
 
 {weatherOz} provides automated downloading, parsing, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia, and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES).
 As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files.
 
 DPIRD weather data are accessed through public APIs provided by DPIRD, <https://www.agric.wa.gov.au/weather-api-20>, providing access to weather station data from DPIRD's own weather station network.
-Detailed information on using {weatherOz} with DPIRD data is available in the []() vignette.
+Detailed information on using {weatherOz} with DPIRD data is available in the [weatherOz for the DPIRD Weather 2.0 API](weatherOz_for_DPIRD.html) vignette.
 
 Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001).
-More details on using {weatherOz} with SILO data are available in the []() vignette.
+More details on using {weatherOz} with SILO data are available in the [weatherOz for the SILO API](weatherOz_for_Silo.html) vignette.
 
-BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
+The BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
-{weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` or {stars} objects of GeoTIFF satellite imagery or a {magick} object of radar image gif files.
-For detailed information on using {weatherOz} with BOM data, please see the [weatherOz for BOM Data Resources](weatherOz-for-BOM-Data-Resources.html) vignette.
+{weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` or {stars} objects of GeoTIFF satellite imagery or a {magick} object of radar image.png files.
+For detailed information on using {weatherOz} with BOM data, please see the [weatherOz for BOM Data Resources](weatherOz_for_BOM.html) vignette.
 
 Following is a quick demonstration of some common tasks that you may wish to undertake while using {weatherOz}.
 
