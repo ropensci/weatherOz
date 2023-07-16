@@ -104,8 +104,8 @@ Fetch nicely formatted individual extreme weather summaries from the
 
 \examples{
 \dontrun{
-# You must have an DPIRD API key to proceed
-# Query Bonnie Rock station for wind erosion and heat extreme events.
+# Query Bonnie Rock station for wind erosion and heat extreme events
+# Note that you need to supply your own API key
 
 xtreme <- get_dpird_extremes(
   station_code = "BR",
