@@ -260,15 +260,15 @@ get_dpird_summaries <- function(station_code,
   # determine how many records are being requested. Default here is 'daily' as
   # with default user arguments
   total_records_req <- data.table::fcase(
-    interval == "yearly",
+    checked_interval == "yearly",
     floor(lubridate::time_length(request_interval, unit = "year") + 1),
-    interval == "monthly",
+    checked_interval == "monthly",
     floor(lubridate::time_length(request_interval, unit = "month") + 1),
-    interval == "hourly",
+    checked_interval == "hourly",
     floor(lubridate::time_length(request_interval, unit = "hour") + 1),
-    interval == "30min",
+    checked_interval == "30min",
     floor((lubridate::time_length(request_interval, unit = "hour")) + 1) * 2,
-    interval == "15min",
+    checked_interval == "15min",
     floor((lubridate::time_length(request_interval, unit = "hour")) + 1) * 4,
     default = floor(lubridate::time_length(request_interval, unit = "day") + 1)
   )
@@ -324,7 +324,7 @@ get_dpird_summaries <- function(station_code,
 
   data.table::setcolorder(out, order(names(out)))
 
-  if (interval == "monthly") {
+  if (checked_interval == "monthly") {
     out[, date := lubridate::ym(sprintf("%s-%s",
                                         out$period_year,
                                         out$period_month))]
@@ -341,7 +341,12 @@ get_dpird_summaries <- function(station_code,
     out[, period_day := NULL]
     out[, period_hour := NULL]
     out[, period_minute := NULL]
-  } else if (interval == "daily") {
+    data.table::setorder(
+      x = out,
+      cols = "period_year",
+      "period_month"
+    )
+  } else if (checked_interval == "daily") {
     out[, date := lubridate::ymd(sprintf(
       "%s-%s-%s",
       out$period_year,
@@ -363,7 +368,13 @@ get_dpird_summaries <- function(station_code,
 
     out[, period_minute := NULL]
     out[, period_hour := NULL]
-  } else if (interval == "hourly") {
+    data.table::setorder(
+      x = out,
+      cols = "period_year",
+      "period_month",
+      "period_day"
+    )
+  } else if (checked_interval == "hourly") {
     out[, date := lubridate::ymd_h(
       sprintf(
         "%s-%s-%s-%s",
@@ -389,8 +400,15 @@ get_dpird_summaries <- function(station_code,
     )
 
     out[, period_minute := NULL]
+    data.table::setorder(
+      x = out,
+      cols = "period_year",
+      "period_month",
+      "period_day",
+      "period_hour"
+    )
 
-  } else if (interval == "30min" || interval == "15min") {
+  } else if (checked_interval == "30min" || interval == "15min") {
     out[, date := lubridate::ymd_hm(
       sprintf(
         "%s-%s-%s-%s-%s",
@@ -416,6 +434,14 @@ get_dpird_summaries <- function(station_code,
         "date"
       )
     )
+    data.table::setorder(
+      x = out,
+      cols = "period_year",
+      "period_month",
+      "period_day",
+      "period_hour",
+      "period_minute"
+    )
   } else {
     data.table::setcolorder(out,
                             c("station_code",
@@ -425,6 +451,7 @@ get_dpird_summaries <- function(station_code,
     out[, period_day := NULL]
     out[, period_hour := NULL]
     out[, period_minute := NULL]
+    data.table::setorder(x = out, cols = "period_year")
   }
 
   if (any(grep("time", colnames(out)))) {
@@ -501,8 +528,7 @@ get_dpird_summaries <- function(station_code,
                          cols = "wind.height",
                          "wind.max.time")
 
-  out <- cbind(nested_list_objects, x)
-  return(data.table::setorder(x = out, cols = "wind.max.time"))
+  return(cbind(nested_list_objects, x))
   }
 
   return(nested_list_objects)
