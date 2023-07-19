@@ -44,8 +44,10 @@ You must provide a `station_code` and `API_key`, the other arguments, `values` a
 ```{r get_all_extremes}
 library(weatherOz)
 
-(extremes <- get_dpird_extremes(station_code = "NO",
-                               api_key = Sys.getenv("DPIRD_API_KEY")))
+(extremes <- get_dpird_extremes(
+  station_code = "NO",
+  api_key = Sys.getenv("DPIRD_API_KEY")
+))
 ```
 
 #### Example 2: Get Selected Extremes for Northam, WA
@@ -56,9 +58,13 @@ The documentation for `get_dpird_extremes()` contains a full listing of the valu
 ```{r get_selected_extremes}
 library(weatherOz)
 
-(extremes <- get_dpird_extremes(station_code = "NO",
-                               values = "erosionCondition",
-                               api_key = Sys.getenv("DPIRD_API_KEY")))
+(
+  extremes <- get_dpird_extremes(
+    station_code = "NO",
+    values = "erosionCondition",
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
 ```
 
 #### Example 3: Get All Extremes but Include Closed Stations
@@ -66,9 +72,13 @@ library(weatherOz)
 ```{r get_all_extremes}
 library(weatherOz)
 
-(extremes <- get_dpird_extremes(station_code = "NO",
-                               include_closed = TRUE,
-                               api_key = Sys.getenv("DPIRD_API_KEY")))
+(
+  extremes <- get_dpird_extremes(
+    station_code = "NO",
+    include_closed = TRUE,
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
 ```
 
 ### Getting Minute Data
@@ -76,3 +86,34 @@ library(weatherOz)
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
+#### Example 4: Get All Minute Data for the Past 24 Hours
+
+```{r get_minute_data}
+library(weatherOz)
+
+(
+  min_dat <- get_dpird_minute(
+    station_code = "NO",
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
+
+#### Example 5: Get Specific Time and Date Data for Specific Values
+
+If you wish to supply a specific start date and time and values, you may do so as shown here.
+
+```{r minute_w_st_dt_and_values}
+
+(
+  min_dat_t_rad_wind <- get_dpird_minute(
+    station_code = "NO",
+    start_date_time = "2023-02-01 13:00:00",
+    minutes = 1440,
+    values = c("airTemperature",
+               "solarIrradiance",
+               "wind"),
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
