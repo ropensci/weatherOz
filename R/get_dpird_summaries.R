@@ -190,6 +190,8 @@ get_dpird_summaries <- function(station_code,
     )
   }
 
+  .check_not_example_api_key(api_key)
+
   if (any(values == "all")) {
     values <- dpird_summary_values
   } else {
@@ -440,7 +442,7 @@ get_dpird_summaries <- function(station_code,
 
   data.table::setkey(x = out, cols = station_code)
 
-  return(out)
+  return(out[])
 }
 
 
