@@ -73,7 +73,7 @@ Western Standard Time \sQuote{AWST}.
 
 get_dpird_minute(
   station_code = "SP",
-  start_date_time = "2018-02-01 13:00:00",
+  start_date_time = "2023-02-01 13:00:00",
   minutes = 1440,
   api_key = "your_api_key",
   values = c("airTemperature",
