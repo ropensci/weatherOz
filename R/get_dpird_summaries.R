@@ -501,7 +501,8 @@ get_dpird_summaries <- function(station_code,
                          cols = "wind.height",
                          "wind.max.time")
 
-  return(cbind(nested_list_objects, x))
+  out <- cbind(nested_list_objects, x)
+  return(data.table::setorder(x = out, cols = "wind.max.time"))
   }
 
   return(nested_list_objects)
