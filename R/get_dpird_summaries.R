@@ -8,10 +8,10 @@
 #'   for the station of interest.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
-#'   (ISO8601).  Data returned is inclusive of this range.
+#'   (ISO8601).  Data returned is inclusive of this date.
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
-#'   returned is inclusive of this range.  Defaults to the current system date.
+#'   returned is inclusive of this date.  Defaults to the current system date.
 #' @param interval A `character` string that indicates the time interval to
 #`   summarise over.  Default is `daily`; others are `15min`, `30min`, `hourly`,
 #'   `monthly` or `yearly`.  For intervals shorter than 1 day, the time period

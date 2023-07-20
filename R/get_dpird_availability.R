@@ -10,12 +10,12 @@
 #'   interval.
 #' @param start_date A `character` string representing the beginning of the
 #'   range to query in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function
-#'   will return data inclusive of this range.  Defaults to `NULL`, returning
+#'   will return data inclusive of this date.  Defaults to `NULL`, returning
 #'   data for the current year-to-date.  Must be sent along with an
 #'   \var{end_date}.
 #' @param end_date A `character` string representing the end of the range query
 #'   in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function will return
-#'   data inclusive of this range.  Defaults to `NULL`, returning data for the
+#'   data inclusive of this date.  Defaults to `NULL`, returning data for the
 #'   current year-to-date.  Must be sent with a \var{start_date}.
 #' @param values A `character` string with the type of availability metadata to
 #'   return.  See **Available Values** for a full list of valid values.

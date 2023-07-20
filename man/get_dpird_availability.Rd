@@ -20,13 +20,13 @@ interval.}
 
 \item{start_date}{A \code{character} string representing the beginning of the
 range to query in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function
-will return data inclusive of this range.  Defaults to \code{NULL}, returning
+will return data inclusive of this date.  Defaults to \code{NULL}, returning
 data for the current year-to-date.  Must be sent along with an
 \var{end_date}.}
 
 \item{end_date}{A \code{character} string representing the end of the range query
 in the format \dQuote{yyyy-mm-dd} (ISO8601).  This function will return
-data inclusive of this range.  Defaults to \code{NULL}, returning data for the
+data inclusive of this date.  Defaults to \code{NULL}, returning data for the
 current year-to-date.  Must be sent with a \var{start_date}.}
 
 \item{values}{A \code{character} string with the type of availability metadata to

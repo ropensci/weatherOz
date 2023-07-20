@@ -22,11 +22,11 @@ point-of-interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
-(ISO8601).  Data returned is inclusive of this range.}
+(ISO8601).  Data returned is inclusive of this date.}
 
 \item{end_date}{A \code{character} string or \code{Date} object representing the end of
 the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
-returned is inclusive of this range.  Defaults to the current system date.}
+returned is inclusive of this date.  Defaults to the current system date.}
 
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address

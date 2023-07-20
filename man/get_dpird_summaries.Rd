@@ -20,11 +20,11 @@ for the station of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
-(ISO8601).  Data returned is inclusive of this range.}
+(ISO8601).  Data returned is inclusive of this date.}
 
 \item{end_date}{A \code{character} string or \code{Date} object representing the end of
 the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
-returned is inclusive of this range.  Defaults to the current system date.}
+returned is inclusive of this date.  Defaults to the current system date.}
 
 \item{interval}{A \code{character} string that indicates the time interval to
 \code{monthly} or \code{yearly}.  For intervals shorter than 1 day, the time period

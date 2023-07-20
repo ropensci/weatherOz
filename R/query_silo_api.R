@@ -11,7 +11,7 @@
 #'   in decimal degrees.
 #' @param .start_date A `character` string representing the beginning of the
 #'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data
-#'   inclusive of this range.
+#'   inclusive of this date.
 #' @param .end_date A `character` string representing the end of the range query
 #'   in the format 'yyyy-mm-dd' (ISO8601).  Will return data inclusive of this
 #'   range.

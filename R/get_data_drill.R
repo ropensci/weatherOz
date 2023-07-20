@@ -15,10 +15,10 @@
 #'   point-of-interest.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
-#'   (ISO8601).  Data returned is inclusive of this range.
+#'   (ISO8601).  Data returned is inclusive of this date.
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
-#'   returned is inclusive of this range.  Defaults to the current system date.
+#'   returned is inclusive of this date.  Defaults to the current system date.
 #' @param values A `character` string with the type of weather data to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all` with all available values being returned.
