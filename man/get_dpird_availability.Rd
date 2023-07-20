@@ -72,7 +72,6 @@ weather station network from the Weather 2.0 \acronym{API}.
 output <- get_dpird_availability(
             station_code = "BI",
             start_date = "20170101",
-            end_date = "20171231",
             api_key = "your_api_key")
 }
 
