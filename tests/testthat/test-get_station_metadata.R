@@ -4,7 +4,7 @@ test_that("get_station_metadata() functions properly for which_api = 'SILO'",
             vcr::use_cassette("silo_station_metadata", {
               skip_if_offline()
               x <-
-                get_station_metadata(which_api = "silo", status = TRUE)
+                get_station_metadata(which_api = "silo", include_closed = TRUE)
             }
             )
             expect_length(x, 11)
@@ -34,7 +34,7 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
               x <-
                 get_station_metadata(which_api = "dpird",
                                      api_key = Sys.getenv("DPIRD_API_KEY"),
-                                     status = TRUE,
+                                     include_closed = TRUE,
                                      rich = FALSE
                                      )
             }
@@ -67,7 +67,7 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
                 get_station_metadata(
                   which_api = "dpird",
                   api_key = Sys.getenv("DPIRD_API_KEY"),
-                  status = TRUE,
+                  include_closed = TRUE,
                   rich = TRUE
                 )
             })
@@ -123,9 +123,8 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
               x <-
                 get_station_metadata(which_api = "all",
                                      api_key = Sys.getenv("DPIRD_API_KEY"))
-            },
-            record = "new_episodes"
-            )
+            })
+
             expect_s3_class(x, "data.table")
             expect_length(x, 11)
             expect_named(
