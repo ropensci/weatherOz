@@ -15,7 +15,7 @@
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#' @param status A `Boolean` string indicating whether to include closed
+#' @param include_closed A `Boolean` string indicating whether to include closed
 #'   stations' metadata.  Use `TRUE` to include these.  Defaults to `FALSE`.
 #' @param rich A `Boolean` string indicating whether to return rich information
 #'   about \acronym{DPIRD}'s weather station(s), this does not affect the
@@ -65,7 +65,7 @@
 #'     **elev_m**:\tab Station elevation in metres. `numeric`\cr
 #'     **source**:\tab Organisation responsible for the data or station
 #'       maintenance. `character`\cr
-#'     **status**:\tab Station status, one of 'open' or 'closed'. `character`\cr
+#'     **include_closed**:\tab Station include_closed, one of 'open' or 'closed'. `character`\cr
 #'     **wmo**:\tab World Meteorological Organisation, (\acronym{WMO}), number
 #'       if applicable. `numeric`\cr
 #'     **`rich` values**\tab\cr
@@ -95,7 +95,7 @@
 get_station_metadata <-
   function(which_api = "all",
            api_key,
-           status = FALSE,
+           include_closed = FALSE,
            rich = FALSE) {
 
   which_api <- .check_which_api(which_api)
@@ -151,15 +151,15 @@ get_station_metadata <-
       "state",
       "elev_m",
       "source",
-      "status",
+      "include_closed",
       "wmo"
     ))
 
     # lastly, if user wants all stations return them, else return only open ones
-    if (isTRUE(status)) {
+    if (isTRUE(include_closed)) {
       return(out)
     } else {
-      return(subset(out, status == "open"))
+      return(subset(out, include_closed == "open"))
     }
   }
 
@@ -243,7 +243,7 @@ get_station_metadata <-
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
-  bom_stations[, status := ifelse(!is.na(end), "closed", "open")]
+  bom_stations[, include_closed := ifelse(!is.na(end), "closed", "open")]
   bom_stations[, dist := NULL]
   bom_stations[, source := NULL]
   bom_stations[, bar_height.m := NULL]
@@ -261,7 +261,7 @@ get_station_metadata <-
       "state",
       "elev_m",
       "source",
-      "status",
+      "include_closed",
       "wmo"
     )
   )
@@ -321,7 +321,7 @@ get_station_metadata <-
           "latitude",
           "longitude",
           "owner",
-          "status"
+          "include_closed"
         ),
         collapse = ","
       ),
@@ -342,7 +342,7 @@ get_station_metadata <-
           "latitude",
           "longitude",
           "owner",
-          "status",
+          "include_closed",
           "capabilities",
           "probeHeight",
           "rainGaugeHeight",
@@ -390,7 +390,7 @@ get_station_metadata <-
       "state",
       "elev_m",
       "source",
-      "status",
+      "include_closed",
       "wmo"
     )
   )
