@@ -1,4 +1,25 @@
 
+---
+title: "weatherOz for SILO"
+author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary and Adam H. Sparks"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{weatherOz-for-SILO}
+    %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE,
+                      comment = "#>",
+                      fig.width = 7,
+                      fig.height = 7,
+                      fig.align = "center",
+                      fig.path = "vignettes/")
+```
+
 ## Using {weatherOz} With SILO Data
 
 Four functions are provided to streamline fetching data from the SILO API endpoints.

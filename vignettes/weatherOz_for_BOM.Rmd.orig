@@ -1,7 +1,7 @@
 
 ---
 title: "weatherOz for BOM"
-author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham and Hugh Parsonage and Adam H. Sparks"
+author: "Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham, Hugh Parsonage, Keith Pembleton and Adam H. Sparks"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -19,11 +19,6 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.align = "center",
                       fig.path = "vignettes/")
 ```
-
-```{r libraries, echo=FALSE, message=FALSE}
-library(weatherOz)
-```
-
 ## Using {weatherOz} With BOM Data
 
 Several functions are provided by {weatherOz} to retrieve Australian Bureau of Meteorology (BOM) data.
@@ -71,6 +66,7 @@ See Appendix 1 for a full description of the fields and values.
 Following is an example fetching the forecast for Queensland.
 
 ```{r precis_forecast, eval=TRUE}
+library(weatherOz)
 (QLD_forecast <- get_precis_forecast(state = "QLD"))
 ```
 
@@ -106,6 +102,7 @@ See Appendix 3 for a full list and description of the fields and values.
 Following is an example fetching the ag bulletin for Western Australia.
 
 ```{r ag_bulletin, eval=TRUE}
+library(weatherOz)
 (WA_bulletin <- get_ag_bulletin(state = "WA"))
 ```
 
@@ -143,6 +140,7 @@ See Appendix 6 for a full description of the fields and values.
 Following is an example fetching the forecast for Queensland.
 
 ```{r coastal_forecast, eval=TRUE}
+library(weatherOz)
 (QLD_coastal_forecast <- get_coastal_forecast(state = "QLD"))
 ```
 
@@ -182,6 +180,7 @@ This function can be used see the most recent files available and then specify i
 If no valid Product ID is supplied, defaults to all GeoTIFF images currently available.
 
 ```{r get_available_imagery, eval=TRUE}
+library(weatherOz)
 (avail <- get_available_imagery(product_id = "IDE00425"))
 ```
 
@@ -201,7 +200,8 @@ Negating will return the oldest files first.
 Defaults to 1.
 This argument is optional.
 
-```{r get_satellite_imagery, eval=TRUE}
+```{r get_satellite_imagery, eval=TRUE}\
+library(weatherOz)
 # Specify product ID and scans
 i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 
@@ -231,6 +231,7 @@ The arguments are:
 * `radar_id`  which is the BOM radar ID number; this defaults to 'all' which will return a data frame of all radar IDs in Australia.
 
 ```{r, get_available_radar}
+library(weatherOz)
 x <- get_available_radar()
 head(x)
 ```
@@ -248,6 +249,7 @@ These can be obtained from the `get_available_radar()` function.
 This value must be specified and the function will accept only one at a time.
 
 ```{r get_radar_imagery, fig.height=9, fig.width=8}
+library(weatherOz)
 y <- get_radar_imagery(product_id = "IDR032")
 plot(y)
 ```

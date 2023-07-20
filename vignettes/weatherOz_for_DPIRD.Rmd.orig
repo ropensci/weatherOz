@@ -1,5 +1,119 @@
 
+---
+title: "weatherOz for DPIRD"
+author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary and Adam H. Sparks"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{weatherOz-for-DPIRD}
+    %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE,
+                      comment = "#>",
+                      fig.width = 7,
+                      fig.height = 7,
+                      fig.align = "center",
+                      fig.path = "vignettes/")
+```
+
+## Working With DPIRD Data
+
 Three functions are provided to streamline fetching data from the DPIRD Weather 2.0 API endpoints.
  * `get_dpird_extremes()`, which returns the recorded extreme values for the given station in the DPIRD weather station network.;
  * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
  * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
+
+## Working With DPIRD Metadata
+
+Three functions are provided to assist in fetching metadata about the stations.
+ * `find_nearby_stations()`, which returns a `data.table` with the nearest weather stations to a given geographic point or known station either in the DPIRD or BOM (from SILO) networks.
+ * `get_dpird_availability()`, which returns a `data.table` with the availability for weather stations in the DPIRD network providing the uptime and data availability for a given period of time.
+ * `get_station_metadata()`, which returns a `data.table` with the latest and most up-to-date information available from the Weather 2.0 API on the stations' geographic locations, hardware details, *e.g.,* wind mast height, and recording capabilities.
+
+### Getting Extreme Weather Values
+
+This function fetches and returns nicely formatted individual extreme weather summaries from the DPIRD Weather 2.0 API.
+You must provide a `station_code` and `API_key`, the other arguments, `values` and `include_closed` are optional.
+
+#### Example 1: Get All Extremes for Northam, WA
+
+```{r get_all_extremes}
+library(weatherOz)
+
+(extremes <- get_dpird_extremes(
+  station_code = "NO",
+  api_key = Sys.getenv("DPIRD_API_KEY")
+))
+```
+
+#### Example 2: Get Selected Extremes for Northam, WA
+
+Fetch only soil erosion extreme conditions for Northam, WA.
+The documentation for `get_dpird_extremes()` contains a full listing of the values that are available to query from this API endpoint.
+
+```{r get_selected_extremes}
+library(weatherOz)
+
+(
+  extremes <- get_dpird_extremes(
+    station_code = "NO",
+    values = "erosionCondition",
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
+
+#### Example 3: Get All Extremes but Include Closed Stations
+
+```{r get_all_extremes}
+library(weatherOz)
+
+(
+  extremes <- get_dpird_extremes(
+    station_code = "NO",
+    include_closed = TRUE,
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
+
+### Getting Minute Data
+
+This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
+You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
+
+#### Example 4: Get All Minute Data for the Past 24 Hours
+
+```{r get_minute_data}
+library(weatherOz)
+
+(
+  min_dat <- get_dpird_minute(
+    station_code = "NO",
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
+
+#### Example 5: Get Specific Time and Date Data for Specific Values
+
+If you wish to supply a specific start date and time and values, you may do so as shown here.
+
+```{r minute_w_st_dt_and_values}
+
+(
+  min_dat_t_rad_wind <- get_dpird_minute(
+    station_code = "NO",
+    start_date_time = "2023-02-01 13:00:00",
+    minutes = 1440,
+    values = c("airTemperature",
+               "solarIrradiance",
+               "wind"),
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
