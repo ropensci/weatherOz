@@ -157,7 +157,7 @@ get_dpird_availability <-
     out[, station_code := as.factor(station_code)]
     data.table::setkey(x = out, cols = station_code)
 
-    return(out)
+    return(out[])
   }
 
 #' Parse DPIRD API availability data
