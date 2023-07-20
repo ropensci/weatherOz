@@ -29,7 +29,7 @@
 #' @family BOM
 #' @family metadata
 #'
-#' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Adam Sparks,
+#' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}, and Adam H. Sparks,
 #'   \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @export get_available_radar

@@ -85,7 +85,7 @@ Other parse:
 \code{\link{parse_precis_forecast}()}
 }
 \author{
-Dean Marchiori, \email{deanmarchiori@gmail.com} and Paul Melloy
+Dean Marchiori, \email{deanmarchiori@gmail.com}, and Paul Melloy,
 \email{paul@melloy.com.au}
 }
 \concept{BOM}

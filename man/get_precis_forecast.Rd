@@ -82,8 +82,8 @@ Other data fetching:
 \code{\link{get_satellite_imagery}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Keith
-Pembleton, \email{keith.pembleton@usq.edu.au} and Paul Melloy,
+Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}, Keith
+Pembleton, \email{keith.pembleton@usq.edu.au}, and Paul Melloy,
 \email{paul@melloy.com.au}
 }
 \concept{BOM}

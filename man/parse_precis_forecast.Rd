@@ -88,8 +88,8 @@ Other parse:
 \code{\link{parse_coastal_forecast}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Keith
-Pembleton, \email{keith.pembleton@usq.edu.au} and Paul Melloy,
+Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}, and Keith
+Pembleton, \email{keith.pembleton@usq.edu.au}, and Paul Melloy,
 \email{paul@melloy.com.au}
 }
 \concept{BOM}

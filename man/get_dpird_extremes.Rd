@@ -141,7 +141,7 @@ Other data fetching:
 \code{\link{get_satellite_imagery}()}
 }
 \author{
-Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au} and Adam
+Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam
 Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{DPIRD}

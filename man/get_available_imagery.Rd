@@ -79,7 +79,7 @@ Other metadata:
 \code{\link{get_station_metadata}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@gmail.com}
+Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}
 }
 \concept{BOM}
 \concept{metadata}

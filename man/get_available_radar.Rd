@@ -57,7 +57,7 @@ Other metadata:
 \code{\link{get_station_metadata}()}
 }
 \author{
-Dean Marchiori, \email{deanmarchiori@gmail.com} and Adam Sparks,
+Dean Marchiori, \email{deanmarchiori@gmail.com}, and Adam H. Sparks,
 \email{adam.sparks@dpird.wa.gov.au}
 }
 \concept{BOM}

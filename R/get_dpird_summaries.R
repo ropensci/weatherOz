@@ -132,7 +132,7 @@
 #' @family DPIRD
 #' @family data fetching
 #'
-#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au} and Rodrigo
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}, and Rodrigo
 #'   Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #'
 #' @examples

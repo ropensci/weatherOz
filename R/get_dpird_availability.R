@@ -47,7 +47,7 @@
 #' @family DPIRD
 #' @family metadata
 #'
-#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @examples
 #' \dontrun{

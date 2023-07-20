@@ -55,7 +55,7 @@
 #'   \acronym{DBF} file portion of a shapefile, \cr
 #'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf>.
 #'
-#' @author Dean Marchiori, \email{deanmarchiori@@gmail.com} and Paul Melloy
+#' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}, and Paul Melloy,
 #' \email{paul@@melloy.com.au}
 #'
 #' @family BOM

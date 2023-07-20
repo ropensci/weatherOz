@@ -90,8 +90,8 @@ Other parse:
 \code{\link{parse_precis_forecast}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au} and Paul Melloy
-\email{paul@melloy.com.au}
+Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}, and Paul
+Melloy, \email{paul@melloy.com.au}
 }
 \concept{BOM}
 \concept{parse}

@@ -49,18 +49,18 @@
 #'
 #' @references
 #' Forecast data come from Australian Bureau of Meteorology (\acronym{BOM})
-#' Weather Data Services \cr
-#' <http://www.bom.gov.au/catalogue/data-feeds.shtml>
+#'   Weather Data Services \cr
+#'   <http://www.bom.gov.au/catalogue/data-feeds.shtml>
 #'
 #' Location data and other metadata for towns come from
-#' the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
-#' <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the
-#' \acronym{DBF} file portion of a shapefile, \cr
-#' <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>
+#'   the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
+#'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/>, specifically the
+#'   \acronym{DBF} file portion of a shapefile, \cr
+#'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au} and Keith
-#'  Pembleton, \email{keith.pembleton@@usq.edu.au} and Paul Melloy,
-#'  \email{paul@@melloy.com.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}, and Keith
+#'   Pembleton, \email{keith.pembleton@@usq.edu.au}, and Paul Melloy,
+#'   \email{paul@@melloy.com.au}
 #'
 #' @seealso [get_precis_forecast]
 #'

@@ -210,7 +210,7 @@ Other data fetching:
 \code{\link{get_satellite_imagery}()}
 }
 \author{
-Adam H. Sparks \email{adam.sparks@dpird.wa.gov.au} and Rodrigo
+Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}, and Rodrigo
 Pires, \email{rodrigo.pires@dpird.wa.gov.au}
 }
 \concept{DPIRD}

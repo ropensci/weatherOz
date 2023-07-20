@@ -51,7 +51,7 @@
 #' @family BOM
 #' @family metadata
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}
 #' @export get_available_imagery
 
 get_available_imagery <- function(product_id = "all") {

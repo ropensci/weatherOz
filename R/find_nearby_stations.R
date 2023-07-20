@@ -78,8 +78,8 @@
 #' )
 #' }
 #'
-#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au} and Adam H.
-#'   Sparks \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam H.
+#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @family DPIRD
 #' @family SILO

@@ -81,7 +81,7 @@ Other data fetching:
 \code{\link{get_satellite_imagery}()}
 }
 \author{
-Dean Marchiori, \email{deanmarchiori@gmail.com} and Paul Melloy
+Dean Marchiori, \email{deanmarchiori@gmail.com}, and Paul Melloy,
 \email{paul@melloy.com.au}
 }
 \concept{BOM}
