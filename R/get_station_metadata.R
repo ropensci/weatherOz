@@ -159,7 +159,7 @@ get_station_metadata <-
     if (isTRUE(include_closed)) {
       return(out[])
     } else {
-      return(subset(out, include_closed == "open")[])
+      return(subset(out, status == "open")[])
     }
   }
 
