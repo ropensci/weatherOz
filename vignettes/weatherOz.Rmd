@@ -1,6 +1,6 @@
 ---
 title: "weatherOz"
-author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham and Hugh Parsonage and Adam H. Sparks"
+author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham, Hugh Parsonage, Keith Pembleton and Adam H. Sparks"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -18,23 +18,21 @@ vignette: >
 
 
 
-
-
 ## Introduction
 
 {weatherOz} provides automated downloading, parsing, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia, and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES).
 As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files.
 
 DPIRD weather data are accessed through public APIs provided by DPIRD, <https://www.agric.wa.gov.au/weather-api-20>, providing access to weather station data from DPIRD's own weather station network.
-Detailed information on using {weatherOz} with DPIRD data is available in the []() vignette.
+Detailed information on using {weatherOz} with DPIRD data is available in the [weatherOz for the DPIRD Weather 2.0 API](weatherOz_for_DPIRD.html) vignette.
 
 Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001).
-More details on using {weatherOz} with SILO data are available in the []() vignette.
+More details on using {weatherOz} with SILO data are available in the [weatherOz for the SILO API](weatherOz_for_Silo.html) vignette.
 
-BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
+The BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
 {weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` or {stars} objects of GeoTIFF satellite imagery or a {magick} object of radar image.png files.
-For detailed information on using {weatherOz} with BOM data, please see the [weatherOz for BOM Data Resources](weatherOz-for-BOM-Data-Resources.html) vignette.
+For detailed information on using {weatherOz} with BOM data, please see the [weatherOz for BOM Data Resources](weatherOz_for_BOM.html) vignette.
 
 Following is a quick demonstration of some common tasks that you may wish to undertake while using {weatherOz}.
 
@@ -80,6 +78,54 @@ dpird_daily <- get_dpird_summaries(
 )
 
 dpird_daily
+#>      station_code station_name year month day       date air_temperature_avg
+#>   1:           NO      Northam 2022     1   1 2022-01-01                23.8
+#>   2:           NO      Northam 2022     1   2 2022-01-02                25.4
+#>   3:           NO      Northam 2022     1   3 2022-01-03                28.0
+#>   4:           NO      Northam 2022     1   4 2022-01-04                26.1
+#>   5:           NO      Northam 2022     1   5 2022-01-05                27.3
+#>  ---                                                                        
+#> 361:           NO      Northam 2022    12  27 2022-12-27                23.0
+#> 362:           NO      Northam 2022    12  28 2022-12-28                22.2
+#> 363:           NO      Northam 2022    12  29 2022-12-29                26.0
+#> 364:           NO      Northam 2022    12  30 2022-12-30                26.6
+#> 365:           NO      Northam 2022    12  31 2022-12-31                22.7
+#>      air_temperature_max air_temperature_max_time air_temperature_min
+#>   1:                32.5      2022-01-01 17:02:00                16.7
+#>   2:                36.1      2022-01-02 16:58:00                14.4
+#>   3:                39.9      2022-01-03 14:42:00                16.6
+#>   4:                36.3      2022-01-04 15:15:00                17.3
+#>   5:                39.1      2022-01-05 16:19:00                16.1
+#>  ---                                                                 
+#> 361:                40.2      2022-12-27 14:48:20                13.7
+#> 362:                40.5      2022-12-28 19:58:20                11.9
+#> 363:                40.2      2022-12-30 03:03:20                13.8
+#> 364:                39.2      2022-12-30 13:50:50                14.5
+#> 365:                31.1      2022-12-31 15:45:50                16.2
+#>      air_temperature_min_time rainfall relative_humidity_avg relative_humidity_max
+#>   1:      2022-01-01 05:17:00        0                  39.9                  71.5
+#>   2:      2022-01-02 05:19:00        0                  35.2                  63.8
+#>   3:      2022-01-03 05:18:00        0                  38.0                  68.5
+#>   4:      2022-01-04 04:22:00        0                  45.9                  74.2
+#>   5:      2022-01-05 05:14:00        0                  42.1                  77.2
+#>  ---                                                                              
+#> 361:      2022-12-27 05:13:20        0                  41.8                  81.1
+#> 362:      2022-12-28 05:33:20        0                  32.8                  65.4
+#> 363:      2022-12-29 05:01:40        0                  29.2                  62.5
+#> 364:      2022-12-30 04:52:30        0                  34.4                  61.2
+#> 365:      2022-12-31 05:23:20        0                  59.0                  98.9
+#>      relative_humidity_max_time relative_humidity_min relative_humidity_min_time
+#>   1:        2022-01-01 04:10:00                  14.5        2022-01-01 18:03:00
+#>   2:        2022-01-02 05:39:00                  16.4        2022-01-02 16:58:00
+#>   3:        2022-01-03 05:22:00                  14.4        2022-01-03 16:15:00
+#>   4:        2022-01-04 04:33:00                  20.1        2022-01-04 16:35:00
+#>   5:        2022-01-05 05:22:00                  14.4        2022-01-05 17:21:00
+#>  ---                                                                            
+#> 361:        2022-12-26 16:03:20                  14.6        2022-12-27 16:47:30
+#> 362:        2022-12-28 05:35:00                   9.2        2022-12-28 16:11:40
+#> 363:        2022-12-29 05:08:20                   9.5        2022-12-29 17:31:40
+#> 364:        2022-12-30 05:06:40                   7.9        2022-12-30 14:00:00
+#> 365:        2022-12-31 05:30:00                  24.7        2022-12-31 16:01:40
 ```
 
 ## Using {weatherOz} to Fetch Patched Point SILO Data
@@ -155,17 +201,17 @@ ppd
 #> 364:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-30 2022  2022 2022
 #> 365:       041103    Toowoomba  151.9317 -27.5836 691.0 m 2022-12-31 2022  2022 2022
 #>       extracted daily_rain daily_rain_source max_temp max_temp_source min_temp
-#>   1: 2023-07-08        7.6                25     22.8              25     16.6
-#>   2: 2023-07-08        0.1                25     27.7              25     14.2
-#>   3: 2023-07-08        0.0                25     29.4              25     13.8
-#>   4: 2023-07-08        0.0                25     30.0              25     16.8
-#>   5: 2023-07-08        0.0                25     29.5              25     17.5
+#>   1: 2023-07-20        7.6                25     22.8              25     16.6
+#>   2: 2023-07-20        0.1                25     27.7              25     14.2
+#>   3: 2023-07-20        0.0                25     29.4              25     13.8
+#>   4: 2023-07-20        0.0                25     30.0              25     16.8
+#>   5: 2023-07-20        0.0                25     29.5              25     17.5
 #>  ---                                                                          
-#> 361: 2023-07-08        0.0                25     26.2              25     15.1
-#> 362: 2023-07-08        0.2                25     26.7              25     13.0
-#> 363: 2023-07-08        0.0                25     27.6              25     14.1
-#> 364: 2023-07-08        0.7                25     27.0              25     17.0
-#> 365: 2023-07-08        0.3                25     27.7              25     16.4
+#> 361: 2023-07-20        0.0                25     26.2              25     15.1
+#> 362: 2023-07-20        0.2                25     26.7              25     13.0
+#> 363: 2023-07-20        0.0                25     27.6              25     14.1
+#> 364: 2023-07-20        0.7                25     27.0              25     17.0
+#> 365: 2023-07-20        0.4                25     27.7              25     16.4
 #>      min_temp_source rh_tmax rh_tmax_source rh_tmin rh_tmin_source
 #>   1:              25    72.1             26   100.0             26
 #>   2:              25    47.1             26   100.0             26
@@ -237,11 +283,6 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
 }
 ```
 
-<div class="figure" style="text-align: center">
-<img src="dpird-station-locations-map-1.png" alt="plot of chunk dpird-station-locations-map"  />
-<p class="caption">plot of chunk dpird-station-locations-map</p>
-</div>
-
 ## Appendix 2 - Map of SILO Station Locations
 
 
@@ -291,8 +332,3 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   )
 }
 ```
-
-<div class="figure" style="text-align: center">
-<img src="silo-station-locations-map-1.png" alt="plot of chunk silo-station-locations-map"  />
-<p class="caption">plot of chunk silo-station-locations-map</p>
-</div>

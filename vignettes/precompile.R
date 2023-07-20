@@ -7,6 +7,9 @@ knit(input = "vignettes/weatherOz.Rmd.orig",
 knit(input = "vignettes/weatherOz_for_BOM.Rmd.orig",
      output = "vignettes/weatherOz_for_BOM.Rmd")
 
+knit(input = "vignettes/weatherOz_for_DPIRD.Rmd.orig",
+     output = "vignettes/weatherOz_for_DPIRD.Rmd")
+
 knit(input = "vignettes/use_case.Rmd.orig",
      output = "vignettes/use_case.Rmd")
 
@@ -27,6 +30,16 @@ replace <- gsub("<img src=\"vignettes/", "<img src=\"", replace)
 # when knitting
 replace <- gsub(".gif", ".png", replace)
 fileConn <- file("vignettes/weatherOz_for_BOM.Rmd")
+writeLines(replace, fileConn)
+close(fileConn)
+
+# remove file path such that vignettes will build with figures
+replace <- readLines("vignettes/weatherOz_for_DPIRD.Rmd")
+replace <- gsub("<img src=\"vignettes/", "<img src=\"", replace)
+# this replaces the .gif with .png extension, the radar .gif image is converted
+# when knitting
+replace <- gsub(".gif", ".png", replace)
+fileConn <- file("vignettes/weatherOz_for_DPIRD.Rmd")
 writeLines(replace, fileConn)
 close(fileConn)
 

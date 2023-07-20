@@ -67,26 +67,12 @@ library(weatherOz)
 )
 ```
 
-#### Example 3: Get All Extremes but Include Closed Stations
-
-```{r get_all_extremes}
-library(weatherOz)
-
-(
-  extremes <- get_dpird_extremes(
-    station_code = "NO",
-    include_closed = TRUE,
-    api_key = Sys.getenv("DPIRD_API_KEY")
-  )
-)
-```
-
 ### Getting Minute Data
 
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
-#### Example 4: Get All Minute Data for the Past 24 Hours
+#### Example 3: Get All Minute Data for the Past 24 Hours
 
 ```{r get_minute_data}
 library(weatherOz)
@@ -99,11 +85,12 @@ library(weatherOz)
 )
 ```
 
-#### Example 5: Get Specific Time and Date Data for Specific Values
+#### Example 4: Get Specific Time and Date Data for Specific Values
 
 If you wish to supply a specific start date and time and values, you may do so as shown here.
 
 ```{r minute_w_st_dt_and_values}
+library(weatherOz)
 
 (
   min_dat_t_rad_wind <- get_dpird_minute(
@@ -114,6 +101,88 @@ If you wish to supply a specific start date and time and values, you may do so a
                "solarIrradiance",
                "wind"),
     api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
+
+### Getting Summary Data
+
+This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
+You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
+
+#### Example 5: Get Annual Rainfall Since 2017
+
+Use the default value for end date (current system date) to get annual rainfall since 2017 until current year for Capel.
+
+```{r yearly_data}
+library(weatherOz)
+
+(
+  annual_rain <- get_dpird_summaries(
+    station_code = "CL001",
+    start_date = "20170101",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "yearly",
+    values = "rainfall"
+  )
+)
+```
+
+#### Example 6: Get Monthly Rainfall Since 2017
+
+Use the default value for end date (current system date) to get monthly rainfall since 2017 until current year for Capel.
+
+```{r monthly_values}
+library(weatherOz)
+
+(
+  monthly_rain <- get_dpird_summaries(
+    station_code = "CL001",
+    start_date = "20170101",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "monthly",
+    values = "rainfall"
+  )
+)
+```
+
+#### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
+
+Use the default value for end date (current system date) to get daily rainfall and wind records from 2017-01-01 to 2018-12-31 for Binnu.
+Note that the Binnu station has two wind heights, 3m and 10m.
+
+```{r daily_values}
+library(weatherOz)
+
+(
+  daily_wind_rain <- get_dpird_summaries(
+    station_code = "BI",
+    start_date = "20170101",
+    end_date = "2018-12-31",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "daily",
+    values = c("rainfall",
+               "wind")
+  )
+)
+```
+
+#### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
+
+Use the default value for end date (current system date) to get hourly rainfall and wind records from 2022-01-01 to Current Date for Binnu.
+Note that the Binnu station has two wind heights, 3m and 10m.
+
+```{r hourly_values}
+library(weatherOz)
+
+(
+  hourly_wind_rain <- get_dpird_summaries(
+    station_code = "BI",
+    start_date = "20220101",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "hourly",
+    values = c("rainfall",
+               "wind")
   )
 )
 ```

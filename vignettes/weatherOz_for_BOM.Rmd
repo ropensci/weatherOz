@@ -1,7 +1,7 @@
 
 ---
 title: "weatherOz for BOM"
-author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary, Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham and Hugh Parsonage and Adam H. Sparks"
+author: "Jonathan Carroll, Dean Marchiori, Paul Melloy, Mark Padgham, Hugh Parsonage, Keith Pembleton and Adam H. Sparks"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -10,9 +10,6 @@ vignette: >
     %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
-
-
-
 
 
 ## Using {weatherOz} With BOM Data
@@ -63,62 +60,9 @@ Following is an example fetching the forecast for Queensland.
 
 
 ```r
+library(weatherOz)
 (QLD_forecast <- get_precis_forecast(state = "QLD"))
-#>   -----------  Australian Bureau of Meteorology (BOM) Précis Forecast. -
-#>   The HTML version of Short Form (Précis) Forecast for 
-#>   QLD can be found at:
-#>   <http://www.bom.gov.au/qld/forecasts/state.shtml>
-#>   Please note information at the page 
-#>   <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>
-#>   --------------------------------------------------------------------------------  
-#>      index product_id state         town       aac       lat      lon elev
-#>   1:     0   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
-#>   2:     1   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
-#>   3:     2   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
-#>   4:     3   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
-#>   5:     4   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
-#>  ---                                                                      
-#> 900:     3   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 901:     4   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 902:     5   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 903:     6   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 904:     7   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#>         start_time_local end_time_local utc_offset      start_time_utc        end_time_utc
-#>   1: 2023-07-08 17:00:00     2023-07-09      10:00 2023-07-08 07:00:00 2023-07-08 14:00:00
-#>   2: 2023-07-09 00:00:00     2023-07-10      10:00 2023-07-08 14:00:00 2023-07-09 14:00:00
-#>   3: 2023-07-10 00:00:00     2023-07-11      10:00 2023-07-09 14:00:00 2023-07-10 14:00:00
-#>   4: 2023-07-11 00:00:00     2023-07-12      10:00 2023-07-10 14:00:00 2023-07-11 14:00:00
-#>   5: 2023-07-12 00:00:00     2023-07-13      10:00 2023-07-11 14:00:00 2023-07-12 14:00:00
-#>  ---                                                                                      
-#> 900: 2023-07-11 00:00:00     2023-07-12      10:00 2023-07-10 14:00:00 2023-07-11 14:00:00
-#> 901: 2023-07-12 00:00:00     2023-07-13      10:00 2023-07-11 14:00:00 2023-07-12 14:00:00
-#> 902: 2023-07-13 00:00:00     2023-07-14      10:00 2023-07-12 14:00:00 2023-07-13 14:00:00
-#> 903: 2023-07-14 00:00:00     2023-07-15      10:00 2023-07-13 14:00:00 2023-07-14 14:00:00
-#> 904: 2023-07-15 00:00:00     2023-07-16      10:00 2023-07-14 14:00:00 2023-07-15 14:00:00
-#>      minimum_temperature maximum_temperature lower_precipitation_limit
-#>   1:                  NA                  NA                        NA
-#>   2:                   9                  23                        NA
-#>   3:                   9                  22                        NA
-#>   4:                   8                  23                        NA
-#>   5:                   8                  22                        NA
-#>  ---                                                                  
-#> 900:                  20                  27                         0
-#> 901:                  21                  27                         0
-#> 902:                  21                  27                         0
-#> 903:                  20                  27                         0
-#> 904:                  20                  26                         0
-#>      upper_precipitation_limit           precis probability_of_precipitation
-#>   1:                        NA           Clear.                            0
-#>   2:                        NA           Sunny.                            0
-#>   3:                        NA           Sunny.                            0
-#>   4:                        NA           Sunny.                            0
-#>   5:                        NA    Mostly sunny.                            0
-#>  ---                                                                        
-#> 900:                         2 Possible shower.                           40
-#> 901:                         3   Shower or two.                           50
-#> 902:                         3   Shower or two.                           50
-#> 903:                         3 Possible shower.                           40
-#> 904:                         3 Possible shower.                           40
+#> Error: Timeout was reached: [ftp.bom.gov.au] Failed to connect to ftp.bom.gov.au port 21 after 60004 ms: Timeout was reached
 ```
 
 ## Using get_ag_bulletin()
@@ -154,38 +98,9 @@ Following is an example fetching the ag bulletin for Western Australia.
 
 
 ```r
+library(weatherOz)
 (WA_bulletin <- get_ag_bulletin(state = "WA"))
-#>   -----------  Australian Bureau of Meteorology (BOM) Ag Bulletin. -----------
-#>   Please note information at the foot of:
-#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDW65176.html>
-#>   the HTML version of Agricultural Observations Bulletin for 
-#>   WA.  Also see: 
-#>   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
-#>   ----------------------------------------------------------------------------  
-#>     product_id state         station  site      obs_time_local        obs_time_utc
-#>  1:   IDW65176    WA        Beverley 10515 2023-07-08 09:00:00 2023-07-08 01:00:00
-#>  2:   IDW65176    WA        Brookton 10524 2023-07-08 09:00:00 2023-07-08 01:00:00
-#>  3:   IDW65176    WA          Broome 03003 2023-07-08 09:00:00 2023-07-08 01:00:00
-#>  4:   IDW65176    WA       Carnarvon 06011 2023-07-08 09:00:00 2023-07-08 01:00:00
-#>  5:   IDW65176    WA       Esperance 09789 2023-07-08 09:00:00 2023-07-08 01:00:00
-#> ---                                                                               
-#> 26:   IDW65176    WA    Ravensthorpe 10633 2023-07-08 09:00:00 2023-07-08 01:00:00
-#> 27:   IDW65176    WA  Salmon Gums RS 12071 2023-07-08 09:00:00 2023-07-08 01:00:00
-#> 28:   IDW65176    WA       Wandering 10917 2023-07-08 09:00:00 2023-07-08 01:00:00
-#> 29:   IDW65176    WA Wongan Hills RS 08137 2023-07-08 09:00:00 2023-07-08 01:00:00
-#> 30:   IDW65176    WA            York 10311 2023-07-08 09:00:00 2023-07-08 01:00:00
-#>     time_zone   r   tn   tx twd ev  tg sn solr t5 t10 t20 t50 t1m wr
-#>  1:       WST  NA  6.2 18.6 0.0 NA  NA NA  9.0 NA  NA  NA  NA  NA NA
-#>  2:       WST 0.5  4.7 17.3 0.2 NA  NA NA 10.4 NA  NA  NA  NA  NA NA
-#>  3:       WST 0.0 16.0 27.4 6.8 NA  NA NA 18.3 NA  NA  NA  NA  NA NA
-#>  4:       WST 0.0  5.4 22.1 3.0 NA  NA NA 15.4 NA  NA  NA  NA  NA NA
-#>  5:       WST 7.8 10.8 18.2 0.8 NA  NA NA  8.9 NA  NA  NA  NA  NA NA
-#> ---                                                                 
-#> 26:       WST 0.0  7.4 17.7 1.3 NA  NA NA  9.1 NA  NA  NA  NA  NA NA
-#> 27:       WST 0.0  6.8 17.6  NA NA  NA NA  9.5 NA  NA  NA  NA  NA NA
-#> 28:       WST 0.4  4.1 16.9  NA NA  NA NA  9.6 NA  NA  NA  NA  NA NA
-#> 29:       WST 0.0  6.9 18.7 0.8 NA 6.9 NA 11.9 NA  NA  NA  NA  NA NA
-#> 30:       WST 0.4  6.0 19.0 0.0 NA  NA NA 10.0 NA  NA  NA  NA  NA NA
+#> Error: Timeout was reached: [ftp.bom.gov.au] Failed to connect to ftp.bom.gov.au port 21 after 60005 ms: Timeout was reached
 ```
 
 ## Using get_coastal_forecast()
@@ -223,135 +138,9 @@ Following is an example fetching the forecast for Queensland.
 
 
 ```r
+library(weatherOz)
 (QLD_coastal_forecast <- get_coastal_forecast(state = "QLD"))
-#>   -------  Australian Bureau of Meteorology (BOM) Coastal Waters Forecast. -------
-#>   Please note information at the foot of:
-#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDQ11290.html>
-#>   the HTML version of Coastal Waters Forecast for 
-#>   QLD.
-#>   Also see 
-#>   <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>.
-#>   --------------------------------------------------------------------------------  
-#>     index product_id type state_code
-#>  1:  <NA>   IDQ11290 <NA>        QLD
-#>  2:  <NA>   IDQ11290 <NA>        QLD
-#>  3:  <NA>   IDQ11290 <NA>        QLD
-#>  4:  <NA>   IDQ11290 <NA>        QLD
-#>  5:     0   IDQ11290 <NA>        QLD
-#> ---                                 
-#> 60:     3   IDQ11290 <NA>        QLD
-#> 61:     0   IDQ11290 <NA>        QLD
-#> 62:     1   IDQ11290 <NA>        QLD
-#> 63:     2   IDQ11290 <NA>        QLD
-#> 64:     3   IDQ11290 <NA>        QLD
-#>                                                          dist_name pt_1_name pt_2_name
-#>  1:                                                     Queensland      <NA>      <NA>
-#>  2:                                 Queensland Gulf of Carpentaria      <NA>      <NA>
-#>  3:                                               North Queensland      <NA>      <NA>
-#>  4:                                               South Queensland      <NA>      <NA>
-#>  5: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>      <NA>
-#> ---                                                                                   
-#> 60:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>      <NA>
-#> 61:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
-#> 62:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
-#> 63:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
-#> 64:                             Great Barrier Reef Offshore Waters      <NA>      <NA>
-#>           aac    start_time_local      end_time_local utc_offset      start_time_utc
-#>  1: QLD_FA001 2023-07-08 22:00:12 2023-07-08 22:00:12      10:00 2023-07-08 22:00:12
-#>  2: QLD_FA002 2023-07-08 17:00:00 2023-07-08 17:00:00      10:00 2023-07-08 17:00:00
-#>  3: QLD_FA003 2023-07-08 17:00:00 2023-07-08 17:00:00      10:00 2023-07-08 17:00:00
-#>  4: QLD_FA004 2023-07-08 17:00:00 2023-07-08 17:00:00      10:00 2023-07-08 17:00:00
-#>  5: QLD_MW001 2023-07-08 17:00:00 2023-07-08 17:00:00      10:00 2023-07-08 17:00:00
-#> ---                                                                                 
-#> 60: QLD_MW014 2023-07-11 00:00:00 2023-07-11 00:00:00      10:00 2023-07-11 00:00:00
-#> 61: QLD_MW015 2023-07-08 17:00:00 2023-07-08 17:00:00      10:00 2023-07-08 17:00:00
-#> 62: QLD_MW015 2023-07-09 00:00:00 2023-07-09 00:00:00      10:00 2023-07-09 00:00:00
-#> 63: QLD_MW015 2023-07-10 00:00:00 2023-07-10 00:00:00      10:00 2023-07-10 00:00:00
-#> 64: QLD_MW015 2023-07-11 00:00:00 2023-07-11 00:00:00      10:00 2023-07-11 00:00:00
-#>            end_time_utc
-#>  1: 2023-07-08 22:00:12
-#>  2: 2023-07-08 17:00:00
-#>  3: 2023-07-08 17:00:00
-#>  4: 2023-07-08 17:00:00
-#>  5: 2023-07-08 17:00:00
-#> ---                    
-#> 60: 2023-07-11 00:00:00
-#> 61: 2023-07-08 17:00:00
-#> 62: 2023-07-09 00:00:00
-#> 63: 2023-07-10 00:00:00
-#> 64: 2023-07-11 00:00:00
-#>                                                                                       forecast_seas
-#>  1:                                                                                            <NA>
-#>  2:                                                                                            <NA>
-#>  3:                                                                                            <NA>
-#>  4:                                                                                            <NA>
-#>  5:                   1 to 1.5 metres, increasing to 1.5 to 2.5 metres offshore north of Kowanyama.
-#> ---                                                                                                
-#> 60:                                                                                  Below 1 metre.
-#> 61:                              Around 1 metre, increasing to 1 to 1.5 metres north of Creal Reef.
-#> 62: Around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel during the morning.
-#> 63:                                                                                 Around 1 metre.
-#> 64:                               Below 1 metre, increasing to 1 to 1.5 metres north of Creal Reef.
-#>     forecast_weather
-#>  1:             <NA>
-#>  2:             <NA>
-#>  3:             <NA>
-#>  4:             <NA>
-#>  5:           Clear.
-#> ---                 
-#> 60:           Sunny.
-#> 61:           Clear.
-#> 62:           Sunny.
-#> 63:          Cloudy.
-#> 64:   Partly cloudy.
-#>                                                                                         forecast_winds
-#>  1:                                                                                               <NA>
-#>  2:                                                                                               <NA>
-#>  3:                                                                                               <NA>
-#>  4:                                                                                               <NA>
-#>  5:       South to southeasterly 15 to 20 knots, reaching up to 25 knots offshore in the late evening.
-#> ---                                                                                                   
-#> 60:                                                                           Variable about 10 knots.
-#> 61: South to southeasterly 10 to 15 knots, reaching up to 20 knots north of Creal Reef in the evening.
-#> 62:                                                             South to southeasterly 15 to 20 knots.
-#> 63:                                                                      Southeasterly 15 to 20 knots.
-#> 64:                                                                      Southeasterly 15 to 20 knots.
-#>                                                                 forecast_swell1
-#>  1:                                                                        <NA>
-#>  2:                                                                        <NA>
-#>  3:                                                                        <NA>
-#>  4:                                                                        <NA>
-#>  5:                                                                        <NA>
-#> ---                                                                            
-#> 60: Southerly 1 to 1.5 metres, decreasing to around 1 metre during the morning.
-#> 61:                                       South to southeasterly below 1 metre.
-#> 62:                                        East to northeasterly below 1 metre.
-#> 63:                                                Southeasterly below 1 metre.
-#> 64:                                        East to northeasterly below 1 metre.
-#>     forecast_swell2 forecast_caution marine_forecast tropical_system_location
-#>  1:            <NA>             <NA>            <NA>                       NA
-#>  2:            <NA>             <NA>            <NA>                       NA
-#>  3:            <NA>             <NA>            <NA>                       NA
-#>  4:            <NA>             <NA>            <NA>                       NA
-#>  5:            <NA>             <NA>            <NA>                       NA
-#> ---                                                                          
-#> 60:            <NA>             <NA>            <NA>                       NA
-#> 61:            <NA>             <NA>            <NA>                       NA
-#> 62:            <NA>             <NA>            <NA>                       NA
-#> 63:            <NA>             <NA>            <NA>                       NA
-#> 64:            <NA>             <NA>            <NA>                       NA
-#>     forecast_waves
-#>  1:             NA
-#>  2:             NA
-#>  3:             NA
-#>  4:             NA
-#>  5:             NA
-#> ---               
-#> 60:             NA
-#> 61:             NA
-#> 62:             NA
-#> 63:             NA
-#> 64:             NA
+#> Error: Timeout was reached: [ftp.bom.gov.au] Failed to connect to ftp.bom.gov.au port 21 after 60005 ms: Timeout was reached
 ```
 
 ## Using {weatherOz} to retrieve BOM satellite imagery
@@ -391,55 +180,9 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 
 
 ```r
+library(weatherOz)
 (avail <- get_available_imagery(product_id = "IDE00425"))
-#>   [1] "IDE00425.202307071210.tif" "IDE00425.202307071220.tif" "IDE00425.202307071230.tif"
-#>   [4] "IDE00425.202307071240.tif" "IDE00425.202307071250.tif" "IDE00425.202307071300.tif"
-#>   [7] "IDE00425.202307071310.tif" "IDE00425.202307071320.tif" "IDE00425.202307071330.tif"
-#>  [10] "IDE00425.202307071340.tif" "IDE00425.202307071350.tif" "IDE00425.202307071400.tif"
-#>  [13] "IDE00425.202307071410.tif" "IDE00425.202307071420.tif" "IDE00425.202307071430.tif"
-#>  [16] "IDE00425.202307071450.tif" "IDE00425.202307071500.tif" "IDE00425.202307071510.tif"
-#>  [19] "IDE00425.202307071520.tif" "IDE00425.202307071530.tif" "IDE00425.202307071540.tif"
-#>  [22] "IDE00425.202307071550.tif" "IDE00425.202307071600.tif" "IDE00425.202307071610.tif"
-#>  [25] "IDE00425.202307071620.tif" "IDE00425.202307071630.tif" "IDE00425.202307071640.tif"
-#>  [28] "IDE00425.202307071650.tif" "IDE00425.202307071700.tif" "IDE00425.202307071710.tif"
-#>  [31] "IDE00425.202307071720.tif" "IDE00425.202307071730.tif" "IDE00425.202307071740.tif"
-#>  [34] "IDE00425.202307071750.tif" "IDE00425.202307071800.tif" "IDE00425.202307071810.tif"
-#>  [37] "IDE00425.202307071820.tif" "IDE00425.202307071830.tif" "IDE00425.202307071840.tif"
-#>  [40] "IDE00425.202307071850.tif" "IDE00425.202307071900.tif" "IDE00425.202307071910.tif"
-#>  [43] "IDE00425.202307071920.tif" "IDE00425.202307071930.tif" "IDE00425.202307071940.tif"
-#>  [46] "IDE00425.202307071950.tif" "IDE00425.202307072000.tif" "IDE00425.202307072010.tif"
-#>  [49] "IDE00425.202307072020.tif" "IDE00425.202307072030.tif" "IDE00425.202307072050.tif"
-#>  [52] "IDE00425.202307072100.tif" "IDE00425.202307072110.tif" "IDE00425.202307072120.tif"
-#>  [55] "IDE00425.202307072130.tif" "IDE00425.202307072140.tif" "IDE00425.202307072150.tif"
-#>  [58] "IDE00425.202307072200.tif" "IDE00425.202307072210.tif" "IDE00425.202307072220.tif"
-#>  [61] "IDE00425.202307072230.tif" "IDE00425.202307072240.tif" "IDE00425.202307072250.tif"
-#>  [64] "IDE00425.202307072300.tif" "IDE00425.202307072310.tif" "IDE00425.202307072320.tif"
-#>  [67] "IDE00425.202307072330.tif" "IDE00425.202307072340.tif" "IDE00425.202307072350.tif"
-#>  [70] "IDE00425.202307080000.tif" "IDE00425.202307080010.tif" "IDE00425.202307080020.tif"
-#>  [73] "IDE00425.202307080030.tif" "IDE00425.202307080040.tif" "IDE00425.202307080050.tif"
-#>  [76] "IDE00425.202307080100.tif" "IDE00425.202307080110.tif" "IDE00425.202307080120.tif"
-#>  [79] "IDE00425.202307080130.tif" "IDE00425.202307080140.tif" "IDE00425.202307080150.tif"
-#>  [82] "IDE00425.202307080200.tif" "IDE00425.202307080210.tif" "IDE00425.202307080220.tif"
-#>  [85] "IDE00425.202307080230.tif" "IDE00425.202307080250.tif" "IDE00425.202307080300.tif"
-#>  [88] "IDE00425.202307080310.tif" "IDE00425.202307080320.tif" "IDE00425.202307080330.tif"
-#>  [91] "IDE00425.202307080340.tif" "IDE00425.202307080350.tif" "IDE00425.202307080400.tif"
-#>  [94] "IDE00425.202307080410.tif" "IDE00425.202307080420.tif" "IDE00425.202307080430.tif"
-#>  [97] "IDE00425.202307080440.tif" "IDE00425.202307080450.tif" "IDE00425.202307080500.tif"
-#> [100] "IDE00425.202307080510.tif" "IDE00425.202307080520.tif" "IDE00425.202307080530.tif"
-#> [103] "IDE00425.202307080540.tif" "IDE00425.202307080550.tif" "IDE00425.202307080600.tif"
-#> [106] "IDE00425.202307080610.tif" "IDE00425.202307080620.tif" "IDE00425.202307080630.tif"
-#> [109] "IDE00425.202307080640.tif" "IDE00425.202307080650.tif" "IDE00425.202307080700.tif"
-#> [112] "IDE00425.202307080710.tif" "IDE00425.202307080720.tif" "IDE00425.202307080730.tif"
-#> [115] "IDE00425.202307080740.tif" "IDE00425.202307080750.tif" "IDE00425.202307080800.tif"
-#> [118] "IDE00425.202307080810.tif" "IDE00425.202307080820.tif" "IDE00425.202307080830.tif"
-#> [121] "IDE00425.202307080840.tif" "IDE00425.202307080850.tif" "IDE00425.202307080900.tif"
-#> [124] "IDE00425.202307080910.tif" "IDE00425.202307080920.tif" "IDE00425.202307080930.tif"
-#> [127] "IDE00425.202307080940.tif" "IDE00425.202307080950.tif" "IDE00425.202307081000.tif"
-#> [130] "IDE00425.202307081010.tif" "IDE00425.202307081020.tif" "IDE00425.202307081030.tif"
-#> [133] "IDE00425.202307081040.tif" "IDE00425.202307081050.tif" "IDE00425.202307081100.tif"
-#> [136] "IDE00425.202307081110.tif" "IDE00425.202307081120.tif" "IDE00425.202307081130.tif"
-#> [139] "IDE00425.202307081140.tif" "IDE00425.202307081150.tif" "IDE00425.202307081200.tif"
-#> [142] "IDE00425.202307081210.tif"
+#> Error in open.connection(con, open = mode): Timeout was reached: [ftp.bom.gov.au] Failed to connect to ftp.bom.gov.au port 21 after 60005 ms: Timeout was reached
 ```
 
 ### Using get_satellite_imagery()
@@ -458,8 +201,8 @@ Negating will return the oldest files first.
 Defaults to 1.
 This argument is optional.
 
-
-```r
+```{r get_satellite_imagery, eval=TRUE}\
+library(weatherOz)
 # Specify product ID and scans
 i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 
@@ -472,12 +215,8 @@ i <- get_satellite_imagery(product_id = avail, scans = 1)
 
 ```r
 plot(i)
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'i' not found
 ```
-
-<div class="figure" style="text-align: center">
-<img src="plot_satellite-1.png" alt="plot of chunk plot_satellite"  />
-<p class="caption">plot of chunk plot_satellite</p>
-</div>
 
 ## Using {weatherOz} to retrieve BOM radar imagery
 
@@ -496,22 +235,11 @@ The arguments are:
 
 
 ```r
+library(weatherOz)
 x <- get_available_radar()
+#> Error in curl::curl_download("ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDR00007.dbf", : Timeout was reached: [] Failed to connect to ftp.bom.gov.au port 21 after 10002 ms: Timeout was reached
 head(x)
-#>    product_id LocationID range     Name Longitude Latitude Radar_id
-#> 1:     IDR641         64 512km Adelaide  138.4689 -34.6169       64
-#> 2:     IDR642         64 256km Adelaide  138.4689 -34.6169       64
-#> 3:     IDR643         64 128km Adelaide  138.4689 -34.6169       64
-#> 4:     IDR644         64  64km Adelaide  138.4689 -34.6169       64
-#> 5:     IDR311         31 512km   Albany  117.8163 -34.9418       31
-#> 6:     IDR312         31 256km   Albany  117.8163 -34.9418       31
-#>                   Full_Name IDRnn0name IDRnn1name State    Type Group_ Status Archive as.is
-#> 1: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk  TRUE
-#> 2: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk  TRUE
-#> 3: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk  TRUE
-#> 4: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk  TRUE
-#> 5:                   Albany     Albany     Albany    WA Doppler    Yes Public  Albany  TRUE
-#> 6:                   Albany     Albany     Albany    WA Doppler    Yes Public  Albany  TRUE
+#> Error in eval(expr, envir, enclos): object 'x' not found
 ```
 
 ### Using get_radar_imagery()
@@ -528,15 +256,12 @@ This value must be specified and the function will accept only one at a time.
 
 
 ```r
+library(weatherOz)
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmpgpQAkw/file10574f5cd1b0.png
+#> Error in value[[3L]](cond): unused argument (cond)
 plot(y)
+#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'y' not found
 ```
-
-<div class="figure" style="text-align: center">
-<img src="get_radar_imagery-1.png" alt="plot of chunk get_radar_imagery"  />
-<p class="caption">plot of chunk get_radar_imagery</p>
-</div>
 
 ## References
 

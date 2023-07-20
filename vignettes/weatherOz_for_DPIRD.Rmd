@@ -1,0 +1,446 @@
+
+---
+title: "weatherOz for DPIRD"
+author: "Rodrigo Pires, Anna Hepworth, Rebecca O'Leary and Adam H. Sparks"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{weatherOz-for-DPIRD}
+    %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+## Working With DPIRD Data
+
+Three functions are provided to streamline fetching data from the DPIRD Weather 2.0 API endpoints.
+ * `get_dpird_extremes()`, which returns the recorded extreme values for the given station in the DPIRD weather station network.;
+ * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
+ * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
+
+## Working With DPIRD Metadata
+
+Three functions are provided to assist in fetching metadata about the stations.
+ * `find_nearby_stations()`, which returns a `data.table` with the nearest weather stations to a given geographic point or known station either in the DPIRD or BOM (from SILO) networks.
+ * `get_dpird_availability()`, which returns a `data.table` with the availability for weather stations in the DPIRD network providing the uptime and data availability for a given period of time.
+ * `get_station_metadata()`, which returns a `data.table` with the latest and most up-to-date information available from the Weather 2.0 API on the stations' geographic locations, hardware details, *e.g.,* wind mast height, and recording capabilities.
+
+### Getting Extreme Weather Values
+
+This function fetches and returns nicely formatted individual extreme weather summaries from the DPIRD Weather 2.0 API.
+You must provide a `station_code` and `API_key`, the other arguments, `values` and `include_closed` are optional.
+
+#### Example 1: Get All Extremes for Northam, WA
+
+
+```r
+library(weatherOz)
+
+(extremes <- get_dpird_extremes(
+  station_code = "NO",
+  api_key = Sys.getenv("DPIRD_API_KEY")
+))
+```
+
+#### Example 2: Get Selected Extremes for Northam, WA
+
+Fetch only soil erosion extreme conditions for Northam, WA.
+The documentation for `get_dpird_extremes()` contains a full listing of the values that are available to query from this API endpoint.
+
+
+```r
+library(weatherOz)
+
+(
+  extremes <- get_dpird_extremes(
+    station_code = "NO",
+    values = "erosionCondition",
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+```
+
+### Getting Minute Data
+
+This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
+You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
+
+#### Example 3: Get All Minute Data for the Past 24 Hours
+
+
+```r
+library(weatherOz)
+
+(
+  min_dat <- get_dpird_minute(
+    station_code = "NO",
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+#>       station_code           date_time air_temperature relative_humidity
+#>    1:           NO 2023-07-19 16:58:00            11.6              57.7
+#>    2:           NO 2023-07-19 16:59:00            11.6              58.1
+#>    3:           NO 2023-07-19 17:00:00            11.5              58.7
+#>    4:           NO 2023-07-19 17:01:00            11.4              59.1
+#>    5:           NO 2023-07-19 17:02:00            11.3              59.1
+#>   ---                                                                   
+#> 1434:           NO 2023-07-20 16:51:00            13.2              73.9
+#> 1435:           NO 2023-07-20 16:52:00            13.2              74.5
+#> 1436:           NO 2023-07-20 16:53:00            13.1              73.9
+#> 1437:           NO 2023-07-20 16:54:00            13.0              74.0
+#> 1438:           NO 2023-07-20 16:55:00            13.0              74.1
+#>       soil_temperature solar_irradiance rainfall dew_point wet_bulb wind_height
+#>    1:             12.1               24        0       3.6      8.1           3
+#>    2:             12.1               23        0       3.7      8.2           3
+#>    3:             12.1               22        0       3.7      8.1           3
+#>    4:             12.1               21        0       3.7      8.1           3
+#>    5:             12.1               20        0       3.6      8.0           3
+#>   ---                                                                          
+#> 1434:             12.8               43        0       8.7     11.1           3
+#> 1435:             12.8               43        0       8.8     11.1           3
+#> 1436:             12.8               45        0       8.6     11.0           3
+#> 1437:             12.8               47        0       8.5     10.9           3
+#> 1438:             12.7               47        0       8.5     10.9           3
+#>       wind_avg_speed wind_avg_direction_compass_point wind_avg_direction_degrees
+#>    1:           6.48                              SSW                        207
+#>    2:           4.75                               SW                        224
+#>    3:           6.08                              SSW                        211
+#>    4:           4.75                               SW                        216
+#>    5:           6.91                               SW                        219
+#>   ---                                                                           
+#> 1434:           5.26                               SW                        226
+#> 1435:           4.25                               SW                        227
+#> 1436:           5.58                              WSW                        256
+#> 1437:           4.43                               SW                        235
+#> 1438:           4.90                               SW                        226
+#>       wind_min_speed wind_max_speed
+#>    1:          1.656          11.74
+#>    2:          1.656          11.74
+#>    3:          1.656          11.74
+#>    4:          1.656           9.22
+#>    5:          4.176          11.74
+#>   ---                              
+#> 1434:          1.656           9.22
+#> 1435:          1.656           6.70
+#> 1436:          1.656           9.22
+#> 1437:          1.656          11.74
+#> 1438:          1.656          11.74
+```
+
+#### Example 4: Get Specific Time and Date Data for Specific Values
+
+If you wish to supply a specific start date and time and values, you may do so as shown here.
+
+
+```r
+library(weatherOz)
+
+(
+  min_dat_t_rad_wind <- get_dpird_minute(
+    station_code = "NO",
+    start_date_time = "2023-02-01 13:00:00",
+    minutes = 1440,
+    values = c("airTemperature",
+               "solarIrradiance",
+               "wind"),
+    api_key = Sys.getenv("DPIRD_API_KEY")
+  )
+)
+#>       station_code           date_time air_temperature solar_irradiance wind_height
+#>    1:           NO 2023-02-01 13:00:00            29.7             1087           3
+#>    2:           NO 2023-02-01 13:00:50            29.4             1086           3
+#>    3:           NO 2023-02-01 13:01:40            29.5             1084           3
+#>    4:           NO 2023-02-01 13:02:30            29.5             1084           3
+#>    5:           NO 2023-02-01 13:03:20            29.6             1084           3
+#>   ---                                                                              
+#> 1436:           NO 2023-02-02 12:55:00            30.2             1105           3
+#> 1437:           NO 2023-02-02 12:55:50            30.1             1104           3
+#> 1438:           NO 2023-02-02 12:56:40            30.0             1102           3
+#> 1439:           NO 2023-02-02 12:57:30            29.9             1102           3
+#> 1440:           NO 2023-02-02 12:58:20            30.1             1104           3
+#>       wind_avg_speed wind_avg_direction_compass_point wind_avg_direction_degrees
+#>    1:          11.66                               SE                        139
+#>    2:          10.80                               SE                        136
+#>    3:          11.81                              SSE                        156
+#>    4:          12.71                               SE                        133
+#>    5:          12.96                               SE                        139
+#>   ---                                                                           
+#> 1436:           9.54                              ESE                        112
+#> 1437:           9.90                              ESE                        120
+#> 1438:          13.03                              ESE                        121
+#> 1439:          10.91                                E                         93
+#> 1440:          10.40                                E                         97
+#>       wind_min_speed wind_max_speed
+#>    1:          4.176          26.82
+#>    2:          4.176          19.26
+#>    3:          6.696          19.26
+#>    4:          6.696          26.82
+#>    5:          6.696          19.26
+#>   ---                              
+#> 1436:          4.176          16.74
+#> 1437:          4.176          19.26
+#> 1438:          4.176          24.30
+#> 1439:          6.696          21.78
+#> 1440:          4.176          16.74
+```
+
+### Getting Summary Data
+
+This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
+You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
+
+#### Example 5: Get Annual Rainfall Since 2017
+
+Use the default value for end date (current system date) to get annual rainfall since 2017 until current year for Capel.
+
+
+```r
+library(weatherOz)
+
+(
+  annual_rain <- get_dpird_summaries(
+    station_code = "CL001",
+    start_date = "20170101",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "yearly",
+    values = "rainfall"
+  )
+)
+#>    station_code station_name year rainfall
+#> 1:        CL001        Capel 2017    711.4
+#> 2:        CL001        Capel 2018    822.0
+#> 3:        CL001        Capel 2019    660.6
+#> 4:        CL001        Capel 2020    862.4
+#> 5:        CL001        Capel 2021    928.0
+#> 6:        CL001        Capel 2022    670.4
+#> 7:        CL001        Capel 2023    348.4
+```
+
+#### Example 6: Get Monthly Rainfall Since 2017
+
+Use the default value for end date (current system date) to get monthly rainfall since 2017 until current year for Capel.
+
+
+```r
+library(weatherOz)
+
+(
+  monthly_rain <- get_dpird_summaries(
+    station_code = "CL001",
+    start_date = "20170101",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "monthly",
+    values = "rainfall"
+  )
+)
+#>     station_code station_name year month       date rainfall
+#>  1:        CL001        Capel 2017     1 2017-01-01      0.0
+#>  2:        CL001        Capel 2017     2 2017-02-01      0.0
+#>  3:        CL001        Capel 2017     3 2017-03-01     59.6
+#>  4:        CL001        Capel 2017     4 2017-04-01      0.0
+#>  5:        CL001        Capel 2017     5 2017-05-01     84.0
+#>  6:        CL001        Capel 2017     6 2017-06-01     57.8
+#>  7:        CL001        Capel 2017     7 2017-07-01    194.4
+#>  8:        CL001        Capel 2017     8 2017-08-01    175.8
+#>  9:        CL001        Capel 2017     9 2017-09-01     49.8
+#> 10:        CL001        Capel 2017    10 2017-10-01     34.0
+#> 11:        CL001        Capel 2017    11 2017-11-01     14.2
+#> 12:        CL001        Capel 2017    12 2017-12-01     41.8
+#> 13:        CL001        Capel 2018     1 2018-01-01     14.4
+#> 14:        CL001        Capel 2018     2 2018-02-01      0.2
+#> 15:        CL001        Capel 2018     3 2018-03-01     15.4
+#> 16:        CL001        Capel 2018     4 2018-04-01     42.8
+#> 17:        CL001        Capel 2018     5 2018-05-01    115.2
+#> 18:        CL001        Capel 2018     6 2018-06-01    168.8
+#> 19:        CL001        Capel 2018     7 2018-07-01    214.6
+#> 20:        CL001        Capel 2018     8 2018-08-01    156.8
+#> 21:        CL001        Capel 2018     9 2018-09-01     29.6
+#> 22:        CL001        Capel 2018    10 2018-10-01     45.8
+#> 23:        CL001        Capel 2018    11 2018-11-01     11.2
+#> 24:        CL001        Capel 2018    12 2018-12-01      7.2
+#> 25:        CL001        Capel 2019     1 2019-01-01      6.0
+#> 26:        CL001        Capel 2019     2 2019-02-01      0.0
+#> 27:        CL001        Capel 2019     3 2019-03-01     29.4
+#> 28:        CL001        Capel 2019     4 2019-04-01     33.0
+#> 29:        CL001        Capel 2019     5 2019-05-01     27.0
+#> 30:        CL001        Capel 2019     6 2019-06-01    239.6
+#> 31:        CL001        Capel 2019     7 2019-07-01     85.4
+#> 32:        CL001        Capel 2019     8 2019-08-01    117.8
+#> 33:        CL001        Capel 2019     9 2019-09-01     45.8
+#> 34:        CL001        Capel 2019    10 2019-10-01     67.0
+#> 35:        CL001        Capel 2019    11 2019-11-01      7.8
+#> 36:        CL001        Capel 2019    12 2019-12-01      1.8
+#> 37:        CL001        Capel 2020     1 2020-01-01      2.0
+#> 38:        CL001        Capel 2020     2 2020-02-01     31.8
+#> 39:        CL001        Capel 2020     3 2020-03-01     40.8
+#> 40:        CL001        Capel 2020     4 2020-04-01     41.6
+#> 41:        CL001        Capel 2020     5 2020-05-01    156.2
+#> 42:        CL001        Capel 2020     6 2020-06-01    132.4
+#> 43:        CL001        Capel 2020     7 2020-07-01    125.8
+#> 44:        CL001        Capel 2020     8 2020-08-01     96.0
+#> 45:        CL001        Capel 2020     9 2020-09-01    110.0
+#> 46:        CL001        Capel 2020    10 2020-10-01     32.6
+#> 47:        CL001        Capel 2020    11 2020-11-01     88.0
+#> 48:        CL001        Capel 2020    12 2020-12-01      5.2
+#> 49:        CL001        Capel 2021     1 2021-01-01      0.0
+#> 50:        CL001        Capel 2021     2 2021-02-01     76.2
+#> 51:        CL001        Capel 2021     3 2021-03-01     27.4
+#> 52:        CL001        Capel 2021     4 2021-04-01     92.0
+#> 53:        CL001        Capel 2021     5 2021-05-01    160.6
+#> 54:        CL001        Capel 2021     6 2021-06-01     81.2
+#> 55:        CL001        Capel 2021     7 2021-07-01    187.6
+#> 56:        CL001        Capel 2021     8 2021-08-01     90.4
+#> 57:        CL001        Capel 2021     9 2021-09-01     93.4
+#> 58:        CL001        Capel 2021    10 2021-10-01    109.4
+#> 59:        CL001        Capel 2021    11 2021-11-01      5.4
+#> 60:        CL001        Capel 2021    12 2021-12-01      4.4
+#> 61:        CL001        Capel 2022     1 2022-01-01      0.0
+#> 62:        CL001        Capel 2022     2 2022-02-01      4.4
+#> 63:        CL001        Capel 2022     3 2022-03-01      4.6
+#> 64:        CL001        Capel 2022     4 2022-04-01     44.0
+#> 65:        CL001        Capel 2022     5 2022-05-01    105.6
+#> 66:        CL001        Capel 2022     6 2022-06-01    103.8
+#> 67:        CL001        Capel 2022     7 2022-07-01    169.0
+#> 68:        CL001        Capel 2022     8 2022-08-01    121.4
+#> 69:        CL001        Capel 2022     9 2022-09-01     69.4
+#> 70:        CL001        Capel 2022    10 2022-10-01     29.0
+#> 71:        CL001        Capel 2022    11 2022-11-01     18.0
+#> 72:        CL001        Capel 2022    12 2022-12-01      1.2
+#> 73:        CL001        Capel 2023     1 2023-01-01      0.8
+#> 74:        CL001        Capel 2023     2 2023-02-01      0.0
+#> 75:        CL001        Capel 2023     3 2023-03-01     27.8
+#> 76:        CL001        Capel 2023     4 2023-04-01     81.2
+#> 77:        CL001        Capel 2023     5 2023-05-01     31.8
+#> 78:        CL001        Capel 2023     6 2023-06-01    130.0
+#> 79:        CL001        Capel 2023     7 2023-07-01     76.8
+#>     station_code station_name year month       date rainfall
+```
+
+#### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
+
+Use the default value for end date (current system date) to get daily rainfall and wind records from 2017-01-01 to 2018-12-31 for Binnu.
+Note that the Binnu station has two wind heights, 3m and 10m.
+
+
+```r
+library(weatherOz)
+
+(
+  daily_wind_rain <- get_dpird_summaries(
+    station_code = "BI",
+    start_date = "20170101",
+    end_date = "2018-12-31",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "daily",
+    values = c("rainfall",
+               "wind")
+  )
+)
+#>       station_code station_name year month day       date rainfall wind_avg_speed
+#>    1:           BI        Binnu 2017     1   1 2017-01-01        0          17.61
+#>    2:           BI        Binnu 2017     1   1 2017-01-01        0          23.30
+#>    3:           BI        Binnu 2017     1   2 2017-01-02        0          16.89
+#>    4:           BI        Binnu 2017     1   2 2017-01-02        0          22.08
+#>    5:           BI        Binnu 2017     1   3 2017-01-03        0          16.08
+#>   ---                                                                            
+#> 1456:           BI        Binnu 2018    12  29 2018-12-29        0          26.91
+#> 1457:           BI        Binnu 2018    12  30 2018-12-30        0          20.88
+#> 1458:           BI        Binnu 2018    12  30 2018-12-30        0          26.38
+#> 1459:           BI        Binnu 2018    12  31 2018-12-31        0          19.32
+#> 1460:           BI        Binnu 2018    12  31 2018-12-31        0          24.58
+#>       wind_height wind_max_direction_compass_point wind_max_direction_degrees
+#>    1:           3                               SW                        220
+#>    2:          10                              ESE                        104
+#>    3:           3                              SSW                        198
+#>    4:          10                              SSW                        213
+#>    5:           3                              SSW                        202
+#>   ---                                                                        
+#> 1456:          10                              SSW                        194
+#> 1457:           3                                S                        186
+#> 1458:          10                              SSW                        193
+#> 1459:           3                              SSW                        196
+#> 1460:          10                              SSW                        197
+#>       wind_max_speed       wind_max_time
+#>    1:          42.73 2017-01-01 17:56:00
+#>    2:          46.30 2017-01-01 08:08:00
+#>    3:          47.77 2017-01-02 17:02:00
+#>    4:          52.88 2017-01-02 17:35:00
+#>    5:          46.94 2017-01-03 16:03:00
+#>   ---                                   
+#> 1456:          44.60 2018-12-29 19:46:00
+#> 1457:          44.42 2018-12-30 16:09:00
+#> 1458:          50.15 2018-12-30 16:13:00
+#> 1459:          41.90 2018-12-31 17:13:00
+#> 1460:          44.78 2018-12-31 18:12:00
+```
+
+#### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
+
+Use the default value for end date (current system date) to get hourly rainfall and wind records from 2022-01-01 to Current Date for Binnu.
+Note that the Binnu station has two wind heights, 3m and 10m.
+
+
+```r
+library(weatherOz)
+
+(
+  hourly_wind_rain <- get_dpird_summaries(
+    station_code = "BI",
+    start_date = "20220101",
+    api_key = Sys.getenv("DPIRD_API_KEY"),
+    interval = "hourly",
+    values = c("rainfall",
+               "wind")
+  )
+)
+#>       station_code station_name year month day hour                date rainfall
+#>    1:           BI        Binnu 2023     6  26   16 2023-06-26 16:00:00        0
+#>    2:           BI        Binnu 2023     6  26   16 2023-06-26 16:00:00        0
+#>    3:           BI        Binnu 2023     6  26   17 2023-06-26 17:00:00        0
+#>    4:           BI        Binnu 2023     6  26   17 2023-06-26 17:00:00        0
+#>    5:           BI        Binnu 2023     6  26   18 2023-06-26 18:00:00        0
+#>   ---                                                                           
+#> 1118:           BI        Binnu 2023     7  19   22 2023-07-19 22:00:00        0
+#> 1119:           BI        Binnu 2023     7  19   23 2023-07-19 23:00:00        0
+#> 1120:           BI        Binnu 2023     7  19   23 2023-07-19 23:00:00        0
+#> 1121:           BI        Binnu 2023     7  20    0 2023-07-20 00:00:00        0
+#> 1122:           BI        Binnu 2023     7  20    0 2023-07-20 00:00:00        0
+#>       wind_avg_direction_compass_point wind_avg_direction_degrees wind_avg_speed
+#>    1:                              SSE                        158          18.06
+#>    2:                              SSE                        156          23.83
+#>    3:                              SSE                        151          17.02
+#>    4:                              SSE                        149          22.61
+#>    5:                              SSE                        158          11.28
+#>   ---                                                                           
+#> 1118:                              SSE                        155          13.06
+#> 1119:                              SSE                        151           8.72
+#> 1120:                              SSE                        150          14.59
+#> 1121:                                S                        172           4.43
+#> 1122:                              SSE                        166           9.39
+#>       wind_height wind_max_direction_compass_point wind_max_direction_degrees
+#>    1:           3                              SSE                        164
+#>    2:          10                              SSE                        154
+#>    3:           3                              SSE                        150
+#>    4:          10                               SE                        141
+#>    5:           3                              SSE                        162
+#>   ---                                                                        
+#> 1118:          10                              SSE                        159
+#> 1119:           3                              SSE                        150
+#> 1120:          10                              SSE                        150
+#> 1121:           3                              SSE                        149
+#> 1122:          10                              SSE                        156
+#>       wind_max_speed       wind_max_time
+#>    1:          30.13 2023-06-26 15:32:00
+#>    2:          34.49 2023-06-26 15:32:00
+#>    3:          33.48 2023-06-26 16:19:00
+#>    4:          34.24 2023-06-26 16:19:00
+#>    5:          22.61 2023-06-26 17:07:00
+#>   ---                                   
+#> 1118:          18.58 2023-07-19 21:06:00
+#> 1119:          16.74 2023-07-19 22:06:00
+#> 1120:          21.71 2023-07-19 22:09:00
+#> 1121:           8.32 2023-07-19 23:26:00
+#> 1122:          14.47 2023-07-19 23:23:00
+```
