@@ -151,15 +151,15 @@ get_station_metadata <-
       "state",
       "elev_m",
       "source",
-      "include_closed",
+      "status",
       "wmo"
     ))
 
     # lastly, if user wants all stations return them, else return only open ones
     if (isTRUE(include_closed)) {
-      return(out)
+      return(out[])
     } else {
-      return(subset(out, include_closed == "open"))
+      return(subset(out, include_closed == "open")[])
     }
   }
 
@@ -321,7 +321,7 @@ get_station_metadata <-
           "latitude",
           "longitude",
           "owner",
-          "include_closed"
+          "status"
         ),
         collapse = ","
       ),
@@ -342,7 +342,7 @@ get_station_metadata <-
           "latitude",
           "longitude",
           "owner",
-          "include_closed",
+          "status",
           "capabilities",
           "probeHeight",
           "rainGaugeHeight",
@@ -390,7 +390,7 @@ get_station_metadata <-
       "state",
       "elev_m",
       "source",
-      "include_closed",
+      "status",
       "wmo"
     )
   )
