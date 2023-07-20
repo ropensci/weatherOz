@@ -4,7 +4,12 @@
 \alias{get_station_metadata}
 \title{Get Weather Station Metadata for Both DPIRD and SILO Weather Stations}
 \usage{
-get_station_metadata(which_api = "all", api_key, status = FALSE, rich = FALSE)
+get_station_metadata(
+  which_api = "all",
+  api_key,
+  include_closed = FALSE,
+  rich = FALSE
+)
 }
 \arguments{
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
@@ -17,7 +22,7 @@ from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to \code{all}.}
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 
-\item{status}{A \code{Boolean} string indicating whether to include closed
+\item{include_closed}{A \code{Boolean} string indicating whether to include closed
 stations' metadata.  Use \code{TRUE} to include these.  Defaults to \code{FALSE}.}
 
 \item{rich}{A \code{Boolean} string indicating whether to return rich information
@@ -42,7 +47,7 @@ metadata for stations available from \acronym{DPIRD}'s Weather 2.0
 \strong{elev_m}:\tab Station elevation in metres. \code{numeric}\cr
 \strong{source}:\tab Organisation responsible for the data or station
 maintenance. \code{character}\cr
-\strong{status}:\tab Station status, one of 'open' or 'closed'. \code{character}\cr
+\strong{include_closed}:\tab Station include_closed, one of 'open' or 'closed'. \code{character}\cr
 \strong{wmo}:\tab World Meteorological Organisation, (\acronym{WMO}), number
 if applicable. \code{numeric}\cr
 \strong{\code{rich} values}\tab\cr
