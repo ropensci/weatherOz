@@ -243,7 +243,7 @@ get_station_metadata <-
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
-  bom_stations[, include_closed := ifelse(!is.na(end), "closed", "open")]
+  bom_stations[, status := ifelse(!is.na(end), "closed", "open")]
   bom_stations[, dist := NULL]
   bom_stations[, source := NULL]
   bom_stations[, bar_height.m := NULL]
@@ -261,7 +261,7 @@ get_station_metadata <-
       "state",
       "elev_m",
       "source",
-      "include_closed",
+      "status",
       "wmo"
     )
   )
