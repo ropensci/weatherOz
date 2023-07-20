@@ -69,11 +69,11 @@ weather station network from the Weather 2.0 \acronym{API}.
 \dontrun{
 # Note that you need to supply your own API key
 
-# Here we check the uptime for the current year for Westonia
+# Here we check the up time for the current year for Westonia
 WS001 <- get_dpird_availability(station_code = "WS001",
                                 api_key = "your_api_key")
 
-# Here we check the uptime for 2017 for Binnu
+# Here we check the up time for 2017 for Binnu
 BN <- get_dpird_availability(
   station_code = "BI",
   start_date = "20170101",
