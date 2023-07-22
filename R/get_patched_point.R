@@ -153,7 +153,7 @@
 #'                start_date = "2021-06-01",
 #'                end_date = "2021-07-01",
 #'                values = "all",
-#'                api_key = "your@@email")
+#'                api_key = "your_api_key")
 #' }
 #' @export
 
