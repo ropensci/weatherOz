@@ -43,6 +43,11 @@ For detailed information on using {weatherOz} with BOM data, please see the [wea
 
 Following is a quick demonstration of some common tasks that you may wish to undertake while using {weatherOz}.
 
+## A Note on API Keys
+
+All examples in this vignette assume that you have stored your API key in your .Renviron file.
+See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+
 ## Using {weatherOz} to Fetch Daily Summary DPIRD Data
 
 Daily summary weather data is frequently used.

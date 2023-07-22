@@ -27,12 +27,19 @@ Three functions are provided to streamline fetching data from the DPIRD Weather 
  * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
  * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
 
+## A Note on API Keys
+
+All examples in this vignette assume that you have stored your API key in your .Renviron file.
+See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+
 ### Getting Extreme Weather Values
 
-This function fetches and returns nicely formatted individual extreme weather summaries from the DPIRD Weather 2.0 API.
+The `get_dpird_extremes()` function fetches and returns nicely formatted individual extreme weather summaries from the DPIRD Weather 2.0 API.
 You must provide a `station_code` and `API_key`, the other arguments, `values` and `include_closed` are optional.
 
 #### Example 1: Get All Extremes for Northam, WA
+
+In the first example, we illustrate how to fetch all extreme values available for Northam.
 
 ```{r get_all_extremes}
 library(weatherOz)
@@ -208,7 +215,7 @@ library(weatherOz)
 
 #### Example 10: Finding Stations Nearby a Given Longitude and Latitude
 
-Using the longitude and latitude for Northam, WA, find all stations within a 50km radius of this geographic point.
+Using the longitude and latitude for Northam, WA, find all DPIRD stations within a 50km radius of this geographic point.
 
 ```{r northam_dpird_lonlat}
 library(weatherOz)
