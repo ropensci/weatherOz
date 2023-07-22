@@ -10,6 +10,9 @@ knit(input = "vignettes/weatherOz_for_BOM.Rmd.orig",
 knit(input = "vignettes/weatherOz_for_DPIRD.Rmd.orig",
      output = "vignettes/weatherOz_for_DPIRD.Rmd")
 
+knit(input = "vignettes/weatherOz_for_SILO.Rmd.orig",
+     output = "vignettes/weatherOz_for_SILO.Rmd")
+
 knit(input = "vignettes/use_case.Rmd.orig",
      output = "vignettes/use_case.Rmd")
 

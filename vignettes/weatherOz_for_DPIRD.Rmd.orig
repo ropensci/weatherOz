@@ -6,8 +6,8 @@ output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{weatherOz-for-DPIRD}
-    %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteIndexEntry{weatherOz for DPIRD}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 

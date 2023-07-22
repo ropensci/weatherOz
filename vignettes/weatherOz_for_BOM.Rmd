@@ -6,8 +6,8 @@ output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{weatherOz-for-BOM}
-    %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteIndexEntry{weatherOz for BOM}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -428,7 +428,7 @@ library(weatherOz)
 #> [133] "IDE00425.202307220340.tif" "IDE00425.202307220350.tif" "IDE00425.202307220400.tif"
 #> [136] "IDE00425.202307220410.tif" "IDE00425.202307220420.tif" "IDE00425.202307220430.tif"
 #> [139] "IDE00425.202307220440.tif" "IDE00425.202307220450.tif" "IDE00425.202307220500.tif"
-#> [142] "IDE00425.202307220510.tif" "IDE00425.202307220520.tif"
+#> [142] "IDE00425.202307220510.tif" "IDE00425.202307220520.tif" "IDE00425.202307220530.tif"
 ```
 
 ### Using get_satellite_imagery()
@@ -516,11 +516,14 @@ This value must be specified and the function will accept only one at a time.
 ```r
 library(weatherOz)
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//Rtmp0sfqle/file53d4486135e.png
-#> Error in value[[3L]](cond): unused argument (cond)
+#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmpZ8A4li/file14f552534468.png
 plot(y)
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'y' not found
 ```
+
+<div class="figure" style="text-align: center">
+<img src="get_radar_imagery-1.png" alt="plot of chunk get_radar_imagery"  />
+<p class="caption">plot of chunk get_radar_imagery</p>
+</div>
 
 ## References
 
