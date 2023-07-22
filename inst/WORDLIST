@@ -7,6 +7,7 @@ ASCE’s
 AUS
 AWST
 BOM
+BOM's
 Beswick
 Bhandari
 Binnu
@@ -26,6 +27,7 @@ Deaccumulated
 Evapotranspiration
 FAO
 FSI
+Formated
 GEOS
 GeoTIFF
 ISSN
@@ -50,6 +52,7 @@ Rahul
 Rayner
 Renviron
 SHTML
+SILO's
 Siddique
 Southwood
 SpatRaster
@@ -63,6 +66,7 @@ Vapour
 WAAA
 WMO
 Westonia
+Wongan
 YYYYMMDD
 Zajaczkowski
 Zehr
@@ -74,12 +78,14 @@ airTemperatureMaxTime
 airTemperatureMin
 airTemperatureMinTime
 al
+api
 apparentAirTemperature
 apparentAirTemperatureAvg
 apparentAirTemperatureMax
 apparentAirTemperatureMaxTime
 apparentAirTemperatureMin
 apparentAirTemperatureMinTime
+apsimx
 availabilityCurrentHour
 availabilityLast
 availabilityMonthToDateSince
@@ -172,6 +178,7 @@ mailR
 metre
 metres
 minimise
+modelling
 mungbean
 mungbeans
 observationsCount
