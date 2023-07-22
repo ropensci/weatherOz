@@ -119,14 +119,14 @@ codes indicating how each datum was obtained.
 \describe{
 \item{0}{Official observation as supplied by the Bureau of Meteorology}
 \item{15}{Deaccumulated rainfall (original observation was recorded
-over a period exceeding the standard 24 hour observation period).}
-\item{25}{Interpolated from daily observations for that date.}
+over a period exceeding the standard 24 hour observation period)}
+\item{25}{Interpolated from daily observations for that date}
 \item{26}{Synthetic Class A pan evaporation, calculated from
-temperatures, radiation and vapour pressure.}
+temperatures, radiation and vapour pressure}
 \item{35}{Interpolated from daily observations using an anomaly
-interpolation method.}
+interpolation method}
 \item{75}{Interpolated from the long term averages of daily
-observations for that day of year.}
+observations for that day of year}
 }
 }
 
@@ -141,7 +141,7 @@ wd <- get_data_drill(
   start_date = "20221001",
   end_date = "20221201",
   values = c("max_temp", "min_temp", "rain"),
-  api_key = "your@email"
+  api_key = "your_api_key"
 )
 }
 

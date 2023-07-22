@@ -103,7 +103,7 @@ wd <- get_patched_point_apsim(
   station_code = "008137",
   start_date = "2021-06-01",
   end_date = "2021-07-01",
-  api_key = "your@email"
+  api_key = "your_api_key"
 )
 }
 }

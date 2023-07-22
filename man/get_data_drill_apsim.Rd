@@ -96,7 +96,7 @@ wd <- get_data_drill_apsim(
   longitude = 150.05,
   start_date = "20221001",
   end_date = "20221201",
-  api_key = "your@email"
+  api_key = "your_api_key"
 )
 }
 
