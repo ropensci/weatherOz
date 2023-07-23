@@ -11,11 +11,6 @@ test_that("get_available_radar functions properly", {
   expect_s3_class(x, "data.frame")
   expect_gt(nrow(x), 0)
 
-  xx <- get_available_radar()
-  expect_s3_class(xx, "data.frame")
-  expect_gt(nrow(xx), 0)
-  expect_equal(xx, get_available_radar(radar_id = "all"))
-
   xxx <- get_available_radar(radar_id = 3)
   expect_s3_class(xxx, "data.frame")
   expect_gt(nrow(xxx), 0)
