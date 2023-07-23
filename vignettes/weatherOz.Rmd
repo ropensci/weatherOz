@@ -27,7 +27,7 @@ DPIRD weather data are accessed through public APIs provided by DPIRD, <https://
 Detailed information on using {weatherOz} with DPIRD data is available in the [weatherOz for the DPIRD Weather 2.0 API](weatherOz_for_DPIRD.html) vignette.
 
 Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001).
-More details on using {weatherOz} with SILO data are available in the [weatherOz for the SILO API](weatherOz_for_Silo.html) vignette.
+More details on using {weatherOz} with SILO data are available in the [weatherOz for the SILO API](weatherOz_for_SILO.html) vignette.
 
 The BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
