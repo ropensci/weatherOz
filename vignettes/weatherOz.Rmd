@@ -277,7 +277,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
 ```
 
 <div class="figure" style="text-align: center">
-<img src="dpird-station-locations-map-1.png" alt="plot of chunk dpird-station-locations-map"  />
+<img src="vignettes/dpird-station-locations-map-1.png" alt="plot of chunk dpird-station-locations-map"  />
 <p class="caption">plot of chunk dpird-station-locations-map</p>
 </div>
 
@@ -332,6 +332,6 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
 ```
 
 <div class="figure" style="text-align: center">
-<img src="silo-station-locations-map-1.png" alt="plot of chunk silo-station-locations-map"  />
+<img src="vignettes/silo-station-locations-map-1.png" alt="plot of chunk silo-station-locations-map"  />
 <p class="caption">plot of chunk silo-station-locations-map</p>
 </div>
