@@ -16,3 +16,4 @@
 ^codemeta\.json$
 ^CONTRIBUTING\.md$
 ^pkgdown$
+^README\.Rmd$
