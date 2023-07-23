@@ -21,7 +21,7 @@ Three functions are provided to streamline fetching data from the DPIRD Weather 
  * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
  * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
 
-# A Note on API Keys
+## A Note on API Keys
 
 All examples in this vignette assume that you have stored your API key in your .Renviron file.
 See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
