@@ -77,7 +77,7 @@ Where possible (depending on the file format), the data are supplied with codes 
 
 The data returned will include columns that denote the source of the data, whether it was an observation or interpolated.
 
-# A Note on API Keys
+## A Note on API Keys
 
 All examples in this vignette assume that you have stored your API key in your .Renviron file.
 See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
