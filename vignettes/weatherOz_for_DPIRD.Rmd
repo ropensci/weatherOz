@@ -13,24 +13,86 @@ vignette: >
 
 
 
-## Working With DPIRD Data
+# Working With DPIRD Data
 
 Three functions are provided to streamline fetching data from the DPIRD Weather 2.0 API endpoints.
+
  * `get_dpird_extremes()`, which returns the recorded extreme values for the given station in the DPIRD weather station network.;
  * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
  * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
 
-## A Note on API Keys
+# A Note on API Keys
 
 All examples in this vignette assume that you have stored your API key in your .Renviron file.
 See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
 
-### Getting Extreme Weather Values
+## Getting Extreme Weather Values
 
 The `get_dpird_extremes()` function fetches and returns nicely formatted individual extreme weather summaries from the DPIRD Weather 2.0 API.
 You must provide a `station_code` and `API_key`, the other arguments, `values` and `include_closed` are optional.
 
-#### Example 1: Get All Extremes for Northam, WA
+### Available Values for Extreme Weather
+
+ * all (which will return all of the following values),
+ * erosionCondition,
+ * erosionConditionLast7Days,
+ * erosionConditionLast7DaysDays,
+ * erosionConditionLast7DaysMinutes,
+ * erosionConditionLast14Days,
+ * erosionConditionLast14DaysDays,
+ * erosionConditionLast14DaysMinutes,
+ * erosionConditionMonthToDate,
+ * erosionConditionMonthToDateDays,
+ * erosionConditionMonthToDateMinutes,
+ * erosionConditionMonthToDateStartTime,
+ * erosionConditionSince12AM,
+ * erosionConditionSince12AMMinutes,
+ * erosionConditionSince12AMStartTime,
+ * erosionConditionYearToDate,
+ * erosionConditionYearToDateDays,
+ * erosionConditionYearToDateMinutes,
+ * erosionConditionYearToDateStartTime,
+ * frostCondition,
+ * frostConditionLast7Days,
+ * frostConditionLast7DaysDays,
+ * frostConditionLast7DaysMinutes,
+ * frostConditionLast14Days,
+ * frostConditionLast14DaysDays,
+ * frostConditionLast14DaysMinutes,
+ * frostConditionMonthToDate,
+ * frostConditionMonthToDateDays,
+ * frostConditionMonthToDateMinutes,
+ * frostConditionMonthToDateStartTime,
+ * frostConditionSince9AM,
+ * frostConditionSince9AMMinutes,
+ * frostConditionSince9AMStartTime,
+ * frostConditionTo9AM,
+ * frostConditionTo9AMMinutes,
+ * frostConditionTo9AMStartTime,
+ * frostConditionYearToDate,
+ * frostConditionYearToDate,
+ * frostConditionYearToDateMinutes,
+ * frostConditionYearToDateStartTime,
+ * heatCondition,
+ * heatConditionLast7Days,
+ * heatConditionLast7DaysDays,
+ * heatConditionLast7DaysMinutes,
+ * heatConditionLast14Days,
+ * heatConditionLast14DaysDays,
+ * heatConditionLast14DaysMinutes,
+ * heatConditionMonthToDate,
+ * heatConditionMonthToDateDays,
+ * heatConditionMonthToDateMinutes,
+ * heatConditionMonthToDateStartTime,
+ * heatConditionSince12AM,
+ * heatConditionSince12AMMinutes,
+ * heatConditionSince12AMStartTime,
+ * heatConditionYearToDate,
+ * heatConditionYearToDateDays,
+ * heatConditionYearToDateMinutes, and
+ * heatConditionYearToDateStartTime
+
+### Example 1: Get All Extremes for Northam, WA
 
 In the first example, we illustrate how to fetch all extreme values available for Northam.
 
@@ -44,7 +106,7 @@ library(weatherOz)
 ))
 ```
 
-#### Example 2: Get Selected Extremes for Northam, WA
+### Example 2: Get Selected Extremes for Northam, WA
 
 Fetch only soil erosion extreme conditions for Northam, WA.
 The documentation for `get_dpird_extremes()` contains a full listing of the values that are available to query from this API endpoint.
@@ -67,7 +129,23 @@ library(weatherOz)
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
-#### Example 3: Get All Minute Data for the Past 24 Hours
+### Available Values for Minute Data
+
+   * all (which will return all of the following values),
+   * airTemperature,
+   * dateTime,
+   * dewPoint,
+   * rainfall,
+   * relativeHumidity,
+   * soilTemperature,
+   * solarIrradiance,
+   * wetBulb,
+   * wind,
+   * windAvgSpeed,
+   * windMaxSpeed, and
+   * windMinSpeed
+
+### Example 3: Get All Minute Data for the Past 24 Hours
 
 
 ```r
@@ -80,44 +158,44 @@ library(weatherOz)
   )
 )
 #>       station_code           date_time air_temperature relative_humidity soil_temperature
-#>    1:           NO 2023-07-21 13:50:00            15.1              94.7             13.7
-#>    2:           NO 2023-07-21 13:51:00            15.2              93.3             13.7
-#>    3:           NO 2023-07-21 13:52:00            15.3              91.3             13.7
-#>    4:           NO 2023-07-21 13:53:00            15.3              90.1             13.7
-#>    5:           NO 2023-07-21 13:54:00            15.2              89.3             13.7
+#>    1:           NO 2023-07-22 13:39:00            17.0              52.0             15.5
+#>    2:           NO 2023-07-22 13:40:00            16.9              51.7             15.5
+#>    3:           NO 2023-07-22 13:41:00            17.1              50.8             15.6
+#>    4:           NO 2023-07-22 13:42:00            17.2              51.0             15.6
+#>    5:           NO 2023-07-22 13:43:00            17.3              51.0             15.6
 #>   ---                                                                                    
-#> 1432:           NO 2023-07-22 13:41:00            17.1              50.8             15.6
-#> 1433:           NO 2023-07-22 13:42:00            17.2              51.0             15.6
-#> 1434:           NO 2023-07-22 13:43:00            17.3              51.0             15.6
-#> 1435:           NO 2023-07-22 13:44:00            16.9              51.3             15.6
-#> 1436:           NO 2023-07-22 13:45:00            16.5              54.2             15.7
+#> 1433:           NO 2023-07-23 13:31:00            18.0              50.0             14.7
+#> 1434:           NO 2023-07-23 13:32:00            17.9              49.2             14.7
+#> 1435:           NO 2023-07-23 13:33:00            17.8              51.0             14.7
+#> 1436:           NO 2023-07-23 13:34:00            17.9              49.5             14.8
+#> 1437:           NO 2023-07-23 13:35:00            17.9              47.3             14.8
 #>       solar_irradiance rainfall dew_point wet_bulb wind_height wind_avg_speed
-#>    1:              337        0      14.3     14.7           3           8.60
-#>    2:              338        0      14.1     14.6           3           6.70
-#>    3:              329        0      13.9     14.6           3           7.99
-#>    4:              286        0      13.7     14.5           3           6.84
-#>    5:              235        0      13.5     14.3           3           9.00
+#>    1:              592        0       7.1     12.2           3           2.92
+#>    2:              591        0       6.9     12.1           3           2.09
+#>    3:              588        0       6.8     12.1           3           4.32
+#>    4:              583        0       7.0     12.2           3           2.66
+#>    5:              585        0       7.1     12.3           3           4.97
 #>   ---                                                                        
-#> 1432:              588        0       6.8     12.1           3           4.32
-#> 1433:              583        0       7.0     12.2           3           2.66
-#> 1434:              585        0       7.1     12.3           3           4.97
-#> 1435:              586        0       6.8     12.0           3           7.45
-#> 1436:              578        0       7.2     12.0           3           3.71
+#> 1433:              607        0       7.4     12.8           3           4.97
+#> 1434:              607        0       7.1     12.6           3           6.98
+#> 1435:              605        0       7.5     12.8           3           5.22
+#> 1436:              603        0       7.2     12.6           3           3.53
+#> 1437:              602        0       6.5     12.4           3           1.80
 #>       wind_avg_direction_compass_point wind_avg_direction_degrees wind_min_speed wind_max_speed
-#>    1:                               NW                        319          4.176          14.22
-#>    2:                              NNW                        329          4.176          11.74
-#>    3:                               NW                        308          1.656          11.74
-#>    4:                               NW                        321          1.656          14.22
-#>    5:                               NW                        324          4.176          14.22
+#>    1:                              SSE                        158          0.000           4.18
+#>    2:                              SSE                        156          0.000           4.18
+#>    3:                                S                        175          1.656           6.70
+#>    4:                                S                        189          0.000           4.18
+#>    5:                                S                        187          1.656          11.74
 #>   ---                                                                                          
-#> 1432:                                S                        175          1.656           6.70
-#> 1433:                                S                        189          0.000           4.18
-#> 1434:                                S                        187          1.656          11.74
-#> 1435:                               SE                        127          4.176          11.74
-#> 1436:                              SSE                        152          1.656           6.70
+#> 1433:                              SSW                        195          1.656           9.22
+#> 1434:                               NW                        326          1.656          11.74
+#> 1435:                              WSW                        249          1.656           9.22
+#> 1436:                              ESE                        107          0.000           6.70
+#> 1437:                              SSW                        207          0.000           4.18
 ```
 
-#### Example 4: Get Specific Time and Date Data for Specific Values
+### Example 4: Get Specific Time and Date Data for Specific Values
 
 If you wish to supply a specific start date and time and values, you may do so as shown here.
 
@@ -167,7 +245,101 @@ library(weatherOz)
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
-#### Example 5: Get Annual Rainfall Since 2017
+### Available Values for Summary Data
+
+   * all (which will return all of the following values),
+   * airTemperature,
+   * airTemperatureAvg,
+   * airTemperatureMax,
+   * airTemperatureMaxTime,
+   * airTemperatureMin,
+   * airTemperatureMinTime,
+   * apparentAirTemperature,
+   * apparentAirTemperatureAvg,
+   * apparentAirTemperatureMax,
+   * apparentAirTemperatureMaxTime,
+   * apparentAirTemperatureMin,
+   * apparentAirTemperatureMinTime,
+   * barometricPressure,
+   * barometricPressureAvg,
+   * barometricPressureMax,
+   * barometricPressureMaxTime,
+   * barometricPressureMin,
+   * barometricPressureMinTime,
+   * battery,
+   * batteryMinVoltage,
+   * batteryMinVoltageDateTime,
+   * chillHours,
+   * deltaT,
+   * deltaTAvg,
+   * deltaTMax,
+   * deltaTMaxTime,
+   * deltaTMin,
+   * deltaTMinTime,
+   * dewPoint,
+   * dewPointAvg,
+   * dewPointMax,
+   * dewPointMaxTime,
+   * dewPointMin,
+   * dewPointMinTime,
+   * erosionCondition,
+   * erosionConditionMinutes,
+   * erosionConditionStartTime,
+   * errors,
+   * etoShortCrop,
+   * etoTallCrop,
+   * evapotranspiration,
+   * frostCondition,
+   * frostConditionMinutes,
+   * frostConditionStartTime,
+   * heatCondition,
+   * heatConditionMinutes,
+   * heatConditionStartTime,
+   * observations,
+   * observationsCount,
+   * observationsPercentage,
+   * panEvaporation,
+   * rainfall,
+   * relativeHumidity,
+   * relativeHumidityAvg,
+   * relativeHumidityMax,
+   * relativeHumidityMaxTime,
+   * relativeHumidityMin,
+   * relativeHumidityMinTime,
+   * richardsonUnits,
+   * soilTemperature,
+   * soilTemperatureAvg,
+   * soilTemperatureMax,
+   * soilTemperatureMaxTime,
+   * soilTemperatureMin,
+   * soilTemperatureMinTime,
+   * solarExposure,
+   * wetBulb,
+   * wetBulbAvg,
+   * wetBulbMax,
+   * wetBulbMaxTime,
+   * wetBulbMin,
+   * wetBulbMinTime,
+   * wind,
+   * windAvgSpeed, and
+   * windMaxSpeed
+
+### What You Get Back
+
+This function returns a [data.table::data.table] with `station_code` and the date interval queried together with the requested weather variables in alphabetical order.  Please note this function converts date-time columns from Coordinated Universal Time 'UTC'} to Australian Western Standard Time 'AWST'.  The first ten columns will always be:
+
+   * `station_code`,
+   * `station_name`,
+   * `latitude`,
+   * `longitude`,
+   * `year`,
+   * `month`,
+   * `day`,
+   * `hour`,
+   * `minute`, and if `month` or finer is present,
+   * `date` (a combination of year, month, day, hour, minute as appropriate)
+
+### Example 5: Get Annual Rainfall Since 2017
 
 Use the default value for end date (current system date) to get annual rainfall since 2017 until current year for Capel.
 
@@ -191,10 +363,10 @@ library(weatherOz)
 #> 4:        CL001        Capel 2020    862.4
 #> 5:        CL001        Capel 2021    928.0
 #> 6:        CL001        Capel 2022    670.4
-#> 7:        CL001        Capel 2023    351.2
+#> 7:        CL001        Capel 2023    351.4
 ```
 
-#### Example 6: Get Monthly Rainfall Since 2017
+### Example 6: Get Monthly Rainfall Since 2017
 
 Use the default value for end date (current system date) to get monthly rainfall since 2017 until current year for Capel.
 
@@ -290,11 +462,11 @@ library(weatherOz)
 #> 76:        CL001        Capel 2023     4 2023-04-01     81.2
 #> 77:        CL001        Capel 2023     5 2023-05-01     31.8
 #> 78:        CL001        Capel 2023     6 2023-06-01    130.0
-#> 79:        CL001        Capel 2023     7 2023-07-01     79.6
+#> 79:        CL001        Capel 2023     7 2023-07-01     79.8
 #>     station_code station_name year month       date rainfall
 ```
 
-#### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
+### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
 
 Use the default value for end date (current system date) to get daily rainfall and wind records from 2017-01-01 to 2018-12-31 for Binnu.
 Note that the Binnu station has two wind heights, 3m and 10m.
@@ -340,7 +512,7 @@ library(weatherOz)
 #> 1460:                              SSW                        197          44.78 2018-12-31 18:12:00
 ```
 
-#### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
+### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
 
 Use the default value for end date (current system date) to get hourly rainfall and wind records from 2022-01-01 to Current Date for Binnu.
 Note that the Binnu station has two wind heights, 3m and 10m.
@@ -366,11 +538,11 @@ library(weatherOz)
 #>    4:           BI        Binnu 2023     6  26   17 2023-06-26 17:00:00        0
 #>    5:           BI        Binnu 2023     6  26   18 2023-06-26 18:00:00        0
 #>   ---                                                                           
-#> 1214:           BI        Binnu 2023     7  21   22 2023-07-21 22:00:00        0
-#> 1215:           BI        Binnu 2023     7  21   23 2023-07-21 23:00:00        0
-#> 1216:           BI        Binnu 2023     7  21   23 2023-07-21 23:00:00        0
-#> 1217:           BI        Binnu 2023     7  22    0 2023-07-22 00:00:00        0
-#> 1218:           BI        Binnu 2023     7  22    0 2023-07-22 00:00:00        0
+#> 1262:           BI        Binnu 2023     7  22   22 2023-07-22 22:00:00        0
+#> 1263:           BI        Binnu 2023     7  22   23 2023-07-22 23:00:00        0
+#> 1264:           BI        Binnu 2023     7  22   23 2023-07-22 23:00:00        0
+#> 1265:           BI        Binnu 2023     7  23    0 2023-07-23 00:00:00        0
+#> 1266:           BI        Binnu 2023     7  23    0 2023-07-23 00:00:00        0
 #>       wind_avg_direction_compass_point wind_avg_direction_degrees wind_avg_speed wind_height
 #>    1:                              SSE                        158          18.06           3
 #>    2:                              SSE                        156          23.83          10
@@ -378,11 +550,11 @@ library(weatherOz)
 #>    4:                              SSE                        149          22.61          10
 #>    5:                              SSE                        158          11.28           3
 #>   ---                                                                                       
-#> 1214:                              SSE                        160          17.37          10
-#> 1215:                              SSE                        161          12.93           3
-#> 1216:                              SSE                        158          19.89          10
-#> 1217:                              SSE                        153          13.39           3
-#> 1218:                              SSE                        151          19.85          10
+#> 1262:                              ESE                        117          15.36          10
+#> 1263:                              ESE                        107          12.19           3
+#> 1264:                              ESE                        105          19.34          10
+#> 1265:                                E                        100          13.21           3
+#> 1266:                                E                         97          20.49          10
 #>       wind_max_direction_compass_point wind_max_direction_degrees wind_max_speed       wind_max_time
 #>    1:                              SSE                        164          30.13 2023-06-26 15:32:00
 #>    2:                              SSE                        154          34.49 2023-06-26 15:32:00
@@ -390,11 +562,11 @@ library(weatherOz)
 #>    4:                               SE                        141          34.24 2023-06-26 16:19:00
 #>    5:                              SSE                        162          22.61 2023-06-26 17:07:00
 #>   ---                                                                                               
-#> 1214:                              SSE                        158          23.29 2023-07-21 21:15:00
-#> 1215:                              SSE                        158          20.09 2023-07-21 22:52:00
-#> 1216:                              SSE                        157          26.06 2023-07-21 22:50:00
-#> 1217:                              SSE                        158          25.13 2023-07-21 23:34:00
-#> 1218:                              SSE                        153          28.62 2023-07-21 23:38:00
+#> 1262:                              ESE                        113          22.79 2023-07-22 21:54:00
+#> 1263:                              ESE                        105          19.26 2023-07-22 22:30:00
+#> 1264:                                E                        101          24.98 2023-07-22 22:31:00
+#> 1265:                              ESE                        102          19.26 2023-07-22 23:06:00
+#> 1266:                                E                         97          26.86 2023-07-22 23:25:00
 ```
 
 ## Working With DPIRD Metadata
@@ -406,7 +578,7 @@ Three functions are provided to assist in fetching metadata about the stations.
 
 ### Finding Nearby Stations
 
-#### Example 9: Finding Stations Nearby a Known Station
+### Example 9: Finding Stations Nearby a Known Station
 
 Query WA only stations and return DPIRD's stations nearest to the Northam, WA station, "NO", returning stations with 50 km of this station.
 
@@ -436,7 +608,7 @@ library(weatherOz)
 #> 5:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       37.83
 ```
 
-#### Example 10: Finding Stations Nearby a Given Longitude and Latitude
+### Example 10: Finding Stations Nearby a Given Longitude and Latitude
 
 Using the longitude and latitude for Northam, WA, find all DPIRD stations within a 50km radius of this geographic point.
 
@@ -467,7 +639,7 @@ library(weatherOz)
 #> 5:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       34.61
 ```
 
-#### Example 11: Finding Stations in Both the DPIRD and SILO Data Sets
+### Example 11: Finding Stations in Both the DPIRD and SILO Data Sets
 
 Query stations nearest DPIRD's Northam, WA station, "NO" and return both DPIRD and SILO/BOM stations within 50 km of this station.
 
@@ -561,7 +733,7 @@ library(weatherOz)
 
 ### Checking Station Uptime or Availability
 
-#### Example 12: Checking Station Availability for Current Year
+### Example 12: Checking Station Availability for Current Year
 
 Check the availability of the Westonia station since the start of the current year using the default functionality with no `start_date` or `end_date`.
 
@@ -581,7 +753,7 @@ library(weatherOz)
 #> 1:                  100                      100                 100                     100
 ```
 
-#### Example 14: Checking Station Availability for a Set Time Period
+### Example 14: Checking Station Availability for a Set Time Period
 
 Check the availability of the Binnu station for January of 2018.
 When a custom `start_date` is provided an `end_date` must also be provided.
@@ -607,7 +779,7 @@ library(weatherOz)
 The `get_station_metadata()` function is shared with the SILO functions as well, so this function will retrieve data from both weather APIs.
 Shown here is how to use it for DPIRD data only and with an example of DPIRD specific information, namely including closed stations and rich metadata.
 
-#### Example 15: Get DPIRD Station Metadata
+### Example 15: Get DPIRD Station Metadata
 
 The `get_station_metadata()` function allows you to get details about the stations themselves for stations in the DPIRD and SILO (BOM) networks in one function.
 Here we demonstrate how to get the metadata for the DPIRD stations only.
@@ -619,17 +791,17 @@ library(weatherOz)
 (metadata <- get_station_metadata(which_api = "dpird",
                                   api_key = Sys.getenv("DPIRD_API_KEY")))
 #>      station_code station_name      start        end  latitude longitude state elev_m
-#>   1:        AN001    Allanooka 2012-06-19 2023-07-22 -29.06361  114.9972    WA    131
-#>   2:        AM001       Amelup 2019-10-09 2023-07-22 -34.27083  118.2685    WA    200
-#>   3:        SH002      Babakin 2016-06-22 2023-07-22 -32.12548  118.0041    WA    313
-#>   4:           BA  Badgingarra 2008-11-19 2023-07-22 -30.33805  115.5395    WA    284
-#>   5:        BP001     Balingup 2014-10-24 2023-07-22 -33.79620  116.0640    WA    227
+#>   1:        AN001    Allanooka 2012-06-19 2023-07-23 -29.06361  114.9972    WA    131
+#>   2:        AM001       Amelup 2019-10-09 2023-07-23 -34.27083  118.2685    WA    200
+#>   3:        SH002      Babakin 2016-06-22 2023-07-23 -32.12548  118.0041    WA    313
+#>   4:           BA  Badgingarra 2008-11-19 2023-07-23 -30.33805  115.5395    WA    284
+#>   5:        BP001     Balingup 2014-10-24 2023-07-23 -33.79620  116.0640    WA    227
 #>  ---                                                                                 
-#> 225:           YS      Yilgarn 2008-11-01 2023-07-22 -31.91562  119.2561    WA    468
-#> 226:        YE001    York East 2013-11-08 2023-07-22 -31.83588  116.9211    WA    229
-#> 227:        YU001         Yuna 2012-06-21 2023-07-22 -28.33763  114.9898    WA    329
-#> 228:        YU002      Yuna NE 2016-03-24 2023-07-22 -28.20032  115.2616    WA    267
-#> 229:        YU003   Yuna North 2018-08-08 2023-07-22 -28.12086  114.9626    WA    264
+#> 225:           YS      Yilgarn 2008-11-01 2023-07-23 -31.91562  119.2561    WA    468
+#> 226:        YE001    York East 2013-11-08 2023-07-23 -31.83588  116.9211    WA    229
+#> 227:        YU001         Yuna 2012-06-21 2023-07-23 -28.33763  114.9898    WA    329
+#> 228:        YU002      Yuna NE 2016-03-24 2023-07-23 -28.20032  115.2616    WA    267
+#> 229:        YU003   Yuna North 2018-08-08 2023-07-23 -28.12086  114.9626    WA    264
 #>                                                                    source status wmo
 #>   1: WA Department of Primary Industries and Regional Development (DPIRD)   open  NA
 #>   2: WA Department of Primary Industries and Regional Development (DPIRD)   open  NA
@@ -644,7 +816,7 @@ library(weatherOz)
 #> 229: WA Department of Primary Industries and Regional Development (DPIRD)   open  NA
 ```
 
-#### Example 16: Get Rich DPIRD Station Metadata and Include Closed Stations
+### Example 16: Get Rich DPIRD Station Metadata and Include Closed Stations
 
 You can fetch additional information about the DPIRD stations as well as getting data for stations that are no longer open like so with the `rich` and `include_closed` arguments set to `TRUE`.
 
@@ -657,17 +829,17 @@ library(weatherOz)
                                   rich = TRUE,
                                   api_key = Sys.getenv("DPIRD_API_KEY")))
 #>      station_code station_name      start        end  latitude longitude state elev_m
-#>   1:        AN001    Allanooka 2012-06-19 2023-07-22 -29.06361  114.9972    WA    131
-#>   2:        AM001       Amelup 2019-10-09 2023-07-22 -34.27083  118.2685    WA    200
-#>   3:        SH002      Babakin 2016-06-22 2023-07-22 -32.12548  118.0041    WA    313
-#>   4:           BA  Badgingarra 2008-11-19 2023-07-22 -30.33805  115.5395    WA    284
-#>   5:        BP001     Balingup 2014-10-24 2023-07-22 -33.79620  116.0640    WA    227
+#>   1:        AN001    Allanooka 2012-06-19 2023-07-23 -29.06361  114.9972    WA    131
+#>   2:        AM001       Amelup 2019-10-09 2023-07-23 -34.27083  118.2685    WA    200
+#>   3:        SH002      Babakin 2016-06-22 2023-07-23 -32.12548  118.0041    WA    313
+#>   4:           BA  Badgingarra 2008-11-19 2023-07-23 -30.33805  115.5395    WA    284
+#>   5:        BP001     Balingup 2014-10-24 2023-07-23 -33.79620  116.0640    WA    227
 #>  ---                                                                                 
-#> 229:           YS      Yilgarn 2008-11-01 2023-07-22 -31.91562  119.2561    WA    468
-#> 230:        YE001    York East 2013-11-08 2023-07-22 -31.83588  116.9211    WA    229
-#> 231:        YU001         Yuna 2012-06-21 2023-07-22 -28.33763  114.9898    WA    329
-#> 232:        YU002      Yuna NE 2016-03-24 2023-07-22 -28.20032  115.2616    WA    267
-#> 233:        YU003   Yuna North 2018-08-08 2023-07-22 -28.12086  114.9626    WA    264
+#> 229:           YS      Yilgarn 2008-11-01 2023-07-23 -31.91562  119.2561    WA    468
+#> 230:        YE001    York East 2013-11-08 2023-07-23 -31.83588  116.9211    WA    229
+#> 231:        YU001         Yuna 2012-06-21 2023-07-23 -28.33763  114.9898    WA    329
+#> 232:        YU002      Yuna NE 2016-03-24 2023-07-23 -28.20032  115.2616    WA    267
+#> 233:        YU003   Yuna North 2018-08-08 2023-07-23 -28.12086  114.9626    WA    264
 #>                                                                    source status wmo probe_height
 #>   1: WA Department of Primary Industries and Regional Development (DPIRD)   open  NA         1.25
 #>   2: WA Department of Primary Industries and Regional Development (DPIRD)   open  NA         1.25

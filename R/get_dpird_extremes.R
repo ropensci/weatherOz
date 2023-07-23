@@ -20,7 +20,7 @@
 #'
 #' @section Available Values:
 #'
-#' * all (returns all of the following values),
+#' * all (which will return all of the following values),
 #' * erosionCondition,
 #' * erosionConditionLast7Days,
 #' * erosionConditionLast7DaysDays,

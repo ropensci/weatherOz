@@ -20,24 +20,86 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.path = "vignettes/")
 ```
 
-## Working With DPIRD Data
+# Working With DPIRD Data
 
 Three functions are provided to streamline fetching data from the DPIRD Weather 2.0 API endpoints.
+
  * `get_dpird_extremes()`, which returns the recorded extreme values for the given station in the DPIRD weather station network.;
  * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
  * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
 
-## A Note on API Keys
+# A Note on API Keys
 
 All examples in this vignette assume that you have stored your API key in your .Renviron file.
 See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
 
-### Getting Extreme Weather Values
+## Getting Extreme Weather Values
 
 The `get_dpird_extremes()` function fetches and returns nicely formatted individual extreme weather summaries from the DPIRD Weather 2.0 API.
 You must provide a `station_code` and `API_key`, the other arguments, `values` and `include_closed` are optional.
 
-#### Example 1: Get All Extremes for Northam, WA
+### Available Values for Extreme Weather
+
+ * all (which will return all of the following values),
+ * erosionCondition,
+ * erosionConditionLast7Days,
+ * erosionConditionLast7DaysDays,
+ * erosionConditionLast7DaysMinutes,
+ * erosionConditionLast14Days,
+ * erosionConditionLast14DaysDays,
+ * erosionConditionLast14DaysMinutes,
+ * erosionConditionMonthToDate,
+ * erosionConditionMonthToDateDays,
+ * erosionConditionMonthToDateMinutes,
+ * erosionConditionMonthToDateStartTime,
+ * erosionConditionSince12AM,
+ * erosionConditionSince12AMMinutes,
+ * erosionConditionSince12AMStartTime,
+ * erosionConditionYearToDate,
+ * erosionConditionYearToDateDays,
+ * erosionConditionYearToDateMinutes,
+ * erosionConditionYearToDateStartTime,
+ * frostCondition,
+ * frostConditionLast7Days,
+ * frostConditionLast7DaysDays,
+ * frostConditionLast7DaysMinutes,
+ * frostConditionLast14Days,
+ * frostConditionLast14DaysDays,
+ * frostConditionLast14DaysMinutes,
+ * frostConditionMonthToDate,
+ * frostConditionMonthToDateDays,
+ * frostConditionMonthToDateMinutes,
+ * frostConditionMonthToDateStartTime,
+ * frostConditionSince9AM,
+ * frostConditionSince9AMMinutes,
+ * frostConditionSince9AMStartTime,
+ * frostConditionTo9AM,
+ * frostConditionTo9AMMinutes,
+ * frostConditionTo9AMStartTime,
+ * frostConditionYearToDate,
+ * frostConditionYearToDate,
+ * frostConditionYearToDateMinutes,
+ * frostConditionYearToDateStartTime,
+ * heatCondition,
+ * heatConditionLast7Days,
+ * heatConditionLast7DaysDays,
+ * heatConditionLast7DaysMinutes,
+ * heatConditionLast14Days,
+ * heatConditionLast14DaysDays,
+ * heatConditionLast14DaysMinutes,
+ * heatConditionMonthToDate,
+ * heatConditionMonthToDateDays,
+ * heatConditionMonthToDateMinutes,
+ * heatConditionMonthToDateStartTime,
+ * heatConditionSince12AM,
+ * heatConditionSince12AMMinutes,
+ * heatConditionSince12AMStartTime,
+ * heatConditionYearToDate,
+ * heatConditionYearToDateDays,
+ * heatConditionYearToDateMinutes, and
+ * heatConditionYearToDateStartTime
+
+### Example 1: Get All Extremes for Northam, WA
 
 In the first example, we illustrate how to fetch all extreme values available for Northam.
 
@@ -50,7 +112,7 @@ library(weatherOz)
 ))
 ```
 
-#### Example 2: Get Selected Extremes for Northam, WA
+### Example 2: Get Selected Extremes for Northam, WA
 
 Fetch only soil erosion extreme conditions for Northam, WA.
 The documentation for `get_dpird_extremes()` contains a full listing of the values that are available to query from this API endpoint.
@@ -72,7 +134,23 @@ library(weatherOz)
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
-#### Example 3: Get All Minute Data for the Past 24 Hours
+### Available Values for Minute Data
+
+   * all (which will return all of the following values),
+   * airTemperature,
+   * dateTime,
+   * dewPoint,
+   * rainfall,
+   * relativeHumidity,
+   * soilTemperature,
+   * solarIrradiance,
+   * wetBulb,
+   * wind,
+   * windAvgSpeed,
+   * windMaxSpeed, and
+   * windMinSpeed
+
+### Example 3: Get All Minute Data for the Past 24 Hours
 
 ```{r get_minute_data}
 library(weatherOz)
@@ -85,7 +163,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 4: Get Specific Time and Date Data for Specific Values
+### Example 4: Get Specific Time and Date Data for Specific Values
 
 If you wish to supply a specific start date and time and values, you may do so as shown here.
 
@@ -110,7 +188,101 @@ library(weatherOz)
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
-#### Example 5: Get Annual Rainfall Since 2017
+### Available Values for Summary Data
+
+   * all (which will return all of the following values),
+   * airTemperature,
+   * airTemperatureAvg,
+   * airTemperatureMax,
+   * airTemperatureMaxTime,
+   * airTemperatureMin,
+   * airTemperatureMinTime,
+   * apparentAirTemperature,
+   * apparentAirTemperatureAvg,
+   * apparentAirTemperatureMax,
+   * apparentAirTemperatureMaxTime,
+   * apparentAirTemperatureMin,
+   * apparentAirTemperatureMinTime,
+   * barometricPressure,
+   * barometricPressureAvg,
+   * barometricPressureMax,
+   * barometricPressureMaxTime,
+   * barometricPressureMin,
+   * barometricPressureMinTime,
+   * battery,
+   * batteryMinVoltage,
+   * batteryMinVoltageDateTime,
+   * chillHours,
+   * deltaT,
+   * deltaTAvg,
+   * deltaTMax,
+   * deltaTMaxTime,
+   * deltaTMin,
+   * deltaTMinTime,
+   * dewPoint,
+   * dewPointAvg,
+   * dewPointMax,
+   * dewPointMaxTime,
+   * dewPointMin,
+   * dewPointMinTime,
+   * erosionCondition,
+   * erosionConditionMinutes,
+   * erosionConditionStartTime,
+   * errors,
+   * etoShortCrop,
+   * etoTallCrop,
+   * evapotranspiration,
+   * frostCondition,
+   * frostConditionMinutes,
+   * frostConditionStartTime,
+   * heatCondition,
+   * heatConditionMinutes,
+   * heatConditionStartTime,
+   * observations,
+   * observationsCount,
+   * observationsPercentage,
+   * panEvaporation,
+   * rainfall,
+   * relativeHumidity,
+   * relativeHumidityAvg,
+   * relativeHumidityMax,
+   * relativeHumidityMaxTime,
+   * relativeHumidityMin,
+   * relativeHumidityMinTime,
+   * richardsonUnits,
+   * soilTemperature,
+   * soilTemperatureAvg,
+   * soilTemperatureMax,
+   * soilTemperatureMaxTime,
+   * soilTemperatureMin,
+   * soilTemperatureMinTime,
+   * solarExposure,
+   * wetBulb,
+   * wetBulbAvg,
+   * wetBulbMax,
+   * wetBulbMaxTime,
+   * wetBulbMin,
+   * wetBulbMinTime,
+   * wind,
+   * windAvgSpeed, and
+   * windMaxSpeed
+
+### What You Get Back
+
+This function returns a [data.table::data.table] with `station_code` and the date interval queried together with the requested weather variables in alphabetical order.  Please note this function converts date-time columns from Coordinated Universal Time 'UTC'} to Australian Western Standard Time 'AWST'.  The first ten columns will always be:
+
+   * `station_code`,
+   * `station_name`,
+   * `latitude`,
+   * `longitude`,
+   * `year`,
+   * `month`,
+   * `day`,
+   * `hour`,
+   * `minute`, and if `month` or finer is present,
+   * `date` (a combination of year, month, day, hour, minute as appropriate)
+
+### Example 5: Get Annual Rainfall Since 2017
 
 Use the default value for end date (current system date) to get annual rainfall since 2017 until current year for Capel.
 
@@ -128,7 +300,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 6: Get Monthly Rainfall Since 2017
+### Example 6: Get Monthly Rainfall Since 2017
 
 Use the default value for end date (current system date) to get monthly rainfall since 2017 until current year for Capel.
 
@@ -146,7 +318,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
+### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
 
 Use the default value for end date (current system date) to get daily rainfall and wind records from 2017-01-01 to 2018-12-31 for Binnu.
 Note that the Binnu station has two wind heights, 3m and 10m.
@@ -167,7 +339,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
+### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
 
 Use the default value for end date (current system date) to get hourly rainfall and wind records from 2022-01-01 to Current Date for Binnu.
 Note that the Binnu station has two wind heights, 3m and 10m.
@@ -196,7 +368,7 @@ Three functions are provided to assist in fetching metadata about the stations.
 
 ### Finding Nearby Stations
 
-#### Example 9: Finding Stations Nearby a Known Station
+### Example 9: Finding Stations Nearby a Known Station
 
 Query WA only stations and return DPIRD's stations nearest to the Northam, WA station, "NO", returning stations with 50 km of this station.
 
@@ -213,7 +385,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 10: Finding Stations Nearby a Given Longitude and Latitude
+### Example 10: Finding Stations Nearby a Given Longitude and Latitude
 
 Using the longitude and latitude for Northam, WA, find all DPIRD stations within a 50km radius of this geographic point.
 
@@ -231,7 +403,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 11: Finding Stations in Both the DPIRD and SILO Data Sets
+### Example 11: Finding Stations in Both the DPIRD and SILO Data Sets
 
 Query stations nearest DPIRD's Northam, WA station, "NO" and return both DPIRD and SILO/BOM stations within 50 km of this station.
 
@@ -250,7 +422,7 @@ library(weatherOz)
 
 ### Checking Station Uptime or Availability
 
-#### Example 12: Checking Station Availability for Current Year
+### Example 12: Checking Station Availability for Current Year
 
 Check the availability of the Westonia station since the start of the current year using the default functionality with no `start_date` or `end_date`.
 
@@ -263,7 +435,7 @@ library(weatherOz)
 ))
 ```
 
-#### Example 14: Checking Station Availability for a Set Time Period
+### Example 14: Checking Station Availability for a Set Time Period
 
 Check the availability of the Binnu station for January of 2018.
 When a custom `start_date` is provided an `end_date` must also be provided.
@@ -286,7 +458,7 @@ library(weatherOz)
 The `get_station_metadata()` function is shared with the SILO functions as well, so this function will retrieve data from both weather APIs.
 Shown here is how to use it for DPIRD data only and with an example of DPIRD specific information, namely including closed stations and rich metadata.
 
-#### Example 15: Get DPIRD Station Metadata
+### Example 15: Get DPIRD Station Metadata
 
 The `get_station_metadata()` function allows you to get details about the stations themselves for stations in the DPIRD and SILO (BOM) networks in one function.
 Here we demonstrate how to get the metadata for the DPIRD stations only.
@@ -298,7 +470,7 @@ library(weatherOz)
                                   api_key = Sys.getenv("DPIRD_API_KEY")))
 ```
 
-#### Example 16: Get Rich DPIRD Station Metadata and Include Closed Stations
+### Example 16: Get Rich DPIRD Station Metadata and Include Closed Stations
 
 You can fetch additional information about the DPIRD stations as well as getting data for stations that are no longer open like so with the `rich` and `include_closed` arguments set to `TRUE`.
 

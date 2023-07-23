@@ -23,7 +23,7 @@
 #'
 #' @section Available Values:
 #'
-#'   * all (includes all of the following),
+#'   * all (which will return all of the following values),
 #'   * airTemperature,
 #'   * dateTime,
 #'   * dewPoint,
