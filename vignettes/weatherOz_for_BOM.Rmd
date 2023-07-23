@@ -496,7 +496,7 @@ The arguments are:
 
 * `radar_id`  which is the BOM radar ID number; this defaults to 'all' which will return a data frame of all radar IDs in Australia.
 
-#### Example 7: Geting Available Radar Imagery
+#### Example 7: Getting Available Radar Imagery
 
 
 ```r
