@@ -86,6 +86,7 @@ apparentAirTemperatureMaxTime
 apparentAirTemperatureMin
 apparentAirTemperatureMinTime
 apsimx
+au
 availabilityCurrentHour
 availabilityLast
 availabilityMonthToDateSince
@@ -173,6 +174,7 @@ hh
 https
 kilometres
 licence
+longpaddock
 magick
 mailR
 metre
@@ -189,6 +191,7 @@ panEvaporation
 png
 pre
 précis
+qld
 recognise
 recognising
 relativeHumidity
