@@ -9,6 +9,7 @@ vignette: >
   %\VignetteIndexEntry{weatherOz for SILO}
   %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteEncoding{UTF-8}
+bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -20,15 +21,56 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.path = "vignettes/")
 ```
 
-## Working With SILO Data
+# About SILO Data
+
+[Queensland Scientific Information for Landowners (SILO)](https://www.longpaddock.qld.gov.au/silo/about/) data sets are constructed from observational records provided by the Bureau of Meteorology (BOM).
+SILO interpolates the raw data to fill missing data creating data sets that are spatially and temporally complete [@Jeffrey2001].
+
+# Working With SILO Data
 
 Four functions are provided to streamline fetching data from the SILO API endpoints.
- * `get_data_drill(), which returns weather data from SILO's 0.05 x 0.05 degrees interpolated, gridded weather dataset;
- * `get_patched_point(), which returns weather data from a given BOM weather station (a point) in the SILO database where missing values are interpolated (patched);
- * `get_data_drill_apsim(), which returns data drill weather data in an {[apsimx]} `.met` class object with the weather data ready for use in APSIM; and
- * `get_data_drill_patched_point(), which returns patched point weather data in an {[apsimx]} `.met` class object with the weather data ready for use in APSIM.
 
-### Data Codes
+ * `get_data_drill()`, which returns weather data from SILO's 0.05 x 0.05 degrees interpolated, gridded weather dataset;
+ * `get_patched_point()`, which returns weather data from a given BOM weather station (a point) in the SILO database where missing values are interpolated (patched);
+ * `get_data_drill_apsim()`, which returns data drill weather data in an {apsimx} `.met` class object with the weather data ready for use in APSIM; and
+ * `get_data_drill_patched_point()`, which returns patched point weather data in an {apsimx} `.met` class object with the weather data ready for use in APSIM.
+
+## Available Values
+
+`get_data_drill()` and `get_patched_point()` both accept the following values.
+`get_data_drill_apsim()` and `get_patched_point_apsim()` return a canned set of values for use in APSIM, because of this, they do not accept a `values` argument.
+
+<dl>
+  <dt>all</dt><dd>Which will return all of the following values</dd>
+  <dt>max_temp (degrees C)</dt><dd>Maximum temperature</dd>
+  <dt>min_temp (degrees C)</dt><dd>Minimum temperature</dd>
+  <dt>vp (hPa)</dt><dd>Vapour pressure</dd>
+  <dt>vp_deficit (hPa)</dt><dd>Vapour pressure deficit</dd>
+  <dt>evap_pan (mm)</dt><dd>Class A pan evaporation</dd>
+  <dt>evap_syn (mm)</dt><dd>Synthetic estimate [@Rayner2005]</dd>
+  <dt>evap_comb (mm)</dt><dd>Combination (synthetic estimate pre-1970, class A pan 1970 onwards)</dd>
+  <dt>evap_morton_lake (mm)</dt><dd>Morton's shallow lake evaporation</dd>
+  <dt>radiation (Mj/m [@Morton1983])</dt><dd>Solar exposure, consisting of both direct and diffuse components</dd>
+  <dt>rh_tmax (%)</dt><dd>Relative humidity at the time of maximum temperature</dd>
+  <dt>rh_tmin (%)</dt><dd>Relative humidity at the time of minimum temperature</dd>
+  <dt>et_short_crop (mm)</dt><dd>FAO56 [@Allen1998] short crop</dd>
+  <dt>et_tall_crop (mm)</dt><dd>ASCE [@Walter2000] tall crop [@Jeffrey2001]</dd>
+  <dt>et_morton_actual (mm)</dt><dd>Morton's areal actual evapotranspiration</dd>
+  <dt>et_morton_potential (mm)</dt><dd>Morton's point potential evapotranspiration</dd>
+  <dt>et_morton_wet (mm)</dt><dd>Morton's wet-environment areal potential evapotranspiration over land</dd>
+  <dt>mslp (hPa)</dt><dd>Mean sea level pressure</dd>
+</dl>
+
+## Value information
+
+Solar radiation: total incoming downward shortwave radiation on a horizontal surface, derived from estimates of cloud oktas and sunshine duration [@Zajaczkowski2013].
+
+Relative humidity: calculated using the vapour pressure measured at 9am, and the saturation vapour pressure computed using either the maximum or minimum temperature [@Jeffrey2001].
+
+Evaporation and evapotranspiration: an overview of the variables provided by SILO is available as a [https://data.longpaddock.qld.gov.au/static/publications/Evapotranspiration_overview.pdf](PDF).
+
+## Data Codes
+
 Where possible (depending on the file format), the data are supplied with codes indicating how each datum was obtained.
 
 <dl>
@@ -42,19 +84,19 @@ Where possible (depending on the file format), the data are supplied with codes 
 
 The data returned will include columns that denote the source of the data, whether it was an observation or interpolated.
 
-## A Note on API Keys
+# A Note on API Keys
 
 All examples in this vignette assume that you have stored your API key in your .Renviron file.
 See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
 
-### Getting Data Drill Interpolated Data
+## Getting Data Drill Interpolated Data
 
 The `get_data_drill()` function fetches spatially interpolated data from SILO for any point in Australia.
 Note that these data are not observations, but are interpolated surfaced derived by using either by splining or kriging the observational data.
 The arguments required to use this function are minimal with few options.
 The location as longitude and latitude, `longitude` and `latitude`, values must be provided along with the start date, `start_date` and the api key, `api_key` (your e-mail address).
 
-#### Example 1: Get Data Drill Data Using Defaults
+### Example 1: Get Data Drill Data Using Defaults
 
 Using coordinates for Southwood, Qld, get Data Drill data for all values available starting on 2022-01-01.
 
@@ -71,7 +113,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 2: Get Data Drill Temperature for a Specific Date Range
+### Example 2: Get Data Drill Temperature for a Specific Date Range
 
 Using coordinates for Southwood, Qld, get Data Drill temperature data for January of 2023.
 
@@ -90,7 +132,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 3: Get Data Drill APSIM Formated Data
+### Example 3: Get Data Drill APSIM Formated Data
 
 For APSIM users, SILO provides an endpoint that serves APSIM formatted data ready for use in this modelling framework.
 The `get_data_drill_apsim()` function works just as `get_data_drill()`, it just returns an object that is an {[apsimx]} `met` class rather than a `data.table` and there is no need to specify values as those are predetermined by the API endpoint.
@@ -115,7 +157,7 @@ Patched Point data are derived from actual BOM station observations (PatchedPoin
 Be sure to note the `data_source` column to be sure.
 The functions, `get_patched_point()` and `get_patched_point_apsim()` work exactly as their Data Drill counterparts except that they require a station code, `station_code`, rather than longitude and latitude values for the geographic location.
 
-#### Example 4: Get Data Drill Data Using Defaults
+### Example 4: Get Data Drill Data Using Defaults
 
 Using the station code for Wongan Hills, WA, get all values for June of 2021.
 
@@ -142,7 +184,7 @@ Two functions are provided to assist in fetching metadata about the stations.
 
 Functions for searching metadata in the SILO network do not require an API key except where you may also interact with the DPIRD API.
 
-#### Example 5: Finding Stations Nearby a Known Station
+### Example 5: Finding Stations Nearby a Known Station
 
 Query stations and return BOM's stations nearest to the DPIRD Northam, WA station, "NO", returning stations with 50 km of this station.
 This requires a DPIRD API key as we're using that station as the starting point.
@@ -159,7 +201,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 10: Finding Stations Nearby a Given Longitude and Latitude
+### Example 10: Finding Stations Nearby a Given Longitude and Latitude
 
 Using the longitude and latitude for Northam, WA, find only BOM stations within a 50km radius of this geographic point.
 
@@ -176,7 +218,7 @@ library(weatherOz)
 )
 ```
 
-#### Example 11: Finding Stations in Both the DPIRD and SILO Data Sets
+### Example 11: Finding Stations in Both the DPIRD and SILO Data Sets
 
 Query stations nearest BOM's Northam, WA station, "010111" and return both DPIRD and SILO/BOM stations within 50 km of this station.
 Note the use of an API key for the DPIRD network and that `which_api` is set to "all".
@@ -200,7 +242,7 @@ library(weatherOz)
 The `get_station_metadata()` function is shared with the DPIRD functions as well, so this function will retrieve data from both weather APIs.
 Shown here is how to use it for SILO data only.
 
-#### Example 15: Get SILO Station Metadata
+### Example 15: Get SILO Station Metadata
 
 The `get_station_metadata()` function allows you to get details about the stations themselves for stations in the DPIRD and SILO (BOM) networks in one function.
 Here we demonstrate how to get the metadata for the SILO stations only.
@@ -210,3 +252,4 @@ library(weatherOz)
 
 (metadata <- get_station_metadata(which_api = "silo"))
 ```
+# References
