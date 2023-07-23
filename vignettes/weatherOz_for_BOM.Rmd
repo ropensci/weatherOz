@@ -12,21 +12,23 @@ vignette: >
 ---
 
 
-## Using {weatherOz} With BOM Data
+# Using {weatherOz} With BOM Data
 
 Several functions are provided by {weatherOz} to retrieve Australian Bureau of Meteorology (BOM) data.
 A family of functions retrieve data files from BOM or parse local files from BOM and return data frames;
+
  * `get_precis_forecast()` and `parse_precis_forecast(), which return the précis (short) forecast;
  * `get_ag_bulletin()` and `parse_ag_bulletin(), which return the agriculture bulletin;
  * `get_coastal_forecast()` and `parse_coastal_forecast(), which return coastal waters forecasts for each state.
 
 And a second family of functions retrieve information pertaining to satellite and radar imagery,
+
  * `get_available_imagery()`, which returns available satellite imagery;
  * `get_satelllite_imagery()` which returns a [terra::SpatRaster] or [stars] object as requested;
  * `get_available_radar()`, which returns available radar images; and
  * `get_radar_imagery()` which returns radar images as a [magick] object.
 
-## Using get_precis_forecast()
+# Using get_precis_forecast()
 
 This function only takes one argument, `state`. The `state` parameter allows the user to select the forecast for just one state or a national forecast.
 States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
@@ -49,12 +51,12 @@ States or territories are specified using the official postal codes or full name
 
 - **AUS** - Australia, returns national forecast including all states, NT and ACT.
 
-### Results
+## Results
 
 The function, `get_precis_forecast()`, will return a data frame of the weather forecast for the daily forecast for selected towns.
 See Appendix 1 for a full description of the fields and values.
 
-### Example
+## Example 1: Getting a Forecast
 
 Following is an example fetching the forecast for Queensland.
 
@@ -119,7 +121,7 @@ library(weatherOz)
 #> 791:                          Partly cloudy.                           30
 ```
 
-## Using get_ag_bulletin()
+# Using get_ag_bulletin()
 
 `get_ag_bulletin()` only takes one argument, `state`.
 The `state` parameter allows the user to select the bulletin for just one state or a national forecast.
@@ -141,12 +143,12 @@ States or territories are specified using the official postal codes or full name
 
 - **AUS** - Australia, returns bulletin for all states and NT.
 
-### Results
+## Results
 
 The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
 See Appendix 3 for a full list and description of the fields and values.
 
-### Example
+## Example 2: Getting an Ag Bulletin
 
 Following is an example fetching the ag bulletin for Western Australia.
 
@@ -187,7 +189,7 @@ library(weatherOz)
 #> 28: 17.2  NA NA  NA NA 13.0 NA  NA  NA  NA  NA NA
 ```
 
-## Using get_coastal_forecast()
+# Using get_coastal_forecast()
 
 This function only takes one argument, `state`.
 The `state` parameter allows the user to select the forecast for just one state or a national forecast.
@@ -211,12 +213,12 @@ States or territories are specified using the official postal codes or full name
 
 - **AUS** - Australia, returns national forecast including all states, NT and ACT.
 
-### Results
+## Results
 
 The function, `get_coastal_forecast()`, will return a data frame of the coastal waters forecast for marine zones in each state.
 See Appendix 6 for a full description of the fields and values.
 
-### Example
+## Example 3: Getting a Coastal Forecast
 
 Following is an example fetching the forecast for Queensland.
 
@@ -239,122 +241,110 @@ library(weatherOz)
 #>  4:  <NA>   IDQ11290 <NA>        QLD                                               South Queensland
 #>  5:     0   IDQ11290 <NA>        QLD South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer
 #> ---                                                                                                
-#> 45:     1   IDQ11290 <NA>        QLD                Gold Coast Waters: Cape Moreton to Point Danger
-#> 46:     2   IDQ11290 <NA>        QLD                Gold Coast Waters: Cape Moreton to Point Danger
-#> 47:     0   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
-#> 48:     1   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
-#> 49:     2   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
+#> 60:     3   IDQ11290 <NA>        QLD                Gold Coast Waters: Cape Moreton to Point Danger
+#> 61:     0   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
+#> 62:     1   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
+#> 63:     2   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
+#> 64:     3   IDQ11290 <NA>        QLD                             Great Barrier Reef Offshore Waters
 #>     pt_1_name pt_2_name       aac    start_time_local      end_time_local utc_offset
-#>  1:      <NA>      <NA> QLD_FA001 2023-07-23 10:01:10 2023-07-23 10:01:10      10:00
-#>  2:      <NA>      <NA> QLD_FA002 2023-07-23 05:00:00 2023-07-23 05:00:00      10:00
-#>  3:      <NA>      <NA> QLD_FA003 2023-07-23 05:00:00 2023-07-23 05:00:00      10:00
-#>  4:      <NA>      <NA> QLD_FA004 2023-07-23 05:00:00 2023-07-23 05:00:00      10:00
-#>  5:      <NA>      <NA> QLD_MW001 2023-07-23 10:00:00 2023-07-23 10:00:00      10:00
+#>  1:      <NA>      <NA> QLD_FA001 2023-07-23 15:50:19 2023-07-23 15:50:19      10:00
+#>  2:      <NA>      <NA> QLD_FA002 2023-07-23 17:00:00 2023-07-23 17:00:00      10:00
+#>  3:      <NA>      <NA> QLD_FA003 2023-07-23 17:00:00 2023-07-23 17:00:00      10:00
+#>  4:      <NA>      <NA> QLD_FA004 2023-07-23 17:00:00 2023-07-23 17:00:00      10:00
+#>  5:      <NA>      <NA> QLD_MW001 2023-07-23 17:00:00 2023-07-23 17:00:00      10:00
 #> ---                                                                                 
-#> 45:      <NA>      <NA> QLD_MW014 2023-07-24 00:00:00 2023-07-24 00:00:00      10:00
-#> 46:      <NA>      <NA> QLD_MW014 2023-07-25 00:00:00 2023-07-25 00:00:00      10:00
-#> 47:      <NA>      <NA> QLD_MW015 2023-07-23 10:00:00 2023-07-23 10:00:00      10:00
-#> 48:      <NA>      <NA> QLD_MW015 2023-07-24 00:00:00 2023-07-24 00:00:00      10:00
-#> 49:      <NA>      <NA> QLD_MW015 2023-07-25 00:00:00 2023-07-25 00:00:00      10:00
+#> 60:      <NA>      <NA> QLD_MW014 2023-07-26 00:00:00 2023-07-26 00:00:00      10:00
+#> 61:      <NA>      <NA> QLD_MW015 2023-07-23 17:00:00 2023-07-23 17:00:00      10:00
+#> 62:      <NA>      <NA> QLD_MW015 2023-07-24 00:00:00 2023-07-24 00:00:00      10:00
+#> 63:      <NA>      <NA> QLD_MW015 2023-07-25 00:00:00 2023-07-25 00:00:00      10:00
+#> 64:      <NA>      <NA> QLD_MW015 2023-07-26 00:00:00 2023-07-26 00:00:00      10:00
 #>          start_time_utc        end_time_utc
-#>  1: 2023-07-23 10:01:10 2023-07-23 10:01:10
-#>  2: 2023-07-23 05:00:00 2023-07-23 05:00:00
-#>  3: 2023-07-23 05:00:00 2023-07-23 05:00:00
-#>  4: 2023-07-23 05:00:00 2023-07-23 05:00:00
-#>  5: 2023-07-23 10:00:00 2023-07-23 10:00:00
+#>  1: 2023-07-23 15:50:19 2023-07-23 15:50:19
+#>  2: 2023-07-23 17:00:00 2023-07-23 17:00:00
+#>  3: 2023-07-23 17:00:00 2023-07-23 17:00:00
+#>  4: 2023-07-23 17:00:00 2023-07-23 17:00:00
+#>  5: 2023-07-23 17:00:00 2023-07-23 17:00:00
 #> ---                                        
-#> 45: 2023-07-24 00:00:00 2023-07-24 00:00:00
-#> 46: 2023-07-25 00:00:00 2023-07-25 00:00:00
-#> 47: 2023-07-23 10:00:00 2023-07-23 10:00:00
-#> 48: 2023-07-24 00:00:00 2023-07-24 00:00:00
-#> 49: 2023-07-25 00:00:00 2023-07-25 00:00:00
-#>                                                            forecast_seas
-#>  1:                                                                 <NA>
-#>  2:                                                                 <NA>
-#>  3:                                                                 <NA>
-#>  4:                                                                 <NA>
-#>  5:                                                   1.5 to 2.5 metres.
-#> ---                                                                     
-#> 45: 1 to 1.5 metres, increasing to 1.5 to 2.5 metres during the morning.
-#> 46:      1.5 to 2.5 metres, decreasing to 1.5 metres during the evening.
-#> 47:                                                       Below 1 metre.
-#> 48:    Around 1 metre, increasing to 1 to 2 metres during the afternoon.
-#> 49:                                                   1.5 to 2.5 metres.
-#>                                                                 forecast_weather
-#>  1:                                                                         <NA>
-#>  2:                                                                         <NA>
-#>  3:                                                                         <NA>
-#>  4:                                                                         <NA>
-#>  5:                                                                       Sunny.
-#> ---                                                                             
-#> 45: Partly cloudy. 95% chance of showers. The chance of a thunderstorm offshore.
-#> 46:                                        Partly cloudy. 60% chance of showers.
-#> 47:                                                               Partly cloudy.
-#> 48:                 Cloudy. 95% chance of showers. The chance of a thunderstorm.
-#> 49:                 Cloudy. 80% chance of showers. The chance of a thunderstorm.
+#> 60: 2023-07-26 00:00:00 2023-07-26 00:00:00
+#> 61: 2023-07-23 17:00:00 2023-07-23 17:00:00
+#> 62: 2023-07-24 00:00:00 2023-07-24 00:00:00
+#> 63: 2023-07-25 00:00:00 2023-07-25 00:00:00
+#> 64: 2023-07-26 00:00:00 2023-07-26 00:00:00
+#>                                                          forecast_seas
+#>  1:                                                               <NA>
+#>  2:                                                               <NA>
+#>  3:                                                               <NA>
+#>  4:                                                               <NA>
+#>  5: 1 to 1.5 metres, increasing to 2 to 2.5 metres north of Kowanyama.
+#> ---                                                                   
+#> 60:                                                   1 to 1.5 metres.
+#> 61:                                                     Below 1 metre.
+#> 62:  Around 1 metre, increasing to 1 to 2 metres during the afternoon.
+#> 63:                                                 1.5 to 2.5 metres.
+#> 64:                                                     2 to 3 metres.
+#>                                                 forecast_weather
+#>  1:                                                         <NA>
+#>  2:                                                         <NA>
+#>  3:                                                         <NA>
+#>  4:                                                         <NA>
+#>  5:                                                       Clear.
+#> ---                                                             
+#> 60:                                               Partly cloudy.
+#> 61:                                               Partly cloudy.
+#> 62: Cloudy. 95% chance of showers. The chance of a thunderstorm.
+#> 63: Cloudy. 80% chance of showers. The chance of a thunderstorm.
+#> 64:                                               Partly cloudy.
 #>                                                                                                                                          forecast_winds
 #>  1:                                                                                                                                                <NA>
 #>  2:                                                                                                                                                <NA>
 #>  3:                                                                                                                                                <NA>
 #>  4:                                                                                                                                                <NA>
-#>  5:                                                                     Southerly 15 to 25 knots, reaching up to 30 knots offshore in the late morning.
+#>  5:                                                                                                                           Southerly 15 to 25 knots.
 #> ---                                                                                                                                                    
-#> 45:                                                       Southeasterly 15 to 25 knots, reaching up to 30 knots during the morning and early afternoon.
-#> 46:                                                                                                                       Southeasterly 15 to 25 knots.
-#> 47:                                                                   Southeasterly about 10 knots increasing to 10 to 15 knots in the early afternoon.
-#> 48: South to southeasterly 15 to 25 knots becoming southeasterly 20 to 30 knots in the late afternoon then decreasing to 20 to 25 knots in the evening.
-#> 49:                                                                                                               East to southeasterly 20 to 30 knots.
-#>                                                                                 forecast_swell1
-#>  1:                                                                                        <NA>
-#>  2:                                                                                        <NA>
-#>  3:                                                                                        <NA>
-#>  4:                                                                                        <NA>
-#>  5:                                                                                        <NA>
-#> ---                                                                                            
-#> 45:              Southeasterly 1 to 1.5 metres inshore, increasing to 1.5 to 2 metres offshore.
-#> 46:                    Southeasterly around 1 metre inshore, increasing to 1.5 metres offshore.
-#> 47:   Southeasterly below 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
-#> 48:  Southeasterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
-#> 49: Southeasterly 1 to 1.5 metres, increasing to 1.5 to 2 metres through the Capricorn Channel.
-#>                                                                                             forecast_swell2
-#>  1:                                                                                                    <NA>
-#>  2:                                                                                                    <NA>
-#>  3:                                                                                                    <NA>
-#>  4:                                                                                                    <NA>
-#>  5:                                                                                                    <NA>
-#> ---                                                                                                        
-#> 45:                         Southeasterly 1 to 1.5 metres, decreasing to around 1 metre during the morning.
-#> 46: South to southeasterly below 1 metre inshore, increasing to around 1 metre offshore during the morning.
-#> 47:                                                                                                    <NA>
-#> 48:                                                                                                    <NA>
-#> 49:                                                                                                    <NA>
-#>     forecast_caution                                                   marine_forecast
-#>  1:             <NA>                                                              <NA>
-#>  2:             <NA>                                                              <NA>
-#>  3:             <NA>                                                              <NA>
-#>  4:             <NA>                                                              <NA>
-#>  5:             <NA> Strong Wind Warning for Sunday for South East Gulf of Carpentaria
-#> ---                                                                                   
-#> 45:             <NA>              Strong Wind Warning for Monday for Gold Coast Waters
-#> 46:             <NA>                                                              <NA>
-#> 47:             <NA>                                                              <NA>
-#> 48:             <NA>                                                              <NA>
-#> 49:             <NA>                                                              <NA>
-#>     tropical_system_location forecast_waves
-#>  1:                       NA             NA
-#>  2:                       NA             NA
-#>  3:                       NA             NA
-#>  4:                       NA             NA
-#>  5:                       NA             NA
-#> ---                                        
-#> 45:                       NA             NA
-#> 46:                       NA             NA
-#> 47:                       NA             NA
-#> 48:                       NA             NA
-#> 49:                       NA             NA
+#> 60:                                                                                                                       Southeasterly 15 to 20 knots.
+#> 61:                                                                                                                       Southeasterly 10 to 15 knots.
+#> 62: South to southeasterly 15 to 25 knots becoming southeasterly 20 to 30 knots in the late afternoon then decreasing to 20 to 25 knots in the evening.
+#> 63:                                                                                                               East to southeasterly 20 to 30 knots.
+#> 64:                                                                                                                       Southeasterly 20 to 30 knots.
+#>                                                                               forecast_swell1
+#>  1:                                                                                      <NA>
+#>  2:                                                                                      <NA>
+#>  3:                                                                                      <NA>
+#>  4:                                                                                      <NA>
+#>  5:                                                     South to southwesterly below 1 metre.
+#> ---                                                                                          
+#> 60:                  Southeasterly around 1 metre inshore, increasing to 1.5 metres offshore.
+#> 61: Southeasterly below 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
+#> 62: Southeasterly below 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
+#> 63:          Southeasterly 1 to 1.5 metres, increasing to 1 to 2 metres during the afternoon.
+#> 64:                                                      East to southeasterly 1 to 2 metres.
+#>                                                                                  forecast_swell2
+#>  1:                                                                                         <NA>
+#>  2:                                                                                         <NA>
+#>  3:                                                                                         <NA>
+#>  4:                                                                                         <NA>
+#>  5:                                                                                         <NA>
+#> ---                                                                                             
+#> 60: Southerly below 1 metre inshore, increasing to around 1 metre offshore during the afternoon.
+#> 61:                                                                                         <NA>
+#> 62:                                                                                         <NA>
+#> 63:                                                                                         <NA>
+#> 64:                                                                                         <NA>
+#>     forecast_caution marine_forecast tropical_system_location forecast_waves
+#>  1:             <NA>            <NA>                       NA             NA
+#>  2:             <NA>            <NA>                       NA             NA
+#>  3:             <NA>            <NA>                       NA             NA
+#>  4:             <NA>            <NA>                       NA             NA
+#>  5:             <NA>            <NA>                       NA             NA
+#> ---                                                                         
+#> 60:             <NA>            <NA>                       NA             NA
+#> 61:             <NA>            <NA>                       NA             NA
+#> 62:             <NA>            <NA>                       NA             NA
+#> 63:             <NA>            <NA>                       NA             NA
+#> 64:             <NA>            <NA>                       NA             NA
 ```
 
-## Using {weatherOz} to retrieve BOM satellite imagery
+# Using {weatherOz} to retrieve BOM satellite imagery
 
 {weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
 [Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
@@ -370,18 +360,18 @@ Valid BOM satellite Product IDs for GeoTIFF files include:
 <tr><td>IDE00425</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
 <tr><td>IDE00426</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
 <tr><td>IDE00427</td><td>AHI WV (Ch8) 2km FD GEOS </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00430</td><td>AHI cloud cover only 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00431</td><td>AHI IR (Ch13) greyscale 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00432</td><td>AHI VIS (Ch3) greyscale 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00433</td><td>AHI IR (Ch13) Zehr 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00430</td><td>AHI cloud cover only 2km AUS equirect.</td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00431</td><td>AHI IR (Ch13) greyscale 2km AUS equirect.</td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00432</td><td>AHI VIS (Ch3) greyscale 2km AUS equirect.</td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00433</td><td>AHI IR (Ch13) Zehr 2km AUS equirect.</td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
 <tr><td>IDE00435</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
 <tr><td>IDE00436</td><td>AHI VIS (true colour) / IR (Ch13 greyscale) composite 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00437</td><td>AHI WV (Ch8) 2km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
-<tr><td>IDE00439</td><td>AHI VIS (Ch3) greyscale 0.5km AUS equirect. </td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00437</td><td>AHI WV (Ch8) 2km AUS equirect.</td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
+<tr><td>IDE00439</td><td>AHI VIS (Ch3) greyscale 0.5km AUS equirect.</td><td>Satellite</td><td style= "text-align: center;">24</td></tr>
 <tr><td colspan = 3><strong>Information gathered from Australian Bureau of Meteorology (BOM)</strong></td></tr>
 </table>
 
-### Using get_available_imagery()
+## Using get_available_imagery()
 
 `get_available_imagery()` only takes one argument, `product_id`, a BOM identifier for the imagery that you wish to check for available imagery.
 Using this function will fetch a listing of BOM GeoTIFF satellite imagery from [ftp://ftp.bom.gov.au/anon/gen/gms/](ftp://ftp.bom.gov.au/anon/gen/gms/) to display which files are currently available for download.
@@ -389,9 +379,12 @@ These files are available at ten minute update frequency with a 24 hour delete t
 This function can be used see the most recent files available and then specify in the `_imagery()` function.
 If no valid Product ID is supplied, defaults to all GeoTIFF images currently available.
 
+### Example 5: Checking Available Imagery
+
 
 ```r
 library(weatherOz)
+
 (avail <- get_available_imagery(product_id = "IDE00425"))
 #>   [1] "IDE00425.202307220510.tif" "IDE00425.202307220520.tif" "IDE00425.202307220530.tif"
 #>   [4] "IDE00425.202307220540.tif" "IDE00425.202307220550.tif" "IDE00425.202307220600.tif"
@@ -440,27 +433,32 @@ library(weatherOz)
 #> [133] "IDE00425.202307230340.tif" "IDE00425.202307230350.tif" "IDE00425.202307230400.tif"
 #> [136] "IDE00425.202307230410.tif" "IDE00425.202307230420.tif" "IDE00425.202307230430.tif"
 #> [139] "IDE00425.202307230440.tif" "IDE00425.202307230450.tif" "IDE00425.202307230500.tif"
-#> [142] "IDE00425.202307230510.tif" "IDE00425.202307230520.tif"
+#> [142] "IDE00425.202307230510.tif" "IDE00425.202307230520.tif" "IDE00425.202307230530.tif"
+#> [145] "IDE00425.202307230540.tif" "IDE00425.202307230550.tif"
 ```
 
-### Using get_satellite_imagery()
+## Using get_satellite_imagery()
 
 `get_satellite_imagery()` fetches BOM satellite GeoTIFF imagery, returning a SpatRaster object and takes two arguments.
 Files are available at ten minute update frequency with a 24 hour delete time.
 It is suggested to check file availability first by using `get_available_imagery()`.
 The arguments are:
 
-- `product_id`, a character value of the BOM product ID to download.
+* `product_id`, a character value of the BOM product ID to download.
 Alternatively, a vector of values from `get_available_imagery()` may be used here.
 This argument is mandatory.
 
-- `scans` a numeric value for the number of scans to download, starting with the most recent and progressing backwards, *e.g.*, `1` - the most recent single scan available , `6` - the most recent hour available, `12` - the most recent 2 hours available, etc.
+* `scans` a numeric value for the number of scans to download, starting with the most recent and progressing backwards, *e.g.*, `1` - the most recent single scan available , `6` - the most recent hour available, `12` - the most recent 2 hours available, etc.
 Negating will return the oldest files first.
 Defaults to 1.
 This argument is optional.
 
-```{r get_satellite_imagery, eval=TRUE}\
+### Example 6: Fetching Satellite Imagery and Viewing It
+
+
+```r
 library(weatherOz)
+
 # Specify product ID and scans
 i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 
@@ -473,15 +471,19 @@ i <- get_satellite_imagery(product_id = avail, scans = 1)
 
 ```r
 plot(i)
-#> Error in h(simpleError(msg, call)): error in evaluating the argument 'x' in selecting a method for function 'plot': object 'i' not found
 ```
 
-## Using {weatherOz} to retrieve BOM radar imagery
+<div class="figure" style="text-align: center">
+<img src="plot_satellite-1.png" alt="plot of chunk plot_satellite"  />
+<p class="caption">plot of chunk plot_satellite</p>
+</div>
+
+# Using {weatherOz} to retrieve BOM radar imagery
 
 {weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through public FTP.
 These are the latest snapshots for each radar locations at various radar ranges _e.g._, 512km, 256km, 128km and 64km for some stations.
 
-### Using get_available_radar()
+## Using get_available_radar()
 
 `get_available_radar()` fetches the available radar imagery from the BOM FTP and returns a data frame for reference.
 This data frame contains the product_id, which is required when using the `get_radar_imagery()` function.
@@ -490,6 +492,8 @@ There are usually several radar ranges available for each radar location, such a
 The arguments are:
 
 * `radar_id`  which is the BOM radar ID number; this defaults to 'all' which will return a data frame of all radar IDs in Australia.
+
+### Example 7: Geting Available Radar Imagery
 
 
 ```r
@@ -512,7 +516,7 @@ head(x)
 #> 6:     Albany     Albany    WA Doppler    Yes Public  Albany  TRUE
 ```
 
-### Using get_radar_imagery()
+## Using get_radar_imagery()
 
 `get_radar_imagery()` fetches the latest BOM radar imagery for a given product ID.
 The files available are the latest `.png` files of BOM radar imagery, which are typically updated each 6-10 minutes.
@@ -524,11 +528,14 @@ The only argument is:
 These can be obtained from the `get_available_radar()` function.
 This value must be specified and the function will accept only one at a time.
 
+### Example 8: Fetching Radar Imagery
+
 
 ```r
 library(weatherOz)
+
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmpjGBpGC/file40c56c22335c.png
+#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmpjGBpGC/file40c53ebac292.png
 plot(y)
 ```
 
@@ -537,7 +544,7 @@ plot(y)
 <p class="caption">plot of chunk get_radar_imagery</p>
 </div>
 
-## References
+# References
 
 [Australian Bureau of Meteorology (BOM) Weather Data Services](http://www.bom.gov.au/catalogue/data-feeds.shtml)
 
@@ -549,115 +556,93 @@ plot(y)
 
 [Australian Bureau of Meteorology (BOM) High-definition satellite images](http://www.bom.gov.au/australia/satellite/index.shtml)
 
-Stephen J. Jeffrey, John O. Carter, Keith B. Moodie, Alan R. Beswick, Using spatial interpolation to construct a comprehensive archive of Australian climate data, _Environmental Modelling & Software_, Volume 16, Issue 4, 2001,
-pages 309-330, ISSN 1364-8152, [DOI: 10.1016/S1364-8152(01)00008-1](https://doi.org/10.1016/S1364-8152(01)00008-1).
-
-## Appendix 1 - Output From get_precis_forecast()
+# Appendix 1 - Output From get_precis_forecast()
 
 The functions, `get_precis_forecast()` or `parse_precis_forecast(), will return a data frame of the 7 day short forecast with the following fields:
 
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>index</td><td>Forecast index number, 0 = current day ... 7 day</td></tr>
-<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td>
-</tr>
-<tr><td>state</td><td>State name (postal code abbreviation)</td></tr>
-<tr><td>town</td><td>Town name for forecast location</td></tr>
-<tr><td>aac</td><td>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for
-each location</td></tr>
-<tr><td>lat</td><td>Latitude of named location (decimal degrees)</td></tr>
-<tr><td>lon</td><td>Longitude of named location (decimal degrees)</td></tr>
-<tr><td>elev</td><td>Elevation of named location (metres)</td></tr>
-<tr><td>start_time_local</td><td>Start of forecast date and time in local
-TZ</td></tr>
-<tr><td>end_time_local</td><td>End of forecast date and time in local
-TZ</td></tr>
-<tr><td>UTC_offset</td><td> Hours offset from difference in hours and minutes
-from Coordinated Universal Time (UTC) for `start_time_local` and
-`end_time_local`</td></tr>
-<tr><td>start_time_utc</td><td>Start of forecast date and time in UTC</td></tr>
-<tr><td>end_time_utc</td><td>End of forecast date and time in UTC</td></tr>
-<tr><td>maximum_temperature</td><td>Maximum forecast temperature (degrees
-Celsius)</td></tr>
-<tr><td>minimum_temperature</td><td>Minimum forecast temperature (degrees
-Celsius)</td></tr>
-<tr><td>lower_precipitation_limit</td><td>Lower forecast precipitation limit
-(millimetres)</td></tr>
-<tr><td>upper_precipitation_limit</td><td>Upper forecast precipitation limit
-(millimetres)</td></tr>
-<tr><td>precis</td><td>Précis forecast (a short summary, less than 30
-characters)</td></tr>
-<tr><td>probability_of_precipitation</td><td>Probability of precipitation
-(percent)</td></tr>
-</table>
+<dl>
+<dt>index</dt><dd>Forecast index number, 0 = current day ... 7 day</dd>
+<dt>product_id</dt><dd>BOM Product ID from which the data are derived</dd>
+<dt>state</dt><dd>State name (postal code abbreviation)</dd>
+<dt>town</dt><dd>Town name for forecast location</dd>
+<dt>aac</dt><dd>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for each location</dd>
+<dt>lat</dt><dd>Latitude of named location (decimal degrees)</dd>
+<dt>lon</dt><dd>Longitude of named location (decimal degrees)</dd>
+<dt>elev</dt><dd>Elevation of named location (metres)</dd>
+<dt>start_time_local</dt><dd>Start of forecast date and time in local TZ</dd>
+<dt>end_time_local</dt><dd>End of forecast date and time in local TZ</dd>
+<dt>UTC_offset</dt><dd> Hours offset from difference in hours and minutes from Coordinated Universal Time (UTC) for `start_time_local` and `end_time_local`</dd>
+<dt>start_time_utc</dt><dd>Start of forecast date and time in UTC</dd>
+<dt>end_time_utc</dt><dd>End of forecast date and time in UTC</dd>
+<dt>maximum_temperature</dt><dd>Maximum forecast temperature (degrees Celsius)</dd>
+<dt>minimum_temperature</dt><dd>Minimum forecast temperature (degrees Celsius)</dd>
+<dt>lower_precipitation_limit</dt><dd>Lower forecast precipitation limit (millimetres)</dd>
+<dt>upper_precipitation_limit</dt><dd>Upper forecast precipitation limit (millimetres)</dd>
+<dt>precis</dt><dd>Précis forecast (a short summary, less than 30 characters)</dd>
+<dt>probability_of_precipitation</dt><dd>Probability of precipitation (percent)</dd>
+</dl>
 
-## Appendix 2 - Output From get_ag_bulletin()
+# Appendix 2 - Output From get_ag_bulletin()
 
 The functions, `get_ag_bulletin()` or `parse_ag_bulletin(), will return a data frame of the agriculture bulletin with the following fields:
 
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td>
-</tr>
-<tr><td>state</td><td>State name (postal code abbreviation)</td></tr>
-<tr><td>dist</td><td>BOM rainfall district</td></tr>
-<tr><td>name</td><td>Full station name (some stations have been retired so
-"station" will be same, this is the full designation</td></tr>
-<tr><td>wmo</td><td>World Meteorological Organization number (unique ID used
-worldwide)</td></tr>
-<tr><td>site</td><td>Unique BOM identifier for each station</td></tr>
-<tr><td>station</td><td>Station name</td></tr>
-<tr><td>obs-time-local</td><td>Observation time</td></tr>
-<tr><td>obs-time-utc</td><td>Observation time (time in UTC)</td></tr>
-<tr><td>time-zone</td><td>Time zone for observation</td></tr>
-<tr><td>lat</td><td>Latitude (decimal degrees)</td></tr>
-<tr><td>lon</td><td>Longitude (decimal degrees)</td></tr>
-<tr><td>elev_m</td><td>Station elevation (metres)</td></tr>
-<tr><td>bar_ht</td><td>Bar height (metres)</td></tr>
-<tr><td>station</td><td>BOM station name</td></tr>
-<tr><td>start</td><td>Year data collection starts</td></tr>
-<tr><td>end</td><td>Year data collection ends (will always be current)</td></tr>
-<tr><td>r</td><td>Rain to 9am (millimetres). <em>Trace will be reported as
-0.01</em></td></tr>
-<tr><td>tn</td><td>Minimum temperature (degrees Celsius)</td></tr>
-<tr><td>tx</td><td>Maximum temperature (degrees Celsius)</td></tr>
-<tr><td>twd</td><td>Wet bulb depression (degrees Celsius)</td></tr>
-<tr><td>ev</td><td>Evaporation (millimetres)</td></tr>
-<tr><td>tg</td><td>Terrestrial minimum temperature (degrees Celsius)</td></tr>
-<tr><td>sn</td><td>Sunshine (hours)</td></tr>
-<tr><td>solr</td><td>Solar Radiation MJ/sq m</td></tr>
-<tr><td>t5</td><td>5cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t10</td><td>10cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t20</td><td>20cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t50</td><td>50cm soil temperature (degrees Celsius)</td></tr>
-<tr><td>t1m</td><td>1m soil temperature (degrees Celsius)</td></tr>
-<tr><td>wr</td><td>Wind run (kilometres)</td></tr>
-</table>
+<dl>
+<dt>product_id</dt><dd>BOM Product ID from which the data are derived</dd>
+<dt>state</dt><dd>State name (postal code abbreviation)</dd>
+<dt>dist</dt><dd>BOM rainfall district</dd>
+<dt>name</dt><dd>Full station name (some stations have been retired so "station" will be same, this is the full designation</dd>
+<dt>wmo</dt><dd>World Meteorological Organization number (unique ID used worldwide)</dd>
+<dt>site</dt><dd>Unique BOM identifier for each station</dd>
+<dt>station</dt><dd>Station name</dd>
+<dt>obs-time-local</dt><dd>Observation time</dd>
+<dt>obs-time-utc</dt><dd>Observation time (time in UTC)</dd>
+<dt>time-zone</dt><dd>Time zone for observation</dd>
+<dt>lat</dt><dd>Latitude (decimal degrees)</dd>
+<dt>lon</dt><dd>Longitude (decimal degrees)</dd>
+<dt>elev_m</dt><dd>Station elevation (metres)</dd>
+<dt>bar_ht</dt><dd>Bar height (metres)</dd>
+<dt>station</dt><dd>BOM station name</dd>
+<dt>start</dt><dd>Year data collection starts</dd>
+<dt>end</dt><dd>Year data collection ends (will always be current)</dd>
+<dt>r</dt><dd>Rain to 9am (millimetres). <em>Trace will be reported as 0.01</em></dd>
+<dt>tn</dt><dd>Minimum temperature (degrees Celsius)</dd>
+<dt>tx</dt><dd>Maximum temperature (degrees Celsius)</dd>
+<dt>twd</dt><dd>Wet bulb depression (degrees Celsius)</dd>
+<dt>ev</dt><dd>Evaporation (millimetres)</dd>
+<dt>tg</dt><dd>Terrestrial minimum temperature (degrees Celsius)</dd>
+<dt>sn</dt><dd>Sunshine (hours)</dd>
+<dt>solr</dt><dd>Solar Radiation MJ/sq m</dd>
+<dt>t5</dt><dd>5cm soil temperature (degrees Celsius)</dd>
+<dt>t10</dt><dd>10cm soil temperature (degrees Celsius)</dd>
+<dt>t20</dt><dd>20cm soil temperature (degrees Celsius)</dd>
+<dt>t50</dt><dd>50cm soil temperature (degrees Celsius)</dd>
+<dt>t1m</dt><dd>1m soil temperature (degrees Celsius)</dd>
+<dt>wr</dt><dd>Wind run (kilometres)</dd>
+</dl>
 
-## Appendix 3 - Output From get_coastal_forecast()
+# Appendix 3 - Output From get_coastal_forecast()
 
 The output of `get_coastal_forecast()` or `parse_coastal_forecast()` will return a data frame with coastal waters forecast values of each area within the given state with the following fields:
 
-<table>
-<tr><th>Field Name</th><th>Description</th></tr>
-<tr><td>index</td><td>Forecast index number.  0 = current day </td></tr>
-<tr><td>product_id</td><td>BOM Product ID from which the data are derived</td></tr>
-<tr><td>type</td><td>Forecast Region type e.g. Coastal</td></tr>
-<tr><td>state_code</td><td>State name (postal code abbreviation)</td></tr>
-<tr><td>dist_name</td><td>Name of forecast district</td></tr>
-<tr><td>pt_1_name</td><td>Start of forecast district</td></tr>
-<tr><td>pt_2_name</td><td>End of forecast district</td></tr>
-<tr><td>aac</td><td>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for each location</td></tr>
-<tr><td>start_time_local</td><td>Start of forecast date and time in local TZ</td></tr>
-<tr><td>end_time_local</td><td>End of forecast date and time in local TZ</td></tr>
-<tr><td>UTC_offset</td><td>Hours offset from difference in hours and minutes from Coordinated Universal Time (UTC) for `start_time_local` and `end_time_local`</td></tr>
-<tr><td>start_time_utc</td><td>Start of forecast date and time in UTC</td></tr>
-<tr><td>end_time_utc</td><td>End of forecast date and time in UTC</td></tr>
-<tr><td>forecast_seas</td><td>Forecast sea conditions</td></tr>
-<tr><td>forecast_weather</td><td>Forecast weather summary</td></tr>
-<tr><td>forecast_winds</td><td>Forecast winds summary</td></tr>
-<tr><td>forecast_swell1</td><td>Forecast primary swell summary</td></tr>
-<tr><td>forecast_swell2</td><td>Forecast seondary swell summary (not always provided)</td></tr>
-<tr><td>forecast_caution</td><td>Forecast caution issued (not always provided)</td></tr>
-<tr><td>marine_forecast</td><td>Additional marine forecast warning information (not always provided)</td></tr>
-</table><br>
+<dl>
+<dt>index</dt><dd>Forecast index number.  0 = current day</dd>
+<dt>product_id</dt><dd>BOM Product ID from which the data are derived</dd>
+<dt>type</dt><dd>Forecast Region type e.g. Coastal</dd>
+<dt>state_code</dt><dd>State name (postal code abbreviation)</dd>
+<dt>dist_name</dt><dd>Name of forecast district</dd>
+<dt>pt_1_name</dt><dd>Start of forecast district</dd>
+<dt>pt_2_name</dt><dd>End of forecast district</dd>
+<dt>aac</dt><dd>AMOC Area Code, _e.g._, WA_MW008, a unique identifier for each location</dd>
+<dt>start_time_local</dt><dd>Start of forecast date and time in local TZ</dd>
+<dt>end_time_local</dt><dd>End of forecast date and time in local TZ</dt>
+<dt>UTC_offset</dt><dd>Hours offset from difference in hours and minutes from Coordinated Universal Time (UTC) for `start_time_local` and `end_time_local`</dd>
+<dt>start_time_utc</dt><dd>Start of forecast date and time in UTC</dd>
+<dt>end_time_utc</dt><dd>End of forecast date and time in UTC</dd>
+<dt>forecast_seas</dt><dd>Forecast sea conditions</dd>
+<dt>forecast_weather</dt><dd>Forecast weather summary</dd>
+<dt>forecast_winds</dt><dd>Forecast winds summary</dd>
+<dt>forecast_swell1</dt><dd>Forecast primary swell summary</dd>
+<dt>forecast_swell2</dt><dd>Forecast seondary swell summary (not always provided)</dd>
+<dt>forecast_caution</dt><dd>Forecast caution issued (not always provided)</dd>
+<dt>marine_forecast</dt><dd>Additional marine forecast warning information (not always provided)</dd>
+</dl>
