@@ -28,14 +28,7 @@ A family of functions retrieve data files from BOM or parse local files from BOM
  * `get_ag_bulletin()` and `parse_ag_bulletin(), which return the agriculture bulletin;
  * `get_coastal_forecast()` and `parse_coastal_forecast(), which return coastal waters forecasts for each state.
 
-And a second family of functions retrieve information pertaining to satellite and radar imagery,
-
- * `get_available_imagery()`, which returns available satellite imagery;
- * `get_satelllite_imagery()` which returns a [terra::SpatRaster] or [stars] object as requested;
- * `get_available_radar()`, which returns available radar images; and
- * `get_radar_imagery()` which returns radar images as a [magick] object.
-
-# Using get_precis_forecast()
+## Using get_precis_forecast()
 
 This function only takes one argument, `state`. The `state` parameter allows the user to select the forecast for just one state or a national forecast.
 States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
@@ -58,12 +51,12 @@ States or territories are specified using the official postal codes or full name
 
 - **AUS** - Australia, returns national forecast including all states, NT and ACT.
 
-## Results
+### Results
 
 The function, `get_precis_forecast()`, will return a data frame of the weather forecast for the daily forecast for selected towns.
 See Appendix 1 for a full description of the fields and values.
 
-## Example 1: Getting a Forecast
+### Example 1: Getting a Forecast
 
 Following is an example fetching the forecast for Queensland.
 
@@ -72,7 +65,7 @@ library(weatherOz)
 (QLD_forecast <- get_precis_forecast(state = "QLD"))
 ```
 
-# Using get_ag_bulletin()
+## Using get_ag_bulletin()
 
 `get_ag_bulletin()` only takes one argument, `state`.
 The `state` parameter allows the user to select the bulletin for just one state or a national forecast.
@@ -94,12 +87,12 @@ States or territories are specified using the official postal codes or full name
 
 - **AUS** - Australia, returns bulletin for all states and NT.
 
-## Results
+### Results
 
 The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
 See Appendix 3 for a full list and description of the fields and values.
 
-## Example 2: Getting an Ag Bulletin
+### Example 2: Getting an Ag Bulletin
 
 Following is an example fetching the ag bulletin for Western Australia.
 
@@ -108,7 +101,7 @@ library(weatherOz)
 (WA_bulletin <- get_ag_bulletin(state = "WA"))
 ```
 
-# Using get_coastal_forecast()
+## Using get_coastal_forecast()
 
 This function only takes one argument, `state`.
 The `state` parameter allows the user to select the forecast for just one state or a national forecast.
@@ -132,12 +125,12 @@ States or territories are specified using the official postal codes or full name
 
 - **AUS** - Australia, returns national forecast including all states, NT and ACT.
 
-## Results
+### Results
 
 The function, `get_coastal_forecast()`, will return a data frame of the coastal waters forecast for marine zones in each state.
 See Appendix 6 for a full description of the fields and values.
 
-## Example 3: Getting a Coastal Forecast
+### Example 3: Getting a Coastal Forecast
 
 Following is an example fetching the forecast for Queensland.
 
@@ -145,11 +138,21 @@ Following is an example fetching the forecast for Queensland.
 library(weatherOz)
 (QLD_coastal_forecast <- get_coastal_forecast(state = "QLD"))
 ```
+## Working with BOM Image Files
 
-# Using {weatherOz} to retrieve BOM satellite imagery
+A second family of functions retrieve information pertaining to satellite and radar imagery.
+
+ * `get_available_imagery()`, which returns available satellite imagery;
+ * `get_satelllite_imagery()` which returns a [terra::SpatRaster] or [stars] object as requested;
+ * `get_available_radar()`, which returns available radar images; and
+ * `get_radar_imagery()` which returns radar images as a [magick] object.
+
+## Using {weatherOz} to retrieve BOM satellite imagery
 
 {weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
 [Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
+
+### Working with Satellite Imagery
 
 Valid BOM satellite Product IDs for GeoTIFF files include:
 
@@ -173,7 +176,7 @@ Valid BOM satellite Product IDs for GeoTIFF files include:
 <tr><td colspan = 3><strong>Information gathered from Australian Bureau of Meteorology (BOM)</strong></td></tr>
 </table>
 
-## Using get_available_imagery()
+#### Using get_available_imagery()
 
 `get_available_imagery()` only takes one argument, `product_id`, a BOM identifier for the imagery that you wish to check for available imagery.
 Using this function will fetch a listing of BOM GeoTIFF satellite imagery from [ftp://ftp.bom.gov.au/anon/gen/gms/](ftp://ftp.bom.gov.au/anon/gen/gms/) to display which files are currently available for download.
@@ -181,7 +184,7 @@ These files are available at ten minute update frequency with a 24 hour delete t
 This function can be used see the most recent files available and then specify in the `_imagery()` function.
 If no valid Product ID is supplied, defaults to all GeoTIFF images currently available.
 
-### Example 5: Checking Available Imagery
+#### Example 5: Checking Available Imagery
 
 ```{r get_available_imagery, eval=TRUE}
 library(weatherOz)
@@ -189,7 +192,7 @@ library(weatherOz)
 (avail <- get_available_imagery(product_id = "IDE00425"))
 ```
 
-## Using get_satellite_imagery()
+#### Using get_satellite_imagery()
 
 `get_satellite_imagery()` fetches BOM satellite GeoTIFF imagery, returning a SpatRaster object and takes two arguments.
 Files are available at ten minute update frequency with a 24 hour delete time.
@@ -205,7 +208,7 @@ Negating will return the oldest files first.
 Defaults to 1.
 This argument is optional.
 
-### Example 6: Fetching Satellite Imagery and Viewing It
+#### Example 6: Fetching Satellite Imagery and Viewing It
 
 ```{r get_satellite_imagery, eval=TRUE}
 library(weatherOz)
@@ -223,12 +226,12 @@ i <- get_satellite_imagery(product_id = avail, scans = 1)
 plot(i)
 ```
 
-# Using {weatherOz} to retrieve BOM radar imagery
+## Using {weatherOz} With BOM Radar Imagery
 
-{weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through public FTP.
+{weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through a public FTP server.
 These are the latest snapshots for each radar locations at various radar ranges _e.g._, 512km, 256km, 128km and 64km for some stations.
 
-## Using get_available_radar()
+### Using get_available_radar()
 
 `get_available_radar()` fetches the available radar imagery from the BOM FTP and returns a data frame for reference.
 This data frame contains the product_id, which is required when using the `get_radar_imagery()` function.
@@ -238,7 +241,7 @@ The arguments are:
 
 * `radar_id`  which is the BOM radar ID number; this defaults to 'all' which will return a data frame of all radar IDs in Australia.
 
-### Example 7: Geting Available Radar Imagery
+#### Example 7: Geting Available Radar Imagery
 
 ```{r, get_available_radar}
 library(weatherOz)
@@ -246,7 +249,7 @@ x <- get_available_radar()
 head(x)
 ```
 
-## Using get_radar_imagery()
+### Using get_radar_imagery()
 
 `get_radar_imagery()` fetches the latest BOM radar imagery for a given product ID.
 The files available are the latest `.gif` files of BOM radar imagery, which are typically updated each 6-10 minutes.
@@ -258,7 +261,7 @@ The only argument is:
 These can be obtained from the `get_available_radar()` function.
 This value must be specified and the function will accept only one at a time.
 
-### Example 8: Fetching Radar Imagery
+#### Example 8: Fetching Radar Imagery
 
 ```{r get_radar_imagery, fig.height=9, fig.width=8, eval=TRUE}
 library(weatherOz)
