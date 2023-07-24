@@ -524,9 +524,7 @@ get_dpird_summaries <- function(station_code,
 
   x <-
     data.table::setorder(x = data.table::as.data.table(
-      do.call(what = cbind, args = new_df_list)),
-                         cols = "wind.height",
-                         "wind.max.time")
+      do.call(what = cbind, args = new_df_list)))
 
   return(cbind(nested_list_objects, x))
   }
