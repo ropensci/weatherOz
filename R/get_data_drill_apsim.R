@@ -78,8 +78,8 @@
 #' wd <- get_data_drill_apsim(
 #'   latitude = -27.85,
 #'   longitude = 150.05,
-#'   start_date = "20221001",
-#'   end_date = "20221201",
+#'   start_date = "20220401",
+#'   end_date = "20221101",
 #'   api_key = "your_api_key"
 #' )
 #' }
@@ -89,6 +89,7 @@
 #'
 #' @family SILO
 #' @family data fetching
+#' @family APSIM
 #' @encoding UTF-8
 #' @export
 

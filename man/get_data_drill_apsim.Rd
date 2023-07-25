@@ -94,8 +94,8 @@ interpolation method for \acronym{CLIMARC} data;}
 wd <- get_data_drill_apsim(
   latitude = -27.85,
   longitude = 150.05,
-  start_date = "20221001",
-  end_date = "20221201",
+  start_date = "20220401",
+  end_date = "20221101",
   api_key = "your_api_key"
 )
 }
@@ -124,6 +124,7 @@ Other data fetching:
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
@@ -132,10 +133,15 @@ Other data fetching:
 \code{\link{get_precis_forecast}()},
 \code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()}
+
+Other APSIM: 
+\code{\link{get_dpird_apsim}()},
+\code{\link{get_patched_point_apsim}()}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam
 Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
+\concept{APSIM}
 \concept{SILO}
 \concept{data fetching}

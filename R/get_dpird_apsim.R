@@ -20,12 +20,24 @@
 #'   write to.  Defaults to `NULL` with no file written, just an [apsimx] `met`
 #'   class object in your \R session.
 #'
+#' @examples
+#' \dontrun{
+#' wd <- get_dpird_apsim(
+#'   station_code = "BI",
+#'   start_date = "20220401",
+#'   end_date = "20221101",
+#'   api_key = "your_api_key"
+#' )
+#' }
+#'
+#'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'
 #' @family DPIRD
 #' @family data fetching
+#' @family APSIM
 #' @encoding UTF-8
 #' @export
 
@@ -43,7 +55,6 @@ get_dpird_apsim <- function(station_code,
     values = c(
       "airTemperatureMax",
       "airTemperatureMin",
-      "evapotranspiration",
       "rainfall",
       "relativeHumidityAvg",
       "solarExposure",

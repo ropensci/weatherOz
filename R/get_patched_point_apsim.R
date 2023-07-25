@@ -83,21 +83,23 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
 #'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
-#' @family SILO
-#' @family data fetching
-#'
 #' @examples
 #' \dontrun{
 #' # requires an API key as your email address
 #' # Source observation data for station Wongan Hills station, WA (008137)
 #' wd <- get_patched_point_apsim(
 #'   station_code = "008137",
-#'   start_date = "2021-06-01",
-#'   end_date = "2021-07-01",
+#'   start_date = "20220401",
+#'   end_date = "20221101",
 #'   api_key = "your_api_key"
 #' )
 #' }
 #' @encoding UTF-8
+#'
+#' @family SILO
+#' @family APSIM
+#' @family data fetching
+#'
 #' @export
 
 get_patched_point_apsim <- function(station_code,

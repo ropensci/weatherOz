@@ -101,8 +101,8 @@ interpolation method for \acronym{CLIMARC} data;}
 # Source observation data for station Wongan Hills station, WA (008137)
 wd <- get_patched_point_apsim(
   station_code = "008137",
-  start_date = "2021-06-01",
-  end_date = "2021-07-01",
+  start_date = "20220401",
+  end_date = "20221101",
   api_key = "your_api_key"
 )
 }
@@ -126,11 +126,16 @@ Other SILO:
 \code{\link{get_station_metadata}()},
 \code{\link{silo_daily_values}}
 
+Other APSIM: 
+\code{\link{get_data_drill_apsim}()},
+\code{\link{get_dpird_apsim}()}
+
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
@@ -143,5 +148,6 @@ Other data fetching:
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam
 Sparks, \email{adam.sparks@dpird.wa.gov.au}
 }
+\concept{APSIM}
 \concept{SILO}
 \concept{data fetching}
