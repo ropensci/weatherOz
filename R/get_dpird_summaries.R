@@ -2,7 +2,8 @@
 #' Get DPIRD Weather Data in Summarised Formats
 #'
 #' Fetch nicely formatted individual station weather summaries from the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  The earliest available data
+#'   start from August of 2000 for Vasse, \dQuote{VA}.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.
@@ -173,6 +174,7 @@ get_dpird_summaries <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
+
   if (missing(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
@@ -208,6 +210,7 @@ get_dpird_summaries <- function(station_code,
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
+  .check_earliest_available(start_date)
 
   # Use `agrep()` to fuzzy match the user-requested time interval
   approved_intervals <- c("15min",
@@ -530,5 +533,24 @@ get_dpird_summaries <- function(station_code,
   }
 
   return(nested_list_objects)
+}
 
+
+#' Check user inputs for earliest available DPIRD weather data
+#'
+#' @param .start_date A date object passed from another function
+#'
+#' @return invisible `NULL`, called for its side-effects
+#' @noRd
+
+.check_earliest_available <- function(.start_date) {
+  if (.start_date < lubridate::as_date("2000-08-28")) {
+    stop(
+      call. = FALSE,
+      "You have requested weather data prior to the establishment of the ",
+      "DPIRD weather station network.  You might try the SILO data for data ",
+      "from the BOM station network instead."
+    )
+  }
+  return(invisible(NULL))
 }
