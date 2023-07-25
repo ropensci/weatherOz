@@ -32,6 +32,9 @@
 #' @param api_key A `character` string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
+#' @param file A `character` string that provides the file or connection to
+#'   write to.  Defaults to `NULL` with no file written, just an [apsimx] `met`
+#'   class object in your \R session.
 #'
 #' @section Included Values:
 #'
