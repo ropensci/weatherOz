@@ -66,7 +66,8 @@ order.  The first ten columns will always be:
 }
 \description{
 Fetch nicely formatted individual station weather summaries from the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.
+\acronym{DPIRD} Weather 2.0 \acronym{API}.  The earliest available data
+start from August of 2000 for Vasse, \dQuote{VA}.
 }
 \note{
 Please note this function converts date-time columns from Coordinated
