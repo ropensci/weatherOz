@@ -60,38 +60,113 @@ get_dpird_apsim <- function(station_code,
       "solarExposure",
       "windAvgSpeed"
     ),
-    api_key = Sys.getenv("DPIRD_API_KEY")
+    api_key = api_key
   )
 
-  pwr <- subset(as.data.frame(pwr), select = c("Yea", "DOY",
-                                               "ALLSKY_SFC_SW_DWN",
-                                               "T2M_MAX", "T2M_MIN",
-                                               "PRECTOTCORR", "RH2M", "WS2M"))
+  apsim[, day := NULL]
+  apsim[, day := lubridate::yday(apsim$date)]
 
-  names(apsim) <-
-    c("year", "day", "radn", "maxt", "mint", "rain", "rh", "windspeed")
+  apsim <-
+    apsim[, c(
+      "year",
+      "day",
+      "solar_exposure",
+      "air_temperature_max",
+      "air_temperature_min",
+      "rainfall",
+      "relative_humidity_avg",
+      "wind_avg"
+    )]
+
+  data.table::setnames(
+    apsim,
+    old = c(
+      "solar_exposure",
+      "air_temperature_max",
+      "air_temperature_min",
+      "rainfall",
+      "relative_humidity_avg",
+      "wind_avg"
+    ),
+    new = c("radn", "maxt", "mint", "rain", "rh", "windspeed")
+  )
+
+  data.table::setDF(apsim)
+
   units <- c("()", "()", "(MJ/m2/day)", "(oC)", "(oC)", "(mm)", "(%)", "(m/s)")
-
   comments <- sprintf("!data from DPIRD Weather 2.0 API. retrieved: %s",
                       Sys.time())
 
-  ## Calculating annual amplitude in mean monthly temperature
-
   attr(apsim, "filename") <- filename
-  attr(apsim, "site") <- paste("site =", sub(".met", "", filename, fixed = TRUE))
+  attr(apsim, "site") <-
+    paste("site =", sub(".met", "", filename, fixed = TRUE))
   attr(apsim, "latitude") <- paste("latitude =", lonlat[2])
   attr(apsim, "longitude") <- paste("longitude =", lonlat[1])
-  attr(apsim, "tav") <- paste("tav =", mean(colMeans(apsim[,c("maxt","mint")], na.rm=TRUE), na.rm=TRUE))
+  attr(apsim, "tav") <-
+    paste("tav =", mean(colMeans(apsim[, c("maxt", "mint")],
+                                 na.rm = TRUE), na.rm = TRUE))
   attr(apsim, "colnames") <- names(apsim)
   attr(apsim, "units") <- units
   attr(apsim, "comments") <- comments
-  ## No constants
-  class(pwr) <- c("met", "data.frame")
 
-  apsim <- apsimx::amp_apsim_met(apsim)
+  class(apsim) <- c("met", "data.frame")
 
-  if (filename != "noname.met") {
-    apsimx::write_apsim_met(apsim, wrt.dir = wrt.dir, filename = filename)
+  apsim <- amp_apsim_met(apsim)
+
+  if (!isNULL(file)) {
+    apsimx::write_apsim_met(apsim,
+                            wrt.dir = dirname(file),
+                            filename = basename(file))
   }
   return(invisible(apsim))
+}
+
+#' Calculates attribute amp for an object of class \sQuote{met}
+#' This function rcalculates annual mean monthly amplitude for an object of
+#'   class \sQuote{met} from \cranpkg{apsimx}
+#'
+#' @param met object of class \sQuote{met}
+#' @return an object of class \sQuote{met} with a recalculation of annual
+#'   amplitude in mean monthly temperature.
+#' @author Fernando Miguez, \email{femiguez@@iastate.edu}
+#' @noRd
+
+amp_apsim_met <- function(met) {
+  if (!inherits(met, "met"))
+    stop("Object should be of class 'met", call. = FALSE)
+
+  ## Step 1: create date
+  date <-
+    as.Date(paste(met$year, met$day, sep = "-"), format = "%Y-%j")
+  ## Step 2: create month column
+  mnth <- as.numeric(format(date, "%m"))
+
+  met <-
+    apsimx::add_column_apsim_met(
+      met = met,
+      value = mnth,
+      name = "month",
+      units = "()"
+    )
+
+  mtemp <- (met$maxt + met$mint) / 2
+  met <-
+    apsimx::add_column_apsim_met(
+      met = met,
+      value = mtemp,
+      name = "mean.temp",
+      units = "(oC)"
+    )
+
+  met.agg <- aggregate(mean.temp ~ mnth, data = met, FUN = mean)
+
+  ans <- round(max(met.agg$mean.temp) - min(met.agg$mean.temp), 2)
+
+  ## Clean up
+  met <- apsimx::remove_column_apsim_met(met, "mean.temp")
+  met <- apsimx::remove_column_apsim_met(met, "month")
+
+  attr(met, "amp") <- paste("amp = ", ans)
+
+  return(met)
 }
