@@ -16,7 +16,8 @@ get_dpird_summaries(
 }
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
-for the station of interest.}
+for the station of interest.  Station codes are available from the
+\code{get_station_metadata()} function.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
@@ -66,7 +67,8 @@ order.  The first ten columns will always be:
 }
 \description{
 Fetch nicely formatted individual station weather summaries from the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.
+\acronym{DPIRD} Weather 2.0 \acronym{API}.  The earliest available data
+start from August of 2000 for Vasse, \dQuote{VA}.
 }
 \note{
 Please note this function converts date-time columns from Coordinated
@@ -191,6 +193,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
@@ -201,6 +204,7 @@ Other data fetching:
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_patched_point_apsim}()},

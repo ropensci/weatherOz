@@ -59,6 +59,9 @@
 #'    \item{7}{an interpolated long term average.}
 #'   }
 #'
+#' @section Saving objects:
+#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'
 #' @references
@@ -78,8 +81,8 @@
 #' wd <- get_data_drill_apsim(
 #'   latitude = -27.85,
 #'   longitude = 150.05,
-#'   start_date = "20221001",
-#'   end_date = "20221201",
+#'   start_date = "20220401",
+#'   end_date = "20221101",
 #'   api_key = "your_api_key"
 #' )
 #' }
@@ -89,6 +92,7 @@
 #'
 #' @family SILO
 #' @family data fetching
+#' @family APSIM
 #' @encoding UTF-8
 #' @export
 
@@ -109,10 +113,8 @@ get_data_drill_apsim <- function(longitude,
 
   # Error if api_key is not provided
   if (missing(api_key)) {
-    stop(
-      "A valid email address must be provided for `api_key`.",
-      call. = FALSE
-    )
+    stop("A valid email address must be provided for `api_key`.",
+         call. = FALSE)
   }
 
   .check_not_example_api_key(api_key)

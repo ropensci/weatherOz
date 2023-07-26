@@ -14,7 +14,8 @@ get_dpird_minute(
 }
 \arguments{
 \item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
-station code for the station of interest.}
+station code for the station of interest.  Station codes are available from
+the \code{get_station_metadata()} function.}
 
 \item{start_date_time}{A \code{character} string representing the start date and
 time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO8601).
@@ -50,7 +51,7 @@ Western Standard Time \sQuote{AWST}.
 \section{Available Values}{
 
 \itemize{
-\item all (includes all of the following),
+\item all (which will return all of the following values),
 \item airTemperature,
 \item dateTime,
 \item dewPoint,
@@ -89,6 +90,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_summaries}()},
@@ -99,6 +101,7 @@ Other data fetching:
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_summaries}()},
 \code{\link{get_patched_point_apsim}()},
