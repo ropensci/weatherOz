@@ -158,41 +158,41 @@ library(weatherOz)
   )
 )
 #>       station_code           date_time air_temperature relative_humidity soil_temperature
-#>    1:           NO 2023-07-25 19:01:00            12.0              74.0              9.2
-#>    2:           NO 2023-07-25 19:02:00            11.9              74.1              9.2
-#>    3:           NO 2023-07-25 19:03:00            11.9              74.7              9.2
-#>    4:           NO 2023-07-25 19:04:00            11.9              74.7              9.2
-#>    5:           NO 2023-07-25 19:05:00            12.0              74.0              9.2
+#>    1:           NO 2023-07-25 20:39:00            11.9              75.2              9.1
+#>    2:           NO 2023-07-25 20:40:00            11.9              75.0              9.1
+#>    3:           NO 2023-07-25 20:41:00            11.9              74.7              9.1
+#>    4:           NO 2023-07-25 20:42:00            11.9              74.8              9.1
+#>    5:           NO 2023-07-25 20:43:00            11.9              74.6              9.1
 #>   ---                                                                                    
-#> 1431:           NO 2023-07-26 18:51:00             9.9              99.2             11.5
-#> 1432:           NO 2023-07-26 18:52:00             9.8              99.2             11.5
-#> 1433:           NO 2023-07-26 18:53:00             9.9              99.2             11.5
-#> 1434:           NO 2023-07-26 18:54:00             9.8              99.2             11.5
-#> 1435:           NO 2023-07-26 18:55:00             9.8              99.2             11.5
+#> 1433:           NO 2023-07-26 20:31:00             8.4              99.2             10.4
+#> 1434:           NO 2023-07-26 20:32:00             8.3              99.2             10.4
+#> 1435:           NO 2023-07-26 20:33:00             8.3              99.2             10.4
+#> 1436:           NO 2023-07-26 20:34:00             8.3              99.2             10.4
+#> 1437:           NO 2023-07-26 20:35:00             8.3              99.2             10.4
 #>       solar_irradiance rainfall dew_point wet_bulb wind_height wind_avg_speed
-#>    1:                4        0       7.5     10.0           3          10.04
-#>    2:                4        0       7.4      9.9           3           9.14
-#>    3:                4        0       7.6      9.9           3           7.63
-#>    4:                4        0       7.6      9.9           3          11.38
-#>    5:                5        0       7.5     10.0           3          12.82
+#>    1:                3        0       7.7     10.0           3           2.02
+#>    2:                3        0       7.6      9.9           3           1.80
+#>    3:                3        0       7.6      9.9           3           1.51
+#>    4:                3        0       7.6      9.9           3           2.09
+#>    5:                3        0       7.5      9.9           3           1.22
 #>   ---                                                                        
-#> 1431:                3        0       9.8      9.8           3           3.64
-#> 1432:                2        0       9.7      9.7           3           3.38
-#> 1433:                2        0       9.8      9.8           3           3.92
-#> 1434:                2        0       9.7      9.7           3           4.50
-#> 1435:                2        0       9.7      9.7           3           5.33
+#> 1433:                1        0       8.3      8.3           3           0.07
+#> 1434:                1        0       8.2      8.2           3           0.00
+#> 1435:                1        0       8.2      8.2           3           0.18
+#> 1436:                1        0       8.2      8.2           3           1.12
+#> 1437:                1        0       8.2      8.2           3           1.01
 #>       wind_avg_direction_compass_point wind_avg_direction_degrees wind_min_speed wind_max_speed
-#>    1:                              NNW                        330          6.696          14.22
-#>    2:                              WSW                        253          6.696          14.22
-#>    3:                              WNW                        303          4.176          11.74
-#>    4:                               NW                        311          6.696          21.78
-#>    5:                               NW                        304          9.216          21.78
+#>    1:                              NNE                         26          0.000           4.18
+#>    2:                               SE                        130          0.000           4.18
+#>    3:                                N                          5          0.000           4.18
+#>    4:                                N                          5          1.656           4.18
+#>    5:                                N                          5          0.000           1.66
 #>   ---                                                                                          
-#> 1431:                              NNW                        333          1.656           6.70
-#> 1432:                              NNW                        338          1.656           6.70
-#> 1433:                              NNW                        335          1.656           6.70
-#> 1434:                              NNW                        336          1.656           6.70
-#> 1435:                              NNW                        340          1.656           9.22
+#> 1433:                                N                         10          0.000           1.66
+#> 1434:                                N                         10          0.000           0.00
+#> 1435:                                N                         10          0.000           1.66
+#> 1436:                                N                         10          0.000           1.66
+#> 1437:                                N                         10          0.000           1.66
 ```
 
 ### Example 4: Get Specific Time and Date Data for Specific Values
@@ -589,10 +589,24 @@ library(weatherOz)
     station_code = "BI",
     start_date = "20220401",
     end_date = "20221101",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
+    api_key = Sys.getenv("DPIRD_API_KEY")
   )
 )
-#> Error in get_dpird_apsim(station_code = "BI", start_date = "20220401", : unused argument (alist())
+#>  
+#> Binnu.met 
+#> latitude = -28.051000  (DECIMAL DEGREES) 
+#> longitude = 114.695750  (DECIMAL DEGREES) 
+#> tav = 16.78 (oC) ! Average ambient temperature. Based on 2022-04-01 to 2022-11-01. 
+#> amp = 7.7 (oC) ! Amplitude in mean monthly temperature. Based on 2022-04-01 to 2022-11-01. 
+#> year day radn maxt mint rain rh windspeed 
+#> () () (MJ/m2/day) (oC) (oC) (mm) (%) (m/s) 
+#>   year day    radn maxt mint rain   rh windspeed
+#> 1 2022  91  8176.3 26.9 20.4  1.2 84.4      3.66
+#> 2 2022  92 13439.8 27.6 20.4  2.0 85.4      3.82
+#> 3 2022  93 14764.3 28.7 20.7  5.8 88.9      4.28
+#> 4 2022  94 16305.3 28.2 19.9  2.2 81.5      4.43
+#> 5 2022  95 23568.2 28.7 16.5  0.2 70.9      4.53
+#> 6 2022  96 22831.7 32.3 15.6  0.0 57.7      4.70
 ```
 
 ## Working With DPIRD Metadata
@@ -624,7 +638,7 @@ library(weatherOz)
 #> 1:           NO            Northam  116.6942 -31.65161    WA    163
 #> 2:           MK             Muresk  116.6913 -31.72772    WA    251
 #> 3:        YE001          York East  116.9211 -31.83588    WA    229
-#> 4:         BTSB DFES-B Talbot West  116.6898 -31.96060    WA    359
+#> 4:         BTSB DFES-B Talbot West  116.6899 -31.96060    WA    359
 #> 5:         ROGR      Rolling Green  116.3184 -31.69527    WA    315
 #>                                                                   owner distance_km
 #> 1: WA Department of Primary Industries and Regional Development (DPIRD)        0.00
@@ -654,7 +668,7 @@ library(weatherOz)
 #>    station_code       station_name longitude  latitude state elev_m
 #> 1:           NO            Northam  116.6942 -31.65161    WA    163
 #> 2:           MK             Muresk  116.6913 -31.72772    WA    251
-#> 3:         BTSB DFES-B Talbot West  116.6898 -31.96060    WA    359
+#> 3:         BTSB DFES-B Talbot West  116.6899 -31.96060    WA    359
 #> 4:        YE001          York East  116.9211 -31.83588    WA    229
 #> 5:         ROGR      Rolling Green  116.3184 -31.69527    WA    315
 #>                                                                   owner distance_km
@@ -700,7 +714,7 @@ library(weatherOz)
 #> 16:       010023     Warradong Farm  116.9411 -31.50030    WA  240.0
 #> 17:        YE001          York East  116.9211 -31.83588    WA  229.0
 #> 18:       010091          Meckering  117.0081 -31.63220    WA  195.0
-#> 19:         BTSB DFES-B Talbot West  116.6898 -31.96060    WA  359.0
+#> 19:         BTSB DFES-B Talbot West  116.6899 -31.96060    WA  359.0
 #> 20:       010056             Inkpen  116.4169 -31.80420    WA  310.0
 #> 21:         ROGR      Rolling Green  116.3184 -31.69527    WA  315.0
 #> 22:       010138           Wooroloo  116.3413 -31.81500    WA  277.0
