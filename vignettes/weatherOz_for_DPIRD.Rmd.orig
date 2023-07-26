@@ -378,7 +378,7 @@ library(weatherOz)
     station_code = "BI",
     start_date = "20220401",
     end_date = "20221101",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
+    api_key = Sys.getenv("DPIRD_API_KEY")
   )
 )
 ```
