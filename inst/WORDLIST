@@ -64,6 +64,7 @@ Toowoomba
 Uptime
 VIS
 Vapour
+Vasse
 WAAA
 WMO
 Westonia
@@ -86,6 +87,7 @@ apparentAirTemperatureMax
 apparentAirTemperatureMaxTime
 apparentAirTemperatureMin
 apparentAirTemperatureMinTime
+apsim
 apsimx
 au
 availabilityCurrentHour
@@ -193,6 +195,7 @@ png
 pre
 précis
 qld
+radation
 recognise
 recognising
 relativeHumidity
@@ -228,6 +231,7 @@ wetBulbMinTime
 windAvgSpeed
 windMaxSpeed
 windMinSpeed
+windspeed
 withr
 wmo
 yyyy
