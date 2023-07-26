@@ -24,6 +24,18 @@ test_that("user-input checks stop if invalid values are provided", {
     )
   )
 
+  # start_date too early -----
+  expect_error(
+    get_dpird_summaries(
+      station_code = "BI",
+      start_date = "19800123",
+      api_key = Sys.getenv("DPIRD_API_KEY"),
+      interval = "daily",
+      values = "wind",
+      include_closed = FALSE
+    )
+  )
+
   # reversed dates ----
   expect_error(
     get_dpird_summaries(
