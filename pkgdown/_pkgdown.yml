@@ -22,10 +22,10 @@ reference:
   desc: >
     Functions that fetch data from the DPIRD Weather 2.0 API.
   contents:
-  - get_dpird_apsim
   - get_dpird_extremes
   - get_dpird_minute
   - get_dpird_summaries
+  - get_dpird_apsim
 
 - subtitle: SILO
   desc: >
