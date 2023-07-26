@@ -22,9 +22,6 @@
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
-#' @param file A `character` string that provides the file or connection to
-#'   write to.  Defaults to `NULL` with no file written, just an [apsimx] `met`
-#'   class object in your \R session.
 #'
 #' @section Included Values:
 #'
@@ -61,6 +58,9 @@
 #'    \item{6}{a synthetic pan value; or}
 #'    \item{7}{an interpolated long term average.}
 #'   }
+#'
+#' @section Saving objects:
+#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
 #'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'

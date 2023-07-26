@@ -16,9 +16,9 @@
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#' @param file A `character` string that provides the file or connection to
-#'   write to.  Defaults to `NULL` with no file written, just an [apsimx] `met`
-#'   class object in your \R session.
+#'
+#' @section Saving objects:
+#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
 #'
 #' @examples
 #' \dontrun{
@@ -33,7 +33,8 @@
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #'
-#' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
+#' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes,
+#'   alternatively, a local APSIM .met file if `file` is specified.
 #'
 #' @family DPIRD
 #' @family data fetching
@@ -44,8 +45,7 @@
 get_dpird_apsim <- function(station_code,
                             start_date,
                             end_date = Sys.Date(),
-                            api_key,
-                            file = NULL) {
+                            api_key) {
 
   apsim <- get_dpird_summaries(
     station_code = station_code,
@@ -62,6 +62,26 @@ get_dpird_apsim <- function(station_code,
     ),
     api_key = api_key
   )
+
+  metadata <- get_station_metadata(which_api = "dpird",
+                                   api_key = api_key)
+
+  apsim <-
+    merge(apsim, metadata, by = c("station_code", "station_name"))
+  station_name <- apsim$station_name[1]
+  longitude <- apsim$longitude[1]
+  latitude <- apsim$latitude[1]
+  site <- apsim$station_name[1]
+  tav <- round(mean(colMeans(apsim[, c("air_temperature_max",
+                                       "air_temperature_min")], na.rm = TRUE),
+                    na.rm = TRUE), 2)
+  tav <-
+    sprintf(
+      "tav = %g (oC) ! Average ambient temperature. Based on %s to %s.",
+      tav,
+      lubridate::ymd(start_date),
+      lubridate::ymd(end_date)
+    )
 
   apsim[, day := NULL]
   apsim[, day := lubridate::yday(apsim$date)]
@@ -97,33 +117,30 @@ get_dpird_apsim <- function(station_code,
   comments <- sprintf("!data from DPIRD Weather 2.0 API. retrieved: %s",
                       Sys.time())
 
-  attr(apsim, "filename") <- filename
-  attr(apsim, "site") <-
-    paste("site =", sub(".met", "", filename, fixed = TRUE))
-  attr(apsim, "latitude") <- paste("latitude =", lonlat[2])
-  attr(apsim, "longitude") <- paste("longitude =", lonlat[1])
-  attr(apsim, "tav") <-
-    paste("tav =", mean(colMeans(apsim[, c("maxt", "mint")],
-                                 na.rm = TRUE), na.rm = TRUE))
+  attr(apsim, "site") <- sprintf("%s.met", site)
+  attr(apsim, "latitude") <- sprintf("latitude = %f  (DECIMAL DEGREES)",
+                                     latitude)
+  attr(apsim, "longitude") <- sprintf("longitude = %f  (DECIMAL DEGREES)",
+                                      longitude)
+  attr(apsim, "tav") <- tav
   attr(apsim, "colnames") <- names(apsim)
   attr(apsim, "units") <- units
   attr(apsim, "comments") <- comments
 
   class(apsim) <- c("met", "data.frame")
 
-  apsim <- amp_apsim_met(apsim)
+  apsim <-
+    amp_apsim_met(met = apsim,
+                  start_date = start_date,
+                  end_date = end_date)
 
-  if (!isNULL(file)) {
-    apsimx::write_apsim_met(apsim,
-                            wrt.dir = dirname(file),
-                            filename = basename(file))
-  }
-  return(invisible(apsim))
+  return(apsim)
 }
 
 #' Calculates attribute amp for an object of class \sQuote{met}
-#' This function rcalculates annual mean monthly amplitude for an object of
-#'   class \sQuote{met} from \cranpkg{apsimx}
+#'
+#' This function recalculates mean monthly amplitude for an object of class
+#' \sQuote{met} from \cranpkg{apsimx}.
 #'
 #' @param met object of class \sQuote{met}
 #' @return an object of class \sQuote{met} with a recalculation of annual
@@ -131,7 +148,7 @@ get_dpird_apsim <- function(station_code,
 #' @author Fernando Miguez, \email{femiguez@@iastate.edu}
 #' @noRd
 
-amp_apsim_met <- function(met) {
+amp_apsim_met <- function(met, start_date, end_date) {
   if (!inherits(met, "met"))
     stop("Object should be of class 'met", call. = FALSE)
 
@@ -166,7 +183,12 @@ amp_apsim_met <- function(met) {
   met <- apsimx::remove_column_apsim_met(met, "mean.temp")
   met <- apsimx::remove_column_apsim_met(met, "month")
 
-  attr(met, "amp") <- paste("amp = ", ans)
+  attr(met, "amp") <- sprintf(
+    "amp = %s (oC) ! Amplitude in mean monthly temperature. Based on %s to %s.",
+    ans,
+    lubridate::ymd(start_date),
+    lubridate::ymd(end_date)
+  )
 
   return(met)
 }

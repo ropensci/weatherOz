@@ -5,13 +5,7 @@
 \alias{get_dpird_apsim}
 \title{Get DPIRD Summary Weather Data in the APSIM Format From the Weather 2.0 API}
 \usage{
-get_dpird_apsim(
-  station_code,
-  start_date,
-  end_date = Sys.Date(),
-  api_key,
-  file = NULL
-)
+get_dpird_apsim(station_code, start_date, end_date = Sys.Date(), api_key)
 }
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
@@ -28,19 +22,21 @@ returned is inclusive of this date.  Defaults to the current system date.}
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
-
-\item{file}{A \code{character} string that provides the file or connection to
-write to.  Defaults to \code{NULL} with no file written, just an \link{apsimx} \code{met}
-class object in your \R session.}
 }
 \value{
-An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
+An \CRANpkg{apsimx} object of class \sQuote{met} with attributes,
+alternatively, a local APSIM .met file if \code{file} is specified.
 }
 \description{
 Automates the retrieval and conversion of summary data from the
 \acronym{DPIRD} Weather 2.0 \acronym{API} to an \acronym{APSIM} .met file
 formatted weather data object.
 }
+\section{Saving objects}{
+
+To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
+}
+
 \examples{
 \dontrun{
 wd <- get_dpird_apsim(

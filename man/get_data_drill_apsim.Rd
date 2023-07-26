@@ -31,10 +31,6 @@ returned is inclusive of this date.  Defaults to the current system date.}
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
-
-\item{file}{A \code{character} string that provides the file or connection to
-write to.  Defaults to \code{NULL} with no file written, just an \link{apsimx} \code{met}
-class object in your \R session.}
 }
 \value{
 An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
@@ -88,6 +84,11 @@ interpolation method for \acronym{CLIMARC} data;}
 \item{6}{a synthetic pan value; or}
 \item{7}{an interpolated long term average.}
 }
+}
+
+\section{Saving objects}{
+
+To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
 }
 
 \examples{
