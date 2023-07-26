@@ -189,7 +189,7 @@ amp_apsim_met <- function(met, start_date, end_date) {
       units = "(oC)"
     )
 
-  met.agg <- aggregate(mean.temp ~ mnth, data = met, FUN = mean)
+  met.agg <- stats::aggregate(mean.temp ~ mnth, data = met, FUN = mean)
 
   ans <- round(max(met.agg$mean.temp) - min(met.agg$mean.temp), 2)
 
