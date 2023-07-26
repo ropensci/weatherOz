@@ -46,7 +46,6 @@ get_dpird_apsim <- function(station_code,
                             start_date,
                             end_date = Sys.Date(),
                             api_key) {
-
   apsim <- get_dpird_summaries(
     station_code = station_code,
     start_date = start_date,
@@ -113,15 +112,26 @@ get_dpird_apsim <- function(station_code,
 
   data.table::setDF(apsim)
 
-  units <- c("()", "()", "(MJ/m2/day)", "(oC)", "(oC)", "(mm)", "(%)", "(m/s)")
-  comments <- sprintf("!data from DPIRD Weather 2.0 API. retrieved: %s",
-                      Sys.time())
+  units <-
+    c("()",
+      "()",
+      "(MJ/m2/day)",
+      "(oC)",
+      "(oC)",
+      "(mm)",
+      "(%)",
+      "(m/s)")
+  comments <-
+    sprintf("!data from DPIRD Weather 2.0 API. retrieved: %s",
+            Sys.time())
 
   attr(apsim, "site") <- sprintf("%s.met", site)
-  attr(apsim, "latitude") <- sprintf("latitude = %f  (DECIMAL DEGREES)",
-                                     latitude)
-  attr(apsim, "longitude") <- sprintf("longitude = %f  (DECIMAL DEGREES)",
-                                      longitude)
+  attr(apsim, "latitude") <-
+    sprintf("latitude = %f  (DECIMAL DEGREES)",
+            latitude)
+  attr(apsim, "longitude") <-
+    sprintf("longitude = %f  (DECIMAL DEGREES)",
+            longitude)
   attr(apsim, "tav") <- tav
   attr(apsim, "colnames") <- names(apsim)
   attr(apsim, "units") <- units

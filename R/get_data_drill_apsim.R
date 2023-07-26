@@ -113,10 +113,8 @@ get_data_drill_apsim <- function(longitude,
 
   # Error if api_key is not provided
   if (missing(api_key)) {
-    stop(
-      "A valid email address must be provided for `api_key`.",
-      call. = FALSE
-    )
+    stop("A valid email address must be provided for `api_key`.",
+         call. = FALSE)
   }
 
   .check_not_example_api_key(api_key)
