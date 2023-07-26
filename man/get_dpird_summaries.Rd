@@ -16,7 +16,8 @@ get_dpird_summaries(
 }
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
-for the station of interest.}
+for the station of interest.  Station codes are available from the
+\code{get_station_metadata()} function.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}

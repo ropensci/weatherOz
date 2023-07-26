@@ -14,7 +14,8 @@ get_dpird_minute(
 }
 \arguments{
 \item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
-station code for the station of interest.}
+station code for the station of interest.  Station codes are available from
+the \code{get_station_metadata()} function.}
 
 \item{start_date_time}{A \code{character} string representing the start date and
 time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO8601).

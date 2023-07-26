@@ -6,7 +6,8 @@
 #'   start from August of 2000 for Vasse, \dQuote{VA}.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
-#'   for the station of interest.
+#'   for the station of interest.  Station codes are available from the
+#'   `get_station_metadata()` function.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.

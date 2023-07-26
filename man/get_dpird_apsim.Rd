@@ -9,7 +9,8 @@ get_dpird_apsim(station_code, start_date, end_date = Sys.Date(), api_key)
 }
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
-for the station of interest.}
+for the station of interest.  Station codes are available from the
+\code{get_station_metadata()} function.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
@@ -39,6 +40,9 @@ To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{aps
 
 \examples{
 \dontrun{
+# Get an APSIM format object for Binnu
+# Note that you need to supply your own API key
+
 wd <- get_dpird_apsim(
   station_code = "BI",
   start_date = "20220401",

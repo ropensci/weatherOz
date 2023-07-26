@@ -6,7 +6,8 @@
 #'   formatted weather data object.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
-#'   for the station of interest.
+#'   for the station of interest.  Station codes are available from the
+#'   `get_station_metadata()` function.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.
@@ -22,6 +23,9 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Get an APSIM format object for Binnu
+#' # Note that you need to supply your own API key
+#'
 #' wd <- get_dpird_apsim(
 #'   station_code = "BI",
 #'   start_date = "20220401",
