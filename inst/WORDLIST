@@ -57,6 +57,7 @@ SILO's
 Siddique
 Southwood
 SpatRaster
+Standardise
 Summarised
 TAS
 TZ
@@ -143,6 +144,8 @@ etoShortCrop
 etoTallCrop
 evaporative
 evapotranspiration
+evapotranspirationShortCrop
+evapotranspirationTallCrop
 frostCondition
 frostConditionLast
 frostConditionMinutes
@@ -214,6 +217,7 @@ soilTemperatureMinTime
 solarExposure
 solarIrradiance
 splining
+standardises
 summarised
 terra
 timezones
@@ -234,4 +238,5 @@ windMinSpeed
 windspeed
 withr
 wmo
+wth
 yyyy
