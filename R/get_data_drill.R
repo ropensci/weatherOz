@@ -211,6 +211,9 @@ get_data_drill <- function(longitude,
     .dataset = "DataDrill"
   )
 
+  data.table::setcolorder(out, order(names(out)))
+  data.table::setcolorder(out, c("station_code", "station_name"))
+
   out[]
 }
 

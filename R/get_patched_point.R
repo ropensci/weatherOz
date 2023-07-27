@@ -212,6 +212,7 @@ get_patched_point <- function(station_code,
     .dataset = "PatchedPoint"
   )
 
+  data.table::setcolorder(out, order(names(out)))
   data.table::setcolorder(out, c("station_code", "station_name"))
 
   out[]
