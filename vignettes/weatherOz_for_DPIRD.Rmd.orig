@@ -366,7 +366,7 @@ This function only needs the `station_code`, `start_date`, `end_date` and your `
 
 ### What You Get Back
 
-An object of {apsimx} 'met' class, compatible with a `data.frame`, that has daily data that include year, day, radation, max temperature, min temperature, rainfall, relative humidity and windspeed.
+An object of {apsimx} 'met' class, compatible with a `data.frame`, that has daily data that include year, day, radiation, max temperature, min temperature, rainfall, relative humidity, evaporation and windspeed.
 
 ### Example 9: Get APSIM Formatted Data for Binnu From 2022-04-01 to 2022-11-01
 
