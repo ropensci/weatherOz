@@ -560,7 +560,7 @@ library(weatherOz)
   wa_stn_all <- find_nearby_stations(
     station_code = "010111",
     distance_km = 50,
-    api_key = Sys.getenv("SILO_API_KEY"),
+    api_key = Sys.getenv("DPIRD_API_KEY"),
     which_api = "all"
   )
 )

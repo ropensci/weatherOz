@@ -1,4 +1,5 @@
-test_that("get_patched_point_apsim() user-input checks stop on invalid values", {
+
+test_that("get_patched_point_apsim() input checks stop on invalid values", {
   # missing station_code
   expect_error(
     get_patched_point_apsim(
