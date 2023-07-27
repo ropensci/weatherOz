@@ -5,6 +5,19 @@
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  The earliest available data
 #'   start from August of 2000 for Vasse, \dQuote{VA}.
 #'
+#' # Column Name Details
+#'
+#' Column names are converted from the default returns of the API to be
+#'    snake_case formatted and where appropriate, the names of the values that
+#'    are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+#'    using the same name for ease of interoperability, _e.g._, using
+#'    `rbind()` to create a `data.table` that contains data from both APIs.
+#'    However, use with caution and don't mix datasets of different time-steps,
+#'    _i.e._, this function gets many summary values not just \dQuote{daily}
+#'    time-step data.  The functions that access the SILO API only provide
+#'    access to daily data, so don't mix hourly or monthly from \acronym{DPIRD}
+#'    with \acronym{SILO}.
+#'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.  Station codes are available from the
 #'   `get_station_metadata()` function.

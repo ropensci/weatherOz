@@ -9,6 +9,14 @@
 #'   -44° with resolution 0.05° latitude by 0.05° longitude (approximately 5 km
 #'   × 5 km).
 #'
+#' # Column Name Details
+#'
+#' Column names are converted from the default returns of the API to be
+#'    snake_case formatted and where appropriate, the names of the values that
+#'    are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+#'    using the same name for ease of interoperability, _e.g._, using
+#'    `rbind()` to create a `data.table` that contains data from both APIs.
+#'
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
 #' @param latitude A single `numeric` value representing the latitude of the

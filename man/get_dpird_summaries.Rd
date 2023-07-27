@@ -75,6 +75,19 @@ Please note this function converts date-time columns from Coordinated
 Universal Time \sQuote{UTC} to Australian Western Standard Time
 \sQuote{AWST}.
 }
+\section{Column Name Details}{
+Column names are converted from the default returns of the API to be
+snake_case formatted and where appropriate, the names of the values that
+are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+using the same name for ease of interoperability, \emph{e.g.}, using
+\code{rbind()} to create a \code{data.table} that contains data from both APIs.
+However, use with caution and don't mix datasets of different time-steps,
+\emph{i.e.}, this function gets many summary values not just \dQuote{daily}
+time-step data.  The functions that access the SILO API only provide
+access to daily data, so don't mix hourly or monthly from \acronym{DPIRD}
+with \acronym{SILO}.
+}
+
 \section{Available Values}{
 
 \itemize{
