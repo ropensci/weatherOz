@@ -130,7 +130,7 @@
   # return the response if we're just looking for the nearest stations
   if (.format == "near") {
     data.table::setnames(
-      response_data,
+      x = response_data,
       old = c(
         "Number",
         "Station name",
@@ -148,11 +148,12 @@
         "state",
         "elev_m",
         "distance_km"
-      )
+      ),
+      skip_absent = TRUE
     )
 
     response_data[, station_code := as.factor(as.character(
-      trimws(sprintf("%06s", station_code))))]
+      trimws(sprintf("%06s", station))))]
     response_data[, station_name := trimws(.strcap(x = station_name))]
     response_data[, owner := "BOM"]
     response_data[, distance_km := round(distance_km, 1)]
@@ -179,14 +180,21 @@
                   )))]
 
   if (.dataset == "PatchedPoint") {
+
     response_data[, station_code := sprintf("%06s", station)]
     response_data[, station := NULL]
-    response_data[, station_name :=
-                    .strcap(
-                      trimws(gsub(
-                        "name=", "",
-                        response_data$metadata[grep(
-                          "name", response_data$metadata)])))]
+
+    # apparently some of the data don't have station names, who knew?
+    if ("station_name" %notin% names(response_data)) {
+      response_data[, station_name := NA]
+    } else {
+      response_data[, station_name :=
+                      .strcap(
+                        trimws(gsub("name=", "",
+                                    response_data$metadata[grep("name",
+                                    response_data$metadata)])))]
+    }
+
     response_data[, latitude :=
                     trimws(
                       gsub("latitude=", "",
@@ -361,7 +369,7 @@
     if (any(dt[, lapply(
       X = .SD,
       FUN = function(col)
-        all(col == 0)
+        all(na.omit(col == 0))
     )])) {
       # Report message
       message(
