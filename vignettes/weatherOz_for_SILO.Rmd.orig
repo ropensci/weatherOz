@@ -230,12 +230,11 @@ library(weatherOz)
   wa_stn_all <- find_nearby_stations(
     station_code = "010111",
     distance_km = 50,
-    api_key = Sys.getenv("DPIRD_API_KEY"),
+    api_key = Sys.getenv("SILO_API_KEY"),
     which_api = "all"
   )
 )
 ```
-
 
 ### Getting Station Metadata for the SILO Network Stations
 
@@ -252,4 +251,43 @@ library(weatherOz)
 
 (metadata <- get_station_metadata(which_api = "silo"))
 ```
+## Using Metadata to Get Weather Data for a Whole State
+
+Using the metadata, we can get all weather data from stations in a single state like so.
+
+```{r silo-state}
+library(weatherOz)
+library(data.table)
+
+metadata <- get_station_metadata(which_api = "silo")
+
+# Subset to the required state
+metadata_wa <- subset(metadata, state == "WA")
+
+# Select first 10 to demo
+first_ten <- as.list(as.character(metadata_wa$station_code))[1:10]
+
+# Loop through each station_code and give proper names
+# We've wrapped it in `suppressMessages()` to keep the output a bit quieter
+# as most of the data have interpolated values in them that will repeat for
+# every set.
+
+supressMessages(
+  x <-
+    lapply(
+      X = first_ten,
+      FUN = get_patched_point,
+      start_date = "20001201",
+      end_date = "20001205",
+      values = "all",
+      api_key = Sys.getenv("SILO_API_KEY")
+    )
+)
+
+names(x) <- unlist(first_ten)
+
+# Create dataset with station_code column id
+rbindlist(x, idcol = "station_code")
+```
+
 # References
