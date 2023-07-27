@@ -10,10 +10,20 @@
 #'   that have corresponding values in each \acronym{API} are renamed, all
 #'   others are kept as-is or filled with `NA`.
 #'
-#' @param x A [data.table::data.table] object containing daily weather data
-#'   returned from `get_dpird_summary()`, `get_silo_data_drill()` or
-#'   `get_silo_patched_point()`.
+#' @param x An object of S3 class \sQuote{weatherOz.daily.wth} containing daily
+#'   weather data returned from `get_dpird_summary()`, `get_silo_data_drill()`
+#'   or `get_silo_patched_point()`.
 #'
 standardise_names <- function(x) {
+  if ("day" %notin% names(x) &&
+      "hour" %in% names(x) || "minute" %in% names(x)) {
+    stop(call. = FALSE,
+         "This function will only accept daily summary values from the DPIRD ",
+         "Weather 2.0 API.")
+  }
+
+  if (!grepl("\\D", x$station_code)) {
+
+  }
 
 }
