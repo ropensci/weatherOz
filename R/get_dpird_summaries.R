@@ -2,8 +2,11 @@
 #' Get DPIRD Weather Data in Summarised Formats
 #'
 #' Fetch nicely formatted individual station weather summaries from the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  The earliest available data
-#'   start from August of 2000 for Vasse, \dQuote{VA}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'
+#' # Start Dates
+#'
+#' The earliest available data start from August of 2000 for Vasse, \dQuote{VA}.
 #'
 #' # Column Name Details
 #'
@@ -14,9 +17,9 @@
 #'    `rbind()` to create a `data.table` that contains data from both APIs.
 #'    However, use with caution and don't mix datasets of different time-steps,
 #'    _i.e._, this function gets many summary values not just \dQuote{daily}
-#'    time-step data.  The functions that access the SILO API only provide
-#'    access to daily data, so don't mix hourly or monthly from \acronym{DPIRD}
-#'    with \acronym{SILO}.
+#'    time-step data.  The functions that access the \acronym{SILO}
+#'    \acronym{API} only provide access to daily data, so don't mix (sub)hourly,
+#'    monthly or yearly data from \acronym{DPIRD} with \acronym{SILO}.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.  Station codes are available from the
