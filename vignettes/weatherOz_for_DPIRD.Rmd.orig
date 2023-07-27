@@ -366,7 +366,7 @@ This function only needs the `station_code`, `start_date`, `end_date` and your `
 
 ### What You Get Back
 
-An object of [apsimx] 'met' class, compatible with a `data.frame`, that has daily data that include year, day, radation, max temperature, min temperature, rainfall, relative humidity and windspeed.
+An object of {apsimx} 'met' class, compatible with a `data.frame`, that has daily data that include year, day, radation, max temperature, min temperature, rainfall, relative humidity and windspeed.
 
 ### Example 9: Get APSIM Formatted Data for Binnu From 2022-04-01 to 2022-11-01
 
@@ -386,6 +386,7 @@ library(weatherOz)
 ## Working With DPIRD Metadata
 
 Three functions are provided to assist in fetching metadata about the stations.
+
  * `find_nearby_stations()`, which returns a `data.table` with the nearest weather stations to a given geographic point or known station either in the DPIRD or BOM (from SILO) networks.
  * `get_dpird_availability()`, which returns a `data.table` with the availability for weather stations in the DPIRD network providing the up time and data availability for a given period of time.
  * `get_station_metadata()`, which returns a `data.table` with the latest and most up-to-date information available from the Weather 2.0 API on the stations' geographic locations, hardware details, *e.g.,* wind mast height, and recording capabilities.
