@@ -57,7 +57,6 @@ SILO's
 Siddique
 Southwood
 SpatRaster
-Standardise
 Summarised
 TAS
 TZ
@@ -217,7 +216,6 @@ soilTemperatureMinTime
 solarExposure
 solarIrradiance
 splining
-standardises
 summarised
 terra
 timezones
@@ -238,5 +236,4 @@ windMinSpeed
 windspeed
 withr
 wmo
-wth
 yyyy
