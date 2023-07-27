@@ -185,7 +185,7 @@ library(weatherOz)
 
 ## Getting Summary Data
 
-The function, `get_dpird_summary(), fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
+The function, `get_dpird_summary()`, fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
 
 ### Available Values for Summary Data
@@ -269,7 +269,7 @@ You must provide a `station_code` and `API_key`, the other arguments, `start_dat
 
 ### What You Get Back
 
-This function returns a [data.table::data.table] with `station_code` and the date interval queried together with the requested weather variables in alphabetical order.  Please note this function converts date-time columns from Coordinated Universal Time 'UTC'} to Australian Western Standard Time 'AWST'.  The first ten columns will always be:
+This function returns a `data.table` with `station_code` and the date interval queried together with the requested weather variables in alphabetical order.  Please note this function converts date-time columns from Coordinated Universal Time 'UTC'} to Australian Western Standard Time 'AWST'.  The first ten columns will always be:
 
    * `station_code`,
    * `station_name`,

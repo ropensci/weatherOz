@@ -4,6 +4,14 @@
 #' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API}
 #'   derived from the \acronym{BOM} station observations (PatchedPoint) data.
 #'
+#' # Column Name Details
+#'
+#' Column names are converted from the default returns of the API to be
+#'    snake_case formatted and where appropriate, the names of the values that
+#'    are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+#'    using the same name for ease of interoperability, _e.g._, using
+#'    `rbind()` to create a `data.table` that contains data from both APIs.
+#'
 #' @details The \acronym{SILO} documentation provides the following information
 #'   for the PatchedPoint data.
 #'
@@ -212,7 +220,14 @@ get_patched_point <- function(station_code,
     .dataset = "PatchedPoint"
   )
 
-  data.table::setcolorder(out, c("station_code", "station_name"))
+  data.table::setcolorder(out, order(names(out)))
+  data.table::setcolorder(out,
+                          c("station_code",
+                            "station_name",
+                            "year",
+                            "month",
+                            "day",
+                            "date"))
 
   out[]
 }

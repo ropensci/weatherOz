@@ -11,7 +11,7 @@ test_that("get_dpird_apsim() returns a 'met' object",
               )
             })
             expect_s3_class(x, "met")
-            expect_length(x, 8)
+            expect_length(x, 9)
             expect_named(x,
                          c(
                            "year",
@@ -20,6 +20,7 @@ test_that("get_dpird_apsim() returns a 'met' object",
                            "maxt",
                            "mint",
                            "rain",
+                           "evap",
                            "rh",
                            "windspeed"
                          ))

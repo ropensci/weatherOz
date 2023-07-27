@@ -2,8 +2,24 @@
 #' Get DPIRD Weather Data in Summarised Formats
 #'
 #' Fetch nicely formatted individual station weather summaries from the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  The earliest available data
-#'   start from August of 2000 for Vasse, \dQuote{VA}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'
+#' # Start Dates
+#'
+#' The earliest available data start from August of 2000 for Vasse, \dQuote{VA}.
+#'
+#' # Column Name Details
+#'
+#' Column names are converted from the default returns of the API to be
+#'    snake_case formatted and where appropriate, the names of the values that
+#'    are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+#'    using the same name for ease of interoperability, _e.g._, using
+#'    `rbind()` to create a `data.table` that contains data from both APIs.
+#'    However, use with caution and don't mix datasets of different time-steps,
+#'    _i.e._, this function gets many summary values not just \dQuote{daily}
+#'    time-step data.  The functions that access the \acronym{SILO}
+#'    \acronym{API} only provide access to daily data, so don't mix (sub)hourly,
+#'    monthly or yearly data from \acronym{DPIRD} with \acronym{SILO}.
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.  Station codes are available from the
@@ -325,6 +341,142 @@ get_dpird_summaries <- function(station_code,
   out[, period.to := NULL]
 
   .set_snake_case_names(out)
+
+  # provide some standard names between DPIRD and SILO for easy merging where
+  # data values are shared
+  # not all columns are renamed, but almost all are listed for clarity
+
+  data.table::setnames(out,
+                       old = c(
+                         "station_code",
+                         "station_name",
+                         "year",
+                         "month",
+                         "day",
+                         "date",
+                         "air_temperature_avg",
+                         "air_temperature_max",
+                         "air_temperature_max_time",
+                         "air_temperature_min",
+                         "air_temperature_min_time",
+                         "apparent_air_temperature_avg",
+                         "apparent_air_temperature_max",
+                         "apparent_air_temperature_max_time",
+                         "apparent_air_temperature_min",
+                         "apparent_air_temperature_min_time",
+                         "barometric_pressure",
+                         "battery_min_voltage",
+                         "battery_min_voltage_date_time",
+                         "chill_hours",
+                         "delta_t_avg",
+                         "delta_t_max",
+                         "delta_t_max_time",
+                         "delta_t_min",
+                         "delta_t_min_time",
+                         "dew_point_avg",
+                         "dew_point_max",
+                         "dew_point_max_time",
+                         "dew_point_min",
+                         "dew_point_min_time",
+                         "erosion_condition_minutes",
+                         "erosion_condition_start_time",
+                         "errors",
+                         "evapotranspiration_short_crop",
+                         "evapotranspiration_tall_crop",
+                         "frost_condition_minutes",
+                         "frost_condition_start_time",
+                         "heat_condition_minutes",
+                         "heat_condition_start_time",
+                         "observations_count",
+                         "observations_percentage",
+                         "pan_evaporation",
+                         "rainfall",
+                         "relative_humidity_avg",
+                         "relative_humidity_max",
+                         "relative_humidity_max_time",
+                         "relative_humidity_min",
+                         "relative_humidity_min_time",
+                         "richardson_units",
+                         "soil_temperature",
+                         "solar_exposure",
+                         "wet_bulb_avg",
+                         "wet_bulb_max",
+                         "wet_bulb_max_time",
+                         "wet_bulb_min",
+                         "wet_bulb_min_time",
+                         "wind_avg_speed",
+                         "wind_height",
+                         "wind_max_direction_compass_point",
+                         "wind_max_direction_degrees",
+                         "wind_max_speed",
+                         "wind_max_time"
+                       ),
+                       new = c(
+                         "station_code",
+                         "station_name",
+                         "year",
+                         "month",
+                         "day",
+                         "date",
+                         "air_tavg",
+                         "air_tmax",
+                         "air_tmax_time",
+                         "air_tmin",
+                         "air_tmin_time",
+                         "apparent_air_tavg",
+                         "apparent_air_tmax",
+                         "apparent_air_tmax_time",
+                         "apparent_air_tmin",
+                         "apparent_air_tmin_time",
+                         "barometric_pressure",
+                         "battery_min_voltage",
+                         "battery_min_voltage_date_time",
+                         "chill_hours",
+                         "delta_tavg",
+                         "delta_tmax",
+                         "delta_tmax_time",
+                         "delta_tmin",
+                         "delta_tmin_time",
+                         "dew_point_avg",
+                         "dew_point_max",
+                         "dew_point_max_time",
+                         "dew_point_min",
+                         "dew_point_min_time",
+                         "erosion_condition_minutes",
+                         "erosion_condition_start_time",
+                         "errors",
+                         "et_short_crop",
+                         "et_tall_crop",
+                         "frost_condition_minutes",
+                         "frost_condition_start_time",
+                         "heat_condition_minutes",
+                         "heat_condition_start_time",
+                         "observations_count",
+                         "observations_percentage",
+                         "pan_evaporation",
+                         "rainfall",
+                         "rh_avg",
+                         "rh_tmax",
+                         "rh_tmax_time",
+                         "rh_tmin",
+                         "rh_tmin_time",
+                         "richardson_units",
+                         "soil_temperature",
+                         "radiation",
+                         "wet_bulb_avg",
+                         "wet_bulb_tmax",
+                         "wet_bulb_tmax_time",
+                         "wet_bulb_tmin",
+                         "wet_bulb_tmin_time",
+                         "wind_avg_speed",
+                         "wind_height",
+                         "wind_max_direction_compass_point",
+                         "wind_max_direction_degrees",
+                         "wind_max_speed",
+                         "wind_max_time"
+                       ),
+                       skip_absent = TRUE
+  )
 
   data.table::setcolorder(out, order(names(out)))
 

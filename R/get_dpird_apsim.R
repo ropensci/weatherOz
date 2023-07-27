@@ -58,6 +58,7 @@ get_dpird_apsim <- function(station_code,
     values = c(
       "airTemperatureMax",
       "airTemperatureMin",
+      "panEvaporation",
       "rainfall",
       "relativeHumidityAvg",
       "solarExposure",
@@ -75,8 +76,8 @@ get_dpird_apsim <- function(station_code,
   longitude <- apsim$longitude[1]
   latitude <- apsim$latitude[1]
   site <- apsim$station_name[1]
-  tav <- round(mean(colMeans(apsim[, c("air_temperature_max",
-                                       "air_temperature_min")], na.rm = TRUE),
+  tav <- round(mean(colMeans(apsim[, c("air_tmax",
+                                       "air_tmin")], na.rm = TRUE),
                     na.rm = TRUE), 2)
   tav <-
     sprintf(
@@ -93,25 +94,27 @@ get_dpird_apsim <- function(station_code,
     apsim[, c(
       "year",
       "day",
-      "solar_exposure",
-      "air_temperature_max",
-      "air_temperature_min",
+      "radiation",
+      "air_tmax",
+      "air_tmin",
+      "pan_evaporation",
       "rainfall",
-      "relative_humidity_avg",
+      "rh_avg",
       "wind_avg"
     )]
 
   data.table::setnames(
     apsim,
     old = c(
-      "solar_exposure",
-      "air_temperature_max",
-      "air_temperature_min",
+      "radiation",
+      "air_tmax",
+      "air_tmin",
+      "pan_evaporation",
       "rainfall",
-      "relative_humidity_avg",
+      "rh_avg",
       "wind_avg"
     ),
-    new = c("radn", "maxt", "mint", "rain", "rh", "windspeed")
+    new = c("radn", "maxt", "mint", "rain", "evap", "rh", "windspeed")
   )
 
   data.table::setDF(apsim)

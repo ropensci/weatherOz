@@ -61,6 +61,14 @@ how the observations were derived.  The grid spans 112° to 154°, -10° to
 -44° with resolution 0.05° latitude by 0.05° longitude (approximately 5 km
 × 5 km).
 }
+\section{Column Name Details}{
+Column names are converted from the default returns of the API to be
+snake_case formatted and where appropriate, the names of the values that
+are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+using the same name for ease of interoperability, \emph{e.g.}, using
+\code{rbind()} to create a \code{data.table} that contains data from both APIs.
+}
+
 \section{Available Values}{
 
 

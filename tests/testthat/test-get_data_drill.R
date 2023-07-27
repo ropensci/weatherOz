@@ -1,5 +1,4 @@
 
-
 test_that("get_data_drill() user-input checks stop on invalid values", {
   # no longitude
   expect_error(
@@ -67,14 +66,15 @@ test_that("get_data_drill() returns all daily values", {
     c(
       "longitude",
       "latitude",
-      "elev_m",
-      "date",
       "year",
       "month",
       "day",
-      "extracted",
-      "daily_rain",
-      "daily_rain_source",
+      "date",
+      "air_tmax",
+      "air_tmax_source",
+      "air_tmin",
+      "air_tmin_source",
+      "elev_m",
       "et_morton_actual",
       "et_morton_actual_source",
       "et_morton_potential",
@@ -93,14 +93,13 @@ test_that("get_data_drill() returns all daily values", {
       "evap_pan_source",
       "evap_syn",
       "evap_syn_source",
-      "max_temp",
-      "max_temp_source",
-      "min_temp",
-      "min_temp_source",
+      "extracted",
       "mslp",
       "mslp_source",
       "radiation",
       "radiation_source",
+      "rainfall",
+      "rainfall_source",
       "rh_tmax",
       "rh_tmax_source",
       "rh_tmin",
@@ -134,18 +133,18 @@ test_that("get_data_drill() returns selected daily values", {
     c(
       "longitude",
       "latitude",
-      "elev_m",
-      "date",
       "year",
       "month",
       "day",
+      "date",
+      "air_tmax",
+      "air_tmax_source",
+      "air_tmin",
+      "air_tmin_source",
+      "elev_m",
       "extracted",
-      "daily_rain",
-      "daily_rain_source",
-      "max_temp",
-      "max_temp_source",
-      "min_temp",
-      "min_temp_source"
+      "rainfall",
+      "rainfall_source"
     )
   )
   expect_s3_class(wd, class = "data.table")

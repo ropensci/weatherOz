@@ -54,7 +54,13 @@ always be:
 Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API}
 derived from the \acronym{BOM} station observations (PatchedPoint) data.
 }
-\details{
+\section{Column Name Details}{
+Column names are converted from the default returns of the API to be
+snake_case formatted and where appropriate, the names of the values that
+are analogous between \acronym{SILO} and \acronym{DPIRD} data are named
+using the same name for ease of interoperability, \emph{e.g.}, using
+\code{rbind()} to create a \code{data.table} that contains data from both APIs.
+
 The \acronym{SILO} documentation provides the following information
 for the PatchedPoint data.
 
@@ -71,6 +77,7 @@ pixel on a 0.05° × 0.05° grid over the land area of Australia (including
 some islands).}
 }
 }
+
 \section{Available Values}{
 
 
