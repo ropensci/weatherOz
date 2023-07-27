@@ -1,3 +1,4 @@
+
 test_that("get_patched_point() user-input checks stop on invalid values", {
   # missing station code
   expect_error(
@@ -7,7 +8,6 @@ test_that("get_patched_point() user-input checks stop on invalid values", {
       api_key = Sys.getenv("SILO_API_KEY")
     )
   )
-
 
   expect_error(
     get_patched_point(
@@ -56,16 +56,15 @@ test_that("get_patched_point() returns daily values", {
     c(
       "station_code",
       "station_name",
-      "longitude",
-      "latitude",
-      "elev_m",
-      "date",
       "year",
       "month",
       "day",
-      "extracted",
-      "daily_rain",
-      "daily_rain_source",
+      "date",
+      "air_tmax",
+      "air_tmax_source",
+      "air_tmin",
+      "air_tmin_source",
+      "elev_m",
       "et_morton_actual",
       "et_morton_actual_source",
       "et_morton_potential",
@@ -84,14 +83,15 @@ test_that("get_patched_point() returns daily values", {
       "evap_pan_source",
       "evap_syn",
       "evap_syn_source",
-      "max_temp",
-      "max_temp_source",
-      "min_temp",
-      "min_temp_source",
+      "extracted",
+      "latitude",
+      "longitude",
       "mslp",
       "mslp_source",
       "radiation",
       "radiation_source",
+      "rainfall",
+      "rainfall_source",
       "rh_tmax",
       "rh_tmax_source",
       "rh_tmin",
@@ -105,23 +105,21 @@ test_that("get_patched_point() returns daily values", {
   expect_s3_class(wd, class = "data.table")
 })
 
-
 test_that("get_patched_point() returns selected daily values", {
-  vcr::use_cassette(
-    "silo_get_patched_point_selected_daily_values",
-    {
-      skip_if_offline()
-      withr::local_timezone(tz = "Australia/Perth")
-      expect_message(
-        wd <- get_patched_point(
-          station_code = "008137",
-          values = c("rain", "max_temp", "min_temp"),
-          start_date = "2021-06-01",
-          end_date = "2021-07-01",
-          api_key = "slavish_moo_0k@icloud.com"
-        )
-      )
-  })
+  vcr::use_cassette("silo_get_patched_point_selected_daily_values",
+                    {
+                      skip_if_offline()
+                      withr::local_timezone(tz = "Australia/Perth")
+                      expect_message(
+                        wd <- get_patched_point(
+                          station_code = "008137",
+                          values = c("rain", "max_temp", "min_temp"),
+                          start_date = "2021-06-01",
+                          end_date = "2021-07-01",
+                          api_key = "slavish_moo_0k@icloud.com"
+                        )
+                      )
+                    })
   expect_equal(nrow(wd), 31)
   expect_length(wd, 16)
   expect_named(
@@ -129,22 +127,21 @@ test_that("get_patched_point() returns selected daily values", {
     c(
       "station_code",
       "station_name",
-      "longitude",
-      "latitude",
-      "elev_m",
-      "date",
       "year",
       "month",
       "day",
+      "date",
+      "air_tmax",
+      "air_tmax_source",
+      "air_tmin",
+      "air_tmin_source",
+      "elev_m",
       "extracted",
-      "daily_rain",
-      "daily_rain_source",
-      "max_temp",
-      "max_temp_source",
-      "min_temp",
-      "min_temp_source"
+      "latitude",
+      "longitude",
+      "rainfall",
+      "rainfall_source"
     )
   )
   expect_s3_class(wd, class = "data.table")
 })
-

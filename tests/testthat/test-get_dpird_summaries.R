@@ -1,5 +1,4 @@
 test_that("user-input checks stop if invalid values are provided", {
-
   # missing station code -----
   expect_error(
     get_dpird_summaries(
@@ -119,9 +118,17 @@ test_that("get_dpird_summaries() returns yearly values",
             expect_length(x, 9)
             expect_named(
               x,
-              c("station_code", "station_name", "year", "wind_avg_speed", "wind_height",
-                "wind_max_direction_compass_point", "wind_max_direction_degrees",
-                "wind_max_speed", "wind_max_time")
+              c(
+                "station_code",
+                "station_name",
+                "year",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
+              )
             )
             expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
@@ -148,9 +155,19 @@ test_that("get_dpird_summaries() returns monthly values",
             expect_length(x, 11)
             expect_named(
               x,
-              c("station_code", "station_name", "year", "month", "date", "wind_avg_speed",
-                "wind_height", "wind_max_direction_compass_point", "wind_max_direction_degrees",
-                "wind_max_speed", "wind_max_time")
+              c(
+                "station_code",
+                "station_name",
+                "year",
+                "month",
+                "date",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
+              )
             )
             expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
@@ -179,9 +196,19 @@ test_that("get_dpird_summaries() returns daily values",
             expect_length(x, 12)
             expect_named(
               x,
-              c("station_code", "station_name", "year", "month", "day", "date",
-                "wind_avg_speed", "wind_height", "wind_max_direction_compass_point",
-                "wind_max_direction_degrees", "wind_max_speed", "wind_max_time"
+              c(
+                "station_code",
+                "station_name",
+                "year",
+                "month",
+                "day",
+                "date",
+                "wind_avg_speed",
+                "wind_height",
+                "wind_max_direction_compass_point",
+                "wind_max_direction_degrees",
+                "wind_max_speed",
+                "wind_max_time"
               )
             )
             expect_type(x$station_code, "integer")
