@@ -129,7 +129,7 @@ library(weatherOz)
 )
 ```
 
-### Getting Minute Data
+## Getting Minute Data
 
 This function fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
@@ -183,7 +183,7 @@ library(weatherOz)
 )
 ```
 
-### Getting Summary Data
+## Getting Summary Data
 
 The function, `get_dpird_summary(), fetches nicely formatted minute weather station data from the DPIRD Weather 2.0 API for a maximum 24-hour period.
 You must provide a `station_code` and `API_key`, the other arguments, `start_date_time`, `minutes` and `values` are optional.
