@@ -13,15 +13,13 @@ values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be
 
 \item{scans}{\code{Integer}. Number of scans to download, starting with most
 recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
-available , 6 - the most recent hour available, 12 - the most recent 2 hours
-available, etc.  Negating will return the oldest files first.  Defaults to
-\enumerate{
-\item Value is optional.
-}}
+available , 6 - the most recent hour available, 12 - the most recent 2
+hours available, etc.  Negating will return the oldest files first.
+Defaults to 1.  Value is optional.}
 
 \item{compat}{\code{Character}. A string indicating the \R package with which the
 returned imagery should be formatted for use, one of \link{terra} or \link{stars}.
-Defaults to 'terra'.}
+Defaults to \sQuote{terra}.}
 }
 \value{
 A \link[terra:SpatRaster-class]{terra::SpatRaster} or \link{stars} class object as selected by the user by

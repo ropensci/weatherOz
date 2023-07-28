@@ -148,8 +148,8 @@ Imports:
     readr (>= 1.1.1),
     stringi,
     stars,
-    stats,
     terra,
+    stats,
     utils,
     xml2
 Suggests:
