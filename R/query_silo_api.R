@@ -369,7 +369,7 @@
     if (any(dt[, lapply(
       X = .SD,
       FUN = function(col)
-        all(na.omit(col == 0))
+        all(stats::na.omit(col == 0))
     )])) {
       # Report message
       message(
