@@ -10,6 +10,7 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
+[![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate
@@ -137,12 +138,12 @@ wd <- get_data_drill(
 
 head(wd)
 #>    longitude latitude  elev_m       date year month  day  extracted daily_rain
-#> 1:       150      -27 274.9 m 2022-10-01 2022  2022 2022 2023-07-27        0.0
-#> 2:       150      -27 274.9 m 2022-10-02 2022  2022 2022 2023-07-27        0.0
-#> 3:       150      -27 274.9 m 2022-10-03 2022  2022 2022 2023-07-27        0.8
-#> 4:       150      -27 274.9 m 2022-10-04 2022  2022 2022 2023-07-27        1.0
-#> 5:       150      -27 274.9 m 2022-10-05 2022  2022 2022 2023-07-27        0.0
-#> 6:       150      -27 274.9 m 2022-10-06 2022  2022 2022 2023-07-27        0.0
+#> 1:       150      -27 274.9 m 2022-10-01 2022  2022 2022 2023-07-28        0.0
+#> 2:       150      -27 274.9 m 2022-10-02 2022  2022 2022 2023-07-28        0.0
+#> 3:       150      -27 274.9 m 2022-10-03 2022  2022 2022 2023-07-28        0.8
+#> 4:       150      -27 274.9 m 2022-10-04 2022  2022 2022 2023-07-28        1.0
+#> 5:       150      -27 274.9 m 2022-10-05 2022  2022 2022 2023-07-28        0.0
+#> 6:       150      -27 274.9 m 2022-10-06 2022  2022 2022 2023-07-28        0.0
 #>    daily_rain_source max_temp max_temp_source min_temp min_temp_source
 #> 1:                25     26.1              25      9.1              25
 #> 2:                25     23.0              25     12.9              25
