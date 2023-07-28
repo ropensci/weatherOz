@@ -169,7 +169,7 @@ user requests, we don’t make any commitments about speed of delivery.
 Jeffrey, S.J., Carter, J.O., Moodie, K.B. and Beswick, A.R. (2001).
 Using spatial interpolation to construct a comprehensive archive of
 Australian climate data, *Environmental Modelling and Software*, Vol
-16/4, pp 309-330. <https://doi.org/10.1016/S1364-8152(01)00008-1)>.
+16/4, pp 309-330. <https://doi.org/10.1016/S1364-8152(01)00008-1>.
 
 ## Code of Conduct
 
