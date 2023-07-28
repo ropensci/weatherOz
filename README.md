@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
