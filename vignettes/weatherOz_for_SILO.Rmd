@@ -881,8 +881,30 @@ Here we demonstrate how to get the metadata for the SILO stations only.
 library(weatherOz)
 
 (metadata <- get_station_metadata(which_api = "silo"))
-#> Error: 
-#> The server with the location information is not responding. Please retry again later.
+#>       station_code                     station_name      start        end latitude
+#>    1:       061065                Aberdeen Rossgole 1926-01-01 2023-07-28 -32.1402
+#>    2:       071000    Adaminaby Alpine Tourist Park 1886-01-01 2023-07-28 -35.9962
+#>    3:       072000                 Adelong Tumut St 1883-01-01 2023-07-28 -35.3085
+#>    4:       068000          Albion Park Post Office 1892-01-01 2023-07-28 -34.5712
+#>    5:       068241 Albion Park Shellharbour Airport 1999-01-01 2023-07-28 -34.5639
+#>   ---                                                                             
+#> 3756:       007096                             Yuin 1898-01-01 2023-07-28 -27.9808
+#> 3757:       012092                         Yuinmery 1921-01-01 2023-07-28 -28.5606
+#> 3758:       002030                           Yulmbu 1950-01-01 2023-07-28 -17.2986
+#> 3759:       008147                             Yuna 1909-01-01 2023-07-28 -28.3250
+#> 3760:       012093                      Yundamindra 1901-01-01 2023-07-28 -29.2472
+#>       longitude state elev_m                source status   wmo
+#>    1:  150.7285   NSW    543 Bureau of Meteorology   open    NA
+#>    2:  148.7693   NSW   1015 Bureau of Meteorology   open    NA
+#>    3:  148.0641   NSW    333 Bureau of Meteorology   open    NA
+#>    4:  150.7761   NSW      8 Bureau of Meteorology   open    NA
+#>    5:  150.7924   NSW      8 Bureau of Meteorology   open 95748
+#>   ---                                                          
+#> 3756:  116.0347    WA    300 Bureau of Meteorology   open    NA
+#> 3757:  119.0161    WA    500 Bureau of Meteorology   open    NA
+#> 3758:  126.9158    WA    450 Bureau of Meteorology   open    NA
+#> 3759:  114.9589    WA    270 Bureau of Meteorology   open    NA
+#> 3760:  122.1022    WA    450 Bureau of Meteorology   open    NA
 ```
 ## Using Metadata to Get Weather Data for a Whole State
 
@@ -892,26 +914,21 @@ Using the metadata, we can get all weather data from stations in a single state 
 ```r
 library(weatherOz)
 library(data.table)
-#> data.table 1.14.8 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 metadata <- get_station_metadata(which_api = "silo")
-#> Error: 
-#> The server with the location information is not responding. Please retry again later.
 
 # Subset to the required state
 metadata_wa <- subset(metadata, state == "WA")
-#> Error in eval(expr, envir, enclos): object 'metadata' not found
 
 # Select first 10 to demo
 first_ten <- as.list(as.character(metadata_wa$station_code))[1:10]
-#> Error in eval(expr, envir, enclos): object 'metadata_wa' not found
 
 # Loop through each station_code and give proper names
 # We've wrapped it in `suppressMessages()` to keep the output a bit quieter
 # as most of the data have interpolated values in them that will repeat for
 # every set.
 
-supressMessages(
+suppressMessages(
   x <-
     lapply(
       X = first_ten,
@@ -922,14 +939,210 @@ supressMessages(
       api_key = Sys.getenv("SILO_API_KEY")
     )
 )
-#> Error in supressMessages(x <- lapply(X = first_ten, FUN = get_patched_point, : could not find function "supressMessages"
 
 names(x) <- unlist(first_ten)
-#> Error in eval(expr, envir, enclos): object 'first_ten' not found
 
 # Create dataset with station_code column id
 rbindlist(x, idcol = "station_code")
-#> Error in eval(expr, envir, enclos): object 'x' not found
+#>     station_code station_code station_name year month  day       date air_tmax
+#>  1:       009804       009804           NA 2000  2000 2000 2000-12-01     35.1
+#>  2:       009804       009804           NA 2000  2000 2000 2000-12-02     21.0
+#>  3:       009804       009804           NA 2000  2000 2000 2000-12-03     26.5
+#>  4:       009804       009804           NA 2000  2000 2000 2000-12-04     23.0
+#>  5:       009804       009804           NA 2000  2000 2000 2000-12-05     23.5
+#>  6:       009804       009804           NA   NA    NA   NA       <NA>       NA
+#>  7:       009804       009804           NA   NA    NA   NA       <NA>       NA
+#>  8:       009804       009804           NA   NA    NA   NA       <NA>       NA
+#>  9:       008000       008000           NA 2000  2000 2000 2000-12-01     32.6
+#> 10:       008000       008000           NA 2000  2000 2000 2000-12-02     30.4
+#> 11:       008000       008000           NA 2000  2000 2000 2000-12-03     35.6
+#> 12:       008000       008000           NA 2000  2000 2000 2000-12-04     33.0
+#> 13:       008000       008000           NA 2000  2000 2000 2000-12-05     33.4
+#> 14:       008000       008000           NA   NA    NA   NA       <NA>       NA
+#> 15:       008000       008000           NA   NA    NA   NA       <NA>       NA
+#> 16:       008000       008000           NA   NA    NA   NA       <NA>       NA
+#> 17:       009500       009500           NA 2000  2000 2000 2000-12-01     24.3
+#> 18:       009500       009500           NA 2000  2000 2000 2000-12-02     19.8
+#> 19:       009500       009500           NA 2000  2000 2000 2000-12-03     28.9
+#> 20:       009500       009500           NA 2000  2000 2000 2000-12-04     18.0
+#> 21:       009500       009500           NA 2000  2000 2000 2000-12-05     21.3
+#>     air_tmax_source air_tmin air_tmin_source  elev_m et_morton_actual
+#>  1:              25     11.5              25  60.0 m              3.5
+#>  2:              25     15.3              25  60.0 m              4.6
+#>  3:              25      8.5              25  60.0 m              4.3
+#>  4:              25     13.0              25  60.0 m              5.6
+#>  5:              25     15.2              25  60.0 m              2.8
+#>  6:              NA       NA              NA  60.0 m               NA
+#>  7:              NA       NA              NA  60.0 m               NA
+#>  8:              NA       NA              NA  60.0 m               NA
+#>  9:              25     14.6              25 210.0 m              3.9
+#> 10:              25     15.6              25 210.0 m              2.3
+#> 11:              25     16.0              25 210.0 m              1.1
+#> 12:              25     16.8              25 210.0 m              1.7
+#> 13:              25     17.0              25 210.0 m              1.6
+#> 14:              NA       NA              NA 210.0 m               NA
+#> 15:              NA       NA              NA 210.0 m               NA
+#> 16:              NA       NA              NA 210.0 m               NA
+#> 17:              25      8.5              25   3.0 m              6.3
+#> 18:              25     12.0              25   3.0 m              4.9
+#> 19:              25      8.6              25   3.0 m              4.4
+#> 20:              25     12.5              25   3.0 m              3.2
+#> 21:              25     13.4              25   3.0 m              3.7
+#>     et_morton_actual_source et_morton_potential et_morton_potential_source
+#>  1:                      26                11.3                         26
+#>  2:                      26                 8.3                         26
+#>  3:                      26                 9.1                         26
+#>  4:                      26                 6.9                         26
+#>  5:                      26                 6.9                         26
+#>  6:                      NA                  NA                         NA
+#>  7:                      NA                  NA                         NA
+#>  8:                      NA                  NA                         NA
+#>  9:                      26                 9.4                         26
+#> 10:                      26                10.7                         26
+#> 11:                      26                12.4                         26
+#> 12:                      26                11.5                         26
+#> 13:                      26                 9.0                         26
+#> 14:                      NA                  NA                         NA
+#> 15:                      NA                  NA                         NA
+#> 16:                      NA                  NA                         NA
+#> 17:                      26                 7.2                         26
+#> 18:                      26                 7.1                         26
+#> 19:                      26                 8.6                         26
+#> 20:                      26                 3.2                         26
+#> 21:                      26                 7.1                         26
+#>     et_morton_wet et_morton_wet_source et_short_crop et_short_crop_source
+#>  1:           7.4                   26           7.7                   26
+#>  2:           6.5                   26           5.4                   26
+#>  3:           6.7                   26           6.1                   26
+#>  4:           6.3                   26           4.9                   26
+#>  5:           4.9                   26           4.7                   26
+#>  6:            NA                   NA            NA                   NA
+#>  7:            NA                   NA            NA                   NA
+#>  8:            NA                   NA            NA                   NA
+#>  9:           6.6                   26           7.0                   26
+#> 10:           6.5                   26           7.2                   26
+#> 11:           6.8                   26           8.1                   26
+#> 12:           6.6                   26           7.6                   26
+#> 13:           5.3                   26           6.4                   26
+#> 14:            NA                   NA            NA                   NA
+#> 15:            NA                   NA            NA                   NA
+#> 16:            NA                   NA            NA                   NA
+#> 17:           6.7                   26           5.3                   26
+#> 18:           6.0                   26           4.8                   26
+#> 19:           6.5                   26           6.2                   26
+#> 20:           3.2                   26           2.2                   26
+#> 21:           5.4                   26           4.8                   26
+#>     et_tall_crop et_tall_crop_source evap_comb evap_comb_source evap_morton_lake
+#>  1:         10.2                  26      10.0               25              7.6
+#>  2:          6.6                  26       7.4               25              6.7
+#>  3:          7.9                  26       6.6               25              6.9
+#>  4:          5.7                  26       8.7               25              6.4
+#>  5:          5.9                  26       7.7               25              5.0
+#>  6:           NA                  NA        NA               NA               NA
+#>  7:           NA                  NA        NA               NA               NA
+#>  8:           NA                  NA        NA               NA               NA
+#>  9:          8.8                  26      10.8               25              7.8
+#> 10:          9.3                  26      11.4               25              7.6
+#> 11:         10.8                  26      10.7               25              7.9
+#> 12:         10.0                  26      10.0               25              7.7
+#> 13:          8.4                  26       9.7               25              6.1
+#> 14:           NA                  NA        NA               NA               NA
+#> 15:           NA                  NA        NA               NA               NA
+#> 16:           NA                  NA        NA               NA               NA
+#> 17:          6.3                  26       8.0               25              7.0
+#> 18:          5.8                  26       6.0               25              6.2
+#> 19:          7.9                  26       6.7               25              6.7
+#> 20:          2.5                  26       5.1               25              3.3
+#> 21:          5.9                  26       7.4               25              5.6
+#>     evap_morton_lake_source evap_pan evap_pan_source evap_syn evap_syn_source
+#>  1:                      26     10.0              25     10.1              26
+#>  2:                      26      7.4              25      7.4              26
+#>  3:                      26      6.6              25      8.4              26
+#>  4:                      26      8.7              25      7.0              26
+#>  5:                      26      7.7              25      6.4              26
+#>  6:                      NA       NA              NA       NA              NA
+#>  7:                      NA       NA              NA       NA              NA
+#>  8:                      NA       NA              NA       NA              NA
+#>  9:                      26     10.8              25     10.5              26
+#> 10:                      26     11.4              25     10.6              26
+#> 11:                      26     10.7              25     12.1              26
+#> 12:                      26     10.0              25     11.2              26
+#> 13:                      26      9.7              25      9.9              26
+#> 14:                      NA       NA              NA       NA              NA
+#> 15:                      NA       NA              NA       NA              NA
+#> 16:                      NA       NA              NA       NA              NA
+#> 17:                      26      8.0              25      7.2              26
+#> 18:                      26      6.0              25      6.5              26
+#> 19:                      26      6.7              25      8.0              26
+#> 20:                      26      5.1              25      3.5              26
+#> 21:                      26      7.4              25      6.2              26
+#>      extracted latitude longitude   mslp mslp_source radiation radiation_source
+#>  1: 2023-07-28 -33.8811  122.2167 1014.7          25      31.4               25
+#>  2: 2023-07-28 -33.8811  122.2167 1018.0          25      29.8               25
+#>  3: 2023-07-28 -33.8811  122.2167 1020.4          25      31.4               25
+#>  4: 2023-07-28 -33.8811  122.2167 1016.8          25      28.3               25
+#>  5: 2023-07-28 -33.8811  122.2167 1021.4          25      21.7               25
+#>  6: 2023-07-28 -33.8811  122.2167     NA          NA        NA               NA
+#>  7: 2023-07-28 -33.8811  122.2167     NA          NA        NA               NA
+#>  8: 2023-07-28 -33.8811  122.2167     NA          NA        NA               NA
+#>  9: 2023-07-28 -27.9607  114.6336 1009.4          25      31.0               25
+#> 10: 2023-07-28 -27.9607  114.6336 1015.9          25      31.7               25
+#> 11: 2023-07-28 -27.9607  114.6336 1012.8          25      31.8               25
+#> 12: 2023-07-28 -27.9607  114.6336 1010.5          25      31.3               25
+#> 13: 2023-07-28 -27.9607  114.6336 1009.5          25      23.7               25
+#> 14: 2023-07-28 -27.9607  114.6336     NA          NA        NA               NA
+#> 15: 2023-07-28 -27.9607  114.6336     NA          NA        NA               NA
+#> 16: 2023-07-28 -27.9607  114.6336     NA          NA        NA               NA
+#> 17: 2023-07-28 -35.0289  117.8808 1012.7          25      31.3               25
+#> 18: 2023-07-28 -35.0289  117.8808 1020.1          25      28.9               25
+#> 19: 2023-07-28 -35.0289  117.8808 1019.1          25      29.8               25
+#> 20: 2023-07-28 -35.0289  117.8808 1018.7          25      13.1               25
+#> 21: 2023-07-28 -35.0289  117.8808 1020.4          25      25.5               25
+#>     rainfall rainfall_source rh_tmax rh_tmax_source rh_tmin rh_tmin_source   vp
+#>  1:      0.0               0    18.6             26    77.4             26 10.5
+#>  2:      0.2               0    44.3             26    63.3             26 11.0
+#>  3:      0.0               0    25.7             26    80.2             26  8.9
+#>  4:      0.0               0    50.9             26    95.5             26 14.3
+#>  5:      0.0               0    43.9             26    73.6             26 12.7
+#>  6:       NA              NA      NA             NA      NA             NA   NA
+#>  7:       NA              NA      NA             NA      NA             NA   NA
+#>  8:       NA              NA      NA             NA      NA             NA   NA
+#>  9:      0.0               0    29.7             26    87.9             26 14.6
+#> 10:      0.0               0    22.8             26    55.9             26  9.9
+#> 11:      0.0               0    15.3             26    49.0             26  8.9
+#> 12:      0.0               0    19.7             26    51.8             26  9.9
+#> 13:      0.0               0    28.2             26    74.9             26 14.5
+#> 14:       NA              NA      NA             NA      NA             NA   NA
+#> 15:       NA              NA      NA             NA      NA             NA   NA
+#> 16:       NA              NA      NA             NA      NA             NA   NA
+#> 17:      0.0               0    41.5             26   100.0             26 12.6
+#> 18:      0.0               0    47.7             26    78.5             26 11.0
+#> 19:      0.0               0    27.6             26    98.5             26 11.0
+#> 20:      0.0               0    75.1             26   100.0             26 15.5
+#> 21:      0.0               0    44.2             26    72.9             26 11.2
+#>     vp_deficit vp_deficit_source vp_source
+#>  1:       30.0                26        25
+#>  2:       11.8                26        25
+#>  3:       17.5                26        25
+#>  4:        9.8                26        25
+#>  5:       12.8                26        25
+#>  6:         NA                NA        NA
+#>  7:         NA                NA        NA
+#>  8:         NA                NA        NA
+#>  9:       23.4                26        25
+#> 10:       25.1                26        25
+#> 11:       35.3                26        25
+#> 12:       30.0                26        25
+#> 13:       26.3                26        25
+#> 14:         NA                NA        NA
+#> 15:         NA                NA        NA
+#> 16:         NA                NA        NA
+#> 17:       11.3                26        25
+#> 18:        9.4                26        25
+#> 19:       18.5                26        25
+#> 20:        3.4                26        25
+#> 21:       11.2                26        25
+#>  [ reached getOption("max.print") -- omitted 60 rows ]
 ```
 
 # References

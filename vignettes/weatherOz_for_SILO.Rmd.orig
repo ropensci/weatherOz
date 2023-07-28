@@ -272,7 +272,7 @@ first_ten <- as.list(as.character(metadata_wa$station_code))[1:10]
 # as most of the data have interpolated values in them that will repeat for
 # every set.
 
-supressMessages(
+suppressMessages(
   x <-
     lapply(
       X = first_ten,
