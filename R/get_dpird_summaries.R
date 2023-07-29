@@ -191,7 +191,6 @@ get_dpird_summaries <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
-
   if (missing(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
@@ -213,7 +212,11 @@ get_dpird_summaries <- function(station_code,
   .check_not_example_api_key(api_key)
 
   if (any(values == "all")) {
-    values <- c("stationCode", "stationName", "period", dpird_summary_values)
+    values <-
+      c("stationCode",
+        "stationName",
+        "period",
+        dpird_summary_values)
   } else {
     if (any(values %notin% dpird_summary_values)) {
       stop(call. = FALSE,
@@ -287,9 +290,13 @@ get_dpird_summaries <- function(station_code,
     checked_interval == "hourly",
     floor(lubridate::time_length(request_interval, unit = "hour") + 1),
     checked_interval == "30min",
-    floor((lubridate::time_length(request_interval, unit = "hour")) + 1) * 2,
+    floor((
+      lubridate::time_length(request_interval, unit = "hour")
+    ) + 1) * 2,
     checked_interval == "15min",
-    floor((lubridate::time_length(request_interval, unit = "hour")) + 1) * 4,
+    floor((
+      lubridate::time_length(request_interval, unit = "hour")
+    ) + 1) * 4,
     default = floor(lubridate::time_length(request_interval, unit = "day") + 1)
   )
 
@@ -346,269 +353,146 @@ get_dpird_summaries <- function(station_code,
   # data values are shared
   # not all columns are renamed, but almost all are listed for clarity
 
-  data.table::setnames(out,
-                       old = c(
-                         "station_code",
-                         "station_name",
-                         "year",
-                         "month",
-                         "day",
-                         "date",
-                         "air_temperature_avg",
-                         "air_temperature_max",
-                         "air_temperature_max_time",
-                         "air_temperature_min",
-                         "air_temperature_min_time",
-                         "apparent_air_temperature_avg",
-                         "apparent_air_temperature_max",
-                         "apparent_air_temperature_max_time",
-                         "apparent_air_temperature_min",
-                         "apparent_air_temperature_min_time",
-                         "barometric_pressure",
-                         "battery_min_voltage",
-                         "battery_min_voltage_date_time",
-                         "chill_hours",
-                         "delta_t_avg",
-                         "delta_t_max",
-                         "delta_t_max_time",
-                         "delta_t_min",
-                         "delta_t_min_time",
-                         "dew_point_avg",
-                         "dew_point_max",
-                         "dew_point_max_time",
-                         "dew_point_min",
-                         "dew_point_min_time",
-                         "erosion_condition_minutes",
-                         "erosion_condition_start_time",
-                         "errors",
-                         "evapotranspiration_short_crop",
-                         "evapotranspiration_tall_crop",
-                         "frost_condition_minutes",
-                         "frost_condition_start_time",
-                         "heat_condition_minutes",
-                         "heat_condition_start_time",
-                         "observations_count",
-                         "observations_percentage",
-                         "pan_evaporation",
-                         "rainfall",
-                         "relative_humidity_avg",
-                         "relative_humidity_max",
-                         "relative_humidity_max_time",
-                         "relative_humidity_min",
-                         "relative_humidity_min_time",
-                         "richardson_units",
-                         "soil_temperature",
-                         "solar_exposure",
-                         "wet_bulb_avg",
-                         "wet_bulb_max",
-                         "wet_bulb_max_time",
-                         "wet_bulb_min",
-                         "wet_bulb_min_time",
-                         "wind_avg_speed",
-                         "wind_height",
-                         "wind_max_direction_compass_point",
-                         "wind_max_direction_degrees",
-                         "wind_max_speed",
-                         "wind_max_time"
-                       ),
-                       new = c(
-                         "station_code",
-                         "station_name",
-                         "year",
-                         "month",
-                         "day",
-                         "date",
-                         "air_tavg",
-                         "air_tmax",
-                         "air_tmax_time",
-                         "air_tmin",
-                         "air_tmin_time",
-                         "apparent_air_tavg",
-                         "apparent_air_tmax",
-                         "apparent_air_tmax_time",
-                         "apparent_air_tmin",
-                         "apparent_air_tmin_time",
-                         "barometric_pressure",
-                         "battery_min_voltage",
-                         "battery_min_voltage_date_time",
-                         "chill_hours",
-                         "delta_tavg",
-                         "delta_tmax",
-                         "delta_tmax_time",
-                         "delta_tmin",
-                         "delta_tmin_time",
-                         "dew_point_avg",
-                         "dew_point_max",
-                         "dew_point_max_time",
-                         "dew_point_min",
-                         "dew_point_min_time",
-                         "erosion_condition_minutes",
-                         "erosion_condition_start_time",
-                         "errors",
-                         "et_short_crop",
-                         "et_tall_crop",
-                         "frost_condition_minutes",
-                         "frost_condition_start_time",
-                         "heat_condition_minutes",
-                         "heat_condition_start_time",
-                         "observations_count",
-                         "observations_percentage",
-                         "pan_evaporation",
-                         "rainfall",
-                         "rh_avg",
-                         "rh_tmax",
-                         "rh_tmax_time",
-                         "rh_tmin",
-                         "rh_tmin_time",
-                         "richardson_units",
-                         "soil_temperature",
-                         "radiation",
-                         "wet_bulb_avg",
-                         "wet_bulb_tmax",
-                         "wet_bulb_tmax_time",
-                         "wet_bulb_tmin",
-                         "wet_bulb_tmin_time",
-                         "wind_avg_speed",
-                         "wind_height",
-                         "wind_max_direction_compass_point",
-                         "wind_max_direction_degrees",
-                         "wind_max_speed",
-                         "wind_max_time"
-                       ),
-                       skip_absent = TRUE
+  data.table::setnames(
+    out,
+    old = c(
+      "station_code",
+      "station_name",
+      "year",
+      "month",
+      "day",
+      "date",
+      "air_temperature_avg",
+      "air_temperature_max",
+      "air_temperature_max_time",
+      "air_temperature_min",
+      "air_temperature_min_time",
+      "apparent_air_temperature_avg",
+      "apparent_air_temperature_max",
+      "apparent_air_temperature_max_time",
+      "apparent_air_temperature_min",
+      "apparent_air_temperature_min_time",
+      "barometric_pressure",
+      "battery_min_voltage",
+      "battery_min_voltage_date_time",
+      "chill_hours",
+      "delta_t_avg",
+      "delta_t_max",
+      "delta_t_max_time",
+      "delta_t_min",
+      "delta_t_min_time",
+      "dew_point_avg",
+      "dew_point_max",
+      "dew_point_max_time",
+      "dew_point_min",
+      "dew_point_min_time",
+      "erosion_condition_minutes",
+      "erosion_condition_start_time",
+      "errors",
+      "evapotranspiration_short_crop",
+      "evapotranspiration_tall_crop",
+      "frost_condition_minutes",
+      "frost_condition_start_time",
+      "heat_condition_minutes",
+      "heat_condition_start_time",
+      "observations_count",
+      "observations_percentage",
+      "pan_evaporation",
+      "rainfall",
+      "relative_humidity_avg",
+      "relative_humidity_max",
+      "relative_humidity_max_time",
+      "relative_humidity_min",
+      "relative_humidity_min_time",
+      "richardson_units",
+      "soil_temperature",
+      "solar_exposure",
+      "wet_bulb_avg",
+      "wet_bulb_max",
+      "wet_bulb_max_time",
+      "wet_bulb_min",
+      "wet_bulb_min_time",
+      "wind_avg_speed",
+      "wind_height",
+      "wind_max_direction_compass_point",
+      "wind_max_direction_degrees",
+      "wind_max_speed",
+      "wind_max_time"
+    ),
+    new = c(
+      "station_code",
+      "station_name",
+      "year",
+      "month",
+      "day",
+      "date",
+      "air_tavg",
+      "air_tmax",
+      "air_tmax_time",
+      "air_tmin",
+      "air_tmin_time",
+      "apparent_air_tavg",
+      "apparent_air_tmax",
+      "apparent_air_tmax_time",
+      "apparent_air_tmin",
+      "apparent_air_tmin_time",
+      "barometric_pressure",
+      "battery_min_voltage",
+      "battery_min_voltage_date_time",
+      "chill_hours",
+      "delta_tavg",
+      "delta_tmax",
+      "delta_tmax_time",
+      "delta_tmin",
+      "delta_tmin_time",
+      "dew_point_avg",
+      "dew_point_max",
+      "dew_point_max_time",
+      "dew_point_min",
+      "dew_point_min_time",
+      "erosion_condition_minutes",
+      "erosion_condition_start_time",
+      "errors",
+      "et_short_crop",
+      "et_tall_crop",
+      "frost_condition_minutes",
+      "frost_condition_start_time",
+      "heat_condition_minutes",
+      "heat_condition_start_time",
+      "observations_count",
+      "observations_percentage",
+      "pan_evaporation",
+      "rainfall",
+      "rh_avg",
+      "rh_tmax",
+      "rh_tmax_time",
+      "rh_tmin",
+      "rh_tmin_time",
+      "richardson_units",
+      "soil_temperature",
+      "radiation",
+      "wet_bulb_avg",
+      "wet_bulb_tmax",
+      "wet_bulb_tmax_time",
+      "wet_bulb_tmin",
+      "wet_bulb_tmin_time",
+      "wind_avg_speed",
+      "wind_height",
+      "wind_max_direction_compass_point",
+      "wind_max_direction_degrees",
+      "wind_max_speed",
+      "wind_max_time"
+    ),
+    skip_absent = TRUE
   )
 
   data.table::setcolorder(out, order(names(out)))
 
-  if (checked_interval == "monthly") {
-    out[, date := lubridate::ym(sprintf("%s-%s",
-                                        out$period_year,
-                                        out$period_month))]
-
-    data.table::setcolorder(out,
-                            c(
-                              "station_code",
-                              "station_name",
-                              "period_year",
-                              "period_month",
-                              "date"
-                            ))
-
-    out[, period_day := NULL]
-    out[, period_hour := NULL]
-    out[, period_minute := NULL]
-    data.table::setorder(
-      x = out,
-      cols = "period_year",
-      "period_month"
-    )
-  } else if (checked_interval == "daily") {
-    out[, date := lubridate::ymd(sprintf(
-      "%s-%s-%s",
-      out$period_year,
-      out$period_month,
-      out$period_day
-    ))]
-
-    data.table::setcolorder(
-      out,
-      c(
-        "station_code",
-        "station_name",
-        "period_year",
-        "period_month",
-        "period_day",
-        "date"
-      )
-    )
-
-    out[, period_minute := NULL]
-    out[, period_hour := NULL]
-    data.table::setorder(
-      x = out,
-      cols = "period_year",
-      "period_month",
-      "period_day"
-    )
-  } else if (checked_interval == "hourly") {
-    out[, date := lubridate::ymd_h(
-      sprintf(
-        "%s-%s-%s-%s",
-        out$period_year,
-        out$period_month,
-        out$period_day,
-        out$period_hour
-      ),
-      tz = "Australia/West"
-    )]
-
-    data.table::setcolorder(
-      out,
-      c(
-        "station_code",
-        "station_name",
-        "period_year",
-        "period_month",
-        "period_day",
-        "period_hour",
-        "date"
-      )
-    )
-
-    out[, period_minute := NULL]
-    data.table::setorder(
-      x = out,
-      cols = "period_year",
-      "period_month",
-      "period_day",
-      "period_hour"
-    )
-
-  } else if (checked_interval == "30min" || interval == "15min") {
-    out[, date := lubridate::ymd_hm(
-      sprintf(
-        "%s-%s-%s-%s-%s",
-        out$period_year,
-        out$period_month,
-        out$period_day,
-        out$period_hour,
-        out$period_minute
-      ),
-      tz = "Australia/West"
-    )]
-
-    data.table::setcolorder(
-      out,
-      c(
-        "station_code",
-        "station_name",
-        "period_year",
-        "period_month",
-        "period_day",
-        "period_hour",
-        "period_minute",
-        "date"
-      )
-    )
-    data.table::setorder(
-      x = out,
-      cols = "period_year",
-      "period_month",
-      "period_day",
-      "period_hour",
-      "period_minute"
-    )
-  } else {
-    data.table::setcolorder(out,
-                            c("station_code",
-                              "station_name",
-                              "period_year"))
-    out[, period_month := NULL]
-    out[, period_day := NULL]
-    out[, period_hour := NULL]
-    out[, period_minute := NULL]
-    data.table::setorder(x = out, cols = "period_year")
-  }
+  # this function contains several `if` and `if else` branches, so it's in its
+  # own function to simplify this parent function and keep it easier to maintain
+  # you can find it at the bottom of this file, so you can see what it's doing
+  out <-
+    .set_col_orders(.out = out, .checked_interval = checked_interval)
 
   if (any(grep("time", colnames(out)))) {
     out[, grep("time", colnames(out)) := suppressMessages(lapply(
@@ -664,25 +548,24 @@ get_dpird_summaries <- function(station_code,
   col_lists <- which(col_classes == "list")
 
   if (length(col_lists) > 0L) {
-  new_df_list <- vector(mode = "list", length = length(col_lists))
-  names(new_df_list) <- names(col_lists)
-  j <- 1
-  for (i in col_lists) {
-    new_df_list[[j]] <-
-      data.table::rbindlist(lapply(X = nested_list_objects[[i]],
-                                   FUN = data.table::as.data.table))
+    new_df_list <- vector(mode = "list", length = length(col_lists))
+    names(new_df_list) <- names(col_lists)
+    j <- 1
+    for (i in col_lists) {
+      new_df_list[[j]] <-
+        data.table::rbindlist(lapply(X = nested_list_objects[[i]],
+                                     FUN = data.table::as.data.table))
 
-    # drop the list column from the org data.table
-    nested_list_objects[, names(new_df_list[j]) := NULL]
+      # drop the list column from the org data.table
+      nested_list_objects[, names(new_df_list[j]) := NULL]
 
-    j <- j + 1
-  }
+      j <- j + 1
+    }
 
-  x <-
-    data.table::setorder(x = data.table::as.data.table(
-      do.call(what = cbind, args = new_df_list)))
+    x <-
+      data.table::setorder(x = data.table::as.data.table(do.call(what = cbind, args = new_df_list)))
 
-  return(cbind(nested_list_objects, x))
+    return(cbind(nested_list_objects, x))
   }
 
   return(nested_list_objects)
@@ -706,4 +589,145 @@ get_dpird_summaries <- function(station_code,
     )
   }
   return(invisible(NULL))
+}
+
+
+#' Sets the Column Orders Based on Time Step in the Data
+#'
+#' Sets column orders and adds date columns as necessary to match the data's
+#'   time-step values.
+#'
+#' @param out A `data.table` containing results from the DPIRD Weather 2.0 API
+#' @param checked_interval a time-step interval value that has been checked for
+#'   validity
+#'
+#' @return a `data.table` with ordered columns
+#' @noRd
+
+.set_col_orders <- function(.out, .checked_interval) {
+  if (.checked_interval == "monthly") {
+    .out[, date := lubridate::ym(sprintf("%s-%s",
+                                         .out$period_year,
+                                         .out$period_month))]
+
+    data.table::setcolorder(.out,
+                            c(
+                              "station_code",
+                              "station_name",
+                              "period_year",
+                              "period_month",
+                              "date"
+                            ))
+
+    .out[, period_day := NULL]
+    .out[, period_hour := NULL]
+    .out[, period_minute := NULL]
+    data.table::setorder(x = .out,
+                         cols = "period_year",
+                         "period_month")
+  } else if (.checked_interval == "daily") {
+    .out[, date := lubridate::ymd(sprintf(
+      "%s-%s-%s",
+      .out$period_year,
+      .out$period_month,
+      .out$period_day
+    ))]
+
+    data.table::setcolorder(
+      .out,
+      c(
+        "station_code",
+        "station_name",
+        "period_year",
+        "period_month",
+        "period_day",
+        "date"
+      )
+    )
+
+    .out[, period_minute := NULL]
+    .out[, period_hour := NULL]
+    data.table::setorder(x = .out,
+                         cols = "period_year",
+                         "period_month",
+                         "period_day")
+  } else if (.checked_interval == "hourly") {
+    .out[, date := lubridate::ymd_h(
+      sprintf(
+        "%s-%s-%s-%s",
+        .out$period_year,
+        .out$period_month,
+        .out$period_day,
+        .out$period_hour
+      ),
+      tz = "Australia/West"
+    )]
+
+    data.table::setcolorder(
+      .out,
+      c(
+        "station_code",
+        "station_name",
+        "period_year",
+        "period_month",
+        "period_day",
+        "period_hour",
+        "date"
+      )
+    )
+
+    .out[, period_minute := NULL]
+    data.table::setorder(x = .out,
+                         cols = "period_year",
+                         "period_month",
+                         "period_day",
+                         "period_hour")
+
+  } else if (.checked_interval == "30min" ||
+             .checked_interval == "15min") {
+    .out[, date := lubridate::ymd_hm(
+      sprintf(
+        "%s-%s-%s-%s-%s",
+        .out$period_year,
+        .out$period_month,
+        .out$period_day,
+        .out$period_hour,
+        .out$period_minute
+      ),
+      tz = "Australia/West"
+    )]
+
+    data.table::setcolorder(
+      .out,
+      c(
+        "station_code",
+        "station_name",
+        "period_year",
+        "period_month",
+        "period_day",
+        "period_hour",
+        "period_minute",
+        "date"
+      )
+    )
+    data.table::setorder(
+      x = .out,
+      cols = "period_year",
+      "period_month",
+      "period_day",
+      "period_hour",
+      "period_minute"
+    )
+  } else {
+    data.table::setcolorder(.out,
+                            c("station_code",
+                              "station_name",
+                              "period_year"))
+    .out[, period_month := NULL]
+    .out[, period_day := NULL]
+    .out[, period_hour := NULL]
+    .out[, period_minute := NULL]
+    data.table::setorder(x = .out, cols = "period_year")
+  }
+  return(.out)
 }

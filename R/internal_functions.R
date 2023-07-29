@@ -205,6 +205,26 @@
   }
 }
 
+#' Check User-provided Values for Passing to the SILO API
+#' @param .values User provided values to query from the API
+#' @return A vector of verified values
+#' @noRd
+
+.check_silo_values <- function(.values = values) {
+  if (any(.values != "all") &&
+      any(.values %notin% names(silo_daily_values))) {
+    stop(call. = FALSE,
+         "You have specified invalid weather values.")
+  }
+
+  if (any(.values == "all")) {
+    .v <- unname(silo_daily_values)
+  } else {
+    .v <- silo_daily_values[names(silo_daily_values) %in% .values]
+  }
+  return(.v)
+}
+
 #' Check User-Provided API Values
 #'
 #' @param which_api user-provided value for `which_api`

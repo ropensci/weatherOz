@@ -72,5 +72,5 @@ find_forecast_towns <-
     out <- forecast_towns[distance %in%
                      forecast_towns[(distance <= distance_km)]$distance]
     data.table::setkey(out, "aac")
-    return(out)
+    return(out[])
   }
