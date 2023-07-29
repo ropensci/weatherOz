@@ -191,7 +191,7 @@ get_patched_point <- function(station_code,
   .check_not_example_api_key(api_key)
 
   # validate user-provided weather values to query
-  .check_silo_values(.values = values)
+  .values <- .check_silo_values(.values = values)
 
   # validate user provided dates
   start_date <- .check_date(start_date)

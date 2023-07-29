@@ -185,7 +185,7 @@ get_data_drill <- function(longitude,
   .check_lonlat(longitude = longitude, latitude = latitude)
 
   # validate user-provided weather values to query
-  .check_silo_values(.values = values)
+  .values <- .check_silo_values(.values = values)
 
   # validate user provided dates
   start_date <- .check_date(start_date)
