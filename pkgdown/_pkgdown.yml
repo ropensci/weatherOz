@@ -60,9 +60,3 @@ reference:
   contents:
   - starts_with("dpird_")
   - silo_daily_values
-
-- title: Plotting
-  desc: >
-    Functions for plotting data from {weatherOz}.
-  contents:
-  - plot
