@@ -215,9 +215,6 @@ library(weatherOz)
 
 # Specify product ID and scans
 i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
-
-# Same, but use "avail" from prior to specify images for download
-i <- get_satellite_imagery(product_id = avail, scans = 1)
 ```
 
 `terra::plot()` has been re-exported to simplify visualising these files while using {weatherOz}.
