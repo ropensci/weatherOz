@@ -695,8 +695,7 @@ library(weatherOz)
 #> [136] "IDE00425.202307282200.tif" "IDE00425.202307282210.tif" "IDE00425.202307282220.tif"
 #> [139] "IDE00425.202307282230.tif" "IDE00425.202307282240.tif" "IDE00425.202307282250.tif"
 #> [142] "IDE00425.202307282300.tif" "IDE00425.202307282310.tif" "IDE00425.202307282320.tif"
-#> [145] "IDE00425.202307282330.tif" "IDE00425.202307282340.tif"
->>>>>>> develop
+#> [145] "IDE00425.202307282330.tif" "IDE00425.202307282340.tif" "IDE00425.202307282350.tif"
 ```
 
 #### Using get_satellite_imagery()
@@ -801,11 +800,7 @@ This value must be specified and the function will accept only one at a time.
 library(weatherOz)
 
 y <- get_radar_imagery(product_id = "IDR032")
-<<<<<<< HEAD
-#> file downloaded to:/var/folders/hc/tft3s5bn48gb81cs99mycyf00000gn/T//RtmpEFYCLf/file28eee88795d.png
-=======
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//Rtmpxc1W8L/file12843518f6c48.png
->>>>>>> develop
+#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//Rtmpxc1W8L/file12843268a74d3.png
 plot(y)
 ```
 
