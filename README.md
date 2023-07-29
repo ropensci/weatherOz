@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
@@ -169,7 +169,7 @@ user requests, we don’t make any commitments about speed of delivery.
 Jeffrey, S.J., Carter, J.O., Moodie, K.B. and Beswick, A.R. (2001).
 Using spatial interpolation to construct a comprehensive archive of
 Australian climate data, *Environmental Modelling and Software*, Vol
-16/4, pp 309-330. <https://doi.org/10.1016/S1364-8152(01)00008-1)>.
+16/4, pp 309-330. <https://doi.org/10.1016/S1364-8152(01)00008-1>.
 
 ## Code of Conduct
 

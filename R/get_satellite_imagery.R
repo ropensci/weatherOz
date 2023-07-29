@@ -75,12 +75,12 @@ get_available_imagery <- function(product_id = "all") {
 #'   values from [get_available_imagery()] may be used here.  Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
 #'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan
-#'   available , 6 - the most recent hour available, 12 - the most recent 2 hours
-#'   available, etc.  Negating will return the oldest files first.  Defaults to
-#'   1.  Value is optional.
+#'   available , 6 - the most recent hour available, 12 - the most recent 2
+#'   hours available, etc.  Negating will return the oldest files first.
+#'   Defaults to 1.  Value is optional.
 #' @param compat `Character`. A string indicating the \R package with which the
 #'   returned imagery should be formatted for use, one of [terra] or [stars].
-#'   Defaults to 'terra'.
+#'   Defaults to \sQuote{terra}.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
 #'   \var{product_id} include:
@@ -371,23 +371,6 @@ get_satellite_imagery <- get_satellite <-
   return(tif_files)
 }
 
-## Reexport plot() for SpatRaster ----
-
-#' Make a Map of BOM Satellite Data
-#'
-#' Native plotting of \CRANpkg{terra} `SpatRaster` objects, such as objects
-#' returned from `get_satellite_imagery()` by default.
-#'
-#' @importMethodsFrom terra plot
-#' @param x An object of class `SpatRaster`.
-#' @param y Not used.
-#' @param ... Plot parameters forwarded.
-#' @aliases plot
+#' @importFrom terra plot
 #' @export
-methods::setMethod(
-  "plot",
-  signature = "SpatRaster",
-  definition = function(x, y = "missing", ...) {
-    terra::plot(x)
-  }
-)
+terra::plot

@@ -67,8 +67,10 @@ find_forecast_towns <-
       lon2 = user_longitude
     )] |>
       data.table::setorderv("distance")
-    forecast_towns[distance %in%
+
+    forecast_towns[, distance := round(distance, 1)]
+    out <- forecast_towns[distance %in%
                      forecast_towns[(distance <= distance_km)]$distance]
-    data.table::setkey(forecast_towns, "aac")
-    return(forecast_towns)
+    data.table::setkey(out, "aac")
+    return(out)
   }

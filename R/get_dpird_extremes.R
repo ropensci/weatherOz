@@ -95,7 +95,7 @@
 #'   station_code = "BR",
 #'   type = c("erosionCondition",
 #'            "heatCondition"),
-#'   api_key = my_key
+#'   api_key = "your_api_key"
 #' )
 #' }
 #'
