@@ -208,6 +208,7 @@
 #' Check User-provided Values for Passing to the SILO API
 #' @param .values User provided values to query from the API
 #' @return A vector of verified values
+#' @noRd
 
 .check_silo_values <- function(.values = values) {
   if (any(.values != "all") &&
