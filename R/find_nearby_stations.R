@@ -118,31 +118,25 @@ find_nearby_stations <- function(longitude = NULL,
     .station_code = station_code
   )
 
-  # get DPIRD stations only ----
-  if (which_api == "dpird") {
-    return(
-      .get_dpird_stations(
-        .station_code = station_code,
-        .distance_km = distance_km,
-        .longitude = longitude,
-        .latitude = latitude,
-        .api_key = api_key,
-        .include_closed = include_closed
-      )
-    )
-  }
-
-  # get SILO stations only ----
-  if (which_api == "silo") {
-    return(
-      .get_silo_stations(
-        .station_code = station_code,
-        .distance_km = distance_km,
-        .longitude = longitude,
-        .latitude = latitude
-      )
-    )
-  }
+  switch(which_api,
+         "dpird" = return(
+           .get_dpird_stations(
+             .station_code = station_code,
+             .distance_km = distance_km,
+             .longitude = longitude,
+             .latitude = latitude,
+             .api_key = api_key,
+             .include_closed = include_closed
+           )
+         ),
+         "silo" = return(
+           .get_silo_stations(
+             .station_code = station_code,
+             .distance_km = distance_km,
+             .longitude = longitude,
+             .latitude = latitude
+           )
+         ))
 
   # get both APIs for `station_code` ----
   if (!is.null(station_code)) {
@@ -183,7 +177,7 @@ find_nearby_stations <- function(longitude = NULL,
       )
     }
     # get both APIs for lon/lat values ----
-  } else if (is.null(station_code)) {
+  } else {
     dpird_out <- .get_dpird_stations(
       .distance_km = distance_km,
       .longitude = longitude,
@@ -203,7 +197,7 @@ find_nearby_stations <- function(longitude = NULL,
                   if (exists("silo_out")) silo_out)
 
   data.table::setorder(out, distance_km)
-  return(out)
+  return(out[])
 }
 
 #' Query and Return a data.table of DPIRD Stations Within a Given Radius
@@ -314,9 +308,9 @@ find_nearby_stations <- function(longitude = NULL,
 #'  `.station_code`.
 #'
 #' Uses SILO's cgi-bin web interface to query and download a text file of
-#' BOM weather stations in SILO within 10000 km of Finke, NT (near the Lambert
-#' centre of Australia). Stations are returned in order of distance from the
-#' Finke Post Office.
+#'   BOM weather stations in SILO within 10000 km of Finke, NT (near the Lambert
+#'   centre of Australia). Stations are returned in order of distance from the
+#'   Finke Post Office.
 #'
 #' @noRd
 .get_silo_stations <-
@@ -375,5 +369,5 @@ find_nearby_stations <- function(longitude = NULL,
         return(invisible(NULL))
       }
     }
-    return(data.table::setorder(x = out, cols = distance_km)[])
+    return(data.table::setorder(x = out, cols = distance_km))
   }

@@ -27,7 +27,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & station_code",
             )
           })
 
-test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ no stations",
+test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ no stns",
           {
             vcr::use_cassette("nearby_dpird_stations_lonlat_with_no_stations", {
               skip_if_offline()
