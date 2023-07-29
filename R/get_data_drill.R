@@ -165,7 +165,6 @@ get_data_drill <- function(longitude,
                            end_date = Sys.Date(),
                            values = "all",
                            api_key) {
-
   if (missing(longitude) || missing(latitude)) {
     stop(call. = FALSE,
          "Please supply a valid values for `longitude` and `latitude`.")
@@ -177,27 +176,16 @@ get_data_drill <- function(longitude,
 
   # Error if api_key is not provided
   if (missing(api_key)) {
-    stop(
-      "A valid email address must be provided for `api_key`.",
-      call. = FALSE
-    )
+    stop("A valid email address must be provided for `api_key`.",
+         call. = FALSE)
   }
   .check_not_example_api_key(api_key)
 
   # validate user-provided lon and lat values
   .check_lonlat(longitude = longitude, latitude = latitude)
 
-  # validate user-provided data values and return .values object
-  if (any(values == "all")) {
-    .values <- unname(silo_daily_values)
-  } else {
-    if (any(values %notin% names(silo_daily_values))) {
-      stop(call. = FALSE,
-           "You have specified invalid weather values.")
-    }
-    .values <- silo_daily_values[names(silo_daily_values) %in%
-                                        values]
-  }
+  # validate user-provided weather values to query
+  .check_SILO_values(.values = values)
 
   # validate user provided dates
   start_date <- .check_date(start_date)
@@ -228,6 +216,5 @@ get_data_drill <- function(longitude,
                             "day",
                             "date"))
 
-  out[]
+  return(out[])
 }
-

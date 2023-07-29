@@ -190,16 +190,8 @@ get_patched_point <- function(station_code,
 
   .check_not_example_api_key(api_key)
 
-  if (any(values != "all") && any(values %notin% names(silo_daily_values))) {
-    stop(call. = FALSE,
-         "You have specified invalid weather values.")
-  }
-
-  if (any(values == "all")) {
-    .values <- unname(silo_daily_values)
-  } else {
-    .values <- silo_daily_values[names(silo_daily_values) %in% values]
-  }
+  # validate user-provided weather values to query
+  .check_SILO_values(.values = values)
 
   # validate user provided dates
   start_date <- .check_date(start_date)
