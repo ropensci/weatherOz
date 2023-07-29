@@ -95,11 +95,14 @@ get_dpird_minute <- function(station_code,
     }
   }
 
-  if ("all" %in% values) {
-    values <- dpird_minute_values
-  } else {
-    values <- c(values, "dateTime")
-  }
+  # selects the values that are to be sent to the API
+  # if "all" get all values and "dateTime", otherwise hand-pick the values
+  # plus date-time
+  values <- switch(
+    values,
+    "all" = c(dpird_minute_values, "dateTime"),
+    c(values, "dateTime")
+  )
 
   start_date_time <- .check_date_time(start_date_time)
 
