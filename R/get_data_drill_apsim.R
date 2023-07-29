@@ -131,14 +131,15 @@ get_data_drill_apsim <- function(longitude,
   start_date <- gsub("-", "", start_date)
   end_date <- gsub("-", "", end_date)
 
-
-  .query_silo_api(
-    .longitude = longitude,
-    .latitude = latitude,
-    .start_date = start_date,
-    .end_date = end_date,
-    .format = "apsim",
-    .api_key = api_key,
-    .dataset = "DataDrill"
+  return(
+    .query_silo_api(
+      .longitude = longitude,
+      .latitude = latitude,
+      .start_date = start_date,
+      .end_date = end_date,
+      .format = "apsim",
+      .api_key = api_key,
+      .dataset = "DataDrill"
+    )
   )
 }
