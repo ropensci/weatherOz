@@ -6,6 +6,8 @@
 
 * Fixed example in `get_dpird_extremes()` that didn't use "your_api_key" as all other examples did for error checking.
 
+* Fix the re-export of `terra::plot()`.
+
 # weatherOz 0.0.1
 
 * Added a `NEWS.md` file to track changes to the package.
