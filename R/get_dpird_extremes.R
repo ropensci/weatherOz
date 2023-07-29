@@ -133,18 +133,24 @@ get_dpird_extremes <- function(station_code,
 
   .check_not_example_api_key(api_key)
 
-  if (any(values == "all")) {
-    .values <- dpird_extreme_weather_values
-  } else {
-    if (any(values %notin% dpird_extreme_weather_values)) {
-      stop(call. = FALSE,
-           "You have specified invalid extreme weather values.")
-    }
-    .values <-
-      dpird_extreme_weather_values[dpird_extreme_weather_values %in% values]
+  if (any(values != "all") &&
+      any(values %notin% dpird_extreme_weather_values)) {
+    stop(call. = FALSE,
+         "You have specified invalid weather values.")
   }
 
-  .values <- c("stationCode", "longitude", "latitude", .values)
+  if (any(values == "all")) {
+    .values <-  c("stationCode",
+                  "longitude",
+                  "latitude",
+                  dpird_extreme_weather_values)
+  } else {
+    .values <-
+      c("stationCode",
+        "longitude",
+        "latitude",
+        dpird_extreme_weather_values[dpird_extreme_weather_values %in% values])
+  }
 
   query_list <- list(
     stationCode = station_code,
