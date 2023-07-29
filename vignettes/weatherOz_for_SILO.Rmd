@@ -775,11 +775,6 @@ Using the metadata, we can get all weather data from stations in a single state 
 ```r
 library(weatherOz)
 library(data.table)
-#> data.table 1.14.8 using 1 threads (see ?getDTthreads).  Latest news: r-datatable.com
-#> **********
-#> This installation of data.table has not detected OpenMP support. It should still work but in single-threaded mode.
-#> This is a Mac. Please read https://mac.r-project.org/openmp/. Please engage with Apple and ask them for support. Check r-datatable.com for updates, and our Mac instructions here: https://github.com/Rdatatable/data.table/wiki/Installation. After several years of many reports of installation problems on Mac, it's time to gingerly point out that there have been no similar problems on Windows or Linux.
-#> **********
 
 metadata <- get_station_metadata(which_api = "silo")
 
