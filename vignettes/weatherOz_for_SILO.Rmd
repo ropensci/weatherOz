@@ -650,7 +650,7 @@ library(weatherOz)
 #> 14:       010144        York Post Office  116.7581 -31.88360    WA  174.0
 #> 15:       010311                    York  116.7650 -31.89970    WA  179.0
 #> 16:       010056                  Inkpen  116.4169 -31.80420    WA  310.0
-#> 17:         BTSB      DFES-B Talbot West  116.6898 -31.96060    WA  356.0
+#> 17:         BTSB      DFES-B Talbot West  116.6899 -31.96060    WA  356.0
 #> 18:       010023          Warradong Farm  116.9411 -31.50030    WA  240.0
 #> 19:        YE001               York East  116.9211 -31.83588    WA  229.0
 #> 20:         ROGR           Rolling Green  116.3184 -31.69527    WA  315.0
