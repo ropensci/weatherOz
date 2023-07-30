@@ -216,9 +216,9 @@ get_dpird_summaries <- function(station_code,
       c("stationCode",
         "stationName",
         "period",
-        dpird_summary_values)
+        weatherOz::dpird_summary_values)
   } else {
-    if (any(values %notin% dpird_summary_values)) {
+    if (any(values %notin% weatherOz::dpird_summary_values)) {
       stop(call. = FALSE,
            "You have specified invalid weather values.")
     }

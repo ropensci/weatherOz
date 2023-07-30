@@ -10,6 +10,8 @@
 
 * Fix example for `get_dpird_extremes()` that didn't follow the package's standard use of "your_api_key" for the `api_key` value in the example.
 
+* Fix an issue where the package data was not available when this package was called by another, _e.g._ {extractOz} used `get_patched_point()` but could not validate the user-input `values` because `silo_daily_values` could not be found.
+
 # weatherOz 0.0.1
 
 * Added a `NEWS.md` file to track changes to the package.
