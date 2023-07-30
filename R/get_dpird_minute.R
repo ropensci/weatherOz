@@ -88,7 +88,7 @@ get_dpird_minute <- function(station_code,
 
   .check_not_example_api_key(api_key)
 
-  if (any(values %notin% dpird_minute_values)) {
+  if (any(values %notin% weatherOz::dpird_minute_values)) {
     if (values != "all") {
       stop(call. = FALSE,
            "You have specified a value not found in the 'API'.")
@@ -100,7 +100,7 @@ get_dpird_minute <- function(station_code,
   # plus date-time
   values <- switch(
     values,
-    "all" = c(dpird_minute_values, "dateTime"),
+    "all" = c(weatherOz::dpird_minute_values, "dateTime"),
     c(values, "dateTime")
   )
 

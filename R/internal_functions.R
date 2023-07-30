@@ -212,15 +212,17 @@
 
 .check_silo_values <- function(.values = values) {
   if (any(.values != "all") &&
-      any(.values %notin% names(silo_daily_values))) {
+      any(.values %notin% names(weatherOz::silo_daily_values))) {
     stop(call. = FALSE,
          "You have specified invalid weather values.")
   }
 
   if (any(.values == "all")) {
-    .v <- unname(silo_daily_values)
+    .v <- unname(weatherOz::silo_daily_values)
   } else {
-    .v <- silo_daily_values[names(silo_daily_values) %in% .values]
+    .v <-
+      weatherOz::silo_daily_values[names(weatherOz::silo_daily_values) %in%
+                                     .values]
   }
   return(.v)
 }
