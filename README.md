@@ -77,6 +77,14 @@ DPIRD Weather 2.0 API.
 
 ``` r
 library(weatherOz)
+#> 
+#> Attaching package: 'weatherOz'
+#> The following object is masked from 'package:graphics':
+#> 
+#>     plot
+#> The following object is masked from 'package:base':
+#> 
+#>     plot
 
 wd <- get_dpird_summaries(
   station_code = "BI",
@@ -137,20 +145,20 @@ wd <- get_data_drill(
 )
 
 head(wd)
-#>    longitude latitude  elev_m       date year month  day  extracted daily_rain
-#> 1:       150      -27 274.9 m 2022-10-01 2022  2022 2022 2023-07-28        0.0
-#> 2:       150      -27 274.9 m 2022-10-02 2022  2022 2022 2023-07-28        0.0
-#> 3:       150      -27 274.9 m 2022-10-03 2022  2022 2022 2023-07-28        0.8
-#> 4:       150      -27 274.9 m 2022-10-04 2022  2022 2022 2023-07-28        1.0
-#> 5:       150      -27 274.9 m 2022-10-05 2022  2022 2022 2023-07-28        0.0
-#> 6:       150      -27 274.9 m 2022-10-06 2022  2022 2022 2023-07-28        0.0
-#>    daily_rain_source max_temp max_temp_source min_temp min_temp_source
-#> 1:                25     26.1              25      9.1              25
-#> 2:                25     23.0              25     12.9              25
-#> 3:                25     24.2              25      8.4              25
-#> 4:                25     25.8              25     10.6              25
-#> 5:                25     22.4              25     12.5              25
-#> 6:                25     25.4              25     14.4              25
+#>    longitude latitude year month  day       date air_tmax air_tmax_source
+#> 1:       150      -27 2022  2022 2022 2022-10-01     26.1              25
+#> 2:       150      -27 2022  2022 2022 2022-10-02     23.0              25
+#> 3:       150      -27 2022  2022 2022 2022-10-03     24.2              25
+#> 4:       150      -27 2022  2022 2022 2022-10-04     25.8              25
+#> 5:       150      -27 2022  2022 2022 2022-10-05     22.4              25
+#> 6:       150      -27 2022  2022 2022 2022-10-06     25.4              25
+#>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
+#> 1:      9.1              25 274.9 m 2023-07-30      0.0              25
+#> 2:     12.9              25 274.9 m 2023-07-30      0.0              25
+#> 3:      8.4              25 274.9 m 2023-07-30      0.8              25
+#> 4:     10.6              25 274.9 m 2023-07-30      1.0              25
+#> 5:     12.5              25 274.9 m 2023-07-30      0.0              25
+#> 6:     14.4              25 274.9 m 2023-07-30      0.0              25
 ```
 
 ## Notes on Data and API Endpoints

@@ -1,4 +1,5 @@
 
+
 #' Find the Nearest Weather Stations to a Given Geographic Point or Known Station
 #'
 #' Find nearby weather stations given geographic coordinates or a station code
@@ -134,7 +135,8 @@ find_nearby_stations <- function(longitude = NULL,
              .station_code = station_code,
              .distance_km = distance_km,
              .longitude = longitude,
-             .latitude = latitude
+             .latitude = latitude,
+             .include_closed = include_closed
            )
          ))
 
@@ -154,7 +156,8 @@ find_nearby_stations <- function(longitude = NULL,
         .station_code = station_code,
         .distance_km = distance_km,
         .longitude = longitude,
-        .latitude = latitude
+        .latitude = latitude,
+        .include_closed = include_closed
       )
     } # check which dataset was queried and use it to supply lat/lon to query
     # the other data set for nearest stations using the closest lat/lon value
@@ -164,7 +167,8 @@ find_nearby_stations <- function(longitude = NULL,
         .station_code = NULL,
         .distance_km = distance_km,
         .longitude = dpird_out$longitude[1],
-        .latitude = dpird_out$latitude[1]
+        .latitude = dpird_out$latitude[1],
+        .include_closed = include_closed
       )
     } else {
       dpird_out <- .get_dpird_stations(
@@ -189,12 +193,15 @@ find_nearby_stations <- function(longitude = NULL,
       .station_code = NULL,
       .distance_km = distance_km,
       .longitude = longitude,
-      .latitude = latitude
+      .latitude = latitude,
+      .include_closed = include_closed
     )
   }
 
-  out <- rbind(if (exists("dpird_out")) dpird_out,
-                  if (exists("silo_out")) silo_out)
+  out <- rbind(if (exists("dpird_out"))
+    dpird_out,
+    if (exists("silo_out"))
+      silo_out)
 
   data.table::setorder(out, distance_km)
   return(out[])
@@ -224,7 +231,6 @@ find_nearby_stations <- function(longitude = NULL,
                                 .latitude,
                                 .api_key,
                                 .include_closed) {
-
   dpird_query_list <- list(api_key = .api_key,
                            api_group = "all",
                            include_closed = .include_closed)
@@ -257,8 +263,7 @@ find_nearby_stations <- function(longitude = NULL,
                                 .limit = 1000)
 
   dpird_out <-
-    data.table::data.table(
-      jsonlite::fromJSON(dpird_out[[1]]$parse("UTF8"))$collection)
+    data.table::data.table(jsonlite::fromJSON(dpird_out[[1]]$parse("UTF8"))$collection)
 
   if (nrow(dpird_out) == 0L) {
     message(
@@ -317,7 +322,8 @@ find_nearby_stations <- function(longitude = NULL,
   function(.station_code,
            .distance_km,
            .longitude,
-           .latitude) {
+           .latitude,
+           .include_closed) {
     if (is.null(.station_code)) {
       out <- .query_silo_api(
         .station_code = "015526",
@@ -369,5 +375,29 @@ find_nearby_stations <- function(longitude = NULL,
         return(invisible(NULL))
       }
     }
-    return(data.table::setorder(x = out, cols = distance_km))
+
+    bom_stations <- .get_bom_metadata()
+
+    out <- merge(out, bom_stations, by = c("station_code"))
+    # drops the unwanted columns that are added after using `find_nearby_stations`
+    out[, grep(".y", names(out)) := NULL]
+
+    data.table::setnames(out,
+                         names(out),
+                         gsub(".x", "", names(out)))
+
+    if (isFALSE(.include_closed)) {
+      out <- subset(out, status == "open")
+    }
+
+    # drops unused cols for this returned object
+    out[, start := NULL]
+    out[, end := NULL]
+    out[, source := NULL]
+    out[, status := NULL]
+    out[, wmo := NULL]
+
+    data.table::setorder(x = out, cols = distance_km)
+
+    return(out[])
   }
