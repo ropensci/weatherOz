@@ -12,6 +12,8 @@
 
 * Fix an issue where the package data was not available when this package was called by another, _e.g._ {extractOz} used `get_patched_point()` but could not validate the user-input `values` because `silo_daily_values` could not be found.
 
+* Fix bug where closed stations are included in the nearest stations when using `find_nearby_stations()` and `include_closed = FALSE` (default).
+
 # weatherOz 0.0.1
 
 * Added a `NEWS.md` file to track changes to the package.
