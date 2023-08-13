@@ -197,8 +197,7 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & station_code",
                 distance_km = 200,
                 which_api = "silo"
               )
-            },
-            record = "new_episodes")
+            })
             expect_s3_class(x, "data.table")
             expect_length(x, 8)
             expect_named(
