@@ -16,8 +16,8 @@
   },
   error = function(x)
     stop(
-      "\nThe server with the location information is not responding. ",
-      "Please retry again later.\n",
+      "The BOM server with the station location information is not responding.",
+      " Please retry again later.\n",
       call. = FALSE
     ))
 
