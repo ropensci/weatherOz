@@ -379,7 +379,7 @@ find_nearby_stations <- function(longitude = NULL,
     bom_stations <- .get_bom_metadata()
 
     out <- merge(out, bom_stations, by = c("station_code"))
-    # drops the unwanted columns that are added after using `find_nearby_stations`
+    # drops unwanted columns that are added after using `find_nearby_stations`
     out[, grep(".y", names(out)) := NULL]
 
     data.table::setnames(out,
