@@ -181,7 +181,8 @@
 
   if (.dataset == "PatchedPoint") {
 
-    response_data[, station_code := sprintf("%06s", station)]
+    response_data[, station_code :=
+                    as.factor(as.character(sprintf("%06d", station)))]
     response_data[, station := NULL]
 
     # apparently some of the data don't have station names, who knew?
