@@ -14,6 +14,8 @@
 
 * Fix bug where closed stations are included in the nearest stations when using `find_nearby_stations()` and `include_closed = FALSE` (default).
 
+* Fix bug where BOM and SILO metadata were not properly merged when using `find_nearby_stations()`
+
 # weatherOz 0.0.1
 
 * Added a `NEWS.md` file to track changes to the package.
