@@ -530,16 +530,20 @@ get_dpird_summaries <- function(station_code,
 #'
 .parse_summary <- function(.ret_list,
                            .values) {
+  x <- vector(mode = "list", length = length(.ret_list))
   for (i in seq_len(length(.ret_list))) {
-    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
-    if ("summaries" %in% names(x$collection)) {
+    y <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
+    if ("summaries" %in% names(y$collection)) {
       nested_list_objects <-
-        data.table::as.data.table(x$collection$summaries)
+        data.table::as.data.table(y$collection$summaries)
       # insert `station_name` and `station_code` into the nested_list_objects df
-      nested_list_objects[, station_code := x$collection$stationCode]
-      nested_list_objects[, station_name := x$collection$stationName]
+      nested_list_objects[, station_code := y$collection$stationCode]
+      nested_list_objects[, station_name := y$collection$stationName]
+      x[[i]] <- nested_list_objects
     }
   }
+
+  nested_list_objects <- data.table::rbindlist(x)
 
   # get the nested list columns and convert them to data.table objects
   col_classes <-
@@ -563,7 +567,8 @@ get_dpird_summaries <- function(station_code,
     }
 
     x <-
-      data.table::setorder(x = data.table::as.data.table(do.call(what = cbind, args = new_df_list)))
+      data.table::setorder(x = data.table::as.data.table(
+        do.call(what = cbind, args = new_df_list)))
 
     return(cbind(nested_list_objects, x))
   }
