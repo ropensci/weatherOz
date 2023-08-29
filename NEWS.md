@@ -16,6 +16,8 @@
 
 * Fix bug where BOM and SILO metadata were not properly merged when using `find_nearby_stations()`
 
+* Fix bug where results from `get_dpird_summary()` were truncated to only a few of the last results requested rather than the full set from start date to end date.
+
 # weatherOz 0.0.1
 
 * Added a `NEWS.md` file to track changes to the package.
