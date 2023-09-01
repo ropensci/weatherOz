@@ -26,9 +26,9 @@ from DPIRD’s weather station network are available via the [Weather
 2.0](https://www.agric.wa.gov.au/weather-api-20) Open API initiative.
 SILO data is available from Queensland’s Long Paddock initiative
 (Jeffery *et al.* 2001) and are spatially and temporally complete,
-covering all Australia and few nearby islands (112 to 154, -10 to -44),
-with resolution 0.05° longitude by 0.05° latitude (approximately 5 km ×
-5 km). Visit the [SILO
+covering all Australia and few nearby islands (112 to 154 degrees
+longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude
+by 0.05° latitude (approximately 5 km × 5 km). Visit the [SILO
 website](https://siloapi.longpaddock.qld.gov.au/silo/) for more details
 about how the data is prepared and which climate data are available.
 Agriculture bulletins, radar imagery, satellite imagery and seven-day
@@ -153,12 +153,12 @@ head(wd)
 #> 5:       150      -27 2022  2022 2022 2022-10-05     22.4              25
 #> 6:       150      -27 2022  2022 2022 2022-10-06     25.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
-#> 1:      9.1              25 274.9 m 2023-07-30      0.0              25
-#> 2:     12.9              25 274.9 m 2023-07-30      0.0              25
-#> 3:      8.4              25 274.9 m 2023-07-30      0.8              25
-#> 4:     10.6              25 274.9 m 2023-07-30      1.0              25
-#> 5:     12.5              25 274.9 m 2023-07-30      0.0              25
-#> 6:     14.4              25 274.9 m 2023-07-30      0.0              25
+#> 1:      9.1              25 274.9 m 2023-09-01      0.0              25
+#> 2:     12.9              25 274.9 m 2023-09-01      0.0              25
+#> 3:      8.4              25 274.9 m 2023-09-01      0.8              25
+#> 4:     10.6              25 274.9 m 2023-09-01      1.0              25
+#> 5:     12.5              25 274.9 m 2023-09-01      0.0              25
+#> 6:     14.4              25 274.9 m 2023-09-01      0.0              25
 ```
 
 ## Notes on Data and API Endpoints
