@@ -317,7 +317,9 @@ test_that("get_dpird_summaries() returns 30min values",
           })
 
 ## 15min ----
-
+# This test checks that the for loop in get_dpird_summaries() properly parses
+# paginated results by checking the number of rows returned to ensure that the
+# data are not truncated
 test_that("get_dpird_summaries() returns 15min values",
           {
             vcr::use_cassette("dpird_summaries_15min", {
@@ -325,7 +327,7 @@ test_that("get_dpird_summaries() returns 15min values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20221028",
-                end_date = "20221029",
+                end_date = "20221231",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "15min",
                 values = "wind"
@@ -333,6 +335,7 @@ test_that("get_dpird_summaries() returns 15min values",
             })
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 16)
+            expect_equal(nrow(x), 12296)
             expect_named(
               x,
               c(

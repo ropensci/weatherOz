@@ -73,7 +73,6 @@ YYYYMMDD
 Zajaczkowski
 Zehr
 ag
-agric
 airTemperature
 airTemperatureAvg
 airTemperatureMax
@@ -107,7 +106,6 @@ barometricPressureMin
 barometricPressureMinTime
 batteryMinVoltage
 batteryMinVoltageDateTime
-bom
 capitalised
 chillHours
 colour
@@ -147,6 +145,7 @@ evaporative
 evapotranspiration
 evapotranspirationShortCrop
 evapotranspirationTallCrop
+extractOz
 frostCondition
 frostConditionLast
 frostConditionMinutes
@@ -162,7 +161,6 @@ frostConditionYearToDateMinutes
 frostConditionYearToDateStartTime
 github
 gmail
-gms
 greyscale
 gridded
 heatCondition
@@ -225,7 +223,6 @@ timzeone
 vapour
 vcr
 visualising
-wa
 weatherOz's
 wetBulb
 wetBulbAvg
@@ -239,5 +236,4 @@ windMinSpeed
 windspeed
 withr
 wmo
-www
 yyyy
