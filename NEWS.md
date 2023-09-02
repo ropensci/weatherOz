@@ -2,7 +2,7 @@
 
 ## Bug fixes
 
-* Fixes [bug](https://github.com/DPIRD-FSI/weatherOz/issues/35) where `find_forecast_town()` returned all values, not the proper values.
+* Fixes [bug](https://github.com/DPIRD-FSI/weatherOz/issues/35) where `find_forecast_towns()` returned all values, not the proper values.
 
 * Fixes example in `get_dpird_extremes()` that didn't use "your_api_key" as all other examples did for error checking.
 
@@ -16,7 +16,7 @@
 
 * Fixes bug where BOM and SILO metadata were not properly merged when using `find_nearby_stations()`
 
-* Fixes bug where results from `get_dpird_summary()` were truncated to only a few of the last results requested rather than the full set from start date to end date.
+* Fixes bug where results from `get_dpird_summaries()` were truncated to only a few of the last results requested rather than the full set from start date to end date.
 
 * Fixes bug where the DPIRD API would not properly respond to requests from Windows OS machines.
 
