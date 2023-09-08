@@ -129,10 +129,10 @@
                              .limit) {
   if (!is.null(.end_point)) {
     .base_url <-
-      sprintf("https://api.agric.wa.gov.au/v2/weather/stations/%s",
+      sprintf("https://api.dpird.wa.gov.au/v2/weather/stations/%s",
               .end_point)
   } else {
-    .base_url <- "https://api.agric.wa.gov.au/v2/weather/stations/"
+    .base_url <- "https://api.dpird.wa.gov.au/v2/weather/stations/"
   }
 
   connection <- crul::HttpClient$new(url = .base_url)
