@@ -198,10 +198,9 @@ find_nearby_stations <- function(longitude = NULL,
     )
   }
 
-  out <- rbind(if (exists("dpird_out"))
-    dpird_out,
-    if (exists("silo_out"))
-      silo_out)
+  out <- rbind(
+    if (exists("dpird_out")) dpird_out,
+    if (exists("silo_out")) silo_out)
 
   data.table::setorder(out, distance_km)
   return(out[])
@@ -267,16 +266,27 @@ find_nearby_stations <- function(longitude = NULL,
       jsonlite::fromJSON(dpird_out[[1]]$parse("UTF8"))$collection)
 
   if (nrow(dpird_out) == 0L) {
-    message(
-      "No DPIRD stations found around a radius of <",
-      .distance_km,
-      " km\n",
-      " from coordinates ",
-      .longitude,
-      " and ",
-      .latitude,
-      " (lon/lat).\n"
-    )
+    if (!is.null(.latitude) && !is.null(.longitude)) {
+      message(
+        "No DPIRD stations found around a radius of <",
+        .distance_km,
+        " km\n",
+        " from coordinates ",
+        .longitude,
+        " and ",
+        .latitude,
+        " (lon/lat).\n"
+      )
+    } else {
+      message(
+        "No DPIRD stations found around a radius of <",
+        .distance_km,
+        " km\n",
+        " from station_code ",
+        .station_code,
+        ".\n"
+      )
+    }
     return(invisible(NULL))
   }
 
