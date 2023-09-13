@@ -263,7 +263,8 @@ find_nearby_stations <- function(longitude = NULL,
                                 .limit = 1000)
 
   dpird_out <-
-    data.table::data.table(jsonlite::fromJSON(dpird_out[[1]]$parse("UTF8"))$collection)
+    data.table::data.table(
+      jsonlite::fromJSON(dpird_out[[1]]$parse("UTF8"))$collection)
 
   if (nrow(dpird_out) == 0L) {
     message(
@@ -347,9 +348,12 @@ find_nearby_stations <- function(longitude = NULL,
         message(
           "No SILO stations found around a radius of < ",
           .distance_km,
-          " km\n for the given `station_code`",
-          .station_code,
-          "."
+          " km\n",
+          " from coordinates ",
+          .longitude,
+          " and ",
+          .latitude,
+          " (lon/lat).\n"
         )
         return(invisible(NULL))
       }
