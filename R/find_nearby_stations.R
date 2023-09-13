@@ -203,6 +203,8 @@ find_nearby_stations <- function(longitude = NULL,
     if (exists("silo_out")) silo_out)
 
   if (nrow(out) == 0L) {
+    stop(call. = FALSE,
+         "There are no stations found that match your criteria.")
     return(invisible(NULL))
   }
 
