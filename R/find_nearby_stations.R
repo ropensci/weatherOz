@@ -202,6 +202,10 @@ find_nearby_stations <- function(longitude = NULL,
     if (exists("dpird_out")) dpird_out,
     if (exists("silo_out")) silo_out)
 
+  if (nrow(out) == 0L) {
+    return(invisible(NULL))
+  }
+
   data.table::setorder(out, distance_km)
   return(out[])
 }
