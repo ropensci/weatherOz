@@ -199,8 +199,8 @@ find_nearby_stations <- function(longitude = NULL,
   }
 
   out <- rbind(
-    if (exists("dpird_out")) dpird_out,
-    if (exists("silo_out")) silo_out)
+    if (!is.null("dpird_out")) dpird_out,
+    if (!is.null("silo_out")) silo_out)
 
   if (!exists("out", envir = sys.frame())) {
     stop(call. = FALSE,
