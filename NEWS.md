@@ -9,6 +9,10 @@
   * Fixes bug where BOM and SILO metadata were not properly merged when using `find_nearby_stations()`
 
   * Fixes [bug](https://github.com/DPIRD-FSI/weatherOz/issues/36) where closed stations are included in the nearest stations when using `find_nearby_stations()` and `include_closed = FALSE` (default).
+  
+  * Fixes the messages when stations aren't found nearby. In certain cases the message indicated that a `station_code` was used when `latitude` and `longitude` had been provided and _vice versa_.
+  
+  * Fixes bug when there are no stations that meet the criteria set by the user and an error was emitted that "x" must be a data.table object. The function now simply errors if there are no stations from either API that meet the criteria.
 
 * `get_dpird_extremes()`
 
