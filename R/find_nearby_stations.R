@@ -199,10 +199,10 @@ find_nearby_stations <- function(longitude = NULL,
   }
 
   out <- rbind(
-    if (!is.null("dpird_out")) dpird_out,
-    if (!is.null("silo_out")) silo_out)
+    if (!is.null(dpird_out)) dpird_out,
+    if (!is.null(silo_out)) silo_out)
 
-  if (!exists("out", envir = sys.frame())) {
+  if (is.null(out)) {
     stop(call. = FALSE,
          "There are no stations found in the DPIRD or SILO networks ",
          "that match your criteria.")
@@ -275,7 +275,7 @@ find_nearby_stations <- function(longitude = NULL,
   if (nrow(dpird_out) == 0L) {
     if (!is.null(.latitude) && !is.null(.longitude)) {
       message(
-        "No DPIRD stations found around a radius of <",
+        "No DPIRD stations found within a radius of <",
         .distance_km,
         " km\n",
         " from coordinates ",
@@ -286,7 +286,7 @@ find_nearby_stations <- function(longitude = NULL,
       )
     } else {
       message(
-        "No DPIRD stations found around a radius of <",
+        "No DPIRD stations found within a radius of <",
         .distance_km,
         " km\n",
         " from station_code ",
@@ -361,19 +361,6 @@ find_nearby_stations <- function(longitude = NULL,
       out <-
         out[distance_km %in% out[(distance_km <= .distance_km)]$distance_km]
 
-      if (nrow(out) == 0L) {
-        message(
-          "No SILO stations found around a radius of < ",
-          .distance_km,
-          " km\n",
-          " from coordinates ",
-          .longitude,
-          " and ",
-          .latitude,
-          " (lon/lat).\n"
-        )
-        return(invisible(NULL))
-      }
     } else {
       out <-
         .query_silo_api(
@@ -382,19 +369,6 @@ find_nearby_stations <- function(longitude = NULL,
           .format = "near",
           .dataset = "PatchedPoint"
         )
-      if (nrow(out) == 0L) {
-        message(
-          "No SILO stations found around a radius of < ",
-          .distance_km,
-          " km\n for the given coordinates",
-          .longitude,
-          " and ",
-          .latitude,
-          "(lon/lat)."
-        )
-
-        return(invisible(NULL))
-      }
     }
 
     bom_stations <- .get_bom_metadata()
@@ -417,6 +391,31 @@ find_nearby_stations <- function(longitude = NULL,
     out[, source := NULL]
     out[, status := NULL]
     out[, wmo := NULL]
+
+    if (nrow(out) == 0L) {
+      if (!is.null(.longitude) && !is.null(.latitude)) {
+        message(
+          "No SILO stations found within a radius of <",
+          .distance_km,
+          " km\n",
+          " from coordinates ",
+          .longitude,
+          " and ",
+          .latitude,
+          " (lon/lat).\n"
+        )
+      } else {
+        message(
+          "No SILO stations found within a radius of <",
+          .distance_km,
+          " km\n",
+          " from `station_code` ",
+          .station_code,
+          ".\n"
+        )
+      }
+      return(invisible(NULL))
+    }
 
     data.table::setorder(x = out, cols = distance_km)
 
