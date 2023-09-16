@@ -202,9 +202,10 @@ find_nearby_stations <- function(longitude = NULL,
     if (exists("dpird_out")) dpird_out,
     if (exists("silo_out")) silo_out)
 
-  if (nrow(out) == 0L) {
+  if (!exists("out", envir = sys.frame())) {
     stop(call. = FALSE,
-         "There are no stations found that match your criteria.")
+         "There are no stations found in the DPIRD or SILO networks ",
+         "that match your criteria.")
     return(invisible(NULL))
   }
 
