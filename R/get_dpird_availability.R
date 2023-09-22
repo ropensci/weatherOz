@@ -167,7 +167,7 @@ get_dpird_availability <-
     return(out[])
   }
 
-#' Parse DPIRD API availability data
+#' Parse DPIRD API Availability Data
 #'
 #' Internal function that parses and tidy up data as returned by
 #'  `.query_dpird_api()`

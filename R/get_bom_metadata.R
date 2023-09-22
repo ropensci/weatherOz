@@ -5,24 +5,28 @@
 #' @noRd
 
 .get_bom_metadata <- function() {
-  tryCatch({
-    curl::curl_download(
-      url =
-        "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
-      destfile = file.path(tempdir(), "stations.zip"),
-      mode = "wb",
-      quiet = TRUE
-    )
-  },
-  error = function(x)
-    stop(
-      "The BOM server with the station location information is not responding.",
-      " Please retry again later.\n",
-      call. = FALSE
-    ))
-
-  utils::unzip(file.path(tempdir(), "stations.zip"), exdir = tempdir())
   file_in <- file.path(tempdir(), "stations.txt")
+  if (!file.exists(file_in)) {
+    tryCatch({
+      zip_file <- file.path(tempdir(), "stations.zip")
+      curl::curl_download(
+        url =
+          "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
+        destfile = zip_file,
+        mode = "wb",
+        quiet = TRUE
+      )
+    },
+    error = function(x)
+      stop(
+        "The BOM server with the station location information is not ",
+        "responding. Please retry again later.\n",
+        call. = FALSE
+      ))
+
+    utils::unzip(zip_file, exdir = tempdir())
+    file.remove(zip_file)
+  }
 
   bom_stations <-
     data.table::setDT(
