@@ -275,7 +275,7 @@ find_nearby_stations <- function(longitude = NULL,
   if (nrow(dpird_out) == 0L) {
     if (!is.null(.latitude) && !is.null(.longitude)) {
       message(
-        "No DPIRD stations found within a radius of <",
+        "No DPIRD stations found within a radius of < ",
         .distance_km,
         " km\n",
         " from coordinates ",
@@ -286,7 +286,7 @@ find_nearby_stations <- function(longitude = NULL,
       )
     } else {
       message(
-        "No DPIRD stations found within a radius of <",
+        "No DPIRD stations found around a radius of < ",
         .distance_km,
         " km\n",
         " from station_code ",
