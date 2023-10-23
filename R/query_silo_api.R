@@ -186,14 +186,13 @@
     response_data[, station := NULL]
 
     # apparently some of the data don't have station names, who knew?
-    if ("station_name" %notin% names(response_data)) {
-      response_data[, station_name := NA]
-    } else {
+    if (any(grepl("name", response_data$metadata))) {
       response_data[, station_name :=
-                      .strcap(
-                        trimws(gsub("name=", "",
-                                    response_data$metadata[grep("name",
-                                    response_data$metadata)])))]
+                      .strcap(trimws(gsub("name=", "",
+                                          response_data$metadata[grep("name",
+                                            response_data$metadata)])))]
+    } else {
+      response_data[, station_name := NA]
     }
 
     response_data[, latitude :=
