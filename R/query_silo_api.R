@@ -329,6 +329,7 @@
   )
 
   response_data[, metadata := NULL]
+  response_data <- response_data[!is.na(response_data$date), ]
   return(response_data[])
 }
 
