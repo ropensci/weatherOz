@@ -170,8 +170,8 @@
 
   data.table::setnames(response_data, old = "YYYY-MM-DD", new = "date")
   response_data[, year := lubridate::year(date)]
-  response_data[, month := lubridate::year(date)]
-  response_data[, day := lubridate::year(date)]
+  response_data[, month := lubridate::month(date)]
+  response_data[, day := lubridate::day(date)]
   response_data[, extracted :=
                   lubridate::as_date(trimws(gsub(
                     "extracted=", "",
