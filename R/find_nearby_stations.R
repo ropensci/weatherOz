@@ -1,5 +1,4 @@
 
-
 #' Find the Nearest Weather Stations to a Given Geographic Point or Known Station
 #'
 #' Find nearby weather stations given geographic coordinates or a station code
