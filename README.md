@@ -11,6 +11,8 @@ stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecy
 [![Codecov test
 coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate
@@ -145,20 +147,20 @@ wd <- get_data_drill(
 )
 
 head(wd)
-#>    longitude latitude year month  day       date air_tmax air_tmax_source
-#> 1:       150      -27 2022  2022 2022 2022-10-01     26.1              25
-#> 2:       150      -27 2022  2022 2022 2022-10-02     23.0              25
-#> 3:       150      -27 2022  2022 2022 2022-10-03     24.2              25
-#> 4:       150      -27 2022  2022 2022 2022-10-04     25.8              25
-#> 5:       150      -27 2022  2022 2022 2022-10-05     22.4              25
-#> 6:       150      -27 2022  2022 2022 2022-10-06     25.4              25
+#>    longitude latitude year month day       date air_tmax air_tmax_source
+#> 1:       150      -27 2022    10   1 2022-10-01     26.1              25
+#> 2:       150      -27 2022    10   2 2022-10-02     23.0              25
+#> 3:       150      -27 2022    10   3 2022-10-03     24.2              25
+#> 4:       150      -27 2022    10   4 2022-10-04     25.8              25
+#> 5:       150      -27 2022    10   5 2022-10-05     22.4              25
+#> 6:       150      -27 2022    10   6 2022-10-06     25.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
-#> 1:      9.1              25 274.9 m 2023-09-01      0.0              25
-#> 2:     12.9              25 274.9 m 2023-09-01      0.0              25
-#> 3:      8.4              25 274.9 m 2023-09-01      0.8              25
-#> 4:     10.6              25 274.9 m 2023-09-01      1.0              25
-#> 5:     12.5              25 274.9 m 2023-09-01      0.0              25
-#> 6:     14.4              25 274.9 m 2023-09-01      0.0              25
+#> 1:      9.1              25 274.9 m 2023-10-25      0.0              25
+#> 2:     12.9              25 274.9 m 2023-10-25      0.0              25
+#> 3:      8.4              25 274.9 m 2023-10-25      0.8              25
+#> 4:     10.6              25 274.9 m 2023-10-25      1.0              25
+#> 5:     12.5              25 274.9 m 2023-10-25      0.0              25
+#> 6:     14.4              25 274.9 m 2023-10-25      0.0              25
 ```
 
 ## Notes on Data and API Endpoints

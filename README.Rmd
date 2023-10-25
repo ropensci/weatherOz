@@ -20,6 +20,7 @@ knitr::opts_chunk$set(
 [![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
 [![Codecov test coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
+[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate data for Australia from Australian data sources.
