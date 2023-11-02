@@ -8,7 +8,7 @@ get_dpird_summaries(
   station_code,
   start_date,
   end_date = Sys.Date(),
-  interval = "daily",
+  interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly"),
   values = "all",
   include_closed = FALSE,
   api_key
@@ -55,8 +55,8 @@ order.  The first ten columns will always be:
 \itemize{
 \item \code{station_code},
 \item \code{station_name},
-\item \code{latitude},
 \item \code{longitude},
+\item \code{latitude},
 \item \code{year},
 \item \code{month},
 \item \code{day},

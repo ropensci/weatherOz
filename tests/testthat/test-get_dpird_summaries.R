@@ -115,12 +115,14 @@ test_that("get_dpird_summaries() returns yearly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 9)
+            expect_length(x, 11)
             expect_named(
               x,
               c(
                 "station_code",
                 "station_name",
+                "longitude",
+                "latitude",
                 "year",
                 "wind_avg_speed",
                 "wind_height",
@@ -152,12 +154,14 @@ test_that("get_dpird_summaries() returns monthly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_length(x, 13)
             expect_named(
               x,
               c(
                 "station_code",
                 "station_name",
+                "longitude",
+                "latitude",
                 "year",
                 "month",
                 "date",
@@ -193,12 +197,14 @@ test_that("get_dpird_summaries() returns daily values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 12)
+            expect_length(x, 14)
             expect_named(
               x,
               c(
                 "station_code",
                 "station_name",
+                "longitude",
+                "latitude",
                 "year",
                 "month",
                 "day",
@@ -236,12 +242,14 @@ test_that("get_dpird_summaries() returns hourly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 15)
+            expect_length(x, 17)
             expect_named(
               x,
               c(
                 "station_code",
                 "station_name",
+                "longitude",
+                "latitude",
                 "year",
                 "month",
                 "day",
@@ -283,12 +291,14 @@ test_that("get_dpird_summaries() returns 30min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_equal(ncol(x), 16)
+            expect_equal(ncol(x), 18)
             expect_named(
               x,
               c(
                 "station_code",
                 "station_name",
+                "longitude",
+                "latitude",
                 "year",
                 "month",
                 "day",
@@ -334,13 +344,15 @@ test_that("get_dpird_summaries() returns 15min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_equal(ncol(x), 16)
+            expect_equal(ncol(x), 18)
             expect_equal(nrow(x), 12296)
             expect_named(
               x,
               c(
                 "station_code",
                 "station_name",
+                "longitude",
+                "latitude",
                 "year",
                 "month",
                 "day",
