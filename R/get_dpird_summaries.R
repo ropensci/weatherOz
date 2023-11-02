@@ -134,8 +134,8 @@
 #'
 #'   * `station_code`,
 #'   * `station_name`,
-#'   * `latitude`,
 #'   * `longitude`,
+#'   * `latitude`,
 #'   * `year`,
 #'   * `month`,
 #'   * `day`,
@@ -307,6 +307,20 @@ get_dpird_summaries <- function(station_code,
       "Please extend the dates requested."
     )
   }
+
+  # TODO: When Phil gets lat/lon values added to the summary results from the
+  # API, remove this bit here and add lat/lon to the list of queried values
+  metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+
+  if (!file.exists(metadata_file)) {
+    saveRDS(
+      get_station_metadata(which_api = "dpird",
+                           api_key = api_key),
+      file = metadata_file,
+      compress = FALSE
+    )
+  }
+  # END chunk to remove
 
   query_list <- .build_query(
     station_code = station_code,
@@ -486,6 +500,13 @@ get_dpird_summaries <- function(station_code,
     skip_absent = TRUE
   )
 
+  # TODO: When Phil gets lat/lon values added to the summary results from the
+  # API, remove this bit here and add lat/lon to the list of queried values
+  out <- merge(x = out, y = readRDS(file = metadata_file)[, c(1:2, 5:6)],
+               by.x = c("station_code", "station_name"),
+               by.y = c("station_code", "station_name"))
+  # END chunk to remove
+
   data.table::setcolorder(out, order(names(out)))
 
   # this function contains several `if` and `if else` branches, so it's in its
@@ -509,6 +530,8 @@ get_dpird_summaries <- function(station_code,
   out[, station_code := as.factor(station_code)]
 
   data.table::setkey(x = out, cols = station_code)
+
+
 
   return(out[])
 }
@@ -619,6 +642,8 @@ get_dpird_summaries <- function(station_code,
                             c(
                               "station_code",
                               "station_name",
+                              "longitude",
+                              "latitude",
                               "period_year",
                               "period_month",
                               "date"
@@ -643,6 +668,8 @@ get_dpird_summaries <- function(station_code,
       c(
         "station_code",
         "station_name",
+        "longitude",
+        "latitude",
         "period_year",
         "period_month",
         "period_day",
@@ -673,6 +700,8 @@ get_dpird_summaries <- function(station_code,
       c(
         "station_code",
         "station_name",
+        "longitude",
+        "latitude",
         "period_year",
         "period_month",
         "period_day",
@@ -707,6 +736,8 @@ get_dpird_summaries <- function(station_code,
       c(
         "station_code",
         "station_name",
+        "longitude",
+        "latitude",
         "period_year",
         "period_month",
         "period_day",
@@ -727,6 +758,8 @@ get_dpird_summaries <- function(station_code,
     data.table::setcolorder(.out,
                             c("station_code",
                               "station_name",
+                              "longitude",
+                              "latitude",
                               "period_year"))
     .out[, period_month := NULL]
     .out[, period_day := NULL]

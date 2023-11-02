@@ -71,59 +71,59 @@ library(weatherOz)
 #>   4:     3   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
 #>   5:     4   IDQ11295   QLD     Brisbane QLD_PT001 -27.48080 153.0389  8.1
 #>  ---                                                                      
-#> 900:     3   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 901:     4   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 902:     5   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 903:     6   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
-#> 904:     7   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
+#> 787:     2   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
+#> 788:     3   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
+#> 789:     4   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
+#> 790:     5   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
+#> 791:     6   IDQ11295   QLD Port Douglas QLD_PT254 -16.48681 145.4635 70.4
 #>         start_time_local end_time_local utc_offset      start_time_utc
-#>   1: 2023-08-29 17:00:00     2023-08-30      10:00 2023-08-29 07:00:00
-#>   2: 2023-08-30 00:00:00     2023-08-31      10:00 2023-08-29 14:00:00
-#>   3: 2023-08-31 00:00:00     2023-09-01      10:00 2023-08-30 14:00:00
-#>   4: 2023-09-01 00:00:00     2023-09-02      10:00 2023-08-31 14:00:00
-#>   5: 2023-09-02 00:00:00     2023-09-03      10:00 2023-09-01 14:00:00
+#>   1: 2023-11-02 08:49:16     2023-11-03      10:00 2023-11-01 22:49:16
+#>   2: 2023-11-03 00:00:00     2023-11-04      10:00 2023-11-02 14:00:00
+#>   3: 2023-11-04 00:00:00     2023-11-05      10:00 2023-11-03 14:00:00
+#>   4: 2023-11-05 00:00:00     2023-11-06      10:00 2023-11-04 14:00:00
+#>   5: 2023-11-06 00:00:00     2023-11-07      10:00 2023-11-05 14:00:00
 #>  ---                                                                  
-#> 900: 2023-09-01 00:00:00     2023-09-02      10:00 2023-08-31 14:00:00
-#> 901: 2023-09-02 00:00:00     2023-09-03      10:00 2023-09-01 14:00:00
-#> 902: 2023-09-03 00:00:00     2023-09-04      10:00 2023-09-02 14:00:00
-#> 903: 2023-09-04 00:00:00     2023-09-05      10:00 2023-09-03 14:00:00
-#> 904: 2023-09-05 00:00:00     2023-09-06      10:00 2023-09-04 14:00:00
+#> 787: 2023-11-04 00:00:00     2023-11-05      10:00 2023-11-03 14:00:00
+#> 788: 2023-11-05 00:00:00     2023-11-06      10:00 2023-11-04 14:00:00
+#> 789: 2023-11-06 00:00:00     2023-11-07      10:00 2023-11-05 14:00:00
+#> 790: 2023-11-07 00:00:00     2023-11-08      10:00 2023-11-06 14:00:00
+#> 791: 2023-11-08 00:00:00     2023-11-09      10:00 2023-11-07 14:00:00
 #>             end_time_utc minimum_temperature maximum_temperature
-#>   1: 2023-08-29 14:00:00                  NA                  NA
-#>   2: 2023-08-30 14:00:00                  12                  25
-#>   3: 2023-08-31 14:00:00                  13                  27
-#>   4: 2023-09-01 14:00:00                  14                  27
-#>   5: 2023-09-02 14:00:00                  14                  24
+#>   1: 2023-11-02 14:00:00                  NA                  26
+#>   2: 2023-11-03 14:00:00                  18                  26
+#>   3: 2023-11-04 14:00:00                  19                  27
+#>   4: 2023-11-05 14:00:00                  19                  25
+#>   5: 2023-11-06 14:00:00                  19                  24
 #>  ---                                                            
-#> 900: 2023-09-01 14:00:00                  17                  29
-#> 901: 2023-09-02 14:00:00                  18                  28
-#> 902: 2023-09-03 14:00:00                  18                  28
-#> 903: 2023-09-04 14:00:00                  18                  28
-#> 904: 2023-09-05 14:00:00                  19                  28
-#>      lower_precipitation_limit upper_precipitation_limit          precis
-#>   1:                        NA                        NA  Shower or two.
-#>   2:                         0                         2  Shower or two.
-#>   3:                        NA                        NA Possible storm.
-#>   4:                        NA                        NA   Mostly sunny.
-#>   5:                        NA                        NA  Partly cloudy.
-#>  ---                                                                    
-#> 900:                        NA                        NA          Sunny.
-#> 901:                        NA                        NA          Sunny.
-#> 902:                        NA                        NA   Mostly sunny.
-#> 903:                        NA                        NA   Mostly sunny.
-#> 904:                        NA                        NA   Mostly sunny.
+#> 787: 2023-11-04 14:00:00                  23                  31
+#> 788: 2023-11-05 14:00:00                  22                  31
+#> 789: 2023-11-06 14:00:00                  22                  31
+#> 790: 2023-11-07 14:00:00                  22                  31
+#> 791: 2023-11-08 14:00:00                  22                  31
+#>      lower_precipitation_limit upper_precipitation_limit         precis
+#>   1:                        NA                        NA Partly cloudy.
+#>   2:                        NA                        NA Partly cloudy.
+#>   3:                        NA                        NA Partly cloudy.
+#>   4:                         0                         7 Shower or two.
+#>   5:                         0                         4 Shower or two.
+#>  ---                                                                   
+#> 787:                        NA                        NA Partly cloudy.
+#> 788:                        NA                        NA Partly cloudy.
+#> 789:                        NA                        NA Partly cloudy.
+#> 790:                        NA                        NA Partly cloudy.
+#> 791:                        NA                        NA Partly cloudy.
 #>      probability_of_precipitation
-#>   1:                           70
-#>   2:                           60
+#>   1:                           10
+#>   2:                           10
 #>   3:                           20
-#>   4:                           10
-#>   5:                           10
+#>   4:                           60
+#>   5:                           60
 #>  ---                             
-#> 900:                            5
-#> 901:                            5
-#> 902:                           10
-#> 903:                           10
-#> 904:                           10
+#> 787:                           20
+#> 788:                           10
+#> 789:                           10
+#> 790:                           20
+#> 791:                           20
 ```
 
 ## Using get_ag_bulletin()
@@ -168,42 +168,30 @@ library(weatherOz)
 #>   WA.  Also see 
 #>   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
 #>   ----------------------------------------------------------------------------  
-#>     product_id state         station  site      obs_time_local
-#>  1:   IDW65176    WA        Beverley 10515 2023-08-29 09:00:00
-#>  2:   IDW65176    WA        Brookton 10524 2023-08-29 09:00:00
-#>  3:   IDW65176    WA          Broome 03003 2023-08-29 09:00:00
-#>  4:   IDW65176    WA        Carnamah 08025 2023-08-29 09:00:00
-#>  5:   IDW65176    WA       Carnarvon 06011 2023-08-29 09:00:00
-#> ---                                                           
-#> 32:   IDW65176    WA  Salmon Gums RS 12071 2023-08-29 09:00:00
-#> 33:   IDW65176    WA           Wagin 10647 2023-08-29 09:00:00
-#> 34:   IDW65176    WA       Wandering 10917 2023-08-29 09:00:00
-#> 35:   IDW65176    WA Wongan Hills RS 08137 2023-08-29 09:00:00
-#> 36:   IDW65176    WA            York 10311 2023-08-29 09:00:00
-#>            obs_time_utc time_zone  r   tn   tx twd ev  tg sn solr t5 t10 t20
-#>  1: 2023-08-29 01:00:00       WST NA  8.8 23.8 2.2 NA  NA NA 16.2 NA  NA  NA
-#>  2: 2023-08-29 01:00:00       WST  0  8.1 22.1 2.1 NA  NA NA 17.1 NA  NA  NA
-#>  3: 2023-08-29 01:00:00       WST  0 14.9 35.0 9.1 NA  NA NA 22.2 NA  NA  NA
-#>  4: 2023-08-29 01:00:00       WST  0 10.5 27.5 1.5 NA  NA NA 18.5 NA  NA  NA
-#>  5: 2023-08-29 01:00:00       WST  0 11.2 28.9 9.1 NA  NA NA 20.4 NA  NA  NA
-#> ---                                                                         
-#> 32: 2023-08-29 01:00:00       WST  0 10.1 26.8  NA NA  NA NA 16.9 NA  NA  NA
-#> 33: 2023-08-29 01:00:00       WST  0   NA 20.5 1.1 NA 0.2 NA 14.3 NA  NA  NA
-#> 34: 2023-08-29 01:00:00       WST  0  7.3 22.3  NA NA  NA NA 16.9 NA  NA  NA
-#> 35: 2023-08-29 01:00:00       WST  0 10.3 25.4 1.1 NA 8.9 NA 17.9 NA  NA  NA
-#> 36: 2023-08-29 01:00:00       WST  0  6.6 24.0 1.0 NA  NA NA 16.2 NA  NA  NA
-#>     t50 t1m wr
-#>  1:  NA  NA NA
-#>  2:  NA  NA NA
-#>  3:  NA  NA NA
-#>  4:  NA  NA NA
-#>  5:  NA  NA NA
-#> ---           
-#> 32:  NA  NA NA
-#> 33:  NA  NA NA
-#> 34:  NA  NA NA
-#> 35:  NA  NA NA
-#> 36:  NA  NA NA
+#>     product_id state         station  site      obs_time_local        obs_time_utc
+#>  1:   IDW65176    WA       Bencubbin 10007 2023-11-01 09:00:00 2023-11-01 01:00:00
+#>  2:   IDW65176    WA        Beverley 10515 2023-11-01 09:00:00 2023-11-01 01:00:00
+#>  3:   IDW65176    WA        Brookton 10524 2023-11-01 09:00:00 2023-11-01 01:00:00
+#>  4:   IDW65176    WA          Broome 03003 2023-11-01 09:00:00 2023-11-01 01:00:00
+#>  5:   IDW65176    WA        Carnamah 08025 2023-11-01 09:00:00 2023-11-01 01:00:00
+#> ---                                                                               
+#> 33:   IDW65176    WA  Salmon Gums RS 12071 2023-11-01 09:00:00 2023-11-01 01:00:00
+#> 34:   IDW65176    WA           Wagin 10647 2023-11-01 09:00:00 2023-11-01 01:00:00
+#> 35:   IDW65176    WA       Wandering 10917 2023-11-01 09:00:00 2023-11-01 01:00:00
+#> 36:   IDW65176    WA Wongan Hills RS 08137 2023-11-01 09:00:00 2023-11-01 01:00:00
+#> 37:   IDW65176    WA            York 10311 2023-11-01 09:00:00 2023-11-01 01:00:00
+#>     time_zone  r   tn   tx twd ev   tg sn solr t5 t10 t20 t50 t1m wr
+#>  1:       WST NA 10.5 27.7 5.5 NA   NA NA 25.7 NA  NA  NA  NA  NA NA
+#>  2:       WST  0 10.6 28.2 4.8 NA   NA NA 23.4 NA  NA  NA  NA  NA NA
+#>  3:       WST  0  8.4 26.6 5.6 NA   NA NA 23.5 NA  NA  NA  NA  NA NA
+#>  4:       WST  0 24.7 32.3 4.3 NA   NA NA 28.3 NA  NA  NA  NA  NA NA
+#>  5:       WST  0 14.0 31.0 6.0 NA   NA NA 25.8 NA  NA  NA  NA  NA NA
+#> ---                                                                 
+#> 33:       WST  0 10.0 24.8  NA NA   NA NA 24.2 NA  NA  NA  NA  NA NA
+#> 34:       WST  0  8.1 24.5 4.5 NA   NA NA 24.1 NA  NA  NA  NA  NA NA
+#> 35:       WST  0  4.9 25.3  NA NA   NA NA 23.9 NA  NA  NA  NA  NA NA
+#> 36:       WST  0 12.9 29.3 4.8 NA 12.2 NA 25.8 NA  NA  NA  NA  NA NA
+#> 37:       WST  0  9.9 27.5 3.6 NA   NA NA 25.0 NA  NA  NA  NA  NA NA
 ```
 
 ## Using get_coastal_forecast()
@@ -258,11 +246,11 @@ library(weatherOz)
 #>  4:  <NA>   IDQ11290 <NA>        QLD
 #>  5:     0   IDQ11290 <NA>        QLD
 #> ---                                 
-#> 60:     3   IDQ11290 <NA>        QLD
-#> 61:     0   IDQ11290 <NA>        QLD
-#> 62:     1   IDQ11290 <NA>        QLD
-#> 63:     2   IDQ11290 <NA>        QLD
-#> 64:     3   IDQ11290 <NA>        QLD
+#> 45:     1   IDQ11290 <NA>        QLD
+#> 46:     2   IDQ11290 <NA>        QLD
+#> 47:     0   IDQ11290 <NA>        QLD
+#> 48:     1   IDQ11290 <NA>        QLD
+#> 49:     2   IDQ11290 <NA>        QLD
 #>                                                          dist_name pt_1_name
 #>  1:                                                     Queensland      <NA>
 #>  2:                                 Queensland Gulf of Carpentaria      <NA>
@@ -270,95 +258,95 @@ library(weatherOz)
 #>  4:                                               South Queensland      <NA>
 #>  5: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>
 #> ---                                                                         
-#> 60:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>
-#> 61:                             Great Barrier Reef Offshore Waters      <NA>
-#> 62:                             Great Barrier Reef Offshore Waters      <NA>
-#> 63:                             Great Barrier Reef Offshore Waters      <NA>
-#> 64:                             Great Barrier Reef Offshore Waters      <NA>
+#> 45:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>
+#> 46:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>
+#> 47:                             Great Barrier Reef Offshore Waters      <NA>
+#> 48:                             Great Barrier Reef Offshore Waters      <NA>
+#> 49:                             Great Barrier Reef Offshore Waters      <NA>
 #>     pt_2_name       aac    start_time_local      end_time_local utc_offset
-#>  1:      <NA> QLD_FA001 2023-08-29 15:50:11 2023-08-29 15:50:11      10:00
-#>  2:      <NA> QLD_FA002 2023-08-29 17:00:00 2023-08-29 17:00:00      10:00
-#>  3:      <NA> QLD_FA003 2023-08-29 17:00:00 2023-08-29 17:00:00      10:00
-#>  4:      <NA> QLD_FA004 2023-08-29 17:00:00 2023-08-29 17:00:00      10:00
-#>  5:      <NA> QLD_MW001 2023-08-29 17:00:00 2023-08-29 17:00:00      10:00
+#>  1:      <NA> QLD_FA001 2023-11-02 04:45:11 2023-11-02 04:45:11      10:00
+#>  2:      <NA> QLD_FA002 2023-11-02 05:00:00 2023-11-02 05:00:00      10:00
+#>  3:      <NA> QLD_FA003 2023-11-02 05:00:00 2023-11-02 05:00:00      10:00
+#>  4:      <NA> QLD_FA004 2023-11-02 05:00:00 2023-11-02 05:00:00      10:00
+#>  5:      <NA> QLD_MW001 2023-11-02 05:00:00 2023-11-02 05:00:00      10:00
 #> ---                                                                       
-#> 60:      <NA> QLD_MW014 2023-09-01 00:00:00 2023-09-01 00:00:00      10:00
-#> 61:      <NA> QLD_MW015 2023-08-29 17:00:00 2023-08-29 17:00:00      10:00
-#> 62:      <NA> QLD_MW015 2023-08-30 00:00:00 2023-08-30 00:00:00      10:00
-#> 63:      <NA> QLD_MW015 2023-08-31 00:00:00 2023-08-31 00:00:00      10:00
-#> 64:      <NA> QLD_MW015 2023-09-01 00:00:00 2023-09-01 00:00:00      10:00
-#>          start_time_utc        end_time_utc     forecast_seas
-#>  1: 2023-08-29 15:50:11 2023-08-29 15:50:11              <NA>
-#>  2: 2023-08-29 17:00:00 2023-08-29 17:00:00              <NA>
-#>  3: 2023-08-29 17:00:00 2023-08-29 17:00:00              <NA>
-#>  4: 2023-08-29 17:00:00 2023-08-29 17:00:00              <NA>
-#>  5: 2023-08-29 17:00:00 2023-08-29 17:00:00    Below 1 metre.
-#> ---                                                          
-#> 60: 2023-09-01 00:00:00 2023-09-01 00:00:00    Below 1 metre.
-#> 61: 2023-08-29 17:00:00 2023-08-29 17:00:00   Around 1 metre.
-#> 62: 2023-08-30 00:00:00 2023-08-30 00:00:00    Below 1 metre.
-#> 63: 2023-08-31 00:00:00 2023-08-31 00:00:00 Below 0.5 metres.
-#> 64: 2023-09-01 00:00:00 2023-09-01 00:00:00 Below 0.5 metres.
-#>                                forecast_weather
-#>  1:                                        <NA>
-#>  2:                                        <NA>
-#>  3:                                        <NA>
-#>  4:                                        <NA>
-#>  5:                                      Clear.
-#> ---                                            
-#> 60: Mostly sunny. The chance of a thunderstorm.
-#> 61:                               Mostly clear.
-#> 62:                                      Sunny.
-#> 63:                                      Sunny.
-#> 64:                                      Sunny.
-#>                                                                                        forecast_winds
-#>  1:                                                                                              <NA>
-#>  2:                                                                                              <NA>
-#>  3:                                                                                              <NA>
-#>  4:                                                                                              <NA>
-#>  5:                                                        Southeast to southwesterly 10 to 15 knots.
-#> ---                                                                                                  
-#> 60:         North to northwesterly 10 to 15 knots shifting south to southeasterly during the morning.
-#> 61: East to southeasterly 10 to 15 knots, reaching up to 20 knots north of Creal Reef in the evening.
-#> 62:                              Easterly 10 to 15 knots decreasing to about 10 knots in the morning.
-#> 63:                                                                          Variable about 10 knots.
-#> 64:                                                                          Variable about 10 knots.
-#>                                                                                              forecast_swell1
-#>  1:                                                                                                     <NA>
-#>  2:                                                                                                     <NA>
-#>  3:                                                                                                     <NA>
-#>  4:                                                                                                     <NA>
-#>  5:                                                                                                     <NA>
-#> ---                                                                                                         
-#> 60: Easterly around 1 metre inshore, increasing to 1 to 1.5 metres offshore during the afternoon or evening.
-#> 61:                    Easterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
-#> 62:                    Easterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
-#> 63:                    Easterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
-#> 64:  Easterly below 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel during the evening.
-#>     forecast_swell2 forecast_caution marine_forecast
-#>  1:            <NA>             <NA>            <NA>
-#>  2:            <NA>             <NA>            <NA>
-#>  3:            <NA>             <NA>            <NA>
-#>  4:            <NA>             <NA>            <NA>
-#>  5:            <NA>             <NA>            <NA>
-#> ---                                                 
-#> 60:            <NA>             <NA>            <NA>
-#> 61:            <NA>             <NA>            <NA>
-#> 62:            <NA>             <NA>            <NA>
-#> 63:            <NA>             <NA>            <NA>
-#> 64:            <NA>             <NA>            <NA>
-#>     tropical_system_location forecast_waves
-#>  1:                       NA             NA
-#>  2:                       NA             NA
-#>  3:                       NA             NA
-#>  4:                       NA             NA
-#>  5:                       NA             NA
+#> 45:      <NA> QLD_MW014 2023-11-03 00:00:00 2023-11-03 00:00:00      10:00
+#> 46:      <NA> QLD_MW014 2023-11-04 00:00:00 2023-11-04 00:00:00      10:00
+#> 47:      <NA> QLD_MW015 2023-11-02 05:00:00 2023-11-02 05:00:00      10:00
+#> 48:      <NA> QLD_MW015 2023-11-03 00:00:00 2023-11-03 00:00:00      10:00
+#> 49:      <NA> QLD_MW015 2023-11-04 00:00:00 2023-11-04 00:00:00      10:00
+#>          start_time_utc        end_time_utc
+#>  1: 2023-11-02 04:45:11 2023-11-02 04:45:11
+#>  2: 2023-11-02 05:00:00 2023-11-02 05:00:00
+#>  3: 2023-11-02 05:00:00 2023-11-02 05:00:00
+#>  4: 2023-11-02 05:00:00 2023-11-02 05:00:00
+#>  5: 2023-11-02 05:00:00 2023-11-02 05:00:00
 #> ---                                        
-#> 60:                       NA             NA
-#> 61:                       NA             NA
-#> 62:                       NA             NA
-#> 63:                       NA             NA
-#> 64:                       NA             NA
+#> 45: 2023-11-03 00:00:00 2023-11-03 00:00:00
+#> 46: 2023-11-04 00:00:00 2023-11-04 00:00:00
+#> 47: 2023-11-02 05:00:00 2023-11-02 05:00:00
+#> 48: 2023-11-03 00:00:00 2023-11-03 00:00:00
+#> 49: 2023-11-04 00:00:00 2023-11-04 00:00:00
+#>                                                     forecast_seas forecast_weather
+#>  1:                                                          <NA>             <NA>
+#>  2:                                                          <NA>             <NA>
+#>  3:                                                          <NA>             <NA>
+#>  4:                                                          <NA>             <NA>
+#>  5:                                               Around 1 metre.           Sunny.
+#> ---                                                                               
+#> 45:                                                Below 1 metre.   Partly cloudy.
+#> 46:                                               Around 1 metre.   Partly cloudy.
+#> 47:                                               Around 1 metre.   Partly cloudy.
+#> 48: 1 to 1.5 metres, decreasing below 1 metre during the morning.   Partly cloudy.
+#> 49:                                                Below 1 metre.   Partly cloudy.
+#>                                                                                                                                                                                                       forecast_winds
+#>  1:                                                                                                                                                                                                             <NA>
+#>  2:                                                                                                                                                                                                             <NA>
+#>  3:                                                                                                                                                                                                             <NA>
+#>  4:                                                                                                                                                                                                             <NA>
+#>  5: North to northeasterly 10 to 15 knots, reaching up to 20 knots inshore in the late afternoon. Winds tending northwest to southwesterly in the evening then becoming variable about 10 knots in the late evening.
+#> ---                                                                                                                                                                                                                 
+#> 45:                                                                                                                                               Easterly 10 to 15 knots turning northeasterly in the late evening.
+#> 46:                                                                                                                                                                                    Northeasterly 10 to 15 knots.
+#> 47:                                                                                                                                   Easterly about 10 knots increasing to 15 to 20 knots in the middle of the day.
+#> 48:                                                                                                                                                                                         Easterly 15 to 20 knots.
+#> 49:                                                                                                                                                                                         Easterly 10 to 15 knots.
+#>                                                                                                     forecast_swell1
+#>  1:                                                                                                            <NA>
+#>  2:                                                                                                            <NA>
+#>  3:                                                                                                            <NA>
+#>  4:                                                                                                            <NA>
+#>  5:                                                                                               Below 0.5 metres.
+#> ---                                                                                                                
+#> 45:                                                                          South to southeasterly around 1 metre.
+#> 46:                                                                                   Southeasterly around 1 metre.
+#> 47: East to southeasterly below 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel around midday.
+#> 48:              East to southeasterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
+#> 49:                        East to southeasterly around 1 metre, increasing to 1 to 1.5 metres north of Creal Reef.
+#>     forecast_swell2 forecast_caution marine_forecast tropical_system_location
+#>  1:            <NA>             <NA>            <NA>                       NA
+#>  2:            <NA>             <NA>            <NA>                       NA
+#>  3:            <NA>             <NA>            <NA>                       NA
+#>  4:            <NA>             <NA>            <NA>                       NA
+#>  5:            <NA>             <NA>            <NA>                       NA
+#> ---                                                                          
+#> 45:            <NA>             <NA>            <NA>                       NA
+#> 46:            <NA>             <NA>            <NA>                       NA
+#> 47:            <NA>             <NA>            <NA>                       NA
+#> 48:            <NA>             <NA>            <NA>                       NA
+#> 49:            <NA>             <NA>            <NA>                       NA
+#>     forecast_waves
+#>  1:             NA
+#>  2:             NA
+#>  3:             NA
+#>  4:             NA
+#>  5:             NA
+#> ---               
+#> 45:             NA
+#> 46:             NA
+#> 47:             NA
+#> 48:             NA
+#> 49:             NA
 ```
 ## Working with BOM Image Files
 
@@ -413,78 +401,78 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 library(weatherOz)
 
 (avail <- get_available_imagery(product_id = "IDE00425"))
-#>   [1] "IDE00425.202308281110.tif" "IDE00425.202308281120.tif"
-#>   [3] "IDE00425.202308281130.tif" "IDE00425.202308281140.tif"
-#>   [5] "IDE00425.202308281150.tif" "IDE00425.202308281200.tif"
-#>   [7] "IDE00425.202308281210.tif" "IDE00425.202308281220.tif"
-#>   [9] "IDE00425.202308281230.tif" "IDE00425.202308281240.tif"
-#>  [11] "IDE00425.202308281250.tif" "IDE00425.202308281300.tif"
-#>  [13] "IDE00425.202308281310.tif" "IDE00425.202308281320.tif"
-#>  [15] "IDE00425.202308281330.tif" "IDE00425.202308281340.tif"
-#>  [17] "IDE00425.202308281350.tif" "IDE00425.202308281400.tif"
-#>  [19] "IDE00425.202308281410.tif" "IDE00425.202308281420.tif"
-#>  [21] "IDE00425.202308281430.tif" "IDE00425.202308281450.tif"
-#>  [23] "IDE00425.202308281500.tif" "IDE00425.202308281510.tif"
-#>  [25] "IDE00425.202308281520.tif" "IDE00425.202308281530.tif"
-#>  [27] "IDE00425.202308281540.tif" "IDE00425.202308281550.tif"
-#>  [29] "IDE00425.202308281600.tif" "IDE00425.202308281610.tif"
-#>  [31] "IDE00425.202308281620.tif" "IDE00425.202308281630.tif"
-#>  [33] "IDE00425.202308281640.tif" "IDE00425.202308281650.tif"
-#>  [35] "IDE00425.202308281700.tif" "IDE00425.202308281710.tif"
-#>  [37] "IDE00425.202308281720.tif" "IDE00425.202308281730.tif"
-#>  [39] "IDE00425.202308281740.tif" "IDE00425.202308281750.tif"
-#>  [41] "IDE00425.202308281800.tif" "IDE00425.202308281810.tif"
-#>  [43] "IDE00425.202308281820.tif" "IDE00425.202308281830.tif"
-#>  [45] "IDE00425.202308281840.tif" "IDE00425.202308281850.tif"
-#>  [47] "IDE00425.202308281900.tif" "IDE00425.202308281910.tif"
-#>  [49] "IDE00425.202308281920.tif" "IDE00425.202308281930.tif"
-#>  [51] "IDE00425.202308281940.tif" "IDE00425.202308281950.tif"
-#>  [53] "IDE00425.202308282000.tif" "IDE00425.202308282010.tif"
-#>  [55] "IDE00425.202308282020.tif" "IDE00425.202308282030.tif"
-#>  [57] "IDE00425.202308282040.tif" "IDE00425.202308282050.tif"
-#>  [59] "IDE00425.202308282100.tif" "IDE00425.202308282110.tif"
-#>  [61] "IDE00425.202308282120.tif" "IDE00425.202308282130.tif"
-#>  [63] "IDE00425.202308282140.tif" "IDE00425.202308282150.tif"
-#>  [65] "IDE00425.202308282200.tif" "IDE00425.202308282210.tif"
-#>  [67] "IDE00425.202308282220.tif" "IDE00425.202308282230.tif"
-#>  [69] "IDE00425.202308282240.tif" "IDE00425.202308282250.tif"
-#>  [71] "IDE00425.202308282300.tif" "IDE00425.202308282310.tif"
-#>  [73] "IDE00425.202308282320.tif" "IDE00425.202308282330.tif"
-#>  [75] "IDE00425.202308282340.tif" "IDE00425.202308282350.tif"
-#>  [77] "IDE00425.202308290000.tif" "IDE00425.202308290010.tif"
-#>  [79] "IDE00425.202308290020.tif" "IDE00425.202308290030.tif"
-#>  [81] "IDE00425.202308290040.tif" "IDE00425.202308290050.tif"
-#>  [83] "IDE00425.202308290100.tif" "IDE00425.202308290110.tif"
-#>  [85] "IDE00425.202308290120.tif" "IDE00425.202308290130.tif"
-#>  [87] "IDE00425.202308290140.tif" "IDE00425.202308290150.tif"
-#>  [89] "IDE00425.202308290200.tif" "IDE00425.202308290210.tif"
-#>  [91] "IDE00425.202308290220.tif" "IDE00425.202308290230.tif"
-#>  [93] "IDE00425.202308290250.tif" "IDE00425.202308290300.tif"
-#>  [95] "IDE00425.202308290310.tif" "IDE00425.202308290320.tif"
-#>  [97] "IDE00425.202308290330.tif" "IDE00425.202308290340.tif"
-#>  [99] "IDE00425.202308290350.tif" "IDE00425.202308290400.tif"
-#> [101] "IDE00425.202308290410.tif" "IDE00425.202308290420.tif"
-#> [103] "IDE00425.202308290430.tif" "IDE00425.202308290440.tif"
-#> [105] "IDE00425.202308290450.tif" "IDE00425.202308290500.tif"
-#> [107] "IDE00425.202308290510.tif" "IDE00425.202308290520.tif"
-#> [109] "IDE00425.202308290530.tif" "IDE00425.202308290540.tif"
-#> [111] "IDE00425.202308290550.tif" "IDE00425.202308290600.tif"
-#> [113] "IDE00425.202308290610.tif" "IDE00425.202308290620.tif"
-#> [115] "IDE00425.202308290630.tif" "IDE00425.202308290640.tif"
-#> [117] "IDE00425.202308290650.tif" "IDE00425.202308290700.tif"
-#> [119] "IDE00425.202308290710.tif" "IDE00425.202308290720.tif"
-#> [121] "IDE00425.202308290730.tif" "IDE00425.202308290740.tif"
-#> [123] "IDE00425.202308290750.tif" "IDE00425.202308290800.tif"
-#> [125] "IDE00425.202308290810.tif" "IDE00425.202308290820.tif"
-#> [127] "IDE00425.202308290830.tif" "IDE00425.202308290840.tif"
-#> [129] "IDE00425.202308290850.tif" "IDE00425.202308290900.tif"
-#> [131] "IDE00425.202308290910.tif" "IDE00425.202308290920.tif"
-#> [133] "IDE00425.202308290930.tif" "IDE00425.202308290940.tif"
-#> [135] "IDE00425.202308290950.tif" "IDE00425.202308291000.tif"
-#> [137] "IDE00425.202308291010.tif" "IDE00425.202308291020.tif"
-#> [139] "IDE00425.202308291030.tif" "IDE00425.202308291040.tif"
-#> [141] "IDE00425.202308291050.tif" "IDE00425.202308291100.tif"
-#> [143] "IDE00425.202308291110.tif" "IDE00425.202308291120.tif"
+#>   [1] "IDE00425.202311010010.tif" "IDE00425.202311010020.tif"
+#>   [3] "IDE00425.202311010030.tif" "IDE00425.202311010040.tif"
+#>   [5] "IDE00425.202311010050.tif" "IDE00425.202311010100.tif"
+#>   [7] "IDE00425.202311010110.tif" "IDE00425.202311010120.tif"
+#>   [9] "IDE00425.202311010130.tif" "IDE00425.202311010140.tif"
+#>  [11] "IDE00425.202311010150.tif" "IDE00425.202311010200.tif"
+#>  [13] "IDE00425.202311010210.tif" "IDE00425.202311010220.tif"
+#>  [15] "IDE00425.202311010230.tif" "IDE00425.202311010250.tif"
+#>  [17] "IDE00425.202311010300.tif" "IDE00425.202311010310.tif"
+#>  [19] "IDE00425.202311010320.tif" "IDE00425.202311010330.tif"
+#>  [21] "IDE00425.202311010340.tif" "IDE00425.202311010350.tif"
+#>  [23] "IDE00425.202311010400.tif" "IDE00425.202311010410.tif"
+#>  [25] "IDE00425.202311010420.tif" "IDE00425.202311010430.tif"
+#>  [27] "IDE00425.202311010440.tif" "IDE00425.202311010450.tif"
+#>  [29] "IDE00425.202311010500.tif" "IDE00425.202311010510.tif"
+#>  [31] "IDE00425.202311010520.tif" "IDE00425.202311010530.tif"
+#>  [33] "IDE00425.202311010540.tif" "IDE00425.202311010550.tif"
+#>  [35] "IDE00425.202311010600.tif" "IDE00425.202311010610.tif"
+#>  [37] "IDE00425.202311010620.tif" "IDE00425.202311010630.tif"
+#>  [39] "IDE00425.202311010640.tif" "IDE00425.202311010650.tif"
+#>  [41] "IDE00425.202311010700.tif" "IDE00425.202311010710.tif"
+#>  [43] "IDE00425.202311010720.tif" "IDE00425.202311010730.tif"
+#>  [45] "IDE00425.202311010740.tif" "IDE00425.202311010750.tif"
+#>  [47] "IDE00425.202311010800.tif" "IDE00425.202311010810.tif"
+#>  [49] "IDE00425.202311010820.tif" "IDE00425.202311010830.tif"
+#>  [51] "IDE00425.202311010840.tif" "IDE00425.202311010850.tif"
+#>  [53] "IDE00425.202311010900.tif" "IDE00425.202311010910.tif"
+#>  [55] "IDE00425.202311010920.tif" "IDE00425.202311010930.tif"
+#>  [57] "IDE00425.202311010940.tif" "IDE00425.202311010950.tif"
+#>  [59] "IDE00425.202311011000.tif" "IDE00425.202311011010.tif"
+#>  [61] "IDE00425.202311011020.tif" "IDE00425.202311011030.tif"
+#>  [63] "IDE00425.202311011040.tif" "IDE00425.202311011050.tif"
+#>  [65] "IDE00425.202311011100.tif" "IDE00425.202311011110.tif"
+#>  [67] "IDE00425.202311011120.tif" "IDE00425.202311011130.tif"
+#>  [69] "IDE00425.202311011140.tif" "IDE00425.202311011150.tif"
+#>  [71] "IDE00425.202311011200.tif" "IDE00425.202311011210.tif"
+#>  [73] "IDE00425.202311011220.tif" "IDE00425.202311011230.tif"
+#>  [75] "IDE00425.202311011240.tif" "IDE00425.202311011250.tif"
+#>  [77] "IDE00425.202311011300.tif" "IDE00425.202311011310.tif"
+#>  [79] "IDE00425.202311011320.tif" "IDE00425.202311011330.tif"
+#>  [81] "IDE00425.202311011340.tif" "IDE00425.202311011350.tif"
+#>  [83] "IDE00425.202311011400.tif" "IDE00425.202311011410.tif"
+#>  [85] "IDE00425.202311011420.tif" "IDE00425.202311011430.tif"
+#>  [87] "IDE00425.202311011450.tif" "IDE00425.202311011500.tif"
+#>  [89] "IDE00425.202311011510.tif" "IDE00425.202311011520.tif"
+#>  [91] "IDE00425.202311011530.tif" "IDE00425.202311011540.tif"
+#>  [93] "IDE00425.202311011550.tif" "IDE00425.202311011600.tif"
+#>  [95] "IDE00425.202311011610.tif" "IDE00425.202311011620.tif"
+#>  [97] "IDE00425.202311011630.tif" "IDE00425.202311011640.tif"
+#>  [99] "IDE00425.202311011650.tif" "IDE00425.202311011700.tif"
+#> [101] "IDE00425.202311011710.tif" "IDE00425.202311011720.tif"
+#> [103] "IDE00425.202311011730.tif" "IDE00425.202311011740.tif"
+#> [105] "IDE00425.202311011750.tif" "IDE00425.202311011800.tif"
+#> [107] "IDE00425.202311011810.tif" "IDE00425.202311011820.tif"
+#> [109] "IDE00425.202311011830.tif" "IDE00425.202311011840.tif"
+#> [111] "IDE00425.202311011850.tif" "IDE00425.202311011900.tif"
+#> [113] "IDE00425.202311011910.tif" "IDE00425.202311011920.tif"
+#> [115] "IDE00425.202311011930.tif" "IDE00425.202311011940.tif"
+#> [117] "IDE00425.202311011950.tif" "IDE00425.202311012000.tif"
+#> [119] "IDE00425.202311012010.tif" "IDE00425.202311012020.tif"
+#> [121] "IDE00425.202311012030.tif" "IDE00425.202311012040.tif"
+#> [123] "IDE00425.202311012050.tif" "IDE00425.202311012100.tif"
+#> [125] "IDE00425.202311012110.tif" "IDE00425.202311012120.tif"
+#> [127] "IDE00425.202311012130.tif" "IDE00425.202311012140.tif"
+#> [129] "IDE00425.202311012150.tif" "IDE00425.202311012200.tif"
+#> [131] "IDE00425.202311012210.tif" "IDE00425.202311012220.tif"
+#> [133] "IDE00425.202311012230.tif" "IDE00425.202311012240.tif"
+#> [135] "IDE00425.202311012250.tif" "IDE00425.202311012300.tif"
+#> [137] "IDE00425.202311012310.tif" "IDE00425.202311012320.tif"
+#> [139] "IDE00425.202311012330.tif" "IDE00425.202311012340.tif"
+#> [141] "IDE00425.202311012350.tif" "IDE00425.202311020000.tif"
+#> [143] "IDE00425.202311020010.tif"
 ```
 
 #### Using get_satellite_imagery()
@@ -554,20 +542,20 @@ head(x)
 #> 4:     IDR644         64  64km Adelaide  138.4689 -34.6169       64
 #> 5:     IDR311         31 512km   Albany  117.8163 -34.9418       31
 #> 6:     IDR312         31 256km   Albany  117.8163 -34.9418       31
-#>                   Full_Name IDRnn0name IDRnn1name State    Type Group_
-#> 1: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes
-#> 2: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes
-#> 3: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes
-#> 4: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes
-#> 5:                   Albany     Albany     Albany    WA Doppler    Yes
-#> 6:                   Albany     Albany     Albany    WA Doppler    Yes
-#>    Status Archive as.is
-#> 1: Public  BuckPk  TRUE
-#> 2: Public  BuckPk  TRUE
-#> 3: Public  BuckPk  TRUE
-#> 4: Public  BuckPk  TRUE
-#> 5: Public  Albany  TRUE
-#> 6: Public  Albany  TRUE
+#>                   Full_Name IDRnn0name IDRnn1name State    Type Group_ Status Archive
+#> 1: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk
+#> 2: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk
+#> 3: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk
+#> 4: Adelaide (Buckland Park)     BuckPk BucklandPk    SA Doppler    Yes Public  BuckPk
+#> 5:                   Albany     Albany     Albany    WA Doppler    Yes Public  Albany
+#> 6:                   Albany     Albany     Albany    WA Doppler    Yes Public  Albany
+#>    as.is
+#> 1:  TRUE
+#> 2:  TRUE
+#> 3:  TRUE
+#> 4:  TRUE
+#> 5:  TRUE
+#> 6:  TRUE
 ```
 
 ### Using get_radar_imagery()
@@ -589,7 +577,7 @@ This value must be specified and the function will accept only one at a time.
 library(weatherOz)
 
 y <- get_radar_imagery(product_id = "IDR032")
-#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmpV1yFIr/file145f52f1299d9.png
+#> file downloaded to:/var/folders/ch/8fqkzddj1kj_qb5ddfdd3p1w0000gn/T//RtmpdWicir/file4f1e7ed48512.png
 plot(y)
 ```
 
