@@ -5,9 +5,9 @@
 #'
 #' @param .station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
-#' @param .longitude A `numeric` value for the geopgraphic longitude of interest
+#' @param .longitude A `numeric` value for the geographic longitude of interest
 #'   in decimal degrees.
-#' @param .latitude A `numeric` value for the geopgraphic latitude of interest
+#' @param .latitude A `numeric` value for the geographic latitude of interest
 #'   in decimal degrees.
 #' @param .start_date A `character` string representing the beginning of the
 #'   range to query in the format 'yyyy-mm-dd' (ISO8601).  Will return data

@@ -273,8 +273,8 @@ This function returns a `data.table` with `station_code` and the date interval q
 
    * `station_code`,
    * `station_name`,
-   * `latitude`,
    * `longitude`,
+   * `latitude`,
    * `year`,
    * `month`,
    * `day`,
