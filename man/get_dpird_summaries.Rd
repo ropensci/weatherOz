@@ -8,7 +8,7 @@ get_dpird_summaries(
   station_code,
   start_date,
   end_date = Sys.Date(),
-  interval = "daily",
+  interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly"),
   values = "all",
   include_closed = FALSE,
   api_key
