@@ -9,6 +9,7 @@ test_that("get_patched_point_apsim() input checks stop on invalid values", {
     )
   )
 
+
   # no start_date
   expect_error(
     get_patched_point_apsim(
@@ -36,7 +37,7 @@ test_that("get_patched_point_apsim() returns daily values", {
       station_code = "008137",
       start_date = "2021-06-01",
       end_date = "2021-07-01",
-      api_key = Sys.getenv("SILO_API_KEY")
+      api_key = Sys.getenv("SILO_API_KEY"),
     )
   })
   expect_equal(nrow(wd), 31)
