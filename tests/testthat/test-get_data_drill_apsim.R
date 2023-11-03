@@ -48,7 +48,7 @@ test_that("get_data_drill_apsim() returns all daily values", {
       longitude = 150.05,
       start_date = "2021-06-01",
       end_date = "2021-07-01",
-      api_key = "slavish_moo_0k@icloud.com"
+      api_key = Sys.getenv("SILO_API_KEY"),
     )
   })
   expect_s3_class(wd, class = "met")
