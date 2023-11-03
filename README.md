@@ -103,11 +103,11 @@ wd <- get_dpird_summaries(
 )
 
 wd
-#>    station_code station_name year month day       date
-#> 1:           BI        Binnu 2022     5   1 2022-05-01
-#> 2:           BI        Binnu 2022     5   1 2022-05-01
-#> 3:           BI        Binnu 2022     5   2 2022-05-02
-#> 4:           BI        Binnu 2022     5   2 2022-05-02
+#>    station_code station_name longitude latitude year month day       date
+#> 1:           BI        Binnu  114.6958  -28.051 2022     5   1 2022-05-01
+#> 2:           BI        Binnu  114.6958  -28.051 2022     5   1 2022-05-01
+#> 3:           BI        Binnu  114.6958  -28.051 2022     5   2 2022-05-02
+#> 4:           BI        Binnu  114.6958  -28.051 2022     5   2 2022-05-02
 #>    erosion_condition_minutes erosion_condition_start_time wind_avg_speed
 #> 1:                         0                         <NA>          10.85
 #> 2:                         0                         <NA>          15.57
@@ -155,12 +155,12 @@ head(wd)
 #> 5:       150      -27 2022    10   5 2022-10-05     22.4              25
 #> 6:       150      -27 2022    10   6 2022-10-06     25.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
-#> 1:      9.1              25 274.9 m 2023-10-25      0.0              25
-#> 2:     12.9              25 274.9 m 2023-10-25      0.0              25
-#> 3:      8.4              25 274.9 m 2023-10-25      0.8              25
-#> 4:     10.6              25 274.9 m 2023-10-25      1.0              25
-#> 5:     12.5              25 274.9 m 2023-10-25      0.0              25
-#> 6:     14.4              25 274.9 m 2023-10-25      0.0              25
+#> 1:      9.1              25 274.9 m 2023-11-03      0.0              25
+#> 2:     12.9              25 274.9 m 2023-11-03      0.0              25
+#> 3:      8.4              25 274.9 m 2023-11-03      0.8              25
+#> 4:     10.6              25 274.9 m 2023-11-03      1.0              25
+#> 5:     12.5              25 274.9 m 2023-11-03      0.0              25
+#> 6:     14.4              25 274.9 m 2023-11-03      0.0              25
 ```
 
 ## Notes on Data and API Endpoints
