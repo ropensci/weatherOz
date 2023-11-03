@@ -530,9 +530,14 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://www.agric.wa.gov.au/",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "10839.003KB",
+  "fileSize": "11300.674KB",
   "releaseNotes": "https://github.com/DPIRD-FSI/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/DPIRD-FSI/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/DPIRD-FSI/weatherOz/actions", "https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main"],
-  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#stable"
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#stable",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/598",
+    "provider": "https://ropensci.org"
+  }
 }
