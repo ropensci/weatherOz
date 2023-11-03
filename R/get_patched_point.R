@@ -223,4 +223,3 @@ get_patched_point <- function(station_code,
 
   out[]
 }
-
