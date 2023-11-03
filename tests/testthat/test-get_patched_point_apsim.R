@@ -37,7 +37,7 @@ test_that("get_patched_point_apsim() returns daily values", {
       station_code = "008137",
       start_date = "2021-06-01",
       end_date = "2021-07-01",
-      api_key = Sys.getenv("SILO_API_KEY"),
+      api_key = "slavish_moo_0k@icloud.com"
     )
   })
   expect_equal(nrow(wd), 31)
