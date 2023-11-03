@@ -13,7 +13,7 @@ test_that("get_patched_point() user-input checks stop on invalid values", {
     get_patched_point(
       station_code = "008137",
       end_date = "20220501",
-      api_key = Sys.getenv("SILO_API_KEY")
+      # api_key = Sys.getenv("SILO_API_KEY")
     )
   )
 
