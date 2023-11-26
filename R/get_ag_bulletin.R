@@ -87,6 +87,16 @@ get_ag_bulletin <- function(state = "AUS") {
 }
 
 # Ag bulletin functions for get() and parse() ----------------------------------
+#' Fetches and Returns the Ag Bulletin
+#'
+#' @param file_loc Either a local file path or a valid FTP URL
+#' @param cleaned_state A text string containing the state(s) to download that
+#'   has been validated.
+#'
+#' @return A `data.table` containing the BOM's ag bulletin
+#' @keywords Internal
+#' @noRd
+#'
 .return_bulletin <- function(file_loc, cleaned_state) {
   # create vector of XML files
   AUS_XML <- c(
@@ -122,7 +132,13 @@ get_ag_bulletin <- function(state = "AUS") {
   }
 }
 
+#' Parse the XML Bulletin to Something Useful
+#'
+#' @param xml_url The location of the XML file to be parsed
+#' @return A `data.table`
+#' @keywords Internal
 #' @noRd
+#'
 .parse_bulletin <- function(xml_url) {
   # load the XML from ftp
   if (substr(xml_url, 1, 3) == "ftp") {
