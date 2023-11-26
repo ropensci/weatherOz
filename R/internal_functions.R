@@ -69,6 +69,22 @@
   return(invisible(NULL))
 }
 
+#' Check Against Earliest Available BOM Data From SILO
+#'
+#' @param start_date User-provided start date.
+#'
+#' @return No value, called for its side-effects checking if the `start_date` is
+#'   before the earliest available data in the SILO database.
+#' @noRd
+#' @keywords Internal
+#'
+.check_earliest_available <- function(start_date) {
+  if (start_date < lubridate::date("1889-01-01")) {
+    stop(call. = FALSE,
+         "The start date requested exceeds the earliest available data.")
+  }
+}
+
 #' Check user inputs for lat, lon or station_code
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function

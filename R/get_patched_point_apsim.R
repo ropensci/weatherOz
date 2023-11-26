@@ -132,6 +132,7 @@ get_patched_point_apsim <- function(station_code,
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
+  .check_earliest_available(start_date)
 
   # reformat date for sending to SILO
   start_date <- gsub("-", "", start_date)
