@@ -8,7 +8,7 @@
 #'
 #' @return A logical vector, indicating if a mismatch was located for any
 #'  element of x: thus the values are TRUE or FALSE and never NA.
-#' @keywords internal
+#' @keywords Internal
 #' @noRd
 `%notin%` <- function(x, table) {
   match(x, table, nomatch = 0L) == 0L
@@ -21,7 +21,7 @@
 #' @note This was taken from \CRANpkg{nasapower}.
 #' @example .check_date(x)
 #' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
-#' @keywords internal
+#' @keywords Internal
 #' @noRd
 .check_date <- function(x) {
   tryCatch(
@@ -52,6 +52,8 @@
 #' @param .start_date a user supplied date for the start of data query
 #' @param .end_date a user supplied date for the end of data query
 #' @return Called for its side-effects, returns an invisible `NULL` if no error.
+#'
+#' @keywords Internal
 #' @noRd
 
 .check_date_order <- function(.start_date, .end_date) {
@@ -89,6 +91,8 @@
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function
 #' @param .station_code station_code passed from another function
+#'
+#' @keywords Internal
 #' @noRd
 #' @return invisible `NULL`, called for its side-effects
 .check_location_params <-
@@ -108,7 +112,9 @@
 #'
 #' @param longitude user provided numeric value as decimal degrees
 #' @param latitude user provided numeric value as decimal degrees
+#' @keywords Internal
 #' @noRd
+#'
 #' @return An invisible `NULL`, called for its side-effects
 
 .check_lonlat <- function(longitude, latitude) {
@@ -134,6 +140,7 @@
 #' Check that the user hasn't blindly copied the "your_api_key" string from the
 #' examples
 #'
+#' @keywords Internal
 #' @noRd
 
 .check_not_example_api_key <- function(.api_key) {
@@ -151,7 +158,7 @@
 #' @param state User provided value to check against.
 #'
 #' @return A validated state
-#' @keywords internal
+#' @keywords Internal
 #' @noRd
 
 .check_states <- function(state) {
@@ -224,6 +231,7 @@
 #' Check User-provided Values for Passing to the SILO API
 #' @param .values User provided values to query from the API
 #' @return A vector of verified values
+#' @keywords Internal
 #' @noRd
 
 .check_silo_values <- function(.values = values) {
@@ -247,6 +255,7 @@
 #'
 #' @param which_api user-provided value for `which_api`
 #' @return A lower-case string of a valid API value
+#' @keywords Internal
 #' @noRd
 .check_which_api <- function(which_api) {
   which_api <- tolower(which_api)
@@ -267,7 +276,7 @@
 #' @param state A user-provided value for the state to be converted.
 #' @return A `string` representing a proper abbreviation of an Australian state
 #'   or territory.
-#'
+#' @keywords Internal
 #' @noRd
 .convert_state <- function(state) {
   state <- gsub(" ", "", state)
@@ -340,7 +349,7 @@
 #'
 #' @return A `string` value of the URL of the requested XML file on BOM's FTP
 #'   server.
-#'
+#' @keywords Internal
 #' @noRd
 
 .create_bom_file <- function(AUS_XML, .the_state, .file_loc) {
@@ -386,6 +395,7 @@
 #' @return An XML file (hopefully).
 #'
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @keywords Internal
 #' @noRd
 
 .get_url <- function(remote_file) {
@@ -468,7 +478,7 @@
 #'   from the known station location.
 #'
 #' @return A numeric value representing distance in kilometres.
-#' @keywords internal
+#' @keywords Internal
 #' @noRd
 
 .haversine_distance <- function(lat1, lon1, lat2, lon2) {
@@ -495,7 +505,7 @@
 #'
 #' @return Modifies the the colnames of `x` in place
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
-#' @keywords internal
+#' @keywords Internal
 #' @noRd
 
 .set_snake_case_names <- function(x) {
@@ -518,7 +528,7 @@
 #' @param x an object containing a BOM forecast object parsed from XML
 #'
 #' @return cleaned data.table cols of date and time
-#' @keywords internal
+#' @keywords Internal
 #' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
 #' @noRd
 
@@ -562,6 +572,7 @@
 #'
 #' @author Charles Dupont and Adam H. Sparks,
 #'  \email{adam.sparks@@dpird.wa.gov.au}
+#' @keywords Internal
 #' @noRd
 
 .strcap <- function(x) {
@@ -615,7 +626,7 @@
 #' Validate user entered filepath value or return BOM URL
 #'
 #' @param filepath User provided value for checking
-#'
+#' @keywords Internal
 #' @noRd
 .validate_filepath <- function(filepath) {
   if (is.null(filepath)) {
