@@ -51,6 +51,12 @@ test_that(".check_date_order() catches errors, passes otherwise", {
                                  .end_date = as.Date("2050-01-31")))
 })
 
+## Check earliest available SILO data ----
+
+test_that("if `start_date` preceeds earliest available BOM data, fn() stops", {
+  expect_error(.check_earliest_available("1800-01-01"))
+})
+
 ## Check lat/lon params ----
 
 test_that("if lat lon or station_code are correct, no error", {
