@@ -67,11 +67,6 @@ get_dpird_apsim <- function(station_code,
     api_key = api_key
   )
 
-  metadata <- get_station_metadata(which_api = "dpird",
-                                   api_key = api_key)
-
-  apsim <-
-    merge(apsim, metadata, by = c("station_code", "station_name"))
   station_name <- apsim$station_name[1]
   longitude <- apsim$longitude[1]
   latitude <- apsim$latitude[1]
