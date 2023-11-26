@@ -1,5 +1,5 @@
 
-#' Add %notin% function
+#' Add %notin% Function
 #'
 #' Negates `%in%` for easier (mis)matching.
 #'
@@ -14,7 +14,7 @@
   match(x, table, nomatch = 0L) == 0L
 }
 
-#' Check user-provided dates for validity
+#' Check User Input Dates for Validity
 #'
 #' @param x User entered date value
 #' @return Validated date string as a `POSIXct` object.
@@ -47,7 +47,7 @@
   return(x)
 }
 
-#' Check user input dates to ensure sequential order
+#' Check User Input Dates to Ensure Sequential Order
 #'
 #' @param .start_date a user supplied date for the start of data query
 #' @param .end_date a user supplied date for the end of data query
@@ -87,7 +87,7 @@
   }
 }
 
-#' Check user inputs for lat, lon or station_code
+#' Check User Input for `lat`, `lon` or `station_code`
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function
 #' @param .station_code station_code passed from another function
@@ -108,7 +108,7 @@
     return(invisible(NULL))
   }
 
-#' Check user-input longitude and latitude values for validity
+#' Check User Input Longitude and Latitude values for Validity
 #'
 #' @param longitude user provided numeric value as decimal degrees
 #' @param latitude user provided numeric value as decimal degrees
@@ -154,7 +154,7 @@
   return(invisible(NULL))
 }
 
-#' Check User Provided `state` for précis and ag bulletin
+#' Check User Input `state` for Précis Forecast and Ag Bulletin
 #' @param state User provided value to check against.
 #'
 #' @return A validated state
@@ -228,7 +228,7 @@
   }
 }
 
-#' Check User-provided Values for Passing to the SILO API
+#' Check User Input Values for Passing to the SILO API
 #' @param .values User provided values to query from the API
 #' @return A vector of verified values
 #' @keywords Internal
@@ -251,7 +251,7 @@
   return(.v)
 }
 
-#' Check User-Provided API Values
+#' Check User Input API Values
 #'
 #' @param which_api user-provided value for `which_api`
 #' @return A lower-case string of a valid API value
@@ -523,7 +523,7 @@
                        new = gsub(".", "_", names(x), fixed = TRUE))
 }
 
-#' splits time cols and removes extra chars for forecast XML objects
+#' Splits Time Cols and Removes Extra Chars for Forecast XML Objects
 #'
 #' @param x an object containing a BOM forecast object parsed from XML
 #'
@@ -623,7 +623,7 @@
   return(res)
 }
 
-#' Validate user entered filepath value or return BOM URL
+#' Check User Input Filepath Value or Return BOM URL
 #'
 #' @param filepath User provided value for checking
 #' @keywords Internal
