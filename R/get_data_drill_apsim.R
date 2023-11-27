@@ -120,13 +120,16 @@ get_data_drill_apsim <- function(longitude,
   .check_not_example_api_key(api_key)
 
   # validate user-provided lon and lat values
-  .check_lonlat(longitude = longitude, latitude = latitude)
+  lonlat <- .check_lonlat(longitude = longitude, latitude = latitude)
+
+  user_longitude <- lonlat["longitude"]
+  user_latitude <- lonlat["latitude"]
 
   # validate user provided dates
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
-  .check_earliest_available(start_date)
+  .check_earliest_available_silo(start_date)
 
   # reformat date for sending to SILO
   start_date <- gsub("-", "", start_date)

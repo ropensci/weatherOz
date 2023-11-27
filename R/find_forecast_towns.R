@@ -31,10 +31,10 @@ find_forecast_towns <-
   function(longitude = 149.2,
            latitude = -35.3,
            distance_km = 100) {
-    .check_lonlat(longitude = longitude, latitude = latitude)
+    lonlat <- .check_lonlat(longitude = longitude, latitude = latitude)
 
-    user_longitude <- longitude
-    user_latitude <- latitude
+    user_longitude <- lonlat["longitude"]
+    user_latitude <- lonlat["latitude"]
 
     file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
     on.exit(unlink(file_dbf))
