@@ -235,7 +235,7 @@ get_dpird_summaries <- function(station_code,
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
-  .check_earliest_available(start_date)
+  .check_earliest_available_dpird(start_date)
 
   # Use `agrep()` to fuzzy match the user-requested time interval
   approved_intervals <- c("15min",
@@ -612,7 +612,7 @@ get_dpird_summaries <- function(station_code,
 #' @return invisible `NULL`, called for its side-effects
 #' @noRd
 
-.check_earliest_available <- function(.start_date) {
+.check_earliest_available_dpird <- function(.start_date) {
   if (.start_date < lubridate::as_date("2000-08-28")) {
     stop(
       call. = FALSE,

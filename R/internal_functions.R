@@ -80,21 +80,21 @@
 #' @noRd
 #' @keywords Internal
 #'
-.check_earliest_available <- function(start_date) {
+.check_earliest_available_silo <- function(start_date) {
   if (start_date < lubridate::date("1889-01-01")) {
     stop(call. = FALSE,
          "The start date requested exceeds the earliest available data.")
   }
 }
 
-#' Check User Input for `lat`, `lon` or `station_code`
+#' Check user inputs for lat, lon or station_code
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function
 #' @param .station_code station_code passed from another function
 #'
 #' @keywords Internal
 #' @noRd
-#' @return invisible `NULL`, called for its side-effects
+#' @return Nothing, called for its side-effects
 .check_location_params <-
   function(.latitude, .longitude, .station_code) {
     if (((is.null(.latitude)) ||
@@ -108,14 +108,14 @@
     return(invisible(NULL))
   }
 
-#' Check User Input Longitude and Latitude values for Validity
+#' Check User Input for `lat`, `lon` or `station_code`
+#' @param .latitude latitude passed from another function
+#' @param .longitude longitude passed from another function
+#' @param .station_code station_code passed from another function
 #'
-#' @param longitude user provided numeric value as decimal degrees
-#' @param latitude user provided numeric value as decimal degrees
 #' @keywords Internal
 #' @noRd
-#'
-#' @return An invisible `NULL`, called for its side-effects
+#' @return A vector of longitude and latitude rounded to four decimal places
 
 .check_lonlat <- function(longitude, latitude) {
   if (longitude < 112 || longitude > 154) {
@@ -134,7 +134,7 @@
       "`, value to be sure it is valid for Australian data.\n"
     )
   }
-  return(invisible(NULL))
+  lonlat <- round(c("longitude" = longitude, "latitude" = latitude), 4)
 }
 
 #' Check that the user hasn't blindly copied the "your_api_key" string from the
