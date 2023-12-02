@@ -6,7 +6,22 @@
 #'   that exist in \acronym{SILO}, but lack metadata from \acronym{BOM}, the
 #'   rows will exist to indicate that the station is in the \acronym{SILO} data
 #'   set, but there is no corresponding \acronym{BOM} metadata available.
-#'
+#' @param station_code An optional value that should be provided as a single
+#'   `string` value or character `vector` of station codes for which to return
+#'   metadata.  If this or `station_name` are not provided, all station metadata
+#'   is returned by default.  If this and `station_name` are both provided, this
+#'   takes precedence and values corresponding to this input will be returned.
+#' @param station_name An optional value that should be provided as either a
+#'   single `string` or character `vector` of station names for which to return
+#'   metadata.  Fuzzy matching is used, \emph{e.g.}, using
+#'   `c("brisbane", "melbourne")` will return rows for \dQuote{Brisbane},
+#'   \dQuote{Brisbane Aero}, \dQuote{Mt Brisbane},
+#'   \dQuote{City of Melbourne Bay}, \dQuote{Selbourne Kirnbrae},
+#'   \dQuote{Maroondah Weir Melbourne Water}, \dQuote{Melbourne Airport} and
+#'   \dQuote{Melbourne Botanical Gardens} `station_name` values.  If this or
+#'   `station_code` are not provided, all station metadata is returned by
+#'   default.  Using `station_code` will always override this argument if both
+#'   are provided.
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Valid values are `all`, for both \acronym{SILO} (\acronym{BOM} data) and
 #'   \acronym{DPIRD} \acronym{API}s; `silo` for only stations from the
@@ -93,7 +108,9 @@
 #' @export
 
 get_station_metadata <-
-  function(which_api = "all",
+  function(station_code = NULL,
+           station_name = NULL,
+           which_api = "all",
            api_key,
            include_closed = FALSE,
            rich = FALSE) {
@@ -155,12 +172,30 @@ get_station_metadata <-
       "wmo"
     ))
 
-    # lastly, if user wants all stations return them, else return only open ones
-    if (isTRUE(include_closed)) {
-      return(out[])
-    } else {
-      return(subset(out, status == "open")[])
+    # if user wants all stations return them, else return only open ones
+    if (isFALSE(include_closed)) {
+      out <- out[status == "open", ]
     }
+
+    # filter for `station_code` and call it good if that's specified, else
+    # search for station names, otherwise just return everything (default)
+    # Here, new vectors are created to allow for subsetting since the data frame
+    # has cols with these respective names already and therefore it will not
+    # subset until you rename the user-provided vector of values.
+    if (!is.null(station_code)) {
+      station_code_user <- station_code
+      return(out[station_code %in% station_code_user, ][])
+    } else if (!is.null(station_name)) {
+      station_name_user <- station_name
+      indices <-
+        unlist(lapply(
+          X = station_name_user,
+          FUN = agrep,
+          x = out$station_name
+        ))
+      return(out[indices, ][])
+    }
+    return(out[])
   }
 
 
