@@ -64,7 +64,7 @@
 #' get_station_metadata(api_key = "your_api_key")
 #' }
 #'
-#' @return a [data.table::data.table] of \acronym{BOM} weather stations'
+#' @return A [data.table] of \acronym{BOM} weather stations'
 #'   metadata for stations available from \acronym{SILO} and weather stations'
 #'   metadata for stations available from \acronym{DPIRD}'s Weather 2.0
 #'   \acronym{API} with the following columns sorted by `state` and
