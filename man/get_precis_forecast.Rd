@@ -12,7 +12,7 @@ Fuzzy string matching via \code{\link[base:agrep]{base::agrep()}} is done.  Defa
 returning all state bulletins, see Details for more.}
 }
 \value{
-A \link[data.table:data.table]{data.table::data.table} of an Australia \acronym{BOM} précis seven day
+A \link{data.table} of an Australia \acronym{BOM} précis seven day
 forecasts for \acronym{BOM} selected towns.
 }
 \description{

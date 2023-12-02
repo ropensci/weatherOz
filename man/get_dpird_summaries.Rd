@@ -49,7 +49,7 @@ closed stations.}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} with \code{station_code} and the date interval
+a \link{data.table} with \code{station_code} and the date interval
 queried together with the requested weather variables in alphabetical
 order.  The first ten columns will always be:
 \itemize{

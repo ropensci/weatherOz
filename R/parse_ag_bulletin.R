@@ -30,7 +30,7 @@
 #'   Australia in the same fashion as [get_precis_forecast()], provided that the
 #'   files are all present in the directory.
 #'
-#' @return A [data.table::data.table] of Australia \acronym{BOM} agricultural
+#' @return A [data.table] of Australia \acronym{BOM} agricultural
 #'   bulletin information.
 #'
 #' @examplesIf interactive()

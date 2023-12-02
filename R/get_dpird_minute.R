@@ -42,7 +42,7 @@
 #'   Universal Time \sQuote{UTC} returned by the \acronym{API} to Australian
 #'   Western Standard Time \sQuote{AWST}.
 #'
-#' @return a [data.table::data.table] with `station_code` and the date interval
+#' @return a [data.table] with `station_code` and the date interval
 #'   queried together with the requested weather variables.
 #'
 #' @examples
