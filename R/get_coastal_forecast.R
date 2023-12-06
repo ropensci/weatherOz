@@ -23,7 +23,7 @@
 #'  }
 #'
 #' @return
-#' A [data.table::data.table] of an Australia \acronym{BOM} Coastal Waters
+#' A [data.table] of an Australia \acronym{BOM} Coastal Waters
 #'   Forecast.
 #'
 #' @examplesIf interactive()

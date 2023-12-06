@@ -1,7 +1,10 @@
 #' Fetch and Clean BOM Metadata for SILO Stations
 #'
+#' This function caches the file during a user's session for faster responses.
+#' Starting a new \R session will delete this file.
+#'
 #' @return a \CRANpkg{data.table} of BOM station metadata.
-#' @keywords internal
+#' @keywords Internal
 #' @noRd
 
 .get_bom_metadata <- function() {

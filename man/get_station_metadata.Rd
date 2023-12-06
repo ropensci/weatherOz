@@ -5,6 +5,8 @@
 \title{Get Weather Station Metadata for Both DPIRD and SILO Weather Stations}
 \usage{
 get_station_metadata(
+  station_code = NULL,
+  station_name = NULL,
   which_api = "all",
   api_key,
   include_closed = FALSE,
@@ -12,6 +14,24 @@ get_station_metadata(
 )
 }
 \arguments{
+\item{station_code}{An optional value that should be provided as a single
+\code{string} value or character \code{vector} of station codes for which to return
+metadata.  If this or \code{station_name} are not provided, all station metadata
+is returned by default.  If this and \code{station_name} are both provided, this
+takes precedence and values corresponding to this input will be returned.}
+
+\item{station_name}{An optional value that should be provided as either a
+single \code{string} or character \code{vector} of station names for which to return
+metadata.  Fuzzy matching is used, \emph{e.g.}, using
+\code{c("brisbane", "melbourne")} will return rows for \dQuote{Brisbane},
+\dQuote{Brisbane Aero}, \dQuote{Mt Brisbane},
+\dQuote{City of Melbourne Bay}, \dQuote{Selbourne Kirnbrae},
+\dQuote{Maroondah Weir Melbourne Water}, \dQuote{Melbourne Airport} and
+\dQuote{Melbourne Botanical Gardens} \code{station_name} values.  If this or
+\code{station_code} are not provided, all station metadata is returned by
+default.  Using \code{station_code} will always override this argument if both
+are provided.}
+
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
 Valid values are \code{all}, for both \acronym{SILO} (\acronym{BOM} data) and
 \acronym{DPIRD} \acronym{API}s; \code{silo} for only stations from the
@@ -31,7 +51,7 @@ about \acronym{DPIRD}'s weather station(s), this does not affect the
 will be \code{NA}.  Defaults to \code{FALSE}.}
 }
 \value{
-a \link[data.table:data.table]{data.table::data.table} of \acronym{BOM} weather stations'
+A \link{data.table} of \acronym{BOM} weather stations'
 metadata for stations available from \acronym{SILO} and weather stations'
 metadata for stations available from \acronym{DPIRD}'s Weather 2.0
 \acronym{API} with the following columns sorted by \code{state} and

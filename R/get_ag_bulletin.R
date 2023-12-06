@@ -24,8 +24,8 @@
 #'
 #' @return
 #'  A data frame as a `weatherOz_tbl` object (inherits and is fully compatible
-#'    with [data.table::data.table]) of Australia \acronym{BOM} agricultural
-#'    bulletin information.
+#'    with [data.table]) of Australia \acronym{BOM} agricultural bulletin
+#'    information.
 #'
 #' @note Data and Information Use
 #' Please note the copyright notice and disclaimer,

@@ -41,7 +41,7 @@
 #'   * availabilityYearToDateSince12AM, and
 #'   * availabilityYearToDateTo9AM
 #'
-#' @return a [data.table::data.table]  with `station_code` and the requested
+#' @return a [data.table]  with `station_code` and the requested
 #'   metadata.
 #'
 #' @family DPIRD

@@ -14,7 +14,7 @@
 #' @details Valid \acronym{BOM} \acronym{radar} ID for each location required.
 #'
 #' @return
-#' A [data.table::data.table] of all selected \acronym{radar} locations with
+#' A [data.table] of all selected \acronym{radar} locations with
 #'   location information and \var{product_ids}.
 #'
 #' @references

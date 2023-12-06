@@ -1,7 +1,7 @@
 
 test_that("get_station_metadata() functions properly for which_api = 'SILO'",
           {
-            vcr::use_cassette("silo_station_metadata", {
+            vcr::use_cassette("metadata_silo_station", {
               skip_if_offline()
               x <-
                 get_station_metadata(which_api = "silo", include_closed = TRUE)
@@ -27,9 +27,9 @@ test_that("get_station_metadata() functions properly for which_api = 'SILO'",
             )
           })
 
-test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
+test_that("get_station_metadata() functions properly for which_api = 'DPIRD'",
           {
-            vcr::use_cassette("dpird_station_metadata", {
+            vcr::use_cassette("metadata_dpird_station", {
               skip_if_offline()
               x <-
                 get_station_metadata(which_api = "dpird",
@@ -59,9 +59,10 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
             )
           })
 
-test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
+test_that("get_station_metadata() functions properly for which_api = 'DPIRD'
+          w/ rich data",
           {
-            vcr::use_cassette("dpird_station_metadata_rich_TRUE", {
+            vcr::use_cassette("metadata_dpird_station_rich_TRUE", {
               skip_if_offline()
               x <-
                 get_station_metadata(
@@ -118,7 +119,7 @@ test_that("get_station_metata() functions properly for which_api = 'DPIRD'",
 
 test_that("get_station_metata() functions properly for which_api = 'all'",
           {
-            vcr::use_cassette("all_station_metadata", {
+            vcr::use_cassette("metadata_all_apis", {
               skip_if_offline()
               x <-
                 get_station_metadata(which_api = "all",
@@ -145,7 +146,71 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
             )
           })
 
+test_that("get_station_metadata() fuzzy matches station names",
+          {
+            vcr::use_cassette("metadata_fuzzy_match_station_name", {
+              skip_if_offline()
+              x <-
+                get_station_metadata(api_key = Sys.getenv("DPIRD_API_KEY"),
+                                     station_name = "Brisbane")
+            })
 
+            expect_s3_class(x, "data.table")
+            expect_length(x, 11)
+            expect_named(
+              x,
+              c(
+                "station_code",
+                "station_name",
+                "start",
+                "end",
+                "latitude",
+                "longitude",
+                "state",
+                "elev_m",
+                "source",
+                "status",
+                "wmo"
+              )
+            )
+            expect_equal(nrow(x), 3)
+            expect_equal(x$station_name,
+                         c("Brisbane", "Brisbane Aero", "Mt Brisbane"))
+          })
+
+test_that("get_station_metadata() matches station_codes",
+            {
+              vcr::use_cassette("metadata_match_station_code", {
+                skip_if_offline()
+                x <-
+                  get_station_metadata(
+                    api_key = Sys.getenv("DPIRD_API_KEY"),
+                    station_code = c("YU001", "YU002", "YU003")
+                  )
+              })
+
+            expect_s3_class(x, "data.table")
+            expect_length(x, 11)
+            expect_named(
+              x,
+              c(
+                "station_code",
+                "station_name",
+                "start",
+                "end",
+                "latitude",
+                "longitude",
+                "state",
+                "elev_m",
+                "source",
+                "status",
+                "wmo"
+              )
+            )
+            expect_equal(nrow(x), 3)
+            expect_equal(as.character(x$station_code),
+                         c("YU001", "YU002", "YU003"))
+          })
 
 test_that("get_station_metadata() errors if no API key is provide for DPIRD",
           {

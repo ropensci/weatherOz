@@ -97,7 +97,7 @@
 #'       observations for that day of year}
 #'   }
 #'
-#' @return a [data.table::data.table] with the weather data queried with the
+#' @return a [data.table] with the weather data queried with the
 #'   weather variables in alphabetical order. The first eight columns will
 #'   always be:
 #'

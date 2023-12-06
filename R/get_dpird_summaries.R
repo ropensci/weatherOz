@@ -128,7 +128,7 @@
 #'   * windAvgSpeed, and
 #'   * windMaxSpeed
 #'
-#' @return a [data.table::data.table] with `station_code` and the date interval
+#' @return a [data.table] with `station_code` and the date interval
 #'   queried together with the requested weather variables in alphabetical
 #'   order.  The first ten columns will always be:
 #'
