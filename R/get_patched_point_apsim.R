@@ -127,6 +127,7 @@ get_patched_point_apsim <- function(station_code,
   }
 
   .check_not_example_api_key(api_key)
+  .is_valid_email_silo_api_key(api_key)
 
   # validate user provided dates
   start_date <- .check_date(start_date)

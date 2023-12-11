@@ -154,6 +154,26 @@
   return(invisible(NULL))
 }
 
+
+#' Check that the user provided an invalid email string as API key for SILO
+#'
+#' @keywords Internal
+#' @noRd
+
+.is_valid_email_silo_api_key <- function(.api_key) {
+
+  # regular expression to check
+  pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
+
+  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE)) {
+    return(invisible(NULL))
+  } else {
+    stop("For SILO requests you must use your e-mail address as an API key.
+         You have not provided a valid email address.",
+         call. = FALSE)
+  }
+}
+
 #' Check User Input `state` for Précis Forecast and Ag Bulletin
 #' @param state User provided value to check against.
 #'
