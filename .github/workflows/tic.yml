@@ -32,7 +32,7 @@ jobs:
           # use a different tic template type if you do not want to build on all listed platforms
           - { os: windows-latest, r: "release" }
           - { os: macOS-latest, r: "release", pkgdown: "true", latex: "true" }
-          - { os: ubuntu-latest, r: "devel" }
+          - { os: ubuntu-latest, r: "devel", http-user-agent: 'release' }
           - { os: ubuntu-latest, r: "release" }
 
     env:
@@ -45,14 +45,16 @@ jobs:
       BUILD_PKGDOWN: ${{ matrix.config.pkgdown }}
       # use GITHUB_TOKEN from GitHub to workaround rate limits in {remotes}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-r@v2
-        id: install-r
         with:
           r-version: ${{ matrix.config.r }}
+          http-user-agent: ${{ matrix.config.http-user-agent }}
+          use-public-rspm: true
           Ncpus: 4
 
       - uses: r-lib/actions/setup-tinytex@v2
@@ -60,33 +62,37 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      - name: Install macOS system dependencies
+        if: runner.os == 'macOS'
+        run: brew install gdal proj
+
       - name: Install pak and query dependencies
         run: |
           install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
           saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
-      - name: "[Stage] Install system dependencies"
-        if: runner.os == 'Linux'
-        run: |
-          pak::local_install_dev_deps(upgrade = TRUE)
-          pak::pkg_install("rcmdcheck")
-        shell: Rscript {0}
+      #- name: "[Stage] Install system dependencies"
+      #  if: runner.os == 'Linux'
+      #  run: |
+      #    pak::local_install_dev_deps(upgrade = TRUE)
+      #    pak::pkg_install("rcmdcheck")
+      #  shell: Rscript {0}
 
       # set date/week for use in cache creation
       # https://github.community/t5/GitHub-Actions/How-to-set-and-access-a-Workflow-variable/m-p/42970
       # - cache R packages daily
-      - name: "[Cache] Prepare daily timestamp for cache"
-        if: runner.os != 'Windows'
-        id: date
-        run: echo "date=$(date '+%d-%m')" >> $GITHUB_OUTPUT
+      #- name: "[Cache] Prepare daily timestamp for cache"
+      #  if: runner.os != 'Windows'
+      #  id: date
+      #  run: echo "date=$(date '+%d-%m')" >> $GITHUB_OUTPUT
 
-      - name: "[Cache] Restore R package cache"
-        if: runner.os != 'Windows'
-        uses: actions/cache/restore@v3
-        with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+      #- name: "[Cache] Restore R package cache"
+      #  if: runner.os != 'Windows'
+      #  uses: actions/cache/restore@v3
+      #  with:
+      #    path: ${{ env.R_LIBS_USER }}
+      #    key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
       - name: "[Stage] Install tic"
         run: Rscript -e "pak::pkg_install('ropensci/tic', dependencies = TRUE)"
@@ -94,14 +100,14 @@ jobs:
       - name: "[Stage] Install"
         run: Rscript -e "print(tic::dsl_load())" -e "tic::prepare_all_stages()" -e "tic::before_install()" -e "tic::install()"
 
-      - name: "[Cache] Save R package cache"
-        if: runner.os != 'Windows' && always()
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            ${{ env.R_LIBS_USER }}/*
-            !${{ env.R_LIBS_USER }}/pak
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
+      #- name: "[Cache] Save R package cache"
+      #  if: runner.os != 'Windows' && always()
+      #  uses: actions/cache/save@v3
+      #  with:
+      #    path: |
+      #      ${{ env.R_LIBS_USER }}/*
+      #      !${{ env.R_LIBS_USER }}/pak
+      #    key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{steps.date.outputs.date}}
 
       - name: "[Stage] Script"
         run: Rscript -e 'tic::script()'
