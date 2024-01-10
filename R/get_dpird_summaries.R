@@ -315,16 +315,32 @@ get_dpird_summaries <- function(station_code,
 
   # TODO: When Phil gets lat/lon values added to the summary results from the
   # API, remove this bit here and add lat/lon to the list of queried values
-  metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+  if (Sys.info()['sysname'] == "Windows") {
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "/")
 
-  if (!file.exists(metadata_file)) {
-    saveRDS(
-      get_station_metadata(which_api = "dpird",
-                           api_key = api_key),
-      file = metadata_file,
-      compress = FALSE
-    )
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_station_metadata(which_api = "dpird",
+                             api_key = api_key),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
+
+  } else {
+
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_station_metadata(which_api = "dpird",
+                             api_key = api_key),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
   }
+
   # END chunk to remove
 
   query_list <- .build_query(
