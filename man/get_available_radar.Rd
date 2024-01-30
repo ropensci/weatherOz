@@ -58,7 +58,7 @@ Other metadata:
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}, and Adam H. Sparks,
-\email{adam.sparks@dpird.wa.gov.au}
+\email{adamhsparks@gmail.com}
 }
 \concept{BOM}
 \concept{metadata}

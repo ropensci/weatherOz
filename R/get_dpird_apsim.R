@@ -35,7 +35,7 @@
 #' }
 #'
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes,
 #'   alternatively, a local APSIM .met file if `file` is specified.

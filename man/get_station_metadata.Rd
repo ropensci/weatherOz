@@ -136,10 +136,10 @@ Other DPIRD:
 
 Other SILO: 
 \code{\link{find_nearby_stations}()},
-\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
-\code{\link{get_patched_point_apsim}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
+\code{\link{get_patched_point_apsim}()},
 \code{\link{silo_daily_values}}
 
 Other metadata: 
@@ -150,7 +150,7 @@ Other metadata:
 \code{\link{get_dpird_availability}()}
 }
 \author{
-Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Adam H. Sparks, \email{adamhsparks@gmail.com}
 }
 \concept{DPIRD}
 \concept{SILO}

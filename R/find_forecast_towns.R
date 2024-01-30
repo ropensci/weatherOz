@@ -20,7 +20,7 @@
 #'   distance from \var{latitude} and \var{longitude}, ascending.
 #' @author Hugh Parsonage, \email{hugh.parsonage@@gmail.com}, and James Goldie,
 #'   \email{me@@jamesgoldie.dev}, and Adam H. Sparks,
-#'   \email{adam.sparks@@dpird.wa.gov.au}
+#'   \email{adamhsparks@@gmail.com}
 #'
 #' @family BOM
 #' @family metadata

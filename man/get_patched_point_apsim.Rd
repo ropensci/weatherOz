@@ -125,8 +125,8 @@ of Hydrology}, Volume 66, 1-76.
 \seealso{
 Other SILO: 
 \code{\link{find_nearby_stations}()},
-\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_station_metadata}()},
 \code{\link{silo_daily_values}}
@@ -138,8 +138,8 @@ Other APSIM:
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
-\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
@@ -151,7 +151,7 @@ Other data fetching:
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam
-Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Sparks, \email{adamhsparks@gmail.com}
 }
 \concept{APSIM}
 \concept{SILO}

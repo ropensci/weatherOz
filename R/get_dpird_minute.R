@@ -64,7 +64,7 @@
 #' @family DPIRD
 #' @family data fetching
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @export
 
 get_dpird_minute <- function(station_code,

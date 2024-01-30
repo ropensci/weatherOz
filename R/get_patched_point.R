@@ -147,7 +147,7 @@
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
-#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#'   Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @family SILO
 #' @family data fetching

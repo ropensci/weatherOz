@@ -99,7 +99,7 @@
 #'   <http://www.bom.gov.au/climate/data/lists_by_element/stations.txt> and the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @family DPIRD
 #' @family SILO
