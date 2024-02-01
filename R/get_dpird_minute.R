@@ -78,7 +78,7 @@ get_dpird_minute <- function(station_code,
          "Please supply a valid `station_code`.")
   }
 
-  if (missing(api_key)) {
+  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop(
       "A valid DPIRD API key must be provided, please visit\n",
       "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
