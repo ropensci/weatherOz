@@ -99,7 +99,7 @@ find_nearby_stations <- function(longitude = NULL,
                                  include_closed = FALSE) {
   which_api <- .check_which_api(which_api)
 
-  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
+  if (missing(api_key) || is.null(api_key) || is.na(api_key)) {
     if (which_api == "all" || which_api == "dpird") {
       stop(
         "A valid DPIRD API key must be provided for queries to the DPIRD API ",
