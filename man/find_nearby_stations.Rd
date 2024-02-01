@@ -116,10 +116,10 @@ Other DPIRD:
 \code{\link{get_station_metadata}()}
 
 Other SILO: 
-\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
-\code{\link{get_patched_point_apsim}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
+\code{\link{get_patched_point_apsim}()},
 \code{\link{get_station_metadata}()},
 \code{\link{silo_daily_values}}
 
@@ -132,7 +132,7 @@ Other metadata:
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam H.
-Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Sparks, \email{adamhsparks@gmail.com}
 }
 \concept{DPIRD}
 \concept{SILO}

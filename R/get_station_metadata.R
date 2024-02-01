@@ -99,7 +99,7 @@
 #'   <http://www.bom.gov.au/climate/data/lists_by_element/stations.txt> and the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @family DPIRD
 #' @family SILO
@@ -120,14 +120,14 @@ get_station_metadata <-
     if (which_api == "silo") {
       out <- .fetch_silo_metadata()
     } else if (which_api == "dpird") {
-      if (missing(api_key)) {
+      if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
         stop(call. = FALSE,
              "You must provide an API key for this query.")
       }
       .check_not_example_api_key(api_key)
       out <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
     } else if (which_api == "all") {
-      if (missing(api_key)) {
+      if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
         stop(call. = FALSE,
              "You must provide an API key for this query.")
       }

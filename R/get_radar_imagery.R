@@ -30,7 +30,7 @@
 #' @family metadata
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}, and Adam H. Sparks,
-#'   \email{adam.sparks@@dpird.wa.gov.au}
+#'   \email{adamhsparks@@gmail.com}
 #'
 #' @export get_available_radar
 

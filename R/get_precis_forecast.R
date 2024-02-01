@@ -127,7 +127,7 @@ get_precis_forecast <- function(state = "AUS") {
 #'
 #' @return a data.table of the forecast for cleaning and returning to user
 #' @keywords internal
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @noRd
 
 .parse_precis_forecast <- function(xml_url) {
@@ -281,7 +281,7 @@ get_precis_forecast <- function(state = "AUS") {
 #'
 #' @return a data.table of the forecast for further refining
 #' @keywords internal
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @noRd
 
 .parse_precis_xml <- function(xml_object) {

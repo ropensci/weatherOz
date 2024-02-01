@@ -147,7 +147,7 @@
 #'   \doi{10.1016/S1364-8152(01)00008-1}.
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
-#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#'   Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @family SILO
 #' @family data fetching
@@ -171,7 +171,7 @@ get_patched_point <- function(station_code,
                               values = "all",
                               api_key) {
 
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
   }
@@ -181,7 +181,7 @@ get_patched_point <- function(station_code,
          "Please supply a valid start date as `start_date`.")
 
   # Error if api_key is not provided
-  if (missing(api_key)) {
+  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop(
       "A valid email address must be provided for `api_key`.",
       call. = FALSE

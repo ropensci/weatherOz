@@ -103,7 +103,7 @@ Other metadata:
 \code{\link{get_station_metadata}()}
 }
 \author{
-Adam H. Sparks, \email{adam.sparks@dpird.wa.gov.au}
+Adam H. Sparks, \email{adamhsparks@gmail.com}
 }
 \concept{DPIRD}
 \concept{metadata}

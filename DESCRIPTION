@@ -97,9 +97,21 @@ Authors@R: c(
   person(
     given = "Adam H.",
     family = "Sparks",
-    email = "adam.sparks@dpird.wa.gov.au",
+    email = "adamhsparks@gmail.com",
     role = "aut",
     comment = c(ORCID = "0000-0002-0061-8359")
+  ),
+  person(
+    given = "Laurens",
+    family = "Geffert",
+    role = "rev",
+    email = "laurensgeffert@gmail.com"
+  ),
+  person(
+    given = "Sam",
+    family = "Rogers",
+    role = "rev",
+    email = "sam.rogers@adelaide.edu.au"
   ),
   person(given = "Western Australia Agriculture Authority (WAAA)",
          role = c("cph")))
@@ -130,7 +142,7 @@ BugReports: https://github.com/DPIRD-FSI/weatherOz/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Imports: 
     apsimx,
     clock,

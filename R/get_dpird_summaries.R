@@ -150,7 +150,7 @@
 #' @family DPIRD
 #' @family data fetching
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}, and Rodrigo
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}, and Rodrigo
 #'   Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #'
 #' @examples
@@ -196,7 +196,7 @@ get_dpird_summaries <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
   }
@@ -206,7 +206,7 @@ get_dpird_summaries <- function(station_code,
          "Please supply a valid start date as `start_date`.")
 
   # Error if api_key is not provided
-  if (missing(api_key)) {
+  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop(
       "A valid DPIRD API key must be provided, please visit\n",
       "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
@@ -315,16 +315,32 @@ get_dpird_summaries <- function(station_code,
 
   # TODO: When Phil gets lat/lon values added to the summary results from the
   # API, remove this bit here and add lat/lon to the list of queried values
-  metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+  if (Sys.info()['sysname'] == "Windows") {
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "\\")
 
-  if (!file.exists(metadata_file)) {
-    saveRDS(
-      get_station_metadata(which_api = "dpird",
-                           api_key = api_key),
-      file = metadata_file,
-      compress = FALSE
-    )
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_station_metadata(which_api = "dpird",
+                             api_key = api_key),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
+
+  } else {
+
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_station_metadata(which_api = "dpird",
+                             api_key = api_key),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
   }
+
   # END chunk to remove
 
   query_list <- .build_query(

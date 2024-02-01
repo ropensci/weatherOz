@@ -21,10 +21,10 @@ taken from the documentation for the \acronym{SILO} \acronym{API}.
 \seealso{
 Other SILO: 
 \code{\link{find_nearby_stations}()},
-\code{\link{get_data_drill_apsim}()},
 \code{\link{get_data_drill}()},
-\code{\link{get_patched_point_apsim}()},
+\code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
+\code{\link{get_patched_point_apsim}()},
 \code{\link{get_station_metadata}()}
 
 Other data: 

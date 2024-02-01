@@ -47,7 +47,7 @@
 #' @family DPIRD
 #' @family metadata
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @examples
 #' \dontrun{
@@ -75,7 +75,7 @@ get_dpird_availability <-
            values = "availability",
            api_key) {
     # Error if api_key is not provided
-    if (missing(api_key)) {
+    if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
       stop(
         "A valid DPIRD API key must be provided, please visit\n",
         "<https://www.agric.wa.gov.au/web-apis> to request one.\n",

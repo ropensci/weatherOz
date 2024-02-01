@@ -88,7 +88,7 @@
 #' }
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
-#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#'   Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @family SILO
 #' @family data fetching
@@ -112,7 +112,7 @@ get_data_drill_apsim <- function(longitude,
   }
 
   # Error if api_key is not provided
-  if (missing(api_key)) {
+  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop("A valid email address must be provided for `api_key`.",
          call. = FALSE)
   }

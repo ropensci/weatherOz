@@ -138,7 +138,7 @@ get_available_imagery <- function(product_id = "all") {
 #' avail <- get_available_imagery(product_id = "IDE00425")
 #' imagery <- get_satellite_imagery(product_id = avail, scans = 2)
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @rdname get_satellite_imagery
 #' @export get_satellite_imagery
 

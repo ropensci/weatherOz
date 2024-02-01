@@ -20,7 +20,7 @@
 #' @return Validated date string as a `POSIXct` object.
 #' @note This was taken from \CRANpkg{nasapower}.
 #' @example .check_date(x)
-#' @author Adam H. Sparks \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks \email{adamhsparks@@gmail.com}
 #' @keywords Internal
 #' @noRd
 .check_date <- function(x) {
@@ -414,7 +414,7 @@
 #'
 #' @return An XML file (hopefully).
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @keywords Internal
 #' @noRd
 
@@ -524,7 +524,7 @@
 #'  camelCase field names
 #'
 #' @return Modifies the the colnames of `x` in place
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @keywords Internal
 #' @noRd
 
@@ -549,7 +549,7 @@
 #'
 #' @return cleaned data.table cols of date and time
 #' @keywords Internal
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @noRd
 
 .split_time_cols <- function(x) {
@@ -591,7 +591,7 @@
 #'  Adam Sparks.
 #'
 #' @author Charles Dupont and Adam H. Sparks,
-#'  \email{adam.sparks@@dpird.wa.gov.au}
+#'  \email{adamhsparks@@gmail.com}
 #' @keywords Internal
 #' @noRd
 

@@ -64,7 +64,7 @@
 #' @family DPIRD
 #' @family data fetching
 #'
-#' @author Adam H. Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @export
 
 get_dpird_minute <- function(station_code,
@@ -73,12 +73,12 @@ get_dpird_minute <- function(station_code,
                              minutes = 1440L,
                              values = "all",
                              api_key) {
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
   }
 
-  if (missing(api_key)) {
+  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop(
       "A valid DPIRD API key must be provided, please visit\n",
       "<https://www.agric.wa.gov.au/web-apis> to request one.\n",

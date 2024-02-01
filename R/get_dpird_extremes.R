@@ -100,7 +100,7 @@
 #' }
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
-#'   Sparks, \email{adam.sparks@@dpird.wa.gov.au}
+#'   Sparks, \email{adamhsparks@@gmail.com}
 #'
 #' @export
 
@@ -108,7 +108,7 @@ get_dpird_extremes <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(
       call. = FALSE,
       "Please provide a station code via the `station_code` argument.\n",
@@ -123,7 +123,7 @@ get_dpird_extremes <- function(station_code,
   }
 
   # Error if api_key is not provided
-  if (missing(api_key)) {
+  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop(
       "A valid DPIRD API key must be provided, please visit\n",
       "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
