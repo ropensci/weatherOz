@@ -108,7 +108,7 @@ get_dpird_extremes <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(
       call. = FALSE,
       "Please provide a station code via the `station_code` argument.\n",

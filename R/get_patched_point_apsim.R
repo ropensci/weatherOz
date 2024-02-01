@@ -110,7 +110,7 @@ get_patched_point_apsim <- function(station_code,
                                     start_date,
                                     end_date = Sys.Date(),
                                     api_key) {
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
   }

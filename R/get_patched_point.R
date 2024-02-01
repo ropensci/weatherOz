@@ -171,7 +171,7 @@ get_patched_point <- function(station_code,
                               values = "all",
                               api_key) {
 
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
   }

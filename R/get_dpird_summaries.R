@@ -196,7 +196,7 @@ get_dpird_summaries <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
-  if (missing(station_code)) {
+  if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
   }
