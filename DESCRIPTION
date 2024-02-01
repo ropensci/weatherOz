@@ -101,6 +101,18 @@ Authors@R: c(
     role = "aut",
     comment = c(ORCID = "0000-0002-0061-8359")
   ),
+  person(
+    given = "Laurens",
+    family = "Geffert",
+    role = "rev",
+    email = "laurensgeffert@gmail.com"
+  ),
+  person(
+    given = "Sam",
+    family = "Rogers",
+    role = "rev",
+    email = "sam.rogers@adelaide.edu.au"
+  ),
   person(given = "Western Australia Agriculture Authority (WAAA)",
          role = c("cph")))
 Description: Provides automated downloading, parsing and formatting of weather
