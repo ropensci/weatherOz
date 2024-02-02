@@ -239,13 +239,13 @@ get_dpird_summaries <- function(station_code,
   .check_earliest_available_dpird(start_date)
 
   # if interval is not set, default to "daily", else check input to be sure
-  if (length(setdiff(interval,
-                     c("daily",
-                       "15min",
-                       "30min",
-                       "hourly",
-                       "monthly",
-                       "yearly"))) == 0) {
+  if (identical(interval,
+                c("daily",
+                  "15min",
+                  "30min",
+                  "hourly",
+                  "monthly",
+                  "yearly"))) {
     checked_interval <- "daily"
   } else {
     approved_intervals <- c("15min",
@@ -253,7 +253,8 @@ get_dpird_summaries <- function(station_code,
                             "hourly",
                             "daily",
                             "monthly",
-                            "yearly")
+                            "yearly"
+    )
 
     likely_interval <- agrep(pattern = interval,
                              x = approved_intervals)
