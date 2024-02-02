@@ -60,10 +60,10 @@
 #'
 #' @family BOM
 #' @family parse
-#'
+#' @autoglobal
 #' @seealso [get_coastal_forecast]
 #'
-#' @export parse_coastal_forecast
+#' @export
 
 parse_coastal_forecast <- function(state, filepath) {
   # see internal_functions.R for these functions

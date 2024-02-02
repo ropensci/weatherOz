@@ -61,7 +61,7 @@
 #' @examples
 #' \dontrun{
 #' # fetch metadata for all stations available in {weatherOz}
-#' get_station_metadata(api_key = "your_api_key")
+#' get_stations_metadata(api_key = "your_api_key")
 #' }
 #'
 #' @return A [data.table] of \acronym{BOM} weather stations'
@@ -104,10 +104,10 @@
 #' @family DPIRD
 #' @family SILO
 #' @family metadata
-#'
+#' @autoglobal
 #' @export
 
-get_station_metadata <-
+get_stations_metadata <-
   function(station_code = NULL,
            station_name = NULL,
            which_api = "all",
@@ -210,6 +210,7 @@ get_station_metadata <-
 #'
 #' @return A `data.table` of SILO station metadata
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .fetch_silo_metadata <- function() {
@@ -245,6 +246,7 @@ get_station_metadata <-
 #'
 #' @return A `data.table` of DPIRD station metadata
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 

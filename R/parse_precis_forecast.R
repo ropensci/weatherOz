@@ -66,8 +66,8 @@
 #'
 #' @family BOM
 #' @family parse
-#'
-#' @export parse_precis_forecast
+#' @autoglobal
+#' @export
 #'
 
 parse_precis_forecast <- function(state, filepath) {

@@ -141,7 +141,8 @@ URL: https://github.com/DPIRD-FSI/weatherOz/, https://dpird-fsi.github.io/weathe
 BugReports: https://github.com/DPIRD-FSI/weatherOz/issues
 License: GPL (>= 3)
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
 RoxygenNote: 7.3.1
 Imports: 
     apsimx,
@@ -179,7 +180,8 @@ Suggests:
     testthat (>= 3.0.0),
     vcr (>= 0.6.0),
     vdiffr,
-    withr
+    withr,
+    roxyglobals
 Config/testthat/edition: 3
 Depends: 
     R (>= 4.1.0)
@@ -191,3 +193,5 @@ X-schema.org-isPartOf: https://www.agric.wa.gov.au/
 VignetteBuilder: knitr
 Language: en-US
 LazyData: true
+Config/roxyglobals/filename: globals.R
+Config/roxyglobals/unique: FALSE

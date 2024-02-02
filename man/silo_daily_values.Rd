@@ -25,7 +25,7 @@ Other SILO:
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_patched_point_apsim}()},
-\code{\link{get_station_metadata}()}
+\code{\link{get_stations_metadata}()}
 
 Other data: 
 \code{\link{dpird_extreme_weather_values}},

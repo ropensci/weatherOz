@@ -7,7 +7,7 @@
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.  Station codes are available from the
-#'   `get_station_metadata()` function.
+#'   `get_stations_metadata()` function.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.
@@ -44,6 +44,7 @@
 #' @family data fetching
 #' @family APSIM
 #' @encoding UTF-8
+#' @autoglobal
 #' @export
 
 get_dpird_apsim <- function(station_code,
@@ -149,7 +150,7 @@ get_dpird_apsim <- function(station_code,
   return(apsim)
 }
 
-#' Calculates attribute amp for an object of class \sQuote{met}
+#' Calculates Attribute Amp for an Object of Class \sQuote{met}
 #'
 #' This function recalculates mean monthly amplitude for an object of class
 #' \sQuote{met} from \cranpkg{apsimx}.
@@ -158,6 +159,7 @@ get_dpird_apsim <- function(station_code,
 #' @return an object of class \sQuote{met} with a recalculation of annual
 #'   amplitude in mean monthly temperature.
 #' @author Fernando Miguez, \email{femiguez@@iastate.edu}
+#' @autoglobal
 #' @noRd
 
 amp_apsim_met <- function(met, start_date, end_date) {

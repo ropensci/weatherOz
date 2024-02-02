@@ -163,6 +163,7 @@
 #'                values = "all",
 #'                api_key = "your_api_key")
 #' }
+#' @autoglobal
 #' @export
 
 get_patched_point <- function(station_code,

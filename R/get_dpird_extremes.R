@@ -102,6 +102,7 @@
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}, and Adam
 #'   Sparks, \email{adamhsparks@@gmail.com}
 #'
+#' @autoglobal
 #' @export
 
 get_dpird_extremes <- function(station_code,

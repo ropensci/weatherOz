@@ -94,6 +94,7 @@
 #' @family data fetching
 #' @family APSIM
 #' @encoding UTF-8
+#' @autoglobal
 #' @export
 
 get_data_drill_apsim <- function(longitude,

@@ -549,7 +549,7 @@ library(weatherOz)
 
 Two functions are provided to assist in fetching metadata about the stations.
  * `find_nearby_stations()`, which returns a `data.table` with the nearest weather stations to a given geographic point or known station either in the DPIRD or BOM (from SILO) networks.
- * `get_station_metadata()`, which returns a `data.table` with the latest and most up-to-date information available from the Weather 2.0 API on the stations' geographic locations, hardware details, *e.g.,* wind mast height, and recording capabilities.
+ * `get_stations_metadata()`, which returns a `data.table` with the latest and most up-to-date information available from the Weather 2.0 API on the stations' geographic locations, hardware details, *e.g.,* wind mast height, and recording capabilities.
 
 ### Finding Nearby Stations
 
@@ -719,19 +719,19 @@ library(weatherOz)
 
 ### Getting Station Metadata for the SILO Network Stations
 
-The `get_station_metadata()` function is shared with the DPIRD functions as well, so this function will retrieve data from both weather APIs.
+The `get_stations_metadata()` function is shared with the DPIRD functions as well, so this function will retrieve data from both weather APIs.
 Shown here is how to use it for SILO data only.
 
 ### Example 15: Get SILO Station Metadata
 
-The `get_station_metadata()` function allows you to get details about the stations themselves for stations in the DPIRD and SILO (BOM) networks in one function.
+The `get_stations_metadata()` function allows you to get details about the stations themselves for stations in the DPIRD and SILO (BOM) networks in one function.
 Here we demonstrate how to get the metadata for the SILO stations only.
 
 
 ```r
 library(weatherOz)
 
-(metadata <- get_station_metadata(which_api = "silo"))
+(metadata <- get_stations_metadata(which_api = "silo"))
 #>       station_code                     station_name      start        end latitude
 #>    1:       061065                Aberdeen Rossgole 1926-01-01 2023-11-03 -32.1402
 #>    2:       071000    Adaminaby Alpine Tourist Park 1886-01-01 2023-11-03 -35.9962
@@ -767,7 +767,7 @@ library(weatherOz)
 library(data.table)
 #> data.table 1.14.8 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
-metadata <- get_station_metadata(which_api = "silo")
+metadata <- get_stations_metadata(which_api = "silo")
 
 # Subset to the required state
 metadata_wa <- subset(metadata, state == "WA")

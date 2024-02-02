@@ -141,7 +141,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(gridExtra)
 
   dpird_stations <-
-    get_station_metadata(which_api = "DPIRD",
+    get_stations_metadata(which_api = "DPIRD",
                          api_key = Sys.getenv("DPIRD_API_KEY"))
 
   Aust_map <- map_data("world", region = "Australia")
@@ -191,7 +191,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(grid)
   library(gridExtra)
 
-  silo_stations <- get_station_metadata(which_api = "SILO")
+  silo_stations <- get_stations_metadata(which_api = "SILO")
 
   Aust_map <- map_data("world", region = "Australia")
 

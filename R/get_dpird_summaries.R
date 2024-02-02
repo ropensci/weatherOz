@@ -23,7 +23,7 @@
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.  Station codes are available from the
-#'   `get_station_metadata()` function.
+#'   `get_stations_metadata()` function.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.
@@ -182,7 +182,8 @@
 #'     )
 #' )
 #' }
-#' @export get_dpird_summaries
+#' @autoglobal
+#' @export
 
 get_dpird_summaries <- function(station_code,
                                 start_date,
@@ -320,7 +321,7 @@ get_dpird_summaries <- function(station_code,
 
     if (!file.exists(metadata_file)) {
       saveRDS(
-        get_station_metadata(which_api = "dpird",
+        get_stations_metadata(which_api = "dpird",
                              api_key = api_key),
         file = metadata_file,
         compress = FALSE
@@ -333,7 +334,7 @@ get_dpird_summaries <- function(station_code,
 
     if (!file.exists(metadata_file)) {
       saveRDS(
-        get_station_metadata(which_api = "dpird",
+        get_stations_metadata(which_api = "dpird",
                              api_key = api_key),
         file = metadata_file,
         compress = FALSE
@@ -570,6 +571,7 @@ get_dpird_summaries <- function(station_code,
 #' @return a tidy `data.table` with station id and requested weather summaries
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords Internal
 #'
 .parse_summary <- function(.ret_list,
@@ -626,6 +628,7 @@ get_dpird_summaries <- function(station_code,
 #' @param .start_date A date object passed from another function
 #'
 #' @return invisible `NULL`, called for its side-effects
+#' @autoglobal
 #' @noRd
 
 .check_earliest_available_dpird <- function(.start_date) {
@@ -651,6 +654,7 @@ get_dpird_summaries <- function(station_code,
 #'   validity
 #'
 #' @return a `data.table` with ordered columns
+#' @autoglobal
 #' @noRd
 
 .set_col_orders <- function(.out, .checked_interval) {

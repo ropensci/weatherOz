@@ -31,8 +31,8 @@
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}, and Adam H. Sparks,
 #'   \email{adamhsparks@@gmail.com}
-#'
-#' @export get_available_radar
+#' @autoglobal
+#' @export
 
 get_available_radar <- function(radar_id = "all") {
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar/"
@@ -142,6 +142,7 @@ get_available_radar <- function(radar_id = "all") {
 #' @family BOM
 #' @family data fetching
 #'
+#' @autoglobal
 #' @rdname get_radar_imagery
 #' @export get_radar_imagery
 

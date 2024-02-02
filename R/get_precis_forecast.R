@@ -84,7 +84,7 @@ get_precis_forecast <- function(state = "AUS") {
 #'
 #' @param location File location either a URL or local filepath provided by
 #' `.validate_filepath()`
-#'
+#' @autoglobal
 #' @noRd
 .return_precis <- function(file_loc, cleaned_state) {
   # create vector of XML files
@@ -128,6 +128,7 @@ get_precis_forecast <- function(state = "AUS") {
 #' @return a data.table of the forecast for cleaning and returning to user
 #' @keywords internal
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @autoglobal
 #' @noRd
 
 .parse_precis_forecast <- function(xml_url) {
@@ -282,10 +283,10 @@ get_precis_forecast <- function(state = "AUS") {
 #' @return a data.table of the forecast for further refining
 #' @keywords internal
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @autoglobal
 #' @noRd
 
 .parse_precis_xml <- function(xml_object) {
-  forecast_icon_code <- NULL
 
   # get the actual forecast objects
   fp <- xml2::xml_find_all(xml_object, ".//forecast-period")

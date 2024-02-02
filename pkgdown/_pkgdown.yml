@@ -46,7 +46,7 @@ reference:
   - get_available_imagery
   - get_available_radar
   - get_dpird_availability
-  - get_station_metadata
+  - get_stations_metadata
 
 - title: File Parsing
   desc: >

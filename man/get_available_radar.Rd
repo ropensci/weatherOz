@@ -54,7 +54,7 @@ Other metadata:
 \code{\link{find_nearby_stations}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_dpird_availability}()},
-\code{\link{get_station_metadata}()}
+\code{\link{get_stations_metadata}()}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}, and Adam H. Sparks,

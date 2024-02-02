@@ -25,6 +25,7 @@
 #' @return A `data.table` of data for manipulating before returning to the user.
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords internal
 
 .query_silo_api <- function(.station_code = NULL,
@@ -351,6 +352,7 @@
 #'   a station_code/code).
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords internal
 
 .check_silo_codes <- function(dt) {

@@ -104,6 +104,7 @@
 #' @family APSIM
 #' @family data fetching
 #'
+#' @autoglobal
 #' @export
 
 get_patched_point_apsim <- function(station_code,

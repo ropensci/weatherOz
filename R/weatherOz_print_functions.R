@@ -4,7 +4,7 @@
 #'
 #' @param x a Defaults to `weatherOz_tbl` object.
 #' @param ... ignored
-#'
+#' @autoglobal
 #' @export
 #' @noRd
 

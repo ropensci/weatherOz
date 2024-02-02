@@ -126,7 +126,7 @@ Other DPIRD:
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
-\code{\link{get_station_metadata}()}
+\code{\link{get_stations_metadata}()}
 
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},

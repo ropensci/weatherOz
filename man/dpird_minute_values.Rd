@@ -28,7 +28,7 @@ Other DPIRD:
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
-\code{\link{get_station_metadata}()}
+\code{\link{get_stations_metadata}()}
 
 Other data: 
 \code{\link{dpird_extreme_weather_values}},

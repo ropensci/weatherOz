@@ -49,7 +49,7 @@ Other metadata:
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_dpird_availability}()},
-\code{\link{get_station_metadata}()}
+\code{\link{get_stations_metadata}()}
 }
 \author{
 Hugh Parsonage, \email{hugh.parsonage@gmail.com}, and James Goldie,
