@@ -303,6 +303,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=withr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "roxyglobals",
+      "name": "roxyglobals",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=roxyglobals"
     }
   ],
   "softwareRequirements": {
@@ -530,7 +542,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://www.agric.wa.gov.au/",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "12475.867KB",
+  "fileSize": "12669.325KB",
   "releaseNotes": "https://github.com/DPIRD-FSI/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/DPIRD-FSI/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/DPIRD-FSI/weatherOz/actions", "https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main"],
