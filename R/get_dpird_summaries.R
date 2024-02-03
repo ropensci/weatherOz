@@ -239,39 +239,32 @@ get_dpird_summaries <- function(station_code,
   .check_earliest_available_dpird(start_date)
 
   # if interval is not set, default to "daily", else check input to be sure
-  if (identical(interval,
-                c("daily",
-                  "15min",
-                  "30min",
-                  "hourly",
-                  "monthly",
-                  "yearly"))) {
-    checked_interval <- "daily"
-  } else {
-    approved_intervals <- c("15min",
-                            "30min",
-                            "hourly",
-                            "daily",
-                            "monthly",
-                            "yearly"
-    )
+  approved_intervals <- c("daily",
+                          "15min",
+                          "30min",
+                          "hourly",
+                          "monthly",
+                          "yearly")
 
-    likely_interval <- agrep(pattern = interval,
-                             x = approved_intervals)
+  if (identical(interval, approved_intervals)) {
+    interval <- "daily"
+  }
 
-    # Match time interval query to user requests
-    checked_interval <-
-      try(match.arg(approved_intervals[likely_interval],
-                    approved_intervals,
-                    several.ok = FALSE),
-          silent = TRUE)
+  likely_interval <- agrep(pattern = interval,
+                           x = approved_intervals)
 
-    # Error if summary interval is not available. API only allows for daily,
-    # 15 min, 30 min, hourly, monthly or yearly
-    if (methods::is(checked_interval, "try-error")) {
-      stop(call. = FALSE,
-           "\"", interval, "\" is not a supported time interval")
-    }
+  # Match time interval query to user requests
+  checked_interval <-
+    try(match.arg(approved_intervals[likely_interval],
+                  approved_intervals,
+                  several.ok = FALSE),
+        silent = TRUE)
+
+  # Error if summary interval is not available. API only allows for daily,
+  # 15 min, 30 min, hourly, monthly or yearly
+  if (methods::is(checked_interval, "try-error")) {
+    stop(call. = FALSE,
+         "\"", interval, "\" is not a supported time interval")
   }
 
   request_interval <- lubridate::interval(start_date,
