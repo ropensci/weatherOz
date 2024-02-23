@@ -92,11 +92,22 @@ BoM provides files through their public anonymous FTP server [@BoM2024] and data
 
 # Features 
 
-Data available from BoM that {weatherOz} provides access to include forecasts, `get_precis_forecast()` and `get_coastal_forecast()`; agriculture bulletin data, `get_ag_bulletin()` and satellite, `get_satellite_imagery()` and radar imagery, `get_radar_imagery()`.
+## Fetching data from BoM
+
+Data available from BoM that {weatherOz} provides access to include forecasts, `get_precis_forecast()` and `get_coastal_forecast()`; agriculture bulletin data, `get_ag_bulletin()` and satellite, `get_satellite_imagery()`, which supports both the {stars} and {terra} package formats and radar imagery, `get_radar_imagery()`.
+
+## Fetching data from SILO
+
 {weatherOz} provides access to data from the SILO database are made available under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence including the Patched Point data available "from 1889 to yesterday" for approximately 8000 weather station locations and Data Drill data, which are spatially interpolated data covering Australian land surfaces.
 Both types of data from SILO are temporally interpolated to fill missing values in the time series and estimated or modelled values are flagged as such in the data frame returned by {weatherOz's} functions.
+
+## Fetching data from DPIRD
+
 The DPIRD weather station network includes approximately 200 weather stations in Western Australia with the majority being located in the southwestern part of the state and are available in time-steps from minute to annual summaries with the default being daily values and is made available under a Creative Commons Attribution Licence 3.0 (CC BY 3.0 AU), though users must register for a free API key to use the resource.
 {weatherOz} has functionality to search for weather stations in one or both APIs, `find_nearby_stations()`, which can then be used to determine which station the user would llike to request data from that best meets their needs based on longitude and latitude coordinates or a known station.
+
+## Station metadata for both SILO and DPIRD
+
 Weather station metadata available through {weatherOz} is richer than what is available from SILO alone and includes geographic location as longitude, latitude and state, elevation, dates available, open or closed status and in the case of DPIRD stations, more detailed information including uptime and hardware details about the stations themselves is available through `get_stations_metadata()`.
 Most users will likely use `get_patched_point()` (station data), `get_data_drill()` (gridded data) or `get_dpird_summaries()` to retrieve daily weather data values.
 Specialised functions are available for APSIM users providing {apsimx} ".met" objects of weather data from both DPIRD and SILO [@miguez2024] in an R session, _e.g._, `get_dpird_apsim()`, `get_data_drill_apsim()` and `get_patched_point_apsim()`.
