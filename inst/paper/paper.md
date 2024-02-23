@@ -90,30 +90,15 @@ Therefore, we created {weatherOz} to replace and at the same time, improve upon 
 There are two sources of Australia-wide climate and weather station observations and data, BoM and Queensland Government's Scientific Information for Landowners (SILO) [@Jeffery2001] database, hosted by the Queensland Department of the Environment, Science and Innovation (DESI) and one source for Western Australia only weather station data, the Department of Primary Industries and Regional Development of Western Australia's (DPIRD) database.
 BoM provides files through their public anonymous FTP server [@BoM2024] and data from both the SILO and DPIRD databases are available through APIs.
 
+{weatherOz} provides access to data from the SILO database are made available under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence including the Patched Point data available "from 1889 to yesterday" for approximately 8000 weather station locations and Data Drill data, which are spatially interpolated data covering Australian land surfaces.
+The DPIRD weather station network includes approximately 200 weather stations with data available from the year 2000 in Western Australia with the majority being located in the southwestern part of the state and are available in time-steps from minute to annual summaries with the default being daily values and is made available under a Creative Commons Attribution Licence 3.0 (CC BY 3.0 AU), though users must register for a free API key to use the resource.
+
 # Features
 
 The package is fully documented with a quick-start vignette that provides details about how to set up the API keys and go about frequently conducted tasks, _e.g._, fetching daily summary weather data from DPIRD and SILO as well as maps of station locations in the DPIRD and SILO station networks.
-The DPIRD weather station network includes approximately 200 weather stations with data available from the year 2000 in Western Australia with the majority being located in the southwestern part of the state and are available in time-steps from minute to annual summaries with the default being daily values and is made available under a Creative Commons Attribution Licence 3.0 (CC BY 3.0 AU), though users must register for a free API key to use the resource.
-{weatherOz} provides access to data from the SILO database are made available under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence including the Patched Point data available "from 1889 to yesterday" for approximately 8000 weather station locations and Data Drill data, which are spatially interpolated data covering Australian land surfaces.
-
-Additionally, each data source has a dedicated vignette that details how to fetch data from that source and includes greater detail about the functionality of the package for each of the three data sources it services.
-Aside from two specialised functions, `get_radar_imagery()` and `get_satellite_imagery()`, the functions all return a well-formatted `data.table` [@Barrett2024] object in the active R session.
+Additionally, each data source has a dedicated vignette that details how to fetch data from that source and includes greater detail about the functionality of the package.
 Most users will likely use `get_patched_point()` (station data), `get_data_drill()` (spatially interpolated gridded data) or `get_dpird_summaries()` to retrieve summarised weather data values.
-
-## Fetching data from BoM
-
-Data available from BoM that {weatherOz} provides access to include forecasts, `get_precis_forecast()` and `get_coastal_forecast()`; agriculture bulletin data, `get_ag_bulletin()` and satellite, `get_satellite_imagery()`, which supports both the {stars} [@Pebesma2023] and {terra} [@Hijmans2024] package formats and radar imagery, `get_radar_imagery()`, which returns a .png file.
-
-## Fetching data from SILO
-
-The functions, `get_patched_point()` and `get_data_drill()` provide access to weather data from the SILO database returning `data.table` objects.
-Both types of data from SILO are temporally interpolated to fill missing values in the time series and estimated or modelled values are flagged as such in the data frame returned by {weatherOz's} functions.
-
-## Fetching data from DPIRD
-
-{weatherOz} has functionality to search for weather stations in one or both APIs, `find_nearby_stations()`, which can then be used to determine which station the user would llike to request data from that best meets their needs based on longitude and latitude coordinates or a known station.
-
-## Specialised functionality 
+Aside from two specialised functions for data available from BoM, `get_radar_imagery()` and `get_satellite_imagery()`, the functions all return a well-formatted `data.table` [@Barrett2024] object in the active R session.
 
 Weather station metadata available through {weatherOz} is richer than what is available from SILO alone and includes geographic location as longitude, latitude and state, elevation, dates available, open or closed status and in the case of DPIRD stations, more detailed information including uptime and hardware details about the stations themselves is available through `get_stations_metadata()`.
 
