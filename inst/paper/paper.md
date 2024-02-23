@@ -91,7 +91,7 @@ There are two sources of Australia-wide climate and weather station observations
 BoM provides files through their public anonymous FTP server [@BoM2024] and data from both the SILO and DPIRD databases are available through APIs.
 
 {weatherOz} provides access to data from the SILO database are made available under a Creative Commons Attribution 4.0 International (CC BY 4.0) licence including the Patched Point data available "from 1889 to yesterday" for approximately 8000 weather station locations and Data Drill data, which are spatially interpolated data covering Australian land surfaces.
-The DPIRD weather station network includes approximately 200 weather stations with data available from the year 2000 in Western Australia with the majority being located in the southwestern part of the state and are available in time-steps from minute to annual summaries with the default being daily values and is made available under a Creative Commons Attribution Licence 3.0 (CC BY 3.0 AU), though users must register for a free API key to use the resource.
+The DPIRD weather station network includes approximately 200 weather stations with data available from the year 2000 in Western Australia with the majority being located in the southwestern part of the state and are available in time-steps from minute to annual summaries with the default being daily values and is made available under a Creative Commons Attribution Licence 3.0 (CC BY 3.0 AU), though users must register for a free API key to use the resource. BoM data that are supported include forecasts, both précis and coastal, agriculture bulletins and satellite and radar imagery and are available under a Creative Commons Attribution (CC BY) licence.
 
 # Features
 
