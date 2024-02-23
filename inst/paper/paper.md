@@ -31,7 +31,7 @@ authors:
   name: Keith Pembleton
   orcid: 0000-0002-1896-4516
 - affiliation: "1, 9, 10"
-  name: Adam H Sparks
+  name: Adam H. Sparks
   orcid: 0000-0002-0061-8359
 date: "XX XXX 2024"
 output:
@@ -110,7 +110,7 @@ This does mean that the column names do not match the data source, but make work
 
 # Acknowledgements
 
-Work on this package was funded as salary for the time of individuals involved in the writing of this software in part by the Department of Primary Industries and Regional Development of Western Australia, Grains Research and Development Corporation research projects GRI2007-001RTX and DAW2112-002RTX and Curtin University.
+Work on this package was funded as salary for the time of individuals involved in the writing of this software in part by the Department of Primary Industries and Regional Development of Western Australia, Adam H. Sparks; Grains Research and Development Corporation research projects GRI2007-001RTX, Rodrigo Pires; and DAW2112-002RTX, Anna Hepworth; and Curtin University, Adam H. Sparks.
 
 # References
 
