@@ -75,9 +75,9 @@ affiliations:
 # Summary
 
 Researchers and policymakers use weather data in a variety of ways. 
-Agriculture applications of the data are used in several types of models and decision support tools, to estimate leaf wetness, crop yield, crop growth stage, physiological stress or forecasting crop disease epidemics or insect pest population levels [@VENALAINEN20021045; @DeWolf2003; Sparks2017].
-Other areas of use include mapping potential renewable energy, _e.g._, wind or solar potential for exploration purposes [@RAMACHANDRA20071460].
-The data can also be used by decision makers for municipalities to help plan for extreme weather events, energy needs and other infrastructure [@SVENSSON200237; @ALCOFORADO200956].
+Agriculture applications of the data are used in several types of models and decision support tools, to estimate leaf wetness, crop yield, crop growth stage, physiological stress or forecasting crop disease epidemics or insect pest population levels [@Venaelaeinen2002; @DeWolf2003; Sparks2017].
+Other areas of use include mapping potential renewable energy, _e.g._, wind or solar potential for exploration purposes [@Ramachandra2007].
+The data can also be used by decision makers for municipalities to help plan for extreme weather events, energy needs and other infrastructure [@Svensson2002; @Alcoforado2009].
 
 {weatherOz} offers R users with a single interface to access Australian climate and weather data sources providing a standardised way of easily querying and retrieving Australian climate and weather data.
 
@@ -90,11 +90,15 @@ Therefore, we created {weatherOz} to replace and at the same time, improve upon 
 There are two sources of Australia-wide climate and weather station observations and data, BoM and Queensland Government's Scientific Information for Landowners (SILO) [@Jeffery2001] database, hosted by the Queensland Department of the Environment, Science and Innovation (DESI) and one source for Western Australia only weather station data, the Department of Primary Industries and Regional Development of Western Australia's (DPIRD) database.
 BoM provides files through their public anonymous FTP server [@BoM2024] and data from both the SILO and DPIRD databases are available through APIs.
 
-# Features 
+# Features
+
+The package is fully documented with a quick-start vignette that provides details about how to set up the API keys and go about frequently conducted tasks, _e.g._, fetching daily summary weather data from DPIRD and SILO as well as maps of station locations in the DPIRD and SILO station networks.
+Additionally, each data source has a dedicated vignette that details how to fetch data from that source and includes greater detail about the functionality of the package for each of the three data sources it services.
+Aside from two specialised functions, `get_radar_imagery()` and `get_satellite_imagery()`, the functions all return a well-formatted `data.table` [@Barrett2024] object in the active R session.
 
 ## Fetching data from BoM
 
-Data available from BoM that {weatherOz} provides access to include forecasts, `get_precis_forecast()` and `get_coastal_forecast()`; agriculture bulletin data, `get_ag_bulletin()` and satellite, `get_satellite_imagery()`, which supports both the {stars} and {terra} package formats and radar imagery, `get_radar_imagery()`.
+Data available from BoM that {weatherOz} provides access to include forecasts, `get_precis_forecast()` and `get_coastal_forecast()`; agriculture bulletin data, `get_ag_bulletin()` and satellite, `get_satellite_imagery()`, which supports both the {stars} [@Pebesma2023] and {terra} [@Hijmans2024] package formats and radar imagery, `get_radar_imagery()`, which returns a .png file.
 
 ## Fetching data from SILO
 
