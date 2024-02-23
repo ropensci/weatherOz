@@ -86,7 +86,7 @@ The data can also be used by decision makers for municipalities to help plan for
 Australian weather data availability is fragmented and difficult to easily access repeatedly or programmatically for use in research activities.
 Previously the R package, {bomrang} [@Sparks2017], provided easy access to data available from the Australian Bureau of Meteorology (BoM) in R.
 However, difficulties with accessing the data and restrictive polices caused us to archive this package.
-Therefore, we created {weatherOz} to replace and at the same time, improve upon {bomrang} and provide R [@RCT2023] users with a package that allowed for easy of access to multiple sources of Australian climate and weather data while providing a unified approach to working with different data sources.
+Therefore, we created {weatherOz} to replace and at the same time, improve upon {bomrang} and provide R users with a package that allowed for easy of access to multiple sources of Australian climate and weather data while providing a unified approach to working with different data sources.
 There are two sources of Australia-wide climate and weather station observations and data, BoM and Queensland Government's Scientific Information for Landowners (SILO) [@Jeffery2001] database, hosted by the Queensland Department of the Environment, Science and Innovation (DESI) and one source for Western Australia only weather station data, the Department of Primary Industries and Regional Development of Western Australia's (DPIRD) database.
 BoM provides files through their public anonymous FTP server [@BoM2024] and data from both the SILO and DPIRD databases are available through APIs.
 
