@@ -535,7 +535,7 @@ library(weatherOz)
 #> 17:       010058         Goomalling  116.8269 -31.29940     WA    239
 #> 18:       010009            Bolgart  116.5092 -31.27440     WA    240
 #> 19:       010165        Green Hills  116.9839 -31.94080     WA    244
-#> 20:         BCAA    DBCA-A Portable  116.2560 -31.84220     WA    262
+#> 20:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    262
 #> 21:       009007            Chidlow  116.2658 -31.86220     WA    300
 #> 22:       009066        Gidgegannup  116.1976 -31.79060     WA    290
 #> 23:       010163             Jaroma  117.1433 -31.77060     WA    265
@@ -568,7 +568,7 @@ library(weatherOz)
 #> 17:                                                                  BOM       39.00
 #> 18:                                                                  BOM       40.50
 #> 19:                                                                  BOM       43.60
-#> 20:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       44.58
+#> 20:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       44.57
 #> 21:                                                                  BOM       44.60
 #> 22:                                                                  BOM       48.20
 #> 23:                                                                  BOM       49.90
@@ -632,6 +632,7 @@ Using the metadata, we can get all weather data from stations in a single state 
 ```r
 library(weatherOz)
 library(data.table)
+#> data.table 1.15.2 using 7 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 metadata <- get_stations_metadata(which_api = "silo")
 

@@ -160,30 +160,30 @@ library(weatherOz)
 #> Key: <station_code>
 #>       station_code           date_time air_temperature relative_humidity soil_temperature solar_irradiance rainfall dew_point
 #>             <fctr>              <POSc>           <num>             <num>            <num>            <int>    <int>     <num>
-#>    1:           NO 2024-03-04 11:19:00            25.3              69.3             28.1              311        0      19.3
-#>    2:           NO 2024-03-04 11:20:00            25.2              69.4             28.1              321        0      19.2
-#>    3:           NO 2024-03-04 11:21:00            25.3              69.9             28.2              327        0      19.4
-#>    4:           NO 2024-03-04 11:22:00            25.4              69.1             28.2              329        0      19.3
-#>    5:           NO 2024-03-04 11:23:00            25.5              68.5             28.2              330        0      19.3
+#>    1:           NO 2024-03-04 13:21:00            27.9              57.5             33.8              387        0      18.7
+#>    2:           NO 2024-03-04 13:22:00            28.1              58.3             33.9             1200        0      19.1
+#>    3:           NO 2024-03-04 13:23:00            28.1              57.4             33.9             1275        0      18.9
+#>    4:           NO 2024-03-04 13:24:00            28.3              58.4             34.0             1062        0      19.4
+#>    5:           NO 2024-03-04 13:25:00            28.5              56.3             34.0             1206        0      19.0
 #>   ---                                                                                                                        
-#> 1433:           NO 2024-03-05 11:11:00            25.5              55.2             32.9              961        0      15.9
-#> 1434:           NO 2024-03-05 11:12:00            25.9              53.8             33.0              962        0      15.8
-#> 1435:           NO 2024-03-05 11:13:00            26.2              52.8             33.0              963        0      15.8
-#> 1436:           NO 2024-03-05 11:14:00            26.4              52.2             33.1              966        0      15.8
-#> 1437:           NO 2024-03-05 11:15:00            26.2              52.7             33.1              967        0      15.8
+#> 1432:           NO 2024-03-05 13:12:00            29.0              46.5             39.0              986        0      16.4
+#> 1433:           NO 2024-03-05 13:13:00            29.2              45.4             39.0              987        0      16.2
+#> 1434:           NO 2024-03-05 13:14:00            28.9              46.5             39.0              985        0      16.3
+#> 1435:           NO 2024-03-05 13:15:00            29.2              45.9             39.0              983        0      16.4
+#> 1436:           NO 2024-03-05 13:16:00            29.5              45.1             39.1              982        0      16.4
 #>       wet_bulb wind_height wind_avg_speed wind_avg_direction_compass_point wind_avg_direction_degrees wind_min_speed wind_max_speed
 #>          <num>       <int>          <num>                           <char>                      <int>          <num>          <num>
-#>    1:     21.6           3           7.20                               SW                        235          4.176          10.22
-#>    2:     21.6           3           6.19                               SW                        236          2.664           9.72
-#>    3:     21.7           3           4.18                               SW                        221          1.656           7.20
-#>    4:     21.7           3           5.69                               SW                        223          1.152          11.23
-#>    5:     21.7           3           6.70                              SSW                        202          3.672          11.74
+#>    1:     22.2           3           4.68                              SSW                        202          1.656           6.70
+#>    2:     22.5           3           7.70                              SSW                        212          4.176          13.72
+#>    3:     22.4           3           8.71                               SW                        225          3.168          13.72
+#>    4:     22.7           3           4.68                               SW                        228          2.664           7.70
+#>    5:     22.5           3           8.71                              WSW                        242          3.168          13.72
 #>   ---                                                                                                                              
-#> 1433:     19.8           3          12.71                              ESE                        122          4.176          20.77
-#> 1434:     20.0           3          10.73                               SE                        131          5.184          18.76
-#> 1435:     20.0           3           7.70                              ESE                        104          4.176          12.20
-#> 1436:     20.1           3          10.73                              ESE                        123          5.688          15.23
-#> 1437:     20.0           3          12.71                               SE                        145          8.712          17.24
+#> 1432:     21.3           3          12.20                              SSE                        152          9.720          15.73
+#> 1433:     21.2           3          12.71                               SE                        136          8.712          18.25
+#> 1434:     21.2           3          12.20                              SSE                        153          8.208          18.25
+#> 1435:     21.3           3           8.71                              SSE                        158          5.184          11.74
+#> 1436:     21.4           3          11.23                                S                        169          7.200          15.73
 ```
 
 ### Example 4: Get Specific Time and Date Data for Specific Values
@@ -630,7 +630,7 @@ library(weatherOz)
 #> 3:        YE001          York East  116.9211 -31.83588     WA    229
 #> 4:         BTSB DFES-B Talbot West  116.6899 -31.96060     WA    354
 #> 5:         ROGR      Rolling Green  116.3184 -31.69527     WA    315
-#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84220     WA    262
+#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    262
 #>                                                                   owner distance_km
 #>                                                                  <char>       <num>
 #> 1: WA Department of Primary Industries and Regional Development (DPIRD)        0.00
@@ -638,7 +638,7 @@ library(weatherOz)
 #> 3: WA Department of Primary Industries and Regional Development (DPIRD)       29.23
 #> 4:                  WA Department of Fire and Emergency Services (DFES)       30.90
 #> 5:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       37.83
-#> 6:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       47.79
+#> 6:   WA Department of Biodiversity, Conservation and Attractions (DBCA)       47.78
 ```
 
 ### Example 11: Finding Stations Nearby a Given Longitude and Latitude
@@ -665,7 +665,7 @@ library(weatherOz)
 #> 3:         BTSB DFES-B Talbot West  116.6899 -31.96060     WA    354
 #> 4:        YE001          York East  116.9211 -31.83588     WA    229
 #> 5:         ROGR      Rolling Green  116.3184 -31.69527     WA    315
-#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84220     WA    262
+#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    262
 #>                                                                   owner distance_km
 #>                                                                  <char>       <num>
 #> 1: WA Department of Primary Industries and Regional Development (DPIRD)        3.23
@@ -717,7 +717,7 @@ library(weatherOz)
 #> 21:       010160        Quella Park  117.1194 -31.45330     WA    265
 #> 22:       009007            Chidlow  116.2658 -31.86220     WA    300
 #> 23:       010120       Doodenanning  117.0986 -31.90920     WA    290
-#> 24:         BCAA    DBCA-A Portable  116.2560 -31.84220     WA    262
+#> 24:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    262
 #> 25:       009066        Gidgegannup  116.1976 -31.79060     WA    290
 #>     station_code       station_name longitude  latitude  state elev_m
 #>                                                                    owner distance_km
@@ -745,7 +745,7 @@ library(weatherOz)
 #> 21:                                                                  BOM   45.923973
 #> 22:                                                                  BOM   46.778842
 #> 23:                                                                  BOM   47.759247
-#> 24:   WA Department of Biodiversity, Conservation and Attractions (DBCA)   47.790000
+#> 24:   WA Department of Biodiversity, Conservation and Attractions (DBCA)   47.780000
 #> 25:                                                                  BOM   49.440793
 #>                                                                    owner distance_km
 ```
