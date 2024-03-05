@@ -17,6 +17,14 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
     api_key = Sys.getenv("SILO_API_KEY")
   ))
 
+  # too few decimal places in lat/lon
+  expect_error(get_data_drill(
+    longitude = 150.05,
+    latitude = -27.8,
+    end_date = "20220501",
+    api_key = Sys.getenv("SILO_API_KEY")
+  ))
+
   # no start date
   expect_error(
     get_data_drill(
