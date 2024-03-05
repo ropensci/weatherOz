@@ -50,6 +50,14 @@ This example assumes that you have stored your DPIRD API key in your .Renviron f
 
 ```r
 library(weatherOz)
+#> 
+#> Attaching package: 'weatherOz'
+#> The following object is masked from 'package:graphics':
+#> 
+#>     plot
+#> The following object is masked from 'package:base':
+#> 
+#>     plot
 
 Northam <-
   find_nearby_stations(

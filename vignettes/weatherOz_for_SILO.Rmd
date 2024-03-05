@@ -632,6 +632,7 @@ Using the metadata, we can get all weather data from stations in a single state 
 ```r
 library(weatherOz)
 library(data.table)
+#> data.table 1.15.2 using 7 threads (see ?getDTthreads).  Latest news: r-datatable.com
 
 metadata <- get_stations_metadata(which_api = "silo")
 
