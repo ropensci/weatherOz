@@ -16,10 +16,10 @@ get_data_drill(
 }
 \arguments{
 \item{longitude}{A single \code{numeric} value  representing the longitude of the
-point-of-interest.}
+point-of-interest to the hundredths (\emph{e.g.}, 0.05) of a degree.}
 
 \item{latitude}{A single \code{numeric} value representing the latitude of the
-point-of-interest.}
+point-of-interest to the hundredths (\emph{e.g.}., 0.05) of a degree.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}

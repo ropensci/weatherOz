@@ -59,8 +59,8 @@
     )
   } else if (.dataset == "DataDrill" && .format == "csv") {
     silo_query_list <- list(
-      longitude = as.integer(.longitude),
-      latitude = as.integer(.latitude),
+      longitude = .longitude,
+      latitude = .latitude,
       start = as.character(.start_date),
       finish = as.character(.end_date),
       format = .format,
@@ -84,8 +84,8 @@
     )
     } else {
     silo_query_list <- list(
-      longitude = as.integer(.longitude),
-      latitude = as.integer(.latitude),
+      longitude = .longitude,
+      latitude = .latitude,
       start = as.character(.start_date),
       finish = as.character(.end_date),
       format = .format,

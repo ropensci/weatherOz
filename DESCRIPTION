@@ -160,6 +160,7 @@ Imports:
     methods,
     readr (>= 1.1.1),
     stringi,
+    stringr,
     stars,
     terra,
     stats,
