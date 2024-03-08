@@ -7,7 +7,7 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
+[![tic](https://github.com/ropensci/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/ropensci/weatherOz/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
@@ -58,10 +58,7 @@ service provided by the Bureau of Meteorology under license.
 You can install the development version of {weatherOz} like so:
 
 ``` r
-if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes")
-}
-remotes::install_github("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
+install.packages("weatherOz", repos = "https://ropensci.r-universe.dev")
 ```
 
 ## A Note on API Keys
@@ -162,12 +159,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-03-05      0.9              25
-#> 2:     11.7              25 254.5 m 2024-03-05      0.0              25
-#> 3:      7.8              25 254.5 m 2024-03-05      0.0              25
-#> 4:     10.6              25 254.5 m 2024-03-05      0.0              25
-#> 5:     13.3              25 254.5 m 2024-03-05      0.0              25
-#> 6:     14.7              25 254.5 m 2024-03-05      1.8              25
+#> 1:      9.8              25 254.5 m 2024-03-08      0.9              25
+#> 2:     11.7              25 254.5 m 2024-03-08      0.0              25
+#> 3:      7.8              25 254.5 m 2024-03-08      0.0              25
+#> 4:     10.6              25 254.5 m 2024-03-08      0.0              25
+#> 5:     13.3              25 254.5 m 2024-03-08      0.0              25
+#> 6:     14.7              25 254.5 m 2024-03-08      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
