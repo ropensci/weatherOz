@@ -169,11 +169,6 @@ get_data_drill <- function(longitude,
     stop("Please supply a valid values for `longitude` and `latitude`.")
   }
 
-  # check lat/lon for precision, we check validity a few lines later
-  if (any(.decimal_count(c(longitude, latitude)) != 2)) {
-    stop("Please supply `latitude` and `longitude` to two decimal places.")
-  }
-
   if (missing(start_date)) {
     stop("Please supply a valid start date as `start_date`.")
   }
@@ -227,50 +222,3 @@ get_data_drill <- function(longitude,
   return(out[])
 }
 
-#' Count the Number of Digits on the Right of a Decimal Point
-#'
-#' Referred to as the mantissa, calculates how many digits fall after the
-#'   decimal point.
-#'
-#' @param value A numeric value or `vector`.
-#'
-#' @author Stuart K. Grange
-#'
-#' @seealso <https://stackoverflow.com/questions/5173692/how-to-return-number-of-decimal-places-in-r>
-#'
-#' @source <https://github.com/skgrange/threadr/blob/master/R/decimal_count.R>
-#' @examples
-#' \dontrun{
-#'
-#' .decimal_count(v = 5.89)
-#'
-#' .decimal_count(v = c(5.89, 2, 56.454545, 5.1))
-#'
-#' }
-#'
-#' @noRd
-#' @keywords Internal
-
-.decimal_count <- function(v) {
-
-  # The worker
-  .decimal_counter <- function(x) {
-    # Check
-    stopifnot(class(x) == "numeric")
-
-    # If contains a period
-    if (grepl("\\.", x)) {
-      x <- stringr::str_replace(x, "0+$", "")
-      x <- stringr::str_replace(x, "^.+[.]", "")
-      x <- stringr::str_length(x)
-    } else {
-      # Otherwise return zero
-      x <- 0
-    }
-    return(x)
-  }
-
-  vapply(X = v,
-         FUN = .decimal_counter,
-         FUN.VALUE = 1)
-}
