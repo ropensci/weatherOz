@@ -80,7 +80,7 @@ Authors@R: c(
                 timezones caused tests to fail due to vcr not recognising the
                 URL when run outside of Australia/Perth TZ! Suggested the use of
                 `withr::local_timzeone()`, see
-                <https://github.com/ropensciweatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
+                <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
   person(
     given = "Jimmy",
     family = "Ng",
@@ -137,8 +137,8 @@ Description: Provides automated downloading, parsing and formatting of weather
     Creative Commons (CC) Attribution 3.0 licence or Public Access Licence (PAL)
     as appropriate, see <http://www.bom.gov.au/other/copyright.shtml> for
     further details.
-URL: https://github.com/ropensciweatherOz/, https://dpird-fsi.github.io/weatherOz/
-BugReports: https://github.com/ropensciweatherOz/issues
+URL: https://github.com/ropensci/weatherOz/, https://docs.ropensci.org/weatherOz
+BugReports: https://github.com/ropensci/weatherOz/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
@@ -196,3 +196,4 @@ Language: en-US
 LazyData: true
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
+Config/testthat/parallel: true
