@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.3 (2024-02-29)",
+  "runtimePlatform": "R version 4.3.2 (2023-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -487,18 +487,6 @@
     },
     "16": {
       "@type": "SoftwareApplication",
-      "identifier": "stringr",
-      "name": "stringr",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringr"
-    },
-    "17": {
-      "@type": "SoftwareApplication",
       "identifier": "stars",
       "name": "stars",
       "provider": {
@@ -509,7 +497,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stars"
     },
-    "18": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -521,17 +509,17 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=terra"
     },
-    "19": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "20": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "21": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
@@ -543,7 +531,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=xml2"
     },
-    "22": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "R",
       "name": "R",
@@ -552,9 +540,9 @@
     "SystemRequirements": null
   },
   "applicationCategory": "Tools",
-  "isPartOf": "https://www.agric.wa.gov.au/",
-  "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "13264.217KB",
+  "isPartOf": "https://ropensci.org",
+  "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
+  "fileSize": "12630.592KB",
   "releaseNotes": "https://github.com/ropensci/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/weatherOz/actions", "https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main"],
