@@ -189,8 +189,9 @@ Depends:
 X-schema.org-applicationCategory: Tools
 X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
     australia, weather, weather-data, meteorology, western-australia,
-    australia-bureau-of-meteorology, western-australia-agriculture
-X-schema.org-isPartOf: https://www.agric.wa.gov.au/
+    australia-bureau-of-meteorology, western-australia-agriculture,
+    australia-agriculture, australia-climate, australia-weather
+X-schema.org-isPartOf: https://ropensci.org
 VignetteBuilder: knitr
 Language: en-US
 LazyData: true
