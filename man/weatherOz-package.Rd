@@ -13,9 +13,9 @@ Provides automated downloading, parsing and formatting of weather data for Austr
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/DPIRD-FSI/weatherOz/}
+  \item \url{https://github.com/ropensciweatherOz/}
   \item \url{https://dpird-fsi.github.io/weatherOz/}
-  \item Report bugs at \url{https://github.com/DPIRD-FSI/weatherOz/issues}
+  \item Report bugs at \url{https://github.com/ropensciweatherOz/issues}
 }
 
 }
@@ -38,7 +38,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/DPIRD-FSI/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.) [contributor]
+  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensciweatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.) [contributor]
   \item Jimmy Ng \email{jimmy.ng@dpird.wa.gov.au} [contributor]
   \item Steve Collins \email{steve.collins@dpird.wa.gov.au} (Designed weatherOz's hex logo.) [contributor]
   \item Laurens Geffert \email{laurensgeffert@gmail.com} [reviewer]

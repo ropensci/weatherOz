@@ -7,7 +7,7 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
+[![tic](https://github.com/ropensciweatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/ropensciweatherOz/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)

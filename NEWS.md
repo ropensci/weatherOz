@@ -8,11 +8,11 @@
 
 * `find_nearby_stations()`
 
-  * Fixes [bug](https://github.com/DPIRD-FSI/weatherOz/issues/35) where `find_forecast_towns()` returned all values, not the proper values.
+  * Fixes [bug](https://github.com/ropensciweatherOz/issues/35) where `find_forecast_towns()` returned all values, not the proper values.
 
   * Fixes bug where BOM and SILO metadata were not properly merged when using `find_nearby_stations()`
 
-  * Fixes [bug](https://github.com/DPIRD-FSI/weatherOz/issues/36) where closed stations are included in the nearest stations when using `find_nearby_stations()` and `include_closed = FALSE` (default).
+  * Fixes [bug](https://github.com/ropensciweatherOz/issues/36) where closed stations are included in the nearest stations when using `find_nearby_stations()` and `include_closed = FALSE` (default).
   
   * Fixes the messages when stations aren't found nearby. In certain cases the message indicated that a `station_code` was used when `latitude` and `longitude` had been provided and _vice versa_.
   
@@ -31,7 +31,7 @@
 
 * Fixes bug where results from `get_dpird_summaries()` were truncated to only a few of the last results requested rather than the full set from start date to end date.
 
-* Fixes [bug](https://github.com/DPIRD-FSI/weatherOz/issues/38) where the DPIRD API would not properly respond to requests from Windows OS machines.
+* Fixes [bug](https://github.com/ropensciweatherOz/issues/38) where the DPIRD API would not properly respond to requests from Windows OS machines.
 
 # weatherOz 0.0.1
 
