@@ -28,7 +28,6 @@ DaysSince
 Deaccumulated
 Evapotranspiration
 FAO
-FSI
 Formated
 GEOS
 GeoTIFF
@@ -212,6 +211,7 @@ relativeHumidityMaxTime
 relativeHumidityMin
 relativeHumidityMinTime
 richardsonUnits
+ropensci
 soilTemperature
 soilTemperatureAvg
 soilTemperatureMax
