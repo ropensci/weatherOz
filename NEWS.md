@@ -2,7 +2,7 @@
 
 ## Major Changes
 
-* Changes the name of the function `get_station_metadata()` to `get_stations_metadata()` to avoid clashes with {stationaRy}
+* Changes the name of the function `get_station_metadata()` to `get_stations_metadata()` to avoid clashes with {stationaRy}.
 
 ## Bug Fixes
 
@@ -24,7 +24,6 @@
 
   * Fixes example for `get_dpird_extremes()` that didn't follow the package's standard use of "your_api_key" for the `api_key` value in the example.
 
-
 * Fixes the re-export of `terra::plot()` where checks indicated that it does not have a documented return value or examples.
 
 * Fixes an issue where the package data was not available when this package was called by another, _e.g._, {extractOz} used `get_patched_point()` but could not validate the user-input `values` because `silo_daily_values` could not be found.
@@ -32,6 +31,8 @@
 * Fixes bug where results from `get_dpird_summaries()` were truncated to only a few of the last results requested rather than the full set from start date to end date.
 
 * Fixes [bug](https://github.com/ropensci/weatherOz/issues/38) where the DPIRD API would not properly respond to requests from Windows OS machines.
+
+* Fixes [bug](https://github.com/ropensci/weatherOz/issues/57) where SILO Data Drill gridded data was not available with enough precision.
 
 # weatherOz 0.0.1
 
