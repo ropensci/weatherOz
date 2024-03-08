@@ -1,4 +1,4 @@
-# weatherOz 0.0.1.9000
+# weatherOz 1.0.0
 
 ## Major Changes
 
