@@ -7,12 +7,11 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![tic](https://github.com/ropensci/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/ropensci/weatherOz/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
+[![R-CMD-check](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate
@@ -159,12 +158,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-03-08      0.9              25
-#> 2:     11.7              25 254.5 m 2024-03-08      0.0              25
-#> 3:      7.8              25 254.5 m 2024-03-08      0.0              25
-#> 4:     10.6              25 254.5 m 2024-03-08      0.0              25
-#> 5:     13.3              25 254.5 m 2024-03-08      0.0              25
-#> 6:     14.7              25 254.5 m 2024-03-08      1.8              25
+#> 1:      9.8              25 254.5 m 2024-03-09      0.9              25
+#> 2:     11.7              25 254.5 m 2024-03-09      0.0              25
+#> 3:      7.8              25 254.5 m 2024-03-09      0.0              25
+#> 4:     10.6              25 254.5 m 2024-03-09      0.0              25
+#> 5:     13.3              25 254.5 m 2024-03-09      0.0              25
+#> 6:     14.7              25 254.5 m 2024-03-09      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
