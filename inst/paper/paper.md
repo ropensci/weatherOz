@@ -18,6 +18,7 @@ authors:
   orcid: 0000-0002-5024-6207
 - affiliation: 4
   name: Dean Marchiori
+  orcid: 0000-0002-3430-7225
 - affiliation: 5
   name: Paul Melloy
   orcid: 0000-0003-4253-7167
@@ -56,7 +57,7 @@ affiliations:
 - index: 3
   name:
 - index: 4
-  name:
+  name: Wave Data Labs, Wollongong, New South Wales, 2500, Australia
 - index: 5
   name: The University of Queensland, School of Agriculture and Food Sustainability, Gatton, Queensland 4343, Australia
 - index: 6
