@@ -5,6 +5,7 @@
 #'
 #' @return a \CRANpkg{data.table} of BOM station metadata.
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .get_bom_metadata <- function() {

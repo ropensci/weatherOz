@@ -139,10 +139,13 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(ggthemes)
   library(grid)
   library(gridExtra)
+  library(dplyr)
 
   dpird_stations <-
-    get_station_metadata(which_api = "DPIRD",
-                         api_key = Sys.getenv("DPIRD_API_KEY"))
+    get_stations_metadata(which_api = "DPIRD",
+                         api_key = Sys.getenv("DPIRD_API_KEY")) |>
+                         filter_at(vars(latitude, longitude),
+                         all_vars(!is.na(.)))
 
   Aust_map <- map_data("world", region = "Australia")
 
@@ -155,7 +158,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
       fill = NA
     ) +
     geom_point(color = grDevices::rgb(0.58, 0.20, 0.13),
-               size = 0.05) +
+               size = 0.09) +
     coord_map(ylim = c(-44, -10),
               xlim = c(112, 154)) +
     theme_map() +
@@ -191,7 +194,9 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(grid)
   library(gridExtra)
 
-  silo_stations <- get_station_metadata(which_api = "SILO")
+  silo_stations <- get_stations_metadata(which_api = "SILO") |>
+                         filter_at(vars(latitude, longitude),
+                         all_vars(!is.na(.)))
 
   Aust_map <- map_data("world", region = "Australia")
 
@@ -204,7 +209,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
       fill = NA
     ) +
     geom_point(color = grDevices::rgb(0.58, 0.20, 0.13),
-               size = 0.05) +
+               size = 0.09) +
     coord_map(ylim = c(-44, -10),
               xlim = c(112, 154)) +
     theme_map() +

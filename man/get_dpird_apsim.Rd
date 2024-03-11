@@ -10,7 +10,7 @@ get_dpird_apsim(station_code, start_date, end_date = Sys.Date(), api_key)
 \arguments{
 \item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
 for the station of interest.  Station codes are available from the
-\code{get_station_metadata()} function.}
+\code{get_stations_metadata()} function.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
@@ -63,7 +63,7 @@ Other DPIRD:
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
-\code{\link{get_station_metadata}()}
+\code{\link{get_stations_metadata}()}
 
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},

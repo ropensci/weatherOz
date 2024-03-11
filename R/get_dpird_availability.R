@@ -66,6 +66,7 @@
 #' )
 #' }
 #'
+#' @autoglobal
 #' @export
 
 get_dpird_availability <-
@@ -178,6 +179,7 @@ get_dpird_availability <-
 #'  metadata
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords Internal
 #'
 .parse_availability <- function(.ret_list, .start_date) {

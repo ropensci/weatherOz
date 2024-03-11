@@ -59,7 +59,7 @@
 #'
 #' @family BOM
 #' @family data fetching
-#'
+#' @autoglobal
 #' @export get_ag_bulletin
 
 get_ag_bulletin <- function(state = "AUS") {
@@ -137,6 +137,7 @@ get_ag_bulletin <- function(state = "AUS") {
 #' @param xml_url The location of the XML file to be parsed
 #' @return A `data.table`
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 #'
 .parse_bulletin <- function(xml_url) {

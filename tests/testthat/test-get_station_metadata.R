@@ -1,10 +1,10 @@
 
-test_that("get_station_metadata() functions properly for which_api = 'SILO'",
+test_that("get_stations_metadata() functions properly for which_api = 'SILO'",
           {
             vcr::use_cassette("metadata_silo_station", {
               skip_if_offline()
               x <-
-                get_station_metadata(which_api = "silo", include_closed = TRUE)
+                get_stations_metadata(which_api = "silo", include_closed = TRUE)
             }
             )
             expect_length(x, 11)
@@ -27,12 +27,12 @@ test_that("get_station_metadata() functions properly for which_api = 'SILO'",
             )
           })
 
-test_that("get_station_metadata() functions properly for which_api = 'DPIRD'",
+test_that("get_stations_metadata() functions properly for which_api = 'DPIRD'",
           {
             vcr::use_cassette("metadata_dpird_station", {
               skip_if_offline()
               x <-
-                get_station_metadata(which_api = "dpird",
+                get_stations_metadata(which_api = "dpird",
                                      api_key = Sys.getenv("DPIRD_API_KEY"),
                                      include_closed = TRUE,
                                      rich = FALSE
@@ -59,13 +59,13 @@ test_that("get_station_metadata() functions properly for which_api = 'DPIRD'",
             )
           })
 
-test_that("get_station_metadata() functions properly for which_api = 'DPIRD'
+test_that("get_stations_metadata() functions properly for which_api = 'DPIRD'
           w/ rich data",
           {
             vcr::use_cassette("metadata_dpird_station_rich_TRUE", {
               skip_if_offline()
               x <-
-                get_station_metadata(
+                get_stations_metadata(
                   which_api = "dpird",
                   api_key = Sys.getenv("DPIRD_API_KEY"),
                   include_closed = TRUE,
@@ -122,7 +122,7 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
             vcr::use_cassette("metadata_all_apis", {
               skip_if_offline()
               x <-
-                get_station_metadata(which_api = "all",
+                get_stations_metadata(which_api = "all",
                                      api_key = Sys.getenv("DPIRD_API_KEY"))
             })
 
@@ -146,12 +146,12 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
             )
           })
 
-test_that("get_station_metadata() fuzzy matches station names",
+test_that("get_stations_metadata() fuzzy matches station names",
           {
             vcr::use_cassette("metadata_fuzzy_match_station_name", {
               skip_if_offline()
               x <-
-                get_station_metadata(api_key = Sys.getenv("DPIRD_API_KEY"),
+                get_stations_metadata(api_key = Sys.getenv("DPIRD_API_KEY"),
                                      station_name = "Brisbane")
             })
 
@@ -178,12 +178,12 @@ test_that("get_station_metadata() fuzzy matches station names",
                          c("Brisbane", "Brisbane Aero", "Mt Brisbane"))
           })
 
-test_that("get_station_metadata() matches station_codes",
+test_that("get_stations_metadata() matches station_codes",
             {
               vcr::use_cassette("metadata_match_station_code", {
                 skip_if_offline()
                 x <-
-                  get_station_metadata(
+                  get_stations_metadata(
                     api_key = Sys.getenv("DPIRD_API_KEY"),
                     station_code = c("YU001", "YU002", "YU003")
                   )
@@ -212,8 +212,8 @@ test_that("get_station_metadata() matches station_codes",
                          c("YU001", "YU002", "YU003"))
           })
 
-test_that("get_station_metadata() errors if no API key is provide for DPIRD",
+test_that("get_stations_metadata() errors if no API key is provide for DPIRD",
           {
-            expect_error(get_station_metadata(which_api = "dpird"))
-            expect_error(get_station_metadata(which_api = "all"))
+            expect_error(get_stations_metadata(which_api = "dpird"))
+            expect_error(get_stations_metadata(which_api = "all"))
           })

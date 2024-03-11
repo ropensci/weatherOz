@@ -13,8 +13,8 @@ Beswick
 Bhandari
 Binnu
 CLIMARC
+CMD
 Capel
-Codecov
 DBF
 DES
 DOI
@@ -28,7 +28,6 @@ DaysSince
 Deaccumulated
 Evapotranspiration
 FAO
-FSI
 Formated
 GEOS
 GeoTIFF
@@ -212,6 +211,7 @@ relativeHumidityMaxTime
 relativeHumidityMin
 relativeHumidityMinTime
 richardsonUnits
+ropensci
 soilTemperature
 soilTemperatureAvg
 soilTemperatureMax
@@ -221,6 +221,7 @@ soilTemperatureMinTime
 solarExposure
 solarIrradiance
 splining
+stationaRy
 summarised
 terra
 timezones

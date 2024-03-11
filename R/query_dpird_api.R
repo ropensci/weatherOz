@@ -37,6 +37,7 @@
 #' @return A `list` object of values to be passed to a [crul] object to query
 #'   the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #' @keywords internal
+#' @autoglobal
 #' @noRd
 .build_query <- function(station_code,
                          start_date_time,
@@ -122,6 +123,7 @@
 #' @return A `data.table` of data for manipulating before returning to the user
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords internal
 
 .query_dpird_api <- function(.end_point = NULL,

@@ -6,7 +6,7 @@
 #'
 #' @param station_code A `character` string or `vector` of the \acronym{DPIRD}
 #'   station code for the station of interest.  Station codes are available from
-#'   the `get_station_metadata()` function.
+#'   the `get_stations_metadata()` function.
 #' @param start_date_time A `character` string representing the start date and
 #'   time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO8601).
 #'   Defaults to 24 hours before the current local system time, returning the
@@ -65,6 +65,7 @@
 #' @family data fetching
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @autoglobal
 #' @export
 
 get_dpird_minute <- function(station_code,
@@ -209,6 +210,7 @@ get_dpird_minute <- function(station_code,
 #'  data.
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords Internal
 #'
 .parse_minute <- function(.ret_list) {

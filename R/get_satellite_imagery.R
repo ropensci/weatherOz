@@ -52,7 +52,8 @@
 #' @family metadata
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}
-#' @export get_available_imagery
+#' @autoglobal
+#' @export
 
 get_available_imagery <- function(product_id = "all") {
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
@@ -140,7 +141,8 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @rdname get_satellite_imagery
-#' @export get_satellite_imagery
+#' @autoglobal
+#' @export
 
 get_satellite_imagery <- get_satellite <-
   function(product_id,
@@ -227,6 +229,7 @@ get_satellite_imagery <- get_satellite <-
 
 # Local internal functions
 #' @noRd
+#' @autoglobal
 .check_IDs <- function(product_id) {
   IDs <- c(
     "IDE00420",
@@ -261,6 +264,7 @@ get_satellite_imagery <- get_satellite <-
 }
 
 #' @noRd
+#' @autoglobal
 .ftp_images <- function(product_id, bom_server) {
   # define custom useragent and handle for communicating with BOM servers
   USERAGENT <- sprintf("{weatherOz} R package (%s)",

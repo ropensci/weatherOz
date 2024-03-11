@@ -7,12 +7,11 @@
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![tic](https://github.com/DPIRD-FSI/weatherOz/workflows/tic/badge.svg?branch=main)](https://github.com/DPIRD-FSI/weatherOz/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/DPIRD-FSI/weatherOz/branch/main/graph/badge.svg)](https://app.codecov.io/gh/DPIRD-FSI/weatherOz?branch=main)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
+[![R-CMD-check](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate
@@ -58,10 +57,7 @@ service provided by the Bureau of Meteorology under license.
 You can install the development version of {weatherOz} like so:
 
 ``` r
-if (!requireNamespace("remotes", quietly = TRUE)) {
-    install.packages("remotes")
-}
-remotes::install_github("DPIRD-FSI/weatherOz", build_vignettes = TRUE)
+install.packages("weatherOz", repos = "https://ropensci.r-universe.dev")
 ```
 
 ## A Note on API Keys
@@ -103,22 +99,27 @@ wd <- get_dpird_summaries(
 )
 
 wd
-#>    station_code station_name longitude latitude year month day       date
-#> 1:           BI        Binnu  114.6958  -28.051 2022     5   1 2022-05-01
-#> 2:           BI        Binnu  114.6958  -28.051 2022     5   1 2022-05-01
-#> 3:           BI        Binnu  114.6958  -28.051 2022     5   2 2022-05-02
-#> 4:           BI        Binnu  114.6958  -28.051 2022     5   2 2022-05-02
+#> Key: <station_code>
+#>    station_code station_name longitude latitude  year month   day       date
+#>          <fctr>       <char>     <num>    <num> <int> <int> <int>     <Date>
+#> 1:           BI        Binnu  114.6958  -28.051  2022     5     1 2022-05-01
+#> 2:           BI        Binnu  114.6958  -28.051  2022     5     1 2022-05-01
+#> 3:           BI        Binnu  114.6958  -28.051  2022     5     2 2022-05-02
+#> 4:           BI        Binnu  114.6958  -28.051  2022     5     2 2022-05-02
 #>    erosion_condition_minutes erosion_condition_start_time wind_avg_speed
+#>                        <int>                       <POSc>          <num>
 #> 1:                         0                         <NA>          10.85
 #> 2:                         0                         <NA>          15.57
 #> 3:                         7          2022-05-02 15:01:00          13.06
 #> 4:                         7          2022-05-02 15:01:00          17.70
 #>    wind_height wind_max_direction_compass_point wind_max_direction_degrees
+#>          <int>                           <char>                      <int>
 #> 1:           3                              SSW                        200
 #> 2:          10                              SSW                        194
 #> 3:           3                              SSW                        205
 #> 4:          10                              SSW                        193
 #>    wind_max_speed       wind_max_time
+#>             <num>              <POSc>
 #> 1:          31.82 2022-05-01 17:28:00
 #> 2:          34.88 2022-05-01 17:34:00
 #> 3:          38.52 2022-05-02 16:07:00
@@ -147,20 +148,22 @@ wd <- get_data_drill(
 )
 
 head(wd)
-#>    longitude latitude year month day       date air_tmax air_tmax_source
-#> 1:       150      -27 2022    10   1 2022-10-01     26.1              25
-#> 2:       150      -27 2022    10   2 2022-10-02     23.0              25
-#> 3:       150      -27 2022    10   3 2022-10-03     24.2              25
-#> 4:       150      -27 2022    10   4 2022-10-04     25.8              25
-#> 5:       150      -27 2022    10   5 2022-10-05     22.4              25
-#> 6:       150      -27 2022    10   6 2022-10-06     25.4              25
+#>    longitude latitude  year month   day       date air_tmax air_tmax_source
+#>        <num>    <num> <num> <num> <int>     <Date>    <num>           <int>
+#> 1:    150.05   -27.85  2022    10     1 2022-10-01     25.1              25
+#> 2:    150.05   -27.85  2022    10     2 2022-10-02     22.6              25
+#> 3:    150.05   -27.85  2022    10     3 2022-10-03     24.0              25
+#> 4:    150.05   -27.85  2022    10     4 2022-10-04     25.7              25
+#> 5:    150.05   -27.85  2022    10     5 2022-10-05     22.3              25
+#> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
-#> 1:      9.1              25 274.9 m 2023-11-03      0.0              25
-#> 2:     12.9              25 274.9 m 2023-11-03      0.0              25
-#> 3:      8.4              25 274.9 m 2023-11-03      0.8              25
-#> 4:     10.6              25 274.9 m 2023-11-03      1.0              25
-#> 5:     12.5              25 274.9 m 2023-11-03      0.0              25
-#> 6:     14.4              25 274.9 m 2023-11-03      0.0              25
+#>       <num>           <int>  <char>     <Date>    <num>           <int>
+#> 1:      9.8              25 254.5 m 2024-03-09      0.9              25
+#> 2:     11.7              25 254.5 m 2024-03-09      0.0              25
+#> 3:      7.8              25 254.5 m 2024-03-09      0.0              25
+#> 4:     10.6              25 254.5 m 2024-03-09      0.0              25
+#> 5:     13.3              25 254.5 m 2024-03-09      0.0              25
+#> 6:     14.7              25 254.5 m 2024-03-09      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
@@ -183,7 +186,6 @@ Australian climate data, *Environmental Modelling and Software*, Vol
 
 ## Code of Conduct
 
-Please note that the {weatherOz} project is released with a [Contributor
-Code of
-Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Please note that this package is released with a [Contributor Code of
+Conduct](https://ropensci.org/code-of-conduct/). By contributing to this
+project, you agree to abide by its terms.

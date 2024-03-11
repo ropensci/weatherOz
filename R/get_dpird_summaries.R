@@ -23,7 +23,7 @@
 #'
 #' @param station_code A `character` string of the \acronym{DPIRD} station code
 #'   for the station of interest.  Station codes are available from the
-#'   `get_station_metadata()` function.
+#'   `get_stations_metadata()` function.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.
@@ -182,7 +182,8 @@
 #'     )
 #' )
 #' }
-#' @export get_dpird_summaries
+#' @autoglobal
+#' @export
 
 get_dpird_summaries <- function(station_code,
                                 start_date,
@@ -196,6 +197,37 @@ get_dpird_summaries <- function(station_code,
                                 values = "all",
                                 include_closed = FALSE,
                                 api_key) {
+
+  # this section is necessary to double check availability dates of DPIRD
+  # stations to give users a better experience. It slows down the first query
+  # but avoids confusion when no values are returned for a station that exists
+  # but the date requested pre-dates the station data
+  if (Sys.info()['sysname'] == "Windows") {
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "\\")
+
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_stations_metadata(which_api = "dpird",
+                              api_key = api_key),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
+
+  } else {
+
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_stations_metadata(which_api = "dpird",
+                              api_key = api_key),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
+  }
+
   if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
@@ -235,15 +267,19 @@ get_dpird_summaries <- function(station_code,
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
-  .check_earliest_available_dpird(start_date)
+  .check_earliest_available_dpird(station_code, start_date, metadata_file)
 
-  # Use `agrep()` to fuzzy match the user-requested time interval
-  approved_intervals <- c("15min",
+  # if interval is not set, default to "daily", else check input to be sure
+  approved_intervals <- c("daily",
+                          "15min",
                           "30min",
                           "hourly",
-                          "daily",
                           "monthly",
                           "yearly")
+
+  if (identical(interval, approved_intervals)) {
+    interval <- "daily"
+  }
 
   likely_interval <- agrep(pattern = interval,
                            x = approved_intervals)
@@ -570,6 +606,7 @@ get_dpird_summaries <- function(station_code,
 #' @return a tidy `data.table` with station id and requested weather summaries
 #'
 #' @noRd
+#' @autoglobal
 #' @keywords Internal
 #'
 .parse_summary <- function(.ret_list,
@@ -626,15 +663,20 @@ get_dpird_summaries <- function(station_code,
 #' @param .start_date A date object passed from another function
 #'
 #' @return invisible `NULL`, called for its side-effects
+#' @autoglobal
 #' @noRd
 
-.check_earliest_available_dpird <- function(.start_date) {
-  if (.start_date < lubridate::as_date("2000-08-28")) {
+.check_earliest_available_dpird <- function(.station_code, .start_date, .f) {
+
+  y <- readRDS(file = .f)[, c(1, 3)]
+  y <- y[y$station_code %in% .station_code]
+
+  if (.start_date < y$start) {
     stop(
       call. = FALSE,
-      "You have requested weather data prior to the establishment of the ",
-      "DPIRD weather station network.  You might try the SILO data for data ",
-      "from the BOM station network instead."
+      "You have requested weather data prior to the establishment of this ",
+      "DPIRD weather station's establishment.  You might try the SILO data ",
+      "for data from the BOM station network instead."
     )
   }
   return(invisible(NULL))
@@ -651,6 +693,7 @@ get_dpird_summaries <- function(station_code,
 #'   validity
 #'
 #' @return a `data.table` with ordered columns
+#' @autoglobal
 #' @noRd
 
 .set_col_orders <- function(.out, .checked_interval) {

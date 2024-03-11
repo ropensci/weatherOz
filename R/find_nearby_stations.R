@@ -85,6 +85,7 @@
 #' @family SILO
 #' @family metadata
 #'
+#' @autoglobal
 #' @export
 
 # NOTE -AHS: this entire function might be well-served to be broken up into
@@ -229,6 +230,7 @@ find_nearby_stations <- function(longitude = NULL,
 #' @param .include_closed A `Boolean` value indicating whether to include
 #'   closed stations or not. Defaults to `FALSE`, not including closed stations.
 #'
+#' @autoglobal
 #' @noRd
 .get_dpird_stations <- function(.station_code = NULL,
                                 .distance_km,
@@ -333,7 +335,7 @@ find_nearby_stations <- function(longitude = NULL,
 #'   BOM weather stations in SILO within 10000 km of Finke, NT (near the Lambert
 #'   centre of Australia). Stations are returned in order of distance from the
 #'   Finke Post Office.
-#'
+#' @autoglobal
 #' @noRd
 .get_silo_stations <-
   function(.station_code,

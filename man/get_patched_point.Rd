@@ -186,7 +186,7 @@ Other SILO:
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point_apsim}()},
-\code{\link{get_station_metadata}()},
+\code{\link{get_stations_metadata}()},
 \code{\link{silo_daily_values}}
 
 Other data fetching: 

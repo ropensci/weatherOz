@@ -24,7 +24,7 @@
 #'
 #' @family BOM
 #' @family metadata
-#'
+#' @autoglobal
 #' @export
 
 find_forecast_towns <-

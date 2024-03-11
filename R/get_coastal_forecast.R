@@ -49,7 +49,7 @@
 #' @family data fetching
 #'
 #' @seealso [parse_coastal_forecast]
-#'
+#' @autoglobal
 #' @export get_coastal_forecast
 
 get_coastal_forecast <- function(state = "AUS") {
@@ -113,6 +113,10 @@ get_coastal_forecast <- function(state = "AUS") {
   }
 }
 
+#' Parse the Coastal Forecast XML File From BOM
+#' @noRd
+#' @keywords Internal
+#' @autoglobal
 .parse_coastal_forecast <- function(xml_url) {
 
   # load the XML from ftp
@@ -234,6 +238,7 @@ get_coastal_forecast <- function(state = "AUS") {
 #' @return a data.table of the forecast for further refining
 #' @keywords internal
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @autoglobal
 #' @noRd
 
 .parse_coastal_xml <- function(xml_object) {

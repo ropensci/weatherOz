@@ -22,6 +22,7 @@
 #' @example .check_date(x)
 #' @author Adam H. Sparks \email{adamhsparks@@gmail.com}
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 .check_date <- function(x) {
   tryCatch(
@@ -54,6 +55,7 @@
 #' @return Called for its side-effects, returns an invisible `NULL` if no error.
 #'
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .check_date_order <- function(.start_date, .end_date) {
@@ -78,6 +80,7 @@
 #' @return No value, called for its side-effects checking if the `start_date` is
 #'   before the earliest available data in the SILO database.
 #' @noRd
+#' @autoglobal
 #' @keywords Internal
 #'
 .check_earliest_available_silo <- function(start_date) {
@@ -93,6 +96,7 @@
 #' @param .station_code station_code passed from another function
 #'
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 #' @return Nothing, called for its side-effects
 .check_location_params <-
@@ -114,6 +118,7 @@
 #' @param .station_code station_code passed from another function
 #'
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 #' @return A vector of longitude and latitude rounded to four decimal places
 
@@ -141,6 +146,7 @@
 #' examples
 #'
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .check_not_example_api_key <- function(.api_key) {
@@ -158,6 +164,7 @@
 #' Check that the user provided an invalid email string as API key for SILO
 #'
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .is_valid_email_silo_api_key <- function(.api_key) {
@@ -179,6 +186,7 @@
 #'
 #' @return A validated state
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .check_states <- function(state) {
@@ -252,6 +260,7 @@
 #' @param .values User provided values to query from the API
 #' @return A vector of verified values
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .check_silo_values <- function(.values = values) {
@@ -276,6 +285,7 @@
 #' @param which_api user-provided value for `which_api`
 #' @return A lower-case string of a valid API value
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 .check_which_api <- function(which_api) {
   which_api <- tolower(which_api)
@@ -297,6 +307,7 @@
 #' @return A `string` representing a proper abbreviation of an Australian state
 #'   or territory.
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 .convert_state <- function(state) {
   state <- gsub(" ", "", state)
@@ -370,6 +381,7 @@
 #' @return A `string` value of the URL of the requested XML file on BOM's FTP
 #'   server.
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .create_bom_file <- function(AUS_XML, .the_state, .file_loc) {
@@ -416,6 +428,7 @@
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .get_url <- function(remote_file) {
@@ -499,6 +512,7 @@
 #'
 #' @return A numeric value representing distance in kilometres.
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .haversine_distance <- function(lat1, lon1, lat2, lon2) {
@@ -526,6 +540,7 @@
 #' @return Modifies the the colnames of `x` in place
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .set_snake_case_names <- function(x) {
@@ -550,6 +565,7 @@
 #' @return cleaned data.table cols of date and time
 #' @keywords Internal
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @autoglobal
 #' @noRd
 
 .split_time_cols <- function(x) {
@@ -593,6 +609,7 @@
 #' @author Charles Dupont and Adam H. Sparks,
 #'  \email{adamhsparks@@gmail.com}
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 
 .strcap <- function(x) {
@@ -647,6 +664,7 @@
 #'
 #' @param filepath User provided value for checking
 #' @keywords Internal
+#' @autoglobal
 #' @noRd
 .validate_filepath <- function(filepath) {
   if (is.null(filepath)) {
