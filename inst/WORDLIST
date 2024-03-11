@@ -20,7 +20,6 @@ DES
 DOI
 DPIRD
 DPIRD's
-DPIRD’s
 DataDrill
 DaysDays
 DaysMinutes
@@ -111,6 +110,7 @@ batteryMinVoltage
 batteryMinVoltageDateTime
 capitalised
 chillHours
+codecov
 colour
 cron
 dateTime
