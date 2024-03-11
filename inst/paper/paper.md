@@ -61,7 +61,7 @@ affiliations:
 - index: 5
   name: The University of Queensland, School of Agriculture and Food Sustainability, Gatton, Queensland 4343, Australia
 - index: 6
-  name: University of Salzburg, Inter-Faculty Department of Geoinformatics, 5020 Salzburg, Austria
+  name: rOpenSci
 - index: 7
   name: Grattan Institute, Carlton, Victoria 3053, Australia
 - index: 8
