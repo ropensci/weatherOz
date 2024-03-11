@@ -31,6 +31,8 @@
 #'
 #' @author Dean Marchiori, \email{deanmarchiori@@gmail.com}, and Adam H. Sparks,
 #'   \email{adamhsparks@@gmail.com}
+#'
+#' @export get_available_radar
 #' @autoglobal
 #' @export
 

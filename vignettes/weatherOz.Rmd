@@ -185,17 +185,17 @@ ppd
 #> 365:       041103    Toowoomba  2022    12    31 2022-12-31     27.7              25     16.4              25
 #>       elev_m  extracted latitude longitude rainfall rainfall_source rh_tmax rh_tmax_source rh_tmin rh_tmin_source
 #>       <char>     <Date>    <num>     <num>    <num>           <int>   <num>          <int>   <num>          <int>
-#>   1: 691.0 m 2024-03-08 -27.5836  151.9317      7.6              25    72.1             26   100.0             26
-#>   2: 691.0 m 2024-03-08 -27.5836  151.9317      0.1              25    47.1             26   100.0             26
-#>   3: 691.0 m 2024-03-08 -27.5836  151.9317      0.0              25    38.8             26   100.0             26
-#>   4: 691.0 m 2024-03-08 -27.5836  151.9317      0.0              25    43.1             26    95.7             26
-#>   5: 691.0 m 2024-03-08 -27.5836  151.9317      0.0              25    49.2             26   100.0             26
+#>   1: 691.0 m 2024-03-11 -27.5836  151.9317      7.6              25    72.1             26   100.0             26
+#>   2: 691.0 m 2024-03-11 -27.5836  151.9317      0.1              25    47.1             26   100.0             26
+#>   3: 691.0 m 2024-03-11 -27.5836  151.9317      0.0              25    38.8             26   100.0             26
+#>   4: 691.0 m 2024-03-11 -27.5836  151.9317      0.0              25    43.1             26    95.7             26
+#>   5: 691.0 m 2024-03-11 -27.5836  151.9317      0.0              25    49.2             26   100.0             26
 #>  ---                                                                                                             
-#> 361: 691.0 m 2024-03-08 -27.5836  151.9317      0.0              25    47.9             26    95.0             26
-#> 362: 691.0 m 2024-03-08 -27.5836  151.9317      0.2              25    43.7             26   100.0             26
-#> 363: 691.0 m 2024-03-08 -27.5836  151.9317      0.0              25    44.1             26   100.0             26
-#> 364: 691.0 m 2024-03-08 -27.5836  151.9317      0.7              25    60.3             26   100.0             26
-#> 365: 691.0 m 2024-03-08 -27.5836  151.9317      0.4              25    50.9             26   100.0             26
+#> 361: 691.0 m 2024-03-11 -27.5836  151.9317      0.0              25    47.9             26    95.0             26
+#> 362: 691.0 m 2024-03-11 -27.5836  151.9317      0.2              25    43.7             26   100.0             26
+#> 363: 691.0 m 2024-03-11 -27.5836  151.9317      0.0              25    44.1             26   100.0             26
+#> 364: 691.0 m 2024-03-11 -27.5836  151.9317      0.7              25    60.3             26   100.0             26
+#> 365: 691.0 m 2024-03-11 -27.5836  151.9317      0.4              25    50.9             26   100.0             26
 ```
 
 {weatherOz} offers much more functionality that is detailed in other vignettes that document how to use it to get station metadata for any station in the DPIRD or SILO databases, get extreme weather events for the DPIRD station network, get minute data for DPIRD stations, get APSIM formatted data from SILO, get ag bulletins, précis forecasts and various imagery files from BOM in the respective vignettes for DPIRD, SILO and BOM data available through {weatherOz}.
