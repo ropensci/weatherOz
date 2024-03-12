@@ -66,9 +66,11 @@ Authors@R: c(
   person(
     given = "Keith",
     family = "Pembleton",
-    role = "aut",
+    role = "ctb",
     email = "keith.pembleton@usq.edu.au",
-    comment = c(ORCID = "0000-0002-1896-4516")
+    comment = c(ORCID = "0000-0002-1896-4516",
+                "Contributed code and ideas for the original 'bomrang' package
+                that was used in the creation of 'weatherOz'.")
   ),
   person(
     given = "Maëlle",

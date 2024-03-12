@@ -28,10 +28,7 @@ authors:
 - affiliation: 7
   name: Hugh Parsonage
   orcid: 0000-0003-4055-0835
-- affiliation: 8
-  name: Keith Pembleton
-  orcid: 0000-0002-1896-4516
-- affiliation: "1, 9, 10"
+- affiliation: "1, 8, 9"
   name: Adam H. Sparks
   orcid: 0000-0002-0061-8359
 date: "XX XXX 2024"
@@ -65,10 +62,8 @@ affiliations:
 - index: 7
   name: Grattan Institute, Carlton, Victoria 3053, Australia
 - index: 8
-  name: University of Southern Queensland, School of Agricultural, Computational and Environmental Sciences, Toowoomba, Queensland 4350, Australia
-- index: 9
   name: University of Southern Queensland, Centre for Crop Health, Toowoomba, Queensland 4350, Australia
-- index: 10
+- index: 9
   name: Curtin University, Centre for Crop and Disease Management, Curtin Biometry and Agricultural Data Analytics, Bentley, Western Australia 6102, Australia
 
 ---

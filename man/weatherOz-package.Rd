@@ -24,7 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Anna Hepworth \email{anna.hepworth@dpird.wa.gov.au} (\href{https://orcid.org/0000-0003-0204-6347}{ORCID})
+  \item Anna Hepworth \email{anna.hepworth@gmail.com} (\href{https://orcid.org/0000-0003-0204-6347}{ORCID})
   \item Rebecca O'Leary \email{bec.oleary@curtin.edu.au}
   \item Jonathan Carroll \email{rpkg@jcarroll.com.au} (\href{https://orcid.org/0000-0002-1404-5264}{ORCID})
   \item James Goldie \email{me@jamesgoldie.dev} (\href{https://orcid.org/0000-0002-5024-6207}{ORCID})
@@ -32,12 +32,12 @@ Authors:
   \item Paul Melloy \email{paul@melloy.com.au} (\href{https://orcid.org/0000-0003-4253-7167}{ORCID})
   \item Mark Padgham \email{mark.padgham@email.com} (\href{https://orcid.org/0000-0003-2172-5265}{ORCID})
   \item Hugh Parsonage \email{hugh.parsonage@gmail.com} (\href{https://orcid.org/0000-0003-4055-0835}{ORCID})
-  \item Keith Pembleton \email{keith.pembleton@usq.edu.au} (\href{https://orcid.org/0000-0002-1896-4516}{ORCID})
   \item Adam H. Sparks \email{adamhsparks@gmail.com} (\href{https://orcid.org/0000-0002-0061-8359}{ORCID})
 }
 
 Other contributors:
 \itemize{
+  \item Keith Pembleton \email{keith.pembleton@usq.edu.au} (\href{https://orcid.org/0000-0002-1896-4516}{ORCID}) (Contributed code and ideas for the original 'bomrang' package that was used in the creation of 'weatherOz'.) [contributor]
   \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/DPIRD-FSI/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.) [contributor]
   \item Jimmy Ng \email{jimmy.ng@dpird.wa.gov.au} [contributor]
   \item Steve Collins \email{steve.collins@dpird.wa.gov.au} (Designed weatherOz's hex logo.) [contributor]
