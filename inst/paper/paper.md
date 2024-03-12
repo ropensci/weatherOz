@@ -50,7 +50,7 @@ affiliations:
 - index: 1
   name: Department of Primary Industries and Regional Development of Western Australia, Perth, Western Australia 6000, Australia
 - index: 2
-  name:
+  name: No affiliation
 - index: 3
   name:
 - index: 4
