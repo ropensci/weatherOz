@@ -52,7 +52,7 @@ affiliations:
 - index: 2
   name: No affiliation
 - index: 3
-  name:
+  name: 360info, Monash University, Australia
 - index: 4
   name: Wave Data Labs, Wollongong, New South Wales, 2500, Australia
 - index: 5
