@@ -13,14 +13,13 @@ Beswick
 Bhandari
 Binnu
 CLIMARC
+CMD
 Capel
-Codecov
 DBF
 DES
 DOI
 DPIRD
 DPIRD's
-DPIRD’s
 DataDrill
 DaysDays
 DaysMinutes
@@ -28,7 +27,6 @@ DaysSince
 Deaccumulated
 Evapotranspiration
 FAO
-FSI
 Formated
 GEOS
 GeoTIFF
@@ -112,6 +110,7 @@ batteryMinVoltage
 batteryMinVoltageDateTime
 capitalised
 chillHours
+codecov
 colour
 cron
 dateTime
@@ -212,6 +211,7 @@ relativeHumidityMaxTime
 relativeHumidityMin
 relativeHumidityMinTime
 richardsonUnits
+ropensci
 soilTemperature
 soilTemperatureAvg
 soilTemperatureMax

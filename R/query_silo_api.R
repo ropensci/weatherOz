@@ -59,8 +59,8 @@
     )
   } else if (.dataset == "DataDrill" && .format == "csv") {
     silo_query_list <- list(
-      longitude = as.integer(.longitude),
-      latitude = as.integer(.latitude),
+      longitude = .longitude,
+      latitude = .latitude,
       start = as.character(.start_date),
       finish = as.character(.end_date),
       format = .format,
@@ -84,8 +84,8 @@
     )
     } else {
     silo_query_list <- list(
-      longitude = as.integer(.longitude),
-      latitude = as.integer(.latitude),
+      longitude = .longitude,
+      latitude = .latitude,
       start = as.character(.start_date),
       finish = as.character(.end_date),
       format = .format,
@@ -197,14 +197,14 @@
     }
 
     response_data[, latitude :=
-                    trimws(
+                    as.numeric(trimws(
                       gsub("latitude=", "",
                            response_data$metadata[grep(
-                             "latitude", response_data$metadata)]))]
+                             "latitude", response_data$metadata)])))]
     response_data[, longitude :=
-                    trimws(gsub("longitude=", "",
+                    as.numeric(trimws(gsub("longitude=", "",
                                 response_data$metadata[grep(
-                                  "longitude", response_data$metadata)]))]
+                                  "longitude", response_data$metadata)])))]
     .check_silo_codes(response_data)
   }
 

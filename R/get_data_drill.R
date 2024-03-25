@@ -18,9 +18,9 @@
 #'    `rbind()` to create a `data.table` that contains data from both APIs.
 #'
 #' @param longitude A single `numeric` value  representing the longitude of the
-#'    point-of-interest.
+#'    point-of-interest to the hundredths (_e.g._, 0.05) of a degree.
 #' @param latitude A single `numeric` value representing the latitude of the
-#'   point-of-interest.
+#'   point-of-interest to the hundredths (_e.g._., 0.05) of a degree.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.
@@ -166,18 +166,18 @@ get_data_drill <- function(longitude,
                            values = "all",
                            api_key) {
   if (missing(longitude) || missing(latitude)) {
-    stop(call. = FALSE,
-         "Please supply a valid values for `longitude` and `latitude`.")
+    stop("Please supply a valid values for `longitude` and `latitude`.")
   }
 
-  if (missing(start_date))
-    stop(call. = FALSE,
-         "Please supply a valid start date as `start_date`.")
+  if (missing(start_date)) {
+    stop("Please supply a valid start date as `start_date`.")
+  }
 
   # Error if api_key is not provided
   if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
     stop("A valid email address must be provided for `api_key`.",
          call. = FALSE)
+    stop("A valid email address must be provided for `api_key`.")
   }
   .check_not_example_api_key(api_key)
   .is_valid_email_silo_api_key(api_key)
@@ -223,3 +223,4 @@ get_data_drill <- function(longitude,
 
   return(out[])
 }
+

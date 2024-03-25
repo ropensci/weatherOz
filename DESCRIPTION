@@ -1,6 +1,6 @@
 Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
-Version: 0.0.1.9000
+Version: 1.0.0
 Authors@R: c(
   person(
     given = "Rodrigo",
@@ -40,7 +40,8 @@ Authors@R: c(
     given = "Dean",
     family = "Marchiori",
     role = "aut",
-    email = "deanmarchiori@gmail.com"
+    email = "deanmarchiori@gmail.com",
+    comment = c(ORCID = "0000-0002-3430-7225")
   ),
   person(
     given = "Paul",
@@ -82,7 +83,7 @@ Authors@R: c(
                 timezones caused tests to fail due to vcr not recognising the
                 URL when run outside of Australia/Perth TZ! Suggested the use of
                 `withr::local_timzeone()`, see
-                <https://github.com/DPIRD-FSI/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
+                <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
   person(
     given = "Jimmy",
     family = "Ng",
@@ -139,8 +140,8 @@ Description: Provides automated downloading, parsing and formatting of weather
     Creative Commons (CC) Attribution 3.0 licence or Public Access Licence (PAL)
     as appropriate, see <http://www.bom.gov.au/other/copyright.shtml> for
     further details.
-URL: https://github.com/DPIRD-FSI/weatherOz/, https://dpird-fsi.github.io/weatherOz/
-BugReports: https://github.com/DPIRD-FSI/weatherOz/issues
+URL: https://github.com/ropensci/weatherOz/, https://docs.ropensci.org/weatherOz
+BugReports: https://github.com/ropensci/weatherOz/issues
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
@@ -185,13 +186,15 @@ Suggests:
     withr,
     roxyglobals
 Config/testthat/edition: 3
+Config/testthat/parallel: true
 Depends: 
     R (>= 4.1.0)
 X-schema.org-applicationCategory: Tools
 X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
     australia, weather, weather-data, meteorology, western-australia,
-    australia-bureau-of-meteorology, western-australia-agriculture
-X-schema.org-isPartOf: https://www.agric.wa.gov.au/
+    australia-bureau-of-meteorology, western-australia-agriculture,
+    australia-agriculture, australia-climate, australia-weather
+X-schema.org-isPartOf: https://ropensci.org
 VignetteBuilder: knitr
 Language: en-US
 LazyData: true
