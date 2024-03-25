@@ -31,7 +31,7 @@ authors:
 - affiliation: "1, 8, 9"
   name: Adam H. Sparks
   orcid: 0000-0002-0061-8359
-date: "XX XXX 2024"
+date: "25 Mar 2024"
 output:
   html_document: default
   pdf_document: default
