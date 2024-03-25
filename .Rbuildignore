@@ -17,3 +17,4 @@
 ^CONTRIBUTING\.md$
 ^pkgdown$
 ^README\.Rmd$
+^cran-comments\.md$
