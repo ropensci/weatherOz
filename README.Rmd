@@ -45,6 +45,12 @@ Rainfall estimates are also available at virtual stations (_i.e._, where no obse
 
 ## Installation instructions
 
+You can install the stable version of {weatherOz} from [CRAN](https://cran.r-project.org/) like so:
+
+```r
+install.packages("weatherOz")
+```
+
 You can install the development version of {weatherOz} like so:
 
 ```r

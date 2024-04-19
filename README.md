@@ -57,6 +57,13 @@ service provided by the Australian Government Bureau of Meteorology
 
 ## Installation instructions
 
+You can install the stable version of {weatherOz} from
+[CRAN](https://cran.r-project.org/) like so:
+
+``` r
+install.packages("weatherOz")
+```
+
 You can install the development version of {weatherOz} like so:
 
 ``` r
