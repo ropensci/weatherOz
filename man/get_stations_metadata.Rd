@@ -67,7 +67,8 @@ metadata for stations available from \acronym{DPIRD}'s Weather 2.0
 \strong{elev_m}:\tab Station elevation in metres. \code{numeric}\cr
 \strong{source}:\tab Organisation responsible for the data or station
 maintenance. \code{character}\cr
-\strong{include_closed}:\tab Station include_closed, one of 'open' or 'closed'. \code{character}\cr
+\strong{include_closed}:\tab Station include_closed, one of \sQuote{open} or
+\sQuote{closed}. \code{character}\cr
 \strong{wmo}:\tab World Meteorological Organisation, (\acronym{WMO}), number
 if applicable. \code{numeric}\cr
 \strong{\code{rich} values}\tab\cr

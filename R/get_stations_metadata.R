@@ -80,7 +80,8 @@
 #'     **elev_m**:\tab Station elevation in metres. `numeric`\cr
 #'     **source**:\tab Organisation responsible for the data or station
 #'       maintenance. `character`\cr
-#'     **include_closed**:\tab Station include_closed, one of 'open' or 'closed'. `character`\cr
+#'     **include_closed**:\tab Station include_closed, one of \sQuote{open} or
+#'      \sQuote{closed}. `character`\cr
 #'     **wmo**:\tab World Meteorological Organisation, (\acronym{WMO}), number
 #'       if applicable. `numeric`\cr
 #'     **`rich` values**\tab\cr
