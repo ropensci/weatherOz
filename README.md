@@ -52,7 +52,8 @@ available via a [web interface](https://weather.agric.wa.gov.au). The
 data available is a mirror of the DPIRD Weather 2.0 API endpoints.
 Rainfall estimates are also available at virtual stations (*i.e.*, where
 no observational data is present) and is sourced from the Doppler radar
-service provided by the Bureau of Meteorology under license.
+service provided by the Australian Government Bureau of Meteorology
+(BOM) under license.
 
 ## Installation instructions
 
