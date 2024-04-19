@@ -6,7 +6,7 @@
   "name": "weatherOz: An API Client for Australian Weather and Climate Data Resources",
   "relatedLink": "https://docs.ropensci.org/weatherOz/",
   "codeRepository": "https://github.com/ropensci/weatherOz/",
-  "issueTracker": "https://github.com/ropensci/weatherOz/issues",
+  "issueTracker": "https://github.com/ropensci/weatherOz/issues/",
   "license": "https://spdx.org/licenses/GPL-3.0",
   "version": "1.0.0",
   "programmingLanguage": {
@@ -543,7 +543,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "12700.452KB",
+  "fileSize": "12700.446KB",
   "releaseNotes": "https://github.com/ropensci/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml", "https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml", "https://codecov.io/gh/ropensci/weatherOz"],

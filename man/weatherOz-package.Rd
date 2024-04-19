@@ -15,7 +15,7 @@ Useful links:
 \itemize{
   \item \url{https://github.com/ropensci/weatherOz/}
   \item \url{https://docs.ropensci.org/weatherOz/}
-  \item Report bugs at \url{https://github.com/ropensci/weatherOz/issues}
+  \item Report bugs at \url{https://github.com/ropensci/weatherOz/issues/}
 }
 
 }

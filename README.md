@@ -33,7 +33,7 @@ SILO data is available from Queensland’s Long Paddock initiative
 covering all Australia and few nearby islands (112 to 154 degrees
 longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude
 by 0.05° latitude (approximately 5 km × 5 km). Visit the [SILO
-website](https://siloapi.longpaddock.qld.gov.au/silo/) for more details
+website](https://www.longpaddock.qld.gov.au/silo/) for more details
 about how the data is prepared and which climate data are available.
 Agriculture bulletins, radar imagery, satellite imagery and seven-day
 forecasts are available from the Bureau of Meteorology (BOM) via an
@@ -45,8 +45,7 @@ form](https://www.agric.wa.gov.au/form/dpird-api-registration). Access
 to the SILO API is conditioned to supplying a valid email address with
 the user query. Follow the API Terms and Conditions for the
 [DPIRD](https://www.agric.wa.gov.au/apis/api-terms-and-conditions) and
-[SILO](https://siloapi.longpaddock.qld.gov.au/silo/about/access-data/)
-APIs.
+[SILO](https://www.longpaddock.qld.gov.au/silo/api-documentation/) APIs.
 
 Observation data from the DPIRD’s weather station network is also
 available via a [web interface](https://weather.agric.wa.gov.au). The
