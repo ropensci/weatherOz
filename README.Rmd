@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml)
 [![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://codecov.io/gh/ropensci/weatherOz)
+[![CRAN status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate data for Australia from Australian data sources.
