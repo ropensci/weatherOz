@@ -34,7 +34,7 @@
 
 * Fixes [bug](https://github.com/ropensci/weatherOz/issues/57) where SILO Data Drill gridded data were not available with enough precision.
 
-* Added functionality to get_station_metadata() so that it returns the metadata for only one station if required, [commit](https://github.com/DPIRD-FSI/weatherOz/commit/8166c92f63ed138ccfed966a09e9537a35324b67).
+* Added functionality to get_station_metadata() so that it returns the metadata for only one station if required, [commit](https://github.com/ropensci/weatherOz/commit/8166c92f63ed138ccfed966a09e9537a35324b67).
 
 * Several enhanced checks for user inputs to ensure that valid requests are made before sending the API queries are now in place.
 

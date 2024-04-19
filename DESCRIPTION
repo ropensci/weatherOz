@@ -138,7 +138,7 @@ Description: Provides automated downloading, parsing and formatting of weather
     Creative Commons (CC) Attribution 3.0 licence or Public Access Licence (PAL)
     as appropriate, see <http://www.bom.gov.au/other/copyright.shtml> for
     further details.
-URL: https://github.com/ropensci/weatherOz/, https://docs.ropensci.org/weatherOz
+URL: https://github.com/ropensci/weatherOz/, https://docs.ropensci.org/weatherOz/
 BugReports: https://github.com/ropensci/weatherOz/issues
 License: GPL (>= 3)
 Encoding: UTF-8

@@ -14,7 +14,7 @@ Provides automated downloading, parsing and formatting of weather data for Austr
 Useful links:
 \itemize{
   \item \url{https://github.com/ropensci/weatherOz/}
-  \item \url{https://docs.ropensci.org/weatherOz}
+  \item \url{https://docs.ropensci.org/weatherOz/}
   \item Report bugs at \url{https://github.com/ropensci/weatherOz/issues}
 }
 
