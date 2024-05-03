@@ -15,6 +15,7 @@ output: github_document
 [![R-CMD-check](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml)
 [![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://codecov.io/gh/ropensci/weatherOz)
+[![status](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b/status.svg)](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b)
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate data for Australia from Australian data sources.
