@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.3 (2024-02-29)",
+  "runtimePlatform": "R version 4.4.0 (2024-04-24)",
   "author": [
     {
       "@type": "Person",
@@ -543,10 +543,10 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "12700.608KB",
+  "fileSize": "12700.61KB",
   "releaseNotes": "https://github.com/ropensci/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/weatherOz/blob/main/README.md",
-  "contIntegration": ["https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml", "https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml", "https://codecov.io/gh/ropensci/weatherOz"],
+  "contIntegration": ["https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml", "https://codecov.io/gh/ropensci/weatherOz"],
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#stable",
   "review": {
     "@type": "Review",
