@@ -319,7 +319,7 @@ find_nearby_stations <- function(longitude = NULL,
       "distance_km"
     )]
 
-  return(data.table::setorder(x = dpird_out, cols = distance_km))
+  return(data.table::setorder(x = dpird_out, cols = distance_km)[])
 }
 
 #' Query and Return a data.table of Stations Available in SILO Within a Given Radius
