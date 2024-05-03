@@ -2,149 +2,65 @@ Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
 Version: 1.0.0
 Authors@R: c(
-  person(
-    given = "Rodrigo",
-    family = "Pires",
-    role = c("aut", "cre"),
-    email = "rodrigo.pires@dpird.wa.gov.au",
-    comment = c(ORCID = "0000-0001-7384-6849")
-  ),
-  person(
-    given = "Anna",
-    family = "Hepworth",
-    role = "aut",
-    email = "anna.hepworth@gmail.com",
-    comment = c(ORCID = "0000-0003-0204-6347")
-  ),
-  person(
-    given = "Rebecca",
-    family = "O'Leary",
-    role = "aut",
-    email = "bec.oleary@curtin.edu.au"
-  ),
-  person(
-    given = "Jonathan",
-    family = "Carroll",
-    role = "aut",
-    email = "rpkg@jcarroll.com.au",
-    comment = c(ORCID = "0000-0002-1404-5264")
-  ),
-  person(
-    given = "James",
-    family = "Goldie",
-    role = "aut",
-    email = "me@jamesgoldie.dev",
-    comment = c(ORCID = "0000-0002-5024-6207")
-  ),
-  person(
-    given = "Dean",
-    family = "Marchiori",
-    role = "aut",
-    email = "deanmarchiori@gmail.com",
-    comment = c(ORCID = "0000-0002-3430-7225")
-  ),
-  person(
-    given = "Paul",
-    family = "Melloy",
-    role = "aut",
-    email = "paul@melloy.com.au",
-    comment = c(ORCID = "0000-0003-4253-7167")
-  ),
-  person(
-    given = "Mark",
-    family = "Padgham",
-    role = "aut",
-    email = "mark.padgham@email.com",
-    comment = c(ORCID = "0000-0003-2172-5265")
-  ),
-  person(
-    given = "Hugh",
-    family = "Parsonage",
-    role = "aut",
-    email = "hugh.parsonage@gmail.com",
-    comment = c(ORCID = "0000-0003-4055-0835")
-  ),
-  person(
-    given = "Keith",
-    family = "Pembleton",
-    role = "aut",
-    email = "keith.pembleton@usq.edu.au",
-    comment = c(ORCID = "0000-0002-1896-4516")
-  ),
-  person(
-    given = "Maëlle",
-    family = "Salmon",
-    role = "ctb",
-    email = "maelle.salmon@yahoo.se",
-    comment = c(ORCID = "0000-0002-2815-0399",
-                "Contributed to debugging a nasty little bug with CI where
-                timezones caused tests to fail due to vcr not recognising the
-                URL when run outside of Australia/Perth TZ! Suggested the use of
-                `withr::local_timzeone()`, see
-                <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
-  person(
-    given = "Jimmy",
-    family = "Ng",
-    role = "ctb",
-    email = "jimmy.ng@dpird.wa.gov.au"
-  ),
-  person(
-    given = "Steve",
-    family = "Collins",
-    role = "ctb",
-    email = "steve.collins@dpird.wa.gov.au",
-    comment = c("Designed weatherOz's hex logo.")
-  ),
-  person(
-    given = "Adam H.",
-    family = "Sparks",
-    email = "adamhsparks@gmail.com",
-    role = "aut",
-    comment = c(ORCID = "0000-0002-0061-8359")
-  ),
-  person(
-    given = "Laurens",
-    family = "Geffert",
-    role = "rev",
-    email = "laurensgeffert@gmail.com"
-  ),
-  person(
-    given = "Sam",
-    family = "Rogers",
-    role = "rev",
-    email = "sam.rogers@adelaide.edu.au"
-  ),
-  person(given = "Western Australia Agriculture Authority (WAAA)",
-         role = c("cph")))
-Description: Provides automated downloading, parsing and formatting of weather
-    data for Australia through API endpoints provided by the Department of
-    Primary Industries and Regional Development (DPIRD) of Western Australia
-    and by the Science and Technology Division of the Queensland Government's
-    Department of Environment and Science (DES).  As well as the Bureau of
-    Meteorology (BOM) of the Australian government precis and coastal
-    forecasts, agriculture bulletin data, and downloading and importing radar
-    and satellite imagery files.  DPIRD weather data are accessed through public
-    APIs provided by DPIRD, <https://www.agric.wa.gov.au/weather-api-20>,
-    providing access to weather station data from DPIRD's weather station
-    network.  Australia-wide weather data are based on data from the Australian
+    person("Rodrigo", "Pires", , "rodrigo.pires@dpird.wa.gov.au", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-7384-6849")),
+    person("Anna", "Hepworth", , "anna.hepworth@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0003-0204-6347")),
+    person("Rebecca", "O'Leary", , "bec.oleary@curtin.edu.au", role = "aut"),
+    person("Jonathan", "Carroll", , "rpkg@jcarroll.com.au", role = "aut",
+           comment = c(ORCID = "0000-0002-1404-5264")),
+    person("James", "Goldie", , "me@jamesgoldie.dev", role = "aut",
+           comment = c(ORCID = "0000-0002-5024-6207")),
+    person("Dean", "Marchiori", , "deanmarchiori@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0002-3430-7225")),
+    person("Paul", "Melloy", , "paul@melloy.com.au", role = "aut",
+           comment = c(ORCID = "0000-0003-4253-7167")),
+    person("Mark", "Padgham", , "mark.padgham@email.com", role = "aut",
+           comment = c(ORCID = "0000-0003-2172-5265")),
+    person("Hugh", "Parsonage", , "hugh.parsonage@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0003-4055-0835")),
+    person("Keith", "Pembleton", , "keith.pembleton@usq.edu.au", role = "aut",
+           comment = c(ORCID = "0000-0002-1896-4516")),
+    person("Maëlle", "Salmon", , "maelle.salmon@yahoo.se", role = "ctb",
+           comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the\n                URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
+    person("Jimmy", "Ng", , "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
+    person("Steve", "Collins", , "steve.collins@dpird.wa.gov.au", role = "ctb",
+           comment = "Designed weatherOz's hex logo."),
+    person("Adam H.", "Sparks", , "adamhsparks@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0002-0061-8359")),
+    person("Laurens", "Geffert", , "laurensgeffert@gmail.com", role = "rev"),
+    person("Sam", "Rogers", , "sam.rogers@adelaide.edu.au", role = "rev"),
+    person("Western Australia Agriculture Authority (WAAA)", role = "cph")
+  )
+Description: Provides automated downloading, parsing and formatting of
+    weather data for Australia through API endpoints provided by the
+    Department of Primary Industries and Regional Development (DPIRD) of
+    Western Australia and by the Science and Technology Division of the
+    Queensland Government's Department of Environment and Science (DES).
+    As well as the Bureau of Meteorology (BOM) of the Australian
+    government precis and coastal forecasts, agriculture bulletin data,
+    and downloading and importing radar and satellite imagery files.
+    DPIRD weather data are accessed through public APIs provided by DPIRD,
+    <https://www.agric.wa.gov.au/weather-api-20>, providing access to
+    weather station data from DPIRD's weather station network.
+    Australia-wide weather data are based on data from the Australian
     Bureau of Meteorology (BOM) data and accessed through SILO (Scientific
-    Information for Land Owners) (Jeffery et al., 2001,
-    <doi: 10.1016/S1364-8152(01)00008-1>).  DPIRD data are made available under
+    Information for Land Owners) (Jeffery et al., 2001, <doi:
+    10.1016/S1364-8152(01)00008-1>).  DPIRD data are made available under
     a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU) license
-    <https://creativecommons.org/licenses/by/3.0/au/deed.en>.  SILO data are
-    released under a  Creative Commons Attribution 4.0 International licence
-    (CC BY 4.0) <https://creativecommons.org/licenses/by/4.0/>.  BOM data are
-    (c) Australian Government Bureau of Meteorology and released under a
-    Creative Commons (CC) Attribution 3.0 licence or Public Access Licence (PAL)
-    as appropriate, see <http://www.bom.gov.au/other/copyright.shtml> for
-    further details.
-URL: https://github.com/ropensci/weatherOz/, https://docs.ropensci.org/weatherOz/
-BugReports: https://github.com/ropensci/weatherOz/issues/
+    <https://creativecommons.org/licenses/by/3.0/au/deed.en>.  SILO data
+    are released under a Creative Commons Attribution 4.0 International
+    licence (CC BY 4.0) <https://creativecommons.org/licenses/by/4.0/>.
+    BOM data are (c) Australian Government Bureau of Meteorology and
+    released under a Creative Commons (CC) Attribution 3.0 licence or
+    Public Access Licence (PAL) as appropriate, see
+    <http://www.bom.gov.au/other/copyright.shtml> for further details.
 License: GPL (>= 3)
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
-    "roxyglobals::global_roclet"))
-RoxygenNote: 7.3.1
+URL: https://github.com/ropensci/weatherOz/,
+    https://docs.ropensci.org/weatherOz/
+BugReports: https://github.com/ropensci/weatherOz/issues/
+Depends: 
+    R (>= 4.1.0)
 Imports: 
     apsimx,
     clock,
@@ -160,10 +76,10 @@ Imports:
     magick,
     methods,
     readr (>= 1.1.1),
-    stringi,
     stars,
-    terra,
     stats,
+    stringi,
+    terra,
     utils,
     xml2
 Suggests:
@@ -173,28 +89,31 @@ Suggests:
     ggthemes,
     grid,
     gridExtra,
+    mailR,
     mapproj,
     maps,
-    mailR,
     rmarkdown,
+    roxyglobals,
     spelling,
     testthat (>= 3.0.0),
     vcr (>= 0.6.0),
     vdiffr,
-    withr,
-    roxyglobals
+    withr
+VignetteBuilder: 
+    knitr
+Config/roxyglobals/filename: globals.R
+Config/roxyglobals/unique: FALSE
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Depends: 
-    R (>= 4.1.0)
+Encoding: UTF-8
+Language: en-US
+LazyData: true
+Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
+RoxygenNote: 7.3.1
 X-schema.org-applicationCategory: Tools
+X-schema.org-isPartOf: https://ropensci.org
 X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,
     australia, weather, weather-data, meteorology, western-australia,
     australia-bureau-of-meteorology, western-australia-agriculture,
     australia-agriculture, australia-climate, australia-weather
-X-schema.org-isPartOf: https://ropensci.org
-VignetteBuilder: knitr
-Language: en-US
-LazyData: true
-Config/roxyglobals/filename: globals.R
-Config/roxyglobals/unique: FALSE
