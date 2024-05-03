@@ -93,7 +93,7 @@ The DPIRD weather station network includes approximately 200 weather stations wi
 
 The package is fully documented with a quick-start vignette that provides details about how to set up the API keys and go about frequently conducted tasks, _e.g._, fetching daily summary weather data from DPIRD and SILO as well as maps of station locations in the DPIRD and SILO station networks.
 Additionally, each data source has a dedicated vignette that details how to fetch data from that source and includes greater detail about the functionality of the package.
-Most users will likely use `get_patched_point()` (station data) [], `get_data_drill()` (spatially interpolated gridded data) or `get_dpird_summaries()` to retrieve summarised weather station data values [].
+Most users will likely use `get_patched_point()` (station data), `get_data_drill()` (spatially interpolated gridded data) or `get_dpird_summaries()` to retrieve summarised weather station data values.
 Most functions return a `data.table` [@Barrett2024], with the exception of some specialised functions discussed later.
 
 Weather station metadata available through {weatherOz} is richer than what is available from SILO alone and includes geographic location as longitude, latitude and state, elevation, dates available, open or closed status and in the case of DPIRD stations, more detailed information including uptime and hardware details about the stations themselves is available through `get_stations_metadata()`.
