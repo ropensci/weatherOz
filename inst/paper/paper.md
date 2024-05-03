@@ -98,8 +98,8 @@ Most functions return a `data.table` [@Barrett2024], with the exception of some 
 
 Weather station metadata available through {weatherOz} is richer than what is available from SILO alone and includes geographic location as longitude, latitude and state, elevation, dates available, open or closed status and in the case of DPIRD stations, more detailed information including uptime and hardware details about the stations themselves is available through `get_stations_metadata()`.
 
-Two specialised functions for data available from BoM, `get_radar_imagery()` and `get_satellite_imagery()`, return either {terra} [@Hijmans2024] or {stars} [@Pebesma2023] native objects or a {magick} object [@Oooms2024], respectively. 
-Three other specialised functions are available for APSIM users providing {apsimx} ".met" objects of weather data from both DPIRD and SILO [@miguez2024] in an R session, _e.g._, `get_dpird_apsim()`, `get_data_drill_apsim()` and `get_patched_point_apsim()`.
+Two specialised functions for data available from BoM, `get_radar_imagery()` and `get_satellite_imagery()`, return either {terra} [@Hijmans2024] or {stars} [@Pebesma2023] native objects or a {magick} object [@Ooms2024], respectively. 
+Three other specialised functions are available for APSIM users providing {apsimx} ".met" objects of weather data from both DPIRD and SILO [@Miguez2024] in an R session, _e.g._, `get_dpird_apsim()`, `get_data_drill_apsim()` and `get_patched_point_apsim()`.
 
 {weatherOz} strives to unify the users experience, this includes the function arguments across the API requests as much as possible and also renaming the return object columns such that they follow a common naming scheme no matter which data source.
 This does mean that the column names do not match the data source, but make working with data from the different APIs more manageable.
