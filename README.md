@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# {weatherOz}: An API Client for Australian Weather and Climate Data Resources <img src="man/figures/logo.png" align="right" />
+# {weatherOz}: An API Client for Australian Weather and Climate Data Resources <img src="man/figures/logo.png" align="right"/>
 
 <!-- badges: start -->
 
@@ -16,6 +16,7 @@ Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci
 [![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://codecov.io/gh/ropensci/weatherOz)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
+
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate

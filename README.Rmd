@@ -13,17 +13,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# {weatherOz}: An API Client for Australian Weather and Climate Data Resources <img src="man/figures/logo.png" align="right" />
+# {weatherOz}: An API Client for Australian Weather and Climate Data Resources <img src="man/figures/logo.png" align="right"/>
 
 <!-- badges: start -->
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
-[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
-[![status](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b/status.svg)](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b)
-[![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml)
-[![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://codecov.io/gh/ropensci/weatherOz)
-[![CRAN status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
+
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable) [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527) [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598) [![status](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b/status.svg)](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b) [![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml) [![test-coverage](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml) [![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://codecov.io/gh/ropensci/weatherOz) [![CRAN status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
+
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate data for Australia from Australian data sources.
@@ -31,7 +26,7 @@ Data are sourced from from the Western Australian Department of Primary Industri
 
 The package queries the APIs or an FTP server and returns data as a data frame or radar and satellite imagery in your R session.
 Observation data from DPIRD's weather station network are available via the [Weather 2.0](https://www.agric.wa.gov.au/weather-api-20) Open API initiative.
-SILO data is available from Queensland's Long Paddock initiative (Jeffery _et al._ 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112 to 154 degrees longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude by 0.05° latitude (approximately 5&nbsp;km × 5&nbsp;km).
+SILO data is available from Queensland's Long Paddock initiative (Jeffery *et al.* 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112 to 154 degrees longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
 Visit the [SILO website](https://www.longpaddock.qld.gov.au/silo/) for more details about how the data is prepared and which climate data are available.
 Agriculture bulletins, radar imagery, satellite imagery and seven-day forecasts are available from the Bureau of Meteorology (BOM) via an anonymous FTP server.
 
@@ -42,26 +37,26 @@ Follow the API Terms and Conditions for the [DPIRD](https://www.agric.wa.gov.au/
 
 Observation data from the DPIRD's weather station network is also available via a [web interface](https://weather.agric.wa.gov.au).
 The data available is a mirror of the DPIRD Weather 2.0 API endpoints.
-Rainfall estimates are also available at virtual stations (_i.e._, where no observational data is present) and is sourced from the Doppler radar service provided by the Australian Government Bureau of Meteorology (BOM) under license.
+Rainfall estimates are also available at virtual stations (*i.e.*, where no observational data is present) and is sourced from the Doppler radar service provided by the Australian Government Bureau of Meteorology (BOM) under license.
 
 ## Installation instructions
 
 You can install the stable version of {weatherOz} from [CRAN](https://cran.r-project.org/) like so:
 
-```r
+``` r
 install.packages("weatherOz")
 ```
 
 You can install the development version of {weatherOz} like so:
 
-```r
+``` r
 install.packages("weatherOz", repos = "https://ropensci.r-universe.dev")
 ```
 
 ## A Note on API Keys
 
 The examples in this README assume that you have stored your API key in your .Renviron file.
-See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan *et al.* for more on storing details in your .Renviron if you are unfamiliar.
 
 ## Example 1
 
