@@ -1,4 +1,5 @@
 
+
 #' Get DPIRD Summary Weather Data in the APSIM Format From the Weather 2.0 API
 #'
 #' Automates the retrieval and conversion of summary data from the
@@ -72,9 +73,7 @@ get_dpird_apsim <- function(station_code,
   longitude <- apsim$longitude[1]
   latitude <- apsim$latitude[1]
   site <- apsim$station_name[1]
-  tav <- round(mean(colMeans(apsim[, c("air_tmax",
-                                       "air_tmin")], na.rm = TRUE),
-                    na.rm = TRUE), 2)
+  tav <- round(mean(colMeans(apsim[, c("air_tmax", "air_tmin")], na.rm = TRUE), na.rm = TRUE), 2)
   tav <-
     sprintf(
       "tav = %g (oC) ! Average ambient temperature. Based on %s to %s.",
@@ -125,16 +124,13 @@ get_dpird_apsim <- function(station_code,
       "(%)",
       "(m/s)")
   comments <-
-    sprintf("!data from DPIRD Weather 2.0 API. retrieved: %s",
-            Sys.time())
+    sprintf("!data from DPIRD Weather 2.0 API. retrieved: %s", Sys.time())
 
   attr(apsim, "site") <- sprintf("%s.met", site)
   attr(apsim, "latitude") <-
-    sprintf("latitude = %f  (DECIMAL DEGREES)",
-            latitude)
+    sprintf("latitude = %f  (DECIMAL DEGREES)", latitude)
   attr(apsim, "longitude") <-
-    sprintf("longitude = %f  (DECIMAL DEGREES)",
-            longitude)
+    sprintf("longitude = %f  (DECIMAL DEGREES)", longitude)
   attr(apsim, "tav") <- tav
   attr(apsim, "colnames") <- names(apsim)
   attr(apsim, "units") <- units
@@ -143,9 +139,9 @@ get_dpird_apsim <- function(station_code,
   class(apsim) <- c("met", "data.frame")
 
   apsim <-
-    amp_apsim_met(met = apsim,
-                  start_date = start_date,
-                  end_date = end_date)
+    .amp_apsim_met(met = apsim,
+                   start_date = start_date,
+                   end_date = end_date)
 
   return(apsim)
 }
@@ -162,7 +158,7 @@ get_dpird_apsim <- function(station_code,
 #' @autoglobal
 #' @noRd
 
-amp_apsim_met <- function(met, start_date, end_date) {
+.amp_apsim_met <- function(met, start_date, end_date) {
   if (!inherits(met, "met"))
     stop("Object should be of class 'met", call. = FALSE)
 
