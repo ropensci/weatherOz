@@ -21,6 +21,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-4055-0835")),
     person("Keith", "Pembleton", , "keith.pembleton@usq.edu.au", role = "aut",
            comment = c(ORCID = "0000-0002-1896-4516")),
+    person("Fernando", "Miguez", , "femiguez@iastate.edu", role = "aut",
+           comment = c(ORCID = "0000-0002-4627-8329", "Contributed 'apsimx::amp_apsim_met()' function under GPL-3 licence that is used in the 'get_dpird_apsim()`")),
     person("Maëlle", "Salmon", , "maelle.salmon@yahoo.se", role = "ctb",
            comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the\n                URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
     person("Jimmy", "Ng", , "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
