@@ -72,6 +72,8 @@
 #'
 #' @section Saving objects:
 #' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#'   Note that when saving, comments from SILO will be included, but these will
+#'   not be printed as a part of the resulting `met` object in your \R session.
 #'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'

@@ -123,7 +123,35 @@
     met_file_path <- file.path(tempdir(), "apsim.met")
     on.exit(unlink(met_file_path))
     writeLines(text = response$parse("UTF8"), con = met_file_path)
-    return(apsimx::read_apsim_met(file = "apsim.met", src.dir = tempdir()))
+    apsim <- readLines(met_file_path)
+    data <- data.table::fread(file = met_file_path,
+                              skip = grep(pattern = "^year",
+                                          x = apsim) + 2)
+    apsim_met <- apsimx::as_apsim_met(
+      x = data,
+      filename = sprintf("station.%s.met",
+                         trimws(sub("^.*=", "",
+                                    apsim[grep(pattern = "^!station number =",
+                                               x = apsim)]))),
+      site = trimws(sub("^.*=", "",
+                        apsim[grep(pattern = "^!station name =", x = apsim)])),
+      latitude = trimws(sub("^.*=", "",
+                            apsim[grep(pattern = "^latitude =", x = apsim)])),
+      longitude = trimws(sub("^.*=", "",
+                             apsim[grep(pattern = "^longitude =", x = apsim)])),
+      colnames = scan(
+        text = apsim[grep(pattern = "year", x = apsim)],
+        what = '',
+        quiet = TRUE
+      ),
+      units = scan(
+        text = apsim[grep(pattern = "\\(\\)", x = apsim)],
+        what = '',
+        quiet = TRUE
+      ),
+      comments = apsim[grep(pattern = "^!", x = apsim)]
+    )
+    return(apsim_met)
   }
 
   response_data <- data.table::fread(response$parse("UTF8"))

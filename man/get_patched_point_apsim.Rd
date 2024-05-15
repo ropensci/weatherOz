@@ -98,6 +98,8 @@ interpolation method for \acronym{CLIMARC} data;}
 \section{Saving objects}{
 
 To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
+Note that when saving, comments from SILO will be included, but these will
+not be printed as a part of the resulting \code{met} object in your \R session.
 }
 
 \examples{
