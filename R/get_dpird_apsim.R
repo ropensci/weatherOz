@@ -121,6 +121,7 @@ get_dpird_apsim <- function(station_code,
       "(oC)",
       "(oC)",
       "(mm)",
+      "(mm)",
       "(%)",
       "(m/s)")
   comments <-
