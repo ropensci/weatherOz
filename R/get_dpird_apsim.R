@@ -1,6 +1,4 @@
 
-
-
 #' Get DPIRD Summary Weather Data in the APSIM Format From the Weather 2.0 API
 #'
 #' Automates the retrieval and conversion of summary data from the
