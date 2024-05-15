@@ -362,7 +362,7 @@ library(weatherOz)
 ## Getting APSIM Ready Data
 
 For work with APSIM, you can use `get_dpird_apsim()` to get an object in your R session that's ready for saving using [apsimx::write_apsim_met()] of DPIRD weather data.
-This function only needs the `station_code`, `start_date`, `end_date` and your `api_key` to return the necessary values.
+This function only needs the `station_code`, `start_date`, `end_date` and your `api_key` values to return the necessary values.
 
 ### What You Get Back
 
