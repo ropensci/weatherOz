@@ -149,7 +149,7 @@ get_dpird_apsim <- function(station_code,
 #' Calculates Attribute Amp for an Object of Class \sQuote{met}
 #'
 #' This function recalculates mean monthly amplitude for an object of class
-#' \sQuote{met} adapted from \cranpkg{apsimx}.
+#' \sQuote{met} adapted from \CRANpkg{apsimx}.
 #'
 #' @param met object of class \sQuote{met}
 #' @return an object of class \sQuote{met} with a recalculation of annual
