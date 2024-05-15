@@ -106,8 +106,8 @@ To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{aps
 # Source observation data for station Wongan Hills station, WA (008137)
 wd <- get_patched_point_apsim(
   station_code = "008137",
-  start_date = "20220401",
-  end_date = "20221101",
+  start_date = "20220101",
+  end_date = "20221231",
   api_key = "your_api_key"
 )
 }
