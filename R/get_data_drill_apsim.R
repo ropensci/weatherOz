@@ -22,6 +22,8 @@
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
+#' @param filename A `character` string providing an optional value for the
+#'   \dQuote{filename} field in the .met file.
 #'
 #' @section Included Values:
 #'
@@ -103,7 +105,8 @@ get_data_drill_apsim <- function(longitude,
                                  latitude,
                                  start_date,
                                  end_date = Sys.Date(),
-                                 api_key) {
+                                 api_key,
+                                 filename) {
   if (missing(longitude) || missing(latitude)) {
     stop(call. = FALSE,
          "Please supply a valid values for `longitude` and `latitude`.")

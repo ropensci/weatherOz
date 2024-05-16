@@ -3,8 +3,8 @@ test_that("get_patched_point_apsim() input checks stop on invalid values", {
   # missing station_code
   expect_error(
     get_patched_point_apsim(
-      start_date = "20220501",
-      end_date = "20220501",
+      start_date = "20220101",
+      end_date = "20221231",
       api_key = Sys.getenv("SILO_API_KEY")
     )
   )
@@ -35,12 +35,12 @@ test_that("get_patched_point_apsim() returns daily values", {
     withr::local_timezone(tz = "Australia/Perth")
     wd <- get_patched_point_apsim(
       station_code = "008137",
-      start_date = "2021-06-01",
-      end_date = "2021-07-01",
+      start_date = "2021-01-01",
+      end_date = "2021-12-31",
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
-  expect_equal(nrow(wd), 31)
+  expect_equal(nrow(wd), 364)
   expect_length(wd, 9)
   expect_named(wd,
                c(

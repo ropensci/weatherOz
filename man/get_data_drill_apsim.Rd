@@ -10,7 +10,8 @@ get_data_drill_apsim(
   latitude,
   start_date,
   end_date = Sys.Date(),
-  api_key
+  api_key,
+  filename
 )
 }
 \arguments{
@@ -31,6 +32,9 @@ returned is inclusive of this date.  Defaults to the current system date.}
 \item{api_key}{A \code{character }string specifying a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
+
+\item{filename}{A \code{character} string providing an optional value for the
+\dQuote{filename} field in the .met file.}
 }
 \value{
 An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.

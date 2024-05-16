@@ -1,7 +1,7 @@
 
 #' Query the SILO API
 #'
-#' Use {crul} to query the SILO API.
+#' Use \CRANpkg{crul} to query the SILO API.
 #'
 #' @param .station_code A `character` string of the \acronym{BOM} station code
 #'   for the station of interest.
@@ -120,8 +120,8 @@
   }
 
   if (.format == "apsim") {
-    met_file_path <- file.path(tempdir(), "apsim.met")
-    on.exit(unlink(met_file_path))
+    met_file_path <- tempfile()
+    on.exit(unlink(tempfile()))
     writeLines(text = response$parse("UTF8"), con = met_file_path)
     apsim <- readLines(met_file_path)
     data <- data.table::fread(file = met_file_path,

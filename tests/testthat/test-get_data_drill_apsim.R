@@ -5,8 +5,8 @@ test_that("get_data_drill_apsim() user-input checks stop on invalid values",
             expect_error(
               get_data_drill_apsim(
                 latitude = -27.85,
-                start_date = "20220501",
-                end_date = "20220501",
+                start_date = "20220101",
+                end_date = "20221231",
                 api_key = Sys.getenv("SILO_API_KEY")
               )
             )
@@ -46,13 +46,13 @@ test_that("get_data_drill_apsim() returns all daily values", {
     wd <- get_data_drill_apsim(
       latitude = -27.85,
       longitude = 150.05,
-      start_date = "2021-06-01",
-      end_date = "2021-07-01",
+      start_date = "2021-01-01",
+      end_date = "2021-12-31",
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
   expect_s3_class(wd, class = "met")
-  expect_equal(nrow(wd), 31)
+  expect_equal(nrow(wd), 364)
   expect_length(wd, 9)
   expect_named(wd,
                c(

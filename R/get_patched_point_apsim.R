@@ -29,9 +29,11 @@
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 #'   returned is inclusive of this date.  Defaults to the current system date.
-#' @param api_key A `character` string specifying a valid email address to use
+#' @param api_key A `character` string providing a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
+#' @param filename A `character` string providing an optional value for the
+#'   \dQuote{filename} field in the .met file.
 #'
 #' @section Included Values:
 #'
@@ -92,7 +94,7 @@
 #' @examples
 #' \dontrun{
 #' # requires an API key as your email address
-#' # Source observation data for station Wongan Hills station, WA (008137)
+#' # Source observation data for Wongan Hills station, WA (008137)
 #' wd <- get_patched_point_apsim(
 #'   station_code = "008137",
 #'   start_date = "20220101",
@@ -112,7 +114,8 @@
 get_patched_point_apsim <- function(station_code,
                                     start_date,
                                     end_date = Sys.Date(),
-                                    api_key) {
+                                    api_key,
+                                    filename) {
   if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
