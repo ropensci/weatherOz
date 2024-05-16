@@ -17,11 +17,11 @@
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
-#' @param filename A `character` string with your desired filename in the .met
-#'   object. Default \sQuote{noname.met} as with [apsimx::as_apsim_met()].
 #'
 #' @section Saving objects:
-#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#' To save \dQuote{met} objects the [apsimx::write_apsim_met()] is reexported.
+#'   Note that when saving, comments from SILO will be included, but these will
+#'   not be printed as a part of the resulting `met` object in your \R session.
 #'
 #' @examples
 #' \dontrun{
@@ -51,8 +51,7 @@
 get_dpird_apsim <- function(station_code,
                             start_date,
                             end_date = Sys.Date(),
-                            api_key,
-                            filename = NULL) {
+                            api_key) {
   apsim <- get_dpird_summaries(
     station_code = station_code,
     start_date = start_date,
@@ -102,14 +101,8 @@ get_dpird_apsim <- function(station_code,
     new = c("radn", "maxt", "mint", "rain", "evap", "rh", "windspeed")
   )
 
-  # if no `filename` is provided,
-  #. remove & use the default that `as_apsim_met()` provides, 'noname.met'
-  if (is.null(filename)) {
-    filename <- "noname.met"
-  }
-
   apsim <- apsimx::as_apsim_met(
-    filename = filename,
+    filename = "weather.met.met",
     x = apsim,
     site = site,
     latitude = latitude,

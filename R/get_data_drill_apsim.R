@@ -9,6 +9,9 @@
 #'   The grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
 #'   0.05° longitude (approximately 5 km × 5 km).
 #'
+#' Note that when saving, comments from SILO will be included, but these will
+#'   not be printed as a part of the resulting `met` object in your \R session.
+#'
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
 #' @param latitude A single `numeric` value representing the latitude of the
@@ -22,8 +25,6 @@
 #' @param api_key A `character `string specifying a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
-#' @param filename A `character` string providing an optional value for the
-#'   \dQuote{filename} field in the .met file.
 #'
 #' @section Included Values:
 #'
@@ -62,7 +63,7 @@
 #'   }
 #'
 #' @section Saving objects:
-#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#' To save \dQuote{met} objects the [apsimx::write_apsim_met()] is reexported.
 #'   Note that when saving, comments from SILO will be included, but these will
 #'   not be printed as a part of the resulting `met` object in your \R session.
 #'
@@ -105,8 +106,7 @@ get_data_drill_apsim <- function(longitude,
                                  latitude,
                                  start_date,
                                  end_date = Sys.Date(),
-                                 api_key,
-                                 filename) {
+                                 api_key) {
   if (missing(longitude) || missing(latitude)) {
     stop(call. = FALSE,
          "Please supply a valid values for `longitude` and `latitude`.")

@@ -32,8 +32,6 @@
 #' @param api_key A `character` string providing a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
-#' @param filename A `character` string providing an optional value for the
-#'   \dQuote{filename} field in the .met file.
 #'
 #' @section Included Values:
 #'
@@ -73,7 +71,7 @@
 #'
 #'
 #' @section Saving objects:
-#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#' To save \dQuote{met} objects the [apsimx::write_apsim_met()] is reexported.
 #'   Note that when saving, comments from SILO will be included, but these will
 #'   not be printed as a part of the resulting `met` object in your \R session.
 #'
@@ -114,8 +112,7 @@
 get_patched_point_apsim <- function(station_code,
                                     start_date,
                                     end_date = Sys.Date(),
-                                    api_key,
-                                    filename) {
+                                    api_key) {
   if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")
