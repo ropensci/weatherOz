@@ -374,7 +374,3 @@ get_satellite_imagery <- get_satellite <-
   }
   return(tif_files)
 }
-
-#' @importFrom terra plot
-#' @export
-terra::plot
