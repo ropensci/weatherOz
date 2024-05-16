@@ -9,8 +9,7 @@ get_patched_point_apsim(
   station_code,
   start_date,
   end_date = Sys.Date(),
-  api_key,
-  filename
+  api_key
 )
 }
 \arguments{
@@ -28,9 +27,6 @@ returned is inclusive of this date.  Defaults to the current system date.}
 \item{api_key}{A \code{character} string providing a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
-
-\item{filename}{A \code{character} string providing an optional value for the
-\dQuote{filename} field in the .met file.}
 }
 \value{
 An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
@@ -101,7 +97,7 @@ interpolation method for \acronym{CLIMARC} data;}
 
 \section{Saving objects}{
 
-To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
+To save \dQuote{met} objects the \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}} is reexported.
 Note that when saving, comments from SILO will be included, but these will
 not be printed as a part of the resulting \code{met} object in your \R session.
 }
@@ -139,7 +135,8 @@ Other SILO:
 
 Other APSIM: 
 \code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()}
+\code{\link{get_dpird_apsim}()},
+\code{\link{reexports}}
 
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},
