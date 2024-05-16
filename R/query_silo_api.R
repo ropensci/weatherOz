@@ -129,10 +129,7 @@
                                           x = apsim) + 2)
     apsim_met <- apsimx::as_apsim_met(
       x = data,
-      filename = sprintf("station.%s.met",
-                         trimws(sub("^.*=", "",
-                                    apsim[grep(pattern = "^!station number =",
-                                               x = apsim)]))),
+      filename = "weather.met.weather",
       site = trimws(sub("^.*=", "",
                         apsim[grep(pattern = "^!station name =", x = apsim)])),
       latitude = trimws(sub("^.*=", "",
