@@ -41,8 +41,7 @@ reference:
     Functions that get metadata, _e.g._, station uptime, dataset availability,
     nearby stations or forecast locations, values that the station records, etc.
   contents:
-  - find_forecast_towns
-  - find_nearby_stations
+  - starts_with("find_")
   - get_available_imagery
   - get_available_radar
   - get_dpird_availability

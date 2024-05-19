@@ -129,6 +129,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},
@@ -137,6 +138,7 @@ Other DPIRD:
 
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
@@ -146,6 +148,7 @@ Other SILO:
 Other metadata: 
 \code{\link{find_forecast_towns}()},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_dpird_availability}()}

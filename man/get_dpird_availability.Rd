@@ -89,6 +89,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
@@ -98,6 +99,7 @@ Other DPIRD:
 Other metadata: 
 \code{\link{find_forecast_towns}()},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_stations_metadata}()}

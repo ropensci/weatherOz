@@ -180,6 +180,7 @@ and Software}, Volume 16/4, 309-330. DOI:
 \seealso{
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_patched_point_apsim}()},

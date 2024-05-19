@@ -74,6 +74,7 @@ Other BOM:
 Other metadata: 
 \code{\link{find_forecast_towns}()},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_stations_metadata}()}

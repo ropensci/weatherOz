@@ -125,6 +125,7 @@ of Hydrology}, Volume 66, 1-76.
 \seealso{
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_patched_point_apsim}()},
