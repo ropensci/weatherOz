@@ -1,0 +1,188 @@
+
+#' Find Stations Within a Geographic Area of Interest
+#'
+#' Given an \CRANpkg{sf} polygon, a bounding box as a vector with the minimum
+#'   and maximum longitude and latitude values or a place name, find
+#'   \acronym{DPIRD} or \acronym{BOM} stations in the \acronym{SILO} network
+#'   that fall within that defined area or the station nearest the centroid of
+#'   the area of interest.
+#'
+#' @param polygon An object of class \CRANpkg{sf} defining the area of interest.
+#' @param bbox `Vector` A four-digit vector defining a bounding box of the area
+#'  of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
+#'   \sQuote{ymax}.
+#' @param place_name `Character` A string value containing the place name of the
+#'   area of interest to query from Open Street Map using [osmdata::getbb].
+#'   Results are the same as providing your own bounding box, a rectangular
+#'   bounding box, except that you don't need to know what the coordinates are
+#'   if you trust Open Street Map.
+#' @param centroid `Boolean` A value of `TRUE` or `FALSE` indicating whether
+#'   you want the centroid only to be used to find the nearest station to the
+#'   centre of the area of interest.  If \dQuote{n} polygons are supplied,
+#'   \dQuote{n} stations are returned.  Defaults to `FALSE` with all stations
+#'   within the area of interest returned.
+#' @param api_key A `string` value that is the user's \acronym{API} key from
+#'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
+#'   when \var{which_api} is `DPIRD` or `all`.
+#' @param which_api A `string` value that indicates which \acronym{API} to use.
+#'   Defaults to `silo` only.  Valid values are `all`, for both \acronym{SILO}
+#'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; `silo` for
+#'   only stations in the \acronym{SILO} network; or `dpird` for stations in the
+#'   \acronym{DPIRD} network.
+#' @param include_closed A `Boolean` value that indicates whether closed
+#'   stations in the \acronym{DPIRD} network should be included in the results.
+#'   Defaults to `FALSE` with closed stations not included.
+#' @param crs A `string` value that provides the coordinate reference system,
+#'   AKA, "projection" to be used for the point extraction.  Defaults to
+#'   GDA 2020, EPSG:7844.  **NOTE** This will override any `crs` value that your
+#'.  `polygon` provides unless you specify it again here, *e.g.*,
+#'    `crs = sf::st_crs(polygon_object_name)`.
+#'
+#' @return a \CRANpkg{data.table} object of weather station(s) within the
+#'   defined area of interest in an unprojected format, EPSG:4326, WGS 84 --
+#'   WGS84 - World Geodetic System 1984, used in \acronym{GPS} format.
+#'
+#' @examples
+#' # using a named place, Toowoomba, Qld, AU using only the SILO API for BOM
+#' # stations
+#'
+#' find_stations_in(place_name = "Toowoomba Qld",
+#'                  which_api = "SILO",
+#'                  include_closed = TRUE)
+#'
+#' # using a bounding box for Melbourne, Vic using only the SILO API for BOM
+#' # stations
+#'
+#' find_stations_in(
+#'   bbox = c(144.470215, -38.160476, 145.612793, -37.622934),
+#'   api_key = "your_api_key",
+#'   which_api = "SILO",
+#'   include_closed = TRUE
+#' )
+#'
+#' # Use the same bounding box but only find a single station nearest
+#'# the centroid using only the SILO API for BOM stations
+#'
+#' find_stations_in(
+#'   bbox = c(144.470215, -38.160476, 145.612793, -37.622934),
+#'   which_api = "SILO",
+#'   include_closed = TRUE,
+#'   centroid = TRUE
+#' )
+#'
+#'
+#' # Use the `south_west_agricultural_region` data to fetch stations only in the
+#' # south-western portion of WA and plot it with {ggplot2} showing open/closed
+#' # stations just to be sure they're inside the area of interest
+#'
+#' library(ggplot2)
+#'
+#' sw_wa <- find_stations_in(
+#' polygon = south_west_agricultural_region,
+#' api_key = Sys.getenv("DPIRD_API_KEY"),
+#' include_closed = TRUE,
+#' crs = sf::st_crs(south_west_agricultural_region)
+#' )
+#'
+#' ggplot(south_west_agricultural_region) +
+#'   geom_sf(fill = "white") +
+#'   geom_sf(data = zz,
+#'          alpha = 0.65,
+#'          size = 2,
+#'          aes(colour = status))
+#'
+#' @family DPIRD
+#' @family SILO
+#' @family metadata
+#'
+#' @export
+
+find_stations_in <- function(polygon = NULL,
+                             bbox = NULL,
+                             place_name = NULL,
+                             centroid = FALSE,
+                             api_key = "your_api_key",
+                             which_api = "all",
+                             include_closed = FALSE,
+                             crs = "EPSG:7844"
+                             ) {
+  pars <- list(bbox = bbox,
+                 polygon = polygon,
+                 place_name = place_name)
+
+  if (all(vapply(pars, is.null, TRUE))) {
+    stop("You must provide one of `bbox`, `polygon` or `place_name`.")
+  }
+
+  if (length(pars[vapply(pars, is.null, TRUE)]) < 2) {
+    warning(
+      "You have provided multiple values for the area of interest. ",
+      "Only one will be used in this order, `polygon`, `bbox`, `place_name`."
+    )
+    if (!is.null(parspolygon)) {
+      area <- parspolygon
+    } else if (!is.null(parsbbox)) {
+      area <- parsbbox
+    } else {
+      area <- parsplace_name
+    }
+  } else {
+  # if we have just one parameter, we select the only non-null value
+  area <- Filter(Negate(is.null), pars)[[1]]
+  }
+
+  # convert bbox or named places to {sf} polygons
+  if (is.numeric(area)) {
+    # area is bbox -----
+    area <- sf::st_as_sf(
+      data.table::data.table("x" = area[c(1, 3)], "y" = area[c(2, 4)]),
+      coords = c("x", "y"),
+      crs = "EPSG:4356"
+    )
+    area <- sf::st_as_sfc(sf::st_bbox(area), crs = crs)
+  } else if (is.character(area)) {
+    # area is a bbox defined by OSM, not by the original user -----
+    area <- sf::st_as_sfc(sf::st_bbox(sf::st_as_sf(data.frame(
+      t(osmdata::getbb(place_name, featuretype = "settlement"))
+    ), coords = c("x", "y"),
+    crs = "EPSG:4326"
+    )))
+  }
+
+  # ensure that the CRS is uniform from here on
+  area <- sf::st_transform(x = area, crs = crs)
+
+  # fetch the station metadata, all the work is done locally for this fn
+
+  stn_metadat <- weatherOz::get_stations_metadata(api_key = api_key,
+                                                  which_api = which_api,
+                                                  include_closed = include_closed)
+  stn_metadat_sf <- sf::st_as_sf(stn_metadat,
+                                 coords = c("longitude", "latitude"),
+                                 crs = "EPSG:4326")
+  stn_metadat_sf <- sf::st_transform(stn_metadat_sf, crs = sf::st_crs(area))
+
+  sf::st_agr(stn_metadat_sf) <- "constant"
+  if (!is.null(polygon)) {
+    sf::st_agr(area) <- "constant"
+  }
+
+  if (isFALSE(centroid)) {
+    intersect <- sf::st_intersection(x = stn_metadat_sf, y = area)
+  } else {
+    intersect <- stn_metadat_sf[
+      sf::st_nearest_feature(x = sf::st_as_sf(sf::st_centroid(area)),
+                             y = stn_metadat_sf), ]
+
+  }
+  intersect <- sf::st_drop_geometry(intersect[, 1:9])
+  return(stn_metadat[intersect, on = c("station_code",
+                                       "station_name",
+                                       "start",
+                                       "end",
+                                       "state",
+                                       "elev_m",
+                                       "source",
+                                       "status",
+                                       "wmo")])
+}
