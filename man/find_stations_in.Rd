@@ -5,9 +5,7 @@
 \title{Find Stations Within a Geographic Area of Interest}
 \usage{
 find_stations_in(
-  polygon = NULL,
-  bbox = NULL,
-  place_name = NULL,
+  x,
   centroid = FALSE,
   api_key = "your_api_key",
   which_api = "all",
@@ -16,17 +14,18 @@ find_stations_in(
 )
 }
 \arguments{
-\item{polygon}{An object of class \CRANpkg{sf} defining the area of interest.}
-
-\item{bbox}{\code{Vector} A four-digit vector defining a bounding box of the area
-of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
-\sQuote{ymax}.}
-
-\item{place_name}{\code{Character} A string value containing the place name of the
-area of interest to query from Open Street Map using \link[osmdata:getbb]{osmdata::getbb}.
-Results are the same as providing your own bounding box, a rectangular
-bounding box, except that you don't need to know what the coordinates are
-if you trust Open Street Map.}
+\item{x}{One of three types of object:
+\itemize{
+\item A \code{Vector} A four-digit vector defining a bounding box of the area
+of interest in this order, \sQuote{xmin}, \sQuote{xmax}, \sQuote{ymin},
+\sQuote{ymax},
+\item An object of class \CRANpkg{sf} defining the area of interest, or
+\item A \code{Character} string value containing the place name of the
+area of interest to query from Open Street Map using \link[osmdata:getbb]{osmdata::getbb},
+\emph{e.g.}, \dQuote{Sydney, NSW}.  These results are the same as providing your
+own bounding box, a rectangular bounding box, except that you don't need to
+know what the coordinates are if you trust Open Street Map.
+}}
 
 \item{centroid}{\code{Boolean} A value of \code{TRUE} or \code{FALSE} indicating whether
 you want the centroid only to be used to find the nearest station to the
