@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_stations_in.R
 \name{find_stations_in}
 \alias{find_stations_in}
-\title{Find Stations Within a Geographic Area of Interest}
+\title{Find Stations Within a Geospatially Defined Geographic Area of Interest}
 \usage{
 find_stations_in(
   x,

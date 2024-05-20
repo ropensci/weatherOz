@@ -1,5 +1,5 @@
 
-#' Find Stations Within a Geographic Area of Interest
+#' Find Stations Within a Geospatially Defined Geographic Area of Interest
 #'
 #' Given an \CRANpkg{sf} polygon, a bounding box as a vector with the minimum
 #'   and maximum longitude and latitude values or a place name, find
