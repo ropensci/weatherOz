@@ -137,10 +137,9 @@ find_stations_in <- function(x,
   area <- sf::st_transform(x = x, crs = crs)
 
   # fetch the station metadata, all the work is done locally for this fn
-
-  stn_metadat <- weatherOz::get_stations_metadata(api_key = api_key,
-                                                  which_api = which_api,
-                                                  include_closed = include_closed)
+  stn_metadat <- get_stations_metadata(api_key = api_key,
+                                       which_api = which_api,
+                                       include_closed = include_closed)
   stn_metadat_sf <- sf::st_as_sf(stn_metadat,
                                  coords = c("longitude", "latitude"),
                                  crs = "EPSG:4326")

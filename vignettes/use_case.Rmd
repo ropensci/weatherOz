@@ -28,7 +28,7 @@ It does this by using the `get_precis_forecast()` function from {weatherOz} alon
 [{mailR}](https://CRAN.R-project.org/package=mailR) (Rahul 2015).
 
 
-```r
+``` r
 install.packages("weatherOz")
 install.packages("mailR")
 library(dplyr)  # for filter()
@@ -40,7 +40,7 @@ For this to work we require a list of alert subscribers.
 Here we create a dummy set of subscribers, locations, and email addresses.
 
 
-```r
+``` r
 subscribers_list <-
   data.frame(cbind(
     c(1, 2, 3),
@@ -69,7 +69,7 @@ We also need to specify our email address and password.
 For this project we are using a gmail account to send the email alerts.
 
 
-```r
+``` r
 our_email <- "yyyy***xxxx@gmail.com"
 our_password <- "*password*"
 ```
@@ -77,14 +77,14 @@ our_password <- "*password*"
 Finally we need to set a forecast temperature threshold that will trigger an alert to be sent.
 
 
-```r
+``` r
 threshold_temp <- 40
 ```
 
 We then use {weatherOz} to access the latest précis forecast for Queensland.
 
 
-```r
+``` r
 QLD_forecast <- get_precis_forecast(state = "QLD")
 ```
 
@@ -94,7 +94,7 @@ subscribers if the forecast maximum temperatures are greater than or equal to th
 This email informs the recipient of the dates that high temperatures are expected.
 
 
-```r
+``` r
 QLD_hotdates <-
   QLD_forecast %>%
   filter(maximum_temperature >= threshold_temp)
