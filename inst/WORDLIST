@@ -26,17 +26,21 @@ DaysDays
 DaysMinutes
 DaysSince
 Deaccumulated
+EPSG
 Evapotranspiration
 FAO
 Formated
+GDA
 GEOS
 GeoTIFF
+Geospatial
 Indooroopilly
 JSON
 Kaushal
 Kirnbrae
 Licence
 Lifecycle
+MGA
 Maroondah
 Modelling
 Moodie
@@ -69,6 +73,7 @@ VIS
 Vapour
 Vasse
 WAAA
+WGS
 WMO
 Westonia
 Wongan
@@ -110,6 +115,7 @@ barometricPressureMinTime
 batteryMinVoltage
 batteryMinVoltageDateTime
 capitalised
+centre
 chillHours
 codecov
 colour
@@ -197,6 +203,7 @@ observationsCount
 observationsPercentage
 oktas
 onwards
+orthophotography
 panEvaporation
 png
 pre
@@ -227,6 +234,7 @@ summarised
 terra
 timezones
 timzeone
+unprojected
 vapour
 vcr
 visualising
@@ -243,4 +251,8 @@ windMinSpeed
 windspeed
 withr
 wmo
+xmax
+xmin
+ymax
+ymin
 yyyy
