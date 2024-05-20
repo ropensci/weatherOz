@@ -450,6 +450,7 @@ library(weatherOz)
 ### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in the Southwest Agriculture Region of Western Australia
 
 Using `find_stations_in()` is different than `find_nearby_stations()` as it finds any stations that fall within a boundary that you provide rather than using a single point to search from.
+For detailed examples using named places or bounding boxes, see the "weatherOz for SILO" vignette.
 
 The {sf} object, `south_west_agricultural_region`, is provided with {weatherOz} under the [CC BY 4.0 Licence](https://creativecommons.org/licenses/by/4.0/deed.en) from the Department of Primary Industries and Regional Development (DPIRD), so we can extract stations within this area of Western Australia.
 

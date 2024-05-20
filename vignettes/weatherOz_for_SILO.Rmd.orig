@@ -238,6 +238,48 @@ library(weatherOz)
 )
 ```
 
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in a Named Place
+
+Using `find_stations_in()` is different than `find_nearby_stations()` as it finds any stations that fall within a boundary or a named place that you provide rather than using a single point to search from.
+For a detailed working example of how to use this with a geospatial polygon and finding both BOM and DPIRD stations, please see the "weatherOz for DPIRD" vignette.
+
+```{r stations_in_tbar}
+place <- find_stations_in(x = "Toowoomba Qld",
+                         which_api = "SILO",
+                         include_closed = TRUE)
+place
+```
+
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in a Bounding Box for Melbourne
+
+Using a (generous) bounding box for Melbourne, Vic using only the SILO API for
+BOM stations, no API key is needed.
+
+```{r stations_in_bbox}
+bbox <- find_stations_in(
+  x = c(144.470215, -38.160476, 145.612793, -37.622934),
+  which_api = "SILO",
+  include_closed = TRUE
+)
+bbox
+```
+
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding the Station Nearest the Centroid of a Bounding Box
+
+Using the same bounding box but only find a single open station nearest the centroid of the bounding box.
+This will return a single value in this case as there is only one polygon.
+For queries where the polygon has 'n' parts, 'n' results will be returned.
+
+```{r stations_in_centroid}
+centroid <- find_stations_in(
+  x = c(144.470215, -38.160476, 145.612793, -37.622934),
+  which_api = "SILO",
+  include_closed = FALSE,
+  centroid = TRUE
+)
+centroid
+```
+
 ### Getting Station Metadata for the SILO Network Stations
 
 The `get_stations_metadata()` function is shared with the DPIRD functions as well, so this function will retrieve data from both weather APIs.
