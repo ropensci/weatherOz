@@ -142,7 +142,7 @@ find_stations_in <- function(x,
   stn_metadat_sf <- sf::st_transform(stn_metadat_sf, crs = sf::st_crs(area))
 
   sf::st_agr(stn_metadat_sf) <- "constant"
-  if (!is.null(polygon)) {
+  if (inherits(area, "sf")) {
     sf::st_agr(area) <- "constant"
   }
 
