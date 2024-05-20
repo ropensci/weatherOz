@@ -106,6 +106,10 @@ find_stations_in <- function(x,
                              crs = "EPSG:7844"
                              ) {
 
+  if (missing(x)) {
+    stop("You must provide a polygon, bounding box or place name.")
+  }
+
   # convert bbox or named places to {sf} polygons
   if (is.numeric(x)) {
     # area is bbox -----
