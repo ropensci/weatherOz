@@ -252,8 +252,7 @@ place
 
 ### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in a Bounding Box for Melbourne
 
-Using a (generous) bounding box for Melbourne, Vic using only the SILO API for
-BOM stations, no API key is needed.
+Using a (generous) bounding box for Melbourne, Vic using only the SILO API for BOM stations, no API key is needed.
 
 ```{r stations_in_bbox}
 bbox <- find_stations_in(
