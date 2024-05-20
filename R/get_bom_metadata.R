@@ -67,8 +67,8 @@
       "station_name",
       "start",
       "end",
-      "lat",
-      "lon",
+      "latitude",
+      "longitude",
       "source",
       "state",
       "elev_m",
@@ -117,8 +117,8 @@
       "station_name",
       "start",
       "end",
-      "lat",
-      "lon",
+      "latitude",
+      "longitude",
       "state",
       "elev_m",
       "source",
@@ -127,10 +127,5 @@
     )
   )
 
-  data.table::setnames(
-    bom_stations,
-    old = c("lat", "lon"),
-    new = c("latitude", "longitude")
-  )
   return(bom_stations[])
 }
