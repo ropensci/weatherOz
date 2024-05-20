@@ -9,7 +9,7 @@
 #'
 #' @param x One of three types of object:
 #'   * A `Vector` A four-digit vector defining a bounding box of the area
-#'   of interest in this order, \sQuote{xmin}, \sQuote{xmax}, \sQuote{ymin},
+#'   of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
 #'   \sQuote{ymax},
 #'   * An object of class \CRANpkg{sf} defining the area of interest, or
 #'   * A `Character` string value containing the place name of the

@@ -100,7 +100,6 @@
 #' Check User Input for `lat`, `lon` or `station_code`
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function
-#' @param .station_code station_code passed from another function
 #'
 #' @keywords Internal
 #' @autoglobal
