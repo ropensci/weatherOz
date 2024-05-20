@@ -106,16 +106,15 @@ find_stations_in <- function(x,
     stop("You must provide a polygon, bounding box or place name.")
   }
 
-  # ensure values are in Australia
-  .check_lonlat(longitude = x[[1]], latitude = x[[2]])
-  .check_lonlat(longitude = x[[2]], latitude = x[[4]])
-
   # convert bbox or named places to {sf} polygons
   if (is.numeric(x)) {
     if (x[[1]] > x[[3]] || x[[2]] > x[[4]]) {
       stop("Check that your lon lat values are in the proper order")
     }
 
+    # ensure values are in Australia
+    .check_lonlat(longitude = x[[1]], latitude = x[[2]])
+    .check_lonlat(longitude = x[[2]], latitude = x[[4]])
 
     # area is bbox -----
     x <- sf::st_as_sf(
