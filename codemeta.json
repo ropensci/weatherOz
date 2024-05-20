@@ -389,6 +389,7 @@
       "@type": "SoftwareApplication",
       "identifier": "data.table",
       "name": "data.table",
+      "version": ">= 1.1.5",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -469,6 +470,18 @@
     },
     "15": {
       "@type": "SoftwareApplication",
+      "identifier": "osmdata",
+      "name": "osmdata",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=osmdata"
+    },
+    "16": {
+      "@type": "SoftwareApplication",
       "identifier": "readr",
       "name": "readr",
       "version": ">= 1.1.1",
@@ -480,7 +493,19 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=readr"
     },
-    "16": {
+    "17": {
+      "@type": "SoftwareApplication",
+      "identifier": "sf",
+      "name": "sf",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=sf"
+    },
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "stars",
       "name": "stars",
@@ -492,12 +517,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stars"
     },
-    "17": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "18": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -509,7 +534,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "19": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -521,12 +546,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=terra"
     },
-    "20": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "21": {
+    "23": {
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
@@ -543,7 +568,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "12862.643KB",
+  "fileSize": "15895.543KB",
   "releaseNotes": "https://github.com/ropensci/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml", "https://codecov.io/gh/ropensci/weatherOz"],
