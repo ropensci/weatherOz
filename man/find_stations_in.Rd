@@ -66,54 +66,51 @@ that fall within that defined area or the station nearest the centroid of
 the area of interest.
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # using a named place, Toowoomba, Qld, AU using only the SILO API for BOM
 # stations
 
-find_stations_in(x = "Toowoomba Qld",
-                 which_api = "SILO",
-                 include_closed = TRUE)
+place <- find_stations_in(x = "Toowoomba Qld",
+                          which_api = "SILO",
+                          include_closed = TRUE)
+place
 
-# using a bounding box for Melbourne, Vic using only the SILO API for BOM
-# stations
+# using a (generous) bounding box for Melbourne, Vic using only the SILO API
+# for BOM stations, so no API key is needed.
 
-find_stations_in(
+bbox <- find_stations_in(
   x = c(144.470215, -38.160476, 145.612793, -37.622934),
-  api_key = "your_api_key",
   which_api = "SILO",
   include_closed = TRUE
 )
+bbox
 
 # Use the same bounding box but only find a single station nearest
 # the centroid using only the SILO API for BOM stations
 
-find_stations_in(
+centroid <- find_stations_in(
   x = c(144.470215, -38.160476, 145.612793, -37.622934),
   which_api = "SILO",
   include_closed = TRUE,
   centroid = TRUE
 )
-
+centroid
 
 # Use the `south_west_agricultural_region` data to fetch stations only in the
 # south-western portion of WA and plot it with {ggplot2} showing open/closed
-# stations just to be sure they're inside the area of interest
+# stations just to be sure they're inside the area of interest.
 
-library(ggplot2)
+# As this is in WA, we can use the DPIRD network, so we need our API key here
 
 sw_wa <- find_stations_in(
-x = south_west_agricultural_region,
-api_key = Sys.getenv("DPIRD_API_KEY"),
-include_closed = TRUE,
-crs = sf::st_crs(south_west_agricultural_region)
+  x = south_west_agricultural_region,
+  api_key = "your_api_key",
+  include_closed = TRUE,
+  crs = sf::st_crs(south_west_agricultural_region)
 )
 
-ggplot(south_west_agricultural_region) +
-  geom_sf(fill = "white") +
-  geom_sf(data = zz,
-         alpha = 0.65,
-         size = 2,
-         aes(colour = status))
-
+sw_wa
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other DPIRD: 
