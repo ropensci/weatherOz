@@ -47,7 +47,7 @@
 #' # using a named place, Toowoomba, Qld, AU using only the SILO API for BOM
 #' # stations
 #'
-#' find_stations_in(place_name = "Toowoomba Qld",
+#' find_stations_in(x = "Toowoomba Qld",
 #'                  which_api = "SILO",
 #'                  include_closed = TRUE)
 #'
@@ -55,7 +55,7 @@
 #' # stations
 #'
 #' find_stations_in(
-#'   bbox = c(144.470215, -38.160476, 145.612793, -37.622934),
+#'   x = c(144.470215, -38.160476, 145.612793, -37.622934),
 #'   api_key = "your_api_key",
 #'   which_api = "SILO",
 #'   include_closed = TRUE
@@ -65,7 +65,7 @@
 #'# the centroid using only the SILO API for BOM stations
 #'
 #' find_stations_in(
-#'   bbox = c(144.470215, -38.160476, 145.612793, -37.622934),
+#'   x = c(144.470215, -38.160476, 145.612793, -37.622934),
 #'   which_api = "SILO",
 #'   include_closed = TRUE,
 #'   centroid = TRUE
@@ -79,7 +79,7 @@
 #' library(ggplot2)
 #'
 #' sw_wa <- find_stations_in(
-#' polygon = south_west_agricultural_region,
+#' x = south_west_agricultural_region,
 #' api_key = Sys.getenv("DPIRD_API_KEY"),
 #' include_closed = TRUE,
 #' crs = sf::st_crs(south_west_agricultural_region)
@@ -116,7 +116,7 @@ find_stations_in <- function(x,
     x <- sf::st_as_sf(
       data.table::data.table("x" = x[c(1, 3)], "y" = x[c(2, 4)]),
       coords = c("x", "y"),
-      crs = "EPSG:4356"
+      crs = crs
     )
     x <- sf::st_as_sfc(sf::st_bbox(x), crs = crs)
   } else if (is.character(x)) {
@@ -126,6 +126,7 @@ find_stations_in <- function(x,
     ), coords = c("x", "y"),
     crs = "EPSG:4326"
     )))
+    x <- sf::st_transform(x, crs = crs)
   }
 
   # ensure that the CRS is uniform from here on

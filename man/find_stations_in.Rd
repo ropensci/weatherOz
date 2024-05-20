@@ -69,7 +69,7 @@ the area of interest.
 # using a named place, Toowoomba, Qld, AU using only the SILO API for BOM
 # stations
 
-find_stations_in(place_name = "Toowoomba Qld",
+find_stations_in(x = "Toowoomba Qld",
                  which_api = "SILO",
                  include_closed = TRUE)
 
@@ -77,7 +77,7 @@ find_stations_in(place_name = "Toowoomba Qld",
 # stations
 
 find_stations_in(
-  bbox = c(144.470215, -38.160476, 145.612793, -37.622934),
+  x = c(144.470215, -38.160476, 145.612793, -37.622934),
   api_key = "your_api_key",
   which_api = "SILO",
   include_closed = TRUE
@@ -87,7 +87,7 @@ find_stations_in(
 # the centroid using only the SILO API for BOM stations
 
 find_stations_in(
-  bbox = c(144.470215, -38.160476, 145.612793, -37.622934),
+  x = c(144.470215, -38.160476, 145.612793, -37.622934),
   which_api = "SILO",
   include_closed = TRUE,
   centroid = TRUE
@@ -101,7 +101,7 @@ find_stations_in(
 library(ggplot2)
 
 sw_wa <- find_stations_in(
-polygon = south_west_agricultural_region,
+x = south_west_agricultural_region,
 api_key = Sys.getenv("DPIRD_API_KEY"),
 include_closed = TRUE,
 crs = sf::st_crs(south_west_agricultural_region)

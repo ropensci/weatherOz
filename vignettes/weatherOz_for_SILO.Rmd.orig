@@ -136,6 +136,7 @@ library(weatherOz)
 
 For APSIM users, SILO provides an endpoint that serves APSIM formatted data ready for use in this modelling framework.
 The `get_data_drill_apsim()` function works just as `get_data_drill()`, it just returns an object that is an {[apsimx]} `met` class rather than a `data.table` and there is no need to specify values as those are predetermined by the API endpoint.
+The [write_apsim_met()] function is reexported from [{apsimx}](https://cran.r-project.org/package=apsimx) for convenience in saving .met files.
 
 ```{r get_data_drill_apsim}
 library(weatherOz)
