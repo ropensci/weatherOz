@@ -22,6 +22,8 @@ utils::globalVariables(c(
   "start", # <.get_bom_metadata>
   "end", # <.get_bom_metadata>
   "status", # <.get_bom_metadata>
+  "elev_m", # <.get_bom_metadata>
+  "wmo", # <.get_bom_metadata>
   "dist", # <.get_bom_metadata>
   "bar_height.m", # <.get_bom_metadata>
   "state_code", # <.parse_coastal_forecast>
