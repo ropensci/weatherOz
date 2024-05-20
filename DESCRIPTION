@@ -76,11 +76,9 @@ Imports:
     magick,
     methods,
     osmdata,
-    readr (>= 1.1.1),
     sf,
     stars,
     stats,
-    stringi,
     terra,
     utils,
     xml2
