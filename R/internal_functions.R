@@ -1,19 +1,4 @@
 
-#' Add %notin% Function
-#'
-#' Negates `%in%` for easier (mis)matching.
-#'
-#' @param x A character string to match.
-#' @param table A table containing values to match `x` against.
-#'
-#' @return A logical vector, indicating if a mismatch was located for any
-#'  element of x: thus the values are TRUE or FALSE and never NA.
-#' @keywords Internal
-#' @noRd
-`%notin%` <- function(x, table) {
-  match(x, table, nomatch = 0L) == 0L
-}
-
 #' Check User Input Dates for Validity
 #'
 #' @param x User entered date value
