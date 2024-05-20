@@ -18,6 +18,7 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.height = 7,
                       fig.align = "center",
                       fig.path = "vignettes/")
+ex_cnt <- 0
 ```
 
 # Working With DPIRD Data
@@ -99,7 +100,7 @@ You must provide a `station_code` and `API_key`, the other arguments, `values` a
  * heatConditionYearToDateMinutes, and
  * heatConditionYearToDateStartTime
 
-### Example 1: Get All Extremes for Northam, WA
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get All Extremes for Northam, WA
 
 In the first example, we illustrate how to fetch all extreme values available for Northam.
 
@@ -112,7 +113,7 @@ library(weatherOz)
 ))
 ```
 
-### Example 2: Get Selected Extremes for Northam, WA
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Selected Extremes for Northam, WA
 
 Fetch only soil erosion extreme conditions for Northam, WA.
 The documentation for `get_dpird_extremes()` contains a full listing of the values that are available to query from this API endpoint.
@@ -150,7 +151,7 @@ You must provide a `station_code` and `API_key`, the other arguments, `start_dat
    * windMaxSpeed, and
    * windMinSpeed
 
-### Example 3: Get All Minute Data for the Past 24 Hours
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get All Minute Data for the Past 24 Hours
 
 ```{r get_minute_data}
 library(weatherOz)
@@ -163,7 +164,7 @@ library(weatherOz)
 )
 ```
 
-### Example 4: Get Specific Time and Date Data for Specific Values
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Specific Time and Date Data for Specific Values
 
 If you wish to supply a specific start date and time and values, you may do so as shown here.
 
@@ -282,7 +283,7 @@ This function returns a `data.table` with `station_code` and the date interval q
    * `minute`, and if `month` or finer is present,
    * `date` (a combination of year, month, day, hour, minute as appropriate)
 
-### Example 5: Get Annual Rainfall Since 2017
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Annual Rainfall Since 2017
 
 Use the default value for end date (current system date) to get annual rainfall since 2017 until current year for Capel.
 
@@ -300,7 +301,7 @@ library(weatherOz)
 )
 ```
 
-### Example 6: Get Monthly Rainfall Since 2017
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Monthly Rainfall Since 2017
 
 Use the default value for end date (current system date) to get monthly rainfall since 2017 until current year for Capel.
 
@@ -318,7 +319,7 @@ library(weatherOz)
 )
 ```
 
-### Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
 
 Use the default value for end date (current system date) to get daily rainfall and wind records from 2017-01-01 to 2018-12-31 for Binnu.
 Note that the Binnu station has two wind heights, 3m and 10m.
@@ -339,7 +340,7 @@ library(weatherOz)
 )
 ```
 
-### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
 
 Use the default value for end date (current system date) to get hourly rainfall and wind records from 2022-01-01 to Current Date for Binnu.
 Note that the Binnu station has two wind heights, 3m and 10m.
@@ -361,14 +362,14 @@ library(weatherOz)
 
 ## Getting APSIM Ready Data
 
-For work with APSIM, you can use `get_dpird_apsim()` to get an object in your R session that's ready for saving using [apsimx::write_apsim_met()] of DPIRD weather data.
+For work with APSIM, you can use `get_dpird_apsim()` to get an object of DPIRD weather data in your R session that's ready for saving using `write_apsim_met()`, which is re-exported from the CRAN package [apsimx] for your convenience.
 This function only needs the `station_code`, `start_date`, `end_date` and your `api_key` values to return the necessary values.
 
 ### What You Get Back
 
 An object of {apsimx} 'met' class, compatible with a `data.frame`, that has daily data that include year, day, radiation, max temperature, min temperature, rainfall, relative humidity, evaporation and windspeed.
 
-### Example 9: Get APSIM Formatted Data for Binnu From 2022-04-01 to 2022-11-01
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get APSIM Formatted Data for Binnu From 2022-04-01 to 2022-11-01
 
 ```{r get-dpird-apsim}
 library(weatherOz)
@@ -387,13 +388,14 @@ library(weatherOz)
 
 Three functions are provided to assist in fetching metadata about the stations.
 
- * `find_nearby_stations()`, which returns a `data.table` with the nearest weather stations to a given geographic point or known station either in the DPIRD or BOM (from SILO) networks.
+ * `find_nearby_stations()`, which returns a `data.table` with the nearest weather stations to a given geographic point or known station in either the DPIRD or BOM (from SILO) networks.
+ * `find_stations_in()`, which returns a `data.table` with the weather stations falling within a given geographic area in either the DPIRD or BOM (from SILO) networks.
  * `get_dpird_availability()`, which returns a `data.table` with the availability for weather stations in the DPIRD network providing the up time and data availability for a given period of time.
  * `get_stations_metadata()`, which returns a `data.table` with the latest and most up-to-date information available from the Weather 2.0 API on the stations' geographic locations, hardware details, *e.g.,* wind mast height, and recording capabilities.
 
 ### Finding Nearby Stations
 
-### Example 10: Finding Stations Nearby a Known Station
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations Nearby a Known Station
 
 Query WA only stations and return DPIRD's stations nearest to the Northam, WA station, "NO", returning stations with 50 km of this station.
 
@@ -410,7 +412,7 @@ library(weatherOz)
 )
 ```
 
-### Example 11: Finding Stations Nearby a Given Longitude and Latitude
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations Nearby a Given Longitude and Latitude
 
 Using the longitude and latitude for Northam, WA, find all DPIRD stations within a 50km radius of this geographic point.
 
@@ -428,7 +430,7 @@ library(weatherOz)
 )
 ```
 
-### Example 12: Finding Stations in Both the DPIRD and SILO Data Sets
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in Both the DPIRD and SILO Data Sets
 
 Query stations nearest DPIRD's Northam, WA station, "NO" and return both DPIRD and SILO/BOM stations within 50 km of this station.
 
@@ -445,9 +447,65 @@ library(weatherOz)
 )
 ```
 
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in the Southwest Agriculture Region of Western Australia
+
+Using `find_stations_in()` is different than `find_nearby_stations()` as it finds any stations that fall within a boundary that you provide rather than using a single point to search from.
+
+The {sf} object, `south_west_agricultural_region`, is provided with {weatherOz} under the [CC BY 4.0 Licence](https://creativecommons.org/licenses/by/4.0/deed.en) from the Department of Primary Industries and Regional Development (DPIRD), so we can extract stations within this area of Western Australia.
+
+First, we can plot the  `south_west_agricultural_region` to see what it looks like.
+
+```{r view sw_ag_region}
+library("weatherOz")
+library("ggplot2")
+library("ggthemes")
+library("sf")
+
+ggplot2(south_west_agricultural_region) +
+   geom_sf() +
+   theme_map()
+```
+
+Now we can use that to find stations that fall only within that part of Western Australia.
+We'll use the coordinate reference system (CRS) provided by this {sf} object and find all stations, including those that have closed.
+
+```{r stations_in_sw_ag}
+sw_wa <- find_stations_in(
+  x = south_west_agricultural_region,
+  api_key = Sys.getenv("DPIRD_API_KEY"),
+  include_closed = TRUE,
+  crs = sf::st_crs(south_west_agricultural_region)
+)
+
+sw_wa
+```
+
+We need to convert the `sw_wa` object from a `data.table` to an `sf` object and transform it to use the same CRS as the `south_west_agricultural_region` object to map the results.
+
+```{r convert_to_sf}
+sw_wa <- st_as_sf(
+  x = sw_wa,
+  coords = c("longitude", "latitude"),
+  crs = "EPSG:4326"
+)
+sw_wa <- st_transform(x = sw_wa, crs = st_crs(south_west_agricultural_region))
+```
+
+Now we can use {ggplot2} to plot the stations indicating whether they are still open or they are closed.
+
+```{r plot_sw_land_div_map}
+ggplot(south_west_agricultural_region) +
+  geom_sf(fill = "white") +
+  geom_sf(data = sw_wa,
+          alpha = 0.65,
+          size = 2,
+          aes(colour = status)) +
+  theme_map()
+```
+
 ### Checking Station Uptime or Availability
 
-### Example 13: Checking Station Availability for Current Year
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Checking Station Availability for Current Year
 
 Check the availability of the Westonia station since the start of the current year using the default functionality with no `start_date` or `end_date`.
 
@@ -460,7 +518,7 @@ library(weatherOz)
 ))
 ```
 
-### Example 14: Checking Station Availability for a Set Time Period
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Checking Station Availability for a Set Time Period
 
 Check the availability of the Binnu station for January of 2018.
 When a custom `start_date` is provided an `end_date` must also be provided.
@@ -483,7 +541,7 @@ library(weatherOz)
 The `get_stations_metadata()` function is shared with the SILO functions as well, so this function will retrieve data from both weather APIs.
 Shown here is how to use it for DPIRD data only and with an example of DPIRD specific information, namely including closed stations and rich metadata.
 
-### Example 15: Get DPIRD Station Metadata
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get DPIRD Station Metadata
 
 The `get_stations_metadata()` function allows you to get details about the stations themselves for stations in the DPIRD and SILO (BOM) networks in one function.
 Here we demonstrate how to get the metadata for the DPIRD stations only.
@@ -495,7 +553,7 @@ library(weatherOz)
                                   api_key = Sys.getenv("DPIRD_API_KEY")))
 ```
 
-### Example 16: Get Rich DPIRD Station Metadata and Include Closed Stations
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Rich DPIRD Station Metadata and Include Closed Stations
 
 You can fetch additional information about the DPIRD stations as well as getting data for stations that are no longer open like so with the `rich` and `include_closed` arguments set to `TRUE`.
 
