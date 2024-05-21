@@ -114,7 +114,7 @@ find_stations_in <- function(x,
 
     # ensure values are in Australia
     .check_lonlat(longitude = x[[1]], latitude = x[[2]])
-    .check_lonlat(longitude = x[[2]], latitude = x[[4]])
+    .check_lonlat(longitude = x[[3]], latitude = x[[4]])
 
     # area is bbox -----
     x <- sf::st_as_sf(
