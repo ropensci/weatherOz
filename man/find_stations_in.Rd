@@ -62,13 +62,6 @@ the area of interest.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# using a named place, Toowoomba, Qld, AU using only the SILO API for BOM
-# stations
-
-place <- find_stations_in(x = "Toowoomba Qld",
-                          which_api = "SILO",
-                          include_closed = TRUE)
-place
 
 # using a (generous) bounding box for Melbourne, Vic using only the SILO API
 # for BOM stations, so no API key is needed.

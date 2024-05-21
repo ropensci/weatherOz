@@ -39,13 +39,6 @@
 #'   WGS84 - World Geodetic System 1984, used in \acronym{GPS} format.
 #'
 #' @examplesIf interactive()
-#' # using a named place, Toowoomba, Qld, AU using only the SILO API for BOM
-#' # stations
-#'
-#' place <- find_stations_in(x = "Toowoomba Qld",
-#'                           which_api = "SILO",
-#'                           include_closed = TRUE)
-#' place
 #'
 #' # using a (generous) bounding box for Melbourne, Vic using only the SILO API
 #' # for BOM stations, so no API key is needed.
@@ -99,6 +92,10 @@ find_stations_in <- function(x,
 
   if (missing(x)) {
     stop("You must provide a polygon, bounding box or place name.")
+  }
+
+  if (!inherits(x, "sf") || !is.numeric(x)) {
+    stop("`x` should be a numeric vector or `sf` object only.")
   }
 
   # convert bbox or named places to {sf} polygons
