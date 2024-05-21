@@ -20,8 +20,7 @@
         mode = "wb",
         quiet = TRUE
       )
-    },
-    error = function(x)
+    }, error = function(x)
       stop(
         "The BOM server with the station location information is not ",
         "responding. Please retry again later.\n",
@@ -34,7 +33,7 @@
 
   bom_stations <-
     data.table::setDT(
-      read.fwf(
+      utils::read.fwf(
         file = file_in,
         widths = c(8, 6, 40, 8, 8, 10, 10, 15, 3, 11, 9, 7),
         header = FALSE,
@@ -94,9 +93,11 @@
 
   # replace ".." and "....." with NA
   bom_stations <-
-    bom_stations[, lapply(.SD, function(x) replace(x, which(x == ".."), NA))]
+    bom_stations[, lapply(.SD, function(x)
+      replace(x, which(x == ".."), NA))]
   bom_stations <-
-    bom_stations[, lapply(.SD, function(x) replace(x, which(x == "....."), NA))]
+    bom_stations[, lapply(.SD, function(x)
+      replace(x, which(x == "....."), NA))]
   bom_stations[, station_code := as.factor(station_code)]
   data.table::setkey(x = bom_stations, station_code)
   bom_stations[, station_name := .strcap(x = station_name)]
