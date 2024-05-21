@@ -18,13 +18,8 @@ find_stations_in(
 \itemize{
 \item A \code{Vector} A four-digit vector defining a bounding box of the area
 of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
-\sQuote{ymax},
-\item An object of class \CRANpkg{sf} defining the area of interest, or
-\item A \code{Character} string value containing the place name of the
-area of interest to query from Open Street Map using \link[osmdata:getbb]{osmdata::getbb},
-\emph{e.g.}, \dQuote{Sydney, NSW}.  These results are the same as providing your
-own bounding box, a rectangular bounding box, except that you don't need to
-know what the coordinates are if you trust Open Street Map.
+\sQuote{ymax}, or
+\item An object of class \CRANpkg{sf} defining the area of interest.
 }}
 
 \item{centroid}{\code{Boolean} A value of \code{TRUE} or \code{FALSE} indicating whether
