@@ -232,10 +232,7 @@ get_stations_metadata <-
   station_metadata[, grep("^i.", names(station_metadata)) := NULL]
   station_metadata[, owner := NULL]
   station_metadata[, distance_km := NULL]
-  data.table::setnames(station_metadata,
-                       names(station_metadata),
-                       gsub(".x", "", names(station_metadata)))
-  return(station_metadata)
+  return(station_metadata[])
 }
 
 #' DPIRD Metadata
