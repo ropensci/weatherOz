@@ -94,10 +94,7 @@ find_stations_in <- function(x,
     stop("You must provide a polygon, bounding box or place name.")
   }
 
-  if (!inherits(x, "sf") || !is.numeric(x)) {
-    stop("`x` should be a numeric vector or `sf` object only.")
-  }
-
+  
   # convert bbox or named places to {sf} polygons
   if (is.numeric(x)) {
     if (x[[1]] > x[[3]] || x[[2]] > x[[4]]) {
