@@ -226,9 +226,9 @@ get_stations_metadata <-
       .dataset = "PatchedPoint"
   )
 
-  station_metadata <- merge(silo_stations, bom_stations, by = c("station_code"))
+  station_metadata <- bom_stations[silo_stations, on = "station_code"]
   # drops the unwanted columns that are added after using `find_nearby_stations`
-  station_metadata[, grep(".y", names(station_metadata)) := NULL]
+  station_metadata[, grep("^i.", names(station_metadata)) := NULL]
   station_metadata[, owner := NULL]
   station_metadata[, distance_km := NULL]
   data.table::setnames(station_metadata,
