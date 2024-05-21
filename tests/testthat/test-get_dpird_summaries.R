@@ -60,6 +60,19 @@ test_that("user-input checks stop if invalid values are provided", {
     )
   )
 
+  # invalid api key, e.g., SILO API key (email) -----
+  expect_error(
+    get_dpird_summaries(
+      station_code = "BI",
+      start_date = "20220501",
+      end_date = "20220501",
+      interval = "daily",
+      values = "wind",
+      api_key = Sys.getenv("SILO_API_KEY"),
+      include_closed = FALSE
+    )
+  )
+
   # invalid 'values' -----
   expect_error(
     get_dpird_summaries(

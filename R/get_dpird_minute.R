@@ -88,6 +88,7 @@ get_dpird_minute <- function(station_code,
   }
 
   .check_not_example_api_key(api_key)
+  .is_valid_dpird_api_key(api_key)
 
   if (any(values %notin% weatherOz::dpird_minute_values)) {
     if (values != "all") {
