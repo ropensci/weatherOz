@@ -377,8 +377,8 @@ library(weatherOz)
 (
   binnu <- get_dpird_apsim(
     station_code = "BI",
-    start_date = "20220401",
-    end_date = "20221101",
+    start_date = "20220101",
+    end_date = "20221231",
     api_key = Sys.getenv("DPIRD_API_KEY")
   )
 )

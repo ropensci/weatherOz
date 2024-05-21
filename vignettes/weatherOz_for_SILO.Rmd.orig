@@ -147,7 +147,7 @@ library(weatherOz)
     latitude = -27.85,
     longitude = 150.05,
     start_date = "20230101",
-    end_date = "20230131",
+    end_date = "20231231",
     api_key = Sys.getenv("SILO_API_KEY")
   )
 )
