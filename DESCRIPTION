@@ -77,7 +77,6 @@ Imports:
     lubridate,
     magick,
     methods,
-    osmdata,
     sf,
     stars,
     stats,

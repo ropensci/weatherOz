@@ -10,13 +10,8 @@
 #' @param x One of three types of object:
 #'   * A `Vector` A four-digit vector defining a bounding box of the area
 #'   of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
-#'   \sQuote{ymax},
-#'   * An object of class \CRANpkg{sf} defining the area of interest, or
-#'   * A `Character` string value containing the place name of the
-#'   area of interest to query from Open Street Map using [osmdata::getbb],
-#'   *e.g.*, \dQuote{Sydney, NSW}.  These results are the same as providing your
-#'   own bounding box, a rectangular bounding box, except that you don't need to
-#'   know what the coordinates are if you trust Open Street Map.
+#'   \sQuote{ymax}, or
+#'   * An object of class \CRANpkg{sf} defining the area of interest.
 #' @param centroid `Boolean` A value of `TRUE` or `FALSE` indicating whether
 #'   you want the centroid only to be used to find the nearest station to the
 #'   centre of the area of interest.  If \dQuote{n} polygons are supplied,
@@ -116,18 +111,12 @@ find_stations_in <- function(x,
     .check_lonlat(longitude = x[[1]], latitude = x[[2]])
     .check_lonlat(longitude = x[[3]], latitude = x[[4]])
 
-    # area is bbox -----
     x <- sf::st_as_sf(
       data.table::data.table("x" = x[c(1, 3)], "y" = x[c(2, 4)]),
       coords = c("x", "y"),
       crs = crs
     )
     x <- sf::st_as_sfc(sf::st_bbox(x), crs = crs)
-  } else if (is.character(x)) {
-    # area is a bbox defined by OSM, not by the original user -----
-    x <- osmdata::getbb(place_name = x,
-                        featuretype = "settlement",
-                        format_out = "sf_polygon")
   }
 
   # ensure that the CRS is uniform from here on

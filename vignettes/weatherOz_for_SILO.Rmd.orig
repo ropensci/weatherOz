@@ -238,21 +238,9 @@ library(weatherOz)
 )
 ```
 
-### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in a Named Place
-
-Using `find_stations_in()` is different than `find_nearby_stations()` as it finds any stations that fall within a boundary or a named place that you provide rather than using a single point to search from.
-For a detailed working example of how to use this with a geospatial polygon and finding both BOM and DPIRD stations, please see the "weatherOz for DPIRD" vignette.
-
-```{r stations_in_tbar}
-place <- find_stations_in(x = "Toowoomba Qld",
-                         which_api = "SILO",
-                         include_closed = TRUE)
-place
-```
-
 ### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Finding Stations in a Bounding Box for Melbourne
 
-Using a (generous) bounding box for Melbourne, Vic using only the SILO API for BOM stations, no API key is needed.
+Using a (generous) bounding box for Melbourne, VIC using only the SILO API for BOM stations, no API key is needed.
 
 ```{r stations_in_bbox}
 bbox <- find_stations_in(
