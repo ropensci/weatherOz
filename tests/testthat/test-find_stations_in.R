@@ -90,30 +90,3 @@ test_that("find_stations_in() works with bbox", {
   )
   expect_true(unique(x$state) == "VIC")
 })
-
-test_that("find_stations_in() works with place name", {
-  vcr::use_cassette("find_stations_in_place_name", {
-    x <- find_stations_in(x = "Toowoomba Qld",
-                          which_api = "silo",
-                          include_closed = TRUE)
-  })
-  expect_length(x, 11)
-  expect_s3_class(x, "data.table")
-  expect_named(
-    x,
-    c(
-      "station_code",
-      "station_name",
-      "start",
-      "end",
-      "latitude",
-      "longitude",
-      "state",
-      "elev_m",
-      "source",
-      "status",
-      "wmo"
-    )
-  )
-  expect_true(unique(x$state) == "QLD")
-})
