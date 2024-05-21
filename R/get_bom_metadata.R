@@ -56,7 +56,8 @@
         nrows = length(utils::count.fields(file_in)) - 6,
         comment.char = "",
         allowEscapes = TRUE,
-        strip.white = TRUE
+        strip.white = TRUE,
+        colClasses = "character"
       )
     )
   data.table::setnames(
@@ -96,9 +97,8 @@
     bom_stations[, lapply(.SD, function(x) replace(x, which(x == ".."), NA))]
   bom_stations <-
     bom_stations[, lapply(.SD, function(x) replace(x, which(x == "....."), NA))]
-
+  bom_stations[, station_code := as.factor(station_code)]
   data.table::setkey(x = bom_stations, station_code)
-  bom_stations[, station_code := as.factor(sprintf("%06s", station_code))]
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
