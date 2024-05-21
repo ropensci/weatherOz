@@ -125,12 +125,9 @@ find_stations_in <- function(x,
     x <- sf::st_as_sfc(sf::st_bbox(x), crs = crs)
   } else if (is.character(x)) {
     # area is a bbox defined by OSM, not by the original user -----
-    x <- sf::st_as_sfc(sf::st_bbox(sf::st_as_sf(data.frame(
-      t(osmdata::getbb(x, featuretype = "settlement"))
-    ), coords = c("x", "y"),
-    crs = "EPSG:4326"
-    )))
-    x <- sf::st_transform(x, crs = crs)
+    x <- osmdata::getbb(place_name = x,
+                        featuretype = "settlement",
+                        format_out = "sf_polygon")
   }
 
   # ensure that the CRS is uniform from here on
