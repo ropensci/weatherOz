@@ -38,8 +38,9 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the
+  \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to 'vcr' not recognising the
  URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.) [contributor]
+  \item Max Moldovan \email{max.moldovan@adelaide.edu.au} (\href{https://orcid.org/0000-0001-9680-8474}{ORCID}) (Contributed valuable feedback on package usage leading to improvements in the package structure and functionality.) [contributor]
   \item Jimmy Ng \email{jimmy.ng@dpird.wa.gov.au} [contributor]
   \item Steve Collins \email{steve.collins@dpird.wa.gov.au} (Designed weatherOz's hex logo.) [contributor]
   \item Laurens Geffert \email{laurensgeffert@gmail.com} [reviewer]
