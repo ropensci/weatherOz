@@ -137,6 +137,11 @@ find_stations_in <- function(x,
   stn_metadat <- get_stations_metadata(api_key = api_key,
                                        which_api = which_api,
                                        include_closed = include_closed)
+
+  # ensure that there are no missing lon/lat values (can't find these stations
+  # on a map anyway, so...)
+  stn_metadat <- stn_metadat[!is.na(stn_metadat$longitude), ]
+  stn_metadat <- stn_metadat[!is.na(stn_metadat$latitude), ]
   stn_metadat_sf <- sf::st_as_sf(stn_metadat,
                                  coords = c("longitude", "latitude"),
                                  crs = "EPSG:4326")
