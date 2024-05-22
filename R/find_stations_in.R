@@ -91,14 +91,15 @@ find_stations_in <- function(x,
                              ) {
 
   if (missing(x)) {
-    stop("You must provide a polygon, bounding box or place name.")
+    stop("You must provide an `sf` object or bounding box vector of 4 numbers.")
   }
 
   
   # convert bbox or named places to {sf} polygons
   if (is.numeric(x)) {
     if (x[[1]] > x[[3]] || x[[2]] > x[[4]]) {
-      stop("Check that your lon lat values are in the proper order")
+      stop("Check that your lon lat values are in the proper order ",
+           "and that you have provided four corners.")
     }
 
     # ensure values are in Australia
