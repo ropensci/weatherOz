@@ -130,9 +130,11 @@ get_stations_metadata <-
     } else if (which_api == "all") {
       if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
         stop(call. = FALSE,
-             "You must provide an API key for this query.")
+             "A valid DPIRD API key must be provided, please visit\n",
+             "<https://www.agric.wa.gov.au/web-apis> to request one.\n",)
       }
       .check_not_example_api_key(api_key)
+      .is_valid_dpird_api_key(api_key)
       silo <- .fetch_silo_metadata()
       dpird <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
       out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
@@ -224,15 +226,13 @@ get_stations_metadata <-
       .dataset = "PatchedPoint"
   )
 
-  station_metadata <- merge(silo_stations, bom_stations, by = c("station_code"))
+  station_metadata <- bom_stations[silo_stations, on = c("station_code",
+                                                         "station_name")]
   # drops the unwanted columns that are added after using `find_nearby_stations`
-  station_metadata[, grep(".y", names(station_metadata)) := NULL]
+  station_metadata[, grep("^i.", names(station_metadata)) := NULL]
   station_metadata[, owner := NULL]
   station_metadata[, distance_km := NULL]
-  data.table::setnames(station_metadata,
-                       names(station_metadata),
-                       gsub(".x", "", names(station_metadata)))
-  return(station_metadata)
+  return(station_metadata[])
 }
 
 #' DPIRD Metadata

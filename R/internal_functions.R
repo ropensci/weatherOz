@@ -145,7 +145,9 @@
 }
 
 
-#' Check that the user provided an invalid email string as API key for SILO
+#' Check That the User Provided a Valid Email String as API Key for SILO
+#' @param .api_key a user-provided value for the `api_key`, should be a valid
+#'   e-mail address
 #'
 #' @keywords Internal
 #' @autoglobal
@@ -162,6 +164,30 @@
     stop("For SILO requests you must use your e-mail address as an API key.
          You have not provided a valid email address.",
          call. = FALSE)
+  }
+}
+
+#' Check That the User Provided a Valid DPIRD API Key String
+#'
+#' @param .api_key a user-provided value for the `api_key`. Should be a random
+#'   string of text and numbers.
+#'
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.is_valid_dpird_api_key <- function(.api_key) {
+
+  # regular expression to check
+  pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
+
+  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE)) {
+    stop("For DPIRD requests you must use your DPIRD provided API key.
+         You (may) have provided your e-mail address, which is used
+         for the SILO API instead.",
+         call. = FALSE)
+  } else {
+    return(invisible(NULL))
   }
 }
 
