@@ -103,6 +103,8 @@
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
+  bom_stations[, latitude := as.numeric(latitude)]
+  bom_stations[, longitude := as.numeric(longitude)]
   bom_stations[, status := ifelse(!is.na(end), "closed", "open")]
   bom_stations[, elev_m := as.numeric(elev_m)]
   bom_stations[, wmo := as.numeric(wmo)]
