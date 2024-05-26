@@ -22,12 +22,17 @@ knitr::opts_chunk$set(collapse = TRUE,
 ex_cnt <- 0
 ```
 
-# About SILO Data
+## About SILO Data
 
 [Queensland Scientific Information for Landowners (SILO)](https://www.longpaddock.qld.gov.au/silo/about/) data sets are constructed from observational records provided by the Bureau of Meteorology (BOM).
 SILO interpolates the raw data to fill missing data creating data sets that are spatially and temporally complete [@Jeffrey2001].
 
-# Working With SILO Data
+## A Note on API Keys
+
+All examples in this vignette assume that you have stored your API key in your .Renviron file.
+See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+
+## Working With SILO Data
 
 Four functions are provided to streamline fetching data from the SILO API endpoints.
 
@@ -62,7 +67,7 @@ Four functions are provided to streamline fetching data from the SILO API endpoi
   <dt>mslp (hPa)</dt><dd>Mean sea level pressure</dd>
 </dl>
 
-## Value information
+## Value Information
 
 Solar radiation: total incoming downward shortwave radiation on a horizontal surface, derived from estimates of cloud oktas and sunshine duration [@Zajaczkowski2013].
 
@@ -84,11 +89,6 @@ Where possible (depending on the file format), the data are supplied with codes 
 </dl>
 
 The data returned will include columns that denote the source of the data, whether it was an observation or interpolated.
-
-## A Note on API Keys
-
-All examples in this vignette assume that you have stored your API key in your .Renviron file.
-See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
 
 ## Getting Data Drill Interpolated Data
 
@@ -133,7 +133,7 @@ library(weatherOz)
 )
 ```
 
-### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Data Drill APSIM Formated Data
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Data Drill APSIM-ready Data
 
 For APSIM users, SILO provides an endpoint that serves APSIM formatted data ready for use in this modelling framework.
 The `get_data_drill_apsim()` function works just as `get_data_drill()`, it just returns an object that is an {[apsimx]} `met` class rather than a `data.table` and there is no need to specify values as those are predetermined by the API endpoint.
@@ -153,7 +153,7 @@ library(weatherOz)
 )
 ```
 
-### Getting Patched Point Data
+## Getting Patched Point Data
 
 Patched Point data are derived from actual BOM station observations (PatchedPoint) data and may or may not be interpolated.
 Be sure to note the `data_source` column to be sure.
@@ -282,7 +282,7 @@ library(weatherOz)
 
 (metadata <- get_stations_metadata(which_api = "silo"))
 ```
-## Using Metadata to Get Weather Data for a Whole State
+### Using Metadata to Get Weather Data for a Whole State
 
 Using the metadata, we can get all weather data from stations in a single state like so.
 
@@ -321,4 +321,4 @@ names(x) <- unlist(first_ten)
 rbindlist(x, idcol = "station_code")
 ```
 
-# References
+## References
