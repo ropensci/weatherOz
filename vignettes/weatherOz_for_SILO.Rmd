@@ -223,8 +223,8 @@ library(weatherOz)
 #> site =  
 #> latitude = -27.85  (DECIMAL DEGREES) 
 #> longitude = 150.05  (DECIMAL DEGREES) 
-#> tav = 20.8006868131868 (oC) ! calculated annual average ambient temperature 2024-05-26 11:11:07.84426 
-#> amp = 14.85 !calculated with the apsimx R package: 2024-05-26 11:11:07.865158 
+#> tav = 20.8006868131868 (oC) ! calculated annual average ambient temperature 2024-05-26 13:24:43.59818 
+#> amp = 14.85 !calculated with the apsimx R package: 2024-05-26 13:24:43.615916 
 #> year day radn maxt mint rain evap vp code 
 #> () () (MJ/m^2) (oC) (oC) (mm) (mm) (hPa) () 
 #>   year day radn maxt mint rain evap   vp   code
@@ -522,7 +522,7 @@ bbox <- find_stations_in(
 )
 bbox
 #>      station_code                          station_name      start        end latitude longitude  state elev_m                source status   wmo
-#>            <fctr>                                <char>     <Date>     <Date>   <char>    <char> <char>  <num>                <char> <char> <num>
+#>            <fctr>                                <char>     <Date>     <Date>    <num>     <num> <char>  <num>                <char> <char> <num>
 #>   1:       087131 Altona City Offices Operations Centre 1967-01-01 2024-05-26 -37.8634  144.8262    VIC    3.0 Bureau of Meteorology   open    NA
 #>   2:       086147                       Aspendale Csiro 1954-01-01 1985-01-01 -38.0333  145.1000    VIC    5.0 Bureau of Meteorology closed    NA
 #>   3:       087113                        Avalon Airport 1965-01-01 2024-05-26 -38.0288  144.4783    VIC   10.6 Bureau of Meteorology   open 94854
@@ -552,7 +552,7 @@ centroid <- find_stations_in(
 )
 centroid
 #>    station_code         station_name      start        end latitude longitude  state elev_m                source status   wmo
-#>          <fctr>               <char>     <Date>     <Date>   <char>    <char> <char>  <num>                <char> <char> <num>
+#>          <fctr>               <char>     <Date>     <Date>    <num>     <num> <char>  <num>                <char> <char> <num>
 #> 1:       086018 Caulfield Racecourse 1887-01-01 2024-05-26 -37.8795  145.0368    VIC   48.8 Bureau of Meteorology   open    NA
 ```
 
@@ -572,7 +572,7 @@ library(weatherOz)
 
 (metadata <- get_stations_metadata(which_api = "silo"))
 #>       station_code                     station_name      start        end latitude longitude  state elev_m                source status   wmo
-#>             <fctr>                           <char>     <Date>     <Date>   <char>    <char> <char>  <num>                <char> <char> <num>
+#>             <fctr>                           <char>     <Date>     <Date>    <num>     <num> <char>  <num>                <char> <char> <num>
 #>    1:       061065                Aberdeen Rossgole 1926-01-01 2024-05-26 -32.1402  150.7285    NSW    543 Bureau of Meteorology   open    NA
 #>    2:       071000    Adaminaby Alpine Tourist Park 1886-01-01 2024-05-26 -35.9962  148.7693    NSW   1015 Bureau of Meteorology   open    NA
 #>    3:       068000          Albion Park Post Office 1892-01-01 2024-05-26 -34.5712  150.7761    NSW      8 Bureau of Meteorology   open    NA

@@ -170,17 +170,17 @@ library(weatherOz)
 #> Key: <station_code>
 #>       station_code           date_time air_temperature relative_humidity soil_temperature solar_irradiance rainfall dew_point wet_bulb wind_height wind_avg_speed wind_avg_direction_compass_point wind_avg_direction_degrees wind_min_speed wind_max_speed
 #>             <fctr>              <POSc>           <num>             <num>            <num>            <int>    <num>     <num>    <num>       <int>          <num>                           <char>                      <int>          <num>          <num>
-#>    1:           NO 2024-05-25 11:06:00            22.5              61.6             20.3              628        0      14.8     18.1           3           6.70                                W                        262          3.672          12.71
-#>    2:           NO 2024-05-25 11:07:00            22.6              62.4             20.4              619        0      15.1     18.3           3           4.18                              WNW                        288          0.648           9.72
-#>    3:           NO 2024-05-25 11:08:00            22.7              60.8             20.4              615        0      14.7     18.2           3           5.69                                W                        276          3.672           8.71
-#>    4:           NO 2024-05-25 11:09:00            22.9              61.6             20.5              614        0      15.1     18.5           3           6.70                              WNW                        284          1.656          12.71
-#>    5:           NO 2024-05-25 11:10:00            22.8              61.1             20.5              613        0      14.9     18.3           3          11.23                               NW                        323          9.720          14.22
+#>    1:           NO 2024-05-25 13:20:00            22.9              58.9             23.0              584        0      14.4     18.1           3          10.73                               NW                        322          6.192          15.73
+#>    2:           NO 2024-05-25 13:21:00            23.1              58.9             23.0              584        0      14.6     18.3           3           9.72                               NW                        318          7.200          14.22
+#>    3:           NO 2024-05-25 13:22:00            23.3              58.0             23.1              585        0      14.6     18.4           3          10.22                               NW                        326          8.712          13.21
+#>    4:           NO 2024-05-25 13:23:00            23.3              57.5             23.1              581        0      14.4     18.3           3           7.20                               NW                        312          4.680          11.23
+#>    5:           NO 2024-05-25 13:24:00            23.2              58.3             23.2              583        0      14.6     18.3           3           9.72                               NW                        310          6.696          13.72
 #>   ---                                                                                                                                                                                                                                                      
-#> 1431:           NO 2024-05-26 10:56:00            20.1              68.5             20.5              575        0      14.1     16.8           3           5.69                              NNW                        348          4.176           7.70
-#> 1432:           NO 2024-05-26 10:57:00            20.2              68.3             20.5              576        0      14.2     16.9           3           5.69                              NNW                        344          3.672           8.71
-#> 1433:           NO 2024-05-26 10:58:00            20.1              67.9             20.6              577        0      14.0     16.8           3           7.20                              NNW                        336          5.688           9.72
-#> 1434:           NO 2024-05-26 10:59:00            20.2              68.0             20.6              578        0      14.1     16.9           3           6.70                              NNW                        345          4.176          11.23
-#> 1435:           NO 2024-05-26 11:00:00            20.1              67.9             20.7              580        0      14.0     16.8           3           7.20                              NNW                        338          5.688           9.22
+#> 1432:           NO 2024-05-26 13:11:00            24.4              44.6             25.7              646        0      11.6     17.3           3           7.20                               NW                        326          5.688          12.20
+#> 1433:           NO 2024-05-26 13:12:00            24.5              44.5             25.8              640        0      11.6     17.3           3           6.19                               NW                        314          4.680           8.21
+#> 1434:           NO 2024-05-26 13:13:00            24.6              43.4             25.8              634        0      11.3     17.2           3           6.19                               NW                        310          4.176          10.22
+#> 1435:           NO 2024-05-26 13:14:00            24.9              43.1             25.8              628        0      11.5     17.4           3           7.20                               NW                        323          4.176          11.23
+#> 1436:           NO 2024-05-26 13:15:00            25.0              41.7             25.9              621        0      11.1     17.3           3          10.73                               NW                        324          7.200          14.72
 ```
 
 ### Example 4: Get Specific Time and Date Data for Specific Values
@@ -557,8 +557,8 @@ library(weatherOz)
 #> site = Binnu 
 #> latitude = -28.051 
 #> longitude = 114.69575 
-#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-05-26 11:09:57.721915 
-#> amp = 15.3 !calculated with the apsimx R package: 2024-05-26 11:09:57.746835 
+#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-05-26 13:23:40.801486 
+#> amp = 15.3 !calculated with the apsimx R package: 2024-05-26 13:23:40.825528 
 #> year day radn maxt mint rain evap rh windspeed 
 #> () () (MJ/m2/day) (oC) (oC) (mm) (mm) (%) (m/s) 
 #>   year day    radn maxt mint rain evap   rh windspeed
@@ -573,8 +573,8 @@ library(weatherOz)
 #> site = Binnu 
 #> latitude = -28.051 
 #> longitude = 114.69575 
-#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-05-26 11:09:57.721915 
-#> amp = 15.3 !calculated with the apsimx R package: 2024-05-26 11:09:57.746835 
+#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-05-26 13:23:40.801486 
+#> amp = 15.3 !calculated with the apsimx R package: 2024-05-26 13:23:40.825528 
 #> year day radn maxt mint rain evap rh windspeed 
 #> () () (MJ/m2/day) (oC) (oC) (mm) (mm) (%) (m/s) 
 #>   year day    radn maxt mint rain evap   rh windspeed
@@ -735,19 +735,19 @@ sw_wa <- find_stations_in(
 )
 
 sw_wa
-#>       station_code              station_name      start        end   latitude  longitude  state elev_m                                                               source status   wmo
-#>             <fctr>                    <char>     <Date>     <Date>     <char>     <char> <char>  <num>                                                               <char> <char> <num>
-#>    1:       009804                     Adina 1969-01-01 2024-05-26   -33.8811   122.2167     WA     60                                                Bureau of Meteorology   open    NA
-#>    2:       008000                     Ajana 1917-01-01 2024-05-26   -27.9607   114.6336     WA    210                                                Bureau of Meteorology   open    NA
-#>    3:       009500                    Albany 1877-01-01 2024-05-26   -35.0289   117.8808     WA      3                                                Bureau of Meteorology   open 94801
-#>    4:       009741 Albany Airport Comparison 1942-01-01 2014-01-01   -34.9414   117.8022     WA     68                                                Bureau of Meteorology closed 95802
-#>    5:       010501     Aldersyde Post Office 1909-01-01 1976-01-01   -32.3667   117.2833     WA     NA                                                Bureau of Meteorology closed    NA
-#>   ---                                                                                                                                                                                   
-#> 1034:       008146                  Ytiniche 1913-01-01 2024-05-26   -30.0706   116.2092     WA    300                                                Bureau of Meteorology   open    NA
-#> 1035:       008147                      Yuna 1909-01-01 2024-05-26   -28.3250   114.9589     WA    270                                                Bureau of Meteorology   open    NA
-#> 1036:        YU001                      Yuna 2012-06-21 2024-05-26  -28.33763   114.9898     WA    329 WA Department of Primary Industries and Regional Development (DPIRD)   open    NA
-#> 1037:        YU002                   Yuna NE 2016-03-24 2024-05-26 -28.200324 115.261614     WA    267 WA Department of Primary Industries and Regional Development (DPIRD)   open    NA
-#> 1038:        YU003                Yuna North 2018-08-08 2024-05-26 -28.120861 114.962611     WA    264 WA Department of Primary Industries and Regional Development (DPIRD)   open    NA
+#>       station_code              station_name      start        end  latitude longitude  state elev_m                                                               source status   wmo
+#>             <fctr>                    <char>     <Date>     <Date>     <num>     <num> <char>  <num>                                                               <char> <char> <num>
+#>    1:       009804                     Adina 1969-01-01 2024-05-26 -33.88110  122.2167     WA     60                                                Bureau of Meteorology   open    NA
+#>    2:       008000                     Ajana 1917-01-01 2024-05-26 -27.96070  114.6336     WA    210                                                Bureau of Meteorology   open    NA
+#>    3:       009500                    Albany 1877-01-01 2024-05-26 -35.02890  117.8808     WA      3                                                Bureau of Meteorology   open 94801
+#>    4:       009741 Albany Airport Comparison 1942-01-01 2014-01-01 -34.94140  117.8022     WA     68                                                Bureau of Meteorology closed 95802
+#>    5:       010501     Aldersyde Post Office 1909-01-01 1976-01-01 -32.36670  117.2833     WA     NA                                                Bureau of Meteorology closed    NA
+#>   ---                                                                                                                                                                                 
+#> 1034:       008146                  Ytiniche 1913-01-01 2024-05-26 -30.07060  116.2092     WA    300                                                Bureau of Meteorology   open    NA
+#> 1035:       008147                      Yuna 1909-01-01 2024-05-26 -28.32500  114.9589     WA    270                                                Bureau of Meteorology   open    NA
+#> 1036:        YU001                      Yuna 2012-06-21 2024-05-26 -28.33763  114.9898     WA    329 WA Department of Primary Industries and Regional Development (DPIRD)   open    NA
+#> 1037:        YU002                   Yuna NE 2016-03-24 2024-05-26 -28.20032  115.2616     WA    267 WA Department of Primary Industries and Regional Development (DPIRD)   open    NA
+#> 1038:        YU003                Yuna North 2018-08-08 2024-05-26 -28.12086  114.9626     WA    264 WA Department of Primary Industries and Regional Development (DPIRD)   open    NA
 ```
 
 We need to convert the `sw_wa` object from a `data.table` to an `sf` object and transform it to use the same CRS as the `south_west_agricultural_region` object to map the results.
@@ -796,8 +796,8 @@ library(weatherOz)
 ))
 #> Key: <station_code>
 #>    station_code station_name to9_am since9_am since12_am current_hour last24_hours last7_days_since9_am last7_days_since12_am last14_days_since9_am last14_days_since12_am month_to_date_to9_am month_to_date_since12_am year_to_date_to9_am year_to_date_since12_am
-#>          <fctr>       <char>  <int>     <int>      <int>        <int>        <int>                <int>                 <int>                 <int>                  <int>                <int>                    <int>               <int>                   <int>
-#> 1:        WS001     Westonia    100       100        100          100          100                  100                   100                   100                    100                  100                      100                 100                     100
+#>          <fctr>       <char>  <int>     <num>      <num>        <int>        <num>                <num>                 <num>                 <int>                  <int>                <int>                    <int>               <int>                   <int>
+#> 1:        WS001     Westonia    100      98.1       99.4           75         99.6                 99.9                  99.9                   100                    100                  100                      100                 100                     100
 ```
 
 ### Example 15: Checking Station Availability for a Set Time Period
