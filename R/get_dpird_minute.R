@@ -100,11 +100,11 @@ get_dpird_minute <- function(station_code,
   # selects the values that are to be sent to the API
   # if "all" get all values and "dateTime", otherwise hand-pick the values
   # plus date-time
-  values <- switch(
-    values,
-    "all" = c(weatherOz::dpird_minute_values, "dateTime"),
-    c(values, "dateTime")
-  )
+  if ("all" %notin% values) {
+    values <-  c(values, "dateTime")
+  } else {
+    values <- c(dpird_minute_values, "dateTime")
+  }
 
   start_date_time <- .check_date_time(start_date_time)
 
