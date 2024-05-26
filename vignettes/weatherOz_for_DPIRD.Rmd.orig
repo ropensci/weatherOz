@@ -21,18 +21,28 @@ knitr::opts_chunk$set(collapse = TRUE,
 ex_cnt <- 0
 ```
 
-# Working With DPIRD Data
+## About DPIRD Data
+
+From the DPIRD Weather Website's ["About" Page](https://weather.agric.wa.gov.au/about).
+
+> The Department of Primary Industries and Regional Development's (DPIRD) network of automatic weather stations and radars throughout the state provide timely, relevant and local weather data to assist growers and regional communities make more-informed decisions.
+>
+> The weather station data includes air temperature, humidity, rainfall, wind speed and direction, with most stations also measuring incoming solar radiation to calculate evaporation. This website includes dashboards for each station to visualise this data.
+
+Data from the DPIRD API are licenced under the [Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU)](https://creativecommons.org/licenses/by/3.0/au/deed.en).
+
+## A Note on API Keys
+
+All examples in this vignette assume that you have stored your API key in your .Renviron file.
+See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+
+## Working With DPIRD Data
 
 Three functions are provided to streamline fetching data from the DPIRD Weather 2.0 API endpoints.
 
  * `get_dpird_extremes()`, which returns the recorded extreme values for the given station in the DPIRD weather station network.;
  * `get_dpird_minute()`, which returns weather data in minute increments for stations in the DPIRD weather station network with only the past two years being available; and
  * `get_dpird_summaries()`, which returns weather data in 15 and 30 minute, hourly, daily, monthly or yearly summary values for stations in the DPIRD weather station network.
-
-## A Note on API Keys
-
-All examples in this vignette assume that you have stored your API key in your .Renviron file.
-See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
 
 ## Getting Extreme Weather Values
 
@@ -360,7 +370,7 @@ library(weatherOz)
 )
 ```
 
-## Getting APSIM Ready Data
+## Getting APSIM-ready Data
 
 For work with APSIM, you can use `get_dpird_apsim()` to get an object of DPIRD weather data in your R session that's ready for saving using `write_apsim_met()`, which is re-exported from the CRAN package [apsimx] for your convenience.
 This function only needs the `station_code`, `start_date`, `end_date` and your `api_key` values to return the necessary values.
