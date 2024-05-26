@@ -59,3 +59,104 @@ reference:
   contents:
   - starts_with("dpird_")
   - silo_daily_values
+
+articles:
+  title: Get started
+  navbar: ~
+  contents:
+  - Introduction
+  - A Note on API Keys
+  - Using {weatherOz} to Fetch Daily Summary DPIRD Data
+  - Using {weatherOz} to Fetch Patched Point SILO Data
+  - Appendix 1 - Map of DPIRD Station Locations
+  - Appendix 2 - Map of SILO Station Locations
+
+  title: Using {weatherOz} With BOM Data
+  navbar: weatherOz for BOM
+  contents:
+  - Using get_precis_forecast()
+  - Using get_ag_bulletin()
+  - Using get_coastal_forecast()
+  - Working with BOM Image Files
+    - Using {weatherOz} to retrieve BOM satellite imagery
+    - Using {weatherOz} With BOM Radar Imagery
+  - References
+  - Appendix 1 - Output From get_precis_forecast()
+  - Appendix 2 - Output From get_ag_bulletin()
+  - Appendix 3 - Output From get_coastal_forecast()
+
+  title: Working With DPIRD Data
+  navbar: weatherOz for DPIRD
+  contents:
+  - About DPIRD Data
+  - A Note on API Keys
+  - Working With DPIRD Data
+  - Getting Extreme Weather Values
+    - Available Values for Extreme Weather
+    - Example 1: Get All Extremes for Northam, WA
+    - Example 2: Get Selected Extremes for Northam, WA
+  - Getting Minute Data
+    - Available Values for Minute Data
+    - Example 3: Get All Minute Data for the Past 24 Hours
+    - Example 4: Get Specific Time and Date Data for Specific Values
+  - Getting Summary Data
+    - Available Values for Summary Data
+    - What You Get Back
+    - Example 5: Get Annual Rainfall Since 2017
+    - Example 6: Get Monthly Rainfall Since 2017
+    - Example 7: Get Daily Rainfall and Wind From Beginning of 2017 to End of 2018
+    - Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
+  - Getting APSIM-ready Data
+    - What You Get Back
+    - Example 9: Get APSIM Formatted Data for Binnu From 2022-04-01 to 2022-11-01
+  - Working With DPIRD Metadata
+    - Finding Nearby Stations
+    - Example 10: Finding Stations Nearby a Known Station
+    - Example 11: Finding Stations Nearby a Given Longitude and Latitude
+    - Example 12: Finding Stations in Both the DPIRD and SILO Data Sets
+    - Example 13: Finding Stations in the Southwest Agriculture Region of Western Australia
+  - Checking Station Uptime or Availability
+    - Example 14: Checking Station Availability for Current Year
+    - Example 15: Checking Station Availability for a Set Time Period
+  - Getting Station Metadata for the DPIRD Network Stations
+    - Example 16: Get DPIRD Station Metadata
+    - Example 17: Get Rich DPIRD Station Metadata and Include Closed Stations
+
+    title: Working With SILO Data
+    navbar: weatherOz for SILO
+    contents:
+    - About SILO Data
+    - A Note on API Keys
+    - Working With SILO Data
+    - Available Values
+    - Value Information
+    - Data Codes
+    - Getting Data Drill Interpolated Data
+      - Example 1: Get Data Drill Data Using Defaults
+      - Example 2: Get Data Drill Temperature for a Specific Date Range
+      - Example 3: Get Data Drill APSIM-ready Data
+    - Getting Patched Point Data
+      - Example 4: Get Data Drill Data Using Defaults
+    - Working With SILO Metadata
+      - Finding Nearby Stations
+      - Example 5: Finding Stations Nearby a Known Station
+      - Example 6: Finding Stations Nearby a Given Longitude and Latitude
+      - Example 7: Finding Stations in Both the DPIRD and SILO Data Sets
+      - Example 8: Finding Stations in a Bounding Box for Melbourne
+      - Example 9: Finding the Station Nearest the Centroid of a Bounding Box
+      - Getting Station Metadata for the SILO Network Stations
+      - Example 10: Get SILO Station Metadata
+      - Using Metadata to Get Weather Data for a Whole State
+    - References
+
+    title: Using {weatherOz} with the {WINS} for Pulses Project
+    navbar: Use Case
+    contents:
+    - Introduction
+    - Materials and Methods
+    - Summary
+    - References
+
+urls:
+  reference: https://docs.ropensci.org/weatherOz/reference
+  article: https://docs.ropensci.org/weatherOz/articles
