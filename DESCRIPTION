@@ -22,10 +22,12 @@ Authors@R: c(
     person("Keith", "Pembleton", , "keith.pembleton@usq.edu.au", role = "aut",
            comment = c(ORCID = "0000-0002-1896-4516")),
     person("Maëlle", "Salmon", , "maelle.salmon@yahoo.se", role = "ctb",
-           comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the\n                URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
+           comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to 'vcr' not recognising the\n                URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
+    person("Max", "Moldovan", , "max.moldovan@adelaide.edu.au", role = "ctb",
+           comment = c(ORCID = "0000-0001-9680-8474", "Contributed valuable feedback on package usage leading to improvements in the package structure and functionality.")),
     person("Jimmy", "Ng", , "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
     person("Steve", "Collins", , "steve.collins@dpird.wa.gov.au", role = "ctb",
-           comment = "Designed weatherOz's hex logo."),
+           comment = "Designed the hex logo for 'weatherOz' hex logo."),
     person("Adam H.", "Sparks", , "adamhsparks@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-0061-8359")),
     person("Laurens", "Geffert", , "laurensgeffert@gmail.com", role = "rev"),
@@ -58,7 +60,7 @@ Description: Provides automated downloading, parsing and formatting of
 License: GPL (>= 3)
 URL: https://github.com/ropensci/weatherOz/,
     https://docs.ropensci.org/weatherOz/
-BugReports: https://github.com/ropensci/weatherOz/issues/
+BugReports: https://github.com/ropensci/weatherOz/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
@@ -67,7 +69,7 @@ Imports:
     crayon,
     crul,
     curl,
-    data.table,
+    data.table (>= 1.1.5),
     foreign,
     grDevices,
     jsonlite,
@@ -75,10 +77,9 @@ Imports:
     lubridate,
     magick,
     methods,
-    readr (>= 1.1.1),
+    sf,
     stars,
     stats,
-    stringi,
     terra,
     utils,
     xml2
@@ -89,6 +90,7 @@ Suggests:
     ggthemes,
     grid,
     gridExtra,
+    knitr,
     mailR,
     mapproj,
     maps,
@@ -99,8 +101,6 @@ Suggests:
     vcr (>= 0.6.0),
     vdiffr,
     withr
-VignetteBuilder: 
-    knitr
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
 Config/testthat/edition: 3
