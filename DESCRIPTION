@@ -77,6 +77,7 @@ Imports:
     lubridate,
     magick,
     methods,
+    readr,
     sf,
     stars,
     stats,
@@ -90,7 +91,6 @@ Suggests:
     ggthemes,
     grid,
     gridExtra,
-    knitr,
     mailR,
     mapproj,
     maps,
@@ -101,6 +101,8 @@ Suggests:
     vcr (>= 0.6.0),
     vdiffr,
     withr
+VignetteBuilder: 
+    knitr
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
 Config/testthat/edition: 3
