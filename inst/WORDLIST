@@ -29,7 +29,6 @@ Deaccumulated
 EPSG
 Evapotranspiration
 FAO
-Formated
 GDA
 GEOS
 GeoTIFF
@@ -116,6 +115,7 @@ centre
 chillHours
 codecov
 colour
+cron
 dateTime
 deltaT
 deltaTAvg
@@ -147,6 +147,7 @@ erosionConditionYearToDateStartTime
 et
 etoShortCrop
 etoTallCrop
+evaporative
 evapotranspiration
 evapotranspirationShortCrop
 evapotranspirationTallCrop
@@ -166,6 +167,7 @@ frostConditionYearToDateMinutes
 frostConditionYearToDateStartTime
 ggplot
 github
+gmail
 greyscale
 gridded
 heatCondition
@@ -185,11 +187,16 @@ hh
 https
 kilometres
 licence
+licenced
 longpaddock
 magick
+mailR
 metre
 metres
+minimise
 modelling
+mungbean
+mungbeans
 observationsCount
 observationsPercentage
 oktas
@@ -201,6 +208,7 @@ pre
 précis
 qld
 rOpenSci
+recognise
 recognising
 relativeHumidity
 relativeHumidityAvg
@@ -227,8 +235,8 @@ timzeone
 unprojected
 vapour
 vcr
+visualise
 visualising
-weatherOz's
 wetBulb
 wetBulbAvg
 wetBulbMax
