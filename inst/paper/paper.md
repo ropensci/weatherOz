@@ -70,7 +70,7 @@ affiliations:
 # Summary
 
 Researchers and policy makers use weather data in a variety of ways.
-Agriculture applications of the data are used in several types of models and decision support tools, to estimate leaf wetness, crop yield, crop growth stage, physiological stress or forecasting crop disease epidemics or insect pest population levels [@Venaelaeinen2002; @DeWolf2003; Sparks2017].
+Agriculture applications of the data are used in several types of models and decision support tools, to estimate leaf wetness, crop yield, crop growth stage, physiological stress or forecasting crop disease epidemics or insect pest population levels [@Venaelaeinen2002; @DeWolf2003; @Sparks2017].
 Other areas of use include mapping potential renewable energy, *e.g.*, wind or solar potential for exploration purposes [@Ramachandra2007].
 The data can also be used by decision makers for municipalities to help plan for extreme weather events, energy needs and other infrastructure [@Svensson2002; @Alcoforado2009].
 
