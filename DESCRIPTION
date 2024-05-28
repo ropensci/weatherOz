@@ -78,9 +78,9 @@ Imports:
     magick,
     methods,
     readr,
-    sf,
     stars,
     stats,
+    stringi,
     terra,
     utils,
     xml2
@@ -96,6 +96,7 @@ Suggests:
     maps,
     rmarkdown,
     roxyglobals,
+    sf,
     spelling,
     testthat (>= 3.0.0),
     vcr (>= 0.6.0),
