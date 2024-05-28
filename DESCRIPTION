@@ -27,7 +27,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0001-9680-8474", "Contributed valuable feedback on package usage leading to improvements in the package structure and functionality.")),
     person("Jimmy", "Ng", , "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
     person("Steve", "Collins", , "steve.collins@dpird.wa.gov.au", role = "ctb",
-           comment = "Designed weatherOz's hex logo."),
+           comment = "Designed the hex logo for 'weatherOz' hex logo."),
     person("Adam H.", "Sparks", , "adamhsparks@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-0061-8359")),
     person("Laurens", "Geffert", , "laurensgeffert@gmail.com", role = "rev"),
@@ -60,7 +60,7 @@ Description: Provides automated downloading, parsing and formatting of
 License: GPL (>= 3)
 URL: https://github.com/ropensci/weatherOz/,
     https://docs.ropensci.org/weatherOz/
-BugReports: https://github.com/ropensci/weatherOz/issues/
+BugReports: https://github.com/ropensci/weatherOz/issues
 Depends: 
     R (>= 4.1.0)
 Imports: 
@@ -77,6 +77,7 @@ Imports:
     lubridate,
     magick,
     methods,
+    readr,
     sf,
     stars,
     stats,

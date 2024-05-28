@@ -1,4 +1,5 @@
 
+
 #' Get DPIRD Weather Data by the Minute
 #'
 #' Fetch nicely formatted minute weather station data from the \acronym{DPIRD}
@@ -75,8 +76,7 @@ get_dpird_minute <- function(station_code,
                              values = "all",
                              api_key) {
   if (missing(station_code) | !is.character(station_code)) {
-    stop(call. = FALSE,
-         "Please supply a valid `station_code`.")
+    stop(call. = FALSE, "Please supply a valid `station_code`.")
   }
 
   if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
@@ -92,19 +92,18 @@ get_dpird_minute <- function(station_code,
 
   if (any(values %notin% weatherOz::dpird_minute_values)) {
     if (values != "all") {
-      stop(call. = FALSE,
-           "You have specified a value not found in the 'API'.")
+      stop(call. = FALSE, "You have specified a value not found in the 'API'.")
     }
   }
 
   # selects the values that are to be sent to the API
   # if "all" get all values and "dateTime", otherwise hand-pick the values
   # plus date-time
-  values <- switch(
-    values,
-    "all" = c(weatherOz::dpird_minute_values, "dateTime"),
-    c(values, "dateTime")
-  )
+  if ("all" %in% values) {
+    values <- c(weatherOz::dpird_minute_values, "dateTime")
+  } else {
+    values <- c(values, "dateTime")
+  }
 
   start_date_time <- .check_date_time(start_date_time)
 
@@ -122,8 +121,7 @@ get_dpird_minute <- function(station_code,
   query_list <- .build_query(
     station_code = NULL,
     start_date_time = lubridate::format_ISO8601(start_date_time, usetz = "Z"),
-    end_date_time = lubridate::format_ISO8601(
-      hour_sequence[total_records_req], usetz = "Z"),
+    end_date_time = lubridate::format_ISO8601(hour_sequence[total_records_req], usetz = "Z"),
     api_key = api_key,
     api_group = NULL,
     interval = "minute",
@@ -143,15 +141,12 @@ get_dpird_minute <- function(station_code,
   # autoconvert numeric cols from character to numeric formats
   col_classes <-
     vapply(out, class, FUN.VALUE = character(1))
-  out[, (which(col_classes == "character")) := lapply(.SD, utils::type.convert,
-                                                      as.is = TRUE),
-      .SDcols = which(col_classes == "character")]
+  out[, (which(col_classes == "character")) := lapply(.SD, utils::type.convert, as.is = TRUE), .SDcols = which(col_classes == "character")]
 
   .set_snake_case_names(out)
 
   # convert dates
-  out[, date_time := suppressMessages(
-    lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
+  out[, date_time := suppressMessages(lubridate::ymd_hms(out$date_time, tz = "Australia/Perth"))]
 
   out[, station_code := as.factor(station_code)]
   data.table::setkey(x = out, cols = station_code)
@@ -218,9 +213,16 @@ get_dpird_minute <- function(station_code,
   parsed <- vector(mode = "list", length = length(.ret_list))
 
   for (i in seq_len(length(.ret_list))) {
-    x <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"),
-                            simplifyVector = TRUE)
-    parsed[[i]] <- x$collection
+    x <-  jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"), simplifyVector = TRUE)
+    if (length(x$collection) > 0) {
+      parsed[[i]] <- x$collection
+    } else {
+      stop(
+        call. = FALSE,
+        "There was an error with this station. ",
+        "It does not appear to provide minute data."
+      )
+    }
   }
 
   if (nrow(parsed[[1]]) == 0) {
@@ -241,11 +243,10 @@ get_dpird_minute <- function(station_code,
   j <- 1
   for (i in col_lists) {
     new_df_list[[j]] <-
-      data.table::rbindlist(lapply(out[[i]],
-                                   function(x)
-                                     as.data.frame(t(unlist(
-                                       x
-                                     )))))
+      data.table::rbindlist(lapply(out[[i]], function(x)
+        as.data.frame(t(unlist(
+          x
+        )))))
     # drop the column that's now in the new list to be added to `out`
     out[, names(new_df_list[j]) := NULL]
     j <- j + 1
@@ -282,8 +283,7 @@ get_dpird_minute <- function(station_code,
           )
         ),
         timevar = "wind.height",
-        times = c(out$wind.height1[[1]],
-                  out$wind.height2[[1]]),
+        times = c(out$wind.height1[[1]], out$wind.height2[[1]]),
         v.names = c(
           "wind.avg.speed",
           "wind.avg.direction.compassPoint",
