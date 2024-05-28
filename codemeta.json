@@ -477,15 +477,15 @@
     },
     "15": {
       "@type": "SoftwareApplication",
-      "identifier": "sf",
-      "name": "sf",
+      "identifier": "readr",
+      "name": "readr",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=sf"
+      "sameAs": "https://CRAN.R-project.org/package=readr"
     },
     "16": {
       "@type": "SoftwareApplication",
@@ -501,10 +501,22 @@
     },
     "17": {
       "@type": "SoftwareApplication",
+      "identifier": "stars",
+      "name": "stars",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=stars"
+    },
+    "18": {
+      "@type": "SoftwareApplication",
       "identifier": "stats",
       "name": "stats"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -516,12 +528,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=terra"
     },
-    "19": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "20": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "xml2",
       "name": "xml2",
@@ -538,7 +550,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "15995.681KB",
+  "fileSize": "15314.17KB",
   "releaseNotes": "https://github.com/ropensci/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml", "https://codecov.io/gh/ropensci/weatherOz"],

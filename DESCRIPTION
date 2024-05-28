@@ -77,7 +77,6 @@ Imports:
     lubridate,
     magick,
     methods,
-    readr,
     sf,
     stars,
     stats,
