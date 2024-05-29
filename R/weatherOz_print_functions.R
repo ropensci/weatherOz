@@ -1,4 +1,4 @@
-#' Print a weatherOz_tbl object
+#' Print a weatherOz_tbl Object
 #'
 #' Custom `print()` method for `weatherOz_tbl` objects.
 #'
@@ -94,22 +94,19 @@ print.weatherOz_tbl <- function(x,
     .stylecat(
       "  ",
       strrep("-", 11),
-      "  Australian Bureau of Meteorology (BOM) Pr",
-      stringi::stri_trans_nfc('\u00e9'),
-      "cis Forecast. ",
+      "  Australian Bureau of Meteorology (BOM) Precis Forecast. ",
       strrep("-", 1),
       "\n"
     )
     .stylecat(
-      "  The HTML version of Short Form (Pr",
-      stringi::stri_trans_nfc('\u00e9'),
-      "cis) Forecast for \n",
+      "  The HTML version of Short Form (Precis) Forecast for \n",
       "  ",
       knitr::combine_words(unlist(state)),
       " can be found at:\n"
     )
     for (s in state) {
       .stylecat("  <http://www.bom.gov.au/",
+
                 tolower(s),
                 "/forecasts/state.shtml>\n")
     }

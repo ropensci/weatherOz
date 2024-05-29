@@ -18,6 +18,9 @@ knitr::opts_chunk$set(collapse = TRUE,
                       fig.height = 7,
                       fig.align = "center",
                       fig.path = "vignettes/")
+
+# Counter for example numbers in headings to automate numbering
+ex_cnt <- 0
 ```
 # Using {weatherOz} With BOM Data
 
@@ -56,7 +59,7 @@ States or territories are specified using the official postal codes or full name
 The function, `get_precis_forecast()`, will return a data frame of the weather forecast for the daily forecast for selected towns.
 See Appendix 1 for a full description of the fields and values.
 
-### Example 1: Getting a Forecast
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Getting a Forecast
 
 Following is an example fetching the forecast for Queensland.
 
@@ -92,7 +95,7 @@ States or territories are specified using the official postal codes or full name
 The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
 See Appendix 3 for a full list and description of the fields and values.
 
-### Example 2: Getting an Ag Bulletin
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Getting an Ag Bulletin
 
 Following is an example fetching the ag bulletin for Western Australia.
 
@@ -130,7 +133,7 @@ States or territories are specified using the official postal codes or full name
 The function, `get_coastal_forecast()`, will return a data frame of the coastal waters forecast for marine zones in each state.
 See Appendix 6 for a full description of the fields and values.
 
-### Example 3: Getting a Coastal Forecast
+### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Getting a Coastal Forecast
 
 Following is an example fetching the forecast for Queensland.
 
@@ -147,12 +150,12 @@ A second family of functions retrieve information pertaining to satellite and ra
  * `get_available_radar()`, which returns available radar images; and
  * `get_radar_imagery()` which returns radar images as a [magick] object.
 
-## Using {weatherOz} to retrieve BOM satellite imagery
+### Using {weatherOz} to retrieve BOM satellite imagery
 
 {weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
 [Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
 
-### Working with Satellite Imagery
+#### Working with Satellite Imagery
 
 Valid BOM satellite Product IDs for GeoTIFF files include:
 
@@ -184,7 +187,7 @@ These files are available at ten minute update frequency with a 24 hour delete t
 This function can be used see the most recent files available and then specify in the `_imagery()` function.
 If no valid Product ID is supplied, defaults to all GeoTIFF images currently available.
 
-#### Example 5: Checking Available Imagery
+#### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Checking Available Imagery
 
 ```{r get_available_imagery, eval=TRUE}
 library(weatherOz)
@@ -223,12 +226,12 @@ i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 plot(i)
 ```
 
-## Using {weatherOz} With BOM Radar Imagery
+### Using {weatherOz} With BOM Radar Imagery
 
 {weatherOz} provides functionality to retrieve the latest radar imagery provided by BOM through a public FTP server.
 These are the latest snapshots for each radar locations at various radar ranges _e.g._, 512km, 256km, 128km and 64km for some stations.
 
-### Using get_available_radar()
+#### Using get_available_radar()
 
 `get_available_radar()` fetches the available radar imagery from the BOM FTP and returns a data frame for reference.
 This data frame contains the product_id, which is required when using the `get_radar_imagery()` function.
@@ -246,7 +249,7 @@ x <- get_available_radar()
 head(x)
 ```
 
-### Using get_radar_imagery()
+#### Using get_radar_imagery()
 
 `get_radar_imagery()` fetches the latest BOM radar imagery for a given product ID.
 The files available are the latest `.gif` files of BOM radar imagery, which are typically updated each 6-10 minutes.
@@ -267,7 +270,7 @@ y <- get_radar_imagery(product_id = "IDR032")
 plot(y)
 ```
 
-# References
+## References
 
 [Australian Bureau of Meteorology (BOM) Weather Data Services](http://www.bom.gov.au/catalogue/data-feeds.shtml)
 
@@ -279,7 +282,7 @@ plot(y)
 
 [Australian Bureau of Meteorology (BOM) High-definition satellite images](http://www.bom.gov.au/australia/satellite/index.shtml)
 
-# Appendix 1 - Output From get_precis_forecast()
+## Appendix 1 - Output From get_precis_forecast()
 
 The functions, `get_precis_forecast()` or `parse_precis_forecast(), will return a data frame of the 7 day short forecast with the following fields:
 
@@ -305,7 +308,7 @@ The functions, `get_precis_forecast()` or `parse_precis_forecast(), will return 
 <dt>probability_of_precipitation</dt><dd>Probability of precipitation (percent)</dd>
 </dl>
 
-# Appendix 2 - Output From get_ag_bulletin()
+## Appendix 2 - Output From get_ag_bulletin()
 
 The functions, `get_ag_bulletin()` or `parse_ag_bulletin(), will return a data frame of the agriculture bulletin with the following fields:
 
@@ -343,7 +346,7 @@ The functions, `get_ag_bulletin()` or `parse_ag_bulletin(), will return a data f
 <dt>wr</dt><dd>Wind run (kilometres)</dd>
 </dl>
 
-# Appendix 3 - Output From get_coastal_forecast()
+## Appendix 3 - Output From get_coastal_forecast()
 
 The output of `get_coastal_forecast()` or `parse_coastal_forecast()` will return a data frame with coastal waters forecast values of each area within the given state with the following fields:
 
