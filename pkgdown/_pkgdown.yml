@@ -56,7 +56,4 @@ reference:
   contents:
   - starts_with("dpird_")
   - silo_daily_values
-
-urls:
-  reference: https://docs.ropensci.org/weatherOz/reference
-  article: https://docs.ropensci.org/weatherOz/articles
+  - south_west_agriculture_region
