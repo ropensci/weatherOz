@@ -1,11 +1,10 @@
 
 #' Find Stations Within a Geospatially Defined Geographic Area of Interest
 #'
-#' Given an \CRANpkg{sf} polygon, a bounding box as a vector with the minimum
-#'   and maximum longitude and latitude values or a place name, find
-#'   \acronym{DPIRD} or \acronym{BOM} stations in the \acronym{SILO} network
-#'   that fall within that defined area or the station nearest the centroid of
-#'   the area of interest.
+#' Given an \CRANpkg{sf} polygon or a bounding box as a vector with the minimum
+#'   and maximum longitude and latitude values, find \acronym{DPIRD} or
+#'   \acronym{BOM} stations in the \acronym{SILO} network that fall within that
+#'   defined area or the station nearest the centroid of the area of interest.
 #'
 #' @param x One of three types of object:
 #'   * A `Vector` A four-digit vector defining a bounding box of the area
@@ -94,7 +93,7 @@ find_stations_in <- function(x,
     stop("You must provide an `sf` object or bounding box vector of 4 numbers.")
   }
 
-  
+
   # convert bbox or named places to {sf} polygons
   if (is.numeric(x)) {
     if (x[[1]] > x[[3]] || x[[2]] > x[[4]]) {

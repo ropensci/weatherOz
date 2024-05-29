@@ -54,11 +54,10 @@ defined area of interest in an unprojected format, EPSG:4326, WGS 84 --
 WGS84 - World Geodetic System 1984, used in \acronym{GPS} format.
 }
 \description{
-Given an \CRANpkg{sf} polygon, a bounding box as a vector with the minimum
-and maximum longitude and latitude values or a place name, find
-\acronym{DPIRD} or \acronym{BOM} stations in the \acronym{SILO} network
-that fall within that defined area or the station nearest the centroid of
-the area of interest.
+Given an \CRANpkg{sf} polygon or a bounding box as a vector with the minimum
+and maximum longitude and latitude values, find \acronym{DPIRD} or
+\acronym{BOM} stations in the \acronym{SILO} network that fall within that
+defined area or the station nearest the centroid of the area of interest.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
