@@ -57,22 +57,6 @@ reference:
   - starts_with("dpird_")
   - silo_daily_values
 
-articles:
-  title: Get started
-  navbar: ~
-
-  title: Using {weatherOz} With BOM Data
-  navbar: weatherOz for BOM
-
-  title: Working With DPIRD Data
-  navbar: weatherOz for DPIRD
-
-  title: Working With SILO Data
-  navbar: weatherOz for SILO
-
-  title: Using {weatherOz} with the {WINS} for Pulses Project
-  navbar: Use Case
-
 urls:
   reference: https://docs.ropensci.org/weatherOz/reference
   article: https://docs.ropensci.org/weatherOz/articles
