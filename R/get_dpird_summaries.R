@@ -262,7 +262,17 @@ get_dpird_summaries <- function(station_code,
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
-  .check_earliest_available_dpird(station_code, start_date, metadata_file)
+  tryCatch(
+    expr = {
+      .check_earliest_available_dpird(station_code, start_date, metadata_file)
+    },
+    error = function(e) {
+      message(
+        "Error: have you perhaps supplied a closed station without specifying,",
+        "`include_closed = TRUE` in `get_dpird_summaries()`?"
+      )
+    }
+  )
 
   # if interval is not set, default to "daily", else check input to be sure
   approved_intervals <- c("daily",
