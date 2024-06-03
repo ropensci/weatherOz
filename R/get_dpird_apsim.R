@@ -5,9 +5,9 @@
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API} to an \acronym{APSIM} .met file
 #'   formatted weather data object.
 #'
-#' @param station_code A `character` string of the \acronym{DPIRD} station code
-#'   for the station of interest.  Station codes are available from the
-#'   `get_stations_metadata()` function.
+#' @param station_code A `character` string or `factor` from
+#'   [get_stations_metadata()] of the \acronym{BOM} station code for the station
+#'   of interest.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.

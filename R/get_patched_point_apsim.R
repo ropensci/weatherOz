@@ -21,8 +21,9 @@
 #'   pixel on a 0.05° × 0.05° grid over the land area of Australia (including
 #'   some islands).*
 #'
-#' @param station_code A `character` string of the \acronym{BOM} station code
-#'   for the station of interest.
+#' @param station_code A `character` string or `factor` from
+#'   [get_stations_metadata()] of the \acronym{BOM} station code for the station
+#'   of interest.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.

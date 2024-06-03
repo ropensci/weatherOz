@@ -12,8 +12,9 @@ get_dpird_extremes(
 )
 }
 \arguments{
-\item{station_code}{A \code{character} string with the station code for the
-station of interest.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{values}{A \code{character} string with the type of extreme weather to
 return.  See \strong{Available Values} for a full list of valid values.

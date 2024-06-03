@@ -4,8 +4,9 @@
 #' Fetch nicely formatted individual extreme weather summaries from the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
-#' @param station_code A `character` string with the station code for the
-#'   station of interest.
+#' @param station_code A `character` string or `factor` from
+#'   [get_stations_metadata()] of the \acronym{BOM} station code for the station
+#'   of interest.
 #' @param values A `character` string with the type of extreme weather to
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all`, returning the full list of values unless otherwise

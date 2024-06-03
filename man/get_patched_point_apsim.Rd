@@ -13,8 +13,9 @@ get_patched_point_apsim(
 )
 }
 \arguments{
-\item{station_code}{A \code{character} string of the \acronym{BOM} station code
-for the station of interest.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
