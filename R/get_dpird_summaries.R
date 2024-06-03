@@ -208,7 +208,8 @@ get_dpird_summaries <- function(station_code,
     if (!file.exists(metadata_file)) {
       saveRDS(
         get_stations_metadata(which_api = "dpird",
-                              api_key = api_key),
+                              api_key = api_key,
+                              include_closed = include_closed),
         file = metadata_file,
         compress = FALSE
       )
@@ -221,7 +222,8 @@ get_dpird_summaries <- function(station_code,
     if (!file.exists(metadata_file)) {
       saveRDS(
         get_stations_metadata(which_api = "dpird",
-                              api_key = api_key),
+                              api_key = api_key,
+                              include_closed = include_closed),
         file = metadata_file,
         compress = FALSE
       )
