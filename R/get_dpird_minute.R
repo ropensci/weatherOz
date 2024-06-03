@@ -75,6 +75,13 @@ get_dpird_minute <- function(station_code,
                              minutes = 1440L,
                              values = "all",
                              api_key) {
+
+  # simplify using the metadata to fetch weather data by converting factors to
+  # numeric values
+  if (inherits(x = station_code, what = "factor")) {
+    station_code <- as.character(station_code)
+  }
+
   if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE, "Please supply a valid `station_code`.")
   }

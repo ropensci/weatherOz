@@ -38,6 +38,7 @@
                             .radius = NULL,
                             .api_key = NULL,
                             .dataset) {
+
   base_url <- "https://www.longpaddock.qld.gov.au/cgi-bin/silo/"
 
   end_point <- data.table::fcase(

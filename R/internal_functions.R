@@ -144,7 +144,6 @@
   return(invisible(NULL))
 }
 
-
 #' Check That the User Provided a Valid Email String as API Key for SILO
 #' @param .api_key a user-provided value for the `api_key`, should be a valid
 #'   e-mail address
