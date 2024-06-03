@@ -232,6 +232,7 @@ get_stations_metadata <-
   station_metadata[, grep("^i.", names(station_metadata)) := NULL]
   station_metadata[, owner := NULL]
   station_metadata[, distance_km := NULL]
+  station_metadata[, source := "Bureau of Meteorology (BOM)"]
   return(station_metadata[])
 }
 
