@@ -190,7 +190,7 @@ get_satellite_imagery <- get_satellite <-
     tryCatch({
       Map(
         function(urls, destination)
-          curl::curl_download(
+          utils::download.file(
             urls,
             destination,
             mode = "wb",

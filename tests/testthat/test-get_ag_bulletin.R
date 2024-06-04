@@ -89,7 +89,7 @@ test_that("get_ag_bulletin() stops if the state is recognised", {
 # Test that get_ag_bulletin() returns a data frame with 21 columns
 test_that("get_ag_bulletin returns 21 columns", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ60604.xml",
     destfile = file.path(
       tempdir(),
@@ -132,7 +132,7 @@ test_that("get_ag_bulletin returns 21 columns", {
 # Test that parse_ag_bulletin() returns the requested state bulletin
 test_that("parse_ag_bulletin() returns the bulletin for ACT/NSW", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDN65176.xml",
     destfile = file.path(
       tempdir(),
@@ -147,7 +147,7 @@ test_that("parse_ag_bulletin() returns the bulletin for ACT/NSW", {
 
 test_that("parse_ag_bulletin() returns the bulletin for NT", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDD65176.xml",
     destfile = file.path(
       tempdir(),
@@ -162,7 +162,7 @@ test_that("parse_ag_bulletin() returns the bulletin for NT", {
 
 test_that("parse_ag_bulletin() returns the bulletin for SA", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDS65176.xml",
     destfile = file.path(
       tempdir(),
@@ -177,7 +177,7 @@ test_that("parse_ag_bulletin() returns the bulletin for SA", {
 
 test_that("parse_ag_bulletin() returns the bulletin for TAS", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDT65176.xml",
     destfile = file.path(
       tempdir(),
@@ -192,7 +192,7 @@ test_that("parse_ag_bulletin() returns the bulletin for TAS", {
 
 test_that("parse_ag_bulletin() returns the bulletin for VIC", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDV65176.xml",
     destfile = file.path(
       tempdir(),
@@ -207,7 +207,7 @@ test_that("parse_ag_bulletin() returns the bulletin for VIC", {
 
 test_that("parse_ag_bulletin() returns the bulletin for WA", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDW65176.xml",
     destfile = file.path(
       tempdir(),

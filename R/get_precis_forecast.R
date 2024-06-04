@@ -161,7 +161,7 @@ get_precis_forecast <- function(state = "AUS") {
   on.exit(unlink(dbf_file))
 
   # fetch database from BOM server
-  curl::curl_download(
+  utils::download.file(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
     destfile = dbf_file,
     mode = "wb",

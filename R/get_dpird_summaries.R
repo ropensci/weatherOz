@@ -265,7 +265,9 @@ get_dpird_summaries <- function(station_code,
 
   # Match time interval query to user requests
   checked_interval <-
-    try(match.arg(approved_intervals[likely_interval], approved_intervals, several.ok = FALSE),
+    try(match.arg(approved_intervals[likely_interval],
+                  approved_intervals,
+                  several.ok = FALSE),
         silent = TRUE)
 
   # Error if summary interval is not available. API only allows for daily,
@@ -560,8 +562,6 @@ get_dpird_summaries <- function(station_code,
   out[, station_code := as.factor(station_code)]
 
   data.table::setkey(x = out, cols = station_code)
-
-
 
   return(out[])
 }

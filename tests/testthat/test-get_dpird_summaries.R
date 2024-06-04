@@ -6,8 +6,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 
@@ -18,8 +17,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 
@@ -30,8 +28,7 @@ test_that("user-input checks stop if invalid values are provided", {
       start_date = "19800123",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 
@@ -43,8 +40,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 
@@ -55,8 +51,7 @@ test_that("user-input checks stop if invalid values are provided", {
       start_date = "20220501",
       end_date = "20220501",
       interval = "daily",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 
@@ -68,8 +63,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       interval = "daily",
       values = "wind",
-      api_key = Sys.getenv("SILO_API_KEY"),
-      include_closed = FALSE
+      api_key = Sys.getenv("SILO_API_KEY")
     )
   )
 
@@ -81,8 +75,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
-      values = "phytophthora",
-      include_closed = FALSE
+      values = "phytophthora"
     )
   )
 
@@ -94,8 +87,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "fortnightly",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 
@@ -107,8 +99,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "30min",
-      values = "wind",
-      include_closed = FALSE
+      values = "wind"
     )
   )
 })

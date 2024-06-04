@@ -136,7 +136,7 @@ get_coastal_forecast <- function(state = "AUS") {
   dbf_file <- file.path(tempdir(), "marine_AAC_codes.dbf")
   on.exit(unlink(dbf_file))
 
-  curl::curl_download(
+  utils::download.file(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00003.dbf",
     destfile = dbf_file,
     mode = "wb",

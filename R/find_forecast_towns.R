@@ -38,7 +38,7 @@ find_forecast_towns <-
 
     file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
     on.exit(unlink(file_dbf))
-    curl::curl_download(
+    utils::download.file(
       "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
       destfile = file_dbf,
       mode = "wb",

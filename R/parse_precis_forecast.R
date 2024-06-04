@@ -40,7 +40,7 @@
 #' # parse the short forecast for Western Australia
 #'
 #' # download to tempfile() using basename() to keep original name
-#' download.file(url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11295.xml",
+#' utils::download.file(url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11295.xml",
 #'               destfile = file.path(tempdir(),
 #'               basename("ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11295.xml")),
 #'               mode = "wb")

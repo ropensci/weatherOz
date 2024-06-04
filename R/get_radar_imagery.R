@@ -52,7 +52,7 @@ get_available_radar <- function(radar_id = "all") {
   dbf_file <- file.path(tempdir(), "radar_locations.dbf")
   on.exit(unlink(dbf_file))
 
-  curl::curl_download(
+  utils::download.file(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDR00007.dbf",
     destfile = dbf_file,
     mode = "wb",
@@ -175,7 +175,7 @@ get_radar_imagery <- get_radar <-
     )
     tryCatch({
       if (download_only == TRUE) {
-        curl::curl_download(
+        utils::download.file(
           url = fp,
           destfile = path,
           mode = "wb",
@@ -184,7 +184,7 @@ get_radar_imagery <- get_radar <-
         )
         message("file downloaded to:", path)
       } else {
-        curl::curl_download(
+        utils::download.file(
           url = fp,
           destfile = path,
           mode = "wb",

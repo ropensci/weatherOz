@@ -85,7 +85,7 @@ test_that("get_coastal_forecast() stops if the state is recognised", {
 # Test that parse_coastal_forecast() returns a data frame with 19 columns
 test_that("parse_coastal_forecast returns at most 22 columns", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDN11001.xml",
     destfile = file.path(
       tempdir(),
@@ -121,7 +121,7 @@ test_that("parse_coastal_forecast returns at most 22 columns", {
 # Test that parse_coastal_forecast() returns the requested state forecast
 test_that("parse_coastal_forecast() returns the forecast for ACT/NSW", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDN11001.xml",
     destfile = file.path(
       tempdir(),
@@ -136,7 +136,7 @@ test_that("parse_coastal_forecast() returns the forecast for ACT/NSW", {
 
 test_that("parse_coastal_forecast returns the forecast for NT", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDD11030.xml",
     destfile = file.path(
       tempdir(),
@@ -151,7 +151,7 @@ test_that("parse_coastal_forecast returns the forecast for NT", {
 
 test_that("parse_coastal_forecast returns the forecast for Qld", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11290.xml",
     destfile = file.path(
       tempdir(),
@@ -166,7 +166,7 @@ test_that("parse_coastal_forecast returns the forecast for Qld", {
 
 test_that("parse_coastal_forecast returns the forecast for SA", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDS11072.xml",
     destfile = file.path(
       tempdir(),
@@ -181,7 +181,7 @@ test_that("parse_coastal_forecast returns the forecast for SA", {
 
 test_that("parse_coastal_forecast returns the forecast for TAS", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDT12329.xml",
     destfile = file.path(
       tempdir(),
@@ -196,7 +196,7 @@ test_that("parse_coastal_forecast returns the forecast for TAS", {
 
 test_that("parse_coastal_forecast returns the forecast for VIC", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDV10200.xml",
     destfile = file.path(
       tempdir(),
@@ -211,7 +211,7 @@ test_that("parse_coastal_forecast returns the forecast for VIC", {
 
 test_that("parse_coastal_forecast returns the forecast for WA", {
   skip_on_cran()
-  download.file(
+  utils::download.file(
     url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDW11160.xml",
     destfile = file.path(
       tempdir(),
