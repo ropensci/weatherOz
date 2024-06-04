@@ -4,12 +4,7 @@
 \alias{get_dpird_extremes}
 \title{Get DPIRD Extreme Weather Event Summaries}
 \usage{
-get_dpird_extremes(
-  station_code,
-  values = "all",
-  include_closed = FALSE,
-  api_key
-)
+get_dpird_extremes(station_code, values = "all", api_key)
 }
 \arguments{
 \item{station_code}{A \code{character} string or \code{factor} from
@@ -20,11 +15,6 @@ of interest.}
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to \code{all}, returning the full list of values unless otherwise
 specified.}
-
-\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}.  If set to
-\code{TRUE} the query returns closed and open stations.  Closed stations are
-those that have been turned off and no longer report data.  They may be
-useful for historical purposes.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the

@@ -1,5 +1,4 @@
 
-
 #' Get DPIRD Weather Data by the Minute
 #'
 #' Fetch nicely formatted minute weather station data from the \acronym{DPIRD}

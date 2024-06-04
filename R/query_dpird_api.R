@@ -19,17 +19,28 @@
 #'   query in the format 'yyyy-mm-dd-hh-mm'.  Defaults to the current system
 #'   date rounded to the nearest minute.  This function does its best to
 #'   decipher many date and time formats but prefers ISO8601.
-#' @param interval Interval to use, one of 'minute', '15min', '30min', 'hourly',
-#'  'daily', 'monthly' or 'yearly'.
+#' @param interval A `string` value providing the time interval to use, one of
+#'   * 'minute',
+#'   * '15min',
+#'   * '30min',
+#'   * 'hourly',
+#'   * 'daily',
+#'   * 'monthly' or
+#'   * 'yearly'.
+#' @param values Values to query from the API
+#' @param api_group A `string` used to filter the stations to a predefined
+#'   group.  These need to be supported on the back end. 'all' returns all
+#'   stations, 'api' returns the default stations in use with the API, 'web'
+#'   returns the list in use by the weather.agric.wa.gov.au and 'rtd' returns
+#'   stations with scientifically complete datasets. Available values: 'api',
+#'   'all', 'web' and 'rtd'.
+#' @param include_closed A `Boolean` value that defaults to `TRUE`.  If set to
+#'   `TRUE` the query returns closed and open stations.  Closed stations are
+#'   those that have been turned off and no longer report data.  They may be
+#'   useful for historical purposes.  Only set to `FALSE` to only fetch data
+#'   from open stations.
 #' @param limit The pagination limit parameter restricts the number of entries
 #'   returned.
-#' @param values Values to query from the API
-#' @param group A `string` used to filter the stations to a predefined group.
-#'   These need to be supported on the back end. 'all' returns all stations,
-#'   'api' returns the default stations in use with the API, 'web' returns the
-#'   list in use by the weather.agric.wa.gov.au and 'rtd' returns stations with
-#'   scientifically complete datasets. Available values: 'api', 'all', 'web' and
-#'   'rtd'.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
