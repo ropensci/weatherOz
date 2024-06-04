@@ -11,10 +11,6 @@
 #'   return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all`, returning the full list of values unless otherwise
 #'   specified.
-#' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
-#'   `TRUE` the query returns closed and open stations.  Closed stations are
-#'   those that have been turned off and no longer report data.  They may be
-#'   useful for historical purposes.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
@@ -108,7 +104,6 @@
 
 get_dpird_extremes <- function(station_code,
                                 values = "all",
-                                include_closed = FALSE,
                                 api_key) {
   # simplify using the metadata to fetch weather data by converting factors to
   # numeric values
@@ -167,7 +162,7 @@ get_dpird_extremes <- function(station_code,
     offset = 0L,
     select = paste(.values, collapse = ","),
     group = "all",
-    includeClosed = include_closed,
+    includeClosed = TRUE,
     api_key = api_key
   )
 

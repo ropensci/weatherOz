@@ -183,12 +183,7 @@
 get_dpird_summaries <- function(station_code,
                                 start_date,
                                 end_date = Sys.Date(),
-                                interval = c("daily",
-                                             "15min",
-                                             "30min",
-                                             "hourly",
-                                             "monthly",
-                                             "yearly"),
+                                interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly"),
                                 values = "all",
                                 api_key) {
   # this section is necessary to double check availability dates of DPIRD
@@ -271,7 +266,8 @@ get_dpird_summaries <- function(station_code,
   # Match time interval query to user requests
   checked_interval <-
     try(match.arg(approved_intervals[likely_interval],
-                  approved_intervals, several.ok = FALSE),
+                  approved_intervals,
+                  several.ok = FALSE),
         silent = TRUE)
 
   # Error if summary interval is not available. API only allows for daily,
@@ -280,9 +276,7 @@ get_dpird_summaries <- function(station_code,
     stop(call. = FALSE, "\"", interval, "\" is not a supported time interval")
   }
 
-  request_interval <- lubridate::interval(start_date,
-                                          end_date,
-                                          tzone = "Australia/Perth")
+  request_interval <- lubridate::interval(start_date, end_date, tzone = "Australia/Perth")
 
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past
