@@ -40,11 +40,6 @@
 #' @param values A `character` string with the type of summarised weather
 #'   to return.  See **Available Values** for a full list of valid values.
 #'   Defaults to `all` with all available values being returned.
-#' @param include_closed A `Boolean` value that defaults to `FALSE`.  If set to
-#'   `TRUE` the query returns closed and open stations.  Closed stations are
-#'   those that have been turned off and no longer report data.  They may be
-#'   useful for historical purposes.  Only set to `TRUE` to fetch data from
-#'   closed stations.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
@@ -195,9 +190,7 @@ get_dpird_summaries <- function(station_code,
                                              "monthly",
                                              "yearly"),
                                 values = "all",
-                                include_closed = FALSE,
                                 api_key) {
-
   # this section is necessary to double check availability dates of DPIRD
   # stations to give users a better experience. It slows down the first query
   # but avoids confusion when no values are returned for a station that exists
@@ -207,23 +200,26 @@ get_dpird_summaries <- function(station_code,
 
     if (!file.exists(metadata_file)) {
       saveRDS(
-        get_stations_metadata(which_api = "dpird",
-                              api_key = api_key,
-                              include_closed = include_closed),
+        get_stations_metadata(
+          which_api = "dpird",
+          api_key = api_key,
+          include_closed = TRUE
+        ),
         file = metadata_file,
         compress = FALSE
       )
     }
 
   } else {
-
     metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
 
     if (!file.exists(metadata_file)) {
       saveRDS(
-        get_stations_metadata(which_api = "dpird",
-                              api_key = api_key,
-                              include_closed = include_closed),
+        get_stations_metadata(
+          which_api = "dpird",
+          api_key = api_key,
+          include_closed = TRUE
+        ),
         file = metadata_file,
         compress = FALSE
       )
@@ -237,13 +233,11 @@ get_dpird_summaries <- function(station_code,
   }
 
   if (missing(station_code) | !is.character(station_code)) {
-    stop(call. = FALSE,
-         "Please supply a valid `station_code`.")
+    stop(call. = FALSE, "Please supply a valid `station_code`.")
   }
 
   if (missing(start_date))
-    stop(call. = FALSE,
-         "Please supply a valid start date as `start_date`.")
+    stop(call. = FALSE, "Please supply a valid start date as `start_date`.")
 
   if (any(values == "all")) {
     values <-
@@ -253,8 +247,7 @@ get_dpird_summaries <- function(station_code,
         weatherOz::dpird_summary_values)
   } else {
     if (any(values %notin% weatherOz::dpird_summary_values)) {
-      stop(call. = FALSE,
-           "You have specified invalid weather values.")
+      stop(call. = FALSE, "You have specified invalid weather values.")
     }
     values <-
       c("stationCode", "stationName", "period", values)
@@ -264,45 +257,27 @@ get_dpird_summaries <- function(station_code,
   start_date <- .check_date(start_date)
   end_date <- .check_date(end_date)
   .check_date_order(start_date, end_date)
-  tryCatch(
-    expr = {
-      .check_earliest_available_dpird(station_code, start_date, metadata_file)
-    },
-    error = function(e) {
-      message(
-        "Error: have you perhaps supplied a closed station without specifying,",
-        "`include_closed = TRUE` in `get_dpird_summaries()`?"
-      )
-    }
-  )
+  .check_earliest_available_dpird(station_code, start_date, metadata_file)
 
   # if interval is not set, default to "daily", else check input to be sure
-  approved_intervals <- c("daily",
-                          "15min",
-                          "30min",
-                          "hourly",
-                          "monthly",
-                          "yearly")
+  approved_intervals <- c("daily", "15min", "30min", "hourly", "monthly", "yearly")
 
   if (identical(interval, approved_intervals)) {
     interval <- "daily"
   }
 
-  likely_interval <- agrep(pattern = interval,
-                           x = approved_intervals)
+  likely_interval <- agrep(pattern = interval, x = approved_intervals)
 
   # Match time interval query to user requests
   checked_interval <-
     try(match.arg(approved_intervals[likely_interval],
-                  approved_intervals,
-                  several.ok = FALSE),
+                  approved_intervals, several.ok = FALSE),
         silent = TRUE)
 
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly or yearly
   if (methods::is(checked_interval, "try-error")) {
-    stop(call. = FALSE,
-         "\"", interval, "\" is not a supported time interval")
+    stop(call. = FALSE, "\"", interval, "\" is not a supported time interval")
   }
 
   request_interval <- lubridate::interval(start_date,
@@ -363,21 +338,18 @@ get_dpird_summaries <- function(station_code,
 
     if (!file.exists(metadata_file)) {
       saveRDS(
-        get_stations_metadata(which_api = "dpird",
-                             api_key = api_key),
+        get_stations_metadata(which_api = "dpird", api_key = api_key),
         file = metadata_file,
         compress = FALSE
       )
     }
 
   } else {
-
     metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
 
     if (!file.exists(metadata_file)) {
       saveRDS(
-        get_stations_metadata(which_api = "dpird",
-                             api_key = api_key),
+        get_stations_metadata(which_api = "dpird", api_key = api_key),
         file = metadata_file,
         compress = FALSE
       )
@@ -392,7 +364,7 @@ get_dpird_summaries <- function(station_code,
     end_date_time = end_date,
     interval = checked_interval,
     values = values,
-    include_closed = include_closed,
+    include_closed = TRUE,
     api_key = api_key,
     limit = total_records_req
   )
@@ -566,9 +538,12 @@ get_dpird_summaries <- function(station_code,
 
   # TODO: When Phil gets lat/lon values added to the summary results from the
   # API, remove this bit here and add lat/lon to the list of queried values
-  out <- merge(x = out, y = readRDS(file = metadata_file)[, c(1:2, 5:6)],
-               by.x = c("station_code", "station_name"),
-               by.y = c("station_code", "station_name"))
+  out <- merge(
+    x = out,
+    y = readRDS(file = metadata_file)[, c(1:2, 5:6)],
+    by.x = c("station_code", "station_name"),
+    by.y = c("station_code", "station_name")
+  )
   # END chunk to remove
 
   data.table::setcolorder(out, order(names(out)))
@@ -585,8 +560,7 @@ get_dpird_summaries <- function(station_code,
       lubridate::ymd_hms,
       truncated = 3,
       tz = "Australia/West"
-    )),
-    .SDcols = grep("time", colnames(out))]
+    )), .SDcols = grep("time", colnames(out))]
   }
 
   data.table::setnames(out, gsub("period_", "", names(out)))
@@ -594,8 +568,6 @@ get_dpird_summaries <- function(station_code,
   out[, station_code := as.factor(station_code)]
 
   data.table::setkey(x = out, cols = station_code)
-
-
 
   return(out[])
 }
@@ -616,8 +588,7 @@ get_dpird_summaries <- function(station_code,
 #' @autoglobal
 #' @keywords Internal
 #'
-.parse_summary <- function(.ret_list,
-                           .values) {
+.parse_summary <- function(.ret_list, .values) {
   x <- vector(mode = "list", length = length(.ret_list))
   for (i in seq_len(length(.ret_list))) {
     y <- jsonlite::fromJSON(.ret_list[[i]]$parse("UTF8"))
@@ -645,8 +616,7 @@ get_dpird_summaries <- function(station_code,
     j <- 1
     for (i in col_lists) {
       new_df_list[[j]] <-
-        data.table::rbindlist(lapply(X = nested_list_objects[[i]],
-                                     FUN = data.table::as.data.table))
+        data.table::rbindlist(lapply(X = nested_list_objects[[i]], FUN = data.table::as.data.table))
 
       # drop the list column from the org data.table
       nested_list_objects[, names(new_df_list[j]) := NULL]
@@ -655,8 +625,7 @@ get_dpird_summaries <- function(station_code,
     }
 
     x <-
-      data.table::setorder(x = data.table::as.data.table(
-        do.call(what = cbind, args = new_df_list)))
+      data.table::setorder(x = data.table::as.data.table(do.call(what = cbind, args = new_df_list)))
 
     return(cbind(nested_list_objects, x))
   }
@@ -674,7 +643,6 @@ get_dpird_summaries <- function(station_code,
 #' @noRd
 
 .check_earliest_available_dpird <- function(.station_code, .start_date, .f) {
-
   y <- readRDS(file = .f)[, c(1, 3)]
   y <- y[y$station_code %in% .station_code]
 
@@ -705,27 +673,25 @@ get_dpird_summaries <- function(station_code,
 
 .set_col_orders <- function(.out, .checked_interval) {
   if (.checked_interval == "monthly") {
-    .out[, date := lubridate::ym(sprintf("%s-%s",
-                                         .out$period_year,
-                                         .out$period_month))]
+    .out[, date := lubridate::ym(sprintf("%s-%s", .out$period_year, .out$period_month))]
 
-    data.table::setcolorder(.out,
-                            c(
-                              "station_code",
-                              "station_name",
-                              "longitude",
-                              "latitude",
-                              "period_year",
-                              "period_month",
-                              "date"
-                            ))
+    data.table::setcolorder(
+      .out,
+      c(
+        "station_code",
+        "station_name",
+        "longitude",
+        "latitude",
+        "period_year",
+        "period_month",
+        "date"
+      )
+    )
 
     .out[, period_day := NULL]
     .out[, period_hour := NULL]
     .out[, period_minute := NULL]
-    data.table::setorder(x = .out,
-                         cols = "period_year",
-                         "period_month")
+    data.table::setorder(x = .out, cols = "period_year", "period_month")
   } else if (.checked_interval == "daily") {
     .out[, date := lubridate::ymd(sprintf(
       "%s-%s-%s",
@@ -827,11 +793,13 @@ get_dpird_summaries <- function(station_code,
     )
   } else {
     data.table::setcolorder(.out,
-                            c("station_code",
+                            c(
+                              "station_code",
                               "station_name",
                               "longitude",
                               "latitude",
-                              "period_year"))
+                              "period_year"
+                            ))
     .out[, period_month := NULL]
     .out[, period_day := NULL]
     .out[, period_hour := NULL]
