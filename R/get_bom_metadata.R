@@ -13,7 +13,7 @@
   if (!file.exists(file_in)) {
     tryCatch({
       zip_file <- file.path(tempdir(), "stations.zip")
-      curl::curl_download(
+      download.file(
         url =
           "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
         destfile = zip_file,

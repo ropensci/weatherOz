@@ -441,30 +441,16 @@
 #' @noRd
 
 .get_url <- function(remote_file) {
-  # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- sprintf("{weatherOz} R package (%s)",
-                       utils::packageVersion("weatherOz"))
-  # set a custom user-agent, restore original settings on exit
-  op <- options()
-  on.exit(options(op))
-  options(HTTPUserAgent = USERAGENT)
 
-  # BOM's FTP server can timeout too quickly
-  # Also, BOM's http server sometimes sends a http response of 200, "all good",
-  # but then will not actually serve the requested file, so we want to set a max
-  # time limit for the complete process to complete as well.
-  h <- curl::new_handle()
-  curl::handle_setopt(
-    handle = h,
-    TCP_KEEPALIVE = 60L,
-    CONNECTTIMEOUT = 60L,
-    TIMEOUT = 120L,
-    USERAGENT = USERAGENT
-  )
+  bom_file <- file.path(tempdir(), "BOM_file.xml")
 
   try_GET <- function(x, ...) {
     tryCatch({
-      curl::curl_fetch_memory(url = x, handle = h)
+      download.file(
+        destfile = bom_file,
+        url = x,
+        mode = "wb"
+      )
     },
     error = function(e)
       conditionMessage(e),
@@ -486,24 +472,8 @@
 
   resp <- try_GET(x = remote_file)
 
-  # check for possible timeout message and stop if that's the case
-  if (!is_response(resp)) {
-    stop(call. = FALSE,
-         resp) # return char string value server provides
-  }
-
-  # Then stop if status indicates file not found
-  if (as.integer(resp$status_code) == 404 |
-      as.integer(resp$status_code) == 550) {
-    stop(
-      call. = FALSE,
-      "\nA file or station was matched. However, a corresponding file was not ",
-      "found at bom.gov.au.\n"
-    )
-  }
-
   if (tools::file_ext(remote_file) == "xml") {
-    xml_out <- xml2::read_xml(rawToChar(resp$content))
+    xml_out <- xml2::read_xml(bom_file)
     return(xml_out)
   }
 }
