@@ -446,7 +446,7 @@
 
   try_GET <- function(x, ...) {
     tryCatch({
-      download.file(
+      utils::download.file(
         destfile = bom_file,
         url = x,
         mode = "wb"
