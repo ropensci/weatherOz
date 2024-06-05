@@ -472,7 +472,7 @@ library(ggplot2)
 library(ggthemes)
 library(sf)
 
-ggplot2(south_west_agricultural_region) +
+ggplot(south_west_agricultural_region) +
    geom_sf() +
    theme_map()
 ```
@@ -499,6 +499,7 @@ sw_wa <- st_as_sf(
   coords = c("longitude", "latitude"),
   crs = "EPSG:4326"
 )
+
 sw_wa <- st_transform(x = sw_wa, crs = st_crs(south_west_agricultural_region))
 ```
 
