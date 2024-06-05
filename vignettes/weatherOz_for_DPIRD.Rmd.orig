@@ -466,7 +466,7 @@ The {sf} object, `south_west_agricultural_region`, is provided with {weatherOz} 
 
 First, we can plot the  `south_west_agricultural_region` to see what it looks like.
 
-```{r view sw_ag_region}
+```{r view_sw_ag_region}
 library(weatherOz)
 library(ggplot2)
 library(ggthemes)
