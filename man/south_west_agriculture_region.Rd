@@ -39,7 +39,8 @@ at date of capture, dates range between 2007 and 2010.
 
 \section{Coordinate Reference System}{
 
-EPSG:28350 - GDA94 / MGA zone 50 \url{https://epsg.io/28350}
+EPSG:4326 - WGS 84 -- WGS84 - World Geodetic System 1984, used in GPS
+\url{https://epsg.io/4326}
 }
 
 \keyword{datasets}
