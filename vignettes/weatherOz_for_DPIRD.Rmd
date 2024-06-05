@@ -168,45 +168,45 @@ library(weatherOz)
   )
 )
 #> Key: <station_code>
-#>       station_code           date_time air_temperature relative_humidity soil_temperature solar_irradiance rainfall dew_point
-#>             <fctr>              <POSc>           <num>             <num>           <lgcl>            <int>    <int>     <num>
-#>    1:           NO 2024-06-04 16:43:00            19.9              62.6               NA               27        0      12.6
-#>    2:           NO 2024-06-04 16:44:00            19.9              62.4               NA               26        0      12.5
-#>    3:           NO 2024-06-04 16:45:00            19.9              62.6               NA               25        0      12.6
-#>    4:           NO 2024-06-04 16:46:00            19.9              64.0               NA               24        0      12.9
-#>    5:           NO 2024-06-04 16:47:00            19.9              63.2               NA               23        0      12.7
-#>   ---                                                                                                                        
-#> 1429:           NO 2024-06-05 16:31:00            22.1              40.0               NA              103        0       7.9
-#> 1430:           NO 2024-06-05 16:32:00            22.0              40.5               NA              100        0       8.0
-#> 1431:           NO 2024-06-05 16:33:00            22.0              41.6               NA               98        0       8.4
-#> 1432:           NO 2024-06-05 16:34:00            22.0              40.6               NA               95        0       8.0
-#> 1433:           NO 2024-06-05 16:35:00            22.0              41.6               NA               92        0       8.4
-#>       wet_bulb wind_height wind_avg_speed wind_avg_direction_compass_point wind_avg_direction_degrees wind_min_speed
-#>          <num>       <int>          <num>                           <char>                      <int>          <num>
-#>    1:     16.0           3           0.14                              WNW                        296          0.144
-#>    2:     15.9           3           0.14                               NW                        304          0.144
-#>    3:     16.0           3           0.14                               NW                        304          0.144
-#>    4:     16.1           3           0.14                               NW                        304          0.144
-#>    5:     16.0           3           0.65                               NW                        304          0.144
-#>   ---                                                                                                               
-#> 1429:     14.7           3           9.22                                N                        356          7.200
-#> 1430:     14.7           3           8.71                              NNW                        348          5.688
-#> 1431:     14.9           3           6.70                                N                        355          5.184
-#> 1432:     14.7           3           7.20                              NNW                        348          4.680
-#> 1433:     14.9           3           8.21                              NNW                        347          6.192
-#>       wind_max_speed
-#>                <num>
-#>    1:           1.15
-#>    2:           1.15
-#>    3:           0.14
-#>    4:           0.14
-#>    5:           1.66
-#>   ---               
-#> 1429:          13.21
-#> 1430:          11.74
-#> 1431:           8.71
-#> 1432:          11.74
-#> 1433:          10.73
+#>       station_code           date_time air_temperature relative_humidity soil_temperature
+#>             <fctr>              <POSc>           <num>             <num>           <lgcl>
+#>    1:           NO 2024-06-04 17:57:00            18.3              72.5               NA
+#>    2:           NO 2024-06-04 17:58:00            18.3              72.2               NA
+#>    3:           NO 2024-06-04 17:59:00            18.2              72.1               NA
+#>    4:           NO 2024-06-04 18:00:00            18.2              71.9               NA
+#>    5:           NO 2024-06-04 18:01:00            18.2              71.7               NA
+#>   ---                                                                                    
+#> 1430:           NO 2024-06-05 17:46:00            18.7              52.2               NA
+#> 1431:           NO 2024-06-05 17:47:00            18.7              51.7               NA
+#> 1432:           NO 2024-06-05 17:48:00            18.7              52.0               NA
+#> 1433:           NO 2024-06-05 17:49:00            18.6              52.2               NA
+#> 1434:           NO 2024-06-05 17:50:00            18.6              52.7               NA
+#>       solar_irradiance rainfall dew_point wet_bulb wind_height wind_avg_speed
+#>                  <int>    <int>     <num>    <num>       <int>          <num>
+#>    1:                0        0      13.3     15.6           3           0.14
+#>    2:                0        0      13.2     15.6           3           0.14
+#>    3:                0        0      13.1     15.5           3           0.14
+#>    4:                0        0      13.1     15.5           3           0.14
+#>    5:                0        0      13.0     15.5           3           0.14
+#>   ---                                                                        
+#> 1430:                0        0       8.7     13.7           3           0.14
+#> 1431:                0        0       8.6     13.6           3           0.14
+#> 1432:                0        0       8.7     13.6           3           0.14
+#> 1433:                0        0       8.6     13.6           3           0.14
+#> 1434:                0        0       8.8     13.6           3           0.14
+#>       wind_avg_direction_compass_point wind_avg_direction_degrees wind_min_speed wind_max_speed
+#>                                 <char>                      <int>          <num>          <num>
+#>    1:                              NNW                        348          0.144           0.14
+#>    2:                              NNW                        348          0.144           0.14
+#>    3:                              NNW                        348          0.144           0.14
+#>    4:                              NNW                        348          0.144           0.14
+#>    5:                              NNW                        348          0.144           0.14
+#>   ---                                                                                          
+#> 1430:                               NE                         43          0.144           0.65
+#> 1431:                               NE                         43          0.144           0.65
+#> 1432:                               NE                         43          0.144           0.65
+#> 1433:                               NE                         43          0.144           0.65
+#> 1434:                               NE                         43          0.144           0.65
 ```
 
 ### Example 4: Get Specific Time and Date Data for Specific Values
@@ -520,32 +520,45 @@ library(weatherOz)
   )
 )
 #> Key: <station_code>
-#>       station_code station_name longitude latitude  year month   day       date rainfall wind_avg_speed wind_height
-#>             <fctr>       <char>     <num>    <num> <int> <int> <int>     <Date>    <num>          <num>       <int>
-#>    1:           BI        Binnu  114.6958  -28.051  2017     1     1 2017-01-01        0           4.28           3
-#>    2:           BI        Binnu  114.6958  -28.051  2017     1     1 2017-01-01        0           6.85          10
-#>    3:           BI        Binnu  114.6958  -28.051  2017     1     2 2017-01-02        0           4.53           3
-#>    4:           BI        Binnu  114.6958  -28.051  2017     1     2 2017-01-02        0           7.39          10
-#>    5:           BI        Binnu  114.6958  -28.051  2017     1     3 2017-01-03        0           4.74           3
-#>   ---                                                                                                              
-#> 1456:           BI        Binnu  114.6958  -28.051  2018    12    29 2018-12-29        0          35.63          10
-#> 1457:           BI        Binnu  114.6958  -28.051  2018    12    30 2018-12-30        0          29.19           3
-#> 1458:           BI        Binnu  114.6958  -28.051  2018    12    30 2018-12-30        0          36.70          10
-#> 1459:           BI        Binnu  114.6958  -28.051  2018    12    31 2018-12-31        0          32.52           3
-#> 1460:           BI        Binnu  114.6958  -28.051  2018    12    31 2018-12-31        0          41.51          10
-#>       wind_max_direction_compass_point wind_max_direction_degrees wind_max_speed       wind_max_time
-#>                                 <char>                      <int>          <num>              <POSc>
-#>    1:                              NNE                         31          17.57 2018-07-17 11:51:00
-#>    2:                              ESE                        121          23.18 2017-07-30 11:38:00
-#>    3:                               NE                         41          21.78 2017-08-10 13:29:00
-#>    4:                                N                          1          19.55 2018-07-17 12:16:00
-#>    5:                              WSW                        247          18.40 2017-06-14 09:05:00
-#>   ---                                                                                               
-#> 1456:                               SE                        134          60.91 2017-02-09 15:56:00
-#> 1457:                              ESE                        105          62.03 2018-01-14 22:55:00
-#> 1458:                              ESE                        113          69.77 2018-01-14 22:45:00
-#> 1459:                              SSE                        163          58.64 2017-02-08 09:12:00
-#> 1460:                              SSE                        167          64.40 2017-02-08 04:48:00
+#>       station_code station_name longitude latitude  year month   day       date rainfall
+#>             <fctr>       <char>     <num>    <num> <int> <int> <int>     <Date>    <num>
+#>    1:           BI        Binnu  114.6958  -28.051  2017     1     1 2017-01-01        0
+#>    2:           BI        Binnu  114.6958  -28.051  2017     1     1 2017-01-01        0
+#>    3:           BI        Binnu  114.6958  -28.051  2017     1     2 2017-01-02        0
+#>    4:           BI        Binnu  114.6958  -28.051  2017     1     2 2017-01-02        0
+#>    5:           BI        Binnu  114.6958  -28.051  2017     1     3 2017-01-03        0
+#>   ---                                                                                   
+#> 1456:           BI        Binnu  114.6958  -28.051  2018    12    29 2018-12-29        0
+#> 1457:           BI        Binnu  114.6958  -28.051  2018    12    30 2018-12-30        0
+#> 1458:           BI        Binnu  114.6958  -28.051  2018    12    30 2018-12-30        0
+#> 1459:           BI        Binnu  114.6958  -28.051  2018    12    31 2018-12-31        0
+#> 1460:           BI        Binnu  114.6958  -28.051  2018    12    31 2018-12-31        0
+#>       wind_avg_speed wind_height wind_max_direction_compass_point wind_max_direction_degrees
+#>                <num>       <int>                           <char>                      <int>
+#>    1:           4.28           3                              NNE                         31
+#>    2:           6.85          10                              ESE                        121
+#>    3:           4.53           3                               NE                         41
+#>    4:           7.39          10                                N                          1
+#>    5:           4.74           3                              WSW                        247
+#>   ---                                                                                       
+#> 1456:          35.63          10                               SE                        134
+#> 1457:          29.19           3                              ESE                        105
+#> 1458:          36.70          10                              ESE                        113
+#> 1459:          32.52           3                              SSE                        163
+#> 1460:          41.51          10                              SSE                        167
+#>       wind_max_speed       wind_max_time
+#>                <num>              <POSc>
+#>    1:          17.57 2018-07-17 11:51:00
+#>    2:          23.18 2017-07-30 11:38:00
+#>    3:          21.78 2017-08-10 13:29:00
+#>    4:          19.55 2018-07-17 12:16:00
+#>    5:          18.40 2017-06-14 09:05:00
+#>   ---                                   
+#> 1456:          60.91 2017-02-09 15:56:00
+#> 1457:          62.03 2018-01-14 22:55:00
+#> 1458:          69.77 2018-01-14 22:45:00
+#> 1459:          58.64 2017-02-08 09:12:00
+#> 1460:          64.40 2017-02-08 04:48:00
 ```
 
 ### Example 8: Get Hourly Rainfall and Wind From Beginning of 2022 to Current
@@ -568,45 +581,45 @@ library(weatherOz)
   )
 )
 #> Key: <station_code>
-#>        station_code station_name longitude latitude  year month   day  hour                date rainfall
-#>              <fctr>       <char>     <num>    <num> <int> <int> <int> <int>              <POSc>    <num>
-#>     1:           BI        Binnu  114.6958  -28.051  2022     1     1     0 2022-01-01 00:00:00        0
-#>     2:           BI        Binnu  114.6958  -28.051  2022     1     1     0 2022-01-01 00:00:00        0
-#>     3:           BI        Binnu  114.6958  -28.051  2022     1     1     1 2022-01-01 01:00:00        0
-#>     4:           BI        Binnu  114.6958  -28.051  2022     1     1     1 2022-01-01 01:00:00        0
-#>     5:           BI        Binnu  114.6958  -28.051  2022     1     1     2 2022-01-01 02:00:00        0
-#>    ---                                                                                                  
-#> 42526:           BI        Binnu  114.6958  -28.051  2024     6     4    22 2024-06-04 22:00:00        0
-#> 42527:           BI        Binnu  114.6958  -28.051  2024     6     4    23 2024-06-04 23:00:00        0
-#> 42528:           BI        Binnu  114.6958  -28.051  2024     6     4    23 2024-06-04 23:00:00        0
-#> 42529:           BI        Binnu  114.6958  -28.051  2024     6     5     0 2024-06-05 00:00:00        0
-#> 42530:           BI        Binnu  114.6958  -28.051  2024     6     5     0 2024-06-05 00:00:00        0
-#>        wind_avg_direction_compass_point wind_avg_direction_degrees wind_avg_speed wind_height wind_max_direction_compass_point
-#>                                  <char>                      <int>          <num>       <int>                           <char>
-#>     1:                              NNE                         18           0.00           3                                N
-#>     2:                             <NA>                         NA             NA          10                             <NA>
-#>     3:                              NNE                         33           0.00           3                              NNE
-#>     4:                             <NA>                         NA             NA          10                             <NA>
-#>     5:                              ENE                         58           0.00           3                                N
-#>    ---                                                                                                                        
-#> 42526:                              WNW                        286          55.23          10                              WNW
-#> 42527:                               NW                        313          43.20           3                               NW
-#> 42528:                               NW                        312          57.27          10                               NW
-#> 42529:                               NW                        317          44.32           3                               NW
-#> 42530:                               NW                        315          58.52          10                               NW
-#>        wind_max_direction_degrees wind_max_speed       wind_max_time
-#>                             <int>          <num>              <POSc>
-#>     1:                          1           0.00 2023-01-20 05:01:00
-#>     2:                         NA             NA                <NA>
-#>     3:                         22           0.00 2022-07-23 01:01:00
-#>     4:                         NA             NA                <NA>
-#>     5:                         11           0.00 2023-02-04 22:01:00
-#>    ---                                                              
-#> 42526:                        282          78.37 2023-09-13 14:25:00
-#> 42527:                        318          72.94 2023-09-13 12:39:00
-#> 42528:                        314          90.58 2023-09-13 12:24:00
-#> 42529:                        311          73.76 2023-09-13 11:40:00
-#> 42530:                        311          91.19 2023-09-13 11:34:00
+#>        station_code station_name longitude latitude  year month   day  hour                date
+#>              <fctr>       <char>     <num>    <num> <int> <int> <int> <int>              <POSc>
+#>     1:           BI        Binnu  114.6958  -28.051  2022     1     1     0 2022-01-01 00:00:00
+#>     2:           BI        Binnu  114.6958  -28.051  2022     1     1     0 2022-01-01 00:00:00
+#>     3:           BI        Binnu  114.6958  -28.051  2022     1     1     1 2022-01-01 01:00:00
+#>     4:           BI        Binnu  114.6958  -28.051  2022     1     1     1 2022-01-01 01:00:00
+#>     5:           BI        Binnu  114.6958  -28.051  2022     1     1     2 2022-01-01 02:00:00
+#>    ---                                                                                         
+#> 42526:           BI        Binnu  114.6958  -28.051  2024     6     4    22 2024-06-04 22:00:00
+#> 42527:           BI        Binnu  114.6958  -28.051  2024     6     4    23 2024-06-04 23:00:00
+#> 42528:           BI        Binnu  114.6958  -28.051  2024     6     4    23 2024-06-04 23:00:00
+#> 42529:           BI        Binnu  114.6958  -28.051  2024     6     5     0 2024-06-05 00:00:00
+#> 42530:           BI        Binnu  114.6958  -28.051  2024     6     5     0 2024-06-05 00:00:00
+#>        rainfall wind_avg_direction_compass_point wind_avg_direction_degrees wind_avg_speed wind_height
+#>           <num>                           <char>                      <int>          <num>       <int>
+#>     1:        0                              NNE                         18           0.00           3
+#>     2:        0                             <NA>                         NA             NA          10
+#>     3:        0                              NNE                         33           0.00           3
+#>     4:        0                             <NA>                         NA             NA          10
+#>     5:        0                              ENE                         58           0.00           3
+#>    ---                                                                                                
+#> 42526:        0                              WNW                        286          55.23          10
+#> 42527:        0                               NW                        313          43.20           3
+#> 42528:        0                               NW                        312          57.27          10
+#> 42529:        0                               NW                        317          44.32           3
+#> 42530:        0                               NW                        315          58.52          10
+#>        wind_max_direction_compass_point wind_max_direction_degrees wind_max_speed       wind_max_time
+#>                                  <char>                      <int>          <num>              <POSc>
+#>     1:                                N                          1           0.00 2023-01-20 05:01:00
+#>     2:                             <NA>                         NA             NA                <NA>
+#>     3:                              NNE                         22           0.00 2022-07-23 01:01:00
+#>     4:                             <NA>                         NA             NA                <NA>
+#>     5:                                N                         11           0.00 2023-02-04 22:01:00
+#>    ---                                                                                               
+#> 42526:                              WNW                        282          78.37 2023-09-13 14:25:00
+#> 42527:                               NW                        318          72.94 2023-09-13 12:39:00
+#> 42528:                               NW                        314          90.58 2023-09-13 12:24:00
+#> 42529:                               NW                        311          73.76 2023-09-13 11:40:00
+#> 42530:                               NW                        311          91.19 2023-09-13 11:34:00
 ```
 
 ## Getting APSIM-ready Data
@@ -636,8 +649,8 @@ library(weatherOz)
 #> site = Binnu 
 #> latitude = -28.051 
 #> longitude = 114.69575 
-#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-06-05 16:43:27.097094 
-#> amp = 15.3 !calculated with the apsimx R package: 2024-06-05 16:43:27.099872 
+#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-06-05 17:57:32.94957 
+#> amp = 15.3 !calculated with the apsimx R package: 2024-06-05 17:57:32.954057 
 #> year day radn maxt mint rain evap rh windspeed 
 #> () () (MJ/m2/day) (oC) (oC) (mm) (mm) (%) (m/s) 
 #>   year day    radn maxt mint rain evap   rh windspeed
@@ -652,8 +665,8 @@ library(weatherOz)
 #> site = Binnu 
 #> latitude = -28.051 
 #> longitude = 114.69575 
-#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-06-05 16:43:27.097094 
-#> amp = 15.3 !calculated with the apsimx R package: 2024-06-05 16:43:27.099872 
+#> tav = 20.5987671232877 (oC) ! calculated annual average ambient temperature 2024-06-05 17:57:32.94957 
+#> amp = 15.3 !calculated with the apsimx R package: 2024-06-05 17:57:32.954057 
 #> year day radn maxt mint rain evap rh windspeed 
 #> () () (MJ/m2/day) (oC) (oC) (mm) (mm) (%) (m/s) 
 #>   year day    radn maxt mint rain evap   rh windspeed
@@ -699,7 +712,7 @@ library(weatherOz)
 #> 3:        YE001          York East  116.9211 -31.83588     WA    229
 #> 4:         BTSB DFES-B Talbot West  116.6898 -31.96060     WA    357
 #> 5:         ROGR      Rolling Green  116.3184 -31.69527     WA    315
-#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    265
+#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    264
 #>                                                                   owner distance_km
 #>                                                                  <char>       <num>
 #> 1: WA Department of Primary Industries and Regional Development (DPIRD)        0.00
@@ -734,7 +747,7 @@ library(weatherOz)
 #> 3:         BTSB DFES-B Talbot West  116.6898 -31.96060     WA    357
 #> 4:        YE001          York East  116.9211 -31.83588     WA    229
 #> 5:         ROGR      Rolling Green  116.3184 -31.69527     WA    315
-#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    265
+#> 6:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    264
 #>                                                                   owner distance_km
 #>                                                                  <char>       <num>
 #> 1: WA Department of Primary Industries and Regional Development (DPIRD)        3.23
@@ -786,7 +799,7 @@ library(weatherOz)
 #> 21:       010160        Quella Park  117.1194 -31.45330     WA    265
 #> 22:       009007            Chidlow  116.2658 -31.86220     WA    300
 #> 23:       010120       Doodenanning  117.0986 -31.90920     WA    290
-#> 24:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    265
+#> 24:         BCAA    DBCA-A Portable  116.2560 -31.84210     WA    264
 #> 25:       009066        Gidgegannup  116.1976 -31.79060     WA    290
 #>     station_code       station_name longitude  latitude  state elev_m
 #>                                                                    owner distance_km
@@ -834,6 +847,10 @@ library(weatherOz)
 library(ggplot2)
 library(ggthemes)
 library(sf)
+#> Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE
+```
+
+``` r
 
 ggplot(south_west_agricultural_region) +
    geom_sf() +
@@ -841,7 +858,7 @@ ggplot(south_west_agricultural_region) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="vignettes/view sw_ag_region-1.png" alt="plot of chunk view sw_ag_region"  />
+<img src="view sw_ag_region-1.png" alt="plot of chunk view sw_ag_region"  />
 <p class="caption">plot of chunk view sw_ag_region</p>
 </div>
 
@@ -913,7 +930,7 @@ ggplot(south_west_agricultural_region) +
 ```
 
 <div class="figure" style="text-align: center">
-<img src="vignettes/plot_sw_land_div_map-1.png" alt="plot of chunk plot_sw_land_div_map"  />
+<img src="plot_sw_land_div_map-1.png" alt="plot of chunk plot_sw_land_div_map"  />
 <p class="caption">plot of chunk plot_sw_land_div_map</p>
 </div>
 
@@ -932,15 +949,15 @@ library(weatherOz)
   api_key = Sys.getenv("DPIRD_API_KEY")
 ))
 #> Key: <station_code>
-#>    station_code station_name to9_am since9_am since12_am current_hour last24_hours last7_days_since9_am last7_days_since12_am
-#>          <fctr>       <char>  <int>     <num>      <num>        <num>        <num>                <num>                 <num>
-#> 1:        WS001     Westonia    100      98.9       99.5         87.5         99.6                 99.9                  99.9
-#>    last14_days_since9_am last14_days_since12_am month_to_date_to9_am month_to_date_since12_am year_to_date_to9_am
-#>                    <int>                  <int>                <num>                    <num>               <int>
-#> 1:                   100                    100                 99.9                     99.9                 100
-#>    year_to_date_since12_am
-#>                      <int>
-#> 1:                     100
+#>    station_code station_name to9_am since9_am since12_am current_hour last24_hours
+#>          <fctr>       <char>  <int>     <num>      <num>        <num>        <num>
+#> 1:        WS001     Westonia    100      99.1       99.5         90.9         99.7
+#>    last7_days_since9_am last7_days_since12_am last14_days_since9_am last14_days_since12_am
+#>                   <num>                 <num>                 <int>                  <int>
+#> 1:                 99.9                  99.9                   100                    100
+#>    month_to_date_to9_am month_to_date_since12_am year_to_date_to9_am year_to_date_since12_am
+#>                   <num>                    <num>               <int>                   <int>
+#> 1:                 99.9                     99.9                 100                     100
 ```
 
 ### Example 15: Checking Station Availability for a Set Time Period
@@ -1035,56 +1052,69 @@ library(weatherOz)
 #> 236:        YU001         Yuna 2012-06-21 2024-06-05 -28.33763  114.9898     WA    329
 #> 237:        YU002      Yuna NE 2016-03-24 2024-06-05 -28.20032  115.2616     WA    267
 #> 238:        YU003   Yuna North 2018-08-08 2024-06-05 -28.12086  114.9626     WA    264
-#>                                                                    source status    wmo probe_height rain_gauge_height
-#>                                                                    <char> <char> <lgcl>        <num>             <num>
-#>   1: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#>   2: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               1.0
-#>   3: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#>   4: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#>   5: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#>  ---                                                                                                                  
-#> 234: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#> 235: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#> 236: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#> 237: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#> 238: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25               0.5
-#>      wind_probe_heights air_temperature battery_voltage delta_t dew_point pan_evaporation relative_humidity barometric_pressure
-#>                  <list>          <lgcl>          <lgcl>  <lgcl>    <lgcl>          <lgcl>            <lgcl>              <lgcl>
-#>   1:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#>   2:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#>   3:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#>   4:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#>   5:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#>  ---                                                                                                                           
-#> 234:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#> 235:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#> 236:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#> 237:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#> 238:                  3            TRUE            TRUE    TRUE      TRUE            TRUE              TRUE               FALSE
-#>      rainfall soil_temperature solar_irradiance wet_bulb  wind1  wind2  wind3 apparent_temperature eto_short eto_tall
-#>        <lgcl>           <lgcl>           <lgcl>   <lgcl> <lgcl> <lgcl> <lgcl>               <lgcl>    <lgcl>   <lgcl>
-#>   1:     TRUE            FALSE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#>   2:     TRUE            FALSE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#>   3:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#>   4:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#>   5:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#>  ---                                                                                                                 
-#> 234:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#> 235:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#> 236:     TRUE            FALSE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#> 237:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#> 238:     TRUE             TRUE             TRUE     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE
-#>      frost_condition heat_condition wind_erosion_condition richardson_unit chill_hour
-#>               <lgcl>         <lgcl>                 <lgcl>          <lgcl>     <lgcl>
-#>   1:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#>   2:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#>   3:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#>   4:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#>   5:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#>  ---                                                                                 
-#> 234:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#> 235:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#> 236:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#> 237:            TRUE           TRUE                   TRUE            TRUE       TRUE
-#> 238:            TRUE           TRUE                   TRUE            TRUE       TRUE
+#>                                                                    source status    wmo probe_height
+#>                                                                    <char> <char> <lgcl>        <num>
+#>   1: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#>   2: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#>   3: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#>   4: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#>   5: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#>  ---                                                                                                
+#> 234: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#> 235: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#> 236: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#> 237: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#> 238: WA Department of Primary Industries and Regional Development (DPIRD)   open     NA         1.25
+#>      rain_gauge_height wind_probe_heights air_temperature battery_voltage delta_t dew_point
+#>                  <num>             <list>          <lgcl>          <lgcl>  <lgcl>    <lgcl>
+#>   1:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#>   2:               1.0                  3            TRUE            TRUE    TRUE      TRUE
+#>   3:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#>   4:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#>   5:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#>  ---                                                                                       
+#> 234:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#> 235:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#> 236:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#> 237:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#> 238:               0.5                  3            TRUE            TRUE    TRUE      TRUE
+#>      pan_evaporation relative_humidity barometric_pressure rainfall soil_temperature solar_irradiance
+#>               <lgcl>            <lgcl>              <lgcl>   <lgcl>           <lgcl>           <lgcl>
+#>   1:            TRUE              TRUE               FALSE     TRUE            FALSE             TRUE
+#>   2:            TRUE              TRUE               FALSE     TRUE            FALSE             TRUE
+#>   3:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#>   4:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#>   5:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#>  ---                                                                                                 
+#> 234:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#> 235:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#> 236:            TRUE              TRUE               FALSE     TRUE            FALSE             TRUE
+#> 237:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#> 238:            TRUE              TRUE               FALSE     TRUE             TRUE             TRUE
+#>      wet_bulb  wind1  wind2  wind3 apparent_temperature eto_short eto_tall frost_condition
+#>        <lgcl> <lgcl> <lgcl> <lgcl>               <lgcl>    <lgcl>   <lgcl>          <lgcl>
+#>   1:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#>   2:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#>   3:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#>   4:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#>   5:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#>  ---                                                                                      
+#> 234:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#> 235:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#> 236:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#> 237:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#> 238:     TRUE   TRUE  FALSE  FALSE                 TRUE      TRUE     TRUE            TRUE
+#>      heat_condition wind_erosion_condition richardson_unit chill_hour
+#>              <lgcl>                 <lgcl>          <lgcl>     <lgcl>
+#>   1:           TRUE                   TRUE            TRUE       TRUE
+#>   2:           TRUE                   TRUE            TRUE       TRUE
+#>   3:           TRUE                   TRUE            TRUE       TRUE
+#>   4:           TRUE                   TRUE            TRUE       TRUE
+#>   5:           TRUE                   TRUE            TRUE       TRUE
+#>  ---                                                                 
+#> 234:           TRUE                   TRUE            TRUE       TRUE
+#> 235:           TRUE                   TRUE            TRUE       TRUE
+#> 236:           TRUE                   TRUE            TRUE       TRUE
+#> 237:           TRUE                   TRUE            TRUE       TRUE
+#> 238:           TRUE                   TRUE            TRUE       TRUE
 ```
