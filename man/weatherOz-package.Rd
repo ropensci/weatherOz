@@ -46,6 +46,7 @@ Other contributors:
   \item Laurens Geffert \email{laurensgeffert@gmail.com} [reviewer]
   \item Sam Rogers \email{sam.rogers@adelaide.edu.au} [reviewer]
   \item Western Australia Agriculture Authority (WAAA) [copyright holder]
+  \item Curtin University [copyright holder]
 }
 
 }
