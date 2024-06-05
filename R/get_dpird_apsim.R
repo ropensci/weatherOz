@@ -70,8 +70,8 @@ get_dpird_apsim <- function(station_code,
   )
 
   site <- apsim$station_name[1]
-  latitude = apsim$latitude[1]
-  longitude = apsim$longitude[1]
+  latitude <- apsim$latitude[1]
+  longitude <- apsim$longitude[1]
   apsim[, day := NULL]
   apsim[, day := lubridate::yday(apsim$date)]
   apsim <-
