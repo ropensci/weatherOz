@@ -119,6 +119,9 @@ get_coastal_forecast <- function(state = "AUS") {
 #' @autoglobal
 .parse_coastal_forecast <- function(xml_url) {
 
+  op <- options(timeout = 120L)
+  on.exit(options(op))
+
   # load the XML from ftp
   if (substr(xml_url, 1, 3) == "ftp") {
     xml_object <- .get_url(xml_url)

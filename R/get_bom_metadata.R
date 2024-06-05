@@ -9,6 +9,9 @@
 #' @noRd
 
 .get_bom_metadata <- function() {
+  op <- options(timeout = 120L)
+  on.exit(options(op))
+
   file_in <- file.path(tempdir(), "stations.txt")
   if (!file.exists(file_in)) {
     tryCatch({

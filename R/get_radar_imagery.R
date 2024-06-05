@@ -38,6 +38,10 @@
 #' @export
 
 get_available_radar <- function(radar_id = "all") {
+
+  op <- options(timeout = 120L)
+  on.exit(options(op))
+
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar/"
 
   list_files <- curl::new_handle()
@@ -160,6 +164,9 @@ get_radar_imagery <- get_radar <-
         call. = FALSE
       )
     }
+
+    op <- options(timeout = 120L)
+    on.exit(options(op))
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar"
     fp <- file.path(ftp_base, sprintf("%s.gif", product_id))

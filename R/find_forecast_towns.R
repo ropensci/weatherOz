@@ -37,6 +37,10 @@ find_forecast_towns <-
     user_latitude <- lonlat["latitude"]
 
     file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
+
+    op <- options(timeout = 120L)
+    on.exit(options(op))
+
     on.exit(unlink(file_dbf))
     utils::download.file(
       "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
