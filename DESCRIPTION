@@ -32,7 +32,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-0061-8359")),
     person("Laurens", "Geffert", , "laurensgeffert@gmail.com", role = "rev"),
     person("Sam", "Rogers", , "sam.rogers@adelaide.edu.au", role = "rev"),
-    person("Western Australia Agriculture Authority (WAAA)", role = "cph")
+    person("Western Australia Agriculture Authority (WAAA)", role = "cph"),
+    person("Curtin University", role = "cph")
   )
 Description: Provides automated downloading, parsing and formatting of
     weather data for Australia through API endpoints provided by the
