@@ -40,7 +40,6 @@ JSON
 Kirnbrae
 Licence
 Lifecycle
-MGA
 Maroondah
 Modelling
 Moodie
@@ -166,6 +165,7 @@ frostConditionTo
 frostConditionYearToDate
 frostConditionYearToDateMinutes
 frostConditionYearToDateStartTime
+geospatial
 ggplot
 github
 gmail
