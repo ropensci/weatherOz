@@ -139,6 +139,7 @@ monthly or yearly data from \acronym{DPIRD} with \acronym{SILO}.
 \item observationsCount,
 \item observationsPercentage,
 \item panEvaporation,
+\item panEvaporation12AM,
 \item rainfall,
 \item relativeHumidity,
 \item relativeHumidityAvg,
