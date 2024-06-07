@@ -47,7 +47,7 @@ the files are all present in the directory.
 # parse the coastal forecast for Queensland
 
 #download to tempfile() using basename() to keep original name
-download.file(url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11290.xml",
+utils::download.file(url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11290.xml",
               destfile = file.path(tempdir(),
               basename("ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11290.xml")),
               mode = "wb")

@@ -1,19 +1,4 @@
 
-#' Add %notin% Function
-#'
-#' Negates `%in%` for easier (mis)matching.
-#'
-#' @param x A character string to match.
-#' @param table A table containing values to match `x` against.
-#'
-#' @return A logical vector, indicating if a mismatch was located for any
-#'  element of x: thus the values are TRUE or FALSE and never NA.
-#' @keywords Internal
-#' @noRd
-`%notin%` <- function(x, table) {
-  match(x, table, nomatch = 0L) == 0L
-}
-
 #' Check User Input Dates for Validity
 #'
 #' @param x User entered date value
@@ -115,7 +100,6 @@
 #' Check User Input for `lat`, `lon` or `station_code`
 #' @param .latitude latitude passed from another function
 #' @param .longitude longitude passed from another function
-#' @param .station_code station_code passed from another function
 #'
 #' @keywords Internal
 #' @autoglobal
@@ -160,8 +144,9 @@
   return(invisible(NULL))
 }
 
-
-#' Check that the user provided an invalid email string as API key for SILO
+#' Check That the User Provided a Valid Email String as API Key for SILO
+#' @param .api_key a user-provided value for the `api_key`, should be a valid
+#'   e-mail address
 #'
 #' @keywords Internal
 #' @autoglobal
@@ -178,6 +163,30 @@
     stop("For SILO requests you must use your e-mail address as an API key.
          You have not provided a valid email address.",
          call. = FALSE)
+  }
+}
+
+#' Check That the User Provided a Valid DPIRD API Key String
+#'
+#' @param .api_key a user-provided value for the `api_key`. Should be a random
+#'   string of text and numbers.
+#'
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.is_valid_dpird_api_key <- function(.api_key) {
+
+  # regular expression to check
+  pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
+
+  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE)) {
+    stop("For DPIRD requests you must use your DPIRD provided API key.
+         You (may) have provided your e-mail address, which is used
+         for the SILO API instead.",
+         call. = FALSE)
+  } else {
+    return(invisible(NULL))
   }
 }
 
@@ -432,30 +441,19 @@
 #' @noRd
 
 .get_url <- function(remote_file) {
-  # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- sprintf("{weatherOz} R package (%s)",
-                       utils::packageVersion("weatherOz"))
-  # set a custom user-agent, restore original settings on exit
-  op <- options()
-  on.exit(options(op))
-  options(HTTPUserAgent = USERAGENT)
 
-  # BOM's FTP server can timeout too quickly
-  # Also, BOM's http server sometimes sends a http response of 200, "all good",
-  # but then will not actually serve the requested file, so we want to set a max
-  # time limit for the complete process to complete as well.
-  h <- curl::new_handle()
-  curl::handle_setopt(
-    handle = h,
-    TCP_KEEPALIVE = 60L,
-    CONNECTTIMEOUT = 60L,
-    TIMEOUT = 120L,
-    USERAGENT = USERAGENT
-  )
+  op <- options(timeout = 120L)
+  on.exit(options(op))
+
+  bom_file <- file.path(tempdir(), "BOM_file.xml")
 
   try_GET <- function(x, ...) {
     tryCatch({
-      curl::curl_fetch_memory(url = x, handle = h)
+      utils::download.file(
+        destfile = bom_file,
+        url = x,
+        mode = "wb"
+      )
     },
     error = function(e)
       conditionMessage(e),
@@ -477,24 +475,8 @@
 
   resp <- try_GET(x = remote_file)
 
-  # check for possible timeout message and stop if that's the case
-  if (!is_response(resp)) {
-    stop(call. = FALSE,
-         resp) # return char string value server provides
-  }
-
-  # Then stop if status indicates file not found
-  if (as.integer(resp$status_code) == 404 |
-      as.integer(resp$status_code) == 550) {
-    stop(
-      call. = FALSE,
-      "\nA file or station was matched. However, a corresponding file was not ",
-      "found at bom.gov.au.\n"
-    )
-  }
-
   if (tools::file_ext(remote_file) == "xml") {
-    xml_out <- xml2::read_xml(rawToChar(resp$content))
+    xml_out <- xml2::read_xml(bom_file)
     return(xml_out)
   }
 }

@@ -10,14 +10,13 @@ get_dpird_summaries(
   end_date = Sys.Date(),
   interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly"),
   values = "all",
-  include_closed = FALSE,
   api_key
 )
 }
 \arguments{
-\item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
-for the station of interest.  Station codes are available from the
-\code{get_stations_metadata()} function.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
@@ -37,12 +36,6 @@ the previous year.}
 \item{values}{A \code{character} string with the type of summarised weather
 to return.  See \strong{Available Values} for a full list of valid values.
 Defaults to \code{all} with all available values being returned.}
-
-\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}.  If set to
-\code{TRUE} the query returns closed and open stations.  Closed stations are
-those that have been turned off and no longer report data.  They may be
-useful for historical purposes.  Only set to \code{TRUE} to fetch data from
-closed stations.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
@@ -209,6 +202,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},

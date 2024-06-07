@@ -152,6 +152,9 @@ get_satellite_imagery <- get_satellite <-
       stop("{weatherOz} only supports working with one Product ID at a time\n")
     }
 
+    op <- options(timeout = 120L)
+    on.exit(options(op))
+
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
 
     # if we're feeding output from get_available_imagery(), use those values
@@ -178,24 +181,15 @@ get_satellite_imagery <- get_satellite <-
 
     # download files from server
 
-    h <- curl::new_handle()
-    curl::handle_setopt(
-      handle = h,
-      TCP_KEEPALIVE = 200000,
-      CONNECTTIMEOUT = 90,
-      ftp_use_epsv = TRUE
-    )
-
     # TODO: this needs to be commented to be more clear
     tryCatch({
       Map(
         function(urls, destination)
-          curl::curl_download(
+          utils::download.file(
             urls,
             destination,
             mode = "wb",
-            quiet = TRUE,
-            handle = h
+            quiet = TRUE
           ),
         tif_files,
         file.path(tempdir(), basename(tif_files))
@@ -374,7 +368,3 @@ get_satellite_imagery <- get_satellite <-
   }
   return(tif_files)
 }
-
-#' @importFrom terra plot
-#' @export
-terra::plot

@@ -21,15 +21,16 @@
 #'   pixel on a 0.05° × 0.05° grid over the land area of Australia (including
 #'   some islands).*
 #'
-#' @param station_code A `character` string of the \acronym{BOM} station code
-#'   for the station of interest.
+#' @param station_code A `character` string or `factor` from
+#'   [get_stations_metadata()] of the \acronym{BOM} station code for the station
+#'   of interest.
 #' @param start_date A `character` string or `Date` object representing the
 #'   beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 #'   (ISO8601).  Data returned is inclusive of this date.
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 #'   returned is inclusive of this date.  Defaults to the current system date.
-#' @param api_key A `character` string specifying a valid email address to use
+#' @param api_key A `character` string providing a valid email address to use
 #'   for the request.  The query will return an error if a valid email address
 #'   is not provided.
 #'
@@ -71,7 +72,9 @@
 #'
 #'
 #' @section Saving objects:
-#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#' To save \dQuote{met} objects the [apsimx::write_apsim_met()] is reexported.
+#'   Note that when saving, comments from SILO will be included, but these will
+#'   not be printed as a part of the resulting `met` object in your \R session.
 #'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'
@@ -90,11 +93,11 @@
 #' @examples
 #' \dontrun{
 #' # requires an API key as your email address
-#' # Source observation data for station Wongan Hills station, WA (008137)
+#' # Source observation data for Wongan Hills station, WA (008137)
 #' wd <- get_patched_point_apsim(
 #'   station_code = "008137",
-#'   start_date = "20220401",
-#'   end_date = "20221101",
+#'   start_date = "20220101",
+#'   end_date = "20221231",
 #'   api_key = "your_api_key"
 #' )
 #' }
@@ -111,6 +114,13 @@ get_patched_point_apsim <- function(station_code,
                                     start_date,
                                     end_date = Sys.Date(),
                                     api_key) {
+
+  # simplify using the metadata to fetch weather data by converting factors to
+  # numeric values
+  if (inherits(x = station_code, what = "factor")) {
+    station_code <- as.character(station_code)
+  }
+
   if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE,
          "Please supply a valid `station_code`.")

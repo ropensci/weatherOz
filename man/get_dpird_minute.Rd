@@ -13,9 +13,9 @@ get_dpird_minute(
 )
 }
 \arguments{
-\item{station_code}{A \code{character} string or \code{vector} of the \acronym{DPIRD}
-station code for the station of interest.  Station codes are available from
-the \code{get_stations_metadata()} function.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{start_date_time}{A \code{character} string representing the start date and
 time of the query in the format \dQuote{yyyy-mm-dd-hh-mm} (ISO8601).
@@ -90,6 +90,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},

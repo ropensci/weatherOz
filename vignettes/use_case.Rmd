@@ -10,14 +10,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{dplyr}
   %\VignetteDepends{mailR}
+bibliography: bibliography.bib
 ---
 
 
 
-## Using {weatherOz} with the {WINS} for pulses project
+## Introduction
 
-[Summer pulses (*e.g.*, mungbeans) are a high value crop for Queensland grain growers](http://www.pulseaus.com.au/about/australian-pulse-industry).
-However, temperatures above 40 °C, particularly during flowering, can have a severe detrimental effect on crop yields (Kaushal *et al.* 2016).
+[Summer pulses (*e.g.*, mungbeans) are a high value crop for Queensland grain growers](https://www.pulseaus.com.au/about/australian-pulse-industry).
+However, temperatures above 40 °C, particularly during flowering, can have a severe detrimental effect on crop yields [@Kaushal2016].
 A key strategy that plants use to minimise the impact of heat stress is evaporative cooling.
 Ensuring crops are well watered prior to a heat stress event (so to facilitate high rates of evaporative cooling) is a potential strategy to ensure that irrigated crops avoid heat stress.
 However, this requires farmers to recognise a heat stress event is coming and commence irrigating with enough time to water the entire crop prior to the event occurring.
@@ -25,10 +26,12 @@ However, this requires farmers to recognise a heat stress event is coming and co
 The [{WINS}](https://github.com/ToowoombaTrio/WINS) for pulses project provides warnings when heat stress events are likely to occur so that farmers can irrigate their crops prior to the event to minimise any resulting yield
 loss.
 It does this by using the `get_precis_forecast()` function from {weatherOz} along with functionality from
-[{mailR}](https://CRAN.R-project.org/package=mailR) (Rahul 2015).
+[{mailR}](https://CRAN.R-project.org/package=mailR) [@Premraj2021].
+
+## Materials and Methods
 
 
-```r
+``` r
 install.packages("weatherOz")
 install.packages("mailR")
 library(dplyr)  # for filter()
@@ -40,7 +43,7 @@ For this to work we require a list of alert subscribers.
 Here we create a dummy set of subscribers, locations, and email addresses.
 
 
-```r
+``` r
 subscribers_list <-
   data.frame(cbind(
     c(1, 2, 3),
@@ -69,7 +72,7 @@ We also need to specify our email address and password.
 For this project we are using a gmail account to send the email alerts.
 
 
-```r
+``` r
 our_email <- "yyyy***xxxx@gmail.com"
 our_password <- "*password*"
 ```
@@ -77,14 +80,14 @@ our_password <- "*password*"
 Finally we need to set a forecast temperature threshold that will trigger an alert to be sent.
 
 
-```r
+``` r
 threshold_temp <- 40
 ```
 
 We then use {weatherOz} to access the latest précis forecast for Queensland.
 
 
-```r
+``` r
 QLD_forecast <- get_precis_forecast(state = "QLD")
 ```
 
@@ -94,7 +97,7 @@ subscribers if the forecast maximum temperatures are greater than or equal to th
 This email informs the recipient of the dates that high temperatures are expected.
 
 
-```r
+``` r
 QLD_hotdates <-
   QLD_forecast %>%
   filter(maximum_temperature >= threshold_temp)
@@ -142,12 +145,11 @@ for (x in seq_len(nrow(subscribers_list))) {
 }
 ```
 
+## Summary
+
 The process is automated to run on a cron job such that the précis forecast is automatically downloaded and thresholds are calculated on a daily basis with email alerts being sent automatically.
 
 While mungbean heat stress is illustrated here, other thresholds can be implemented, _e.g._, frost events for sugarcane harvest using this same functionality.
 
-# References
+## References
 
-Kaushal, N., Bhandari, K., Siddique, K. H., & Nayyar, H. (2016). Food crops face rising temperatures: An overview of responses, adaptive mechanisms, and approaches to improve heat tolerance. Cogent Food & Agriculture, 2(1), 1134380.
-
-Rahul P (2015). mailR: A Utility to Send emails from R. R package version 0.4.1.https://CRAN.R-project.org/package=mailR

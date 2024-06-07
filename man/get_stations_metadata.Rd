@@ -67,7 +67,8 @@ metadata for stations available from \acronym{DPIRD}'s Weather 2.0
 \strong{elev_m}:\tab Station elevation in metres. \code{numeric}\cr
 \strong{source}:\tab Organisation responsible for the data or station
 maintenance. \code{character}\cr
-\strong{include_closed}:\tab Station include_closed, one of 'open' or 'closed'. \code{character}\cr
+\strong{include_closed}:\tab Station include_closed, one of \sQuote{open} or
+\sQuote{closed}. \code{character}\cr
 \strong{wmo}:\tab World Meteorological Organisation, (\acronym{WMO}), number
 if applicable. \code{numeric}\cr
 \strong{\code{rich} values}\tab\cr
@@ -128,6 +129,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},
@@ -136,6 +138,7 @@ Other DPIRD:
 
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
@@ -145,6 +148,7 @@ Other SILO:
 Other metadata: 
 \code{\link{find_forecast_towns}()},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_dpird_availability}()}

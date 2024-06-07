@@ -9,6 +9,9 @@
 #'   The grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
 #'   0.05° longitude (approximately 5 km × 5 km).
 #'
+#' Note that when saving, comments from SILO will be included, but these will
+#'   not be printed as a part of the resulting `met` object in your \R session.
+#'
 #' @param longitude A single `numeric` value  representing the longitude of the
 #'    point-of-interest.
 #' @param latitude A single `numeric` value representing the latitude of the
@@ -60,7 +63,9 @@
 #'   }
 #'
 #' @section Saving objects:
-#' To save \dQuote{met} objects, please use [apsimx::write_apsim_met()].
+#' To save \dQuote{met} objects the [apsimx::write_apsim_met()] is reexported.
+#'   Note that when saving, comments from SILO will be included, but these will
+#'   not be printed as a part of the resulting `met` object in your \R session.
 #'
 #' @return An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 #'
@@ -81,8 +86,8 @@
 #' wd <- get_data_drill_apsim(
 #'   latitude = -27.85,
 #'   longitude = 150.05,
-#'   start_date = "20220401",
-#'   end_date = "20221101",
+#'   start_date = "20220101",
+#'   end_date = "20221231",
 #'   api_key = "your_api_key"
 #' )
 #' }

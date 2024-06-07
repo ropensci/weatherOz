@@ -8,9 +8,9 @@
 get_dpird_apsim(station_code, start_date, end_date = Sys.Date(), api_key)
 }
 \arguments{
-\item{station_code}{A \code{character} string of the \acronym{DPIRD} station code
-for the station of interest.  Station codes are available from the
-\code{get_stations_metadata()} function.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
@@ -25,8 +25,7 @@ returned is inclusive of this date.  Defaults to the current system date.}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-An \CRANpkg{apsimx} object of class \sQuote{met} with attributes,
-alternatively, a local APSIM .met file if \code{file} is specified.
+An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.
 }
 \description{
 Automates the retrieval and conversion of summary data from the
@@ -35,7 +34,9 @@ formatted weather data object.
 }
 \section{Saving objects}{
 
-To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
+To save \dQuote{met} objects the \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}} is reexported.
+Note that when saving, comments from SILO will be included, but these will
+not be printed as a part of the resulting \code{met} object in your \R session.
 }
 
 \examples{
@@ -45,8 +46,8 @@ To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{aps
 
 wd <- get_dpird_apsim(
   station_code = "BI",
-  start_date = "20220401",
-  end_date = "20221101",
+  start_date = "20220101",
+  end_date = "20221231",
   api_key = "your_api_key"
 )
 }
@@ -59,6 +60,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
@@ -81,7 +83,8 @@ Other data fetching:
 
 Other APSIM: 
 \code{\link{get_data_drill_apsim}()},
-\code{\link{get_patched_point_apsim}()}
+\code{\link{get_patched_point_apsim}()},
+\code{\link{reexports}}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@gmail.com}

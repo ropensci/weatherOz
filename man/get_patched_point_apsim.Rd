@@ -13,8 +13,9 @@ get_patched_point_apsim(
 )
 }
 \arguments{
-\item{station_code}{A \code{character} string of the \acronym{BOM} station code
-for the station of interest.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{start_date}{A \code{character} string or \code{Date} object representing the
 beginning of the range to query in the format \dQuote{yyyy-mm-dd}
@@ -24,7 +25,7 @@ beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 returned is inclusive of this date.  Defaults to the current system date.}
 
-\item{api_key}{A \code{character} string specifying a valid email address to use
+\item{api_key}{A \code{character} string providing a valid email address to use
 for the request.  The query will return an error if a valid email address
 is not provided.}
 }
@@ -97,17 +98,19 @@ interpolation method for \acronym{CLIMARC} data;}
 
 \section{Saving objects}{
 
-To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
+To save \dQuote{met} objects the \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}} is reexported.
+Note that when saving, comments from SILO will be included, but these will
+not be printed as a part of the resulting \code{met} object in your \R session.
 }
 
 \examples{
 \dontrun{
 # requires an API key as your email address
-# Source observation data for station Wongan Hills station, WA (008137)
+# Source observation data for Wongan Hills station, WA (008137)
 wd <- get_patched_point_apsim(
   station_code = "008137",
-  start_date = "20220401",
-  end_date = "20221101",
+  start_date = "20220101",
+  end_date = "20221231",
   api_key = "your_api_key"
 )
 }
@@ -125,6 +128,7 @@ of Hydrology}, Volume 66, 1-76.
 \seealso{
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},
 \code{\link{get_patched_point}()},
@@ -133,7 +137,8 @@ Other SILO:
 
 Other APSIM: 
 \code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()}
+\code{\link{get_dpird_apsim}()},
+\code{\link{reexports}}
 
 Other data fetching: 
 \code{\link{get_ag_bulletin}()},

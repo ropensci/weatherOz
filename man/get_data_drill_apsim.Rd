@@ -44,6 +44,10 @@ splining or kriging the observational data.  The returned values contain
 The grid spans 112° to 154°, -10° to -44° with resolution 0.05° latitude by
 0.05° longitude (approximately 5 km × 5 km).
 }
+\details{
+Note that when saving, comments from SILO will be included, but these will
+not be printed as a part of the resulting \code{met} object in your \R session.
+}
 \section{Included Values}{
 
 
@@ -88,7 +92,9 @@ interpolation method for \acronym{CLIMARC} data;}
 
 \section{Saving objects}{
 
-To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}}.
+To save \dQuote{met} objects the \code{\link[apsimx:write_apsim_met]{apsimx::write_apsim_met()}} is reexported.
+Note that when saving, comments from SILO will be included, but these will
+not be printed as a part of the resulting \code{met} object in your \R session.
 }
 
 \examples{
@@ -99,8 +105,8 @@ To save \dQuote{met} objects, please use \code{\link[apsimx:write_apsim_met]{aps
 wd <- get_data_drill_apsim(
   latitude = -27.85,
   longitude = 150.05,
-  start_date = "20220401",
-  end_date = "20221101",
+  start_date = "20220101",
+  end_date = "20221231",
   api_key = "your_api_key"
 )
 }
@@ -119,6 +125,7 @@ of Hydrology}, Volume 66, 1-76.
 \seealso{
 Other SILO: 
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_patched_point_apsim}()},
@@ -141,7 +148,8 @@ Other data fetching:
 
 Other APSIM: 
 \code{\link{get_dpird_apsim}()},
-\code{\link{get_patched_point_apsim}()}
+\code{\link{get_patched_point_apsim}()},
+\code{\link{reexports}}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam

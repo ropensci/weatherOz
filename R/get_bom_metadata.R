@@ -9,19 +9,21 @@
 #' @noRd
 
 .get_bom_metadata <- function() {
+  op <- options(timeout = 120L)
+  on.exit(options(op))
+
   file_in <- file.path(tempdir(), "stations.txt")
   if (!file.exists(file_in)) {
     tryCatch({
       zip_file <- file.path(tempdir(), "stations.zip")
-      curl::curl_download(
+      utils::download.file(
         url =
           "ftp://ftp.bom.gov.au/anon2/home/ncc/metadata/sitelists/stations.zip",
         destfile = zip_file,
         mode = "wb",
         quiet = TRUE
       )
-    },
-    error = function(x)
+    }, error = function(x)
       stop(
         "The BOM server with the station location information is not ",
         "responding. Please retry again later.\n",
@@ -34,51 +36,81 @@
 
   bom_stations <-
     data.table::setDT(
-      readr::read_fwf(
+      utils::read.fwf(
         file = file_in,
-        na = c("..", "...", ".....", " "),
+        widths = c(8, 6, 40, 8, 8, 10, 10, 15, 3, 11, 9, 7),
+        header = FALSE,
         skip = 4,
-        col_positions = readr::fwf_cols(
-          "station_code" = c(1, 8),
-          "dist" = c(9, 14),
-          "station_name" = c(15, 55),
-          "start" = c(56, 63),
-          "end" = c(64, 71),
-          "lat" = c(72, 80),
-          "lon" = c(81, 90),
-          "source" = c(91, 105),
-          "state" = c(106, 109),
-          "elev_m" = c(110, 120),
-          "bar_height.m" = c(121, 129),
-          "wmo" = c(130, 136)
+        col.names = c(
+          "Site",
+          "Dist",
+          "Site name",
+          "Start",
+          "End",
+          "Lat",
+          "Lon",
+          "Source",
+          "STA",
+          "Height (m)",
+          "Bar_ht",
+          "WMO"
         ),
-        col_types = c(
-          station_code = readr::col_character(),
-          dist = readr::col_character(),
-          site_name = readr::col_character(),
-          start = readr::col_integer(),
-          end = readr::col_integer(),
-          lat = readr::col_double(),
-          lon = readr::col_double(),
-          source = readr::col_character(),
-          state = readr::col_character(),
-          elev_m = readr::col_double(),
-          bar_height.m = readr::col_double(),
-          wmo = readr::col_integer()
-        ),
-        # drop last six rows
-        n_max = length(utils::count.fields(file_in)) - 6
+        nrows = length(utils::count.fields(file_in)) - 6,
+        comment.char = "",
+        allowEscapes = TRUE,
+        strip.white = TRUE,
+        colClasses = "character"
       )
     )
+  data.table::setnames(
+    x = bom_stations,
+    new = c(
+      "station_code",
+      "dist",
+      "station_name",
+      "start",
+      "end",
+      "latitude",
+      "longitude",
+      "source",
+      "state",
+      "elev_m",
+      "bar_height.m",
+      "wmo"
+    ),
+    old = c(
+      "Site",
+      "Dist",
+      "Site.name",
+      "Start",
+      "End",
+      "Lat",
+      "Lon",
+      "Source",
+      "STA",
+      "Height..m.",
+      "Bar_ht",
+      "WMO"
+    )
+  )
 
-  bom_stations[, station_code := trimws(station_code)]
+  # replace ".." and "....." with NA
+  bom_stations <-
+    bom_stations[, lapply(.SD, function(x)
+      replace(x, which(x == ".."), NA))]
+  bom_stations <-
+    bom_stations[, lapply(.SD, function(x)
+      replace(x, which(x == "....."), NA))]
+  bom_stations[, station_code := as.factor(station_code)]
   data.table::setkey(x = bom_stations, station_code)
-  bom_stations[, station_code := as.factor(sprintf("%06s", station_code))]
-  bom_stations[, station_name := trimws(station_name)]
   bom_stations[, station_name := .strcap(x = station_name)]
   bom_stations[, start := as.integer(start)]
   bom_stations[, end := as.integer(end)]
+  bom_stations[, latitude := as.numeric(latitude)]
+  bom_stations[, longitude := as.numeric(longitude)]
   bom_stations[, status := ifelse(!is.na(end), "closed", "open")]
+  bom_stations[, elev_m := as.numeric(elev_m)]
+  bom_stations[, wmo := as.numeric(wmo)]
   bom_stations[, dist := NULL]
   bom_stations[, source := NULL]
   bom_stations[, bar_height.m := NULL]
@@ -91,8 +123,8 @@
       "station_name",
       "start",
       "end",
-      "lat",
-      "lon",
+      "latitude",
+      "longitude",
       "state",
       "elev_m",
       "source",
@@ -101,10 +133,5 @@
     )
   )
 
-  data.table::setnames(
-    bom_stations,
-    old = c("lat", "lon"),
-    new = c("latitude", "longitude")
-  )
   return(bom_stations[])
 }

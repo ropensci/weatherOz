@@ -133,6 +133,9 @@ get_precis_forecast <- function(state = "AUS") {
 
 .parse_precis_forecast <- function(xml_url) {
 
+  op <- options(timeout = 120L)
+  on.exit(options(op))
+
   # load the XML from ftp
   if (substr(xml_url, 1, 3) == "ftp") {
     xml_object <- .get_url(xml_url)
@@ -161,7 +164,7 @@ get_precis_forecast <- function(state = "AUS") {
   on.exit(unlink(dbf_file))
 
   # fetch database from BOM server
-  curl::curl_download(
+  utils::download.file(
     "ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf",
     destfile = dbf_file,
     mode = "wb",

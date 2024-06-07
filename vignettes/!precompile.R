@@ -27,6 +27,16 @@ writeLines(replace, fileConn)
 close(fileConn)
 
 # remove file path such that vignettes will build with figures
+replace <- readLines("vignettes/weatherOz_for_DPIRD.Rmd")
+replace <- gsub("<img src=\"vignettes/", "<img src=\"", replace)
+# this replaces the .gif with .png extension, the radar .gif image is converted
+# when knitting
+replace <- gsub(".gif", ".png", replace)
+fileConn <- file("vignettes/weatherOz_for_DPIRD.Rmd")
+writeLines(replace, fileConn)
+close(fileConn)
+
+# remove file path such that vignettes will build with figures
 replace <- readLines("vignettes/weatherOz_for_BOM.Rmd")
 replace <- gsub("<img src=\"vignettes/", "<img src=\"", replace)
 # this replaces the .gif with .png extension, the radar .gif image is converted

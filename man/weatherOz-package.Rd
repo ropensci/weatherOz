@@ -8,13 +8,13 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides automated downloading, parsing and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES). As well as the Bureau of Meteorology (BOM) of the Australian government precis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files. DPIRD weather data are accessed through public APIs provided by DPIRD, \url{https://www.agric.wa.gov.au/weather-api-20}, providing access to weather station data from DPIRD's weather station network. Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001, \doi{ 10.1016/S1364-8152(01)00008-1}). DPIRD data are made available under a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU) license \url{https://creativecommons.org/licenses/by/3.0/au/deed.en}. SILO data are released under a Creative Commons Attribution 4.0 International licence (CC BY 4.0) \url{https://creativecommons.org/licenses/by/4.0/}. BOM data are (c) Australian Government Bureau of Meteorology and released under a Creative Commons (CC) Attribution 3.0 licence or Public Access Licence (PAL) as appropriate, see \url{http://www.bom.gov.au/other/copyright.shtml} for further details.
+Provides automated downloading, parsing and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development ('DPIRD') of Western Australia and by the Science and Technology Division of the Queensland Government's Department of Environment and Science ('DES'). As well as the Bureau of Meteorology ('BOM') of the Australian government precis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files. 'DPIRD' weather data are accessed through public 'APIs' provided by 'DPIRD', \url{https://www.agric.wa.gov.au/weather-api-20}, providing access to weather station data from the 'DPIRD' weather station network. Australia-wide weather data are based on data from the Australian Bureau of Meteorology ('BOM') data and accessed through 'SILO' (Scientific Information for Land Owners) \doi{ 10.1016/S1364-8152(01)00008-1}. 'DPIRD' data are made available under a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU) license \url{https://creativecommons.org/licenses/by/3.0/au/deed.en}. SILO data are released under a Creative Commons Attribution 4.0 International licence (CC BY 4.0) \url{https://creativecommons.org/licenses/by/4.0/}. 'BOM' data are (c) Australian Government Bureau of Meteorology and released under a Creative Commons (CC) Attribution 3.0 licence or Public Access Licence ('PAL') as appropriate, see \url{http://www.bom.gov.au/other/copyright.shtml} for further details.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/ropensci/weatherOz/}
-  \item \url{https://docs.ropensci.org/weatherOz}
+  \item \url{https://docs.ropensci.org/weatherOz/}
   \item Report bugs at \url{https://github.com/ropensci/weatherOz/issues}
 }
 
@@ -40,10 +40,11 @@ Other contributors:
   \item Keith Pembleton \email{keith.pembleton@usq.edu.au} (\href{https://orcid.org/0000-0002-1896-4516}{ORCID}) (Contributed code and ideas for the original 'bomrang' package that was used in the creation of 'weatherOz'.) [contributor]
   \item Maëlle Salmon \email{maelle.salmon@yahoo.se} (\href{https://orcid.org/0000-0002-2815-0399}{ORCID}) (Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.) [contributor]
   \item Jimmy Ng \email{jimmy.ng@dpird.wa.gov.au} [contributor]
-  \item Steve Collins \email{steve.collins@dpird.wa.gov.au} (Designed weatherOz's hex logo.) [contributor]
+  \item Steve Collins \email{steve.collins@dpird.wa.gov.au} (Designed the hex logo for 'weatherOz' hex logo.) [contributor]
   \item Laurens Geffert \email{laurensgeffert@gmail.com} [reviewer]
   \item Sam Rogers \email{sam.rogers@adelaide.edu.au} [reviewer]
   \item Western Australia Agriculture Authority (WAAA) [copyright holder]
+  \item Curtin University [copyright holder]
 }
 
 }

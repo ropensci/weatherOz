@@ -4,26 +4,17 @@
 \alias{get_dpird_extremes}
 \title{Get DPIRD Extreme Weather Event Summaries}
 \usage{
-get_dpird_extremes(
-  station_code,
-  values = "all",
-  include_closed = FALSE,
-  api_key
-)
+get_dpird_extremes(station_code, values = "all", api_key)
 }
 \arguments{
-\item{station_code}{A \code{character} string with the station code for the
-station of interest.}
+\item{station_code}{A \code{character} string or \code{factor} from
+\code{\link[=get_stations_metadata]{get_stations_metadata()}} of the \acronym{BOM} station code for the station
+of interest.}
 
 \item{values}{A \code{character} string with the type of extreme weather to
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to \code{all}, returning the full list of values unless otherwise
 specified.}
-
-\item{include_closed}{A \code{Boolean} value that defaults to \code{FALSE}.  If set to
-\code{TRUE} the query returns closed and open stations.  Closed stations are
-those that have been turned off and no longer report data.  They may be
-useful for historical purposes.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
@@ -122,6 +113,7 @@ Other DPIRD:
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{find_nearby_stations}()},
+\code{\link{find_stations_in}()},
 \code{\link{get_dpird_apsim}()},
 \code{\link{get_dpird_availability}()},
 \code{\link{get_dpird_minute}()},
