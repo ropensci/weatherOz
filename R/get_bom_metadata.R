@@ -9,7 +9,7 @@
 #' @noRd
 
 .get_bom_metadata <- function() {
-  op <- options(timeout = 480L)
+  op <- options(timeout = 600L)
   on.exit(options(op))
 
   file_in <- file.path(tempdir(), "stations.txt")

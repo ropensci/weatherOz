@@ -41,7 +41,7 @@
 
 get_available_radar <- function(radar_id = "all") {
 
-  op <- options(timeout = 480L)
+  op <- options(timeout = 600L)
   on.exit(options(op))
 
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar/"
@@ -50,8 +50,8 @@ get_available_radar <- function(radar_id = "all") {
   curl::handle_setopt(
     handle = list_files,
     TCP_KEEPALIVE = 200000L,
-    CONNECTTIMEOUT = 480L,
-    TIMEOUT = 480L,
+    CONNECTTIMEOUT = 600L,
+    TIMEOUT = 600L,
     ftp_use_epsv = TRUE,
     dirlistonly = TRUE
   )
@@ -168,7 +168,7 @@ get_radar_imagery <- get_radar <-
       )
     }
 
-    op <- options(timeout = 480L)
+    op <- options(timeout = 600L)
     on.exit(options(op))
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar"

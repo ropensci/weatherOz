@@ -442,7 +442,7 @@
 
 .get_url <- function(remote_file) {
 
-  op <- options(timeout = 480L)
+  op <- options(timeout = 600L)
   on.exit(options(op))
 
   bom_file <- file.path(tempdir(), "BOM_file.xml")
