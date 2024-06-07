@@ -80,13 +80,6 @@
     },
     {
       "@type": "Person",
-      "givenName": "Keith",
-      "familyName": "Pembleton",
-      "email": "keith.pembleton@usq.edu.au",
-      "@id": "https://orcid.org/0000-0002-1896-4516"
-    },
-    {
-      "@type": "Person",
       "givenName": "Adam H.",
       "familyName": "Sparks",
       "email": "adamhsparks@gmail.com",
@@ -94,6 +87,13 @@
     }
   ],
   "contributor": [
+    {
+      "@type": "Person",
+      "givenName": "Keith",
+      "familyName": "Pembleton",
+      "email": "keith.pembleton@usq.edu.au",
+      "@id": "https://orcid.org/0000-0002-1896-4516"
+    },
     {
       "@type": "Person",
       "givenName": "Maëlle",
@@ -542,7 +542,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "15360.106KB",
+  "fileSize": "15374.213KB",
   "releaseNotes": "https://github.com/ropensci/weatherOz/blob/master/NEWS.md",
   "readme": "https://github.com/ropensci/weatherOz/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml", "https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml", "https://app.codecov.io/gh/ropensci/weatherOz"],

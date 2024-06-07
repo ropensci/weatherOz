@@ -93,7 +93,6 @@ apparentAirTemperatureMin
 apparentAirTemperatureMinTime
 apsim
 apsimx
-au
 availabilityCurrentHour
 availabilityLast
 availabilityMonthToDateSince
@@ -110,6 +109,7 @@ barometricPressureMin
 barometricPressureMinTime
 batteryMinVoltage
 batteryMinVoltageDateTime
+bomrang
 capitalised
 centre
 chillHours
@@ -189,7 +189,6 @@ https
 kilometres
 licence
 licenced
-longpaddock
 magick
 mailR
 metre
@@ -207,7 +206,6 @@ panEvaporation
 png
 pre
 précis
-qld
 rOpenSci
 recognise
 recognising
