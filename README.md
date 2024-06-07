@@ -8,12 +8,14 @@
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
-[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
-[![R-CMD-check](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/DPIRD-FSI/weatherOz/actions/workflows/test-coverage.yaml)
-[![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://codecov.io/gh/ropensci/weatherOz)
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
 [![status](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b/status.svg)](https://joss.theoj.org/papers/44a93e6baee10f5212735041123d400b)
-<!-- badges: end -->
+[![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml)
+[![test-coverage](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml)
+[![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://app.codecov.io/gh/ropensci/weatherOz)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 
 <!-- badges: end -->
 
@@ -171,12 +173,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-06-05      0.9              25
-#> 2:     11.7              25 254.5 m 2024-06-05      0.0              25
-#> 3:      7.8              25 254.5 m 2024-06-05      0.0              25
-#> 4:     10.6              25 254.5 m 2024-06-05      0.0              25
-#> 5:     13.3              25 254.5 m 2024-06-05      0.0              25
-#> 6:     14.7              25 254.5 m 2024-06-05      1.8              25
+#> 1:      9.8              25 254.5 m 2024-06-07      0.9              25
+#> 2:     11.7              25 254.5 m 2024-06-07      0.0              25
+#> 3:      7.8              25 254.5 m 2024-06-07      0.0              25
+#> 4:     10.6              25 254.5 m 2024-06-07      0.0              25
+#> 5:     13.3              25 254.5 m 2024-06-07      0.0              25
+#> 6:     14.7              25 254.5 m 2024-06-07      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
