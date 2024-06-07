@@ -49,8 +49,9 @@ get_available_radar <- function(radar_id = "all") {
   list_files <- curl::new_handle()
   curl::handle_setopt(
     handle = list_files,
-    TCP_KEEPALIVE = 200000,
-    CONNECTTIMEOUT = 90,
+    TCP_KEEPALIVE = 200000L,
+    CONNECTTIMEOUT = 480L,
+    TIMEOUT = 480L,
     ftp_use_epsv = TRUE,
     dirlistonly = TRUE
   )

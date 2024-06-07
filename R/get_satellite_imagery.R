@@ -264,14 +264,10 @@ get_satellite_imagery <- get_satellite <-
 #' @noRd
 #' @autoglobal
 .ftp_images <- function(product_id, bom_server) {
-  # define custom useragent and handle for communicating with BOM servers
-  USERAGENT <- sprintf("{weatherOz} R package (%s)",
-                       utils::packageVersion("weatherOz"))
   # set a custom user-agent, restore original settings on exit
   # required for #130 - BOM returns 403 for RStudio
   op <- options()
   on.exit(options(op))
-  options(HTTPUserAgent = USERAGENT)
 
   # BOM's FTP server can timeout too quickly
   # Also, BOM's http server sometimes sends a http response of 200, "all good",
@@ -281,9 +277,8 @@ get_satellite_imagery <- get_satellite <-
   curl::handle_setopt(
     handle = list_files,
     TCP_KEEPALIVE = 60L,
-    CONNECTTIMEOUT = 60L,
-    timeout = 480L,
-    USERAGENT = USERAGENT,
+    CONNECTTIMEOUT = 480L,
+    TIMEOUT = 480L,
     ftp_use_epsv = TRUE,
     dirlistonly = TRUE
   )
