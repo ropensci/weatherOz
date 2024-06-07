@@ -39,7 +39,7 @@
 
 get_available_radar <- function(radar_id = "all") {
 
-  op <- options(timeout = 120L)
+  op <- options(timeout = 480L)
   on.exit(options(op))
 
   ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar/"
@@ -165,7 +165,7 @@ get_radar_imagery <- get_radar <-
       )
     }
 
-    op <- options(timeout = 120L)
+    op <- options(timeout = 480L)
     on.exit(options(op))
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/radar"

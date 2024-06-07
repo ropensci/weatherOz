@@ -38,7 +38,7 @@ find_forecast_towns <-
 
     file_dbf <- file.path(tempdir(), "AAC_codes.dbf")
 
-    op <- options(timeout = 120L)
+    op <- options(timeout = 480L)
     on.exit(options(op))
 
     on.exit(unlink(file_dbf))

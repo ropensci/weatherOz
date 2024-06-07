@@ -133,7 +133,7 @@ get_precis_forecast <- function(state = "AUS") {
 
 .parse_precis_forecast <- function(xml_url) {
 
-  op <- options(timeout = 120L)
+  op <- options(timeout = 480L)
   on.exit(options(op))
 
   # load the XML from ftp

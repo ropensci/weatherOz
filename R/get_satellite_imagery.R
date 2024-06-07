@@ -152,7 +152,7 @@ get_satellite_imagery <- get_satellite <-
       stop("{weatherOz} only supports working with one Product ID at a time\n")
     }
 
-    op <- options(timeout = 120L)
+    op <- options(timeout = 480L)
     on.exit(options(op))
 
     ftp_base <- "ftp://ftp.bom.gov.au/anon/gen/gms/"
@@ -278,7 +278,7 @@ get_satellite_imagery <- get_satellite <-
     handle = list_files,
     TCP_KEEPALIVE = 60L,
     CONNECTTIMEOUT = 60L,
-    TIMEOUT = 120L,
+    timeout = 480L,
     USERAGENT = USERAGENT,
     ftp_use_epsv = TRUE,
     dirlistonly = TRUE
