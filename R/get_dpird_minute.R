@@ -54,10 +54,10 @@
 #'   station_code = "SP",
 #'   start_date_time = "2023-02-01 13:00:00",
 #'   minutes = 1440,
-#'   api_key = "your_api_key",
 #'   values = c("airTemperature",
 #'              "solarIrradiance",
-#'              "wind")
+#'              "wind"),
+#'   api_key = "your_api_key"
 #' )
 #' }
 #'

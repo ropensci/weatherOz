@@ -52,7 +52,7 @@
 #'   Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 #'   <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>.
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}, and Paul
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}, and Paul
 #'   Melloy, \email{paul@@melloy.com.au}
 #'
 #' @seealso [parse_ag_bulletin]

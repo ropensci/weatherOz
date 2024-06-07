@@ -48,10 +48,12 @@
 #' # 1km FD GEOS GIS images
 #' imagery <- get_available_imagery(product_id = "IDE00425")
 #'
+#' imagery
+#'
 #' @family BOM
 #' @family metadata
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @autoglobal
 #' @export
 
@@ -132,12 +134,14 @@ get_available_imagery <- function(product_id = "all") {
 #' # GEOS GIS [terra::SpatRaster] object for most recent single scan available
 #'
 #' imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
+#' plot(imagery)
 #'
 #' # Get a list of available image files and use that to specify files for
 #' # download, downloading the two most recent files available
 #'
 #' avail <- get_available_imagery(product_id = "IDE00425")
 #' imagery <- get_satellite_imagery(product_id = avail, scans = 2)
+#' plot(imagery)
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @rdname get_satellite_imagery

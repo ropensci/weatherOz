@@ -83,7 +83,7 @@ Other data fetching:
 \code{\link{get_satellite_imagery}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}, Keith
+Adam H. Sparks, \email{adamhsparks@gmail.com}, Keith
 Pembleton, \email{keith.pembleton@usq.edu.au}, and Paul Melloy,
 \email{paul@melloy.com.au}
 }

@@ -42,7 +42,7 @@
 #'               basename("ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ60604.xml")),
 #'               mode = "wb")
 #'
-#' parse_ag_bulletin(state = "WA", filepath = tempdir())
+#' parse_ag_bulletin(state = "QLD", filepath = tempdir())
 #'
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of
@@ -59,7 +59,7 @@
 #'   Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
 #'   <http://www.bom.gov.au/climate/cdo/about/site-num.shtml>.
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}, and Paul
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}, and Paul
 #'   Melloy, \email{paul@@melloy.com.au}
 #'
 #' @family BOM

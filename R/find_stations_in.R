@@ -64,13 +64,13 @@
 #' # south-western portion of WA and plot it with {ggplot2} showing open/closed
 #' # stations just to be sure they're inside the area of interest.
 #'
-#' # As this is in WA, we can use the DPIRD network, so we need our API key here
+#' # As this is in WA, we can use the DPIRD network, so we need our API key.
+#' # Using the `south_west_agricultural_region` {sf} object provided.
 #'
 #' sw_wa <- find_stations_in(
 #'   x = south_west_agricultural_region,
 #'   api_key = "your_api_key",
-#'   include_closed = TRUE,
-#'   crs = sf::st_crs(south_west_agricultural_region)
+#'   include_closed = TRUE
 #' )
 #'
 #' sw_wa

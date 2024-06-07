@@ -45,7 +45,7 @@
 #'               basename("ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ11295.xml")),
 #'               mode = "wb")
 #'
-#' parse_precis_forecast(state = "WA", filepath = tempdir())
+#' parse_precis_forecast(state = "QLD", filepath = tempdir())
 #'
 #' @references
 #' Forecast data come from Australian Bureau of Meteorology (\acronym{BOM})
@@ -58,7 +58,7 @@
 #'   \acronym{DBF} file portion of a shapefile, \cr
 #'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}, and Keith
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}, and Keith
 #'   Pembleton, \email{keith.pembleton@@usq.edu.au}, and Paul Melloy,
 #'   \email{paul@@melloy.com.au}
 #'

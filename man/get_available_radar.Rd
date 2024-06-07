@@ -30,6 +30,8 @@ Valid \acronym{BOM} \acronym{radar} ID for each location required.
 
 # Check availability radar imagery for Wollongong (radar_id = 3)
 imagery <- get_available_radar(radar_id = 3)
+
+imagery
 \dontshow{\}) # examplesIf}
 }
 \references{

@@ -90,7 +90,7 @@
 #'
 #' xtreme <- get_dpird_extremes(
 #'   station_code = "BR",
-#'   type = c("erosionCondition",
+#'   values = c("erosionCondition",
 #'            "heatCondition"),
 #'   api_key = "your_api_key"
 #' )
@@ -188,5 +188,5 @@ get_dpird_extremes <- function(station_code,
   out[, station_code := as.factor(station_code)]
   data.table::setkey(x = out, cols = station_code)
   data.table::setcolorder(out, c("station_code", "longitude", "latitude"))
-  return(out)
+  return(out[])
 }

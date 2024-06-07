@@ -100,7 +100,7 @@ Fetch nicely formatted individual extreme weather summaries from the
 
 xtreme <- get_dpird_extremes(
   station_code = "BR",
-  type = c("erosionCondition",
+  values = c("erosionCondition",
            "heatCondition"),
   api_key = "your_api_key"
 )

@@ -71,12 +71,14 @@ functionality any longer due to issues with \acronym{CRAN} and
 # GEOS GIS [terra::SpatRaster] object for most recent single scan available
 
 imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
+plot(imagery)
 
 # Get a list of available image files and use that to specify files for
 # download, downloading the two most recent files available
 
 avail <- get_available_imagery(product_id = "IDE00425")
 imagery <- get_satellite_imagery(product_id = avail, scans = 2)
+plot(imagery)
 \dontshow{\}) # examplesIf}
 }
 \references{

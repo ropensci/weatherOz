@@ -43,7 +43,7 @@
 #'   \acronym{DBF} file portion of a shapefile, \cr
 #'   <ftp://ftp.bom.gov.au/anon/home/adfd/spatial/IDM00013.dbf>.
 #'
-#' @author Adam H. Sparks, \email{adamhsparks@@dpird.wa.gov.au}, Keith
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}, Keith
 #'  Pembleton, \email{keith.pembleton@@usq.edu.au}, and Paul Melloy,
 #'  \email{paul@@melloy.com.au}
 #'

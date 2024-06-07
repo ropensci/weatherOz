@@ -52,6 +52,8 @@ AUS equirect. GIS}
 # Check availability of AHI VIS (true colour) / IR (Ch13 greyscale) composite
 # 1km FD GEOS GIS images
 imagery <- get_available_imagery(product_id = "IDE00425")
+
+imagery
 \dontshow{\}) # examplesIf}
 }
 \references{
@@ -80,7 +82,7 @@ Other metadata:
 \code{\link{get_stations_metadata}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}
+Adam H. Sparks, \email{adamhsparks@gmail.com}
 }
 \concept{BOM}
 \concept{metadata}

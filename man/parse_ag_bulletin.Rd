@@ -52,7 +52,7 @@ utils::download.file(url = "ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ60604.xml",
               basename("ftp://ftp.bom.gov.au/anon/gen/fwo/IDQ60604.xml")),
               mode = "wb")
 
-parse_ag_bulletin(state = "WA", filepath = tempdir())
+parse_ag_bulletin(state = "QLD", filepath = tempdir())
 \dontshow{\}) # examplesIf}
 }
 \references{
@@ -90,7 +90,7 @@ Other parse:
 \code{\link{parse_precis_forecast}()}
 }
 \author{
-Adam H. Sparks, \email{adamhsparks@dpird.wa.gov.au}, and Paul
+Adam H. Sparks, \email{adamhsparks@gmail.com}, and Paul
 Melloy, \email{paul@melloy.com.au}
 }
 \concept{BOM}
