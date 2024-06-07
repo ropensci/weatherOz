@@ -48,16 +48,17 @@ Description: Provides automated downloading, parsing and formatting of
     access to weather station data from the 'DPIRD' weather station
     network.  Australia-wide weather data are based on data from the
     Australian Bureau of Meteorology ('BOM') data and accessed through
-    'SILO' (Scientific Information for Land Owners) <doi:
-    10.1016/S1364-8152(01)00008-1>.  'DPIRD' data are made available under
-    a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU) license
-    <https://creativecommons.org/licenses/by/3.0/au/deed.en>.  SILO data
-    are released under a Creative Commons Attribution 4.0 International
-    licence (CC BY 4.0) <https://creativecommons.org/licenses/by/4.0/>.
-    'BOM' data are (c) Australian Government Bureau of Meteorology and
-    released under a Creative Commons (CC) Attribution 3.0 licence or
-    Public Access Licence ('PAL') as appropriate, see
-    <http://www.bom.gov.au/other/copyright.shtml> for further details.
+    'SILO' (Scientific Information for Land Owners) Jeffrey et al. (2001)
+    <doi:10.1016/S1364-8152(01)00008-1>.  'DPIRD' data are made available
+    under a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU)
+    license <https://creativecommons.org/licenses/by/3.0/au/deed.en>.
+    SILO data are released under a Creative Commons Attribution 4.0
+    International licence (CC BY 4.0)
+    <https://creativecommons.org/licenses/by/4.0/>. 'BOM' data are (c)
+    Australian Government Bureau of Meteorology and released under a
+    Creative Commons (CC) Attribution 3.0 licence or Public Access Licence
+    ('PAL') as appropriate, see <http://www.bom.gov.au/other/copyright.shtml>
+    for further details.
 License: GPL (>= 3)
 URL: https://github.com/ropensci/weatherOz/,
     https://docs.ropensci.org/weatherOz/
