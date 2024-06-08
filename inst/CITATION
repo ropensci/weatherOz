@@ -1,0 +1,43 @@
+bibentry(
+  bibtype = "Article",
+  author    = c(
+  person("Rodrigo", "Pires"),
+  person("Anna", "Hepworth"),
+  person("Rebecca", "O'Leary"),
+  person("Jonathan", "Carroll"),
+  person("James", "Goldie"),
+  person("Dean", "Marchiori"),
+  person("Paul", "Melloy"),
+  person("Mark", "Padgham"),
+  person("Hugh", "Parsonage"),
+  person(c(("Adam H."), "Sparks"))
+  ),
+  journal   = "Journal of Open Source Software",
+  title     = "weatherOz: An API Client for Australian Weather and Climate Data Resources in R",
+  year      = "2024",
+  number    = "98",
+  pages     = "6717",
+  volume    = "9",
+  doi       = "10.21105/joss.06717",
+  publisher = "The Open Journal",
+  url       = "https://doi.org/10.21105/joss.06717")
+
+bibentry(
+  bibtype = "Manual",
+  title = "{weatherOz}: An API Client for Australian Weather and Climate Data Resources in R",
+  author = c(
+  person("Rodrigo", "Pires"),
+  person("Anna", "Hepworth"),
+  person("Rebecca", "O'Leary"),
+  person("Jonathan", "Carroll"),
+  person("James", "Goldie"),
+  person("Dean", "Marchiori"),
+  person("Paul", "Melloy"),
+  person("Mark", "Padgham"),
+  person("Hugh", "Parsonage"),
+  person(c("Adam H."), "Sparks")
+  ),
+  year = sub("-.*", "", meta$Date),
+  note = sprintf("R package version %s", meta$Version),
+  doi = "10.5281/zenodo.8191283",
+  url = "https://docs.ropensci.org/weatherOz/")
