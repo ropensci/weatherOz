@@ -91,7 +91,7 @@
       "@type": "Person",
       "givenName": "Keith",
       "familyName": "Pembleton",
-      "email": "keith.pembleton@usq.edu.au",
+      "email": "keith.pembleton@unisq.edu.au",
       "@id": "https://orcid.org/0000-0002-1896-4516"
     },
     {
@@ -542,7 +542,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "15375.499KB",
+  "fileSize": "15375.524KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
