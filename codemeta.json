@@ -542,7 +542,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "15375.524KB",
+  "fileSize": "15375.516KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -594,8 +594,9 @@
           "familyName": "Parsonage"
         },
         {
-          "@type": "Organization",
-          "name": ["Adam H.", "Sparks"]
+          "@type": "Person",
+          "givenName": "Adam H.",
+          "familyName": "Sparks"
         }
       ],
       "name": "weatherOz: An API Client for Australian Weather and Climate Data Resources in R",

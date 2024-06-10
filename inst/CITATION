@@ -10,7 +10,7 @@ bibentry(
   person("Paul", "Melloy"),
   person("Mark", "Padgham"),
   person("Hugh", "Parsonage"),
-  person(c(("Adam H."), "Sparks"))
+  person("Adam H.", "Sparks")
   ),
   journal   = "Journal of Open Source Software",
   title     = "weatherOz: An API Client for Australian Weather and Climate Data Resources in R",
@@ -35,7 +35,7 @@ bibentry(
   person("Paul", "Melloy"),
   person("Mark", "Padgham"),
   person("Hugh", "Parsonage"),
-  person(c("Adam H."), "Sparks")
+  person("Adam H.", "Sparks")
   ),
   year = sub("-.*", "", meta$Date),
   note = sprintf("R package version %s", meta$Version),
