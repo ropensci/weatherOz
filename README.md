@@ -5,17 +5,15 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
-[![Status at rOpenSci Software Peer
-Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
-[![status](https://joss.theoj.org/papers/10.21105/joss.06717/status.svg)](https://joss.theoj.org/papers/10.21105/joss.06717)
+[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.06717/status.svg)](https://doi.org/10.21105/joss.06717)
 [![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml)
 [![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://app.codecov.io/gh/ropensci/weatherOz)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
+[![weatherOz status badge](https://ropensci.r-universe.dev/badges/weatherOz)](https://ropensci.r-universe.dev)
+[![CRAN status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 
 <!-- badges: end -->
 
