@@ -2,6 +2,10 @@
 
 ## Major Changes
 
+* Addressed comments after initial CRAN submission (reduce file size and update links to packages/function in the documentation).
+
+* Published manuscript describing package in the [Journal of Open Source Software](https://doi.org/10.21105/joss.06717)
+
 * Package was [peer reviewed](https://github.com/ropensci/software-review/issues/598).
 
 * Changes the name of the function `get_station_metadata()` to `get_stations_metadata()` to avoid clashes with {stationaRy}.

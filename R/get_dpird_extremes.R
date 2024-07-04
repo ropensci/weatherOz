@@ -76,7 +76,7 @@
 #' * heatConditionYearToDateMinutes, and
 #' * heatConditionYearToDateStartTime
 #'
-#' @return a [data.table] of one row with `station_code`,
+#' @return a [data.table::data.table()] of one row with `station_code`,
 #'   `station_name`, `latitude`, `longitude`, `date_time` of the query and the
 #'   extreme weather information according to the value(s) selected.
 #'

@@ -26,7 +26,7 @@ message.
 }
 \description{
 Fetch \acronym{BOM} radar imagery from \url{ftp://ftp.bom.gov.au/anon/gen/radar/}
-and return a \link{magick} image object.  Files available are the
+and return a \CRANpkg{magick} image object.  Files available are the
 most recent radar snapshot which are updated approximately every 6 to 10
 minutes.  It is suggested to check file availability first by using
 \code{\link[=get_available_radar]{get_available_radar()}}.

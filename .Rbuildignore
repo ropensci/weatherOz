@@ -18,3 +18,7 @@
 ^pkgdown$
 ^README\.Rmd$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
+^inst/paper$
+^inst/CITATION$
+^tests/fixtures$

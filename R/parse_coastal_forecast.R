@@ -31,7 +31,7 @@
 #'   the files are all present in the directory.
 #'
 #' @return
-#' A [data.table] of an Australia \acronym{BOM} Coastal Waters
+#' A [data.table::data.table()] of an Australia \acronym{BOM} Coastal Waters
 #'   Forecast.
 #'
 #' @examplesIf interactive()

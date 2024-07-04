@@ -45,7 +45,7 @@ stations in the \acronym{DPIRD} network should be included in the results.
 Defaults to \code{FALSE} with closed stations not included.}
 }
 \value{
-A \link{data.table} with \code{station_code}, \code{station_name},
+A \code{\link[data.table:data.table]{data.table::data.table()}} with \code{station_code}, \code{station_name},
 \code{latitude}, \code{longitude}, \code{elev_m}, \code{state}, \code{owner}, and \code{distance}.
 Data are sorted by increasing distance from station or location of
 interest.

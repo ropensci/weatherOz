@@ -21,7 +21,7 @@ specified.}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-a \link{data.table} of one row with \code{station_code},
+a \code{\link[data.table:data.table]{data.table::data.table()}} of one row with \code{station_code},
 \code{station_name}, \code{latitude}, \code{longitude}, \code{date_time} of the query and the
 extreme weather information according to the value(s) selected.
 }

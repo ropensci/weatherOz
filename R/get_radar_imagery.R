@@ -14,7 +14,7 @@
 #' @details Valid \acronym{BOM} \acronym{radar} ID for each location required.
 #'
 #' @return
-#' A [data.table] of all selected \acronym{radar} locations with
+#' A [data.table::data.table()] of all selected \acronym{radar} locations with
 #'   location information and \var{product_ids}.
 #'
 #' @references
@@ -109,7 +109,7 @@ get_available_radar <- function(radar_id = "all") {
 #' Get BOM Radar Imagery
 #'
 #' Fetch \acronym{BOM} radar imagery from <ftp://ftp.bom.gov.au/anon/gen/radar/>
-#'   and return a [magick] image object.  Files available are the
+#'   and return a \CRANpkg{magick} image object.  Files available are the
 #'   most recent radar snapshot which are updated approximately every 6 to 10
 #'   minutes.  It is suggested to check file availability first by using
 #'   [get_available_radar()].

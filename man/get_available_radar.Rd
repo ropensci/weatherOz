@@ -12,7 +12,7 @@ of available images will be returned.  Defaults to all images currently
 available.}
 }
 \value{
-A \link{data.table} of all selected \acronym{radar} locations with
+A \code{\link[data.table:data.table]{data.table::data.table()}} of all selected \acronym{radar} locations with
 location information and \var{product_ids}.
 }
 \description{

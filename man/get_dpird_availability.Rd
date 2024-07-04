@@ -38,7 +38,7 @@ Defaults to \code{availability}, returning metadata for all stations.}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-a \link{data.table}  with \code{station_code} and the requested
+a \code{\link[data.table:data.table]{data.table::data.table()}}  with \code{station_code} and the requested
 metadata.
 }
 \description{

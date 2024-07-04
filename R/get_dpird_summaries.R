@@ -124,9 +124,9 @@
 #'   * windAvgSpeed, and
 #'   * windMaxSpeed
 #'
-#' @return a [data.table] with `station_code` and the date interval
-#'   queried together with the requested weather variables in alphabetical
-#'   order.  The first ten columns will always be:
+#' @return a [data.table::data.table()] with `station_code` and the date
+#'   interval queried together with the requested weather variables in
+#'   alphabetical order.  The first ten columns will always be:
 #'
 #'   * `station_code`,
 #'   * `station_name`,
@@ -581,7 +581,8 @@ get_dpird_summaries <- function(station_code,
 #' @param .values a character vector with the variables to query. See the
 #' `get_dpird_summaries()` for further details.
 #'
-#' @return a tidy `data.table` with station id and requested weather summaries
+#' @return a tidy [data.table::data.table()] with station id and requested
+#'  weather summaries
 #'
 #' @noRd
 #' @autoglobal

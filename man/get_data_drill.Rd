@@ -38,8 +38,8 @@ for the request.  The query will return an error if a valid email address
 is not provided.}
 }
 \value{
-a \link{data.table} with the weather data queried with the
-weather variables in alphabetical order. The first eight columns will
+a \code{\link[data.table:data.table]{data.table::data.table()}} with the weather data queried with
+the weather variables in alphabetical order. The first eight columns will
 always be:
 \itemize{
 \item \code{longitude},

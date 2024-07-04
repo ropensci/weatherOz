@@ -51,7 +51,7 @@ about \acronym{DPIRD}'s weather station(s), this does not affect the
 will be \code{NA}.  Defaults to \code{FALSE}.}
 }
 \value{
-A \link{data.table} of \acronym{BOM} weather stations'
+A \code{\link[data.table:data.table]{data.table::data.table()}} of \acronym{BOM} weather stations'
 metadata for stations available from \acronym{SILO} and weather stations'
 metadata for stations available from \acronym{DPIRD}'s Weather 2.0
 \acronym{API} with the following columns sorted by \code{state} and

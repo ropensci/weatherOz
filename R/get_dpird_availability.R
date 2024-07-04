@@ -41,7 +41,7 @@
 #'   * availabilityYearToDateSince12AM, and
 #'   * availabilityYearToDateTo9AM
 #'
-#' @return a [data.table]  with `station_code` and the requested
+#' @return a [data.table::data.table()]  with `station_code` and the requested
 #'   metadata.
 #'
 #' @family DPIRD
@@ -175,8 +175,8 @@ get_dpird_availability <-
 #'
 #' @param .ret_list a list with the DPIRD weather API response
 #'
-#' @return a tidy `data.table` with station id and requested availability
-#'  metadata
+#' @return a tidy `data.table` with station id and requested
+#'  availability metadata
 #'
 #' @noRd
 #' @autoglobal

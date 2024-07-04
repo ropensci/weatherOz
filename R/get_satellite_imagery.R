@@ -68,21 +68,22 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#'   [terra::SpatRaster] or [stars] object of GeoTIFF files.  Files are
-#'   available at ten minutes update frequency with a 24-hour delete time.  It
-#'   is suggested to check file availability first by using
+#'   \linkS4class{SpatRaster} or \CRANpkg{stars} object of GeoTIFF files.
+#'   Files are available at ten minutes update frequency with a 24-hour delete
+#'   time.  It is suggested to check file availability first by using
 #'   [get_available_imagery()].  Ported from \pkg{bomrang} with modifications.
 #'
 #' @param product_id `Character`. \acronym{BOM} product \acronym{ID} to download
-#'   and import as a [terra::SpatRaster] or [stars] class object.  A vector of
-#'   values from [get_available_imagery()] may be used here.  Value is required.
+#'   and import as a \linkS4class{SpatRaster} or \CRANpkg{stars} class object.
+#'   A vector of values from [get_available_imagery()] may be used here.
+#'   Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
 #'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan
 #'   available , 6 - the most recent hour available, 12 - the most recent 2
 #'   hours available, etc.  Negating will return the oldest files first.
 #'   Defaults to 1.  Value is optional.
 #' @param compat `Character`. A string indicating the \R package with which the
-#'   returned imagery should be formatted for use, one of [terra] or [stars].
+#'   returned imagery should be formatted for use, one of [terra] or \CRANpkg{stars}.
 #'   Defaults to \sQuote{terra}.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
@@ -116,9 +117,9 @@ get_available_imagery <- function(product_id = "all") {
 #' [get_available_imagery()]
 #'
 #' @return
-#' A [terra::SpatRaster] or [stars] class object as selected by the user by
-#'   specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
-#'    product \acronym{ID}, timestamp and band.
+#' A \linkS4class{SpatRaster} or \CRANpkg{stars} class object as selected
+#'   by the user by specifying `compat` of GeoTIFF images with layers named by
+#'    \acronym{BOM} product \acronym{ID}, timestamp and band.
 #'
 #' @note The original \pkg{bomrang} version of this function supported local
 #'   file caching using \CRANpkg{hoardr}.  This version does not support this
@@ -131,7 +132,8 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-#' # GEOS GIS [terra::SpatRaster] object for most recent single scan available
+#' # GEOS GIS `SpatRaster` object for most recent single scan
+#'  available
 #'
 #' imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 #' plot(imagery)

@@ -13,8 +13,8 @@ returning all state bulletins, see Details for more.}
 }
 \value{
 A data frame as a \code{weatherOz_tbl} object (inherits and is fully compatible
-with \link{data.table}) of Australia \acronym{BOM} agricultural bulletin
-information.
+with \code{\link[data.table:data.table]{data.table::data.table()}}) of Australia \acronym{BOM}
+agricultural bulletin information.
 }
 \description{
 Fetch the \acronym{BOM} agricultural bulletin information for a specified

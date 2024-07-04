@@ -24,7 +24,7 @@
 #'  }
 #'
 #' @return
-#' A [data.table] of an Australia \acronym{BOM} précis seven day
+#' A [data.table::data.table()] of an Australia \acronym{BOM} précis seven day
 #'   forecasts for \acronym{BOM} selected towns.
 #'
 #' @examplesIf interactive()

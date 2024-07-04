@@ -42,9 +42,9 @@ Defaults to \code{all} with all available values being returned.}
 \acronym{DPIRD} Weather 2.0 \acronym{API}.}
 }
 \value{
-a \link{data.table} with \code{station_code} and the date interval
-queried together with the requested weather variables in alphabetical
-order.  The first ten columns will always be:
+a \code{\link[data.table:data.table]{data.table::data.table()}} with \code{station_code} and the date
+interval queried together with the requested weather variables in
+alphabetical order.  The first ten columns will always be:
 \itemize{
 \item \code{station_code},
 \item \code{station_name},

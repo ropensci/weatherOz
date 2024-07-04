@@ -42,7 +42,7 @@
 #'   Universal Time \sQuote{UTC} returned by the \acronym{API} to Australian
 #'   Western Standard Time \sQuote{AWST}.
 #'
-#' @return a [data.table] with `station_code` and the date interval
+#' @return a [data.table::data.table()] with `station_code` and the date interval
 #'   queried together with the requested weather variables.
 #'
 #' @examples
@@ -208,8 +208,7 @@ get_dpird_minute <- function(station_code,
 #'
 #' @param .ret_list a list with the DPIRD weather API response
 #'
-#' @return a tidy (long) `data.table` with station id and requested weather
-#'  data.
+#' @return a tidy (long) `data.table` with station id and requested weather data.
 #'
 #' @noRd
 #' @autoglobal

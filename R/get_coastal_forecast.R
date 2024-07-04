@@ -23,7 +23,7 @@
 #'  }
 #'
 #' @return
-#' A [data.table] of an Australia \acronym{BOM} Coastal Waters
+#' A [data.table::data.table()] of an Australia \acronym{BOM} Coastal Waters
 #'   Forecast.
 #'
 #' @examplesIf interactive()
@@ -238,7 +238,7 @@ get_coastal_forecast <- function(state = "AUS") {
 #'
 #' @param xml_object coastal forecast XML object
 #'
-#' @return a data.table of the forecast for further refining
+#' @return a `data.table` of the forecast for further refining
 #' @keywords internal
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @autoglobal
