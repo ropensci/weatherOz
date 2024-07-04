@@ -21,4 +21,3 @@
 ^CRAN-SUBMISSION$
 ^inst/paper$
 ^inst/CITATION$
-^tests/fixtures$
