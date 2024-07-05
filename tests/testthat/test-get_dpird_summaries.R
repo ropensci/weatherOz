@@ -194,7 +194,7 @@ test_that("get_dpird_summaries() returns daily values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20171028",
-                end_date = "20181028",
+                end_date = "20171029",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "daily",
                 values = "wind"
