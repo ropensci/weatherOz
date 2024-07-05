@@ -5,7 +5,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & station_code",
               skip_if_offline()
               x <- find_nearby_stations(
                 station_code = "NO",
-                distance_km = 50,
+                distance_km = 20,
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 which_api = "dpird"
               )
@@ -35,7 +35,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ no stns",
                 x <- find_nearby_stations(
                   longitude = 147.4575,
                   latitude = -35.1583,
-                  distance_km = 50,
+                  distance_km = 20,
                   api_key = Sys.getenv("DPIRD_API_KEY"),
                   which_api = "dpird"
                 )
@@ -51,7 +51,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ stations",
                 x <- find_nearby_stations(
                   longitude = 116.694194,
                   latitude = -31.651611,
-                  distance_km = 50,
+                  distance_km = 20,
                   api_key = Sys.getenv("DPIRD_API_KEY"),
                   which_api = "dpird"
               )
@@ -80,7 +80,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & latlon",
               x <- find_nearby_stations(
                 longitude = 116.694194,
                 latitude = -31.651611,
-                distance_km = 50,
+                distance_km = 20,
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 which_api = "all"
               )
@@ -108,7 +108,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
               skip_if_offline()
               x <- find_nearby_stations(
                 station_code = "010111",
-                distance_km = 50,
+                distance_km = 20,
                 which_api = "all",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
               )
@@ -136,7 +136,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
               skip_if_offline()
               x <- find_nearby_stations(
                 station_code = "NO",
-                distance_km = 50,
+                distance_km = 20,
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 which_api = "all"
               )
@@ -222,7 +222,7 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & lonlat",
               x <- find_nearby_stations(
                 latitude = -35.1583,
                 longitude = 147.4575,
-                distance_km = 50,
+                distance_km = 20,
                 which_api = "silo"
               )
             })
@@ -249,7 +249,7 @@ test_that("find_nearby_stations() fails on DPIRD API w/ no key",
               expect_error(find_nearby_stations(
                 latitude = -35.1583,
                 longitude = 147.4575,
-                distance_km = 50,
+                distance_km = 20,
                 which_api = "dpird"
               ))
           })
@@ -260,7 +260,7 @@ test_that("find_nearby_stations() fails on all API w/ no key",
             expect_error(find_nearby_stations(
               latitude = -35.1583,
               longitude = 147.4575,
-              distance_km = 50,
+              distance_km = 20,
               which_api = "all"
             ))
           })

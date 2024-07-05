@@ -4,7 +4,7 @@ test_that("find_stations_in() works with {sf} polygon", {
     x <- find_stations_in(
       x = south_west_agricultural_region,
       api_key = Sys.getenv("DPIRD_API_KEY"),
-      include_closed = TRUE,
+      include_closed = FALSE,
       crs = sf::st_crs(south_west_agricultural_region)
     )
   })

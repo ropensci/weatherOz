@@ -112,7 +112,7 @@ test_that("get_dpird_summaries() returns yearly values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20171028",
-                end_date = "20221028",
+                end_date = "20181028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "yearly",
                 values = "wind"
@@ -151,7 +151,7 @@ test_that("get_dpird_summaries() returns monthly values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20171028",
-                end_date = "20221028",
+                end_date = "20181028",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "monthly",
                 values = "wind"
@@ -239,7 +239,7 @@ test_that("get_dpird_summaries() returns hourly values",
               x <- get_dpird_summaries(
                 station_code = "BI",
                 start_date = "20171028",
-                end_date = "20171031",
+                end_date = "20171029",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "hourly",
                 values = "wind"

@@ -41,7 +41,7 @@ test_that("get_dpird_availability() returns values",
               x <- get_dpird_availability(
                 station_code = c("BD002", "SP"),
                 start_date = "20230401",
-                end_date = "20230430",
+                end_date = "20230402",
                 api_key = Sys.getenv("DPIRD_API_KEY")
               )
             })

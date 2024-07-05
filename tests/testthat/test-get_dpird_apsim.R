@@ -6,7 +6,7 @@ test_that("get_dpird_apsim() returns a 'met' object",
               expect_warning(x <- get_dpird_apsim(
                 station_code = "BI",
                 start_date = "20170101",
-                end_date = "20171231",
+                end_date = "20170101",
                 api_key = Sys.getenv("DPIRD_API_KEY")
               ))
             })

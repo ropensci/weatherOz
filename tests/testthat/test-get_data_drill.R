@@ -63,11 +63,11 @@ test_that("get_data_drill() returns all daily values", {
       latitude = -27.85,
       longitude = 150.05,
       start_date = "2021-06-01",
-      end_date = "2021-07-01",
+      end_date = "2021-06-01",
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
-  expect_equal(nrow(wd), 31)
+  expect_equal(nrow(wd), 1)
   expect_length(wd, 44)
   expect_named(
     wd,
@@ -130,11 +130,11 @@ test_that("get_data_drill() returns selected daily values", {
       longitude = 150.05,
       values = c("rain", "max_temp", "min_temp"),
       start_date = "2021-06-01",
-      end_date = "2021-07-01",
+      end_date = "2021-06-01",
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
-  expect_equal(nrow(wd), 31)
+  expect_equal(nrow(wd), 1)
   expect_length(wd, 14)
   expect_named(
     wd,

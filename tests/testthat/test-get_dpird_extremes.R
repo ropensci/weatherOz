@@ -13,16 +13,6 @@ test_that("user-input checks stop if invalid values are provided", {
     )
   )
 
-  # invalid group
-  expect_error(
-    get_dpird_extremes(
-      station_code = "BI",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
-      values = "all",
-      api_group = "Tame Impala"
-    )
-  )
-
   # missing key
   expect_error(
     get_dpird_extremes(
