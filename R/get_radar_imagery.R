@@ -103,7 +103,7 @@ get_available_radar <- function(radar_id = "all") {
     stop("`radar_id` was not found",
          call. = FALSE)
   }
-  return(dat)
+  return(dat[])
 }
 
 #' Get BOM Radar Imagery
