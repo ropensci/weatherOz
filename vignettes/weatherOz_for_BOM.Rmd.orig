@@ -222,7 +222,7 @@ i <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
 
 `terra::plot()` has been re-exported to simplify visualising these files while using {weatherOz}.
 
-```{r plot_satellite, eval=TRUE}
+```{r plot_satellite, eval=FALSE}
 plot(i)
 ```
 
@@ -263,7 +263,7 @@ This value must be specified and the function will accept only one at a time.
 
 #### Example 8: Fetching Radar Imagery
 
-```{r get_radar_imagery, fig.height=9, fig.width=8, eval=TRUE}
+```{r get_radar_imagery, fig.height=9, fig.width=8, eval=FALSE}
 library(weatherOz)
 
 y <- get_radar_imagery(product_id = "IDR032")
