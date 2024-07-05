@@ -80,7 +80,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & latlon",
               x <- find_nearby_stations(
                 longitude = 116.694194,
                 latitude = -31.651611,
-                distance_km = 20,
+                distance_km = 10,
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 which_api = "all"
               )
@@ -108,7 +108,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
               skip_if_offline()
               x <- find_nearby_stations(
                 station_code = "010111",
-                distance_km = 20,
+                distance_km = 10,
                 which_api = "all",
                 api_key = Sys.getenv("DPIRD_API_KEY"),
               )
@@ -136,35 +136,6 @@ test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
               skip_if_offline()
               x <- find_nearby_stations(
                 station_code = "NO",
-                distance_km = 10,
-                api_key = Sys.getenv("DPIRD_API_KEY"),
-                which_api = "all"
-              )
-            })
-            expect_s3_class(x, "data.table")
-            expect_length(x, 8)
-            expect_named(
-              x,
-              c(
-                "station_code",
-                "station_name",
-                "longitude",
-                "latitude",
-                "state",
-                "elev_m",
-                "owner",
-                "distance_km"
-              )
-            )
-          })
-
-test_that("find_nearby_stations() w/ which_api = 'all' & lonlat",
-          {
-            vcr::use_cassette("nearby_all_stations_lonlat", {
-              skip_if_offline()
-              x <- find_nearby_stations(
-                longitude = 116.694194,
-                latitude = -31.651611,
                 distance_km = 10,
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 which_api = "all"
