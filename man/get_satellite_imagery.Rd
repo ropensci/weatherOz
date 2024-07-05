@@ -69,7 +69,7 @@ functionality any longer due to issues with \acronym{CRAN} and
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-# GEOS GIS `SpatRaster` object for most recent single scan
+# GEOS GIS \linkS4class{SpatRaster} object for most recent single scan
  available
 
 imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
