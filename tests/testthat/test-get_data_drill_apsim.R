@@ -43,16 +43,16 @@ test_that("get_data_drill_apsim() returns all daily values", {
   vcr::use_cassette("silo_get_data_drill_apsim", {
     skip_if_offline()
     withr::local_timezone(tz = "Australia/Perth")
-    expect_warning(wd <- get_data_drill_apsim(
+    wd <- get_data_drill_apsim(
       latitude = -27.85,
       longitude = 150.05,
       start_date = "2021-01-01",
-      end_date = "2021-01-02",
+      end_date = "2021-12-31",
       api_key = "slavish_moo_0k@icloud.com"
-    ))
+    )
   })
   expect_s3_class(wd, class = "met")
-  expect_equal(nrow(wd), 1)
+  expect_equal(nrow(wd), 364)
   expect_length(wd, 9)
   expect_named(wd,
                c(

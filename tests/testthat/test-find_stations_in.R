@@ -1,6 +1,6 @@
 
 test_that("find_stations_in() works with {sf} polygon", {
-  vcr::use_cassette("find_stations_in_polygon_all", {
+  vcr::use_cassette("metadata_all_cassette", {
     x <- find_stations_in(
       x = south_west_agricultural_region,
       api_key = Sys.getenv("DPIRD_API_KEY"),
@@ -31,7 +31,7 @@ test_that("find_stations_in() works with {sf} polygon", {
 })
 
 test_that("find_stations_in() works with {sf} polygon and centroid", {
-  vcr::use_cassette("find_stations_in_polygon_centroid", {
+  vcr::use_cassette("metadata_all_cassette", {
     x <- find_stations_in(
       x = south_west_agricultural_region,
       api_key = Sys.getenv("DPIRD_API_KEY"),
@@ -63,7 +63,7 @@ test_that("find_stations_in() works with {sf} polygon and centroid", {
 })
 
 test_that("find_stations_in() works with bbox", {
-  vcr::use_cassette("find_stations_in_bbox", {
+  vcr::use_cassette("metadata_all_cassette", {
     x <- find_stations_in(
       x = c(144.470215, -38.160476, 145.612793, -37.622934),
       which_api = "SILO",

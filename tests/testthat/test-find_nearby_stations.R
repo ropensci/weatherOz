@@ -160,7 +160,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
 
 test_that("find_nearby_stations() w/ which_api = 'silo' & station_code",
           {
-            vcr::use_cassette("nearby_silo_stations", {
+            vcr::use_cassette("metadata_silo_station", {
               skip_if_offline()
               x <- find_nearby_stations(
                 latitude = -35.1583,
@@ -188,7 +188,7 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & station_code",
 
 test_that("find_nearby_stations() w/ which_api = 'silo' & lonlat",
           {
-            vcr::use_cassette("nearby_silo_stations_lonlat", {
+            vcr::use_cassette("metadata_silo_station", {
               skip_if_offline()
               x <- find_nearby_stations(
                 latitude = -35.1583,

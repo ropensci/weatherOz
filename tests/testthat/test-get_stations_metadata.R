@@ -119,7 +119,7 @@ test_that("get_stations_metadata() functions properly for which_api = 'DPIRD'
 
 test_that("get_station_metata() functions properly for which_api = 'all'",
           {
-            vcr::use_cassette("metadata_all_apis", {
+            vcr::use_cassette("metadata_all_cassette", {
               skip_if_offline()
               x <-
                 get_stations_metadata(which_api = "all",
@@ -148,7 +148,7 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
 
 test_that("get_stations_metadata() fuzzy matches station names",
           {
-            vcr::use_cassette("metadata_fuzzy_match_station_name", {
+            vcr::use_cassette("metadata_all_cassette", {
               skip_if_offline()
               x <-
                 get_stations_metadata(api_key = Sys.getenv("DPIRD_API_KEY"),
@@ -180,7 +180,7 @@ test_that("get_stations_metadata() fuzzy matches station names",
 
 test_that("get_stations_metadata() matches station_codes",
             {
-              vcr::use_cassette("metadata_match_station_code", {
+              vcr::use_cassette("metadata_all_cassette", {
                 skip_if_offline()
                 x <-
                   get_stations_metadata(
