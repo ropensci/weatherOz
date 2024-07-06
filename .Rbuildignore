@@ -6,6 +6,8 @@
 ^\.travis\.yml$
 ^codecov\.yml$
 ^README\.Rmd$
+^CONTRIBUTING\.md$
+^LICENSE\.md$
 ^docs$
 ^codemeta\.json$
 ^cran-comments\.md$
