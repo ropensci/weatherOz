@@ -82,6 +82,28 @@ method for setting up your API keys, see [Chapter
 Teach You About R” by Bryan *et al.* for more on storing details in your
 .Renviron if you are unfamiliar.
 
+To get a DPIRD API key, you can use `get_key()` and it will direct you
+to the form to request a key and provides instructions for using
+`usethis::edit_r_environ()` to add your key to your .Renviron so that
+{weatherOz} will automatically find it. If you have already set up an
+API key, this will return that value for you.
+
+``` r
+get_key(source = "DPIRD")
+```
+
+You only need to provide an e-mail address for the SILO API. Using
+`get_key()` will provide you with instructions on what format to use in
+your .Renviron so that {weatherOz} will auto-recognise it and if you
+have already set up an API key, this will return that value for you.
+
+``` r
+get_key(source = "SILO")
+```
+
+Note that you do not need to do this separately, any function requiring
+an API key will prompt you if you don’t have one set.
+
 ## Example 1
 
 Source wind and erosion conditions for daily time interval from the
