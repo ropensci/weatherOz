@@ -55,6 +55,7 @@ Qld
 README
 Rayner
 Renviron
+Rprofile
 SHTML
 SILO's
 Selbourne
@@ -107,16 +108,16 @@ barometricPressureMax
 barometricPressureMaxTime
 barometricPressureMin
 barometricPressureMinTime
+bashrc
 batteryMinVoltage
 batteryMinVoltageDateTime
 bomrang
 capitalised
 centre
-centroid
-Centroid
 chillHours
 codecov
 colour
+config
 cron
 dateTime
 deltaT
@@ -255,3 +256,4 @@ xmin
 ymax
 ymin
 yyyy
+zshrc
