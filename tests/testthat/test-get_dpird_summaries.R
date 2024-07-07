@@ -4,7 +4,6 @@ test_that("user-input checks stop if invalid values are provided", {
     get_dpird_summaries(
       start_date = "20220501",
       end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "wind"
     )
@@ -15,7 +14,6 @@ test_that("user-input checks stop if invalid values are provided", {
     get_dpird_summaries(
       station_code = "BI",
       end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "wind"
     )
@@ -26,7 +24,6 @@ test_that("user-input checks stop if invalid values are provided", {
     get_dpird_summaries(
       station_code = "BI",
       start_date = "19800123",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "wind"
     )
@@ -38,24 +35,24 @@ test_that("user-input checks stop if invalid values are provided", {
       station_code = "BI",
       start_date = "20220601",
       end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "wind"
     )
   )
 
-  # missing api key -----
+  # no api_key -----
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
       start_date = "20220501",
       end_date = "20220501",
       interval = "daily",
+      api_key = "",
       values = "wind"
     )
   )
 
-  # invalid api key, e.g., SILO API key (email) -----
+  # n api_key, e.g., SILO API key (email) -----
   expect_error(
     get_dpird_summaries(
       station_code = "BI",
@@ -63,7 +60,7 @@ test_that("user-input checks stop if invalid values are provided", {
       end_date = "20220501",
       interval = "daily",
       values = "wind",
-      api_key = Sys.getenv("SILO_API_KEY")
+      api_key = ""
     )
   )
 
@@ -73,7 +70,6 @@ test_that("user-input checks stop if invalid values are provided", {
       station_code = "BI",
       start_date = "20220501",
       end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "daily",
       values = "phytophthora"
     )
@@ -85,7 +81,6 @@ test_that("user-input checks stop if invalid values are provided", {
       station_code = "BI",
       start_date = "20220501",
       end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "fortnightly",
       values = "wind"
     )
@@ -97,7 +92,6 @@ test_that("user-input checks stop if invalid values are provided", {
       station_code = "BI",
       start_date = "20180501",
       end_date = "20220501",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       interval = "30min",
       values = "wind"
     )
@@ -113,7 +107,6 @@ test_that("get_dpird_summaries() returns yearly values",
                 station_code = "BI",
                 start_date = "20171028",
                 end_date = "20181028",
-                api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "yearly",
                 values = "wind"
               )
@@ -152,7 +145,6 @@ test_that("get_dpird_summaries() returns monthly values",
                 station_code = "BI",
                 start_date = "20171028",
                 end_date = "20181028",
-                api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "monthly",
                 values = "wind"
               )

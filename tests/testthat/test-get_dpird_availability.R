@@ -1,25 +1,26 @@
 ## check user-inputs
 
+### no api_key
+
 test_that("get_dpird_availability() fails with bad user inputs", {
   expect_error(
     get_dpird_availability(
       station_code = "BD002",
       start_date = "20230401",
+      end_date = "20230430",
+      api_key = ""
+    )
+  )
+  expect_error(
+    get_dpird_availability(
+      station_code = "BD002",
       end_date = "20230430"
     )
   )
   expect_error(
     get_dpird_availability(
       station_code = "BD002",
-      end_date = "20230430",
-      api_key = Sys.getenv("DPIRD_API_KEY")
-    )
-  )
-  expect_error(
-    get_dpird_availability(
-      station_code = "BD002",
-      start_date = "20230430",
-      api_key = Sys.getenv("DPIRD_API_KEY")
+      start_date = "20230430"
     )
   )
 
@@ -41,8 +42,7 @@ test_that("get_dpird_availability() returns values",
               x <- get_dpird_availability(
                 station_code = c("BD002", "SP"),
                 start_date = "20230401",
-                end_date = "20230402",
-                api_key = Sys.getenv("DPIRD_API_KEY")
+                end_date = "20230402"
               )
             })
             expect_s3_class(x, "data.table")
@@ -70,7 +70,7 @@ test_that("get_dpird_availability() returns values",
             vcr::use_cassette("dpird_all_availability", {
               skip_if_offline()
               x <-
-                get_dpird_availability(api_key = Sys.getenv("DPIRD_API_KEY"))
+                get_dpird_availability()
             })
             expect_s3_class(x, "data.table")
             expect_equal(ncol(x), 15)

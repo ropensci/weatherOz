@@ -3,7 +3,6 @@ test_that("find_stations_in() works with {sf} polygon", {
   vcr::use_cassette("metadata_all_cassette", {
     x <- find_stations_in(
       x = south_west_agricultural_region,
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       include_closed = FALSE,
       crs = sf::st_crs(south_west_agricultural_region)
     )
@@ -34,7 +33,6 @@ test_that("find_stations_in() works with {sf} polygon and centroid", {
   vcr::use_cassette("metadata_all_cassette", {
     x <- find_stations_in(
       x = south_west_agricultural_region,
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       include_closed = FALSE,
       centroid = TRUE,
       crs = sf::st_crs(south_west_agricultural_region)
