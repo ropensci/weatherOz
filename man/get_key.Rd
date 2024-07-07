@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_key.R
 \name{get_key}
 \alias{get_key}
-\title{Function to Get or Set Up API Keys}
+\title{Get or Set Up API Keys}
 \usage{
 get_key(service)
 }

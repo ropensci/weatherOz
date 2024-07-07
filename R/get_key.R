@@ -1,4 +1,4 @@
-#' Function to Get or Set Up API Keys
+#' Get or Set Up API Keys
 #'
 #' Checks first to get key from your .Rprofile or .Renviron (or similar) file.
 #'   If it's not found, then it suggests setting it up.  Can be used to check
