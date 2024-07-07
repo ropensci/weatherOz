@@ -56,20 +56,20 @@ install.packages("weatherOz", repos = "https://ropensci.r-universe.dev")
 ## A Note on API Keys
 
 The examples in this README assume that you have stored your API key in your .Renviron file.
-See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan *et al.* for more on storing details in your .Renviron if you are unfamiliar.
+{weatherOz} will prompt you to set up your API keys automatically if you haven't.
+For more information on the preferred method for setting up your API keys, see [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan *et al.* for more on storing details in your .Renviron if you are unfamiliar.
 
 ## Example 1
 
 Source wind and erosion conditions for daily time interval from the DPIRD Weather 2.0 API.
 
-```{r summaries}
+```{r summaries, message=FALSE}
 library(weatherOz)
 
 wd <- get_dpird_summaries(
   station_code = "BI",
   start_date = "20220501",
   end_date = "20220502",
-  api_key = Sys.getenv("DPIRD_API_KEY"),
   interval = "daily",
   values = c(
     "wind",
@@ -98,8 +98,7 @@ wd <- get_data_drill(
     "max_temp",
     "min_temp",
     "rain"
-  ),
-  api_key = Sys.getenv("SILO_API_KEY")
+  )
 )
 
 head(wd)

@@ -5,15 +5,17 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![DOI](https://zenodo.org/badge/613750527.svg)](https://zenodo.org/badge/latestdoi/613750527)
-[![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
-[![DOI](https://joss.theoj.org/papers/10.21105/joss.06717/status.svg)](https://doi.org/10.21105/joss.06717)
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
+[![status](https://joss.theoj.org/papers/10.21105/joss.06717/status.svg)](https://joss.theoj.org/papers/10.21105/joss.06717)
 [![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml)
 [![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://app.codecov.io/gh/ropensci/weatherOz)
-[![weatherOz status badge](https://ropensci.r-universe.dev/badges/weatherOz)](https://ropensci.r-universe.dev)
-[![CRAN status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 
 <!-- badges: end -->
 
@@ -73,7 +75,9 @@ install.packages("weatherOz", repos = "https://ropensci.r-universe.dev")
 ## A Note on API Keys
 
 The examples in this README assume that you have stored your API key in
-your .Renviron file. See [Chapter
+your .Renviron file. {weatherOz} will prompt you to set up your API keys
+automatically if you haven’t. For more information on the preferred
+method for setting up your API keys, see [Chapter
 8](https://rstats.wtf/r-startup.html#renviron) in “What They Forgot to
 Teach You About R” by Bryan *et al.* for more on storing details in your
 .Renviron if you are unfamiliar.
@@ -85,23 +89,11 @@ DPIRD Weather 2.0 API.
 
 ``` r
 library(weatherOz)
-#> 
-#> Attaching package: 'weatherOz'
-#> The following object is masked from 'package:graphics':
-#> 
-#>     plot
-#> The following object is masked from 'package:base':
-#> 
-#>     plot
-```
-
-``` r
 
 wd <- get_dpird_summaries(
   station_code = "BI",
   start_date = "20220501",
   end_date = "20220502",
-  api_key = Sys.getenv("DPIRD_API_KEY"),
   interval = "daily",
   values = c(
     "wind",
@@ -156,8 +148,7 @@ wd <- get_data_drill(
     "max_temp",
     "min_temp",
     "rain"
-  ),
-  api_key = Sys.getenv("SILO_API_KEY")
+  )
 )
 
 head(wd)
@@ -171,12 +162,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-06-08      0.9              25
-#> 2:     11.7              25 254.5 m 2024-06-08      0.0              25
-#> 3:      7.8              25 254.5 m 2024-06-08      0.0              25
-#> 4:     10.6              25 254.5 m 2024-06-08      0.0              25
-#> 5:     13.3              25 254.5 m 2024-06-08      0.0              25
-#> 6:     14.7              25 254.5 m 2024-06-08      1.8              25
+#> 1:      9.8              25 254.5 m 2024-07-07      0.9              25
+#> 2:     11.7              25 254.5 m 2024-07-07      0.0              25
+#> 3:      7.8              25 254.5 m 2024-07-07      0.0              25
+#> 4:     10.6              25 254.5 m 2024-07-07      0.0              25
+#> 5:     13.3              25 254.5 m 2024-07-07      0.0              25
+#> 6:     14.7              25 254.5 m 2024-07-07      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
