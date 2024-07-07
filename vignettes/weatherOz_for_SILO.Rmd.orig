@@ -108,8 +108,7 @@ library(weatherOz)
   southwood <- get_data_drill(
     latitude = -27.85,
     longitude = 150.05,
-    start_date = "20220101",
-    api_key = Sys.getenv("SILO_API_KEY")
+    start_date = "20220101"
   )
 )
 ```
@@ -127,8 +126,7 @@ library(weatherOz)
     longitude = 150.05,
     start_date = "20230101",
     end_date = "20230131",
-    values = c("max_temp", "min_temp"),
-    api_key = Sys.getenv("SILO_API_KEY")
+    values = c("max_temp", "min_temp")
   )
 )
 ```
@@ -147,8 +145,7 @@ library(weatherOz)
     latitude = -27.85,
     longitude = 150.05,
     start_date = "20230101",
-    end_date = "20231231",
-    api_key = Sys.getenv("SILO_API_KEY")
+    end_date = "20231231"
   )
 )
 ```
@@ -170,8 +167,7 @@ library(weatherOz)
   wongan_hills <- get_patched_point(
     station_code = "008137",
     start_date = "20210601",
-    end_date = "20210630",
-    api_key = Sys.getenv("SILO_API_KEY")
+    end_date = "20210630"
   )
 )
 ```
@@ -232,7 +228,6 @@ library(weatherOz)
   wa_stn_all <- find_nearby_stations(
     station_code = "010111",
     distance_km = 50,
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     which_api = "all"
   )
 )
@@ -310,8 +305,7 @@ suppressMessages(
       FUN = get_patched_point,
       start_date = "20001201",
       end_date = "20001205",
-      values = "all",
-      api_key = Sys.getenv("SILO_API_KEY")
+      values = "all"
     )
 )
 

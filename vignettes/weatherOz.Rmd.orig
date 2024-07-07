@@ -45,8 +45,9 @@ Following is a quick demonstration of some common tasks that you may wish to und
 
 ## A Note on API Keys
 
-All examples in this vignette assume that you have stored your API key in your .Renviron file.
-See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+The examples in this README assume that you have stored your API key in your .Renviron file.
+{weatherOz} will prompt you to set up your API keys automatically if you haven't.
+For more information on the preferred method for setting up your API keys, see [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan *et al.* for more on storing details in your .Renviron if you are unfamiliar.
 
 ## Using {weatherOz} to Fetch Daily Summary DPIRD Data
 
@@ -62,7 +63,6 @@ Northam <-
     longitude = 116.6620,
     latitude = -31.6540,
     which_api = "dpird",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     distance_km = 20
   )
 
@@ -77,8 +77,7 @@ dpird_daily <- get_dpird_summaries(
   station_code = "NO",
   start_date = "2022-01-01",
   end_date = "2022-12-31",
-  values = c("airTemperature", "rainfall", "relativeHumidity"),
-  api_key = Sys.getenv("DPIRD_API_KEY")
+  values = c("airTemperature", "rainfall", "relativeHumidity")
 )
 
 dpird_daily
@@ -98,7 +97,6 @@ Tbar <-
     longitude = 151.9507,
     latitude = -27.5598,
     which_api = "silo",
-    api_key = Sys.getenv("SILO_API_KEY"),
     distance_km = 20
   )
 
@@ -113,8 +111,7 @@ ppd <- get_patched_point(
   station_code = "041103",
   start_date = "2022-01-01",
   end_date = "2022-12-31",
-  values = c("max_temp", "min_temp", "rain", "rh_tmax", "rh_tmin"),
-  api_key = Sys.getenv("SILO_API_KEY")
+  values = c("max_temp", "min_temp", "rain", "rh_tmax", "rh_tmin")
 )
 
 ppd
@@ -142,8 +139,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(dplyr)
 
   dpird_stations <-
-    get_stations_metadata(which_api = "DPIRD",
-                         api_key = Sys.getenv("DPIRD_API_KEY")) |>
+    get_stations_metadata(which_api = "DPIRD") |>
                          filter_at(vars(latitude, longitude),
                          all_vars(!is.na(.)))
 
