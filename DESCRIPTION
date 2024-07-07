@@ -99,6 +99,7 @@ Suggests:
     roxyglobals,
     spelling,
     testthat (>= 3.0.0),
+    usethis,
     vcr (>= 0.6.0),
     vdiffr,
     withr
