@@ -20,7 +20,11 @@
 #'   Defaults to all available values, `all`.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to automatically
+#'   detecting your key from your local .Renviron, .Rprofile or similar.
+#'   Alternatively, you may directly provide your key as a string here.  If
+#'   nothing is provided, you will be prompted on how to set up your \R session
+#'   so that it is auto-detected.
 #'
 #' @section Available Values:
 #'
@@ -73,7 +77,7 @@ get_dpird_minute <- function(station_code,
                                lubridate::hours(24L),
                              minutes = 1440L,
                              values = "all",
-                             api_key) {
+                             api_key = get_key(service = "DPIRD")) {
 
   # simplify using the metadata to fetch weather data by converting factors to
   # numeric values
@@ -83,14 +87,6 @@ get_dpird_minute <- function(station_code,
 
   if (missing(station_code) | !is.character(station_code)) {
     stop(call. = FALSE, "Please supply a valid `station_code`.")
-  }
-
-  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
-    stop(
-      "A valid DPIRD API key must be provided, please visit\n",
-      "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
-      call. = FALSE
-    )
   }
 
   .check_not_example_api_key(api_key)

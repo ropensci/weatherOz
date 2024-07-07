@@ -30,9 +30,12 @@
 #' @param end_date A `character` string or `Date` object representing the end of
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 #'   returned is inclusive of this date.  Defaults to the current system date.
-#' @param api_key A `character` string providing a valid email address to use
-#'   for the request.  The query will return an error if a valid email address
-#'   is not provided.
+#' @param api_key A `character` string containing your \acronym{API} key,
+#'   an e-mail address, for the request.  Defaults to automatically detecting
+#'   your key from your local .Renviron, .Rprofile or similar.  Alternatively,
+#'   you may directly provide your key as a string here.  If nothing is
+#'   provided, you will be prompted on how to set up your \R session so that it
+#'   is auto-detected.
 #'
 #' @section Included Values:
 #'
@@ -113,7 +116,7 @@
 get_patched_point_apsim <- function(station_code,
                                     start_date,
                                     end_date = Sys.Date(),
-                                    api_key) {
+                                    api_key = get_key(service = "SILO")) {
 
   # simplify using the metadata to fetch weather data by converting factors to
   # numeric values
@@ -129,12 +132,6 @@ get_patched_point_apsim <- function(station_code,
   if (missing(start_date)) {
     stop(call. = FALSE,
          "Please supply a valid start date as `start_date`.")
-  }
-
-  # Error if api_key is not provided
-  if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
-    stop("A valid email address must be provided for `api_key`.",
-         call. = FALSE)
   }
 
   .check_not_example_api_key(api_key)

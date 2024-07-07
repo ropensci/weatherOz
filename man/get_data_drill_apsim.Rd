@@ -10,7 +10,7 @@ get_data_drill_apsim(
   latitude,
   start_date,
   end_date = Sys.Date(),
-  api_key
+  api_key = get_key(service = "SILO")
 )
 }
 \arguments{
@@ -28,9 +28,12 @@ beginning of the range to query in the format \dQuote{yyyy-mm-dd}
 the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 returned is inclusive of this date.  Defaults to the current system date.}
 
-\item{api_key}{A \code{character }string specifying a valid email address to use
-for the request.  The query will return an error if a valid email address
-is not provided.}
+\item{api_key}{A \code{character} string containing your \acronym{API} key,
+an e-mail address, for the request.  Defaults to automatically detecting
+your key from your local .Renviron, .Rprofile or similar.  Alternatively,
+you may directly provide your key as a string here.  If nothing is
+provided, you will be prompted on how to set up your \R session so that it
+is auto-detected.}
 }
 \value{
 An \CRANpkg{apsimx} object of class \sQuote{met} with attributes.

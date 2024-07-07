@@ -16,9 +16,14 @@
 #'   centre of the area of interest.  If \dQuote{n} polygons are supplied,
 #'   \dQuote{n} stations are returned.  Defaults to `FALSE` with all stations
 #'   within the area of interest returned.
-#' @param api_key A `string` value that is the user's \acronym{API} key from
-#'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
-#'   when \var{which_api} is `DPIRD` or `all`.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  If left as `NULL`, defaults to
+#'   automatically detecting your key from your local .Renviron, .Rprofile or
+#'   similar.  Alternatively, you may directly provide your key as a string
+#'   here.  If nothing is provided, you will be prompted on how to set up your
+#'   \R session so that it is auto-detected.  Only used  when \var{which_api} is
+#'   `DPIRD` or `all`.
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Defaults to `silo` only.  Valid values are `all`, for both \acronym{SILO}
 #'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; `silo` for
@@ -83,11 +88,17 @@
 
 find_stations_in <- function(x,
                              centroid = FALSE,
-                             api_key = "your_api_key",
+                             api_key = NULL,
                              which_api = "all",
                              include_closed = FALSE,
                              crs = "EPSG:7844"
                              ) {
+
+  .check_not_example_api_key(api_key)
+  if (which_api == "all" || which_api == "dpird" && is.null(api_key)) {
+    api_key <- get_key(service = "DPIRD")
+    .is_valid_dpird_api_key(api_key)
+  }
 
   if (missing(x)) {
     stop("You must provide an `sf` object or bounding box vector of 4 numbers.")

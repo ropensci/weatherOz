@@ -9,7 +9,7 @@ get_dpird_availability(
   start_date = NULL,
   end_date = NULL,
   values = "availability",
-  api_key
+  api_key = get_key(service = "DPIRD")
 )
 }
 \arguments{
@@ -35,7 +35,11 @@ Defaults to \code{availability}, returning metadata for all stations.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.}
+\acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to automatically
+detecting your key from your local .Renviron, .Rprofile or similar.
+Alternatively, you may directly provide your key as a string here.  If
+nothing is provided, you will be prompted on how to set up your R session
+so that it is auto-detected.}
 }
 \value{
 a \code{\link[data.table:data.table]{data.table::data.table()}}  with \code{station_code} and the requested

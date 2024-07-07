@@ -21,9 +21,14 @@
 #'   `latitude` are not provided.
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'   the station or location of interest.  Defaults to 100 km.
-#' @param api_key A `string` value that is the user's \acronym{API} key from
-#'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).  Only used
-#'   when \var{which_api} is `DPIRD` or `all`.
+#' @param api_key A `character` string containing your \acronym{API} key from
+#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  If left as `NULL`, defaults to
+#'   automatically detecting your key from your local .Renviron, .Rprofile or
+#'   similar.  Alternatively, you may directly provide your key as a string
+#'   here.  If nothing is provided, you will be prompted on how to set up your
+#'   \R session so that it is auto-detected.  Only used  when \var{which_api} is
+#'   `DPIRD` or `all`.
 #' @param which_api A `string` value that indicates which \acronym{API} to use.
 #'   Defaults to `silo` only.  Valid values are `all`, for both \acronym{SILO}
 #'   (\acronym{BOM}) and \acronym{DPIRD} weather station networks; `silo` for
@@ -100,18 +105,13 @@ find_nearby_stations <- function(longitude = NULL,
                                  include_closed = FALSE) {
   which_api <- .check_which_api(which_api)
 
-  if (missing(api_key) || is.null(api_key) || is.na(api_key)) {
-    if (which_api == "all" || which_api == "dpird") {
-      stop(
-        "A valid DPIRD API key must be provided for queries to the DPIRD API ",
-        "please visit\n",
-        "<https://www.agric.wa.gov.au/web-apis> to request one.\n",
-        call. = FALSE
-      )
+  if (which_api == "all" || which_api == "dpird") {
+    .check_not_example_api_key(api_key)
+    if (is.null(api_key)) {
+      api_key <- get_key(service = "DPIRD")
     }
+    .is_valid_dpird_api_key(api_key)
   }
-
-  .check_not_example_api_key(api_key)
 
   .check_location_params(
     .longitude = longitude,

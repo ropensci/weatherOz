@@ -29,7 +29,12 @@
 #'   from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to `all`.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  If left as `NULL`, defaults to
+#'   automatically detecting your key from your local .Renviron, .Rprofile or
+#'   similar.  Alternatively, you may directly provide your key as a string
+#'   here.  If nothing is provided, you will be prompted on how to set up your
+#'   \R session so that it is auto-detected.  Only used  when \var{which_api} is
+#'   `DPIRD` or `all`.
 #' @param include_closed A `Boolean` string indicating whether to include closed
 #'   stations' metadata.  Use `TRUE` to include these.  Defaults to `FALSE`.
 #' @param rich A `Boolean` string indicating whether to return rich information
@@ -112,33 +117,37 @@ get_stations_metadata <-
   function(station_code = NULL,
            station_name = NULL,
            which_api = "all",
-           api_key,
+           api_key = NULL,
            include_closed = FALSE,
            rich = FALSE) {
 
   which_api <- .check_which_api(which_api)
 
-    if (which_api == "silo") {
-      out <- .fetch_silo_metadata()
-    } else if (which_api == "dpird") {
-      if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
-        stop(call. = FALSE,
-             "You must provide an API key for this query.")
-      }
-      .check_not_example_api_key(api_key)
-      out <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
-    } else if (which_api == "all") {
-      if (missing(api_key) | is.null(api_key) | is.na(api_key)) {
-        stop(call. = FALSE,
-             "A valid DPIRD API key must be provided, please visit\n",
-             "<https://www.agric.wa.gov.au/web-apis> to request one.\n",)
-      }
-      .check_not_example_api_key(api_key)
-      .is_valid_dpird_api_key(api_key)
-      silo <- .fetch_silo_metadata()
-      dpird <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
-      out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
+  if (which_api == "silo") {
+    out <- .fetch_silo_metadata()
+  } else if (which_api == "dpird") {
+    .check_not_example_api_key(api_key)
+
+    if (is.null(api_key)) {
+      api_key <- get_key(service = "DPIRD")
     }
+
+    .is_valid_dpird_api_key(api_key)
+
+    out <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
+  } else {
+    .check_not_example_api_key(api_key)
+
+    if (is.null(api_key)) {
+      api_key <- get_key(service = "DPIRD")
+    }
+
+    .is_valid_dpird_api_key(api_key)
+
+    silo <- .fetch_silo_metadata()
+    dpird <- .fetch_dpird_metadata(.api_key = api_key, .rich = rich)
+    out <- data.table::rbindlist(list(silo, dpird), fill = TRUE)
+  }
 
     out[, start := data.table::fifelse(is.na(start),
                                        as.character(
