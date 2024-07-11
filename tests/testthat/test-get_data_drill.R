@@ -5,24 +5,21 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
     get_data_drill(
       latitude = -27.85,
       start_date = "20220501",
-      end_date = "20220501",
-      api_key = Sys.getenv("SILO_API_KEY")
+      end_date = "20220501"
     )
   )
 
   # no latitude
   expect_error(get_data_drill(
     longitude = 150.05,
-    end_date = "20220501",
-    api_key = Sys.getenv("SILO_API_KEY")
+    end_date = "20220501"
   ))
 
   # too few decimal places in lat/lon
   expect_error(get_data_drill(
     longitude = 150.05,
     latitude = -27.8,
-    end_date = "20220501",
-    api_key = Sys.getenv("SILO_API_KEY")
+    end_date = "20220501"
   ))
 
   # no start date
@@ -30,8 +27,7 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
     get_data_drill(
       latitude = -27.85,
       longitude = 150.05,
-      end_date = "20220501",
-      api_key = Sys.getenv("SILO_API_KEY")
+      end_date = "20220501"
     )
   )
 
@@ -39,7 +35,8 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
   expect_error(get_data_drill(
     latitude = -27.85,
     longitude = 150.05,
-    start_date = "20220501"
+    start_date = "20220501",
+    api_key = ""
   ))
 
   # bad values
@@ -49,7 +46,6 @@ test_that("get_data_drill() user-input checks stop on invalid values", {
       longitude = 150.05,
       start_date = "20220501",
       end_date = "20220501",
-      api_key = Sys.getenv("SILO_API_KEY"),
       values = "Fusarium_thapsinum"
     )
   )

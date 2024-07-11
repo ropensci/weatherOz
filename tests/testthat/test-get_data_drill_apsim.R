@@ -6,8 +6,7 @@ test_that("get_data_drill_apsim() user-input checks stop on invalid values",
               get_data_drill_apsim(
                 latitude = -27.85,
                 start_date = "20220101",
-                end_date = "20221231",
-                api_key = Sys.getenv("SILO_API_KEY")
+                end_date = "20221231"
               )
             )
 
@@ -15,8 +14,7 @@ test_that("get_data_drill_apsim() user-input checks stop on invalid values",
             expect_error(
               get_data_drill_apsim(
                 longitude = 150.05,
-                end_date = "20220501",
-                api_key = Sys.getenv("SILO_API_KEY")
+                end_date = "20220501"
               )
             )
 
@@ -25,8 +23,7 @@ test_that("get_data_drill_apsim() user-input checks stop on invalid values",
               get_data_drill_apsim(
                 latitude = -27.85,
                 longitude = 150.05,
-                end_date = "20220501",
-                api_key = Sys.getenv("SILO_API_KEY")
+                end_date = "20220501"
               )
             )
 
@@ -34,7 +31,8 @@ test_that("get_data_drill_apsim() user-input checks stop on invalid values",
             expect_error(get_data_drill_apsim(
               latitude = -27.85,
               longitude = 150.05,
-              start_date = "20220501"
+              start_date = "20220501",
+              api_key = ""
             ))
 
           })

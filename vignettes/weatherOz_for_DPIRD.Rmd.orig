@@ -118,8 +118,7 @@ In the first example, we illustrate how to fetch all extreme values available fo
 library(weatherOz)
 
 (extremes <- get_dpird_extremes(
-  station_code = "NO",
-  api_key = Sys.getenv("DPIRD_API_KEY")
+  station_code = "NO"
 ))
 ```
 
@@ -134,8 +133,7 @@ library(weatherOz)
 (
   extremes <- get_dpird_extremes(
     station_code = "NO",
-    values = "erosionCondition",
-    api_key = Sys.getenv("DPIRD_API_KEY")
+    values = "erosionCondition"
   )
 )
 ```
@@ -168,8 +166,7 @@ library(weatherOz)
 
 (
   min_dat <- get_dpird_minute(
-    station_code = "NO",
-    api_key = Sys.getenv("DPIRD_API_KEY")
+    station_code = "NO"
   )
 )
 ```
@@ -188,8 +185,7 @@ library(weatherOz)
     minutes = 1440,
     values = c("airTemperature",
                "solarIrradiance",
-               "wind"),
-    api_key = Sys.getenv("DPIRD_API_KEY")
+               "wind")
   )
 )
 ```
@@ -304,7 +300,6 @@ library(weatherOz)
   annual_rain <- get_dpird_summaries(
     station_code = "CL001",
     start_date = "20170101",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     interval = "yearly",
     values = "rainfall"
   )
@@ -322,7 +317,6 @@ library(weatherOz)
   monthly_rain <- get_dpird_summaries(
     station_code = "CL001",
     start_date = "20170101",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     interval = "monthly",
     values = "rainfall"
   )
@@ -342,7 +336,6 @@ library(weatherOz)
     station_code = "BI",
     start_date = "20170101",
     end_date = "2018-12-31",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     interval = "daily",
     values = c("rainfall",
                "wind")
@@ -362,7 +355,6 @@ library(weatherOz)
   hourly_wind_rain <- get_dpird_summaries(
     station_code = "BI",
     start_date = "20220101",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     interval = "hourly",
     values = c("rainfall",
                "wind")
@@ -388,8 +380,7 @@ library(weatherOz)
   binnu <- get_dpird_apsim(
     station_code = "BI",
     start_date = "20220101",
-    end_date = "20221231",
-    api_key = Sys.getenv("DPIRD_API_KEY")
+    end_date = "20221231"
   )
 )
 ```
@@ -416,7 +407,6 @@ library(weatherOz)
   wa_stn <- find_nearby_stations(
     station_code = "NO",
     distance_km = 50,
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     which_api = "dpird"
   )
 )
@@ -434,7 +424,6 @@ library(weatherOz)
     longitude = 116.6620,
     latitude = -31.6540,
     distance_km = 50,
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     which_api = "dpird"
   )
 )
@@ -451,7 +440,6 @@ library(weatherOz)
   wa_stn_all <- find_nearby_stations(
     station_code = "NO",
     distance_km = 50,
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     which_api = "all"
   )
 )
@@ -483,7 +471,6 @@ We'll use the coordinate reference system (CRS) provided by this {sf} object and
 ```{r stations_in_sw_ag}
 sw_wa <- find_stations_in(
   x = south_west_agricultural_region,
-  api_key = Sys.getenv("DPIRD_API_KEY"),
   include_closed = TRUE,
   crs = sf::st_crs(south_west_agricultural_region)
 )
@@ -525,8 +512,7 @@ Check the availability of the Westonia station since the start of the current ye
 library(weatherOz)
 
 (WS001 <- get_dpird_availability(
-  station_code = "WS001",
-  api_key = Sys.getenv("DPIRD_API_KEY")
+  station_code = "WS001"
 ))
 ```
 
@@ -542,8 +528,7 @@ library(weatherOz)
   BI_201801 <- get_dpird_availability(
     station_code = "BI",
     start_date = "2018-01-01",
-    end_date = "2018-01-31",
-    api_key = Sys.getenv("DPIRD_API_KEY")
+    end_date = "2018-01-31"
   )
 )
 ```
@@ -561,8 +546,7 @@ Here we demonstrate how to get the metadata for the DPIRD stations only.
 ```{r station_metadata}
 library(weatherOz)
 
-(metadata <- get_stations_metadata(which_api = "dpird",
-                                  api_key = Sys.getenv("DPIRD_API_KEY")))
+(metadata <- get_stations_metadata(which_api = "dpird"))
 ```
 
 ### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Get Rich DPIRD Station Metadata and Include Closed Stations
@@ -574,6 +558,5 @@ library(weatherOz)
 
 (metadata <- get_stations_metadata(which_api = "dpird",
                                   include_closed = TRUE,
-                                  rich = TRUE,
-                                  api_key = Sys.getenv("DPIRD_API_KEY")))
+                                  rich = TRUE))
 ```

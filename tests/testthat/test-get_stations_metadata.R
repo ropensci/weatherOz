@@ -212,8 +212,11 @@ test_that("get_stations_metadata() matches station_codes",
                          c("YU001", "YU002", "YU003"))
           })
 
-test_that("get_stations_metadata() errors if no API key is provide for DPIRD",
+# no api_key
+test_that("get_stations_metadata() errors if no api_key is provide for DPIRD",
           {
-            expect_error(get_stations_metadata(which_api = "dpird"))
-            expect_error(get_stations_metadata(which_api = "all"))
+            expect_error(get_stations_metadata(which_api = "dpird",
+                                               api_key = ""))
+            expect_error(get_stations_metadata(which_api = "all",
+                                               api_key = ""))
           })

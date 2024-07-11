@@ -30,9 +30,14 @@ interest.  Optional and defaults to \code{NULL}.  Required if \code{longitude} a
 \item{distance_km}{A \code{numeric} value for distance to limit the search from
 the station or location of interest.  Defaults to 100 km.}
 
-\item{api_key}{A \code{string} value that is the user's \acronym{API} key from
-\acronym{DPIRD} (see \url{https://www.agric.wa.gov.au/web-apis}).  Only used
-when \var{which_api} is \code{DPIRD} or \code{all}.}
+\item{api_key}{A \code{character} string containing your \acronym{API} key from
+\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
+\acronym{DPIRD} Weather 2.0 \acronym{API}.  If left as \code{NULL}, defaults to
+automatically detecting your key from your local .Renviron, .Rprofile or
+similar.  Alternatively, you may directly provide your key as a string
+here.  If nothing is provided, you will be prompted on how to set up your
+\R session so that it is auto-detected.  Only used  when \var{which_api} is
+\code{DPIRD} or \code{all}.}
 
 \item{which_api}{A \code{string} value that indicates which \acronym{API} to use.
 Defaults to \code{silo} only.  Valid values are \code{all}, for both \acronym{SILO}

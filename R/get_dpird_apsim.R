@@ -16,7 +16,11 @@
 #'   returned is inclusive of this date.  Defaults to the current system date.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to automatically
+#'   detecting your key from your local .Renviron, .Rprofile or similar.
+#'   Alternatively, you may directly provide your key as a string here.  If
+#'   nothing is provided, you will be prompted on how to set up your \R session
+#'   so that it is auto-detected.
 #'
 #' @section Saving objects:
 #' To save \dQuote{met} objects the [apsimx::write_apsim_met()] is reexported.
@@ -51,7 +55,8 @@
 get_dpird_apsim <- function(station_code,
                             start_date,
                             end_date = Sys.Date(),
-                            api_key) {
+                            api_key = get_key(service = "DPIRD")) {
+
   apsim <- get_dpird_summaries(
     station_code = station_code,
     start_date = start_date,

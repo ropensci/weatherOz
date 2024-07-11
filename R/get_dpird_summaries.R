@@ -42,7 +42,11 @@
 #'   Defaults to `all` with all available values being returned.
 #' @param api_key A `character` string containing your \acronym{API} key from
 #'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
-#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
+#'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to automatically
+#'   detecting your key from your local .Renviron, .Rprofile or similar.
+#'   Alternatively, you may directly provide your key as a string here.  If
+#'   nothing is provided, you will be prompted on how to set up your \R session
+#'   so that it is auto-detected.
 #'
 #' @section Available Values:
 #'
@@ -186,9 +190,18 @@
 get_dpird_summaries <- function(station_code,
                                 start_date,
                                 end_date = Sys.Date(),
-                                interval = c("daily", "15min", "30min", "hourly", "monthly", "yearly"),
+                                interval = c("daily",
+                                             "15min",
+                                             "30min",
+                                             "hourly",
+                                             "monthly",
+                                             "yearly"),
                                 values = "all",
-                                api_key) {
+                                api_key = get_key(service = "DPIRD")) {
+
+  .check_not_example_api_key(api_key)
+  .is_valid_dpird_api_key(api_key)
+
   # this section is necessary to double check availability dates of DPIRD
   # stations to give users a better experience. It slows down the first query
   # but avoids confusion when no values are returned for a station that exists
@@ -258,7 +271,12 @@ get_dpird_summaries <- function(station_code,
   .check_earliest_available_dpird(station_code, start_date, metadata_file)
 
   # if interval is not set, default to "daily", else check input to be sure
-  approved_intervals <- c("daily", "15min", "30min", "hourly", "monthly", "yearly")
+  approved_intervals <- c("daily",
+                          "15min",
+                          "30min",
+                          "hourly",
+                          "monthly",
+                          "yearly")
 
   if (identical(interval, approved_intervals)) {
     interval <- "daily"
@@ -297,7 +315,9 @@ get_dpird_summaries <- function(station_code,
     stop(call. = FALSE, "\"", interval, "\" is not a supported time interval")
   }
 
-  request_interval <- lubridate::interval(start_date, end_date, tzone = "Australia/Perth")
+  request_interval <- lubridate::interval(start_date,
+                                          end_date,
+                                          tzone = "Australia/Perth")
 
   # Stop if query is for 15 and 30 min intervals and date is more than one
   # year in the past
@@ -312,9 +332,7 @@ get_dpird_summaries <- function(station_code,
     stop(
       call. = FALSE,
       "Start date is too early. Data in 15 and 30 min intervals are only ",
-      "available from the the 1st day of ",
-      this_year - 1,
-      "."
+      "available from the the 1st day of ", this_year - 1, "."
     )
   }
 

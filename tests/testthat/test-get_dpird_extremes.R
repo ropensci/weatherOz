@@ -1,23 +1,22 @@
 
 test_that("user-input checks stop if invalid values are provided", {
   # missing station code
-  expect_error(get_dpird_extremes(api_key = Sys.getenv("DPIRD_API_KEY"),
-                                  values = "wind"))
+  expect_error(get_dpird_extremes(values = "wind"))
 
   # invalid 'values'
   expect_error(
     get_dpird_extremes(
       station_code = "BI",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       values = "phytophthora"
     )
   )
 
-  # missing key
+  # no api_key
   expect_error(
     get_dpird_extremes(
       station_code = "BI",
-      values = "all"
+      values = "all",
+      api_key = ""
     )
   )
 
@@ -25,7 +24,6 @@ test_that("user-input checks stop if invalid values are provided", {
   expect_error(
     get_dpird_extremes(
       station_code = c("BI", "NO"),
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       values = "all"
     )
   )
@@ -36,7 +34,6 @@ test_that("get_dpird_extremes() returns all values for a station", {
     skip_if_offline()
     x <- get_dpird_extremes(
       station_code = "BI",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       values = "all"
     )
   })
@@ -96,7 +93,6 @@ test_that("get_dpird_extremes() returns selected values for a station", {
     skip_if_offline()
     x <- get_dpird_extremes(
       station_code = "BI",
-      api_key = Sys.getenv("DPIRD_API_KEY"),
       values = "erosionCondition"
     )
   })

@@ -8,7 +8,7 @@ get_stations_metadata(
   station_code = NULL,
   station_name = NULL,
   which_api = "all",
-  api_key,
+  api_key = NULL,
   include_closed = FALSE,
   rich = FALSE
 )
@@ -40,7 +40,12 @@ from the \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to \code{all}.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
 \acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
-\acronym{DPIRD} Weather 2.0 \acronym{API}.}
+\acronym{DPIRD} Weather 2.0 \acronym{API}.  If left as \code{NULL}, defaults to
+automatically detecting your key from your local .Renviron, .Rprofile or
+similar.  Alternatively, you may directly provide your key as a string
+here.  If nothing is provided, you will be prompted on how to set up your
+\R session so that it is auto-detected.  Only used  when \var{which_api} is
+\code{DPIRD} or \code{all}.}
 
 \item{include_closed}{A \code{Boolean} string indicating whether to include closed
 stations' metadata.  Use \code{TRUE} to include these.  Defaults to \code{FALSE}.}

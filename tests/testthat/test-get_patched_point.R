@@ -17,14 +17,17 @@ test_that("get_patched_point() user-input checks stop on invalid values", {
     )
   )
 
+  # no api_key
   expect_error(
     get_patched_point(
       station_code = "008137",
       start_date = "20220501",
-      end_date = "20220501"
+      end_date = "20220501",
+      api_key = ""
     )
   )
 
+  # bad values
   expect_error(
     get_patched_point(
       station_code = "008137",

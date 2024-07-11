@@ -10,7 +10,7 @@ get_patched_point(
   start_date,
   end_date = Sys.Date(),
   values = "all",
-  api_key
+  api_key = get_key(service = "SILO")
 )
 }
 \arguments{
@@ -29,9 +29,12 @@ returned is inclusive of this date.  Defaults to the current system date.}
 return.  See \strong{Available Values} for a full list of valid values.
 Defaults to \code{all} with all available values being returned.}
 
-\item{api_key}{A \code{character} string specifying a valid email address to use
-for the request.  The query will return an error if a valid email address
-is not provided.}
+\item{api_key}{A \code{character} string containing your \acronym{API} key,
+an e-mail address, for the request.  Defaults to automatically detecting
+your key from your local .Renviron, .Rprofile or similar.  Alternatively,
+you may directly provide your key as a string here.  If nothing is
+provided, you will be prompted on how to set up your \R session so that it
+is auto-detected.}
 }
 \value{
 a \code{\link[data.table:data.table]{data.table::data.table()}} with the weather data queried with the

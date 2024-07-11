@@ -38,8 +38,28 @@ Following is a quick demonstration of some common tasks that you may wish to und
 
 ## A Note on API Keys
 
-All examples in this vignette assume that you have stored your API key in your .Renviron file.
-See [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan _et al._ for more on storing details in your .Renviron if you are unfamiliar.
+The examples in this README assume that you have stored your API key in your .Renviron file.
+{weatherOz} will prompt you to set up your API keys automatically if you haven't.
+For more information on the preferred method for setting up your API keys, see [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan *et al.* for more on storing details in your .Renviron if you are unfamiliar.
+
+To get a DPIRD API key, you can use `get_key()` and it will direct you to the form to request a key and provides instructions for using `usethis::edit_r_environ()` to add your key to your .Renviron so that {weatherOz} will automatically find it.
+If you have already set up an API key, this will return that value for you.
+
+
+``` r
+get_key(source = "DPIRD")
+```
+
+You only need to provide an e-mail address for the SILO API.
+Using `get_key()` will provide you with instructions on what format to use in your .Renviron so that {weatherOz} will auto-recognise it and if you have already set up an API key, this will return that value for you.
+
+
+
+``` r
+get_key(source = "SILO")
+```
+
+Note that you do not need to do this separately, any function requiring an API key will prompt you if you don't have one set.
 
 ## Using {weatherOz} to Fetch Daily Summary DPIRD Data
 
@@ -56,7 +76,6 @@ Northam <-
     longitude = 116.6620,
     latitude = -31.6540,
     which_api = "dpird",
-    api_key = Sys.getenv("DPIRD_API_KEY"),
     distance_km = 20
   )
 
@@ -80,8 +99,7 @@ dpird_daily <- get_dpird_summaries(
   station_code = "NO",
   start_date = "2022-01-01",
   end_date = "2022-12-31",
-  values = c("airTemperature", "rainfall", "relativeHumidity"),
-  api_key = Sys.getenv("DPIRD_API_KEY")
+  values = c("airTemperature", "rainfall", "relativeHumidity")
 )
 
 dpird_daily
@@ -142,7 +160,6 @@ Tbar <-
     longitude = 151.9507,
     latitude = -27.5598,
     which_api = "silo",
-    api_key = Sys.getenv("SILO_API_KEY"),
     distance_km = 20
   )
 
@@ -165,8 +182,7 @@ ppd <- get_patched_point(
   station_code = "041103",
   start_date = "2022-01-01",
   end_date = "2022-12-31",
-  values = c("max_temp", "min_temp", "rain", "rh_tmax", "rh_tmin"),
-  api_key = Sys.getenv("SILO_API_KEY")
+  values = c("max_temp", "min_temp", "rain", "rh_tmax", "rh_tmin")
 )
 
 ppd
@@ -185,17 +201,17 @@ ppd
 #> 365:       041103    Toowoomba  2022    12    31 2022-12-31     27.7              25     16.4              25
 #>       elev_m  extracted latitude longitude rainfall rainfall_source rh_tmax rh_tmax_source rh_tmin rh_tmin_source
 #>       <char>     <Date>    <num>     <num>    <num>           <int>   <num>          <int>   <num>          <int>
-#>   1: 691.0 m 2024-07-05 -27.5836  151.9317      7.6              25    72.1             26   100.0             26
-#>   2: 691.0 m 2024-07-05 -27.5836  151.9317      0.1              25    47.1             26   100.0             26
-#>   3: 691.0 m 2024-07-05 -27.5836  151.9317      0.0              25    38.8             26   100.0             26
-#>   4: 691.0 m 2024-07-05 -27.5836  151.9317      0.0              25    43.1             26    95.7             26
-#>   5: 691.0 m 2024-07-05 -27.5836  151.9317      0.0              25    49.2             26   100.0             26
+#>   1: 691.0 m 2024-07-07 -27.5836  151.9317      7.6              25    72.1             26   100.0             26
+#>   2: 691.0 m 2024-07-07 -27.5836  151.9317      0.1              25    47.1             26   100.0             26
+#>   3: 691.0 m 2024-07-07 -27.5836  151.9317      0.0              25    38.8             26   100.0             26
+#>   4: 691.0 m 2024-07-07 -27.5836  151.9317      0.0              25    43.1             26    95.7             26
+#>   5: 691.0 m 2024-07-07 -27.5836  151.9317      0.0              25    49.2             26   100.0             26
 #>  ---                                                                                                             
-#> 361: 691.0 m 2024-07-05 -27.5836  151.9317      0.0              25    47.9             26    95.0             26
-#> 362: 691.0 m 2024-07-05 -27.5836  151.9317      0.2              25    43.7             26   100.0             26
-#> 363: 691.0 m 2024-07-05 -27.5836  151.9317      0.0              25    44.1             26   100.0             26
-#> 364: 691.0 m 2024-07-05 -27.5836  151.9317      0.7              25    60.3             26   100.0             26
-#> 365: 691.0 m 2024-07-05 -27.5836  151.9317      0.4              25    50.9             26   100.0             26
+#> 361: 691.0 m 2024-07-07 -27.5836  151.9317      0.0              25    47.9             26    95.0             26
+#> 362: 691.0 m 2024-07-07 -27.5836  151.9317      0.2              25    43.7             26   100.0             26
+#> 363: 691.0 m 2024-07-07 -27.5836  151.9317      0.0              25    44.1             26   100.0             26
+#> 364: 691.0 m 2024-07-07 -27.5836  151.9317      0.7              25    60.3             26   100.0             26
+#> 365: 691.0 m 2024-07-07 -27.5836  151.9317      0.4              25    50.9             26   100.0             26
 ```
 
 {weatherOz} offers much more functionality that is detailed in other vignettes that document how to use it to get station metadata for any station in the DPIRD or SILO databases, get extreme weather events for the DPIRD station network, get minute data for DPIRD stations, get APSIM formatted data from SILO, get ag bulletins, précis forecasts and various imagery files from BOM in the respective vignettes for DPIRD, SILO and BOM data available through {weatherOz}.
@@ -221,8 +237,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
   library(dplyr)
 
   dpird_stations <-
-    get_stations_metadata(which_api = "DPIRD",
-                         api_key = Sys.getenv("DPIRD_API_KEY")) |>
+    get_stations_metadata(which_api = "DPIRD") |>
                          filter_at(vars(latitude, longitude),
                          all_vars(!is.na(.)))
 
