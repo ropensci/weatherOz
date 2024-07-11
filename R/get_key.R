@@ -27,7 +27,7 @@
 #' @export
 get_key <- function(service = c("DPIRD", "SILO")) {
 
-  service <- rlang::match_arg(arg = service)
+  service <- rlang::arg_match(arg = service)
 
   if (service == "DPIRD") {
     DPIRD_API_KEY <- Sys.getenv("DPIRD_API_KEY")
