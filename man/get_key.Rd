@@ -4,11 +4,11 @@
 \alias{get_key}
 \title{Get or Set Up API Keys}
 \usage{
-get_key(service)
+get_key(service = c("DPIRD", "SILO"))
 }
 \arguments{
-\item{service}{(character) The \acronym{API} host, either \acronym{DPIRD} or
-\acronym{SILO}.}
+\item{service}{(character) The \acronym{API} host, either \dQuote{DPIRD} or
+\dQuote{SILO}.}
 }
 \value{
 A string value with either a \acronym{DPIRD} Weather 2.0 API or

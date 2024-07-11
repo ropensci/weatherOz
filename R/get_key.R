@@ -12,8 +12,8 @@
 #'   cross-language use.
 #'
 #'
-#' @param service (character) The \acronym{API} host, either \acronym{DPIRD} or
-#'   \acronym{SILO}.
+#' @param service (character) The \acronym{API} host, either \dQuote{DPIRD} or
+#'   \dQuote{SILO}.
 #'
 #' @return A string value with either a \acronym{DPIRD} Weather 2.0 API or
 #'   \acronym{SILO} API key value.
@@ -25,7 +25,10 @@
 #' }
 #'
 #' @export
-get_key <- function(service) {
+get_key <- function(service = c("DPIRD", "SILO")) {
+
+  service <- rlang::match_arg(arg = servic)
+
   if (service == "DPIRD") {
     DPIRD_API_KEY <- Sys.getenv("DPIRD_API_KEY")
 
