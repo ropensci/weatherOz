@@ -20,7 +20,7 @@ Defaults to 1.  Value is optional.}
 
 \item{compat}{\code{Character}. A string indicating the \R package with which the
 returned imagery should be formatted for use, one of \link{terra} or \CRANpkg{stars}.
-Defaults to \sQuote{terra}.}
+Defaults to \link{terra}.}
 }
 \value{
 A \linkS4class{SpatRaster} or \CRANpkg{stars} class object as selected

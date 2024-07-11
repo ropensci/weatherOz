@@ -84,7 +84,7 @@ get_available_imagery <- function(product_id = "all") {
 #'   Defaults to 1.  Value is optional.
 #' @param compat `Character`. A string indicating the \R package with which the
 #'   returned imagery should be formatted for use, one of [terra] or \CRANpkg{stars}.
-#'   Defaults to \sQuote{terra}.
+#'   Defaults to [terra].
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
 #'   \var{product_id} include:
@@ -208,7 +208,7 @@ get_satellite_imagery <- get_satellite <-
                     package = "weatherOz")
       ))
     })
-    # create SpatRaster or stars object of the GeoTIFF files
+    # create object of the GeoTIFF files
     files <-
       list.files(tempdir(), pattern = "\\.tif$", full.names = TRUE)
     files <-

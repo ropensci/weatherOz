@@ -126,6 +126,8 @@ monthly or yearly data from \acronym{DPIRD} with \acronym{SILO}.
 \item erosionConditionMinutes,
 \item erosionConditionStartTime,
 \item errors,
+\item etoShortCrop,
+\item etoTallCrop,
 \item evapotranspiration,
 \item evapotranspirationShortCrop,
 \item evapotranspirationTallCrop,

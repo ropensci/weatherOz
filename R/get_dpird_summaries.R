@@ -85,6 +85,8 @@
 #'   * erosionConditionMinutes,
 #'   * erosionConditionStartTime,
 #'   * errors,
+#'   * etoShortCrop,
+#'   * etoTallCrop,
 #'   * evapotranspiration,
 #'   * evapotranspirationShortCrop,
 #'   * evapotranspirationTallCrop,
@@ -270,6 +272,24 @@ get_dpird_summaries <- function(station_code,
                   approved_intervals,
                   several.ok = FALSE),
         silent = TRUE)
+
+  # TODO
+  # Remove this once Phil fix the daily values names
+  # Check if the interval is "daily" and modify values accordingly
+  if (checked_interval == "daily") {
+    values <-
+      setdiff(values,
+              c("etoShortCrop",
+                "etoTallCrop")
+      )
+  } else {
+    values <-
+      setdiff(values,
+              c("evapotranspirationShortCrop",
+                "evapotranspirationTallCrop",
+                "panEvaporation12AM")
+      )
+  }
 
   # Error if summary interval is not available. API only allows for daily,
   # 15 min, 30 min, hourly, monthly or yearly
