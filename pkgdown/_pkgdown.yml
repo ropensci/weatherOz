@@ -57,3 +57,9 @@ reference:
   - starts_with("dpird_")
   - silo_daily_values
   - south_west_agriculture_region
+
+- title: Helper Functions
+  desc: >
+    Functions intended to make using {weatherOz} a more enjoyabl experience.
+  contents:
+    - get_key
