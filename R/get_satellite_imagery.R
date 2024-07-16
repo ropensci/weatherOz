@@ -76,7 +76,7 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @param product_id `Character`. \acronym{BOM} product \acronym{ID} to download
 #'   and import as a \CRANpkg{terra} `SpatRaster` S4 class (see
-#'   `[terra::rast)]`) or \CRANpkg{stars} S3 `stars` class object.  A vector of
+#'   `[terra::rast()]`) or \CRANpkg{stars} S3 `stars` class object.  A vector of
 #'   values from [get_available_imagery()] may be used here.  Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
 #'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan

@@ -9,11 +9,8 @@ get_satellite_imagery(product_id, scans = 1, compat = "terra")
 \arguments{
 \item{product_id}{\code{Character}. \acronym{BOM} product \acronym{ID} to download
 and import as a \CRANpkg{terra} \code{SpatRaster} S4 class (see
-\verb{[terra::rast)]}) or \CRANpkg{stars} S3 \code{stars} class object.  A vector of
-values from [get_available_imagery()] may be used here.  Value is required.
-
-[terra::rast)]: R:terra::rast)
-[get_available_imagery()]: R:get_available_imagery()}
+\verb{[terra::rast()]}) or \CRANpkg{stars} S3 \code{stars} class object.  A vector of
+values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.  Value is required.}
 
 \item{scans}{\code{Integer}. Number of scans to download, starting with most
 recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
