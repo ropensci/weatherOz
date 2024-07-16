@@ -8,9 +8,12 @@ get_satellite_imagery(product_id, scans = 1, compat = "terra")
 }
 \arguments{
 \item{product_id}{\code{Character}. \acronym{BOM} product \acronym{ID} to download
-and import as a \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class
-or \CRANpkg{stars} S3 \code{stars} class object.  A vector of values from
-\code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.  Value is required.}
+and import as a \CRANpkg{terra} \code{SpatRaster} S4 class (see
+\verb{[terra::rast)]}) or \CRANpkg{stars} S3 \code{stars} class object.  A vector of
+values from [get_available_imagery()] may be used here.  Value is required.
+
+[terra::rast)]: R:terra::rast)
+[get_available_imagery()]: R:get_available_imagery()}
 
 \item{scans}{\code{Integer}. Number of scans to download, starting with most
 recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
@@ -23,15 +26,15 @@ returned imagery should be formatted for use, one of \code{terra} or
 \code{stars}.  Defaults to \code{terra}.}
 }
 \value{
-A \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars}
-S3 \code{stars} class object as selected by the user by specifying \code{compat} of
-GeoTIFF images with layers named by \acronym{BOM} product \acronym{ID},
-timestamp and band.
+A \CRANpkg{terra} \code{SpatRaster} S4 class (see \verb{[terra::rast()]}) or
+\CRANpkg{stars} S3 \code{stars} class object as selected by the user by
+specifying \code{compat} of GeoTIFF images with layers named by \acronym{BOM}
+product \acronym{ID}, timestamp and band.
 }
 \description{
 Fetch \acronym{BOM} satellite GeoTIFF imagery from
 \url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a \CRANpkg{terra}
-\linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars} S3 \code{stars}
+\code{SpatRaster} S4 class (see \verb{[terra::rast()]}) or \CRANpkg{stars} S3 \code{stars}
 object of GeoTIFF files.  Files are available at ten minutes update
 frequency with a 24-hour delete time.  It is suggested to check file
 availability first by using \code{\link[=get_available_imagery]{get_available_imagery()}}.  Ported from
@@ -71,7 +74,7 @@ functionality any longer due to issues with \acronym{CRAN} and
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-# GEOS GIS \linkS4class{SpatRaster-class} object for most recent single scan
+# GEOS GIS {terra} `SpatRaster`` object for most recent single scan
  available
 
 imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)

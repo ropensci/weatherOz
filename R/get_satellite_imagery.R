@@ -68,16 +68,16 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
 #'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a \CRANpkg{terra} 
-#'   \linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars} S3 `stars`
+#'   `SpatRaster` S4 class (see `[terra::rast()]`) or \CRANpkg{stars} S3 `stars`
 #'   object of GeoTIFF files.  Files are available at ten minutes update
 #'   frequency with a 24-hour delete time.  It is suggested to check file
 #'   availability first by using [get_available_imagery()].  Ported from
 #'   \CRANpkg{bomrang} with modifications.
 #'
 #' @param product_id `Character`. \acronym{BOM} product \acronym{ID} to download
-#'   and import as a \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class
-#'   or \CRANpkg{stars} S3 `stars` class object.  A vector of values from
-#'   [get_available_imagery()] may be used here.  Value is required.
+#'   and import as a \CRANpkg{terra} `SpatRaster` S4 class (see
+#'   `[terra::rast)]`) or \CRANpkg{stars} S3 `stars` class object.  A vector of
+#'   values from [get_available_imagery()] may be used here.  Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
 #'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan
 #'   available , 6 - the most recent hour available, 12 - the most recent 2
@@ -118,10 +118,10 @@ get_available_imagery <- function(product_id = "all") {
 #' [get_available_imagery()]
 #'
 #' @return
-#' A \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars}
-#'   S3 `stars` class object as selected by the user by specifying `compat` of
-#'   GeoTIFF images with layers named by \acronym{BOM} product \acronym{ID},
-#'   timestamp and band.
+#' A \CRANpkg{terra} `SpatRaster` S4 class (see `[terra::rast()]`) or
+#'   \CRANpkg{stars} S3 `stars` class object as selected by the user by
+#'   specifying `compat` of GeoTIFF images with layers named by \acronym{BOM}
+#'   product \acronym{ID}, timestamp and band.
 #'
 #' @note The original \CRANpkg{bomrang} version of this function supported local
 #'   file caching using \CRANpkg{hoardr}.  This version does not support this
@@ -134,7 +134,7 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-#' # GEOS GIS \linkS4class{SpatRaster-class} object for most recent single scan
+#' # GEOS GIS {terra} `SpatRaster`` object for most recent single scan
 #'  available
 #'
 #' imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
