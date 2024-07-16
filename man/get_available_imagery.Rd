@@ -20,7 +20,7 @@ Fetch a listing of \acronym{BOM} GeoTIFF satellite imagery from
 currently available for download.  Files are available at ten minute update
 frequency with a 24-hour delete time.  It is useful to know the most recent
 files available and then specify in the \code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
-function.  Ported from \pkg{bomrang}.
+function.  Ported from \CRANpkg{bomrang}.
 }
 \details{
 Valid \acronym{BOM} satellite Product IDs for GeoTIFF files

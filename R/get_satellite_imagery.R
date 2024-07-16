@@ -6,7 +6,7 @@
 #'   currently available for download.  Files are available at ten minute update
 #'   frequency with a 24-hour delete time.  It is useful to know the most recent
 #'   files available and then specify in the [get_satellite_imagery()]
-#'   function.  Ported from \pkg{bomrang}.
+#'   function.  Ported from \CRANpkg{bomrang}.
 #'
 #' @param product_id `Character`. \acronym{BOM} product \acronym{ID} of interest
 #'   for which a list of available images will be returned.  Defaults to all
@@ -67,24 +67,25 @@ get_available_imagery <- function(product_id = "all") {
 #' Get BOM Satellite Imagery
 #'
 #' Fetch \acronym{BOM} satellite GeoTIFF imagery from
-#'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a raster
-#'   \linkS4class{SpatRaster} or \CRANpkg{stars} object of GeoTIFF files.
-#'   Files are available at ten minutes update frequency with a 24-hour delete
-#'   time.  It is suggested to check file availability first by using
-#'   [get_available_imagery()].  Ported from \pkg{bomrang} with modifications.
+#'   <ftp://ftp.bom.gov.au/anon/gen/gms/> and return a \CRANpkg{terra} 
+#'   \linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars} S3 `stars`
+#'   object of GeoTIFF files.  Files are available at ten minutes update
+#'   frequency with a 24-hour delete time.  It is suggested to check file
+#'   availability first by using [get_available_imagery()].  Ported from
+#'   \CRANpkg{bomrang} with modifications.
 #'
 #' @param product_id `Character`. \acronym{BOM} product \acronym{ID} to download
-#'   and import as a \linkS4class{SpatRaster} or \CRANpkg{stars} class object.
-#'   A vector of values from [get_available_imagery()] may be used here.
-#'   Value is required.
+#'   and import as a \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class
+#'   or \CRANpkg{stars} S3 `stars` class object.  A vector of values from
+#'   [get_available_imagery()] may be used here.  Value is required.
 #' @param scans `Integer`. Number of scans to download, starting with most
 #'   recent and progressing backwards, *e.g.*, 1 - the most recent single scan
 #'   available , 6 - the most recent hour available, 12 - the most recent 2
 #'   hours available, etc.  Negating will return the oldest files first.
 #'   Defaults to 1.  Value is optional.
 #' @param compat `Character`. A string indicating the \R package with which the
-#'   returned imagery should be formatted for use, one of [terra] or \CRANpkg{stars}.
-#'   Defaults to [terra].
+#'   returned imagery should be formatted for use, one of `terra` or
+#'   `stars`.  Defaults to `terra`.
 #'
 #' @details Valid \acronym{BOM} satellite Product IDs for use with
 #'   \var{product_id} include:
@@ -117,11 +118,12 @@ get_available_imagery <- function(product_id = "all") {
 #' [get_available_imagery()]
 #'
 #' @return
-#' A \linkS4class{SpatRaster} or \CRANpkg{stars} class object as selected
-#'   by the user by specifying `compat` of GeoTIFF images with layers named by
-#'    \acronym{BOM} product \acronym{ID}, timestamp and band.
+#' A \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars}
+#'   S3 `stars` class object as selected by the user by specifying `compat` of
+#'   GeoTIFF images with layers named by \acronym{BOM} product \acronym{ID},
+#'   timestamp and band.
 #'
-#' @note The original \pkg{bomrang} version of this function supported local
+#' @note The original \CRANpkg{bomrang} version of this function supported local
 #'   file caching using \CRANpkg{hoardr}.  This version does not support this
 #'   functionality any longer due to issues with \acronym{CRAN} and
 #'   \CRANpkg{hoardr}.
@@ -132,7 +134,7 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-#' # GEOS GIS \linkS4class{SpatRaster} object for most recent single scan
+#' # GEOS GIS \linkS4class{SpatRaster-class} object for most recent single scan
 #'  available
 #'
 #' imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
@@ -267,7 +269,7 @@ get_satellite_imagery <- get_satellite <-
 #' @autoglobal
 .ftp_images <- function(product_id, bom_server) {
   # set a custom user-agent, restore original settings on exit
-  # required for #130 - BOM returns 403 for RStudio
+  # required for 130 - BOM returns 403 for RStudio
   op <- options()
   on.exit(options(op))
 
@@ -365,7 +367,7 @@ get_satellite_imagery <- get_satellite <-
   if (length(tif_files) == 0 |
       tif_files[1] == "ftp://ftp.bom.gov.au/anon/gen/gms/") {
     stop("Sorry, no files are currently available for ", product_id, ".",
-         call. = FALSE)
+        call. = FALSE)
   }
   return(tif_files)
 }

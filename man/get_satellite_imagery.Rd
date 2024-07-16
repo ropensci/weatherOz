@@ -8,9 +8,9 @@ get_satellite_imagery(product_id, scans = 1, compat = "terra")
 }
 \arguments{
 \item{product_id}{\code{Character}. \acronym{BOM} product \acronym{ID} to download
-and import as a \linkS4class{SpatRaster} or \CRANpkg{stars} class object.
-A vector of values from \code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.
-Value is required.}
+and import as a \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class
+or \CRANpkg{stars} S3 \code{stars} class object.  A vector of values from
+\code{\link[=get_available_imagery]{get_available_imagery()}} may be used here.  Value is required.}
 
 \item{scans}{\code{Integer}. Number of scans to download, starting with most
 recent and progressing backwards, \emph{e.g.}, 1 - the most recent single scan
@@ -19,21 +19,23 @@ hours available, etc.  Negating will return the oldest files first.
 Defaults to 1.  Value is optional.}
 
 \item{compat}{\code{Character}. A string indicating the \R package with which the
-returned imagery should be formatted for use, one of \link{terra} or \CRANpkg{stars}.
-Defaults to \link{terra}.}
+returned imagery should be formatted for use, one of \code{terra} or
+\code{stars}.  Defaults to \code{terra}.}
 }
 \value{
-A \linkS4class{SpatRaster} or \CRANpkg{stars} class object as selected
-by the user by specifying \code{compat} of GeoTIFF images with layers named by
-\acronym{BOM} product \acronym{ID}, timestamp and band.
+A \CRANpkg{terra} \linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars}
+S3 \code{stars} class object as selected by the user by specifying \code{compat} of
+GeoTIFF images with layers named by \acronym{BOM} product \acronym{ID},
+timestamp and band.
 }
 \description{
 Fetch \acronym{BOM} satellite GeoTIFF imagery from
-\url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a raster
-\linkS4class{SpatRaster} or \CRANpkg{stars} object of GeoTIFF files.
-Files are available at ten minutes update frequency with a 24-hour delete
-time.  It is suggested to check file availability first by using
-\code{\link[=get_available_imagery]{get_available_imagery()}}.  Ported from \pkg{bomrang} with modifications.
+\url{ftp://ftp.bom.gov.au/anon/gen/gms/} and return a \CRANpkg{terra}
+\linkS4class{SpatRaster-class} S4 class or \CRANpkg{stars} S3 \code{stars}
+object of GeoTIFF files.  Files are available at ten minutes update
+frequency with a 24-hour delete time.  It is suggested to check file
+availability first by using \code{\link[=get_available_imagery]{get_available_imagery()}}.  Ported from
+\CRANpkg{bomrang} with modifications.
 }
 \details{
 Valid \acronym{BOM} satellite Product IDs for use with
@@ -61,7 +63,7 @@ AUS equirect. GIS}
 }
 }
 \note{
-The original \pkg{bomrang} version of this function supported local
+The original \CRANpkg{bomrang} version of this function supported local
 file caching using \CRANpkg{hoardr}.  This version does not support this
 functionality any longer due to issues with \acronym{CRAN} and
 \CRANpkg{hoardr}.
@@ -69,7 +71,7 @@ functionality any longer due to issues with \acronym{CRAN} and
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
-# GEOS GIS \linkS4class{SpatRaster} object for most recent single scan
+# GEOS GIS \linkS4class{SpatRaster-class} object for most recent single scan
  available
 
 imagery <- get_satellite_imagery(product_id = "IDE00425", scans = 1)
