@@ -156,7 +156,7 @@ wd
 ## Example 2
 
 Source data from latitude and longitude coordinates anywhere in
-Australia (interpolated/gridded data - SILO API) Southwood, QLD for max
+Australia (interpolated/gridded data - SILO API) for Southwood, QLD for max
 and min temperature and rainfall.
 
 ``` r
