@@ -155,8 +155,9 @@ wd
 
 ## Example 2
 
-Source data from latitude and longitude coordinates (gridded data - SILO
-API) Southwood, QLD for max and min temperature and rainfall.
+Source data from latitude and longitude coordinates anywhere in
+Australia (interpolated/gridded data - SILO API) Southwood, QLD for max
+and min temperature and rainfall.
 
 ``` r
 library(weatherOz)
@@ -184,12 +185,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-07-07      0.9              25
-#> 2:     11.7              25 254.5 m 2024-07-07      0.0              25
-#> 3:      7.8              25 254.5 m 2024-07-07      0.0              25
-#> 4:     10.6              25 254.5 m 2024-07-07      0.0              25
-#> 5:     13.3              25 254.5 m 2024-07-07      0.0              25
-#> 6:     14.7              25 254.5 m 2024-07-07      1.8              25
+#> 1:      9.8              25 254.5 m 2024-07-28      0.9              25
+#> 2:     11.7              25 254.5 m 2024-07-28      0.0              25
+#> 3:      7.8              25 254.5 m 2024-07-28      0.0              25
+#> 4:     10.6              25 254.5 m 2024-07-28      0.0              25
+#> 5:     13.3              25 254.5 m 2024-07-28      0.0              25
+#> 6:     14.7              25 254.5 m 2024-07-28      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
