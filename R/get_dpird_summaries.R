@@ -654,7 +654,8 @@ get_dpird_summaries <- function(station_code,
     j <- 1
     for (i in col_lists) {
       new_df_list[[j]] <-
-        data.table::rbindlist(lapply(X = nested_list_objects[[i]], FUN = data.table::as.data.table))
+        data.table::rbindlist(lapply(X = nested_list_objects[[i]],
+           FUN = data.table::as.data.table))
 
       # drop the list column from the org data.table
       nested_list_objects[, names(new_df_list[j]) := NULL]
@@ -662,8 +663,8 @@ get_dpird_summaries <- function(station_code,
       j <- j + 1
     }
 
-    x <-
-      data.table::setorder(x = data.table::as.data.table(do.call(what = cbind, args = new_df_list)))
+
+    x <- data.table::as.data.table(do.call(what = cbind, args = new_df_list))
 
     return(cbind(nested_list_objects, x))
   }
