@@ -64,71 +64,45 @@ library(weatherOz)
 #>   Please note information at the page 
 #>   <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>.
 #>   --------------------------------------------------------------------------------  
-#>       index product_id  state         town       aac       lat      lon  elev
-#>      <fctr>     <char> <char>       <char>    <char>     <num>    <num> <num>
-#>   1:      0   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1
-#>   2:      1   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1
-#>   3:      2   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1
-#>   4:      3   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1
-#>   5:      4   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1
-#>  ---                                                                         
-#> 787:      2   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4
-#> 788:      3   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4
-#> 789:      4   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4
-#> 790:      5   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4
-#> 791:      6   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4
-#>         start_time_local end_time_local utc_offset      start_time_utc
-#>                   <POSc>         <POSc>     <fctr>              <POSc>
-#>   1: 2024-07-07 09:28:52     2024-07-08      10:00 2024-07-06 23:28:52
-#>   2: 2024-07-08 00:00:00     2024-07-09      10:00 2024-07-07 14:00:00
-#>   3: 2024-07-09 00:00:00     2024-07-10      10:00 2024-07-08 14:00:00
-#>   4: 2024-07-10 00:00:00     2024-07-11      10:00 2024-07-09 14:00:00
-#>   5: 2024-07-11 00:00:00     2024-07-12      10:00 2024-07-10 14:00:00
-#>  ---                                                                  
-#> 787: 2024-07-09 00:00:00     2024-07-10      10:00 2024-07-08 14:00:00
-#> 788: 2024-07-10 00:00:00     2024-07-11      10:00 2024-07-09 14:00:00
-#> 789: 2024-07-11 00:00:00     2024-07-12      10:00 2024-07-10 14:00:00
-#> 790: 2024-07-12 00:00:00     2024-07-13      10:00 2024-07-11 14:00:00
-#> 791: 2024-07-13 00:00:00     2024-07-14      10:00 2024-07-12 14:00:00
-#>             end_time_utc minimum_temperature maximum_temperature
-#>                   <POSc>               <num>               <num>
-#>   1: 2024-07-07 14:00:00                  NA                  22
-#>   2: 2024-07-08 14:00:00                  13                  21
-#>   3: 2024-07-09 14:00:00                  13                  23
-#>   4: 2024-07-10 14:00:00                  14                  24
-#>   5: 2024-07-11 14:00:00                  12                  24
-#>  ---                                                            
-#> 787: 2024-07-09 14:00:00                  20                  27
-#> 788: 2024-07-10 14:00:00                  19                  27
-#> 789: 2024-07-11 14:00:00                  18                  27
-#> 790: 2024-07-12 14:00:00                  18                  27
-#> 791: 2024-07-13 14:00:00                  18                  27
-#>      lower_precipitation_limit upper_precipitation_limit           precis
-#>                          <num>                     <num>           <char>
-#>   1:                         0                         1 Possible shower.
-#>   2:                         0                         3   Shower or two.
-#>   3:                         0                         7   Shower or two.
-#>   4:                         0                         1  Cloud clearing.
-#>   5:                        NA                        NA    Mostly sunny.
-#>  ---                                                                     
-#> 787:                         0                         4   Shower or two.
-#> 788:                         0                         1 Possible shower.
-#> 789:                         0                         1 Possible shower.
-#> 790:                         0                         1   Partly cloudy.
-#> 791:                        NA                        NA           Sunny.
-#>      probability_of_precipitation
-#>                             <num>
-#>   1:                           40
-#>   2:                           60
-#>   3:                           70
-#>   4:                           30
-#>   5:                            5
-#>  ---                             
-#> 787:                           60
-#> 788:                           40
-#> 789:                           40
-#> 790:                           30
-#> 791:                           20
+#>       index product_id  state         town       aac       lat      lon  elev    start_time_local end_time_local
+#>      <fctr>     <char> <char>       <char>    <char>     <num>    <num> <num>              <POSc>         <POSc>
+#>   1:      0   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1 2024-08-03 17:00:00     2024-08-04
+#>   2:      1   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1 2024-08-04 00:00:00     2024-08-05
+#>   3:      2   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1 2024-08-05 00:00:00     2024-08-06
+#>   4:      3   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1 2024-08-06 00:00:00     2024-08-07
+#>   5:      4   IDQ11295    QLD     Brisbane QLD_PT001 -27.48080 153.0389   8.1 2024-08-07 00:00:00     2024-08-08
+#>  ---                                                                                                            
+#> 900:      3   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4 2024-08-06 00:00:00     2024-08-07
+#> 901:      4   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4 2024-08-07 00:00:00     2024-08-08
+#> 902:      5   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4 2024-08-08 00:00:00     2024-08-09
+#> 903:      6   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4 2024-08-09 00:00:00     2024-08-10
+#> 904:      7   IDQ11295    QLD Port Douglas QLD_PT254 -16.48681 145.4635  70.4 2024-08-10 00:00:00     2024-08-11
+#>      utc_offset      start_time_utc        end_time_utc minimum_temperature maximum_temperature
+#>          <fctr>              <POSc>              <POSc>               <num>               <num>
+#>   1:      10:00 2024-08-03 07:00:00 2024-08-03 14:00:00                  NA                  NA
+#>   2:      10:00 2024-08-03 14:00:00 2024-08-04 14:00:00                   9                  23
+#>   3:      10:00 2024-08-04 14:00:00 2024-08-05 14:00:00                  11                  23
+#>   4:      10:00 2024-08-05 14:00:00 2024-08-06 14:00:00                  12                  24
+#>   5:      10:00 2024-08-06 14:00:00 2024-08-07 14:00:00                  13                  22
+#>  ---                                                                                           
+#> 900:      10:00 2024-08-05 14:00:00 2024-08-06 14:00:00                  18                  26
+#> 901:      10:00 2024-08-06 14:00:00 2024-08-07 14:00:00                  18                  26
+#> 902:      10:00 2024-08-07 14:00:00 2024-08-08 14:00:00                  18                  27
+#> 903:      10:00 2024-08-08 14:00:00 2024-08-09 14:00:00                  18                  26
+#> 904:      10:00 2024-08-09 14:00:00 2024-08-10 14:00:00                  18                  26
+#>      lower_precipitation_limit upper_precipitation_limit           precis probability_of_precipitation
+#>                          <num>                     <num>           <char>                        <num>
+#>   1:                        NA                        NA    Mostly clear.                            5
+#>   2:                        NA                        NA           Sunny.                            5
+#>   3:                        NA                        NA          Cloudy.                           20
+#>   4:                         0                         1 Possible shower.                           40
+#>   5:                         0                         1   Partly cloudy.                           30
+#>  ---                                                                                                  
+#> 900:                         0                         2   Shower or two.                           50
+#> 901:                         0                         1   Shower or two.                           50
+#> 902:                         0                         2   Shower or two.                           50
+#> 903:                         0                         3   Shower or two.                           60
+#> 904:                         0                         3   Shower or two.                           50
 ```
 
 ## Using get_ag_bulletin()
@@ -173,45 +147,32 @@ library(weatherOz)
 #>   WA.  Also see 
 #>   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
 #>   ----------------------------------------------------------------------------  
-#>     product_id  state         station   site      obs_time_local
-#>         <fctr> <char>          <char> <fctr>              <POSc>
-#>  1:   IDW65176     WA        Beverley  10515 2024-07-07 09:00:00
-#>  2:   IDW65176     WA        Brookton  10524 2024-07-07 09:00:00
-#>  3:   IDW65176     WA          Broome  03003 2024-07-07 09:00:00
-#>  4:   IDW65176     WA       Carnarvon  06011 2024-07-07 09:00:00
-#>  5:   IDW65176     WA      Donnybrook  09534 2024-07-07 09:00:00
-#> ---                                                             
-#> 28:   IDW65176     WA    Ravensthorpe  10633 2024-07-07 09:00:00
-#> 29:   IDW65176     WA  Salmon Gums RS  12071 2024-07-07 09:00:00
-#> 30:   IDW65176     WA       Wandering  10917 2024-07-07 09:00:00
-#> 31:   IDW65176     WA Wongan Hills RS  08137 2024-07-07 09:00:00
-#> 32:   IDW65176     WA            York  10311 2024-07-07 09:00:00
-#>            obs_time_utc time_zone     r    tn    tx   twd    ev    tg    sn
-#>                  <POSc>    <char> <num> <num> <num> <num> <num> <num> <num>
-#>  1: 2024-07-07 01:00:00       WST   4.0   8.8  15.0   0.2    NA    NA    NA
-#>  2: 2024-07-07 01:00:00       WST   2.0   6.0  15.0   0.6    NA    NA    NA
-#>  3: 2024-07-07 01:00:00       WST   0.0  11.9  27.3   9.9    NA    NA    NA
-#>  4: 2024-07-07 01:00:00       WST  21.8  15.9  24.4   0.0    NA    NA    NA
-#>  5: 2024-07-07 01:00:00       WST    NA   6.0  16.9   0.3    NA    NA    NA
-#> ---                                                                        
-#> 28: 2024-07-07 01:00:00       WST   0.0   3.0  15.0   1.0    NA    NA    NA
-#> 29: 2024-07-07 01:00:00       WST   0.0   6.2  15.9    NA    NA    NA    NA
-#> 30: 2024-07-07 01:00:00       WST   1.8   7.9  13.6    NA    NA    NA    NA
-#> 31: 2024-07-07 01:00:00       WST   8.8   8.0  16.6   0.2    NA     8    NA
-#> 32: 2024-07-07 01:00:00       WST   5.7   7.5  17.0   0.7    NA    NA    NA
-#>      solr    t5   t10   t20   t50   t1m    wr
-#>     <num> <num> <num> <num> <num> <num> <num>
-#>  1:   8.1    NA    NA    NA    NA    NA    NA
-#>  2:   8.8    NA    NA    NA    NA    NA    NA
-#>  3:  18.2    NA    NA    NA    NA    NA    NA
-#>  4:  14.9    NA    NA    NA    NA    NA    NA
-#>  5:   5.8    NA    NA    NA    NA    NA    NA
-#> ---                                          
-#> 28:  10.6    NA    NA    NA    NA    NA    NA
-#> 29:  11.4    NA    NA    NA    NA    NA    NA
-#> 30:   7.7    NA    NA    NA    NA    NA    NA
-#> 31:   9.6    NA    NA    NA    NA    NA    NA
-#> 32:   9.2    NA    NA    NA    NA    NA    NA
+#>     product_id  state        station   site      obs_time_local        obs_time_utc time_zone     r    tn    tx
+#>         <fctr> <char>         <char> <fctr>              <POSc>              <POSc>    <char> <num> <num> <num>
+#>  1:   IDW65176     WA       Beverley  10515 2024-08-03 09:00:00 2024-08-03 01:00:00       WST    NA   0.5  15.2
+#>  2:   IDW65176     WA       Brookton  10524 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.01   0.2  14.7
+#>  3:   IDW65176     WA         Broome  03003 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00  16.6  34.5
+#>  4:   IDW65176     WA      Carnarvon  06011 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00  13.0  22.2
+#>  5:   IDW65176     WA      Esperance  09789 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00   5.9  16.8
+#> ---                                                                                                            
+#> 20:   IDW65176     WA  Perth Airport  09021 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00   5.8  16.6
+#> 21:   IDW65176     WA   Port Hedland  04032 2024-08-03 09:00:00 2024-08-03 01:00:00       WST 28.20  17.2  24.7
+#> 22:   IDW65176     WA   Ravensthorpe  10633 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00   2.0  16.0
+#> 23:   IDW65176     WA Salmon Gums RS  12071 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00  -2.0  14.9
+#> 24:   IDW65176     WA           York  10311 2024-08-03 09:00:00 2024-08-03 01:00:00       WST  0.00  -0.5  16.5
+#>       twd    ev    tg    sn  solr    t5   t10   t20   t50   t1m    wr
+#>     <num> <num> <num> <num> <num> <num> <num> <num> <num> <num> <num>
+#>  1:   0.0    NA    NA    NA  14.1    NA    NA    NA    NA    NA    NA
+#>  2:   1.2    NA    NA    NA  13.7    NA    NA    NA    NA    NA    NA
+#>  3:   4.0    NA    NA    NA  19.9    NA    NA    NA    NA    NA    NA
+#>  4:   3.9    NA    NA    NA  17.3    NA    NA    NA    NA    NA    NA
+#>  5:   2.6    NA    NA    NA  13.4    NA    NA    NA    NA    NA    NA
+#> ---                                                                  
+#> 20:   3.4   1.6   2.5   3.8  11.4   9.3   9.8  11.6  14.4  15.9    58
+#> 21:   0.0    NA    NA    NA  10.3    NA    NA    NA    NA    NA    NA
+#> 22:   1.0    NA    NA    NA  13.3    NA    NA    NA    NA    NA    NA
+#> 23:    NA    NA    NA    NA  13.9    NA    NA    NA    NA    NA    NA
+#> 24:   0.0    NA    NA    NA  14.1    NA    NA    NA    NA    NA    NA
 ```
 
 ## Using get_coastal_forecast()
@@ -259,136 +220,97 @@ library(weatherOz)
 #>   Also see 
 #>   <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>.
 #>   --------------------------------------------------------------------------------  
-#>      index product_id   type state_code
-#>     <fctr>     <char> <char>     <char>
-#>  1:   <NA>   IDQ11290   <NA>        QLD
-#>  2:   <NA>   IDQ11290   <NA>        QLD
-#>  3:   <NA>   IDQ11290   <NA>        QLD
-#>  4:   <NA>   IDQ11290   <NA>        QLD
-#>  5:      0   IDQ11290   <NA>        QLD
-#> ---                                    
-#> 45:      1   IDQ11290   <NA>        QLD
-#> 46:      2   IDQ11290   <NA>        QLD
-#> 47:      0   IDQ11290   <NA>        QLD
-#> 48:      1   IDQ11290   <NA>        QLD
-#> 49:      2   IDQ11290   <NA>        QLD
-#>                                                          dist_name pt_1_name
-#>                                                             <char>    <char>
-#>  1:                                                     Queensland      <NA>
-#>  2:                                 Queensland Gulf of Carpentaria      <NA>
-#>  3:                                               North Queensland      <NA>
-#>  4:                                               South Queensland      <NA>
-#>  5: South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>
-#> ---                                                                         
-#> 45:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>
-#> 46:                Gold Coast Waters: Cape Moreton to Point Danger      <NA>
-#> 47:                             Great Barrier Reef Offshore Waters      <NA>
-#> 48:                             Great Barrier Reef Offshore Waters      <NA>
-#> 49:                             Great Barrier Reef Offshore Waters      <NA>
-#>     pt_2_name       aac    start_time_local      end_time_local utc_offset
-#>        <char>    <char>              <POSc>              <POSc>     <fctr>
-#>  1:      <NA> QLD_FA001 2024-07-07 10:00:08 2024-07-07 10:00:08      10:00
-#>  2:      <NA> QLD_FA002 2024-07-07 05:00:00 2024-07-07 05:00:00      10:00
-#>  3:      <NA> QLD_FA003 2024-07-07 05:00:00 2024-07-07 05:00:00      10:00
-#>  4:      <NA> QLD_FA004 2024-07-07 05:00:00 2024-07-07 05:00:00      10:00
-#>  5:      <NA> QLD_MW001 2024-07-07 05:00:00 2024-07-07 05:00:00      10:00
-#> ---                                                                       
-#> 45:      <NA> QLD_MW014 2024-07-08 00:00:00 2024-07-08 00:00:00      10:00
-#> 46:      <NA> QLD_MW014 2024-07-09 00:00:00 2024-07-09 00:00:00      10:00
-#> 47:      <NA> QLD_MW015 2024-07-07 05:00:00 2024-07-07 05:00:00      10:00
-#> 48:      <NA> QLD_MW015 2024-07-08 00:00:00 2024-07-08 00:00:00      10:00
-#> 49:      <NA> QLD_MW015 2024-07-09 00:00:00 2024-07-09 00:00:00      10:00
-#>          start_time_utc        end_time_utc
-#>                  <POSc>              <POSc>
-#>  1: 2024-07-07 10:00:08 2024-07-07 10:00:08
-#>  2: 2024-07-07 05:00:00 2024-07-07 05:00:00
-#>  3: 2024-07-07 05:00:00 2024-07-07 05:00:00
-#>  4: 2024-07-07 05:00:00 2024-07-07 05:00:00
-#>  5: 2024-07-07 05:00:00 2024-07-07 05:00:00
-#> ---                                        
-#> 45: 2024-07-08 00:00:00 2024-07-08 00:00:00
-#> 46: 2024-07-09 00:00:00 2024-07-09 00:00:00
-#> 47: 2024-07-07 05:00:00 2024-07-07 05:00:00
-#> 48: 2024-07-08 00:00:00 2024-07-08 00:00:00
-#> 49: 2024-07-09 00:00:00 2024-07-09 00:00:00
-#>                                                          forecast_seas
-#>                                                                 <char>
-#>  1:                                                               <NA>
-#>  2:                                                               <NA>
-#>  3:                                                               <NA>
-#>  4:                                                               <NA>
-#>  5: 1 to 2 metres, decreasing to 1 to 1.5 metres during the afternoon.
-#> ---                                                                   
-#> 45:                                                    Around 1 metre.
-#> 46:                                                     Below 1 metre.
-#> 47:                                                   1.5 to 2 metres.
-#> 48:                                                   1 to 1.5 metres.
-#> 49: Around 1 metre, increasing to 1 to 1.5 metres north of Creal Reef.
-#>                                                 forecast_weather
-#>                                                           <char>
-#>  1:                                                         <NA>
-#>  2:                                                         <NA>
-#>  3:                                                         <NA>
-#>  4:                                                         <NA>
-#>  5:                                               Partly cloudy.
-#> ---                                                             
-#> 45:                               Cloudy. 70% chance of showers.
-#> 46: Cloudy. 90% chance of showers. The chance of a thunderstorm.
-#> 47:                        Partly cloudy. 50% chance of showers.
-#> 48:                                                Mostly sunny.
-#> 49:                                                Mostly sunny.
-#>                                                                                                                                                             forecast_winds
-#>                                                                                                                                                                     <char>
-#>  1:                                                                                                                                                                   <NA>
-#>  2:                                                                                                                                                                   <NA>
-#>  3:                                                                                                                                                                   <NA>
-#>  4:                                                                                                                                                                   <NA>
-#>  5: Easterly 15 to 20 knots, reaching up to 25 knots offshore north of Kowanyama early in the morning. Winds turning south to southeasterly 10 to 15 knots in the evening.
-#> ---                                                                                                                                                                       
-#> 45:                                                                                           Easterly 10 to 15 knots decreasing to about 10 knots in the early afternoon.
-#> 46:                                                                                                                                          Northeasterly about 10 knots.
-#> 47:                                                                                                                                               Easterly 20 to 25 knots.
-#> 48:                                                                                                                                               Easterly 15 to 20 knots.
-#> 49:                                                                                                                                  East to southeasterly 10 to 15 knots.
-#>                                                                              forecast_swell1
-#>                                                                                       <char>
-#>  1:                                                                                     <NA>
-#>  2:                                                                                     <NA>
-#>  3:                                                                                     <NA>
-#>  4:                                                                                     <NA>
-#>  5:                                                             Northeasterly below 1 metre.
+#>      index product_id   type state_code                                                      dist_name pt_1_name
+#>     <fctr>     <char> <char>     <char>                                                         <char>    <char>
+#>  1:   <NA>   IDQ11290   <NA>        QLD                                                     Queensland      <NA>
+#>  2:   <NA>   IDQ11290   <NA>        QLD                                 Queensland Gulf of Carpentaria      <NA>
+#>  3:   <NA>   IDQ11290   <NA>        QLD                                               North Queensland      <NA>
+#>  4:   <NA>   IDQ11290   <NA>        QLD                                               South Queensland      <NA>
+#>  5:      0   IDQ11290   <NA>        QLD South East Gulf of Carpentaria: QLD-NT Border to Cape Keerweer      <NA>
+#> ---                                                                                                             
+#> 60:      3   IDQ11290   <NA>        QLD                Gold Coast Waters: Cape Moreton to Point Danger      <NA>
+#> 61:      0   IDQ11290   <NA>        QLD                             Great Barrier Reef Offshore Waters      <NA>
+#> 62:      1   IDQ11290   <NA>        QLD                             Great Barrier Reef Offshore Waters      <NA>
+#> 63:      2   IDQ11290   <NA>        QLD                             Great Barrier Reef Offshore Waters      <NA>
+#> 64:      3   IDQ11290   <NA>        QLD                             Great Barrier Reef Offshore Waters      <NA>
+#>     pt_2_name       aac    start_time_local      end_time_local utc_offset      start_time_utc
+#>        <char>    <char>              <POSc>              <POSc>     <fctr>              <POSc>
+#>  1:      <NA> QLD_FA001 2024-08-03 15:50:19 2024-08-03 15:50:19      10:00 2024-08-03 15:50:19
+#>  2:      <NA> QLD_FA002 2024-08-03 17:00:00 2024-08-03 17:00:00      10:00 2024-08-03 17:00:00
+#>  3:      <NA> QLD_FA003 2024-08-03 17:00:00 2024-08-03 17:00:00      10:00 2024-08-03 17:00:00
+#>  4:      <NA> QLD_FA004 2024-08-03 17:00:00 2024-08-03 17:00:00      10:00 2024-08-03 17:00:00
+#>  5:      <NA> QLD_MW001 2024-08-03 17:00:00 2024-08-03 17:00:00      10:00 2024-08-03 17:00:00
+#> ---                                                                                           
+#> 60:      <NA> QLD_MW014 2024-08-06 00:00:00 2024-08-06 00:00:00      10:00 2024-08-06 00:00:00
+#> 61:      <NA> QLD_MW015 2024-08-03 17:00:00 2024-08-03 17:00:00      10:00 2024-08-03 17:00:00
+#> 62:      <NA> QLD_MW015 2024-08-04 00:00:00 2024-08-04 00:00:00      10:00 2024-08-04 00:00:00
+#> 63:      <NA> QLD_MW015 2024-08-05 00:00:00 2024-08-05 00:00:00      10:00 2024-08-05 00:00:00
+#> 64:      <NA> QLD_MW015 2024-08-06 00:00:00 2024-08-06 00:00:00      10:00 2024-08-06 00:00:00
+#>            end_time_utc                                                     forecast_seas
+#>                  <POSc>                                                            <char>
+#>  1: 2024-08-03 15:50:19                                                              <NA>
+#>  2: 2024-08-03 17:00:00                                                              <NA>
+#>  3: 2024-08-03 17:00:00                                                              <NA>
+#>  4: 2024-08-03 17:00:00                                                              <NA>
+#>  5: 2024-08-03 17:00:00            Below 1 metre, increasing to 1 to 1.5 metres offshore.
+#> ---                                                                                      
+#> 60: 2024-08-06 00:00:00                                                    Below 1 metre.
+#> 61: 2024-08-03 17:00:00                                                  1 to 1.5 metres.
+#> 62: 2024-08-04 00:00:00 1 to 1.5 metres, increasing to 1 to 2 metres north of Creal Reef.
+#> 63: 2024-08-05 00:00:00      1 to 1.5 metres, decreasing to 1 metre during the afternoon.
+#> 64: 2024-08-06 00:00:00                                                    Below 1 metre.
+#>                          forecast_weather
+#>                                    <char>
+#>  1:                                  <NA>
+#>  2:                                  <NA>
+#>  3:                                  <NA>
+#>  4:                                  <NA>
+#>  5:                                Clear.
+#> ---                                      
+#> 60: Partly cloudy. 70% chance of showers.
+#> 61:                         Mostly clear.
+#> 62:                        Partly cloudy.
+#> 63:                        Partly cloudy.
+#> 64:                         Mostly sunny.
+#>                                                                                                                                                     forecast_winds
+#>                                                                                                                                                             <char>
+#>  1:                                                                                                                                                           <NA>
+#>  2:                                                                                                                                                           <NA>
+#>  3:                                                                                                                                                           <NA>
+#>  4:                                                                                                                                                           <NA>
+#>  5:                                                                            East to southeasterly 10 to 15 knots tending south to southeasterly in the evening.
+#> ---                                                                                                                                                               
+#> 60:                          West to northwesterly 10 to 15 knots turning northerly below 10 knots during the afternoon then becoming variable during the evening.
+#> 61:                                                                                                                                  Southeasterly 15 to 20 knots.
+#> 62: Southeasterly 15 to 20 knots, reaching up to 25 knots north of Creal Reef early in the morning. Winds turning easterly during the morning and early afternoon.
+#> 63:                                                                                                                                       Easterly 15 to 20 knots.
+#> 64:                                                                                                                                       Easterly 10 to 15 knots.
+#>                                                                                        forecast_swell1
+#>                                                                                                 <char>
+#>  1:                                                                                               <NA>
+#>  2:                                                                                               <NA>
+#>  3:                                                                                               <NA>
+#>  4:                                                                                               <NA>
+#>  5:                                                               East to northeasterly below 1 metre.
+#> ---                                                                                                   
+#> 60:                                                                      Southeasterly around 1 metre.
+#> 61:         Southeasterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
+#> 62: East to southeasterly around 1 metre, increasing to 1 to 1.5 metres through the Capricorn Channel.
+#> 63:                                                             East to southeasterly 1 to 1.5 metres.
+#> 64:                                                             East to southeasterly 1 to 1.5 metres.
+#>     forecast_swell2 forecast_caution marine_forecast tropical_system_location forecast_waves
+#>              <char>           <char>          <char>                   <lgcl>         <lgcl>
+#>  1:            <NA>             <NA>            <NA>                       NA             NA
+#>  2:            <NA>             <NA>            <NA>                       NA             NA
+#>  3:            <NA>             <NA>            <NA>                       NA             NA
+#>  4:            <NA>             <NA>            <NA>                       NA             NA
+#>  5:            <NA>             <NA>            <NA>                       NA             NA
 #> ---                                                                                         
-#> 45:                     Easterly 1.5 metres inshore, increasing to 1.5 to 2 metres offshore.
-#> 46:                     Easterly 1.5 metres inshore, increasing to 1.5 to 2 metres offshore.
-#> 47:   Easterly 1 to 1.5 metres, increasing to 2 to 2.5 metres through the Capricorn Channel.
-#> 48: Easterly 1 to 1.5 metres, increasing to 1.5 to 2.5 metres through the Capricorn Channel.
-#> 49:   Easterly 1 to 1.5 metres, increasing to 1.5 to 2 metres through the Capricorn Channel.
-#>               forecast_swell2 forecast_caution marine_forecast
-#>                        <char>           <char>          <char>
-#>  1:                      <NA>             <NA>            <NA>
-#>  2:                      <NA>             <NA>            <NA>
-#>  3:                      <NA>             <NA>            <NA>
-#>  4:                      <NA>             <NA>            <NA>
-#>  5:                      <NA>             <NA>            <NA>
-#> ---                                                           
-#> 45: Southerly around 1 metre.             <NA>            <NA>
-#> 46: Southerly around 1 metre.             <NA>            <NA>
-#> 47:                      <NA>             <NA>            <NA>
-#> 48:                      <NA>             <NA>            <NA>
-#> 49:                      <NA>             <NA>            <NA>
-#>     tropical_system_location forecast_waves
-#>                       <lgcl>         <lgcl>
-#>  1:                       NA             NA
-#>  2:                       NA             NA
-#>  3:                       NA             NA
-#>  4:                       NA             NA
-#>  5:                       NA             NA
-#> ---                                        
-#> 45:                       NA             NA
-#> 46:                       NA             NA
-#> 47:                       NA             NA
-#> 48:                       NA             NA
-#> 49:                       NA             NA
+#> 60:            <NA>             <NA>            <NA>                       NA             NA
+#> 61:            <NA>             <NA>            <NA>                       NA             NA
+#> 62:            <NA>             <NA>            <NA>                       NA             NA
+#> 63:            <NA>             <NA>            <NA>                       NA             NA
+#> 64:            <NA>             <NA>            <NA>                       NA             NA
 ```
 ## Working with BOM Image Files
 
@@ -443,80 +365,54 @@ If no valid Product ID is supplied, defaults to all GeoTIFF images currently ava
 library(weatherOz)
 
 (avail <- get_available_imagery(product_id = "IDE00425"))
-#>   [1] "IDE00425.202407060210.tif" "IDE00425.202407060220.tif"
-#>   [3] "IDE00425.202407060230.tif" "IDE00425.202407060250.tif"
-#>   [5] "IDE00425.202407060300.tif" "IDE00425.202407060310.tif"
-#>   [7] "IDE00425.202407060320.tif" "IDE00425.202407060330.tif"
-#>   [9] "IDE00425.202407060340.tif" "IDE00425.202407060350.tif"
-#>  [11] "IDE00425.202407060400.tif" "IDE00425.202407060410.tif"
-#>  [13] "IDE00425.202407060420.tif" "IDE00425.202407060430.tif"
-#>  [15] "IDE00425.202407060440.tif" "IDE00425.202407060450.tif"
-#>  [17] "IDE00425.202407060500.tif" "IDE00425.202407060510.tif"
-#>  [19] "IDE00425.202407060520.tif" "IDE00425.202407060530.tif"
-#>  [21] "IDE00425.202407060540.tif" "IDE00425.202407060550.tif"
-#>  [23] "IDE00425.202407060600.tif" "IDE00425.202407060610.tif"
-#>  [25] "IDE00425.202407060620.tif" "IDE00425.202407060630.tif"
-#>  [27] "IDE00425.202407060640.tif" "IDE00425.202407060650.tif"
-#>  [29] "IDE00425.202407060700.tif" "IDE00425.202407060710.tif"
-#>  [31] "IDE00425.202407060720.tif" "IDE00425.202407060730.tif"
-#>  [33] "IDE00425.202407060740.tif" "IDE00425.202407060750.tif"
-#>  [35] "IDE00425.202407060800.tif" "IDE00425.202407060810.tif"
-#>  [37] "IDE00425.202407060820.tif" "IDE00425.202407060830.tif"
-#>  [39] "IDE00425.202407060840.tif" "IDE00425.202407060850.tif"
-#>  [41] "IDE00425.202407060900.tif" "IDE00425.202407060910.tif"
-#>  [43] "IDE00425.202407060920.tif" "IDE00425.202407060930.tif"
-#>  [45] "IDE00425.202407060940.tif" "IDE00425.202407060950.tif"
-#>  [47] "IDE00425.202407061000.tif" "IDE00425.202407061010.tif"
-#>  [49] "IDE00425.202407061020.tif" "IDE00425.202407061030.tif"
-#>  [51] "IDE00425.202407061040.tif" "IDE00425.202407061050.tif"
-#>  [53] "IDE00425.202407061100.tif" "IDE00425.202407061110.tif"
-#>  [55] "IDE00425.202407061120.tif" "IDE00425.202407061130.tif"
-#>  [57] "IDE00425.202407061140.tif" "IDE00425.202407061150.tif"
-#>  [59] "IDE00425.202407061200.tif" "IDE00425.202407061210.tif"
-#>  [61] "IDE00425.202407061220.tif" "IDE00425.202407061230.tif"
-#>  [63] "IDE00425.202407061240.tif" "IDE00425.202407061250.tif"
-#>  [65] "IDE00425.202407061300.tif" "IDE00425.202407061310.tif"
-#>  [67] "IDE00425.202407061320.tif" "IDE00425.202407061330.tif"
-#>  [69] "IDE00425.202407061340.tif" "IDE00425.202407061350.tif"
-#>  [71] "IDE00425.202407061400.tif" "IDE00425.202407061410.tif"
-#>  [73] "IDE00425.202407061420.tif" "IDE00425.202407061430.tif"
-#>  [75] "IDE00425.202407061450.tif" "IDE00425.202407061500.tif"
-#>  [77] "IDE00425.202407061510.tif" "IDE00425.202407061520.tif"
-#>  [79] "IDE00425.202407061530.tif" "IDE00425.202407061540.tif"
-#>  [81] "IDE00425.202407061550.tif" "IDE00425.202407061600.tif"
-#>  [83] "IDE00425.202407061610.tif" "IDE00425.202407061620.tif"
-#>  [85] "IDE00425.202407061630.tif" "IDE00425.202407061640.tif"
-#>  [87] "IDE00425.202407061650.tif" "IDE00425.202407061700.tif"
-#>  [89] "IDE00425.202407061710.tif" "IDE00425.202407061720.tif"
-#>  [91] "IDE00425.202407061730.tif" "IDE00425.202407061740.tif"
-#>  [93] "IDE00425.202407061750.tif" "IDE00425.202407061800.tif"
-#>  [95] "IDE00425.202407061810.tif" "IDE00425.202407061820.tif"
-#>  [97] "IDE00425.202407061830.tif" "IDE00425.202407061840.tif"
-#>  [99] "IDE00425.202407061850.tif" "IDE00425.202407061900.tif"
-#> [101] "IDE00425.202407061910.tif" "IDE00425.202407061920.tif"
-#> [103] "IDE00425.202407061930.tif" "IDE00425.202407061940.tif"
-#> [105] "IDE00425.202407061950.tif" "IDE00425.202407062000.tif"
-#> [107] "IDE00425.202407062010.tif" "IDE00425.202407062020.tif"
-#> [109] "IDE00425.202407062030.tif" "IDE00425.202407062040.tif"
-#> [111] "IDE00425.202407062050.tif" "IDE00425.202407062100.tif"
-#> [113] "IDE00425.202407062110.tif" "IDE00425.202407062120.tif"
-#> [115] "IDE00425.202407062130.tif" "IDE00425.202407062140.tif"
-#> [117] "IDE00425.202407062150.tif" "IDE00425.202407062200.tif"
-#> [119] "IDE00425.202407062210.tif" "IDE00425.202407062220.tif"
-#> [121] "IDE00425.202407062230.tif" "IDE00425.202407062240.tif"
-#> [123] "IDE00425.202407062250.tif" "IDE00425.202407062300.tif"
-#> [125] "IDE00425.202407062310.tif" "IDE00425.202407062320.tif"
-#> [127] "IDE00425.202407062330.tif" "IDE00425.202407062340.tif"
-#> [129] "IDE00425.202407062350.tif" "IDE00425.202407070000.tif"
-#> [131] "IDE00425.202407070010.tif" "IDE00425.202407070020.tif"
-#> [133] "IDE00425.202407070030.tif" "IDE00425.202407070040.tif"
-#> [135] "IDE00425.202407070050.tif" "IDE00425.202407070100.tif"
-#> [137] "IDE00425.202407070110.tif" "IDE00425.202407070120.tif"
-#> [139] "IDE00425.202407070130.tif" "IDE00425.202407070140.tif"
-#> [141] "IDE00425.202407070150.tif" "IDE00425.202407070200.tif"
-#> [143] "IDE00425.202407070210.tif" "IDE00425.202407070220.tif"
-#> [145] "IDE00425.202407070230.tif" "IDE00425.202407070250.tif"
-#> [147] "IDE00425.202407070300.tif"
+#>   [1] "IDE00425.202408020710.tif" "IDE00425.202408020720.tif" "IDE00425.202408020730.tif"
+#>   [4] "IDE00425.202408020740.tif" "IDE00425.202408020750.tif" "IDE00425.202408020800.tif"
+#>   [7] "IDE00425.202408020810.tif" "IDE00425.202408020820.tif" "IDE00425.202408020830.tif"
+#>  [10] "IDE00425.202408020840.tif" "IDE00425.202408020850.tif" "IDE00425.202408020900.tif"
+#>  [13] "IDE00425.202408020910.tif" "IDE00425.202408020920.tif" "IDE00425.202408020930.tif"
+#>  [16] "IDE00425.202408020940.tif" "IDE00425.202408020950.tif" "IDE00425.202408021000.tif"
+#>  [19] "IDE00425.202408021010.tif" "IDE00425.202408021020.tif" "IDE00425.202408021030.tif"
+#>  [22] "IDE00425.202408021040.tif" "IDE00425.202408021050.tif" "IDE00425.202408021100.tif"
+#>  [25] "IDE00425.202408021110.tif" "IDE00425.202408021120.tif" "IDE00425.202408021130.tif"
+#>  [28] "IDE00425.202408021140.tif" "IDE00425.202408021150.tif" "IDE00425.202408021200.tif"
+#>  [31] "IDE00425.202408021210.tif" "IDE00425.202408021220.tif" "IDE00425.202408021230.tif"
+#>  [34] "IDE00425.202408021240.tif" "IDE00425.202408021250.tif" "IDE00425.202408021300.tif"
+#>  [37] "IDE00425.202408021310.tif" "IDE00425.202408021320.tif" "IDE00425.202408021330.tif"
+#>  [40] "IDE00425.202408021340.tif" "IDE00425.202408021350.tif" "IDE00425.202408021400.tif"
+#>  [43] "IDE00425.202408021410.tif" "IDE00425.202408021420.tif" "IDE00425.202408021430.tif"
+#>  [46] "IDE00425.202408021450.tif" "IDE00425.202408021500.tif" "IDE00425.202408021510.tif"
+#>  [49] "IDE00425.202408021520.tif" "IDE00425.202408021530.tif" "IDE00425.202408021540.tif"
+#>  [52] "IDE00425.202408021550.tif" "IDE00425.202408021600.tif" "IDE00425.202408021610.tif"
+#>  [55] "IDE00425.202408021620.tif" "IDE00425.202408021630.tif" "IDE00425.202408021640.tif"
+#>  [58] "IDE00425.202408021650.tif" "IDE00425.202408021700.tif" "IDE00425.202408021710.tif"
+#>  [61] "IDE00425.202408021720.tif" "IDE00425.202408021730.tif" "IDE00425.202408021740.tif"
+#>  [64] "IDE00425.202408021750.tif" "IDE00425.202408021800.tif" "IDE00425.202408021810.tif"
+#>  [67] "IDE00425.202408021820.tif" "IDE00425.202408021830.tif" "IDE00425.202408021840.tif"
+#>  [70] "IDE00425.202408021850.tif" "IDE00425.202408021900.tif" "IDE00425.202408021910.tif"
+#>  [73] "IDE00425.202408021920.tif" "IDE00425.202408021930.tif" "IDE00425.202408021940.tif"
+#>  [76] "IDE00425.202408021950.tif" "IDE00425.202408022000.tif" "IDE00425.202408022010.tif"
+#>  [79] "IDE00425.202408022020.tif" "IDE00425.202408022030.tif" "IDE00425.202408022040.tif"
+#>  [82] "IDE00425.202408022050.tif" "IDE00425.202408022100.tif" "IDE00425.202408022110.tif"
+#>  [85] "IDE00425.202408022120.tif" "IDE00425.202408022130.tif" "IDE00425.202408022140.tif"
+#>  [88] "IDE00425.202408022150.tif" "IDE00425.202408022200.tif" "IDE00425.202408022210.tif"
+#>  [91] "IDE00425.202408022220.tif" "IDE00425.202408022230.tif" "IDE00425.202408022240.tif"
+#>  [94] "IDE00425.202408022250.tif" "IDE00425.202408022300.tif" "IDE00425.202408022310.tif"
+#>  [97] "IDE00425.202408022320.tif" "IDE00425.202408022330.tif" "IDE00425.202408022340.tif"
+#> [100] "IDE00425.202408022350.tif" "IDE00425.202408030000.tif" "IDE00425.202408030010.tif"
+#> [103] "IDE00425.202408030020.tif" "IDE00425.202408030030.tif" "IDE00425.202408030040.tif"
+#> [106] "IDE00425.202408030050.tif" "IDE00425.202408030100.tif" "IDE00425.202408030110.tif"
+#> [109] "IDE00425.202408030120.tif" "IDE00425.202408030130.tif" "IDE00425.202408030140.tif"
+#> [112] "IDE00425.202408030150.tif" "IDE00425.202408030200.tif" "IDE00425.202408030210.tif"
+#> [115] "IDE00425.202408030220.tif" "IDE00425.202408030230.tif" "IDE00425.202408030250.tif"
+#> [118] "IDE00425.202408030300.tif" "IDE00425.202408030310.tif" "IDE00425.202408030320.tif"
+#> [121] "IDE00425.202408030330.tif" "IDE00425.202408030340.tif" "IDE00425.202408030350.tif"
+#> [124] "IDE00425.202408030400.tif" "IDE00425.202408030410.tif" "IDE00425.202408030420.tif"
+#> [127] "IDE00425.202408030430.tif" "IDE00425.202408030440.tif" "IDE00425.202408030450.tif"
+#> [130] "IDE00425.202408030500.tif" "IDE00425.202408030510.tif" "IDE00425.202408030520.tif"
+#> [133] "IDE00425.202408030530.tif" "IDE00425.202408030540.tif" "IDE00425.202408030550.tif"
+#> [136] "IDE00425.202408030600.tif" "IDE00425.202408030610.tif" "IDE00425.202408030620.tif"
+#> [139] "IDE00425.202408030630.tif" "IDE00425.202408030640.tif" "IDE00425.202408030650.tif"
+#> [142] "IDE00425.202408030700.tif" "IDE00425.202408030710.tif" "IDE00425.202408030720.tif"
 ```
 
 #### Using get_satellite_imagery()
@@ -574,30 +470,22 @@ The arguments are:
 library(weatherOz)
 x <- get_available_radar()
 head(x)
-#>    product_id LocationID  range     Name Longitude Latitude Radar_id
-#>        <char>     <char> <char>   <fctr>     <num>    <num>    <int>
-#> 1:     IDR641         64  512km Adelaide  138.4689 -34.6169       64
-#> 2:     IDR642         64  256km Adelaide  138.4689 -34.6169       64
-#> 3:     IDR643         64  128km Adelaide  138.4689 -34.6169       64
-#> 4:     IDR644         64   64km Adelaide  138.4689 -34.6169       64
-#> 5:     IDR311         31  512km   Albany  117.8163 -34.9418       31
-#> 6:     IDR312         31  256km   Albany  117.8163 -34.9418       31
-#>                   Full_Name IDRnn0name IDRnn1name  State    Type Group_ Status
-#>                      <fctr>     <fctr>     <fctr> <fctr>  <fctr> <fctr> <fctr>
-#> 1: Adelaide (Buckland Park)     BuckPk BucklandPk     SA Doppler    Yes Public
-#> 2: Adelaide (Buckland Park)     BuckPk BucklandPk     SA Doppler    Yes Public
-#> 3: Adelaide (Buckland Park)     BuckPk BucklandPk     SA Doppler    Yes Public
-#> 4: Adelaide (Buckland Park)     BuckPk BucklandPk     SA Doppler    Yes Public
-#> 5:                   Albany     Albany     Albany     WA Doppler    Yes Public
-#> 6:                   Albany     Albany     Albany     WA Doppler    Yes Public
-#>    Archive  as.is
-#>     <fctr> <lgcl>
-#> 1:  BuckPk   TRUE
-#> 2:  BuckPk   TRUE
-#> 3:  BuckPk   TRUE
-#> 4:  BuckPk   TRUE
-#> 5:  Albany   TRUE
-#> 6:  Albany   TRUE
+#>    product_id LocationID  range     Name Longitude Latitude Radar_id                Full_Name IDRnn0name
+#>        <char>     <char> <char>   <fctr>     <num>    <num>    <int>                   <fctr>     <fctr>
+#> 1:     IDR641         64  512km Adelaide  138.4689 -34.6169       64 Adelaide (Buckland Park)     BuckPk
+#> 2:     IDR642         64  256km Adelaide  138.4689 -34.6169       64 Adelaide (Buckland Park)     BuckPk
+#> 3:     IDR643         64  128km Adelaide  138.4689 -34.6169       64 Adelaide (Buckland Park)     BuckPk
+#> 4:     IDR644         64   64km Adelaide  138.4689 -34.6169       64 Adelaide (Buckland Park)     BuckPk
+#> 5:     IDR311         31  512km   Albany  117.8163 -34.9418       31                   Albany     Albany
+#> 6:     IDR312         31  256km   Albany  117.8163 -34.9418       31                   Albany     Albany
+#>    IDRnn1name  State    Type Group_ Status Archive  as.is
+#>        <fctr> <fctr>  <fctr> <fctr> <fctr>  <fctr> <lgcl>
+#> 1: BucklandPk     SA Doppler    Yes Public  BuckPk   TRUE
+#> 2: BucklandPk     SA Doppler    Yes Public  BuckPk   TRUE
+#> 3: BucklandPk     SA Doppler    Yes Public  BuckPk   TRUE
+#> 4: BucklandPk     SA Doppler    Yes Public  BuckPk   TRUE
+#> 5:     Albany     WA Doppler    Yes Public  Albany   TRUE
+#> 6:     Albany     WA Doppler    Yes Public  Albany   TRUE
 ```
 
 #### Using get_radar_imagery()
