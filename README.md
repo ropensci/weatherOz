@@ -12,11 +12,10 @@ stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecy
 Review](https://badges.ropensci.org/598_status.svg)](https://github.com/ropensci/software-review/issues/598)
 [![status](https://joss.theoj.org/papers/10.21105/joss.06717/status.svg)](https://joss.theoj.org/papers/10.21105/joss.06717)
 [![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml)
-[![test-coverage](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/test-coverage.yaml)
-[![codecov](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg?token=ZiaPsN6nYy)](https://app.codecov.io/gh/ropensci/weatherOz)
+[![Codecov test
+coverage](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg)](https://app.codecov.io/gh/ropensci/weatherOz)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
-
 <!-- badges: end -->
 
 {weatherOz} aims to facilitate access and download weather and climate
@@ -156,8 +155,8 @@ wd
 ## Example 2
 
 Source data from latitude and longitude coordinates anywhere in
-Australia (interpolated/gridded data - SILO API) for Southwood, QLD for max
-and min temperature and rainfall.
+Australia (interpolated/gridded data - SILO API) for Southwood, QLD for
+max and min temperature and rainfall.
 
 ``` r
 library(weatherOz)
@@ -185,12 +184,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-07-28      0.9              25
-#> 2:     11.7              25 254.5 m 2024-07-28      0.0              25
-#> 3:      7.8              25 254.5 m 2024-07-28      0.0              25
-#> 4:     10.6              25 254.5 m 2024-07-28      0.0              25
-#> 5:     13.3              25 254.5 m 2024-07-28      0.0              25
-#> 6:     14.7              25 254.5 m 2024-07-28      1.8              25
+#> 1:      9.8              25 254.5 m 2024-08-04      0.9              25
+#> 2:     11.7              25 254.5 m 2024-08-04      0.0              25
+#> 3:      7.8              25 254.5 m 2024-08-04      0.0              25
+#> 4:     10.6              25 254.5 m 2024-08-04      0.0              25
+#> 5:     13.3              25 254.5 m 2024-08-04      0.0              25
+#> 6:     14.7              25 254.5 m 2024-08-04      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
