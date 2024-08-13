@@ -18,11 +18,12 @@ coverage](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg)](https://app
 status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 <!-- badges: end -->
 
-{weatherOz} facilitates access and download weather and climate data for
-Australia from Australian data sources. Data are sourced from from the
-[Western Australia Department of Primary Industries and Regional
-Development (DPIRD)](https://www.agric.wa.gov.au/weather-api-20) and the
-[Scientific Information for Land Owners (SILO)
+{weatherOz} facilitates access to and download of weather and climate
+data for Australia from Australian data sources. Data are sourced from
+from the [Western Australia Department of Primary Industries and
+Regional Development
+(DPIRD)](https://www.agric.wa.gov.au/weather-api-20) and the [Scientific
+Information for Land Owners (SILO)
 API](https://www.agric.wa.gov.au/weather-api-20) endpoints and the
 Australian Government Bureau of Meteorology’s (BOM) [FTP
 server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
