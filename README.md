@@ -18,12 +18,14 @@ coverage](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg)](https://app
 status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 <!-- badges: end -->
 
-{weatherOz} aims to facilitate access and download weather and climate
-data for Australia from Australian data sources. Data are sourced from
-from the Western Australian Department of Primary Industries and
-Regional Development (DPIRD) and the Scientific Information for Land
-Owners (SILO) API endpoints and the Australian Government Bureau of
-Meteorology’s (BOM) FTP server.
+{weatherOz} facilitates access and download weather and climate data for
+Australia from Australian data sources. Data are sourced from from the
+[Western Australia Department of Primary Industries and Regional
+Development (DPIRD)](https://www.agric.wa.gov.au/weather-api-20) and the
+[Scientific Information for Land Owners (SILO)
+API](https://www.agric.wa.gov.au/weather-api-20) endpoints and the
+Australian Government Bureau of Meteorology’s (BOM) [FTP
+server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
 
 The package queries the APIs or an FTP server and returns data as a data
 frame or radar and satellite imagery in your R session. Observation data
@@ -135,20 +137,20 @@ wd
 #>    erosion_condition_minutes erosion_condition_start_time wind_avg_speed
 #>                        <int>                       <POSc>          <num>
 #> 1:                         0                         <NA>          10.85
-#> 2:                         0                         <NA>          15.57
-#> 3:                         7          2022-05-02 15:01:00          13.06
+#> 2:                         0                         <NA>          13.06
+#> 3:                         7          2022-05-02 15:01:00          15.57
 #> 4:                         7          2022-05-02 15:01:00          17.70
 #>    wind_height wind_max_direction_compass_point wind_max_direction_degrees
 #>          <int>                           <char>                      <int>
 #> 1:           3                              SSW                        200
-#> 2:          10                              SSW                        194
-#> 3:           3                              SSW                        205
+#> 2:           3                              SSW                        205
+#> 3:          10                              SSW                        194
 #> 4:          10                              SSW                        193
 #>    wind_max_speed       wind_max_time
 #>             <num>              <POSc>
 #> 1:          31.82 2022-05-01 17:28:00
-#> 2:          34.88 2022-05-01 17:34:00
-#> 3:          38.52 2022-05-02 16:07:00
+#> 2:          38.52 2022-05-02 16:07:00
+#> 3:          34.88 2022-05-01 17:34:00
 #> 4:          40.10 2022-05-02 16:31:00
 ```
 
@@ -184,12 +186,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-08-04      0.9              25
-#> 2:     11.7              25 254.5 m 2024-08-04      0.0              25
-#> 3:      7.8              25 254.5 m 2024-08-04      0.0              25
-#> 4:     10.6              25 254.5 m 2024-08-04      0.0              25
-#> 5:     13.3              25 254.5 m 2024-08-04      0.0              25
-#> 6:     14.7              25 254.5 m 2024-08-04      1.8              25
+#> 1:      9.8              25 254.5 m 2024-08-13      0.9              25
+#> 2:     11.7              25 254.5 m 2024-08-13      0.0              25
+#> 3:      7.8              25 254.5 m 2024-08-13      0.0              25
+#> 4:     10.6              25 254.5 m 2024-08-13      0.0              25
+#> 5:     13.3              25 254.5 m 2024-08-13      0.0              25
+#> 6:     14.7              25 254.5 m 2024-08-13      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
