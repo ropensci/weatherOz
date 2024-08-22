@@ -17,14 +17,14 @@ A string value with either a \acronym{DPIRD} Weather 2.0 API or
 \description{
 Checks first to get key from your .Rprofile or .Renviron (or similar) file.
 If it's not found, then it suggests setting it up.  Can be used to check
-that your key that R is using is the key that you wish to be using or for
+that your key that \R is using is the key that you wish to be using or for
 guidance in setting up the keys.
 }
 \details{
-The suggestion is to use your .Renviron to set up the API keys. However, if
-you regularly interact with the APIs outside of R using some other language
-you may wish to set these up in your .bashrc, .zshrc, or config.fish for
-cross-language use.
+The suggestion is to use your .Renviron to set up the \acronym{API} keys.
+However, if you regularly interact with the APIs outside of \R using some
+other language you may wish to set these up in your .bashrc, .zshrc, or
+config.fish for cross-language use.
 }
 \examples{
 \dontrun{
