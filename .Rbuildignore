@@ -2,8 +2,6 @@
 ^\.github$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^appveyor\.yml$
-^\.travis\.yml$
 ^codecov\.yml$
 ^README\.Rmd$
 ^CONTRIBUTING\.md$
