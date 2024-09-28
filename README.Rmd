@@ -65,14 +65,14 @@ To get a DPIRD API key, you can use `get_key()` and it will direct you to the fo
 If you have already set up an API key, this will return that value for you.
 
 ```{r get-dpird-key, eval=FALSE}
-get_key(source = "DPIRD")
+get_key(service = "DPIRD")
 ```
 
 You only need to provide an e-mail address for the SILO API.
 Using `get_key()` will provide you with instructions on what format to use in your .Renviron so that {weatherOz} will auto-recognise it and if you have already set up an API key, this will return that value for you.
 
 ```{r get-silo-key, eval=FALSE}
-get_key(source = "SILO")
+get_key(service = "SILO")
 ```
 
 Note that you do not need to do this separately, any function requiring an API key will prompt you if you don't have one set.
