@@ -366,8 +366,9 @@ get_dpird_summaries <- function(station_code,
 
   # TODO: When Phil gets lat/lon values added to the summary results from the
   # API, remove this bit here and add lat/lon to the list of queried values
-  if (Sys.info()['sysname'] == "Windows") {
-    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "\\")
+    metadata_file <- file.path(tempdir(),
+                               "dpird_metadata.Rda",
+                               fsep = .Platform$file.sep)
 
     if (!file.exists(metadata_file)) {
       saveRDS(
@@ -376,18 +377,6 @@ get_dpird_summaries <- function(station_code,
         compress = FALSE
       )
     }
-
-  } else {
-    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
-
-    if (!file.exists(metadata_file)) {
-      saveRDS(
-        get_stations_metadata(which_api = "dpird", api_key = api_key),
-        file = metadata_file,
-        compress = FALSE
-      )
-    }
-  }
 
   # END chunk to remove
 
@@ -435,7 +424,6 @@ get_dpird_summaries <- function(station_code,
   # provide some standard names between DPIRD and SILO for easy merging where
   # data values are shared
   # not all columns are renamed, but almost all are listed for clarity
-
   data.table::setnames(
     out,
     old = c(
