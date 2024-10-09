@@ -366,9 +366,8 @@ get_dpird_summaries <- function(station_code,
 
   # TODO: When Phil gets lat/lon values added to the summary results from the
   # API, remove this bit here and add lat/lon to the list of queried values
-    metadata_file <- file.path(tempdir(),
-                               "dpird_metadata.Rda",
-                               fsep = .Platform$file.sep)
+    metadata_file <- file.path(normalizePath(tempdir(), winslash = "/"),
+                               "dpird_metadata.Rda")
 
     if (!file.exists(metadata_file)) {
       saveRDS(
