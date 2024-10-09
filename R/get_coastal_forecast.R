@@ -234,7 +234,7 @@ get_coastal_forecast <- function(state = "AUS") {
   return(out[])
 }
 
-#' extract the values of a coastal forecast item
+#' Extract the Values of a Coastal Forecast XML Object
 #'
 #' @param xml_object coastal forecast XML object
 #'
