@@ -91,7 +91,7 @@ to the form to request a key and provides instructions for using
 API key, this will return that value for you.
 
 ``` r
-get_key(source = "DPIRD")
+get_key(service = "DPIRD")
 ```
 
 You only need to provide an e-mail address for the SILO API. Using
@@ -100,7 +100,7 @@ your .Renviron so that {weatherOz} will auto-recognise it and if you
 have already set up an API key, this will return that value for you.
 
 ``` r
-get_key(source = "SILO")
+get_key(service = "SILO")
 ```
 
 Note that you do not need to do this separately, any function requiring
