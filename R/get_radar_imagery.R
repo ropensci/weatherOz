@@ -177,20 +177,14 @@ get_radar_imagery <- get_radar <-
     if (is.null(path)) {
       path <- tempfile(fileext = ".gif", tmpdir = tempdir())
     }
-    h <- curl::new_handle()
-    curl::handle_setopt(
-      handle = h,
-      TCP_KEEPALIVE = 200000,
-      CONNECTTIMEOUT = 90
-    )
+
     tryCatch({
       if (download_only == TRUE) {
         utils::download.file(
           url = fp,
           destfile = path,
           mode = "wb",
-          quiet = TRUE,
-          handle = h
+          quiet = TRUE
         )
         message("file downloaded to:", path)
       } else {
@@ -198,8 +192,7 @@ get_radar_imagery <- get_radar <-
           url = fp,
           destfile = path,
           mode = "wb",
-          quiet = TRUE,
-          handle = h
+          quiet = TRUE
         )
         message("file downloaded to:", path)
         y <- magick::image_read(path = path)
