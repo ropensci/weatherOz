@@ -27,9 +27,9 @@ ex_cnt <- 0
 Several functions are provided by {weatherOz} to retrieve Australian Bureau of Meteorology (BOM) data.
 A family of functions retrieve data files from BOM or parse local files from BOM and return data frames;
 
- * `get_precis_forecast()` and `parse_precis_forecast(), which return the précis (short) forecast;
- * `get_ag_bulletin()` and `parse_ag_bulletin(), which return the agriculture bulletin;
- * `get_coastal_forecast()` and `parse_coastal_forecast(), which return coastal waters forecasts for each state.
+ * `get_precis_forecast()` and `parse_precis_forecast()`, which return the précis (short) forecast;
+ * `get_ag_bulletin()` and `parse_ag_bulletin()`, which return the agriculture bulletin;
+ * `get_coastal_forecast()` and `parse_coastal_forecast()`, which return coastal waters forecasts for each state.
 
 ## Using get_precis_forecast()
 
