@@ -6,7 +6,7 @@
 #'   \acronym{BOM} stations in the \acronym{SILO} network that fall within that
 #'   defined area or the station nearest the centroid of the area of interest.
 #'
-#' @param x One of three types of object:
+#' @param x One of two types of object:
 #'   * A `Vector` A four-digit vector defining a bounding box of the area
 #'   of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
 #'   \sQuote{ymax}, or

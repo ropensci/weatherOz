@@ -14,7 +14,7 @@ find_stations_in(
 )
 }
 \arguments{
-\item{x}{One of three types of object:
+\item{x}{One of two types of object:
 \itemize{
 \item A \code{Vector} A four-digit vector defining a bounding box of the area
 of interest in this order, \sQuote{xmin}, \sQuote{ymin}, \sQuote{xmax},
