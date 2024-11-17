@@ -99,6 +99,16 @@ test_that("check user-input for `which_api`", {
   }
 })
 
+## Test that the user didn't provide a `NULL` value for an API Key
+
+test_that("check user-input for a SILO API key isn't `NULL`", {
+  expect_error(.is_valid_email_silo_api_key(.api_key = NULL))
+})
+
+test_that("check user-input for a DPIRD API key isn't `NULL`", {
+  expect_error(.is_valid_dpird_api_key(.api_key = NULL))
+})
+
 ## .check_lon_lat() ----
 test_that(".check_lonlat() returns invisible `NULL` if no errors", {
   expect_invisible(.check_lonlat(longitude = 150.05,

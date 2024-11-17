@@ -157,7 +157,8 @@
   # regular expression to check
   pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
 
-  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE)) {
+  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE) &&
+      !is.null(.api_key)) {
     return(invisible(NULL))
   } else {
     stop("For SILO requests you must use your e-mail address as an API key.
@@ -180,7 +181,8 @@
   # regular expression to check
   pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
 
-  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE)) {
+  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE) &&
+      is.null(.api_key)) {
     stop("For DPIRD requests you must use your DPIRD provided API key.
          You (may) have provided your e-mail address, which is used
          for the SILO API instead.",
