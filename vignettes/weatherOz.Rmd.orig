@@ -8,6 +8,7 @@ vignette: >
   %\VignetteIndexEntry{weatherOz}
   %\VignetteEngine{knitr::rmarkdown_notangle}
   %\VignetteDepends{ggplot2}
+  %\VignetteDepends{dplyr}
   %\VignetteDepends{ggthemes}
   %\VignetteDepends{grid}
   %\VignetteDepends{gridextra}
@@ -196,6 +197,7 @@ if (requireNamespace("ggplot2", quietly = TRUE) &&
 
 ```{r silo-station-locations-map, fig.width = 7, fig.height = 5, message = FALSE}
 if (requireNamespace("ggplot2", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE) &&
     requireNamespace("ggthemes", quietly = TRUE) &&
     requireNamespace("gridExtra", quietly = TRUE) &&
     requireNamespace("grid", quietly = TRUE) &&
