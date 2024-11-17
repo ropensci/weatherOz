@@ -61,7 +61,7 @@ The examples in this README assume that you have stored your API key in your .Re
 {weatherOz} will prompt you to set up your API keys automatically if you haven't.
 For more information on the preferred method for setting up your API keys, see [Chapter 8](https://rstats.wtf/r-startup.html#renviron) in "What They Forgot to Teach You About R" by Bryan *et al.* for more on storing details in your .Renviron if you are unfamiliar.
 
-To get a DPIRD API key, you can use `get_key()` and it will direct you to the form to request a key and provides instructions for using `usethis::edit_r_environ()` to add your key to your .Renviron so that {weatherOz} will automatically find it.
+To get a DPIRD API key, you can use `get_key()` and it will direct you to the form to request a key and provides instructions for setting it up so that it's available in your R session and {weatherOz} will automatically find it.
 If you have already set up an API key, this will return that value for you.
 
 ```{r get-dpird-key, eval=FALSE}

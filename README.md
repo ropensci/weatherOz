@@ -85,10 +85,10 @@ Teach You About R” by Bryan *et al.* for more on storing details in your
 .Renviron if you are unfamiliar.
 
 To get a DPIRD API key, you can use `get_key()` and it will direct you
-to the form to request a key and provides instructions for using
-`usethis::edit_r_environ()` to add your key to your .Renviron so that
-{weatherOz} will automatically find it. If you have already set up an
-API key, this will return that value for you.
+to the form to request a key and provides instructions for setting it up
+so that it’s available in your R session and {weatherOz} will
+automatically find it. If you have already set up an API key, this will
+return that value for you.
 
 ``` r
 get_key(service = "DPIRD")
@@ -187,12 +187,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2024-08-13      0.9              25
-#> 2:     11.7              25 254.5 m 2024-08-13      0.0              25
-#> 3:      7.8              25 254.5 m 2024-08-13      0.0              25
-#> 4:     10.6              25 254.5 m 2024-08-13      0.0              25
-#> 5:     13.3              25 254.5 m 2024-08-13      0.0              25
-#> 6:     14.7              25 254.5 m 2024-08-13      1.8              25
+#> 1:      9.8              25 254.5 m 2024-11-17      0.9              25
+#> 2:     11.7              25 254.5 m 2024-11-17      0.0              25
+#> 3:      7.8              25 254.5 m 2024-11-17      0.0              25
+#> 4:     10.6              25 254.5 m 2024-11-17      0.0              25
+#> 5:     13.3              25 254.5 m 2024-11-17      0.0              25
+#> 6:     14.7              25 254.5 m 2024-11-17      1.8              25
 ```
 
 ## Notes on Data and API Endpoints
