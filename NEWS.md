@@ -1,3 +1,17 @@
+# weatherOz 1.0.0.9000
+
+## Bug Fixes
+
+* Provides useful feedback when users provide a `NULL` API key value.
+
+* Fixes [Issue 82](https://github.com/ropensci/weatherOz/issues/82) where Average wind speed data extracted using get_dpird_summaries() is ranked from lowest to highest and does not match the observation recorded at that time from DPIRD summaries, thanks to @alycest.
+
+* Fixes [Issue 83](https://github.com/ropensci/weatherOz/issues/83) where average wind direction data extracted using get_dpird_summaries() do not match the observation average wind direction recorded at that time in DPIRD summaries, thanks to @alycest.
+
+* Fixes an error in documentation about the number of types of objects accepted by `find_stations_in()`.
+
+* Fixes a [typo in the README](https://github.com/ropensci/weatherOz/commit/0c544acd4651fa16a3a3dc2e3e24addf5d41187d) that provided incorrect arguments for `get_key()`, thanks to @johnbaums.
+
 # weatherOz 1.0.0
 
 ## Major Changes
