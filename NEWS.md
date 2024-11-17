@@ -4,9 +4,9 @@
 
 * Provides useful feedback when users provide a `NULL` API key value.
 
-* Fixes [Issue 82](https://github.com/ropensci/weatherOz/issues/82) where Average wind speed data extracted using get_dpird_summaries() is ranked from lowest to highest and does not match the observation recorded at that time from DPIRD summaries, thanks to @alycest.
+* Fixes [Issue 82](https://github.com/ropensci/weatherOz/issues/82) where Average wind speed data extracted using `get_dpird_summaries()` is ranked from lowest to highest and does not match the observation recorded at that time from DPIRD summaries, thanks to @alycest.
 
-* Fixes [Issue 83](https://github.com/ropensci/weatherOz/issues/83) where average wind direction data extracted using get_dpird_summaries() do not match the observation average wind direction recorded at that time in DPIRD summaries, thanks to @alycest.
+* Fixes [Issue 83](https://github.com/ropensci/weatherOz/issues/83) where average wind direction data extracted using `get_dpird_summaries()` do not match the observation average wind direction recorded at that time in DPIRD summaries, thanks to @alycest.
 
 * Fixes an error in documentation about the number of types of objects accepted by `find_stations_in()`.
 
