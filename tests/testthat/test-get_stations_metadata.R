@@ -173,8 +173,8 @@ test_that("get_stations_metadata() fuzzy matches station names",
                 "wmo"
               )
             )
-            expect_equal(nrow(x), 3)
-            expect_equal(x$station_name,
+            expect_identical(nrow(x), 3L)
+            expect_identical(x$station_name,
                          c("Brisbane", "Brisbane Aero", "Mt Brisbane"))
           })
 
@@ -190,7 +190,7 @@ test_that("get_stations_metadata() matches station_codes",
               })
 
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_length(x, 11L)
             expect_named(
               x,
               c(
@@ -207,8 +207,8 @@ test_that("get_stations_metadata() matches station_codes",
                 "wmo"
               )
             )
-            expect_equal(nrow(x), 3)
-            expect_equal(as.character(x$station_code),
+            expect_identical(nrow(x), 3L)
+            expect_identical(as.character(x$station_code),
                          c("YU001", "YU002", "YU003"))
           })
 

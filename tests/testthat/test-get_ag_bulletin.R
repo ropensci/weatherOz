@@ -3,7 +3,7 @@
 test_that("get_ag_bulletin returns 21 columns", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "QLD")
-  expect_equal(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
+  expect_identical(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
   expect_named(
     bom_bulletin,
     c(
@@ -31,51 +31,51 @@ test_that("get_ag_bulletin returns 21 columns", {
     ),
     info = print(names(bom_bulletin))
   )
-  expect_equal(bom_bulletin[["state"]][1], "QLD")
+  expect_identical(bom_bulletin[["state"]][1], "QLD")
 })
 
 # Test that get_ag_bulletin() returns the requested state bulletin
 test_that("get_ag_bulletin() returns the bulletin for ACT/NSW", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "NSW")
-  expect_equal(bom_bulletin[["state"]][1], "NSW")
+  expect_identical(bom_bulletin[["state"]][1], "NSW")
 })
 
 test_that("get_ag_bulletin() returns the bulletin for NT", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "NT")
-  expect_equal(bom_bulletin[["state"]][1], "NT")
+  expect_identical(bom_bulletin[["state"]][1], "NT")
 })
 
 test_that("get_ag_bulletin() returns the bulletin for SA", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "SA")
-  expect_equal(bom_bulletin[["state"]][1], "SA")
+  expect_identical(bom_bulletin[["state"]][1], "SA")
 })
 
 test_that("get_ag_bulletin() returns the bulletin for TAS", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "TAS")
-  expect_equal(bom_bulletin[["state"]][1], "TAS")
+  expect_identical(bom_bulletin[["state"]][1], "TAS")
 })
 
 test_that("get_ag_bulletin() returns the bulletin for VIC", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "VIC")
-  expect_equal(bom_bulletin[["state"]][1], "VIC")
+  expect_identical(bom_bulletin[["state"]][1], "VIC")
 })
 
 test_that("get_ag_bulletin() returns the bulletin for WA", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "WA")
-  expect_equal(bom_bulletin[["state"]][1], "WA")
+  expect_identical(bom_bulletin[["state"]][1], "WA")
 })
 
 test_that("get_ag_bulletin() returns the bulletin for AUS", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "AUS")
   state <- na.omit(bom_bulletin[["state"]])
-  expect_equal(length(unique(state)), 7)
+  expect_identical(length(unique(state)), 7)
 })
 
 # Test that .validate_state() stops if the state recognised
@@ -99,7 +99,7 @@ test_that("get_ag_bulletin returns 21 columns", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "QLD", filepath = tempdir())
-  expect_equal(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
+  expect_identical(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
   expect_named(
     bom_bulletin,
     c(
@@ -142,7 +142,7 @@ test_that("parse_ag_bulletin() returns the bulletin for ACT/NSW", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "NSW", filepath = tempdir())
-  expect_equal(bom_bulletin[["state"]][1], "NSW")
+  expect_identical(bom_bulletin[["state"]][1], "NSW")
 })
 
 test_that("parse_ag_bulletin() returns the bulletin for NT", {
@@ -157,7 +157,7 @@ test_that("parse_ag_bulletin() returns the bulletin for NT", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "NT", filepath = tempdir())
-  expect_equal(bom_bulletin[["state"]][1], "NT")
+  expect_identical(bom_bulletin[["state"]][1], "NT")
 })
 
 test_that("parse_ag_bulletin() returns the bulletin for SA", {
@@ -172,7 +172,7 @@ test_that("parse_ag_bulletin() returns the bulletin for SA", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "SA", filepath = tempdir())
-  expect_equal(bom_bulletin[["state"]][1], "SA")
+  expect_identical(bom_bulletin[["state"]][1], "SA")
 })
 
 test_that("parse_ag_bulletin() returns the bulletin for TAS", {
@@ -187,7 +187,7 @@ test_that("parse_ag_bulletin() returns the bulletin for TAS", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "TAS", filepath = tempdir())
-  expect_equal(bom_bulletin[["state"]][1], "TAS")
+  expect_identical(bom_bulletin[["state"]][1], "TAS")
 })
 
 test_that("parse_ag_bulletin() returns the bulletin for VIC", {
@@ -202,7 +202,7 @@ test_that("parse_ag_bulletin() returns the bulletin for VIC", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "VIC", filepath = tempdir())
-  expect_equal(bom_bulletin[["state"]][1], "VIC")
+  expect_identical(bom_bulletin[["state"]][1], "VIC")
 })
 
 test_that("parse_ag_bulletin() returns the bulletin for WA", {
@@ -217,7 +217,7 @@ test_that("parse_ag_bulletin() returns the bulletin for WA", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "WA", filepath = tempdir())
-  expect_equal(bom_bulletin[["state"]][1], "WA")
+  expect_identical(bom_bulletin[["state"]][1], "WA")
 })
 
 test_that("parse_ag_bulletin() returns the bulletin for AUS", {
@@ -225,7 +225,7 @@ test_that("parse_ag_bulletin() returns the bulletin for AUS", {
   bom_bulletin <-
     parse_ag_bulletin(state = "AUS", filepath = tempdir())
   state <- na.omit(bom_bulletin[["state"]])
-  expect_equal(length(unique(state)), 7)
+  expect_identical(length(unique(state)), 7)
 })
 
 # Test that .validate_state() stops if the state recognised

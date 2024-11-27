@@ -52,8 +52,8 @@ test_that("get_patched_point() returns daily values", {
       )
     )
   })
-  expect_equal(nrow(wd), 31)
-  expect_length(wd, 46)
+  expect_identical(nrow(wd), 31L)
+  expect_length(wd, 46L)
   expect_named(
     wd,
     c(
@@ -123,8 +123,8 @@ test_that("get_patched_point() returns selected daily values", {
                         )
                       )
                     })
-  expect_equal(nrow(wd), 31)
-  expect_length(wd, 16)
+  expect_identical(nrow(wd), 31L)
+  expect_length(wd, 16L)
   expect_named(
     wd,
     c(

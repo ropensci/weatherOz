@@ -287,7 +287,7 @@ test_that("get_dpird_summaries() returns 30min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_equal(ncol(x), 18)
+            expect_identical(ncol(x), 18)
             expect_named(
               x,
               c(
@@ -340,7 +340,7 @@ test_that("get_dpird_summaries() returns 15min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_equal(ncol(x), 18)
+            expect_identical(ncol(x), 18)
             expect_named(
               x,
               c(

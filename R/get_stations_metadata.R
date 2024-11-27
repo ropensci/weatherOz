@@ -267,7 +267,7 @@ get_stations_metadata <-
     query_list <- list(
       offset = "0",
       includeClosed = "true",
-      select = paste0(
+      select = paste(
         list(
           "altitude",
           "startDate",
@@ -288,7 +288,7 @@ get_stations_metadata <-
     query_list <- list(
       offset = "0",
       includeClosed = "true",
-      select = paste0(
+      select = paste(
         list(
           "altitude",
           "startDate",

@@ -68,8 +68,6 @@ get_key <- function(service = c("DPIRD", "SILO")) {
         "DPIRD_API_KEY='youractualkeynotthisstring'\n",
         "For that, use `usethis::edit_r_environ()`"
     )
-
-    invisible("https://www.agric.wa.gov.au/form/dpird-api-registration")
   }
 
   #' Help the User Set Up Their SILO API Key
@@ -88,6 +86,4 @@ get_key <- function(service = c("DPIRD", "SILO")) {
         "SILO_API_KEY='youractualemailnotthisstring'\n",
         "For that, use `usethis::edit_r_environ()`"
     )
-
-    invisible(NULL)
   }

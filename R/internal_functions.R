@@ -373,7 +373,7 @@
   )
   state <- state_code[pmatch(state, state_names)]
 
-  if (any(is.na(state)))
+  if (anyNA(state))
     stop("Unable to determine state",
          call. = FALSE)
 

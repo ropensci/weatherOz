@@ -4,7 +4,7 @@ test_that("get_coastal_forecast returns at most 22 columns", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "NSW")
   expect_lte(ncol(bom_forecast), 22)
-  expect_equal(bom_forecast[["state_code"]][1], "NSW")
+  expect_identical(bom_forecast[["state_code"]][1], "NSW")
   expect_s3_class(bom_forecast$index, "factor")
   expect_type(bom_forecast$product_id, "character")
   expect_type(bom_forecast$type, "character")
@@ -28,49 +28,49 @@ test_that("get_coastal_forecast returns at most 22 columns", {
 test_that("get_coastal_forecast returns the forecast for ACT/NSW", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "ACT")
-  expect_equal(bom_forecast[["state_code"]][1], "NSW")
+  expect_identical(bom_forecast[["state_code"]][1], "NSW")
 })
 
 test_that("get_coastal_forecast returns the forecast for ACT/NSW", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "NSW")
-  expect_equal(bom_forecast[["state_code"]][1], "NSW")
+  expect_identical(bom_forecast[["state_code"]][1], "NSW")
 })
 
 test_that("get_coastal_forecast returns the forecast for NT", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "NT")
-  expect_equal(bom_forecast[["state_code"]][1], "NT")
+  expect_identical(bom_forecast[["state_code"]][1], "NT")
 })
 
 test_that("get_coastal_forecast returns the forecast for SA", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "SA")
-  expect_equal(bom_forecast[["state_code"]][1], "SA")
+  expect_identical(bom_forecast[["state_code"]][1], "SA")
 })
 
 test_that("get_coastal_forecast returns the forecast for TAS", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "TAS")
-  expect_equal(bom_forecast[["state_code"]][1], "TAS")
+  expect_identical(bom_forecast[["state_code"]][1], "TAS")
 })
 
 test_that("get_coastal_forecast returns the forecast for VIC", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "VIC")
-  expect_equal(bom_forecast[["state_code"]][1], "VIC")
+  expect_identical(bom_forecast[["state_code"]][1], "VIC")
 })
 
 test_that("get_coastal_forecast returns the forecast for WA", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "WA")
-  expect_equal(bom_forecast[["state_code"]][1], "WA")
+  expect_identical(bom_forecast[["state_code"]][1], "WA")
 })
 
 test_that("get_coastal_forecast returns the forecast for AUS", {
   skip_on_cran()
   bom_forecast <- get_coastal_forecast(state = "AUS")
-  expect_equal(unique(bom_forecast[["state_code"]]),
+  expect_identical(unique(bom_forecast[["state_code"]]),
                c("NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"))
 })
 
@@ -97,7 +97,7 @@ test_that("parse_coastal_forecast returns at most 22 columns", {
     parse_coastal_forecast(state = "NSW", filepath = tempdir())
 
   expect_lte(ncol(bom_forecast), 22)
-  expect_equal(bom_forecast[["state_code"]][1], "NSW")
+  expect_identical(bom_forecast[["state_code"]][1], "NSW")
   expect_s3_class(bom_forecast$index, "factor")
   expect_type(bom_forecast$product_id, "character")
   expect_type(bom_forecast$type, "character")
@@ -115,7 +115,7 @@ test_that("parse_coastal_forecast returns at most 22 columns", {
   expect_type(bom_forecast$forecast_weather, "character")
   expect_type(bom_forecast$forecast_winds, "character")
   expect_type(bom_forecast$forecast_swell1, "character")
-  expect_equal(bom_forecast[["state_code"]][1], "NSW")
+  expect_identical(bom_forecast[["state_code"]][1], "NSW")
 })
 
 # Test that parse_coastal_forecast() returns the requested state forecast
@@ -131,7 +131,7 @@ test_that("parse_coastal_forecast() returns the forecast for ACT/NSW", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "ACT", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "NSW")
+  expect_identical(bom_forecast[["state_code"]][1], "NSW")
 })
 
 test_that("parse_coastal_forecast returns the forecast for NT", {
@@ -146,7 +146,7 @@ test_that("parse_coastal_forecast returns the forecast for NT", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "NT", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "NT")
+  expect_identical(bom_forecast[["state_code"]][1], "NT")
 })
 
 test_that("parse_coastal_forecast returns the forecast for Qld", {
@@ -161,7 +161,7 @@ test_that("parse_coastal_forecast returns the forecast for Qld", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "Qld", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "QLD")
+  expect_identical(bom_forecast[["state_code"]][1], "QLD")
 })
 
 test_that("parse_coastal_forecast returns the forecast for SA", {
@@ -176,7 +176,7 @@ test_that("parse_coastal_forecast returns the forecast for SA", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "SA", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "SA")
+  expect_identical(bom_forecast[["state_code"]][1], "SA")
 })
 
 test_that("parse_coastal_forecast returns the forecast for TAS", {
@@ -191,7 +191,7 @@ test_that("parse_coastal_forecast returns the forecast for TAS", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "TAS", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "TAS")
+  expect_identical(bom_forecast[["state_code"]][1], "TAS")
 })
 
 test_that("parse_coastal_forecast returns the forecast for VIC", {
@@ -206,7 +206,7 @@ test_that("parse_coastal_forecast returns the forecast for VIC", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "VIC", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "VIC")
+  expect_identical(bom_forecast[["state_code"]][1], "VIC")
 })
 
 test_that("parse_coastal_forecast returns the forecast for WA", {
@@ -221,14 +221,14 @@ test_that("parse_coastal_forecast returns the forecast for WA", {
   )
   bom_forecast <-
     parse_coastal_forecast(state = "WA", filepath = tempdir())
-  expect_equal(bom_forecast[["state_code"]][1], "WA")
+  expect_identical(bom_forecast[["state_code"]][1], "WA")
 })
 
 test_that("parse_coastal_forecast returns the forecast for AUS", {
   skip_on_cran()
   bom_forecast <-
     parse_coastal_forecast(state = "AUS", filepath = tempdir())
-  expect_equal(unique(bom_forecast[["state_code"]]),
+  expect_identical(unique(bom_forecast[["state_code"]]),
                c("NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"))
 })
 

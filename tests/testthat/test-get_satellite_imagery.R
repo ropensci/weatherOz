@@ -31,59 +31,59 @@ test_that("product ID urls are properly handled", {
 
   pid <- "IDE00420"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00421"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00422"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00423"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00425"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00426"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00427"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00430"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00431"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00432"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00433"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00435"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00436"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   pid <- "IDE00437"
   x <- .ftp_images(product_id = pid, ftp_base)
-  expect_equal(substr(basename(x), 1, 8)[1], pid)
+  expect_identical(substr(basename(x), 1, 8)[1], pid)
 
   #   This product ID doesn't seem to have images associated with it,
   #   in spite of being valid

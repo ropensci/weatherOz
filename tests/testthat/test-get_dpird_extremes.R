@@ -38,8 +38,8 @@ test_that("get_dpird_extremes() returns all values for a station", {
     )
   })
   expect_s3_class(x, "data.table")
-  expect_length(x, 41)
-  expect_equal(nrow(x), 1)
+  expect_length(x, 41L)
+  expect_identical(nrow(x), 1L)
   expect_named(
     x,
     c(
@@ -97,8 +97,8 @@ test_that("get_dpird_extremes() returns selected values for a station", {
     )
   })
   expect_s3_class(x, "data.table")
-  expect_length(x, 15)
-  expect_equal(nrow(x), 1)
+  expect_length(x, 15L)
+  expect_identical(nrow(x), 1L)
   expect_named(
     x,
     c(

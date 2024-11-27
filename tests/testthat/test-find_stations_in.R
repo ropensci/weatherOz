@@ -38,8 +38,8 @@ test_that("find_stations_in() works with {sf} polygon and centroid", {
       crs = sf::st_crs(south_west_agricultural_region)
     )
   })
-  expect_length(x, 11)
-  expect_equal(nrow(x), 5)
+  expect_length(x, 11L)
+  expect_identical(nrow(x), 5L)
   expect_s3_class(x, "data.table")
   expect_named(
     x,
