@@ -133,6 +133,6 @@ test_that(".convert_state() will return the proper match", {
 ## .set_snake_case_names() ----
 test_that(".snake_case_names() converts CamelCase colnames to snake_case", {
   x <- data.table("UpperCase" = 1)
-  expect_identical(names(.set_snake_case_names(x)), "upper_case")
+  expect_named(.set_snake_case_names(x), "upper_case")
   expect_error(.set_snake_case_names(c("UpperCase" = 1)))
 })

@@ -3,7 +3,7 @@
 test_that("get_ag_bulletin returns 21 columns", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "QLD")
-  expect_identical(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
+  expect_identical(ncol(bom_bulletin), 21L, info = print(ncol(bom_bulletin)))
   expect_named(
     bom_bulletin,
     c(
@@ -75,7 +75,7 @@ test_that("get_ag_bulletin() returns the bulletin for AUS", {
   skip_on_cran()
   bom_bulletin <- get_ag_bulletin(state = "AUS")
   state <- na.omit(bom_bulletin[["state"]])
-  expect_identical(length(unique(state)), 7)
+  expect_length(unique(state), 7L)
 })
 
 # Test that .validate_state() stops if the state recognised
@@ -99,7 +99,7 @@ test_that("get_ag_bulletin returns 21 columns", {
   )
   bom_bulletin <-
     parse_ag_bulletin(state = "QLD", filepath = tempdir())
-  expect_identical(ncol(bom_bulletin), 21, info = print(ncol(bom_bulletin)))
+  expect_identical(ncol(bom_bulletin), 21L, info = print(ncol(bom_bulletin)))
   expect_named(
     bom_bulletin,
     c(
@@ -225,7 +225,7 @@ test_that("parse_ag_bulletin() returns the bulletin for AUS", {
   bom_bulletin <-
     parse_ag_bulletin(state = "AUS", filepath = tempdir())
   state <- na.omit(bom_bulletin[["state"]])
-  expect_identical(length(unique(state)), 7)
+  expect_length(unique(state), 7L)
 })
 
 # Test that .validate_state() stops if the state recognised

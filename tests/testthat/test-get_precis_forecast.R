@@ -4,7 +4,7 @@
 test_that("get_precis_forecast() returns 19 columns and min < max", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "QLD")
-  expect_identical(ncol(bom_forecast), 19)
+  expect_identical(dim(bom_forecast), c(791L, 19L))
   expect_identical(bom_forecast[["state"]][1], "QLD")
   expect_named(
     bom_forecast,
@@ -125,7 +125,7 @@ test_that("parse_precis_forecast() returns 19 columns and min < max", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "QLD", filepath = tempdir())
-  expect_identical(ncol(bom_forecast), 19)
+  expect_identical(dim(bom_forecast), c(791L, 19L))
   expect_identical(bom_forecast[["state"]][1], "QLD")
   expect_named(
     bom_forecast,

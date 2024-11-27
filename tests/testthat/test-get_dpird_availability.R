@@ -46,7 +46,7 @@ test_that("get_dpird_availability() returns values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(ncol(x), 6)
+            expect_identical(dim(x), c(2L, 6L))
             expect_named(
               x,
               c(
@@ -73,7 +73,7 @@ test_that("get_dpird_availability() returns values",
                 get_dpird_availability()
             })
             expect_s3_class(x, "data.table")
-            expect_identical(ncol(x), 15)
+            expect_identical(dim(x), c(238L, 15L))
             expect_named(
               x,
               c(

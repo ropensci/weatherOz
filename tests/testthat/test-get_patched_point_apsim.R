@@ -40,8 +40,7 @@ test_that("get_patched_point_apsim() returns daily values", {
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
-  expect_identical(nrow(wd), 364L)
-  expect_length(wd, 9L)
+  expect_identical(dim(wd), c(364L, 9L))
   expect_named(wd,
                c(
                  "year",

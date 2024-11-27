@@ -9,7 +9,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & station_code",
                 which_api = "dpird"
               )
             })
-            expect_length(x, 8)
+            expect_identical(dim(x), c(2L, 8L))
             expect_s3_class(x, "data.table")
             expect_named(
               x,
@@ -39,7 +39,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ no stns",
                 )
               )
             })
-            expect_length(x, 0)
+            expect_null(x)
           })
 
 test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ stations",
@@ -53,7 +53,7 @@ test_that("find_nearby_stations() w/ which_api = 'dpird' & lonlat w/ stations",
                   which_api = "dpird"
               )
             })
-            expect_length(x, 8)
+            expect_identical(dim(x), c(2L, 8L))
             expect_s3_class(x, "data.table")
             expect_named(
               x,
@@ -82,7 +82,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & latlon",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 8)
+            expect_identical(dim(x), c(4L, 8L))
             expect_named(
               x,
               c(
@@ -109,7 +109,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & SILO station",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 8)
+            expect_identical(dim(x), c(4L, 8L))
             expect_named(
               x,
               c(
@@ -136,7 +136,7 @@ test_that("find_nearby_stations() w/ which_api = 'all' & DPIRD station",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 8)
+            expect_identical(dim(x), c(4L, 8L))
             expect_named(
               x,
               c(
@@ -164,7 +164,7 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & station_code",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 8)
+            expect_identical(dim(x), c(1L, 8L))
             expect_named(
               x,
               c(
@@ -191,7 +191,7 @@ test_that("find_nearby_stations() w/ which_api = 'silo' & lonlat",
                 which_api = "silo"
               )
             })
-            expect_length(x, 8)
+            expect_identical(dim(x), c(1L, 8L))
             expect_s3_class(x, "data.table")
             expect_named(
               x,

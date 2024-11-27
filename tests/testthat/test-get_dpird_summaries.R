@@ -112,7 +112,7 @@ test_that("get_dpird_summaries() returns yearly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_identical(dim(x), c(4L, 11L))
             expect_named(
               x,
               c(
@@ -150,7 +150,7 @@ test_that("get_dpird_summaries() returns monthly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 13)
+            expect_identical(dim(x), c(26L, 13L))
             expect_named(
               x,
               c(
@@ -193,7 +193,7 @@ test_that("get_dpird_summaries() returns daily values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 14)
+            expect_identical(dim(x), c(4L, 14L))
             expect_named(
               x,
               c(
@@ -238,7 +238,7 @@ test_that("get_dpird_summaries() returns hourly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 17)
+            expect_identical(dim(x), c(50L, 17L))
             expect_named(
               x,
               c(
@@ -287,7 +287,7 @@ test_that("get_dpird_summaries() returns 30min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(ncol(x), 18)
+            expect_identical(dim(x), c(4L, 18L))
             expect_named(
               x,
               c(
@@ -340,7 +340,7 @@ test_that("get_dpird_summaries() returns 15min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(ncol(x), 18)
+            expect_identical(dim(x), c(8L, 18L))
             expect_named(
               x,
               c(
