@@ -63,8 +63,7 @@ test_that("get_data_drill() returns all daily values", {
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
-  expect_equal(nrow(wd), 1)
-  expect_length(wd, 44)
+  expect_identical(dim(wd), c(1L, 44L))
   expect_named(
     wd,
     c(
@@ -130,8 +129,7 @@ test_that("get_data_drill() returns selected daily values", {
       api_key = "slavish_moo_0k@icloud.com"
     )
   })
-  expect_equal(nrow(wd), 1)
-  expect_length(wd, 14)
+  expect_identical(dim(wd), c(1L, 14L))
   expect_named(
     wd,
     c(

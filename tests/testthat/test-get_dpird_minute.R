@@ -64,7 +64,7 @@ test_that("get_dpird_minute() returns minute values", {
   }
   )
   expect_s3_class(x, "data.table")
-  expect_equal(ncol(x), 8)
+  expect_identical(dim(x), c(60L, 8L))
   expect_named(
     x,
     c(

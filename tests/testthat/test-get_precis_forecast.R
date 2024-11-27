@@ -4,8 +4,8 @@
 test_that("get_precis_forecast() returns 19 columns and min < max", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "QLD")
-  expect_equal(ncol(bom_forecast), 19)
-  expect_equal(bom_forecast[["state"]][1], "QLD")
+  expect_identical(dim(bom_forecast), c(791L, 19L))
+  expect_identical(bom_forecast[["state"]][1], "QLD")
   expect_named(
     bom_forecast,
     c(
@@ -58,49 +58,49 @@ test_that("get_precis_forecast() returns 19 columns and min < max", {
 test_that("get_precis_forecast() returns the forecast for ACT/NSW", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "ACT")
-  expect_equal(bom_forecast[["state"]][1], "NSW")
+  expect_identical(bom_forecast[["state"]][1], "NSW")
 })
 
 test_that("get_precis_forecast() returns the forecast for ACT/NSW", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "NSW")
-  expect_equal(bom_forecast[["state"]][1], "NSW")
+  expect_identical(bom_forecast[["state"]][1], "NSW")
 })
 
 test_that("get_precis_forecast() returns the forecast for NT", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "NT")
-  expect_equal(bom_forecast[["state"]][1], "NT")
+  expect_identical(bom_forecast[["state"]][1], "NT")
 })
 
 test_that("get_precis_forecast() returns the forecast for SA", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "SA")
-  expect_equal(bom_forecast[["state"]][1], "SA")
+  expect_identical(bom_forecast[["state"]][1], "SA")
 })
 
 test_that("get_precis_forecast() returns the forecast for TAS", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "TAS")
-  expect_equal(bom_forecast[["state"]][1], "TAS")
+  expect_identical(bom_forecast[["state"]][1], "TAS")
 })
 
 test_that("get_precis_forecast() returns the forecast for VIC", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "VIC")
-  expect_equal(bom_forecast[["state"]][1], "VIC")
+  expect_identical(bom_forecast[["state"]][1], "VIC")
 })
 
 test_that("get_precis_forecast() returns the forecast for WA", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "WA")
-  expect_equal(bom_forecast[["state"]][1], "WA")
+  expect_identical(bom_forecast[["state"]][1], "WA")
 })
 
 test_that("get_precis_forecast() returns the forecast for AUS", {
   skip_on_cran()
   bom_forecast <- get_precis_forecast(state = "AUS")
-  expect_equal(unique(bom_forecast[["state"]]),
+  expect_identical(unique(bom_forecast[["state"]]),
                c("NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"))
 })
 
@@ -125,8 +125,8 @@ test_that("parse_precis_forecast() returns 19 columns and min < max", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "QLD", filepath = tempdir())
-  expect_equal(ncol(bom_forecast), 19)
-  expect_equal(bom_forecast[["state"]][1], "QLD")
+  expect_identical(dim(bom_forecast), c(791L, 19L))
+  expect_identical(bom_forecast[["state"]][1], "QLD")
   expect_named(
     bom_forecast,
     c(
@@ -187,7 +187,7 @@ test_that("parse_precis_forecast() returns the forecast for ACT/NSW", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "ACT", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "NSW")
+  expect_identical(bom_forecast[["state"]][1], "NSW")
 })
 
 test_that("parse_precis_forecast() returns the forecast for ACT/NSW", {
@@ -201,7 +201,7 @@ test_that("parse_precis_forecast() returns the forecast for ACT/NSW", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "NSW", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "NSW")
+  expect_identical(bom_forecast[["state"]][1], "NSW")
 })
 
 test_that("parse_precis_forecast() returns the forecast for NT", {
@@ -215,7 +215,7 @@ test_that("parse_precis_forecast() returns the forecast for NT", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "NT", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "NT")
+  expect_identical(bom_forecast[["state"]][1], "NT")
 })
 
 test_that("parse_precis_forecast() returns the forecast for SA", {
@@ -229,7 +229,7 @@ test_that("parse_precis_forecast() returns the forecast for SA", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "SA", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "SA")
+  expect_identical(bom_forecast[["state"]][1], "SA")
 })
 
 test_that("parse_precis_forecast() returns the forecast for TAS", {
@@ -243,7 +243,7 @@ test_that("parse_precis_forecast() returns the forecast for TAS", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "TAS", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "TAS")
+  expect_identical(bom_forecast[["state"]][1], "TAS")
 })
 
 test_that("parse_precis_forecast() returns the forecast for VIC", {
@@ -257,7 +257,7 @@ test_that("parse_precis_forecast() returns the forecast for VIC", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "VIC", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "VIC")
+  expect_identical(bom_forecast[["state"]][1], "VIC")
 })
 
 test_that("parse_precis_forecast() returns the forecast for WA", {
@@ -271,13 +271,13 @@ test_that("parse_precis_forecast() returns the forecast for WA", {
     mode = "wb"
   )
   bom_forecast <- parse_precis_forecast(state = "WA", filepath = tempdir())
-  expect_equal(bom_forecast[["state"]][1], "WA")
+  expect_identical(bom_forecast[["state"]][1], "WA")
 })
 
 test_that("parse_precis_forecast() returns the forecast for AUS", {
   skip_on_cran()
   bom_forecast <- parse_precis_forecast(state = "AUS", filepath = tempdir())
-  expect_equal(unique(bom_forecast[["state"]]),
+  expect_identical(unique(bom_forecast[["state"]]),
                c("NSW", "NT", "QLD", "SA", "TAS", "VIC", "WA"))
 })
 

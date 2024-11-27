@@ -179,7 +179,7 @@ get_radar_imagery <- get_radar <-
     }
 
     tryCatch({
-      if (download_only == TRUE) {
+      if (download_only) {
         utils::download.file(
           url = fp,
           destfile = path,

@@ -50,8 +50,7 @@ test_that("get_data_drill_apsim() returns all daily values", {
     )
   })
   expect_s3_class(wd, class = "met")
-  expect_equal(nrow(wd), 364)
-  expect_length(wd, 9)
+  expect_identical(dim(wd), c(364L, 9L))
   expect_named(wd,
                c(
                  "year",

@@ -15,7 +15,7 @@ test_that("get_available_radar functions properly", {
   expect_s3_class(xxx, "data.frame")
   expect_gt(nrow(xxx), 0)
   expect_lt(nrow(xxx), 5)
-  expect_equal(unique(xxx$Radar_id), 3)
+  expect_identical(unique(xxx$Radar_id), 3L)
 })
 
 # get_radar_imagery()-----------------------------------------------------------

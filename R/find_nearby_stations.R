@@ -206,7 +206,6 @@ find_nearby_stations <- function(longitude = NULL,
     stop(call. = FALSE,
          "There are no stations found in the DPIRD or SILO networks ",
          "that match your criteria.")
-    return(invisible(NULL))
   }
 
   data.table::setorder(out, distance_km)

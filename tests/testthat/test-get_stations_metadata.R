@@ -7,7 +7,7 @@ test_that("get_stations_metadata() functions properly for which_api = 'SILO'",
                 get_stations_metadata(which_api = "silo", include_closed = TRUE)
             }
             )
-            expect_length(x, 11)
+            expect_identical(dim(x), c(7995L, 11L))
             expect_s3_class(x, "data.table")
             expect_named(
               x,
@@ -40,7 +40,7 @@ test_that("get_stations_metadata() functions properly for which_api = 'DPIRD'",
             }
             )
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_identical(dim(x), c(239L, 11L))
             expect_named(
               x,
               c(
@@ -73,7 +73,7 @@ test_that("get_stations_metadata() functions properly for which_api = 'DPIRD'
                 )
             })
             expect_s3_class(x, "data.table")
-            expect_length(x, 36)
+            expect_identical(dim(x), c(239L, 36L))
             expect_named(
               x,
               c(
@@ -127,7 +127,7 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
             })
 
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_identical(dim(x), c(3883L, 11L))
             expect_named(
               x,
               c(
@@ -156,7 +156,7 @@ test_that("get_stations_metadata() fuzzy matches station names",
             })
 
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_identical(dim(x), c(3L, 11L))
             expect_named(
               x,
               c(
@@ -173,8 +173,7 @@ test_that("get_stations_metadata() fuzzy matches station names",
                 "wmo"
               )
             )
-            expect_equal(nrow(x), 3)
-            expect_equal(x$station_name,
+            expect_identical(x$station_name,
                          c("Brisbane", "Brisbane Aero", "Mt Brisbane"))
           })
 
@@ -190,7 +189,7 @@ test_that("get_stations_metadata() matches station_codes",
               })
 
             expect_s3_class(x, "data.table")
-            expect_length(x, 11)
+            expect_identical(dim(x), c(3L, 11L))
             expect_named(
               x,
               c(
@@ -207,8 +206,7 @@ test_that("get_stations_metadata() matches station_codes",
                 "wmo"
               )
             )
-            expect_equal(nrow(x), 3)
-            expect_equal(as.character(x$station_code),
+            expect_identical(as.character(x$station_code),
                          c("YU001", "YU002", "YU003"))
           })
 

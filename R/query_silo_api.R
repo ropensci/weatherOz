@@ -395,12 +395,10 @@
   dt <-
     dt[, .SD, .SDcols = primary_cols[primary_cols %in% names(dt)]]
 
-  if (ncol(dt) > 0) {
-    if (any(dt[, lapply(
+  if (ncol(dt) > 0 && any(dt[, lapply(
       X = .SD,
       FUN = function(col)
-        all(stats::na.omit(col == 0))
-    )])) {
+        all(stats::na.omit(col == 0)))])) {
       # Report message
       message(
         "You have requested station observation data but some rows in this\n",
@@ -410,6 +408,5 @@
         "references.\n"
       )
     }
-  }
   return(invisible(NULL))
 }
