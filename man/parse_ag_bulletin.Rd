@@ -18,7 +18,7 @@ A \code{\link[data.table:data.table]{data.table::data.table()}} of Australia \ac
 bulletin information.
 }
 \description{
-\strong{Defunct:} This function is defunct as of version 1.0.1 because the
+\strong{Defunct:} This function is defunct as of version 1.1.0 because the
 underlying BOM agricultural forecast bulletin service is no longer available.
 }
 \details{

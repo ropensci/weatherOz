@@ -18,7 +18,7 @@
 
 * Re-documented package to reflect changes
 
-* Updated test vrc cassette/fixtures
+* Updated test vcr cassette/fixtures
 
 * Updated BOM-related vignette
 
