@@ -1,6 +1,9 @@
 
 #' Get a BOM Agriculture Bulletin
 #'
+#' **Defunct:** This function is defunct as of version 1.0.1 because the
+#'  underlying BOM agricultural forecast bulletin service is no longer available.
+#'
 #' Fetch the \acronym{BOM} agricultural bulletin information for a specified
 #'   station or stations.
 #'
@@ -63,6 +66,8 @@
 #' @export get_ag_bulletin
 
 get_ag_bulletin <- function(state = "AUS") {
+  .Defunct(msg = "The function 'get_ag_bulletin' is defunct because 
+  the BOM agricultural forecast bulletin service is no longer available.")
 
   # see internal_functions.R for these functions
   the_state <- .check_states(state)

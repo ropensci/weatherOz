@@ -1,3 +1,19 @@
+# weatherOz 1.1.0
+
+## Breaking changes
+
+* Functions `get_ag_bulletin()` and `parse_ag_bulletin()` have been defuncted because the underlying BOM agricultural bulletin service is no longer available. This removal constitutes a breaking change; please update your code accordingly.
+
+* Documentation has been updated to reflect the removal of the `get_ag_bulletin()` and `parse_ag_bulletin()` functions.
+
+* Tests for the `get_ag_bulletin()` and `parse_ag_bulletin()` functions now errors given that the functions are now defunct.
+
+## Bug fixes
+
+* Fixes [Issue 90](https://github.com/ropensci/weatherOz/issues/90) with the `get_dpird_summaries()` function where tests had fixed dates and errors were generated. The tests `test-get_dpird_summaries.R` have been updated to use previous year from the current date and the tests now pass.
+
+* Fixes other bugs with the `find_stations_in()` and function where the function would not return the correct number of stations, given recent adjustments to the weather station infrastructure.
+
 # weatherOz 1.0.0.9000
 
 ## Bug Fixes

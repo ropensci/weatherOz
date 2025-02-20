@@ -18,7 +18,6 @@ Several functions are provided by {weatherOz} to retrieve Australian Bureau of M
 A family of functions retrieve data files from BOM or parse local files from BOM and return data frames;
 
  * `get_precis_forecast()` and `parse_precis_forecast()`, which return the précis (short) forecast;
- * `get_ag_bulletin()` and `parse_ag_bulletin()`, which return the agriculture bulletin;
  * `get_coastal_forecast()` and `parse_coastal_forecast()`, which return coastal waters forecasts for each state.
 
 ## Using get_precis_forecast()
@@ -129,89 +128,6 @@ library(weatherOz)
 #> 789:                           80
 #> 790:                           80
 #> 791:                           70
-```
-
-## Using get_ag_bulletin()
-
-`get_ag_bulletin()` only takes one argument, `state`.
-The `state` parameter allows the user to select the bulletin for just one state or a national forecast.
-States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
-
-- **NSW** - New South Wales
-
-- **NT** - Northern Territory
-
-- **QLD** - Queensland
-
-- **SA** - South Australia
-
-- **TAS** - Tasmania
-
-- **VIC** - Victoria
-
-- **WA** - Western Australia
-
-- **AUS** - Australia, returns bulletin for all states and NT.
-
-### Results
-
-The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
-See Appendix 3 for a full list and description of the fields and values.
-
-### Example 2: Getting an Ag Bulletin
-
-Following is an example fetching the ag bulletin for Western Australia.
-
-
-``` r
-library(weatherOz)
-(WA_bulletin <- get_ag_bulletin(state = "WA"))
-#>   -----------  Australian Bureau of Meteorology (BOM) Ag Bulletin. -----------
-#>   Please note information at the foot of
-#>   <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?IDW65176.html>,
-#>   the HTML version of Agricultural Observations Bulletin for 
-#>   WA.  Also see 
-#>   <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>.
-#>   ----------------------------------------------------------------------------  
-#>     product_id  state        station   site      obs_time_local
-#>         <fctr> <char>         <char> <fctr>              <POSc>
-#>  1:   IDW65176     WA       Beverley  10515 2024-11-16 09:00:00
-#>  2:   IDW65176     WA       Brookton  10524 2024-11-16 09:00:00
-#>  3:   IDW65176     WA         Broome  03003 2024-11-16 09:00:00
-#>  4:   IDW65176     WA      Carnarvon  06011 2024-11-16 09:00:00
-#>  5:   IDW65176     WA      Esperance  09789 2024-11-16 09:00:00
-#> ---                                                            
-#> 22:   IDW65176     WA   Port Hedland  04032 2024-11-16 09:00:00
-#> 23:   IDW65176     WA   Ravensthorpe  10633 2024-11-16 09:00:00
-#> 24:   IDW65176     WA Salmon Gums RS  12071 2024-11-16 09:00:00
-#> 25:   IDW65176     WA      Wandering  10917 2024-11-16 09:00:00
-#> 26:   IDW65176     WA           York  10311 2024-11-16 09:00:00
-#>            obs_time_utc time_zone     r    tn    tx   twd    ev    tg    sn
-#>                  <POSc>    <char> <num> <num> <num> <num> <num> <num> <num>
-#>  1: 2024-11-16 01:00:00       WST     0   7.6  28.6   6.2    NA    NA    NA
-#>  2: 2024-11-16 01:00:00       WST     0   5.3  26.5   5.7    NA    NA    NA
-#>  3: 2024-11-16 01:00:00       WST     0  29.0  40.3  10.8    NA    NA    NA
-#>  4: 2024-11-16 01:00:00       WST     0  19.5  27.5   5.3    NA    NA    NA
-#>  5: 2024-11-16 01:00:00       WST     0  13.2  19.8   6.7    NA    NA    NA
-#> ---                                                                        
-#> 22: 2024-11-16 01:00:00       WST     0  26.3  40.5   7.5    NA    NA    NA
-#> 23: 2024-11-16 01:00:00       WST     0   9.5  20.5   4.5    NA    NA    NA
-#> 24: 2024-11-16 01:00:00       WST     0  10.3  19.7    NA    NA    NA    NA
-#> 25: 2024-11-16 01:00:00       WST     0   2.4  24.6    NA    NA    NA    NA
-#> 26: 2024-11-16 01:00:00       WST     0    NA  31.0   1.8    NA    NA    NA
-#>      solr    t5   t10   t20   t50   t1m    wr
-#>     <num> <num> <num> <num> <num> <num> <num>
-#>  1:  20.2    NA    NA    NA    NA    NA    NA
-#>  2:  20.2    NA    NA    NA    NA    NA    NA
-#>  3:  28.5    NA    NA    NA    NA    NA    NA
-#>  4:  29.6    NA    NA    NA    NA    NA    NA
-#>  5:  11.5    NA    NA    NA    NA    NA    NA
-#> ---                                          
-#> 22:  29.8    NA    NA    NA    NA    NA    NA
-#> 23:  13.8    NA    NA    NA    NA    NA    NA
-#> 24:  10.3    NA    NA    NA    NA    NA    NA
-#> 25:  20.0    NA    NA    NA    NA    NA    NA
-#> 26:  21.3    NA    NA    NA    NA    NA    NA
 ```
 
 ## Using get_coastal_forecast()
@@ -658,45 +574,7 @@ The functions, `get_precis_forecast()` or `parse_precis_forecast(), will return 
 <dt>probability_of_precipitation</dt><dd>Probability of precipitation (percent)</dd>
 </dl>
 
-## Appendix 2 - Output From get_ag_bulletin()
-
-The functions, `get_ag_bulletin()` or `parse_ag_bulletin(), will return a data frame of the agriculture bulletin with the following fields:
-
-<dl>
-<dt>product_id</dt><dd>BOM Product ID from which the data are derived</dd>
-<dt>state</dt><dd>State name (postal code abbreviation)</dd>
-<dt>dist</dt><dd>BOM rainfall district</dd>
-<dt>name</dt><dd>Full station name (some stations have been retired so "station" will be same, this is the full designation</dd>
-<dt>wmo</dt><dd>World Meteorological Organization number (unique ID used worldwide)</dd>
-<dt>site</dt><dd>Unique BOM identifier for each station</dd>
-<dt>station</dt><dd>Station name</dd>
-<dt>obs-time-local</dt><dd>Observation time</dd>
-<dt>obs-time-utc</dt><dd>Observation time (time in UTC)</dd>
-<dt>time-zone</dt><dd>Time zone for observation</dd>
-<dt>lat</dt><dd>Latitude (decimal degrees)</dd>
-<dt>lon</dt><dd>Longitude (decimal degrees)</dd>
-<dt>elev_m</dt><dd>Station elevation (metres)</dd>
-<dt>bar_ht</dt><dd>Bar height (metres)</dd>
-<dt>station</dt><dd>BOM station name</dd>
-<dt>start</dt><dd>Year data collection starts</dd>
-<dt>end</dt><dd>Year data collection ends (will always be current)</dd>
-<dt>r</dt><dd>Rain to 9am (millimetres). <em>Trace will be reported as 0.01</em></dd>
-<dt>tn</dt><dd>Minimum temperature (degrees Celsius)</dd>
-<dt>tx</dt><dd>Maximum temperature (degrees Celsius)</dd>
-<dt>twd</dt><dd>Wet bulb depression (degrees Celsius)</dd>
-<dt>ev</dt><dd>Evaporation (millimetres)</dd>
-<dt>tg</dt><dd>Terrestrial minimum temperature (degrees Celsius)</dd>
-<dt>sn</dt><dd>Sunshine (hours)</dd>
-<dt>solr</dt><dd>Solar Radiation MJ/sq m</dd>
-<dt>t5</dt><dd>5cm soil temperature (degrees Celsius)</dd>
-<dt>t10</dt><dd>10cm soil temperature (degrees Celsius)</dd>
-<dt>t20</dt><dd>20cm soil temperature (degrees Celsius)</dd>
-<dt>t50</dt><dd>50cm soil temperature (degrees Celsius)</dd>
-<dt>t1m</dt><dd>1m soil temperature (degrees Celsius)</dd>
-<dt>wr</dt><dd>Wind run (kilometres)</dd>
-</dl>
-
-## Appendix 3 - Output From get_coastal_forecast()
+## Appendix 2 - Output From get_coastal_forecast()
 
 The output of `get_coastal_forecast()` or `parse_coastal_forecast()` will return a data frame with coastal waters forecast values of each area within the given state with the following fields:
 
