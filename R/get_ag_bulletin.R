@@ -1,7 +1,7 @@
 
 #' Get a BOM Agriculture Bulletin
 #'
-#' **Defunct:** This function is defunct as of version 1.1.0 because the
+#' **Defunct:** This function is defunct as of version 2.0.0 because the
 #'  underlying BOM agricultural forecast bulletin service is no longer available.
 #'
 #' Fetch the \acronym{BOM} agricultural bulletin information for a specified

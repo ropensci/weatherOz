@@ -26,36 +26,6 @@ print.weatherOz_tbl <- function(x,
   state <- c(attributes(x)$state)
   product_id <- c(attributes(x)$product_id)
 
-  ## ag bulletin header ----
-  if ("ag_bulletin" %in% attributes(x)) {
-    .stylecat(
-      "  ",
-      strrep("-", 11),
-      "  Australian Bureau of Meteorology (BOM) Ag Bulletin. ",
-      strrep("-", 11),
-      "\n"
-    )
-    .stylecat("  Please note information at the foot of\n")
-    for (i in product_id) {
-      .stylecat("  <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
-                i,
-                ".html>,\n")
-    }
-    .stylecat(
-      "  the HTML version of Agricultural Observations Bulletin for \n",
-      "  ",
-      knitr::combine_words(unlist(state)),
-      ".",
-      "  Also see \n",
-      "  <http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml>",
-      ".\n",
-      "  ",
-      strrep("-",
-             76),
-      "  \n"
-    )
-  }
-
   ## coastal forecast header -----
   if ("coastal_forecast" %in% attributes(x)) {
     .stylecat(
