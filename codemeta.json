@@ -8,7 +8,7 @@
   "codeRepository": "https://github.com/ropensci/weatherOz/",
   "issueTracker": "https://github.com/ropensci/weatherOz/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "1.0.0.9000",
+  "version": "2.0.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -560,7 +560,7 @@
   "applicationCategory": "Tools",
   "isPartOf": "https://ropensci.org",
   "keywords": ["dpird", "bom", "meteorological-data", "weather-forecast", "australia", "weather", "weather-data", "meteorology", "western-australia", "australia-bureau-of-meteorology", "western-australia-agriculture", "australia-agriculture", "australia-climate", "australia-weather", "rstats", "climate", "api-client", "data", "weather-api", "rainfall", "r"],
-  "fileSize": "5570.879KB",
+  "fileSize": "5505.495KB",
   "citation": [
     {
       "@type": "ScholarlyArticle",
@@ -691,7 +691,7 @@
       "name": "{weatherOz}: An API Client for Australian Weather and Climate Data Resources in R",
       "identifier": "10.5281/zenodo.8191283",
       "url": "https://docs.ropensci.org/weatherOz/",
-      "description": "R package version 1.0.0.9000",
+      "description": "R package version 2.0.0",
       "@id": "https://doi.org/10.5281/zenodo.8191283",
       "sameAs": "https://doi.org/10.5281/zenodo.8191283"
     }
