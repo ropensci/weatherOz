@@ -62,9 +62,8 @@
 #'
 #' @family BOM
 #' @family data fetching
-#' @keywords internal
 #' @autoglobal
-#' @export get_ag_bulletin
+#' @keywords internal
 
 get_ag_bulletin <- function(state = "AUS") {
   .Defunct(msg = "The function 'get_ag_bulletin' is defunct because
