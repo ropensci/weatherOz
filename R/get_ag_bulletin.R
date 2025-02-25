@@ -62,6 +62,7 @@
 #'
 #' @family BOM
 #' @family data fetching
+#' @keywords internal
 #' @autoglobal
 #' @export get_ag_bulletin
 
