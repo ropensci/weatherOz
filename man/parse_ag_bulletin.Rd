@@ -18,10 +18,13 @@ A \code{\link[data.table:data.table]{data.table::data.table()}} of Australia \ac
 bulletin information.
 }
 \description{
-Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) for a
-specified state or territory or all Australia.  Ported from \pkg{bomrang}.
+\strong{Defunct:} This function is defunct as of version 2.0.0 because the
+underlying BOM agricultural forecast bulletin service is no longer available.
 }
 \details{
+Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) for a
+specified state or territory or all Australia.  Ported from \pkg{bomrang}.
+
 Allowed state and territory postal codes, only one state per request
 or all using \code{AUS}.
 \describe{

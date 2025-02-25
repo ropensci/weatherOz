@@ -1,6 +1,9 @@
 
 #' Parse BOM Agriculture Bulletin XML Files
 #'
+#' **Defunct:** This function is defunct as of version 2.0.0 because the
+#'  underlying BOM agricultural forecast bulletin service is no longer available.
+#'
 #' Parse local \acronym{BOM} agriculture bulletin \acronym{XML} file(s) for a
 #'   specified state or territory or all Australia.  Ported from \pkg{bomrang}.
 #'
@@ -70,6 +73,9 @@
 #' @export
 #'
 parse_ag_bulletin <- function(state, filepath) {
+  .Defunct(msg = "The function 'parse_ag_bulletin' is defunct as the
+   underlying service has been discontinued.")
+
   the_state <- .check_states(state)
   location <- .validate_filepath(filepath)
   bulletin_out <-

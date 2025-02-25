@@ -28,7 +28,7 @@ Several functions are provided by {weatherOz} to retrieve Australian Bureau of M
 A family of functions retrieve data files from BOM or parse local files from BOM and return data frames;
 
  * `get_precis_forecast()` and `parse_precis_forecast()`, which return the précis (short) forecast;
- * `get_ag_bulletin()` and `parse_ag_bulletin()`, which return the agriculture bulletin;
+ * `get_ag_bulletin()` and `parse_ag_bulletin()`, which return the agriculture bulletin (defunct as of version v2.0.0);
  * `get_coastal_forecast()` and `parse_coastal_forecast()`, which return coastal waters forecasts for each state.
 
 ## Using get_precis_forecast()
@@ -66,42 +66,6 @@ Following is an example fetching the forecast for Queensland.
 ```{r precis_forecast, eval=TRUE}
 library(weatherOz)
 (QLD_forecast <- get_precis_forecast(state = "QLD"))
-```
-
-## Using get_ag_bulletin()
-
-`get_ag_bulletin()` only takes one argument, `state`.
-The `state` parameter allows the user to select the bulletin for just one state or a national forecast.
-States or territories are specified using the official postal codes or full name with fuzzy matching performed via `agrep()`.
-
-- **NSW** - New South Wales
-
-- **NT** - Northern Territory
-
-- **QLD** - Queensland
-
-- **SA** - South Australia
-
-- **TAS** - Tasmania
-
-- **VIC** - Victoria
-
-- **WA** - Western Australia
-
-- **AUS** - Australia, returns bulletin for all states and NT.
-
-### Results
-
-The function, `get_ag_bulletin()`, will return a data frame of the agriculture bulletin for selected stations.
-See Appendix 3 for a full list and description of the fields and values.
-
-### Example `r ex_cnt <- ex_cnt + 1; ex_cnt`: Getting an Ag Bulletin
-
-Following is an example fetching the ag bulletin for Western Australia.
-
-```{r ag_bulletin, eval=TRUE}
-library(weatherOz)
-(WA_bulletin <- get_ag_bulletin(state = "WA"))
 ```
 
 ## Using get_coastal_forecast()
@@ -276,8 +240,6 @@ plot(y)
 
 [Australian Bureau of Meteorology (BOM) FTP Public Products](http://www.bom.gov.au/catalogue/anon-ftp.shtml)
 
-[Australian Bureau of Meteorology (BOM) Weather Data Services Agriculture Bulletins](http://www.bom.gov.au/catalogue/observations/about-agricultural.shtml)
-
 [Australian Bureau of Meteorology (BOM) Weather Data Services Observation of Rainfall](http://www.bom.gov.au/climate/how/observations/rain-measure.shtml)
 
 [Australian Bureau of Meteorology (BOM) High-definition satellite images](http://www.bom.gov.au/australia/satellite/index.shtml)
@@ -308,45 +270,7 @@ The functions, `get_precis_forecast()` or `parse_precis_forecast(), will return 
 <dt>probability_of_precipitation</dt><dd>Probability of precipitation (percent)</dd>
 </dl>
 
-## Appendix 2 - Output From get_ag_bulletin()
-
-The functions, `get_ag_bulletin()` or `parse_ag_bulletin(), will return a data frame of the agriculture bulletin with the following fields:
-
-<dl>
-<dt>product_id</dt><dd>BOM Product ID from which the data are derived</dd>
-<dt>state</dt><dd>State name (postal code abbreviation)</dd>
-<dt>dist</dt><dd>BOM rainfall district</dd>
-<dt>name</dt><dd>Full station name (some stations have been retired so "station" will be same, this is the full designation</dd>
-<dt>wmo</dt><dd>World Meteorological Organization number (unique ID used worldwide)</dd>
-<dt>site</dt><dd>Unique BOM identifier for each station</dd>
-<dt>station</dt><dd>Station name</dd>
-<dt>obs-time-local</dt><dd>Observation time</dd>
-<dt>obs-time-utc</dt><dd>Observation time (time in UTC)</dd>
-<dt>time-zone</dt><dd>Time zone for observation</dd>
-<dt>lat</dt><dd>Latitude (decimal degrees)</dd>
-<dt>lon</dt><dd>Longitude (decimal degrees)</dd>
-<dt>elev_m</dt><dd>Station elevation (metres)</dd>
-<dt>bar_ht</dt><dd>Bar height (metres)</dd>
-<dt>station</dt><dd>BOM station name</dd>
-<dt>start</dt><dd>Year data collection starts</dd>
-<dt>end</dt><dd>Year data collection ends (will always be current)</dd>
-<dt>r</dt><dd>Rain to 9am (millimetres). <em>Trace will be reported as 0.01</em></dd>
-<dt>tn</dt><dd>Minimum temperature (degrees Celsius)</dd>
-<dt>tx</dt><dd>Maximum temperature (degrees Celsius)</dd>
-<dt>twd</dt><dd>Wet bulb depression (degrees Celsius)</dd>
-<dt>ev</dt><dd>Evaporation (millimetres)</dd>
-<dt>tg</dt><dd>Terrestrial minimum temperature (degrees Celsius)</dd>
-<dt>sn</dt><dd>Sunshine (hours)</dd>
-<dt>solr</dt><dd>Solar Radiation MJ/sq m</dd>
-<dt>t5</dt><dd>5cm soil temperature (degrees Celsius)</dd>
-<dt>t10</dt><dd>10cm soil temperature (degrees Celsius)</dd>
-<dt>t20</dt><dd>20cm soil temperature (degrees Celsius)</dd>
-<dt>t50</dt><dd>50cm soil temperature (degrees Celsius)</dd>
-<dt>t1m</dt><dd>1m soil temperature (degrees Celsius)</dd>
-<dt>wr</dt><dd>Wind run (kilometres)</dd>
-</dl>
-
-## Appendix 3 - Output From get_coastal_forecast()
+## Appendix 2 - Output From get_coastal_forecast()
 
 The output of `get_coastal_forecast()` or `parse_coastal_forecast()` will return a data frame with coastal waters forecast values of each area within the given state with the following fields:
 

@@ -17,10 +17,13 @@ with \code{\link[data.table:data.table]{data.table::data.table()}}) of Australia
 agricultural bulletin information.
 }
 \description{
-Fetch the \acronym{BOM} agricultural bulletin information for a specified
-station or stations.
+\strong{Defunct:} This function is defunct as of version 2.0.0 because the
+underlying BOM agricultural forecast bulletin service is no longer available.
 }
 \details{
+Fetch the \acronym{BOM} agricultural bulletin information for a specified
+station or stations.
+
 Allowed state and territory postal codes, only one state per request
 or all using 'AUS'.
 \describe{

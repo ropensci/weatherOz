@@ -279,8 +279,8 @@ test_that("get_dpird_summaries() returns 30min values",
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
-                start_date = "20231028",
-                end_date = "20231028",
+                start_date = paste0(format(Sys.Date() - 365, "%Y"), "1028"),
+                end_date = paste0(format(Sys.Date() - 365, "%Y"), "1028"),
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "30min",
                 values = "wind"
@@ -332,8 +332,8 @@ test_that("get_dpird_summaries() returns 15min values",
               skip_if_offline()
               x <- get_dpird_summaries(
                 station_code = "BI",
-                start_date = "20231028",
-                end_date = "20231028",
+                start_date = paste0(format(Sys.Date()-365, "%Y"), "1028"),
+                end_date = paste0(format(Sys.Date()-365, "%Y"), "1028"),
                 api_key = Sys.getenv("DPIRD_API_KEY"),
                 interval = "15min",
                 values = "wind"

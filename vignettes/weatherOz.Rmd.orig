@@ -29,7 +29,7 @@ knitr::opts_chunk$set(collapse = TRUE,
 ## Introduction
 
 {weatherOz} provides automated downloading, parsing, and formatting of weather data for Australia through API endpoints provided by the Department of Primary Industries and Regional Development (DPIRD) of Western Australia, and by the Science and Technology Division of the Queensland Government's Department of Environment and Science (DES).
-As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, agriculture bulletin data, and downloading and importing radar and satellite imagery files.
+As well as Australian Government Bureau of Meteorology ('BOM') précis and coastal forecasts, and downloading and importing radar and satellite imagery files.
 
 DPIRD weather data are accessed through public APIs provided by DPIRD, <https://www.agric.wa.gov.au/weather-api-20>, providing access to weather station data from DPIRD's own weather station network.
 Detailed information on using {weatherOz} with DPIRD data is available in the [weatherOz for the DPIRD Weather 2.0 API](weatherOz_for_DPIRD.html) vignette.

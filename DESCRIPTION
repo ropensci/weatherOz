@@ -1,6 +1,6 @@
 Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
-Version: 1.0.0.9000
+Version: 2.0.0
 Authors@R: c(
     person("Rodrigo", "Pires", , "rodrigo.pires@dpird.wa.gov.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7384-6849")),
@@ -41,7 +41,7 @@ Description: Provides automated downloading, parsing and formatting of
     Western Australia and by the Science and Technology Division of the
     Queensland Government's Department of Environment and Science ('DES').
     As well as the Bureau of Meteorology ('BOM') of the Australian
-    government precis and coastal forecasts, agriculture bulletin data,
+    government precis and coastal forecasts,
     and downloading and importing radar and satellite imagery files.
     'DPIRD' weather data are accessed through public 'APIs' provided by
     'DPIRD', <https://www.agric.wa.gov.au/weather-api-20>, providing

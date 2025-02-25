@@ -9,7 +9,6 @@ reference:
   desc: >
     Functions that fetch BOM Data from the FTP server.
   contents:
-  - get_ag_bulletin
   - get_coastal_forecast
   - get_precis_forecast
   - get_radar_imagery
