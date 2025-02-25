@@ -3,6 +3,8 @@
 This is a resubmission. 
 - The agricultural bulletin services was removed by one of the providers (Bureau of Meteorology Australia) which led to breaking changes.
 - Fix error when re-building vignette outputs
+- Adhere to CRAN policy to fail gracefully when using internet resources (.get_url() internal function)
+- Cross platform CMD checks are performed via GitHub Actions for: macos-release, windows-release, ubuntu-devel, ubuntu-release and ubuntu-oldrel-1.
 
 ## R CMD check results
 
