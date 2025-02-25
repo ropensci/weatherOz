@@ -1,4 +1,4 @@
-# weatherOz 1.1.0
+# weatherOz 2.0.0
 
 ## Breaking changes
 
