@@ -1,4 +1,3 @@
-
 #' Build a DPIRD Weather 2.0 API Query
 #'
 #' Construct a list of options to pass to the DPIRD API for summary and minute
@@ -50,15 +49,16 @@
 #' @keywords internal
 #' @autoglobal
 #' @noRd
-.build_query <- function(station_code,
-                         start_date_time,
-                         end_date_time,
-                         interval,
-                         values,
-                         api_group = "all",
-                         include_closed,
-                         limit,
-                         api_key) {
+.build_query <- function(
+    station_code,
+    start_date_time,
+    end_date_time,
+    interval,
+    values,
+    api_group = "all",
+    include_closed,
+    limit,
+    api_key) {
   # the API only accepts "true" or "false" in all lowercase
   include_closed <- tolower(as.character(include_closed))
 
@@ -95,19 +95,23 @@
       stationCode = station_code,
       startMonth = format(start_date_time, "%Y-%m"),
       endMonth = format(end_date_time, "%Y-%m"),
-      limit = ceiling(as.double(
-        difftime(
-          format(end_date_time, "%Y-%m-%d"),
-          format(start_date_time, "%Y-%m-%d"),
-          units = "days"
-        ) / 365
-      ) * 12),
+      limit = ceiling(
+        as.double(
+          difftime(
+            format(end_date_time, "%Y-%m-%d"),
+            format(start_date_time, "%Y-%m-%d"),
+            units = "days"
+          ) /
+            365
+        ) *
+          12
+      ),
       select = paste(values, collapse = ","),
       group = api_group,
       includeClosed = include_closed,
       api_key = api_key
     )
-  }  else {
+  } else {
     query_list <- list(
       stationCode = station_code,
       startYear = format(start_date_time, "%Y"),
@@ -137,13 +141,10 @@
 #' @autoglobal
 #' @keywords internal
 
-.query_dpird_api <- function(.end_point = NULL,
-                             .query_list,
-                             .limit) {
+.query_dpird_api <- function(.end_point = NULL, .query_list, .limit) {
   if (!is.null(.end_point)) {
     .base_url <-
-      sprintf("https://api.agric.wa.gov.au/v2/weather/stations/%s",
-              .end_point)
+      sprintf("https://api.agric.wa.gov.au/v2/weather/stations/%s", .end_point)
   } else {
     .base_url <- "https://api.agric.wa.gov.au/v2/weather/stations/"
   }
@@ -164,27 +165,50 @@
   #   explanation of the code, and message from the server
   # check response from start_date item in list, should be same across all
   if (response_data[[1]]$status_code > 201) {
-    if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors) > 0) {
+    if (
+      length(
+        jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors
+      ) >
+        0
+    ) {
       x <-
         jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$errors
-      stop("HTTP (", x[, "code"], ") - ", x[, "message"], "\n",
-           x[, "description"],
-           call. = FALSE)
-    } else if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))) > 0) {
-      if (length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$message) > 0) {
+      stop(
+        "HTTP (",
+        x[, "code"],
+        ") - ",
+        x[, "message"],
+        "\n",
+        x[, "description"],
+        call. = FALSE
+      )
+    } else if (
+      length(jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))) > 0
+    ) {
+      if (
+        length(
+          jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error$message
+        ) >
+          0
+      ) {
         x <- jsonlite::fromJSON(response_data[[1]]$parse("UTF8"))$error
 
-        stop("HTTP (", x["code"], ") - ", x[, "message"], "\n",
-             call. = FALSE)
+        stop("HTTP (", x["code"], ") - ", x[, "message"], "\n", call. = FALSE)
+      } else if (grepl("Invalid", response_data[[1]]$parse("UTF8"))) {
+        stop(
+          call. = FALSE,
+          "Invalid authentication credentials. Please check your API key.",
+          domain = NA
+        )
       } else {
-        stop(call. = FALSE,
-             domain = NA,
-               jsonlite::fromJSON(response_data[[1]]$parse("UTF8")$error$message)
-             )
+        stop(
+          call. = FALSE,
+          domain = NA,
+          jsonlite::fromJSON(response_data[[1]]$parse("UTF8")$error$message)
+        )
       }
     } else {
-      stop(call. = FALSE,
-           "An unidentified error has occurred with your query.")
+      stop(call. = FALSE, "An unidentified error has occurred with your query.")
     }
   }
 
