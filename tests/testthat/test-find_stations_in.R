@@ -8,7 +8,7 @@ test_that("find_stations_in() works with {sf} polygon", {
     )
   })
 
-  expect_identical(dim(x), c(671L, 11L))
+  expect_identical(dim(x), c(670L, 11L))
   expect_s3_class(x, "data.table")
   expect_named(
     x,

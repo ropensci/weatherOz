@@ -23,14 +23,14 @@ test_that("Error handling works", {
   skip_on_cran()
   expect_error(expect_warning(get_radar_imagery(product_id = "abc")))
   expect_error(expect_warning(get_radar_imagery()))
-  expect_error(get_radar_imagery(c("IDR032", "IDR022")))
+  expect_error(get_radar_imagery(c("IDR644", "IDR644")))
 })
 
 test_that("get_radar_imagery functions properly", {
   skip_on_cran()
-  y <- get_radar_imagery(product_id = "IDR022")
+  y <- get_radar_imagery(product_id = "IDR644")
   expect_type(y, "externalptr")
 
-  yy <- get_radar_imagery(product_id = "IDR022", download_only = TRUE)
+  yy <- get_radar_imagery(product_id = "IDR644", download_only = TRUE)
   expect_null(yy)
 })
