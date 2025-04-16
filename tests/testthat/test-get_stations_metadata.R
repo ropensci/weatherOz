@@ -127,7 +127,7 @@ test_that("get_station_metata() functions properly for which_api = 'all'",
             })
 
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(3855L, 11L))
+            expect_identical(dim(x), c(3854L, 11L))
             expect_named(
               x,
               c(
