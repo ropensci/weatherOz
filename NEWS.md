@@ -1,4 +1,12 @@
-# weatherOz 2.0.0
+# weatherOz 2.0.1
+
+## Minor changes
+* Updated `testthat` tests to reflect changes in weather station and BOM Radar imagery availability
+
+## Bug fixes
+* `get_stations_metadata()` fails to fetch data with invalid API key but provided unhelpful error.
+
+*  Added check to `query_dpird_api()` when using an invalid DPIRD API key ([Issue 94](https://github.com/ropensci/weatherOz/issues/94)).
 
 ## Breaking changes
 
