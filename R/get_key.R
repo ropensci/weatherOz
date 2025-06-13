@@ -59,7 +59,7 @@ get_key <- function(service = c("DPIRD", "SILO")) {
   #'   weather data API key request form.
   .set_dpird_key <- function() {
     if (interactive()) {
-      utils::browseURL("https://www.agric.wa.gov.au/form/dpird-api-registration")
+      utils::browseURL("https://www.dpird.wa.gov.au/forms/dpird-api-registration")
     }
 
     stop(
