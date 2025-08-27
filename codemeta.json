@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/ropensci/weatherOz/",
   "issueTracker": "https://github.com/ropensci/weatherOz/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
+  "runtimePlatform": "R version 4.4.3 (2025-02-28)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
