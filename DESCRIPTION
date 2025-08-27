@@ -44,7 +44,7 @@ Description: Provides automated downloading, parsing and formatting of
     government precis and coastal forecasts,
     and downloading and importing radar and satellite imagery files.
     'DPIRD' weather data are accessed through public 'APIs' provided by
-    'DPIRD', <https://www.agric.wa.gov.au/weather-api-20>, providing
+    'DPIRD', <https://www.dpird.wa.gov.au/online-tools/apis/>, providing
     access to weather station data from the 'DPIRD' weather station
     network.  Australia-wide weather data are based on data from the
     Australian Bureau of Meteorology ('BOM') data and accessed through
@@ -70,7 +70,6 @@ Imports:
     clock,
     crayon,
     crul (>= 1.6.0),
-    curl,
     data.table (>= 1.1.5),
     foreign,
     grDevices,

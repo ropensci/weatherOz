@@ -21,7 +21,7 @@ Defaults to \code{all}, returning the full list of values unless otherwise
 specified.}
 
 \item{api_key}{A \code{character} string containing your \acronym{API} key from
-\acronym{DPIRD}, \url{https://www.agric.wa.gov.au/web-apis}, for the
+\acronym{DPIRD}, \url{https://www.dpird.wa.gov.au/online-tools/apis/}, for the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.  Defaults to automatically
 detecting your key from your local .Renviron, .Rprofile or similar.
 Alternatively, you may directly provide your key as a string here.  If

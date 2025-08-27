@@ -24,18 +24,18 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 {weatherOz} facilitates access to and download of weather and climate data for Australia from Australian data sources.
-Data are sourced from from the [Western Australia Department of Primary Industries and Regional Development (DPIRD)](https://www.agric.wa.gov.au/weather-api-20) and the [Scientific Information for Land Owners (SILO) API](https://www.agric.wa.gov.au/weather-api-20) endpoints and the Australian Government Bureau of Meteorology’s (BOM) [FTP server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
+Data are sourced from from the [Western Australia Department of Primary Industries and Regional Development (DPIRD)](https://www.dpird.wa.gov.au/online-tools/apis/) and the [Scientific Information for Land Owners (SILO) API](https://www.dpird.wa.gov.au/online-tools/apis/) endpoints and the Australian Government Bureau of Meteorology’s (BOM) [FTP server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
 
 The package queries the APIs or an FTP server and returns data as a data frame or radar and satellite imagery in your R session.
-Observation data from DPIRD's weather station network are available via the [Weather 2.0](https://www.agric.wa.gov.au/weather-api-20) Open API initiative.
+Observation data from DPIRD's weather station network are available via the [Weather 2.0](https://www.dpird.wa.gov.au/online-tools/apis/) Open API initiative.
 SILO data is available from Queensland's Long Paddock initiative (Jeffery *et al.* 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112 to 154 degrees longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
 Visit the [SILO website](https://www.longpaddock.qld.gov.au/silo/) for more details about how the data is prepared and which climate data are available.
 Agriculture bulletins, radar imagery, satellite imagery and seven-day forecasts are available from the Bureau of Meteorology (BOM) via an anonymous FTP server.
 
 Access to DPIRD API requires an API key.
-Apply for an API key by submitting the [DPIRD API registration form](https://www.agric.wa.gov.au/form/dpird-api-registration).
+Apply for an API key by submitting the [DPIRD API registration form](https://www.dpird.wa.gov.au/forms/dpird-api-registration/).
 Access to the SILO API is conditioned to supplying a valid email address with the user query.
-Follow the API Terms and Conditions for the [DPIRD](https://www.agric.wa.gov.au/apis/api-terms-and-conditions) and [SILO](https://www.longpaddock.qld.gov.au/silo/api-documentation/) APIs.
+Follow the API Terms and Conditions for the [DPIRD](https://www.dpird.wa.gov.au/online-tools/apis/api-terms-and-conditions/) and [SILO](https://www.longpaddock.qld.gov.au/silo/api-documentation/) APIs.
 
 Observation data from the DPIRD's weather station network is also available via a [web interface](https://weather.agric.wa.gov.au).
 The data available is a mirror of the DPIRD Weather 2.0 API endpoints.

@@ -22,7 +22,7 @@
 #' @param distance_km A `numeric` value for distance to limit the search from
 #'   the station or location of interest.  Defaults to 100 km.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD}, <https://www.dpird.wa.gov.au/online-tools/apis/>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.  If left as `NULL`, defaults to
 #'   automatically detecting your key from your local .Renviron, .Rprofile or
 #'   similar.  Alternatively, you may directly provide your key as a string
@@ -45,7 +45,7 @@
 #'
 #' @note You can request your own \acronym{API} key from \acronym{DPIRD} for
 #'   free by filling out the form found at
-#'   <https://www.agric.wa.gov.au/web-apis>.
+#'   <https://www.dpird.wa.gov.au/online-tools/apis/>.
 #'
 #' @examples \dontrun{
 #'
@@ -225,7 +225,7 @@ find_nearby_stations <- function(longitude = NULL,
 #' @param .longitude A `numeric` value (Decimal Degrees) passed from another
 #'   function.
 #' @param .api_key A `string` value that is the user's \acronym{API} key from
-#'   \acronym{DPIRD} (see <https://www.agric.wa.gov.au/web-apis>).
+#'   \acronym{DPIRD} (see <https://www.dpird.wa.gov.au/online-tools/apis/>).
 #' @param .include_closed A `Boolean` value indicating whether to include
 #'   closed stations or not. Defaults to `FALSE`, not including closed stations.
 #'
