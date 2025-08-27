@@ -267,6 +267,7 @@ get_satellite_imagery <- get_satellite <-
 
 #' @noRd
 #' @autoglobal
+#' @importFrom curl new_handle handle_setopt curl
 .ftp_images <- function(product_id, bom_server) {
   # set a custom user-agent, restore original settings on exit
   # required for 130 - BOM returns 403 for RStudio

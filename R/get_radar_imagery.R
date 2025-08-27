@@ -37,6 +37,7 @@
 #' @export get_available_radar
 #'
 #' @autoglobal
+#' @importFrom curl new_handle handle_setopt curl
 #' @export
 
 get_available_radar <- function(radar_id = "all") {
