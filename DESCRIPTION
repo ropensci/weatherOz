@@ -1,6 +1,6 @@
 Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
-Version: 2.0.1
+Version: 2.0.2
 Authors@R: c(
     person("Rodrigo", "Pires", , "rodrigo.pires@dpird.wa.gov.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7384-6849")),
@@ -44,7 +44,7 @@ Description: Provides automated downloading, parsing and formatting of
     government precis and coastal forecasts,
     and downloading and importing radar and satellite imagery files.
     'DPIRD' weather data are accessed through public 'APIs' provided by
-    'DPIRD', <https://www.agric.wa.gov.au/weather-api-20>, providing
+    'DPIRD', <https://www.dpird.wa.gov.au/online-tools/apis/>, providing
     access to weather station data from the 'DPIRD' weather station
     network.  Australia-wide weather data are based on data from the
     Australian Bureau of Meteorology ('BOM') data and accessed through
@@ -69,8 +69,8 @@ Imports:
     apsimx,
     clock,
     crayon,
-    crul,
     curl,
+    crul (>= 1.6.0),
     data.table (>= 1.1.5),
     foreign,
     grDevices,
@@ -100,7 +100,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     usethis,
-    vcr (>= 0.6.0),
+    vcr (>= 2.0.0),
     vdiffr,
     withr
 VignetteBuilder: 

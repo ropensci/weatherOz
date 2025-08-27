@@ -12,7 +12,7 @@
 #' @family DPIRD
 #' @family data
 #'
-#' @source <https://www.agric.wa.gov.au/weather-api-20>
+#' @source <https://www.dpird.wa.gov.au/online-tools/apis/>
 #'
 "dpird_minute_values"
 
@@ -29,7 +29,7 @@
 #' @family DPIRD
 #' @family data
 #'
-#' @source <https://www.agric.wa.gov.au/weather-api-20>
+#' @source <https://www.dpird.wa.gov.au/online-tools/apis/>
 #'
 "dpird_extreme_weather_values"
 
@@ -47,7 +47,7 @@
 #' @family DPIRD
 #' @family data
 #'
-#' @source <https://www.agric.wa.gov.au/weather-api-20>
+#' @source <https://www.dpird.wa.gov.au/online-tools/apis/>
 #'
 "dpird_summary_values"
 

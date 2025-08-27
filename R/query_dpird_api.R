@@ -41,7 +41,7 @@
 #' @param limit The pagination limit parameter restricts the number of entries
 #'   returned.
 #' @param api_key A `character` string containing your \acronym{API} key from
-#'   \acronym{DPIRD}, <https://www.agric.wa.gov.au/web-apis>, for the
+#'   \acronym{DPIRD}, <https://www.dpird.wa.gov.au/online-tools/apis/>, for the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @return A `list` object of values to be passed to a [crul] object to query

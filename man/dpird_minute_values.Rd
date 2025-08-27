@@ -8,7 +8,7 @@
 A \link{vector} object of 12 items.
 }
 \source{
-\url{https://www.agric.wa.gov.au/weather-api-20}
+\url{https://www.dpird.wa.gov.au/online-tools/apis/}
 }
 \usage{
 dpird_minute_values

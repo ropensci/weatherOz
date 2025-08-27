@@ -440,6 +440,7 @@
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
 #' @keywords Internal
 #' @autoglobal
+#' @importFrom curl has_internet
 #' @noRd
 
 .get_url <- function(remote_file) {
