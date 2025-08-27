@@ -69,6 +69,7 @@ Imports:
     apsimx,
     clock,
     crayon,
+    curl,
     crul (>= 1.6.0),
     data.table (>= 1.1.5),
     foreign,
