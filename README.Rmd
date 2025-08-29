@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 <!-- badges: end -->
 
 {weatherOz} facilitates access to and download of weather and climate data for Australia from Australian data sources.
-Data are sourced from from the [Western Australia Department of Primary Industries and Regional Development (DPIRD)](https://www.dpird.wa.gov.au/online-tools/apis/) and the [Scientific Information for Land Owners (SILO) API](https://www.dpird.wa.gov.au/online-tools/apis/) endpoints and the Australian Government Bureau of Meteorology’s (BOM) [FTP server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
+Data are sourced from from the [Western Australia Department of Primary Industries and Regional Development (DPIRD)](https://www.dpird.wa.gov.au/online-tools/apis/) and the [Scientific Information for Land Owners (SILO) API](https://www.longpaddock.qld.gov.au/silo/) endpoints and the Australian Government Bureau of Meteorology's (BOM) [FTP server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
 
 The package queries the APIs or an FTP server and returns data as a data frame or radar and satellite imagery in your R session.
 Observation data from DPIRD's weather station network are available via the [Weather 2.0](https://www.dpird.wa.gov.au/online-tools/apis/) Open API initiative.
