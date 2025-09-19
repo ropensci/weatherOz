@@ -33,4 +33,4 @@ All previously problematic DPIRD URLs have been updated to their new locations:
 These URLs are now working and accessible following DPIRD's completion of the IT system migration to the new platform.
 
 ## Additional notes
-This submission addresses the policy violation, the compatibility issues and fixes URL problems identified in R CMD checks.
+This submission addresses the policy violation, the compatibility issues and fixes URL problems identified in R CMD checks. Also addressed CRAN request to "remove the single quotes around every term in the description that is not a package/software/API name" and removed examples for unexported functions.

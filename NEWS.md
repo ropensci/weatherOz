@@ -10,10 +10,12 @@
 * URL updates following DPIRD IT system migration:
   * API endpoints: Maintained on `api.agric.wa.gov.au`
   * Updated DPIRD API documentation URLs: `agric.wa.gov.au/apis/api-terms-and-conditions` to `dpird.wa.gov.au/online-tools/apis/api-terms-and-conditions/` and `agric.wa.gov.au/form/dpird-api-registration` to `dpird.wa.gov.au/forms/dpird-api-registration/`
-  * Updated organisational URL: `pulseaus.com.au/about/australian-pulse-industry` to `grainsaustralia.com.au`
+  * Updated displaced URL: `pulseaus.com.au/about/australian-pulse-industry` to `grainsaustralia.com.au`
   * Updated all references in vignettes, README files, and function documentation
 
 ## Additional fixes and improvements:
+* Addressed CRAN request to "remove the single quotes around every term in the description that is not a package/software/API name" and removed examples for unexported functions.
+
 * Addressed CRAN URL check issues by updating all redirected links to their new working locations.
 
 * Updated all man pages with corrected URLs; Fixed all broken links in README and vignettes.

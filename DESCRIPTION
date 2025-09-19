@@ -2,62 +2,62 @@ Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
 Version: 2.0.2
 Authors@R: c(
-    person("Rodrigo", "Pires", , "rodrigo.pires@dpird.wa.gov.au", role = c("aut", "cre"),
+    person("Rodrigo", "Pires", email = "rodrigo.pires@dpird.wa.gov.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7384-6849")),
-    person("Anna", "Hepworth", , "anna.hepworth@gmail.com", role = "aut",
+    person("Anna", "Hepworth", email = "anna.hepworth@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0003-0204-6347")),
-    person("Rebecca", "O'Leary", , "bec.oleary@curtin.edu.au", role = "aut"),
-    person("Jonathan", "Carroll", , "rpkg@jcarroll.com.au", role = "aut",
+    person("Rebecca", "O'Leary", email = "bec.oleary@curtin.edu.au", role = "aut"),
+    person("Jonathan", "Carroll", email = "rpkg@jcarroll.com.au", role = "aut",
            comment = c(ORCID = "0000-0002-1404-5264")),
-    person("James", "Goldie", , "me@jamesgoldie.dev", role = "aut",
+    person("James", "Goldie", email = "me@jamesgoldie.dev", role = "aut",
            comment = c(ORCID = "0000-0002-5024-6207")),
-    person("Dean", "Marchiori", , "deanmarchiori@gmail.com", role = "aut",
+    person("Dean", "Marchiori", email = "deanmarchiori@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-3430-7225")),
-    person("Paul", "Melloy", , "paul@melloy.com.au", role = "aut",
+    person("Paul", "Melloy", email = "paul@melloy.com.au", role = "aut",
            comment = c(ORCID = "0000-0003-4253-7167")),
-    person("Mark", "Padgham", , "mark.padgham@email.com", role = "aut",
+    person("Mark", "Padgham", email = "mark.padgham@email.com", role = "aut",
            comment = c(ORCID = "0000-0003-2172-5265")),
-    person("Hugh", "Parsonage", , "hugh.parsonage@gmail.com", role = "aut",
+    person("Hugh", "Parsonage", email = "hugh.parsonage@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0003-4055-0835")),
-    person("Keith", "Pembleton", , "keith.pembleton@unisq.edu.au", role = "ctb",
-           comment = c(ORCID = "0000-0002-1896-4516", "Contributed code and ideas for original 'bomrang' package that was used in the creation of 'weatherOz'.")),
-    person("Maëlle", "Salmon", , "maelle.salmon@yahoo.se", role = "ctb",
-           comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to 'vcr' not recognising the\n                URL when run outside of Australia/Perth TZ! Suggested the use of `withr::local_timzeone()`, see <https://github.com/ropensci/weatherOz/commit/b052bf91973b8d7e147a39e8938405a64622634b>.")),
-    person("Max", "Moldovan", , "max.moldovan@adelaide.edu.au", role = "ctb",
+    person("Keith", "Pembleton", email = "keith.pembleton@unisq.edu.au", role = "ctb",
+           comment = c(ORCID = "0000-0002-1896-4516", "Contributed code and ideas for original bomrang package that was used in the creation of weatherOz.")),
+    person("Maëlle", "Salmon", email = "maelle.salmon@yahoo.se", role = "ctb",
+           comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the URL when run outside of Australia-Perth TZ! Suggested the use of local_timzeone().")),
+    person("Max", "Moldovan", email = "max.moldovan@adelaide.edu.au", role = "ctb",
            comment = c(ORCID = "0000-0001-9680-8474", "Contributed valuable feedback on package usage leading to improvements in the package structure and functionality.")),
-    person("Jimmy", "Ng", , "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
-    person("Steve", "Collins", , "steve.collins@dpird.wa.gov.au", role = "ctb",
+    person("Jimmy", "Ng", email = "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
+    person("Steve", "Collins", email = "steve.collins@dpird.wa.gov.au", role = "ctb",
            comment = "Designed the hex logo for 'weatherOz' hex logo."),
-    person("Adam H.", "Sparks", , "adamhsparks@gmail.com", role = "aut",
+    person("Adam H.", "Sparks", email = "adamhsparks@gmail.com", role = "aut",
            comment = c(ORCID = "0000-0002-0061-8359")),
-    person("Laurens", "Geffert", , "laurensgeffert@gmail.com", role = "rev"),
-    person("Sam", "Rogers", , "sam.rogers@adelaide.edu.au", role = "rev"),
+    person("Laurens", "Geffert", email = "laurensgeffert@gmail.com", role = "rev"),
+    person("Sam", "Rogers", email = "sam.rogers@adelaide.edu.au", role = "rev"),
     person("Western Australia Agriculture Authority (WAAA)", role = "cph"),
     person("Curtin University", role = "cph")
   )
 Description: Provides automated downloading, parsing and formatting of
     weather data for Australia through API endpoints provided by the
-    Department of Primary Industries and Regional Development ('DPIRD') of
+    Department of Primary Industries and Regional Development (DPIRD) of
     Western Australia and by the Science and Technology Division of the
-    Queensland Government's Department of Environment and Science ('DES').
-    As well as the Bureau of Meteorology ('BOM') of the Australian
+    Queensland Government's Department of Environment and Science (DES).
+    As well as the Bureau of Meteorology (BOM) of the Australian
     government precis and coastal forecasts,
     and downloading and importing radar and satellite imagery files.
-    'DPIRD' weather data are accessed through public 'APIs' provided by
-    'DPIRD', <https://www.dpird.wa.gov.au/online-tools/apis/>, providing
-    access to weather station data from the 'DPIRD' weather station
+    DPIRD weather data are accessed through public APIs provided by
+    DPIRD, <https://www.dpird.wa.gov.au/online-tools/apis/>, providing
+    access to weather station data from the DPIRD weather station
     network.  Australia-wide weather data are based on data from the
-    Australian Bureau of Meteorology ('BOM') data and accessed through
-    'SILO' (Scientific Information for Land Owners) Jeffrey et al. (2001)
-    <doi:10.1016/S1364-8152(01)00008-1>.  'DPIRD' data are made available
+    Australian Bureau of Meteorology (BOM) data and accessed through
+    SILO (Scientific Information for Land Owners) Jeffrey et al. (2001)
+    <doi:10.1016/S1364-8152(01)00008-1>.  DPIRD data are made available
     under a Creative Commons Attribution 3.0 Licence (CC BY 3.0 AU)
     license <https://creativecommons.org/licenses/by/3.0/au/deed.en>.
     SILO data are released under a Creative Commons Attribution 4.0
     International licence (CC BY 4.0)
-    <https://creativecommons.org/licenses/by/4.0/>. 'BOM' data are (c)
+    <https://creativecommons.org/licenses/by/4.0/>. BOM data are (c)
     Australian Government Bureau of Meteorology and released under a
     Creative Commons (CC) Attribution 3.0 licence or Public Access Licence
-    ('PAL') as appropriate, see
+    (PAL) as appropriate, see
     <http://www.bom.gov.au/other/copyright.shtml> for further details.
 License: GPL (>= 3)
 URL: https://github.com/ropensci/weatherOz/,

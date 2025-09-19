@@ -36,10 +36,6 @@
 #'   information. Users of this information are deemed to have read and
 #'   accepted the conditions described therein.
 #'
-#' @examplesIf interactive()
-#'
-#' get_ag_bulletin(state = "QLD")
-#'
 #' @references
 #' Agricultural observations are retrieved from the Australian Bureau of
 #'   Meteorology (\acronym{BOM}) Weather Data Services Agriculture Bulletins,\cr
