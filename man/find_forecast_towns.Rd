@@ -25,7 +25,7 @@ For a given \code{latitude} and \code{longitude}, find the nearest town that the
 \acronym{BOM} provides a forecast for.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # find forecast towns near Esperance, WA
 find_forecast_towns(longitude = 121.8913, latitude = -33.8614)

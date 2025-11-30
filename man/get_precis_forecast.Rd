@@ -36,7 +36,7 @@ or all using 'AUS'.
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # get the short forecast for Western Australia
 get_precis_forecast(state = "WA")
