@@ -32,19 +32,16 @@ get_key <- function(service = c("DPIRD", "SILO")) {
 
   if (service == "DPIRD") {
     DPIRD_API_KEY <- Sys.getenv("DPIRD_API_KEY")
-
-    if (!nzchar(DPIRD_API_KEY)) {
-      .set_dpird_key()
-    } else {
+    if (nzchar(DPIRD_API_KEY)) {
       return(DPIRD_API_KEY)
     }
+    return(.set_dpird_key())
   } else {
     SILO_API_KEY <- Sys.getenv("SILO_API_KEY")
-    if (!nzchar(SILO_API_KEY)) {
-      .set_silo_key()
-    } else {
+    if (nzchar(SILO_API_KEY)) {
       return(SILO_API_KEY)
     }
+    return(.set_silo_key())
   }
 }
 
@@ -69,7 +66,8 @@ get_key <- function(service = c("DPIRD", "SILO")) {
     "You need to set your DPIRD API key.\n",
     "After getting your key set it as 'DPIRD_API_KEY' in .Renviron.\n",
     "DPIRD_API_KEY='youractualkeynotthisstring'\n",
-    "For that, use `usethis::edit_r_environ()`"
+    "For that, use `usethis::edit_r_environ()`",
+    call. = FALSE
   )
 }
 
@@ -87,6 +85,7 @@ get_key <- function(service = c("DPIRD", "SILO")) {
   stop(
     "Set your SILO API key (email address) as 'SILO_API_KEY' in .Renviron.\n",
     "SILO_API_KEY='youractualemailnotthisstring'\n",
-    "For that, use `usethis::edit_r_environ()`"
+    "For that, use `usethis::edit_r_environ()`",
+    call. = FALSE
   )
 }
