@@ -1,4 +1,3 @@
-
 #' Get PatchedPoint Weather Data From SILO
 #'
 #' Fetch nicely formatted weather data from the \acronym{SILO} \acronym{API}
@@ -50,7 +49,7 @@
 #'
 #' \describe{
 #'  \item{all}{Which will return all of the following values}
-#'  \item{rain (mm)}{Rainfall}
+#'  \item{rain}{Rainfall}
 #'  \item{max_temp (degrees C)}{Maximum temperature}
 #'  \item{min_temp (degrees C)}{Minimum temperature}
 #'  \item{vp (hPa)}{Vapour pressure}
@@ -169,12 +168,13 @@
 #' @autoglobal
 #' @export
 
-get_patched_point <- function(station_code,
-                              start_date,
-                              end_date = Sys.Date(),
-                              values = "all",
-                              api_key = get_key(service = "SILO")) {
-
+get_patched_point <- function(
+  station_code,
+  start_date,
+  end_date = Sys.Date(),
+  values = "all",
+  api_key = get_key(service = "SILO")
+) {
   # simplify using the metadata to fetch weather data by converting factors to
   # numeric values
   if (inherits(x = station_code, what = "factor")) {
@@ -182,13 +182,12 @@ get_patched_point <- function(station_code,
   }
 
   if (missing(station_code) | !is.character(station_code)) {
-    stop(call. = FALSE,
-         "Please supply a valid `station_code`.")
+    stop(call. = FALSE, "Please supply a valid `station_code`.")
   }
 
-  if (missing(start_date))
-    stop(call. = FALSE,
-         "Please supply a valid start date as `start_date`.")
+  if (missing(start_date)) {
+    stop(call. = FALSE, "Please supply a valid start date as `start_date`.")
+  }
 
   .check_not_example_api_key(api_key)
   .is_valid_email_silo_api_key(api_key)
@@ -217,13 +216,10 @@ get_patched_point <- function(station_code,
   )
 
   data.table::setcolorder(out, order(names(out)))
-  data.table::setcolorder(out,
-                          c("station_code",
-                            "station_name",
-                            "year",
-                            "month",
-                            "day",
-                            "date"))
+  data.table::setcolorder(
+    out,
+    c("station_code", "station_name", "year", "month", "day", "date")
+  )
 
   out[]
 }
