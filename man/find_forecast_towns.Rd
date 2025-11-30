@@ -17,8 +17,8 @@ format.  By default, Canberra (approximately).}
 \code{latitude} and \code{longitude} point beyond which values will not be returned.}
 }
 \value{
-A \code{\link[data.table:data.table]{data.table::data.table()}} of all forecast towns (in this package) sorted by
-distance from \var{latitude} and \var{longitude}, ascending.
+A \code{\link[data.table:data.table]{data.table::data.table()}} of all forecast towns (in this package)
+sorted by distance from \var{latitude} and \var{longitude}, ascending.
 }
 \description{
 For a given \code{latitude} and \code{longitude}, find the nearest town that the
