@@ -4,15 +4,15 @@
 \alias{get_key}
 \title{Get or Set Up API Keys}
 \usage{
-get_key(service = c("DPIRD", "SILO"))
+get_key(service = c("DPIRD", "SILO", "METNO"))
 }
 \arguments{
-\item{service}{(character) The \acronym{API} host, either \dQuote{DPIRD} or
-\dQuote{SILO}.}
+\item{service}{(character) The \acronym{API} host i.e., \dQuote{DPIRD},
+\dQuote{SILO}, or \dQuote{METNO}.}
 }
 \value{
-A string value with either a \acronym{DPIRD} Weather 2.0 API or
-\acronym{SILO} API key value.
+A string value with either a \acronym{DPIRD} Weather 2.0 API,
+\acronym{SILO} and \acronym{METNO} API key value.
 }
 \description{
 Checks first to get key from your .Rprofile or .Renviron (or similar) file.
@@ -30,6 +30,7 @@ config.fish for cross-language use.
 \dontrun{
   get_key(service = "DPIRD")
   get_key(service = "SILO")
+  get_key(service = "METNO")
 }
 
 }

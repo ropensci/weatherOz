@@ -53,6 +53,18 @@ utils::globalVariables(c(
   "period_hour", # <.set_col_orders>
   "period_minute", # <.set_col_orders>
   "period_month", # <.set_col_orders>
+  "time", # <metno_timeseries_to_data_table>
+  "time", # <metno_resample_data_table>
+  "air_temperature", # <metno_resample_data_table>
+  "relative_humidity", # <metno_resample_data_table>
+  "wind_speed", # <metno_resample_data_table>
+  "wind_from_direction", # <metno_resample_data_table>
+  "cloud_area_fraction", # <metno_resample_data_table>
+  "air_pressure_at_sea_level", # <metno_resample_data_table>
+  "precipitation_amount", # <metno_resample_data_table>
+  "symbol_code", # <metno_resample_data_table>
+  "week_start", # <metno_resample_data_table>
+  "month_start", # <metno_resample_data_table>
   "state", # <.parse_precis_forecast>
   "product_id", # <.parse_precis_forecast>
   "probability_of_precipitation", # <.parse_precis_forecast>

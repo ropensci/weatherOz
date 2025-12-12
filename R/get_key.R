@@ -12,78 +12,97 @@
 #'  config.fish for cross-language use.
 #'
 #'
-#' @param service (character) The \acronym{API} host, either \dQuote{DPIRD} or
-#'   \dQuote{SILO}.
+#' @param service (character) The \acronym{API} host i.e., \dQuote{DPIRD},
+#'   \dQuote{SILO}, or \dQuote{METNO}.
 #'
-#' @return A string value with either a \acronym{DPIRD} Weather 2.0 API or
-#'   \acronym{SILO} API key value.
+#' @return A string value with either a \acronym{DPIRD} Weather 2.0 API,
+#'   \acronym{SILO} and \acronym{METNO} API key value.
 #'
 #' @examples
 #' \dontrun{
 #'   get_key(service = "DPIRD")
 #'   get_key(service = "SILO")
+#'   get_key(service = "METNO")
 #' }
 #'
 #' @export
-get_key <- function(service = c("DPIRD", "SILO")) {
-
+get_key <- function(service = c("DPIRD", "SILO", "METNO")) {
   service <- match.arg(service)
 
-  if (service == "DPIRD") {
-    DPIRD_API_KEY <- Sys.getenv("DPIRD_API_KEY")
+  key <- switch(
+    service,
+    DPIRD = {
+      k <- Sys.getenv("DPIRD_API_KEY")
+      if (!nzchar(k)) .set_dpird_key() else k
+    },
+    SILO = {
+      k <- Sys.getenv("SILO_API_KEY")
+      if (!nzchar(k)) .set_silo_key() else k
+    },
+    METNO = {
+      k <- Sys.getenv("METNO_API_KEY")
+      if (!nzchar(k)) .set_metno_key() else k
+    }
+  )
 
-    if (!nzchar(DPIRD_API_KEY)) {
-      .set_dpird_key()
-    } else {
-      return(DPIRD_API_KEY)
-    }
-  } else {
-    SILO_API_KEY <- Sys.getenv("SILO_API_KEY")
-    if (!nzchar(SILO_API_KEY)) {
-      .set_silo_key()
-    } else {
-      return(SILO_API_KEY)
-    }
-  }
+  return(key)
 }
 
-  #' Help the User Request an API Key for the DPIRD API
-  #'
-  #' Opens a browser window at the DPIRD API key request URL and provides
-  #'   instruction on how to store the key. After filling the form you will get
-  #'   the key soon, but not immediately.
-  #'
-  #' @keywords internal
-  #' @noRd
-  #' @return Called for its side-effects, opens a browser window at the DPIRD
-  #'   weather data API key request form.
-  .set_dpird_key <- function() {
-    if (interactive()) {
-      utils::browseURL("https://www.dpird.wa.gov.au/forms/dpird-api-registration/")
-    }
-
-    stop(
-        "You need to set your DPIRD API key.\n",
-        "After getting your key set it as 'DPIRD_API_KEY' in .Renviron.\n",
-        "DPIRD_API_KEY='youractualkeynotthisstring'\n",
-        "For that, use `usethis::edit_r_environ()`"
-    )
+#' Help the User Request an API Key for the DPIRD API
+#'
+#' Opens a browser window at the DPIRD API key request URL and provides
+#'   instruction on how to store the key. After filling the form you will get
+#'   the key soon, but not immediately.
+#'
+#' @keywords internal
+#' @noRd
+#' @return Called for its side-effects, opens a browser window at the DPIRD
+#'   weather data API key request form.
+.set_dpird_key <- function() {
+  if (interactive()) {
+    utils::browseURL("https://www.dpird.wa.gov.au/forms/dpird-api-registration/")
   }
 
-  #' Help the User Set Up Their SILO API Key
-  #'
-  #' Instructs the user on how to set up the SILO API key to automatically find
-  #'   it.
-  #'
-  #' @return Invisible `NULL`, called for its side-effects, returns a message
-  #'   with instructions.
-  #' @keywords internal
-  #' @noRd
+  stop(
+    "You need to set your DPIRD API key.\n",
+    "After getting your key set it as 'DPIRD_API_KEY' in .Renviron.\n",
+    "DPIRD_API_KEY='youractualkeynotthisstring'\n",
+    "For that, use `usethis::edit_r_environ()`"
+  )
+}
 
-  .set_silo_key <- function() {
-    stop(
-        "Set your SILO API key (email address) as 'SILO_API_KEY' in .Renviron.\n",
-        "SILO_API_KEY='youractualemailnotthisstring'\n",
-        "For that, use `usethis::edit_r_environ()`"
-    )
-  }
+#' Help the User Set Up Their SILO API Key
+#'
+#' Instructs the user on how to set up the SILO API key to automatically find
+#'   it.
+#'
+#' @return Invisible `NULL`, called for its side-effects, returns a message
+#'   with instructions.
+#' @keywords internal
+#' @noRd
+
+.set_silo_key <- function() {
+  stop(
+    "Set your SILO API key (email address) as 'SILO_API_KEY' in .Renviron.\n",
+    "SILO_API_KEY='youractualemailnotthisstring'\n",
+    "For that, use `usethis::edit_r_environ()`"
+  )
+}
+
+#' Help the User Set Up Their METNO API Key
+#'
+#' Instructs the user on how to set up the METNO API key to automatically find
+#'  it.
+#'
+#' @return Invisible `NULL`, called for its side-effects, returns a message
+#' with instructions.
+#' @keywords internal
+#' @noRd
+
+.set_metno_key <- function() {
+  stop(
+    "Set your METNO API key as 'METNO_API_KEY' in .Renviron.\n",
+    "METNO_API_KEY='youractualkeynotthisstring'\n",
+    "For that, use `usethis::edit_r_environ()`"
+  )
+}

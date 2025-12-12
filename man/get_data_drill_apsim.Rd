@@ -143,6 +143,8 @@ Other data fetching:
 \code{\link{get_dpird_extremes}()},
 \code{\link{get_dpird_minute}()},
 \code{\link{get_dpird_summaries}()},
+\code{\link{get_metno_daily_forecast}()},
+\code{\link{get_metno_forecast}()},
 \code{\link{get_patched_point}()},
 \code{\link{get_patched_point_apsim}()},
 \code{\link{get_precis_forecast}()},

@@ -89,6 +89,9 @@ Other BOM:
 \code{\link{parse_precis_forecast}()}
 
 Other parse: 
+\code{\link{metno_get_dominant_symbol}()},
+\code{\link{metno_resample_data_table}()},
+\code{\link{metno_timeseries_to_data_table}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()}
 }
