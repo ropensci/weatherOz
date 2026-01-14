@@ -65,7 +65,7 @@ and maximum longitude and latitude values, find \acronym{DPIRD} or
 defined area or the station nearest the centroid of the area of interest.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # using a (generous) bounding box for Melbourne, Vic using only the SILO API
 # for BOM stations, so no API key is needed.

@@ -114,7 +114,7 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE, roclets = c("collate", "namespace", "rd",
     "roxyglobals::global_roclet"))
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 X-schema.org-applicationCategory: Tools
 X-schema.org-isPartOf: https://ropensci.org
 X-schema.org-keywords: dpird, bom, meteorological-data, weather-forecast,

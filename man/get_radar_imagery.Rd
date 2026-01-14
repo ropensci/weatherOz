@@ -36,7 +36,7 @@ Valid \acronym{BOM} \acronym{Radar} Product IDs for radar imagery
 can be obtained from \code{\link[=get_available_radar]{get_available_radar()}}.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # Fetch most recent radar image for Wollongong 256km radar
 imagery <- get_radar_imagery(product_id = "IDR032")

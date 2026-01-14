@@ -69,7 +69,7 @@ functionality any longer due to issues with \acronym{CRAN} and
 \CRANpkg{hoardr}.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
 # GEOS GIS {terra} `SpatRaster`` object for most recent single scan
  available
