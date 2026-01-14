@@ -1,2 +1,5 @@
 *.html
 *.sav
+
+/.quarto/
+**/*.quarto_ipynb

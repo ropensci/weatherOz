@@ -1,6 +1,7 @@
 AHI
 AMMinutes
 AMStartTime
+API's
 APSIM
 ASCE
 ASCE’s
@@ -11,16 +12,13 @@ BOM
 BOM's
 Beswick
 Binnu
-centroid
-Centroid
 CLIMARC
 CMD
 CRS
 Capel
+Codecov
 Curtin
-cassette
 DBF
-defunct
 DES
 DOI
 DPIRD
@@ -36,6 +34,7 @@ Evapotranspiration
 FAO
 GDA
 GEOS
+GeoJSON
 GeoTIFF
 Geospatial
 Geospatially
@@ -44,6 +43,8 @@ JSON
 Kirnbrae
 Licence
 Lifecycle
+Locationforecast
+METNO
 Maroondah
 Modelling
 Moodie
@@ -57,6 +58,7 @@ Précis
 QLD
 Qld
 README
+RStudio
 Rayner
 Renviron
 Rprofile
@@ -73,15 +75,16 @@ Uptime
 VIS
 Vapour
 Vasse
+Visualise
 WAAA
 WGS
 WMO
+WORDLIST
 Westonia
 Wongan
 YYYYMMDD
 Zajaczkowski
 Zehr
-ag
 airTemperature
 airTemperatureAvg
 airTemperatureMax
@@ -106,6 +109,7 @@ availabilitySince
 availabilityTo
 availabilityYearToDateSince
 availabilityYearToDateTo
+backoff
 barometricPressure
 barometricPressureAvg
 barometricPressureMax
@@ -119,7 +123,6 @@ bomrang
 capitalised
 centre
 chillHours
-codecov
 colour
 config
 cron
@@ -174,7 +177,6 @@ frostConditionYearToDateMinutes
 frostConditionYearToDateStartTime
 geospatial
 ggplot
-github
 gmail
 greyscale
 gridded
@@ -192,12 +194,13 @@ heatConditionYearToDateDays
 heatConditionYearToDateMinutes
 heatConditionYearToDateStartTime
 hh
-https
 kilometres
 licence
 licenced
+locationforecast
 magick
 mailR
+metno
 metre
 metres
 minimise
@@ -214,7 +217,6 @@ png
 pre
 précis
 rOpenSci
-rast
 recognise
 recognising
 relativeHumidity
@@ -224,7 +226,6 @@ relativeHumidityMaxTime
 relativeHumidityMin
 relativeHumidityMinTime
 richardsonUnits
-ropensci
 soilTemperature
 soilTemperatureAvg
 soilTemperatureMax
@@ -237,6 +238,7 @@ splining
 stationaRy
 summarised
 terra
+timeseries
 timezones
 timzeone
 unprojected
@@ -254,9 +256,7 @@ windAvgSpeed
 windMaxSpeed
 windMinSpeed
 windspeed
-withr
 wmo
-WORDLIST
 xmax
 xmin
 ymax

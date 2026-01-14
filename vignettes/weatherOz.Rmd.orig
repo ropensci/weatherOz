@@ -37,6 +37,9 @@ Detailed information on using {weatherOz} with DPIRD data is available in the [w
 Australia-wide weather data are based on data from the Australian Bureau of Meteorology (BOM) data and accessed through SILO (Scientific Information for Land Owners) (Jeffery et al., 2001).
 More details on using {weatherOz} with SILO data are available in the [weatherOz for the SILO API](weatherOz_for_SILO.html) vignette.
 
+Weather forecast data are available from the Norwegian Meteorological Institute (MET Weather API) Locationforecast endpoint, providing up to 9 days of forecast data for locations across Australia.
+Details on using {weatherOz} with MET Weather API forecast data are available in the [weatherOz for met.no Forecasts](weatherOz_for_metno.html) vignette.
+
 The BOM also serves several types of data data as XML, JSON and SHTML files. This package fetches these files, parses them and return a data frame.
 Satellite and radar imagery files are also made available to the public via anonymous FTP.
 {weatherOz} provides functionality to query, fetch and create `terra::SpatRaster()` or {stars} objects of GeoTIFF satellite imagery or a {magick} object of radar image.png files.
@@ -63,6 +66,7 @@ Using `get_key()` will provide you with instructions on what format to use in yo
 
 ```{r get-silo-key, eval=FALSE}
 get_key(source = "SILO")
+get_key(source = "METNO")
 ```
 
 Note that you do not need to do this separately, any function requiring an API key will prompt you if you don't have one set.
@@ -135,7 +139,27 @@ ppd <- get_patched_point(
 ppd
 ```
 
-{weatherOz} offers much more functionality that is detailed in other vignettes that document how to use it to get station metadata for any station in the DPIRD or SILO databases, get extreme weather events for the DPIRD station network, get minute data for DPIRD stations, get APSIM formatted data from SILO, get ag bulletins, précis forecasts and various imagery files from BOM in the respective vignettes for DPIRD, SILO and BOM data available through {weatherOz}.
+## Using {weatherOz} to Fetch 9-day forecast from METNO
+
+Retrieve a 9-day weather forecast for a specified location from the MET Norway (METNO) Locationforecast API. The function get_metno_forecast() returns structured hourly and daily weather variables such as temperature, precipitation, wind speed, and cloud cover, which can be integrated into analytical workflows or decision-support tools.
+
+```{r metno_forecast}
+library(weatherOz)
+
+perth_forecast <- get_metno_forecast(
+  latitude = -31.95,
+  longitude = 115.86,
+  format = "complete"
+)
+
+# Inspect the structure
+names(perth_forecast)
+
+# View the first few rows of hourly data
+head(perth_forecast$data)
+```
+
+{weatherOz} offers much more functionality that is detailed in other vignettes that document how to use it to get station metadata for any station in the DPIRD or SILO databases, get extreme weather events for the DPIRD station network, get minute data for DPIRD stations, get APSIM formatted data from SILO, get précis forecasts and various imagery files from BOM, get weather forecasts from METNO in the respective vignettes for DPIRD, SILO, BOM and METNO data available through {weatherOz}.
 
 ## Appendix 1 - Map of DPIRD Station Locations
 

@@ -1,10 +1,15 @@
 .Rproj.user
 .Rhistory
 .Rproj
+.Rprofile
+.Renviron
 .RData
+.Ruserdata
 .Ruserdata
 **/.DS_Store
 inst/doc
+Meta
+doc
 /doc/
 /Meta/
 docs/

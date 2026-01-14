@@ -46,6 +46,13 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
+      - name: Configure PROJ (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          PROJ_LIB_PATH=$(Rscript -e 'cat(system.file("proj", package = "sf"))')
+          echo "PROJ_LIB=$PROJ_LIB_PATH" >> "$GITHUB_ENV"
+          echo "PROJ_DATA=$PROJ_LIB_PATH" >> "$GITHUB_ENV"
+
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true

@@ -134,11 +134,11 @@
 #' @noRd
 
 .check_not_example_api_key <- function(.api_key) {
-  if (!is.null(.api_key) && .api_key == "your_api_key") {
+  if (!is.null(.api_key) && .api_key %in% c("your_api_key", "your.email@@example.com")) {
     stop("You have copied the example code and not provided a proper API key.
-         An API key may be requested from DPIRD or for SILO you must use your
-         e-mail address as an API key. See the help for the respective functions
-         for more.",
+         An API key may be requested from DPIRD or for SILO/METNO you must use
+         your e-mail address as an API key. See the help for the respective
+         functions for more.",
          call. = FALSE)
   }
   return(invisible(NULL))
@@ -147,7 +147,7 @@
 #' Check That the User Provided a Valid Email String as API Key for SILO
 #' @param .api_key a user-provided value for the `api_key`, should be a valid
 #'   e-mail address
-#'
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
 #' @keywords Internal
 #' @autoglobal
 #' @noRd
@@ -162,6 +162,29 @@
     return(invisible(NULL))
   } else {
     stop("For SILO requests you must use your e-mail address as an API key.
+         You have not provided a valid email address.",
+         call. = FALSE)
+  }
+}
+
+#' Check That the User Provided a Valid Email String as API Key for METNO
+#' @param .api_key a user-provided value for the `api_key`, should be a valid
+#'   e-mail address
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.is_valid_email_metno_api_key <- function(.api_key) {
+
+  # regular expression to check
+  pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
+
+  if (grepl(pattern, as.character(.api_key), ignore.case = TRUE) &&
+      !is.null(.api_key)) {
+    return(invisible(NULL))
+  } else {
+    stop("For METNO requests you must use your e-mail address as an API key.
          You have not provided a valid email address.",
          call. = FALSE)
   }
@@ -666,4 +689,18 @@
     }
     return(location)
   }
+}
+
+#' Null-Coalescing Operator
+#' Internal operator that returns `y` if `x` is `NULL`, otherwise returns `x`.
+#' This is a convenience function for simplifying default argument handling.
+#' @param x The first value to check.
+#' @param y The fallback value to return if `x` is `NULL`.
+#' @return `x` if not `NULL`, otherwise `y`.
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @keywords internal
+#' @noRd
+
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
 }

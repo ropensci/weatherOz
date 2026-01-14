@@ -21,21 +21,25 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/weatherOz/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/ropensci/weatherOz/graph/badge.svg)](https://app.codecov.io/gh/ropensci/weatherOz)
 [![CRAN status](https://www.r-pkg.org/badges/version/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/weatherOz)](https://CRAN.R-project.org/package=weatherOz)
 <!-- badges: end -->
 
-{weatherOz} facilitates access to and download of weather and climate data for Australia from Australian data sources.
-Data are sourced from from the [Western Australia Department of Primary Industries and Regional Development (DPIRD)](https://www.dpird.wa.gov.au/online-tools/apis/) and the [Scientific Information for Land Owners (SILO) API](https://www.longpaddock.qld.gov.au/silo/) endpoints and the Australian Government Bureau of Meteorology's (BOM) [FTP server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
+{weatherOz} facilitates access to and download of weather and climate data for Australia from Australian and international data sources.
+Data are sourced from the [Western Australia Department of Primary Industries and Regional Development (DPIRD)](https://www.dpird.wa.gov.au/online-tools/apis/), the [Scientific Information for Land Owners (SILO) API](https://www.longpaddock.qld.gov.au/silo/), the [Norwegian Meteorological Institute](https://www.met.no/) and the Australian Government Bureau of Meteorology's (BOM) [FTP server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
 
 The package queries the APIs or an FTP server and returns data as a data frame or radar and satellite imagery in your R session.
 Observation data from DPIRD's weather station network are available via the [Weather 2.0](https://www.dpird.wa.gov.au/online-tools/apis/) Open API initiative.
-SILO data is available from Queensland's Long Paddock initiative (Jeffery *et al.* 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112 to 154 degrees longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
+SILO data is available from Queensland's Long Paddock initiative (Jeffery *et al.* 2001) and are spatially and temporally complete, covering all Australia and few nearby islands (112 to 154 degrees longitude, -10 to -44 degrees latitude), with resolution 0.05° longitude by 0.05° latitude (approximately 5 km × 5 km).
 Visit the [SILO website](https://www.longpaddock.qld.gov.au/silo/) for more details about how the data is prepared and which climate data are available.
+Forecast data with up to 9 days ahead are available from the [MET Weather API Locationforecast endpoint](https://api.met.no/weatherapi/locationforecast/2.0/documentation) for any location in Australia.
 Agriculture bulletins, radar imagery, satellite imagery and seven-day forecasts are available from the Bureau of Meteorology (BOM) via an anonymous FTP server.
 
 Access to DPIRD API requires an API key.
 Apply for an API key by submitting the [DPIRD API registration form](https://www.dpird.wa.gov.au/forms/dpird-api-registration/).
 Access to the SILO API is conditioned to supplying a valid email address with the user query.
-Follow the API Terms and Conditions for the [DPIRD](https://www.dpird.wa.gov.au/online-tools/apis/api-terms-and-conditions/) and [SILO](https://www.longpaddock.qld.gov.au/silo/api-documentation/) APIs.
+Follow the API Terms and Conditions for the [DPIRD](https://www.dpird.wa.gov.au/online-tools/apis/api-terms-and-conditions/), [SILO](https://www.longpaddock.qld.gov.au/silo/api-documentation/) and 
+[METNO](https://api.met.no/doc/TermsOfService)
+APIs.
 
 Observation data from the DPIRD's weather station network is also available via a [web interface](https://weather.agric.wa.gov.au).
 The data available is a mirror of the DPIRD Weather 2.0 API endpoints.
@@ -68,11 +72,12 @@ If you have already set up an API key, this will return that value for you.
 get_key(service = "DPIRD")
 ```
 
-You only need to provide an e-mail address for the SILO API.
+You only need to provide an e-mail address for the SILO and MET Weather APIs.
 Using `get_key()` will provide you with instructions on what format to use in your .Renviron so that {weatherOz} will auto-recognise it and if you have already set up an API key, this will return that value for you.
 
 ```{r get-silo-key, eval=FALSE}
 get_key(service = "SILO")
+get_key(service = "METNO")
 ```
 
 Note that you do not need to do this separately, any function requiring an API key will prompt you if you don't have one set.
@@ -122,14 +127,50 @@ wd <- get_data_drill(
 head(wd)
 ```
 
+
+## Example 3
+
+Source 9-day forecast data from the Norwegian Meteorological Institute Weather API for Perth, WA.
+
+```{r}
+library(weatherOz)
+
+perth_forecast <- get_metno_forecast(
+  latitude = -31.95,
+  longitude = 115.86,
+  format = "complete"
+)
+
+# Inspect the structure
+names(perth_forecast)
+
+# View the first few rows of hourly data
+head(perth_forecast$data)
+
+# Check metadata
+perth_forecast$metadata$request$longitude
+
+perth_forecast$metadata$request$latitude
+
+perth_forecast$metadata$request$format
+
+perth_forecast$metadata$status_code
+
+perth_forecast$metadata$expires
+```
+
 ## Notes on Data and API Endpoints
 
 Note that most of the data are not static and may be replaced with improved data.
 Also please note that SILO may be unavailable between 11am and 1pm (Brisbane time) each Wednesday and Thursday to allow for essential system maintenance.
 
+The MET Weather API is an interface to a selection
+of data produced by MET Norway. The data are freely available for use under a 
+Creative Commons license, including commercial use. See also 
+[separate conditions for use of the service](https://api.met.no/doc/TermsOfService).
+
 Please also note that not all exposed endpoints of the DPIRD APIs have associated functions.
-Development is ongoing.
-While we are responsive to user requests, we don't make any commitments about speed of delivery.
+Development is ongoing.While we are responsive to user requests, we don't make any commitments about speed of delivery.
 
 ## References
 
