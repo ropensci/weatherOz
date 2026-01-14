@@ -1,8 +1,33 @@
+url: https://docs.ropensci.org/weatherOz/
+
 home:
   title: An API Client for Australian Weather and Climate Data Resources
 
 template:
   bootstrap: 5
+
+navbar:
+  structure:
+    left: [intro, reference, articles, news]
+    right: [search, github]
+  components:
+    articles:
+      text: Articles
+      menu:
+        - text: Getting Started — weatherOz
+          href: articles/weatherOz.html
+        - text: Data Sources — BOM
+          href: articles/weatherOz_for_BOM.html
+        - text: Data Sources — DPIRD
+          href: articles/weatherOz_for_DPIRD.html
+        - text: Data Sources — SILO
+          href: articles/weatherOz_for_SILO.html
+        - text: Data Sources — METNO
+          href: articles/weatherOz_for_metno.html
+        - text: Use Cases — use_case
+          href: articles/use_case.html
+        - text: More articles...
+          href: articles/index.html
 
 reference:
   - title: Data Fetching
@@ -41,57 +66,56 @@ reference:
       - get_metno_forecast
       - get_metno_daily_forecast
 
-- title: Metadata Fetching
-  desc: >
-    Functions that get metadata, _e.g._, station uptime, dataset availability,
-    nearby stations or forecast locations, values that the station records, etc.
-  contents:
-    - starts_with("find_")
-    - get_available_imagery
-    - get_available_radar
-    - get_dpird_availability
-    - get_stations_metadata
+  - title: Metadata Fetching
+    desc: >
+      Functions that get metadata, _e.g._, station uptime, dataset availability,
+      nearby stations or forecast locations, values that the station records, etc.
+    contents:
+      - starts_with("find_")
+      - get_available_imagery
+      - get_available_radar
+      - get_dpird_availability
+      - get_stations_metadata
 
-- title: File Parsing
-  desc: >
-    Functions that parse files that you already downloaded to your computer.
-  contents:
-    - starts_with("parse_")
+  - title: File Parsing
+    desc: >
+      Functions that parse files that you already downloaded to your computer.
+    contents:
+      - starts_with("parse_")
 
-- title: Built in Datasets
-  desc: >
-    Datasets included in {WeatherOz}.
-  contents:
-    - starts_with("dpird_")
-    - silo_daily_values
-    - south_west_agriculture_region
+  - title: Built in Datasets
+    desc: >
+      Datasets included in {WeatherOz}.
+    contents:
+      - starts_with("dpird_")
+      - silo_daily_values
+      - south_west_agriculture_region
 
-- title: Helper Functions
-  desc: >
-    Functions intended to make using {weatherOz} a more enjoyable experience.
-  contents:
-    - get_key
-    - metno_timeseries_to_data_table
-    - metno_resample_data_table
-    - metno_get_dominant_symbol
+  - title: Helper Functions
+    desc: >
+      Functions intended to make using {weatherOz} a more enjoyable experience.
+    contents:
+      - get_key
+      - metno_timeseries_to_data_table
+      - metno_resample_data_table
+      - metno_get_dominant_symbol
 
 articles:
-- title: Getting Started
-  navbar: ~
-  contents:
-  - weatherOz
+  - title: Getting Started
+    contents:
+      - weatherOz
 
-- title: Data Sources
-  desc: >
-    Guides for working with different weather data sources.
-  contents:
-    - weatherOz_for_BOM
-    - weatherOz_for_DPIRD
-    - weatherOz_for_SILO
-    - weatherOz_for_metno
+  - title: Data Sources
+    desc: >
+      Guides for working with different weather data sources.
+    contents:
+      - weatherOz_for_BOM
+      - weatherOz_for_DPIRD
+      - weatherOz_for_SILO
+      - weatherOz_for_metno
 
-- title: Use Cases
-  desc: >
-    Practical examples and applications.
-  contents:
-    - use_case
+  - title: Use Cases
+    desc: >
+      Practical examples and applications.
+    contents:
+      - use_case
