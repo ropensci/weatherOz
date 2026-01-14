@@ -27,7 +27,8 @@
 #'
 #' @export
 get_key <- function(service = c("DPIRD", "SILO", "METNO")) {
-  service <- match.arg(toupper(service))
+  service <- toupper(service)
+  service <- match.arg(service)
 
   key <- switch(
     service,
