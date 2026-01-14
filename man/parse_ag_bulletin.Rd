@@ -46,7 +46,7 @@ Australia in the same fashion as \code{\link[=get_precis_forecast]{get_precis_fo
 files are all present in the directory.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # parse the ag bulletin for Western Australia
 
 # download to tempfile() using basename() to keep original name

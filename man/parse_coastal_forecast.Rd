@@ -43,7 +43,7 @@ Australia in the same fashion as \code{\link[=get_coastal_forecast]{get_coastal_
 the files are all present in the directory.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # parse the coastal forecast for Queensland
 
 #download to tempfile() using basename() to keep original name

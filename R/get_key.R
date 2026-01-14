@@ -27,7 +27,7 @@
 #'
 #' @export
 get_key <- function(service = c("DPIRD", "SILO", "METNO")) {
-  service <- match.arg(service)
+  service <- match.arg(toupper(service))
 
   key <- switch(
     service,
@@ -60,14 +60,17 @@ get_key <- function(service = c("DPIRD", "SILO", "METNO")) {
 #'   weather data API key request form.
 .set_dpird_key <- function() {
   if (interactive()) {
-    utils::browseURL("https://www.dpird.wa.gov.au/forms/dpird-api-registration/")
+    utils::browseURL(
+      "https://www.dpird.wa.gov.au/forms/dpird-api-registration/"
+    )
   }
 
   stop(
     "You need to set your DPIRD API key.\n",
     "After getting your key set it as 'DPIRD_API_KEY' in .Renviron.\n",
     "DPIRD_API_KEY='youractualkeynotthisstring'\n",
-    "For that, use `usethis::edit_r_environ()`"
+    "For that, use `usethis::edit_r_environ()`",
+    call. = FALSE
   )
 }
 
@@ -85,7 +88,8 @@ get_key <- function(service = c("DPIRD", "SILO", "METNO")) {
   stop(
     "Set your SILO API key (email address) as 'SILO_API_KEY' in .Renviron.\n",
     "SILO_API_KEY='youractualemailnotthisstring'\n",
-    "For that, use `usethis::edit_r_environ()`"
+    "For that, use `usethis::edit_r_environ()`",
+    call. = FALSE
   )
 }
 
@@ -103,6 +107,7 @@ get_key <- function(service = c("DPIRD", "SILO", "METNO")) {
   stop(
     "Set your METNO API key as 'METNO_API_KEY' in .Renviron.\n",
     "METNO_API_KEY='youractualkeynotthisstring'\n",
-    "For that, use `usethis::edit_r_environ()`"
+    "For that, use `usethis::edit_r_environ()`",
+    call. = FALSE
   )
 }

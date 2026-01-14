@@ -48,7 +48,7 @@ AUS equirect. GIS}
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # Check availability of AHI VIS (true colour) / IR (Ch13 greyscale) composite
 # 1km FD GEOS GIS images
 imagery <- get_available_imagery(product_id = "IDE00425")

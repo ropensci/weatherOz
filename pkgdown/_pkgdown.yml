@@ -1,4 +1,3 @@
-
 home:
   title: An API Client for Australian Weather and Climate Data Resources
 
@@ -6,66 +5,66 @@ template:
   bootstrap: 5
 
 reference:
-- title: Data Fetching
+  - title: Data Fetching
 
-- subtitle: BOM
-  desc: >
-    Functions that fetch BOM Data from the FTP server.
-  contents:
-  - get_coastal_forecast
-  - get_precis_forecast
-  - get_radar_imagery
-  - get_satellite_imagery
+  - subtitle: BOM
+    desc: >
+      Functions that fetch BOM Data from the FTP server.
+    contents:
+      - get_coastal_forecast
+      - get_precis_forecast
+      - get_radar_imagery
+      - get_satellite_imagery
 
-- subtitle: DPIRD
-  desc: >
-    Functions that fetch data from the DPIRD Weather 2.0 API.
-  contents:
-  - get_dpird_extremes
-  - get_dpird_minute
-  - get_dpird_summaries
-  - get_dpird_apsim
+  - subtitle: DPIRD
+    desc: >
+      Functions that fetch data from the DPIRD Weather 2.0 API.
+    contents:
+      - get_dpird_extremes
+      - get_dpird_minute
+      - get_dpird_summaries
+      - get_dpird_apsim
 
-- subtitle: SILO
-  desc: >
-    Functions that fetch data from the SILO API.
-  contents:
-  - get_data_drill
-  - get_patched_point
-  - get_data_drill_apsim
-  - get_patched_point_apsim
+  - subtitle: SILO
+    desc: >
+      Functions that fetch data from the SILO API.
+    contents:
+      - get_data_drill
+      - get_patched_point
+      - get_data_drill_apsim
+      - get_patched_point_apsim
 
-- subtitle: MET Weather API forecast
-  desc: >
-    Functions that fetch weather forecast data from the Norwegian Meteorological Institute API.
-  contents:
-  - get_metno_forecast
-  - get_metno_daily_forecast
+  - subtitle: MET Weather API forecast
+    desc: >
+      Functions that fetch weather forecast data from the Norwegian Meteorological Institute API.
+    contents:
+      - get_metno_forecast
+      - get_metno_daily_forecast
 
 - title: Metadata Fetching
   desc: >
     Functions that get metadata, _e.g._, station uptime, dataset availability,
     nearby stations or forecast locations, values that the station records, etc.
   contents:
-  - starts_with("find_")
-  - get_available_imagery
-  - get_available_radar
-  - get_dpird_availability
-  - get_stations_metadata
+    - starts_with("find_")
+    - get_available_imagery
+    - get_available_radar
+    - get_dpird_availability
+    - get_stations_metadata
 
 - title: File Parsing
   desc: >
     Functions that parse files that you already downloaded to your computer.
   contents:
-  - starts_with("parse_")
+    - starts_with("parse_")
 
 - title: Built in Datasets
   desc: >
     Datasets included in {WeatherOz}.
   contents:
-  - starts_with("dpird_")
-  - silo_daily_values
-  - south_west_agriculture_region
+    - starts_with("dpird_")
+    - silo_daily_values
+    - south_west_agriculture_region
 
 - title: Helper Functions
   desc: >
@@ -86,13 +85,13 @@ articles:
   desc: >
     Guides for working with different weather data sources.
   contents:
-  - weatherOz_for_BOM
-  - weatherOz_for_DPIRD
-  - weatherOz_for_SILO
-  - weatherOz_for_metno
+    - weatherOz_for_BOM
+    - weatherOz_for_DPIRD
+    - weatherOz_for_SILO
+    - weatherOz_for_metno
 
 - title: Use Cases
   desc: >
     Practical examples and applications.
   contents:
-  - use_case
+    - use_case

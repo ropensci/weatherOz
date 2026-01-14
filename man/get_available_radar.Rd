@@ -26,7 +26,7 @@ every 6 to 10 minutes by the \acronym{BOM}.  Ported from \pkg{bomrang}.
 Valid \acronym{BOM} \acronym{radar} ID for each location required.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 
 # Check availability radar imagery for Wollongong (radar_id = 3)
 imagery <- get_available_radar(radar_id = 3)

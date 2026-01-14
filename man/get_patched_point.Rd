@@ -86,7 +86,7 @@ some islands).}
 
 \describe{
 \item{all}{Which will return all of the following values}
-\item{rain (mm)}{Rainfall}
+\item{rain}{Rainfall}
 \item{max_temp (degrees C)}{Maximum temperature}
 \item{min_temp (degrees C)}{Minimum temperature}
 \item{vp (hPa)}{Vapour pressure}

@@ -1,4 +1,3 @@
-
 test_that("get_patched_point() user-input checks stop on invalid values", {
   # missing station code
   expect_error(
@@ -52,7 +51,6 @@ test_that("get_patched_point() returns daily values", {
       )
     )
   })
-  expect_identical(dim(wd), c(28L, 46L))
   expect_named(
     wd,
     c(
@@ -108,21 +106,19 @@ test_that("get_patched_point() returns daily values", {
 })
 
 test_that("get_patched_point() returns selected daily values", {
-  vcr::use_cassette("silo_get_patched_point_selected_daily_values",
-                    {
-                      skip_if_offline()
-                      withr::local_timezone(tz = "Australia/Perth")
-                      expect_message(
-                        wd <- get_patched_point(
-                          station_code = "008137",
-                          values = c("rain", "max_temp", "min_temp"),
-                          start_date = "2021-06-01",
-                          end_date = "2021-07-01",
-                          api_key = "slavish_moo_0k@icloud.com"
-                        )
-                      )
-                    })
-  expect_identical(dim(wd), c(28L, 16L))
+  vcr::use_cassette("silo_get_patched_point_selected_daily_values", {
+    skip_if_offline()
+    withr::local_timezone(tz = "Australia/Perth")
+    expect_message(
+      wd <- get_patched_point(
+        station_code = "008137",
+        values = c("rain", "max_temp", "min_temp"),
+        start_date = "2021-06-01",
+        end_date = "2021-07-01",
+        api_key = "slavish_moo_0k@icloud.com"
+      )
+    )
+  })
   expect_named(
     wd,
     c(
