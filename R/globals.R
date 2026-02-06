@@ -40,6 +40,7 @@ utils::globalVariables(c(
   "warning_summary_footer", # <.parse_coastal_xml>
   "product_footer", # <.parse_coastal_xml>
   "postamble", # <.parse_coastal_xml>
+  "wind_avg", # <get_dpird_apsim>
   "day", # <get_dpird_apsim>
   "period", # <.parse_availability>
   "date_time", # <get_dpird_minute>
@@ -47,12 +48,20 @@ utils::globalVariables(c(
   "wind.height2", # <.parse_minute>
   "period.from", # <get_dpird_summaries>
   "period.to", # <get_dpird_summaries>
+  "wind_max_date", # <get_dpird_summaries>
+  "wind_max_time", # <get_dpird_summaries>
+  "wind_max_time_of_day", # <get_dpird_summaries>
   "station_code", # <.parse_summary>
   "station_name", # <.parse_summary>
+  ".row_id", # <.parse_summary>
+  ".sub_index", # <.parse_summary>
+  "..multi_list_names", # <.parse_summary>
   "period_day", # <.set_col_orders>
   "period_hour", # <.set_col_orders>
   "period_minute", # <.set_col_orders>
   "period_month", # <.set_col_orders>
+  "wind_height", # <.widen_wind_height_cols>
+  "..group_cols", # <.widen_wind_height_cols>
   "time", # <metno_timeseries_to_data_table>
   "time", # <metno_resample_data_table>
   "air_temperature", # <metno_resample_data_table>

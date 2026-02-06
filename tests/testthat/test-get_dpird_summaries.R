@@ -112,7 +112,7 @@ test_that("get_dpird_summaries() returns yearly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(4L, 11L))
+            expect_identical(dim(x), c(2L, 19L))
             expect_named(
               x,
               c(
@@ -121,18 +121,39 @@ test_that("get_dpird_summaries() returns yearly values",
                 "longitude",
                 "latitude",
                 "year",
-                "wind_avg_speed",
-                "wind_height",
-                "wind_max_direction_compass_point",
-                "wind_max_direction_degrees",
-                "wind_max_speed",
-                "wind_max_time"
+                "wind_avg_speed_3m",
+                "wind_max_direction_compass_point_3m",
+                "wind_max_direction_degrees_3m",
+                "wind_max_speed_3m",
+                "wind_max_time_3m",
+                "wind_max_date_3m",
+                "wind_max_time_of_day_3m",
+                "wind_avg_speed_10m",
+                "wind_max_direction_compass_point_10m",
+                "wind_max_direction_degrees_10m",
+                "wind_max_speed_10m",
+                "wind_max_time_10m",
+                "wind_max_date_10m",
+                "wind_max_time_of_day_10m"
               )
             )
             expect_type(x$station_code, "integer")
             expect_type(x$station_name, "character")
             expect_type(x$year, "integer")
-            expect_s3_class(x$wind_max_time, "POSIXct")
+            expect_s3_class(x$wind_max_time_3m, "POSIXct")
+            expect_s3_class(x$wind_max_time_10m, "POSIXct")
+            date_only_idx <- is.na(x$wind_max_time_of_day_10m) &
+              !is.na(x$wind_max_time_10m)
+            expect_true(any(date_only_idx))
+            expect_true(all(!is.na(x$wind_max_date_10m[date_only_idx])))
+            expect_identical(attr(x$wind_max_time_10m, "tzone"), "Australia/West")
+            expect_true(all(
+              format(
+                x$wind_max_time_10m[date_only_idx],
+                "%H:%M:%S",
+                tz = "Australia/West"
+              ) == "08:00:00"
+            ))
           })
 
 ## monthly ----
@@ -150,7 +171,7 @@ test_that("get_dpird_summaries() returns monthly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(26L, 13L))
+            expect_identical(dim(x), c(13L, 21L))
             expect_named(
               x,
               c(
@@ -161,12 +182,20 @@ test_that("get_dpird_summaries() returns monthly values",
                 "year",
                 "month",
                 "date",
-                "wind_avg_speed",
-                "wind_height",
-                "wind_max_direction_compass_point",
-                "wind_max_direction_degrees",
-                "wind_max_speed",
-                "wind_max_time"
+                "wind_avg_speed_3m",
+                "wind_max_direction_compass_point_3m",
+                "wind_max_direction_degrees_3m",
+                "wind_max_speed_3m",
+                "wind_max_time_3m",
+                "wind_max_date_3m",
+                "wind_max_time_of_day_3m",
+                "wind_avg_speed_10m",
+                "wind_max_direction_compass_point_10m",
+                "wind_max_direction_degrees_10m",
+                "wind_max_speed_10m",
+                "wind_max_time_10m",
+                "wind_max_date_10m",
+                "wind_max_time_of_day_10m"
               )
             )
             expect_type(x$station_code, "integer")
@@ -174,7 +203,8 @@ test_that("get_dpird_summaries() returns monthly values",
             expect_type(x$year, "integer")
             expect_type(x$month, "integer")
             expect_s3_class(x$date, "Date")
-            expect_s3_class(x$wind_max_time, "POSIXct")
+            expect_s3_class(x$wind_max_time_3m, "POSIXct")
+            expect_s3_class(x$wind_max_time_10m, "POSIXct")
           })
 
 ## daily ----
@@ -193,7 +223,7 @@ test_that("get_dpird_summaries() returns daily values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(4L, 14L))
+            expect_identical(dim(x), c(2L, 22L))
             expect_named(
               x,
               c(
@@ -205,12 +235,20 @@ test_that("get_dpird_summaries() returns daily values",
                 "month",
                 "day",
                 "date",
-                "wind_avg_speed",
-                "wind_height",
-                "wind_max_direction_compass_point",
-                "wind_max_direction_degrees",
-                "wind_max_speed",
-                "wind_max_time"
+                "wind_avg_speed_3m",
+                "wind_max_direction_compass_point_3m",
+                "wind_max_direction_degrees_3m",
+                "wind_max_speed_3m",
+                "wind_max_time_3m",
+                "wind_max_date_3m",
+                "wind_max_time_of_day_3m",
+                "wind_avg_speed_10m",
+                "wind_max_direction_compass_point_10m",
+                "wind_max_direction_degrees_10m",
+                "wind_max_speed_10m",
+                "wind_max_time_10m",
+                "wind_max_date_10m",
+                "wind_max_time_of_day_10m"
               )
             )
             expect_type(x$station_code, "integer")
@@ -219,7 +257,8 @@ test_that("get_dpird_summaries() returns daily values",
             expect_type(x$month, "integer")
             expect_type(x$day, "integer")
             expect_s3_class(x$date, "Date")
-            expect_s3_class(x$wind_max_time, "POSIXct")
+            expect_s3_class(x$wind_max_time_3m, "POSIXct")
+            expect_s3_class(x$wind_max_time_10m, "POSIXct")
           })
 
 ## hourly ----
@@ -238,7 +277,7 @@ test_that("get_dpird_summaries() returns hourly values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(50L, 17L))
+            expect_identical(dim(x), c(25L, 27L))
             expect_named(
               x,
               c(
@@ -251,14 +290,24 @@ test_that("get_dpird_summaries() returns hourly values",
                 "day",
                 "hour",
                 "date",
-                "wind_avg_direction_compass_point",
-                "wind_avg_direction_degrees",
-                "wind_avg_speed",
-                "wind_height",
-                "wind_max_direction_compass_point",
-                "wind_max_direction_degrees",
-                "wind_max_speed",
-                "wind_max_time"
+                "wind_avg_direction_compass_point_3m",
+                "wind_avg_direction_degrees_3m",
+                "wind_avg_speed_3m",
+                "wind_max_direction_compass_point_3m",
+                "wind_max_direction_degrees_3m",
+                "wind_max_speed_3m",
+                "wind_max_time_3m",
+                "wind_max_date_3m",
+                "wind_max_time_of_day_3m",
+                "wind_avg_direction_compass_point_10m",
+                "wind_avg_direction_degrees_10m",
+                "wind_avg_speed_10m",
+                "wind_max_direction_compass_point_10m",
+                "wind_max_direction_degrees_10m",
+                "wind_max_speed_10m",
+                "wind_max_time_10m",
+                "wind_max_date_10m",
+                "wind_max_time_of_day_10m"
               )
             )
             expect_type(x$station_code, "integer")
@@ -268,8 +317,25 @@ test_that("get_dpird_summaries() returns hourly values",
             expect_type(x$day, "integer")
             expect_type(x$hour, "integer")
             expect_s3_class(x$date, "POSIXct")
-            expect_s3_class(x$wind_max_time, "POSIXct")
+            expect_s3_class(x$wind_max_time_3m, "POSIXct")
+            expect_s3_class(x$wind_max_time_10m, "POSIXct")
           })
+
+test_that("padding missing wind heights preserves integer columns", {
+  x <- data.table::data.table(
+    station_code = factor("BI"),
+    station_name = "Binnu",
+    year = 2025L,
+    wind_height = 3L,
+    wind_max_direction_degrees = 180L,
+    wind_max_speed = 12.3
+  )
+
+  out <- weatherOz:::.widen_wind_height_cols(x)
+
+  expect_type(out$wind_max_direction_degrees_3m, "integer")
+  expect_type(out$wind_max_direction_degrees_10m, "integer")
+})
 
 ## 30min ----
 
@@ -287,7 +353,7 @@ test_that("get_dpird_summaries() returns 30min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(4L, 18L))
+            expect_identical(dim(x), c(2L, 28L))
             expect_named(
               x,
               c(
@@ -301,14 +367,24 @@ test_that("get_dpird_summaries() returns 30min values",
                 "hour",
                 "minute",
                 "date",
-                "wind_avg_direction_compass_point",
-                "wind_avg_direction_degrees",
-                "wind_avg_speed",
-                "wind_height",
-                "wind_max_direction_compass_point",
-                "wind_max_direction_degrees",
-                "wind_max_speed",
-                "wind_max_time"
+                "wind_avg_direction_compass_point_3m",
+                "wind_avg_direction_degrees_3m",
+                "wind_avg_speed_3m",
+                "wind_max_direction_compass_point_3m",
+                "wind_max_direction_degrees_3m",
+                "wind_max_speed_3m",
+                "wind_max_time_3m",
+                "wind_max_date_3m",
+                "wind_max_time_of_day_3m",
+                "wind_avg_direction_compass_point_10m",
+                "wind_avg_direction_degrees_10m",
+                "wind_avg_speed_10m",
+                "wind_max_direction_compass_point_10m",
+                "wind_max_direction_degrees_10m",
+                "wind_max_speed_10m",
+                "wind_max_time_10m",
+                "wind_max_date_10m",
+                "wind_max_time_of_day_10m"
               )
             )
             expect_type(x$station_code, "integer")
@@ -319,7 +395,8 @@ test_that("get_dpird_summaries() returns 30min values",
             expect_type(x$hour, "integer")
             expect_type(x$minute, "integer")
             expect_s3_class(x$date, "POSIXct")
-            expect_s3_class(x$wind_max_time, "POSIXct")
+            expect_s3_class(x$wind_max_time_3m, "POSIXct")
+            expect_s3_class(x$wind_max_time_10m, "POSIXct")
           })
 
 ## 15min ----
@@ -340,7 +417,7 @@ test_that("get_dpird_summaries() returns 15min values",
               )
             })
             expect_s3_class(x, "data.table")
-            expect_identical(dim(x), c(8L, 18L))
+            expect_identical(dim(x), c(4L, 28L))
             expect_named(
               x,
               c(
@@ -354,14 +431,24 @@ test_that("get_dpird_summaries() returns 15min values",
                 "hour",
                 "minute",
                 "date",
-                "wind_avg_direction_compass_point",
-                "wind_avg_direction_degrees",
-                "wind_avg_speed",
-                "wind_height",
-                "wind_max_direction_compass_point",
-                "wind_max_direction_degrees",
-                "wind_max_speed",
-                "wind_max_time"
+                "wind_avg_direction_compass_point_3m",
+                "wind_avg_direction_degrees_3m",
+                "wind_avg_speed_3m",
+                "wind_max_direction_compass_point_3m",
+                "wind_max_direction_degrees_3m",
+                "wind_max_speed_3m",
+                "wind_max_time_3m",
+                "wind_max_date_3m",
+                "wind_max_time_of_day_3m",
+                "wind_avg_direction_compass_point_10m",
+                "wind_avg_direction_degrees_10m",
+                "wind_avg_speed_10m",
+                "wind_max_direction_compass_point_10m",
+                "wind_max_direction_degrees_10m",
+                "wind_max_speed_10m",
+                "wind_max_time_10m",
+                "wind_max_date_10m",
+                "wind_max_time_of_day_10m"
               )
             )
             expect_type(x$station_code, "integer")
@@ -372,5 +459,6 @@ test_that("get_dpird_summaries() returns 15min values",
             expect_type(x$hour, "integer")
             expect_type(x$minute, "integer")
             expect_s3_class(x$date, "POSIXct")
-            expect_s3_class(x$wind_max_time, "POSIXct")
+            expect_s3_class(x$wind_max_time_3m, "POSIXct")
+            expect_s3_class(x$wind_max_time_10m, "POSIXct")
           })

@@ -80,34 +80,34 @@ names(perth_forecast)
 head(perth_forecast$data)
 #>                   time air_temperature relative_humidity wind_speed
 #>                 <POSc>           <num>             <num>      <num>
-#> 1: 2025-11-05 19:00:00            23.5              51.8        2.1
-#> 2: 2025-11-05 20:00:00            23.6              52.5        3.2
-#> 3: 2025-11-05 21:00:00            23.0              54.4        3.5
-#> 4: 2025-11-05 22:00:00            22.3              58.5        4.4
-#> 5: 2025-11-05 23:00:00            22.7              57.3        3.1
-#> 6: 2025-11-06 00:00:00            23.5              53.5        2.3
+#> 1: 2026-02-05 19:00:00            27.2              31.0        3.2
+#> 2: 2026-02-05 20:00:00            29.6              26.4        2.9
+#> 3: 2026-02-05 21:00:00            31.7              22.2        2.8
+#> 4: 2026-02-05 22:00:00            33.3              18.9        3.3
+#> 5: 2026-02-05 23:00:00            34.3              16.8        4.6
+#> 6: 2026-02-06 00:00:00            34.0              17.6        5.5
 #>    wind_from_direction cloud_area_fraction air_pressure_at_sea_level
 #>                  <num>               <num>                     <num>
-#> 1:               280.5                60.2                    1004.0
-#> 2:               288.2                73.4                    1003.4
-#> 3:               263.2                82.0                    1002.9
-#> 4:               195.3                98.4                    1003.0
-#> 5:               184.0               100.0                    1002.3
-#> 6:               185.8               100.0                    1001.9
-#>    precipitation_amount          symbol_code
-#>                   <num>               <char>
-#> 1:                  0.2 lightrainshowers_day
-#> 2:                  0.7      rainshowers_day
-#> 3:                  1.2 heavyrainshowers_day
-#> 4:                  0.0               cloudy
-#> 5:                  0.0     partlycloudy_day
-#> 6:                  0.0     partlycloudy_day
+#> 1:               107.3                   0                    1019.4
+#> 2:               116.3                   0                    1018.4
+#> 3:               121.9                   0                    1017.2
+#> 4:               133.0                   0                    1016.1
+#> 5:               153.8                   0                    1015.2
+#> 6:               183.7                   0                    1014.4
+#>    precipitation_amount  symbol_code
+#>                   <num>       <char>
+#> 1:                    0 clearsky_day
+#> 2:                    0 clearsky_day
+#> 3:                    0 clearsky_day
+#> 4:                    0 clearsky_day
+#> 5:                    0 clearsky_day
+#> 6:                    0 clearsky_day
 
 # Check metadata
 perth_forecast$metadata$status_code
 #> [1] 200
 perth_forecast$metadata$expires
-#> [1] "2025-11-05 11:37:56 AWST"
+#> [1] "2026-02-05 12:08:54 AWST"
 ```
 
 ### Example 2: Understanding the Metadata
@@ -126,15 +126,15 @@ forecast <- get_metno_forecast(
 
 # When was this forecast retrieved?
 forecast$metadata$retrieved_at
-#> [1] "2025-11-05 11:06:39 AWST"
+#> [1] "2026-02-05 11:43:11 AWST"
 
 # When does this forecast expire (for caching purposes)?
 forecast$metadata$expires
-#> [1] "2025-11-05 11:37:56 AWST"
+#> [1] "2026-02-05 12:08:52 AWST"
 
 # When was the forecast last modified at the source?
 forecast$metadata$last_modified
-#> [1] "2025-11-05 11:06:39 AWST"
+#> [1] "2026-02-05 11:37:48 AWST"
 ```
 
 ### Example 3: Working With Hourly Data
@@ -164,7 +164,7 @@ next_24h <- hourly_data[1:24, ]
 
 # Temperature range
 range(next_24h$air_temperature, na.rm = TRUE)
-#> [1]  4.8 20.0
+#> [1] 14.1 33.5
 
 # Total precipitation expected
 sum(next_24h$precipitation_amount, na.rm = TRUE)
@@ -172,7 +172,7 @@ sum(next_24h$precipitation_amount, na.rm = TRUE)
 
 # Maximum wind speed
 max(next_24h$wind_speed, na.rm = TRUE)
-#> [1] 6.6
+#> [1] 5.8
 ```
 
 We can visualise the hourly forecast for the next 48 hours.
@@ -246,33 +246,33 @@ hobart_daily <- get_metno_daily_forecast(
 )
 
 hobart_daily
-#>          date min_temperature max_temperature total_precipitation
-#>        <Date>           <num>           <num>               <num>
-#> 1: 2025-11-06             8.9            13.8                 0.5
-#> 2: 2025-11-07            10.5            17.8                 4.7
-#> 3: 2025-11-08             7.4            10.9                14.8
-#> 4: 2025-11-09             7.9            11.9                 0.7
-#> 5: 2025-11-10             8.5            14.6                 0.2
-#> 6: 2025-11-11             9.6            16.1                 5.2
-#> 7: 2025-11-12             3.4             9.3                12.6
-#>    avg_wind_speed max_wind_speed avg_relative_humidity avg_pressure
-#>             <num>          <num>                 <num>        <num>
-#> 1:       4.890476            7.5              71.20000     1005.024
-#> 2:       4.283333            8.4              75.60000     1007.700
-#> 3:       6.615789            8.3              95.75263     1008.732
-#> 4:       3.500000            5.0              68.07500     1013.850
-#> 5:       3.000000            4.7              68.35000     1012.475
-#> 6:       2.750000            5.3              71.22500     1010.150
-#> 7:       2.700000            3.6              94.02500     1007.675
-#>    avg_cloud_fraction dominant_weather_symbol
-#>                 <num>                  <char>
-#> 1:           72.43333    lightrainshowers_day
-#> 2:           98.70000               heavyrain
-#> 3:          100.00000               heavyrain
-#> 4:           51.95000               lightrain
-#> 5:           81.62500                  cloudy
-#> 6:           98.82500                    rain
-#> 7:           82.02500               heavyrain
+#>          date min_temperature max_temperature total_precipitation avg_wind_speed
+#>        <Date>           <num>           <num>               <num>          <num>
+#> 1: 2026-02-06            12.7            18.1                 0.0       4.452381
+#> 2: 2026-02-07            13.7            20.7                 0.0       4.095833
+#> 3: 2026-02-08            14.6            18.6                 2.0       4.126316
+#> 4: 2026-02-09            14.0            23.2                 0.1       1.575000
+#> 5: 2026-02-10            13.4            20.3                 0.4       1.775000
+#> 6: 2026-02-11            15.0            20.2                 0.2       2.600000
+#> 7: 2026-02-12            11.3            22.4                 0.5       5.150000
+#>    max_wind_speed avg_relative_humidity avg_pressure avg_cloud_fraction
+#>             <num>                 <num>        <num>              <num>
+#> 1:            6.1              61.71429     1015.738           96.99524
+#> 2:            5.9              66.65000     1013.958           92.57917
+#> 3:            6.0              85.05263     1018.721          100.00000
+#> 4:            2.9              69.22500     1014.350           46.10000
+#> 5:            3.3              81.15000     1013.625           95.10000
+#> 6:            3.8              83.75000     1009.800           81.45000
+#> 7:            5.8              62.77500      995.050           60.35000
+#>    dominant_weather_symbol
+#>                     <char>
+#> 1:                  cloudy
+#> 2:                  cloudy
+#> 3:               lightrain
+#> 4:                  cloudy
+#> 5:        partlycloudy_day
+#> 6:                  cloudy
+#> 7:                  cloudy
 ```
 
 Visualise the 7-day forecast with temperature ranges and precipitation.
@@ -352,9 +352,9 @@ day1_hourly <- hourly$data[as.Date(time) == first_day, ]
 cat("Day 1 from hourly data:\n")
 #> Day 1 from hourly data:
 cat("  Min temp:", min(day1_hourly$air_temperature, na.rm = TRUE), "°C\n")
-#>   Min temp: 11.1 °C
+#>   Min temp: 16.3 °C
 cat("  Max temp:", max(day1_hourly$air_temperature, na.rm = TRUE), "°C\n")
-#>   Max temp: 17.3 °C
+#>   Max temp: 30.2 °C
 cat("  Total precip:", sum(day1_hourly$precipitation_amount, na.rm = TRUE), "mm\n")
 #>   Total precip: 0 mm
 
@@ -363,9 +363,9 @@ cat("\nDay 1 from daily aggregation:\n")
 #> 
 #> Day 1 from daily aggregation:
 cat("  Min temp:", daily$min_temperature[1], "°C\n")
-#>   Min temp: 11.1 °C
+#>   Min temp: 14.7 °C
 cat("  Max temp:", daily$max_temperature[1], "°C\n")
-#>   Max temp: 17.3 °C
+#>   Max temp: 30.2 °C
 cat("  Total precip:", daily$total_precipitation[1], "mm\n")
 #>   Total precip: 0 mm
 ```
@@ -434,22 +434,22 @@ combined <- rbind(historical_clean, forecast_clean)
 combined[(.N - 15):.N, ]
 #>           date min_temp max_temp precipitation       data_source
 #>         <Date>    <num>    <num>         <num>            <char>
-#>  1: 2025-10-29     12.8     25.1          34.0 SILO (historical)
-#>  2: 2025-10-30     15.0     27.9           0.0 SILO (historical)
-#>  3: 2025-10-31     16.4     29.2           0.0 SILO (historical)
-#>  4: 2025-11-01     16.9     29.5           2.1 SILO (historical)
-#>  5: 2025-11-02     16.1     31.4           4.4 SILO (historical)
-#>  6: 2025-11-03     18.9     31.5           0.0 SILO (historical)
-#>  7: 2025-11-04     16.2     25.7           2.0 SILO (historical)
-#>  8: 2025-11-06     10.7     23.9           0.0 met.no (forecast)
-#>  9: 2025-11-07     12.0     23.4           0.0 met.no (forecast)
-#> 10: 2025-11-08     13.4     24.6           0.0 met.no (forecast)
-#> 11: 2025-11-09     17.7     29.1           5.5 met.no (forecast)
-#> 12: 2025-11-10     15.4     21.0           7.5 met.no (forecast)
-#> 13: 2025-11-11     11.0     18.6           3.5 met.no (forecast)
-#> 14: 2025-11-12     11.2     23.7           0.0 met.no (forecast)
-#> 15: 2025-11-13     15.6     26.5           0.0 met.no (forecast)
-#> 16: 2025-11-14     16.9     23.0           1.1 met.no (forecast)
+#>  1: 2026-01-29     15.8     28.4           0.0 SILO (historical)
+#>  2: 2026-01-30     16.1     28.5           0.0 SILO (historical)
+#>  3: 2026-01-31     18.3     28.4           0.0 SILO (historical)
+#>  4: 2026-02-01     17.3     34.3           0.0 SILO (historical)
+#>  5: 2026-02-02     20.8     30.0           0.0 SILO (historical)
+#>  6: 2026-02-03     15.7     25.8           0.0 SILO (historical)
+#>  7: 2026-02-04     14.8     27.4           0.0 SILO (historical)
+#>  8: 2026-02-06     15.6     28.7           0.0 met.no (forecast)
+#>  9: 2026-02-07     15.7     28.3           0.0 met.no (forecast)
+#> 10: 2026-02-08     15.8     27.8           0.2 met.no (forecast)
+#> 11: 2026-02-09     17.7     28.2           1.0 met.no (forecast)
+#> 12: 2026-02-10     19.6     27.5           1.7 met.no (forecast)
+#> 13: 2026-02-11     19.6     27.3          30.0 met.no (forecast)
+#> 14: 2026-02-12     21.4     30.5           1.1 met.no (forecast)
+#> 15: 2026-02-13     20.9     30.8          11.2 met.no (forecast)
+#> 16: 2026-02-14     18.1     23.1          33.5 met.no (forecast)
 ```
 
 Check the transition from historical data to forecast.
@@ -484,6 +484,8 @@ ggplot(combined, aes(x = date)) +
     legend.position = "bottom",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+#> Warning in scale_x_date(): A <numeric> value was passed to a Date scale.
+#> ℹ The value was converted to a <Date> object.
 ```
 
 <div class="figure" style="text-align: center">
@@ -545,28 +547,29 @@ combined <- rbind(dpird_clean, metno_clean)
 combined
 #>           date min_temp max_temp precipitation       data_source
 #>         <Date>    <num>    <num>         <num>            <char>
-#>  1: 2025-10-22      7.6     26.2           0.0  DPIRD (observed)
-#>  2: 2025-10-23     10.7     25.3           0.0  DPIRD (observed)
-#>  3: 2025-10-24      7.5     21.5           0.4  DPIRD (observed)
-#>  4: 2025-10-25      8.5     23.9           1.2  DPIRD (observed)
-#>  5: 2025-10-26      6.4     26.0           0.0  DPIRD (observed)
-#>  6: 2025-10-27      6.9     28.7           0.0  DPIRD (observed)
-#>  7: 2025-10-28      8.0     35.7           0.0  DPIRD (observed)
-#>  8: 2025-10-29     12.2     23.1           0.0  DPIRD (observed)
-#>  9: 2025-10-30     10.3     24.3           0.8  DPIRD (observed)
-#> 10: 2025-10-31      7.0     26.9           0.0  DPIRD (observed)
-#> 11: 2025-11-01     13.4     24.1           0.0  DPIRD (observed)
-#> 12: 2025-11-02      4.9     27.1           0.0  DPIRD (observed)
-#> 13: 2025-11-03      9.0     31.9           0.0  DPIRD (observed)
-#> 14: 2025-11-04     16.7     33.6           0.0  DPIRD (observed)
-#> 15: 2025-11-06     13.6     25.6           3.2 met.no (forecast)
-#> 16: 2025-11-07     12.5     25.0           0.0 met.no (forecast)
-#> 17: 2025-11-08     13.3     23.7           0.0 met.no (forecast)
-#> 18: 2025-11-09     15.7     26.4           0.0 met.no (forecast)
-#> 19: 2025-11-10     16.5     29.0           0.0 met.no (forecast)
-#> 20: 2025-11-11     14.8     29.3           0.0 met.no (forecast)
-#> 21: 2025-11-12     17.9     30.2           0.0 met.no (forecast)
+#>  1: 2026-01-22     20.3     40.8             0  DPIRD (observed)
+#>  2: 2026-01-23     16.7     31.6             0  DPIRD (observed)
+#>  3: 2026-01-24     15.2     34.9             0  DPIRD (observed)
+#>  4: 2026-01-25     14.1     30.3             0  DPIRD (observed)
+#>  5: 2026-01-26     16.7     27.5             0  DPIRD (observed)
+#>  6: 2026-01-27     11.8     29.5             0  DPIRD (observed)
+#>  7: 2026-01-28     13.9     33.5             0  DPIRD (observed)
+#>  8: 2026-01-29     15.7     38.5             0  DPIRD (observed)
+#>  9: 2026-01-30     19.9     41.9             0  DPIRD (observed)
+#> 10: 2026-01-31     18.8     37.2             0  DPIRD (observed)
+#> 11: 2026-02-01     18.0     39.0             0  DPIRD (observed)
+#> 12: 2026-02-02     21.6     42.2             0  DPIRD (observed)
+#> 13: 2026-02-03     21.7     37.6             0  DPIRD (observed)
+#> 14: 2026-02-04     16.1     32.1             0  DPIRD (observed)
+#> 15: 2026-02-06     17.1     32.7             0 met.no (forecast)
+#> 16: 2026-02-07     18.2     35.9             0 met.no (forecast)
+#> 17: 2026-02-08     20.7     35.9             0 met.no (forecast)
+#> 18: 2026-02-09     22.6     37.2             0 met.no (forecast)
+#> 19: 2026-02-10     25.5     41.5             0 met.no (forecast)
+#> 20: 2026-02-11     17.1     28.3             0 met.no (forecast)
+#> 21: 2026-02-12     17.8     29.7             0 met.no (forecast)
 #>           date min_temp max_temp precipitation       data_source
+#>         <Date>    <num>    <num>         <num>            <char>
 ```
 
 ## Practical Use Case: Agricultural Planning
@@ -649,30 +652,31 @@ weather_data[, cumulative_balance := cumsum(water_balance)]
 weather_data[, .(date, max_temp, precipitation, cumulative_balance)]
 #>           date max_temp precipitation cumulative_balance
 #>         <Date>    <num>         <num>              <num>
-#>  1: 2025-10-22     37.1           0.0                0.0
-#>  2: 2025-10-23     40.0           0.0                0.0
-#>  3: 2025-10-24     40.4           0.0                0.0
-#>  4: 2025-10-25     38.7           0.5                0.5
-#>  5: 2025-10-26     40.3          13.6               14.1
-#>  6: 2025-10-27     36.7           0.0               14.1
-#>  7: 2025-10-28     32.9           5.3               19.4
-#>  8: 2025-10-29     35.5           0.0               19.4
-#>  9: 2025-10-30     36.8           0.1               19.5
-#> 10: 2025-10-31     38.0           0.0               19.5
-#> 11: 2025-11-01     37.6           0.0               19.5
-#> 12: 2025-11-02     39.4          10.3               29.8
-#> 13: 2025-11-03     36.4           0.4               30.2
-#> 14: 2025-11-04     32.9           0.4               30.6
-#> 15: 2025-11-06     32.6           0.0               30.6
-#> 16: 2025-11-07     33.3           0.0               30.6
-#> 17: 2025-11-08     32.5           0.0               30.6
-#> 18: 2025-11-09     35.8           0.0               30.6
-#> 19: 2025-11-10     31.1          11.7               42.3
-#> 20: 2025-11-11     31.2           0.3               42.6
-#> 21: 2025-11-12     31.5           0.0               42.6
-#> 22: 2025-11-13     32.4           7.9               50.5
-#> 23: 2025-11-14     29.3           1.2               51.7
+#>  1: 2026-01-22     32.9          39.2               39.2
+#>  2: 2026-01-23     35.1           0.0               39.2
+#>  3: 2026-01-24     33.8           0.0               39.2
+#>  4: 2026-01-25     35.3           0.0               39.2
+#>  5: 2026-01-26     34.8           0.0               39.2
+#>  6: 2026-01-27     36.2           0.0               39.2
+#>  7: 2026-01-28     35.8           0.0               39.2
+#>  8: 2026-01-29     34.9           0.0               39.2
+#>  9: 2026-01-30     33.8           0.0               39.2
+#> 10: 2026-01-31     35.5           0.0               39.2
+#> 11: 2026-02-01     37.6           0.0               39.2
+#> 12: 2026-02-02     39.0           0.0               39.2
+#> 13: 2026-02-03     30.3           1.3               40.5
+#> 14: 2026-02-04     33.0           0.0               40.5
+#> 15: 2026-02-06     32.9           0.0               40.5
+#> 16: 2026-02-07     33.8           0.0               40.5
+#> 17: 2026-02-08     32.8           0.6               41.1
+#> 18: 2026-02-09     33.1           0.3               41.4
+#> 19: 2026-02-10     34.0           1.2               42.6
+#> 20: 2026-02-11     35.7           6.1               48.7
+#> 21: 2026-02-12     35.6          35.6               84.3
+#> 22: 2026-02-13     30.3           5.0               89.3
+#> 23: 2026-02-14     32.6          18.1              107.4
 #>           date max_temp precipitation cumulative_balance
+#>         <Date>    <num>         <num>              <num>
 ```
 
 Visualise temperature trends and identify heat stress risk days.
@@ -724,6 +728,8 @@ ggplot(weather_data, aes(x = date)) +
     legend.position = "bottom",
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
+#> Warning in scale_x_date(): A <numeric> value was passed to a Date scale.
+#> ℹ The value was converted to a <Date> object.
 ```
 
 <div class="figure" style="text-align: center">
@@ -759,16 +765,16 @@ daily_aggregated <- metno_resample_data_table(hourly_data, freq = "daily")
 # View the structure
 str(daily_aggregated)
 #> Classes 'data.table' and 'data.frame':	10 obs. of  10 variables:
-#>  $ date                   : Date, format: "2025-11-06" "2025-11-07" ...
-#>  $ min_temperature        : num  12.6 16.8 20.5 16.1 14.1 13.4 16.1 14.4 16.8 17.2
-#>  $ max_temperature        : num  23.9 22.2 24.1 29 16.8 18.7 21.9 21.7 27.2 22.6
-#>  $ total_precipitation    : num  0 0 0 11.9 0.3 0 0 0 0 0
-#>  $ avg_wind_speed         : num  4.11 7.2 9.49 6.1 5.58 ...
-#>  $ max_wind_speed         : num  7.4 10.6 12.6 7.2 8.7 3.8 6.5 4.9 6.9 5.8
-#>  $ avg_relative_humidity  : num  62.2 65.6 70.8 72.6 70.2 ...
-#>  $ avg_pressure           : num  1016 1015 1007 1005 1016 ...
-#>  $ avg_cloud_fraction     : num  1.75 76.49 80.39 36.33 45.9 ...
-#>  $ dominant_weather_symbol: chr  "fair_night" "partlycloudy_day" "cloudy" "heavyrainshowers_day" ...
+#>  $ date                   : Date, format: "2026-02-06" "2026-02-07" ...
+#>  $ min_temperature        : num  20.8 22 23.4 22 21.5 20.6 23.6 21.3 20.8 20.7
+#>  $ max_temperature        : num  31.4 27.3 28.2 25 23.1 24.5 27.1 24.3 22.2 23.1
+#>  $ total_precipitation    : num  0 0 0 11.8 24.6 0.1 0 5.6 0.2 1.3
+#>  $ avg_wind_speed         : num  7.85 4.29 4.75 2.75 2.8 ...
+#>  $ max_wind_speed         : num  11.3 8.6 6.3 4.1 3.8 4.1 5.6 7 5.1 5.5
+#>  $ avg_relative_humidity  : num  75.3 82.3 80.9 72 92.9 ...
+#>  $ avg_pressure           : num  1017 1016 1016 1016 1011 ...
+#>  $ avg_cloud_fraction     : num  41.1 54 98.5 99.8 96.3 ...
+#>  $ dominant_weather_symbol: chr  "cloudy" "fog" "partlycloudy_day" "heavyrain" ...
 #>  - attr(*, ".internal.selfref")=<externalptr>
 
 # Compare with built-in function
@@ -808,9 +814,7 @@ symbols_48h <- unique(forecast$data[1:48, symbol_code])
 cat("Weather symbols predicted in next 48 hours:\n")
 #> Weather symbols predicted in next 48 hours:
 print(symbols_48h)
-#> [1] "cloudy"           "partlycloudy_day" "clearsky_night"   "fair_night"      
-#> [5] "fair_day"         "clearsky_day"     "lightrain"        "rain"            
-#> [9] "heavyrain"
+#> [1] "partlycloudy_day" "fair_day"         "clearsky_day"     "clearsky_night"
 
 # Get daily forecast to see dominant symbols
 daily <- get_metno_daily_forecast(
@@ -824,11 +828,11 @@ daily <- get_metno_daily_forecast(
 daily[, .(date, dominant_weather_symbol)]
 #>          date dominant_weather_symbol
 #>        <Date>                  <char>
-#> 1: 2025-11-06                  cloudy
-#> 2: 2025-11-07               heavyrain
-#> 3: 2025-11-08               heavyrain
-#> 4: 2025-11-09                    rain
-#> 5: 2025-11-10        partlycloudy_day
+#> 1: 2026-02-06        partlycloudy_day
+#> 2: 2026-02-07            clearsky_day
+#> 3: 2026-02-08      partlycloudy_night
+#> 4: 2026-02-09        partlycloudy_day
+#> 5: 2026-02-10      partlycloudy_night
 ```
 
 ## Appendix: Field Descriptions
