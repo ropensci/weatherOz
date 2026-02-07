@@ -48,9 +48,6 @@ utils::globalVariables(c(
   "wind.height2", # <.parse_minute>
   "period.from", # <get_dpird_summaries>
   "period.to", # <get_dpird_summaries>
-  "wind_max_date", # <get_dpird_summaries>
-  "wind_max_time", # <get_dpird_summaries>
-  "wind_max_time_of_day", # <get_dpird_summaries>
   "station_code", # <.parse_summary>
   "station_name", # <.parse_summary>
   ".row_id", # <.parse_summary>
@@ -91,6 +88,9 @@ utils::globalVariables(c(
   "values", # <.check_silo_values>
   "start_time_local", # <.split_time_cols>
   "end_time_local", # <.split_time_cols>
+  "wind_max_date", # <.prepare_wind_time_columns>
+  "wind_max_time", # <.prepare_wind_time_columns>
+  "wind_max_time_of_day", # <.prepare_wind_time_columns>
   "station_code", # <.query_silo_api>
   "station_name", # <.query_silo_api>
   "owner", # <.query_silo_api>

@@ -179,11 +179,11 @@ monthly or yearly data from \acronym{DPIRD} with \acronym{SILO}.
 # Use default for end date (current system date) to get rainfall
 
 wd <- get_dpird_summaries(
-   station_code = "CL001",
-   start_date = "20171028",
-   api_key = "your_api_key",
-   interval = "yearly",
-   values = "rainfall"
+  station_code = "CL001",
+  start_date = "20171028",
+  api_key = "your_api_key",
+  interval = "yearly",
+  values = "rainfall"
 )
 
 # Only for wind and erosion conditions for daily time interval
@@ -199,7 +199,7 @@ wd <- get_dpird_summaries(
     "erosionCondition",
     "erosionConditionMinutes",
     "erosionConditionStartTime"
-    )
+  )
 )
 }
 }
