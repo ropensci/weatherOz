@@ -421,8 +421,11 @@ metno_resample_data_table <- function(dt_data, freq) {
   }
 
   # ensure times are in AWST (Australia/Perth)
-  dt_data[, time := lubridate::force_tz(time, tzone = "UTC")]
-  dt_data[, time := lubridate::with_tz(time, tzone = "Australia/Perth")]
+  # Data from get_metno_forecast() is already in Australia/Perth timezone
+  # Only convert if it's not already in the correct timezone
+  if (!identical(attr(dt_data$time, "tzone"), "Australia/Perth")) {
+    dt_data[, time := lubridate::with_tz(time, tzone = "Australia/Perth")]
+  }
 
   freq_map <- list(
     "hourly" = "hour",
