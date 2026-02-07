@@ -1,4 +1,3 @@
-
 #' Get DPIRD Weather Data in Summarised Formats
 #'
 #' Fetch nicely formatted individual station weather summaries from the
@@ -31,7 +30,7 @@
 #'   the range query in the format  \dQuote{yyyy-mm-dd} (ISO8601).  Data
 #'   returned is inclusive of this date.  Defaults to the current system date.
 #' @param interval A `character` string that indicates the time interval to
-#`   summarise over.  Default is `daily`; others are `15min`, `30min`, `hourly`,
+# `   summarise over.  Default is `daily`; others are `15min`, `30min`, `hourly`,
 #'   `monthly` or `yearly`.  For intervals shorter than 1 day, the time period
 #'   covered will be midnight to midnight, with the end_date time interval being
 #'   before midnight - hour/minute values are for the end of the time period.
@@ -161,11 +160,11 @@
 #' # Use default for end date (current system date) to get rainfall
 #'
 #' wd <- get_dpird_summaries(
-#'    station_code = "CL001",
-#'    start_date = "20171028",
-#'    api_key = "your_api_key",
-#'    interval = "yearly",
-#'    values = "rainfall"
+#'   station_code = "CL001",
+#'   start_date = "20171028",
+#'   api_key = "your_api_key",
+#'   interval = "yearly",
+#'   values = "rainfall"
 #' )
 #'
 #' # Only for wind and erosion conditions for daily time interval
@@ -181,7 +180,7 @@
 #'     "erosionCondition",
 #'     "erosionConditionMinutes",
 #'     "erosionConditionStartTime"
-#'     )
+#'   )
 #' )
 #' }
 #' @autoglobal
@@ -190,15 +189,16 @@
 get_dpird_summaries <- function(station_code,
                                 start_date,
                                 end_date = Sys.Date(),
-                                interval = c("daily",
-                                             "15min",
-                                             "30min",
-                                             "hourly",
-                                             "monthly",
-                                             "yearly"),
+                                interval = c(
+                                  "daily",
+                                  "15min",
+                                  "30min",
+                                  "hourly",
+                                  "monthly",
+                                  "yearly"
+                                ),
                                 values = "all",
                                 api_key = get_key(service = "DPIRD")) {
-
   .check_not_example_api_key(api_key)
   .is_valid_dpird_api_key(api_key)
 
@@ -206,36 +206,7 @@ get_dpird_summaries <- function(station_code,
   # stations to give users a better experience. It slows down the first query
   # but avoids confusion when no values are returned for a station that exists
   # but the date requested pre-dates the station data
-  if (Sys.info()['sysname'] == "Windows") {
-    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "\\")
-
-    if (!file.exists(metadata_file)) {
-      saveRDS(
-        get_stations_metadata(
-          which_api = "dpird",
-          api_key = api_key,
-          include_closed = TRUE
-        ),
-        file = metadata_file,
-        compress = FALSE
-      )
-    }
-
-  } else {
-    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
-
-    if (!file.exists(metadata_file)) {
-      saveRDS(
-        get_stations_metadata(
-          which_api = "dpird",
-          api_key = api_key,
-          include_closed = TRUE
-        ),
-        file = metadata_file,
-        compress = FALSE
-      )
-    }
-  }
+  metadata_file <- .load_dpird_metadata_file(api_key)
 
   # simplify using the metadata to fetch weather data by converting factors to
   # numeric values
@@ -247,22 +218,11 @@ get_dpird_summaries <- function(station_code,
     stop(call. = FALSE, "Please supply a valid `station_code`.")
   }
 
-  if (missing(start_date))
+  if (missing(start_date)) {
     stop(call. = FALSE, "Please supply a valid start date as `start_date`.")
-
-  if (any(values == "all")) {
-    values <-
-      c("stationCode",
-        "stationName",
-        "period",
-        weatherOz::dpird_summary_values)
-  } else {
-    if (any(values %notin% weatherOz::dpird_summary_values)) {
-      stop(call. = FALSE, "You have specified invalid weather values.")
-    }
-    values <-
-      c("stationCode", "stationName", "period", values)
   }
+
+  values <- .validate_and_expand_dpird_values(values)
 
   # validate user provided dates
   start_date <- .check_date(start_date)
@@ -270,125 +230,15 @@ get_dpird_summaries <- function(station_code,
   .check_date_order(start_date, end_date)
   .check_earliest_available_dpird(station_code, start_date, metadata_file)
 
-  # if interval is not set, default to "daily", else check input to be sure
-  approved_intervals <- c("daily",
-                          "15min",
-                          "30min",
-                          "hourly",
-                          "monthly",
-                          "yearly")
+  validated <- .validate_dpird_interval(interval, values)
+  checked_interval <- validated$interval
+  values <- validated$values
 
-  if (identical(interval, approved_intervals)) {
-    interval <- "daily"
-  }
-
-  likely_interval <- agrep(pattern = interval, x = approved_intervals)
-
-  # Match time interval query to user requests
-  checked_interval <-
-    try(match.arg(approved_intervals[likely_interval],
-                  approved_intervals,
-                  several.ok = FALSE),
-        silent = TRUE)
-
-  # TODO
-  # Remove this once Phil fix the daily values names
-  # Check if the interval is "daily" and modify values accordingly
-  if (checked_interval == "daily") {
-    values <-
-      setdiff(values,
-              c("etoShortCrop",
-                "etoTallCrop")
-      )
-  } else {
-    values <-
-      setdiff(values,
-              c("evapotranspirationShortCrop",
-                "evapotranspirationTallCrop",
-                "panEvaporation12AM")
-      )
-  }
-
-  # Error if summary interval is not available. API only allows for daily,
-  # 15 min, 30 min, hourly, monthly or yearly
-  if (methods::is(checked_interval, "try-error")) {
-    stop(call. = FALSE, "\"", interval, "\" is not a supported time interval")
-  }
-
-  request_interval <- lubridate::interval(start_date,
-                                          end_date,
-                                          tzone = "Australia/Perth")
-
-  # Stop if query is for 15 and 30 min intervals and date is more than one
-  # year in the past
-  this_year <- lubridate::year(lubridate::today())
-
-  if (checked_interval %in% c("15min", "30min") &
-      lubridate::year(start_date) <
-      this_year - 1 |
-      checked_interval %in% c("15min", "30min") &
-      lubridate::year(end_date) <
-      this_year - 1) {
-    stop(
-      call. = FALSE,
-      "Start date is too early. Data in 15 and 30 min intervals are only ",
-      "available from the the 1st day of ", this_year - 1, "."
-    )
-  }
-
-  # determine how many records are being requested. Default here is 'daily' as
-  # with default user arguments
-  total_records_req <- data.table::fcase(
-    checked_interval == "yearly",
-    floor(lubridate::time_length(request_interval, unit = "year") + 1),
-    checked_interval == "monthly",
-    floor(lubridate::time_length(request_interval, unit = "month") + 1),
-    checked_interval == "hourly",
-    floor(lubridate::time_length(request_interval, unit = "hour") + 1),
-    checked_interval == "30min",
-    floor((
-      lubridate::time_length(request_interval, unit = "hour")
-    ) + 1) * 2,
-    checked_interval == "15min",
-    floor((
-      lubridate::time_length(request_interval, unit = "hour")
-    ) + 1) * 4,
-    default = floor(lubridate::time_length(request_interval, unit = "day") + 1)
-  )
-
-  if (total_records_req < 1) {
-    stop(
-      call. = FALSE,
-      "You have submitted a query with 0 total records.\n",
-      "Please extend the dates requested."
-    )
-  }
+  total_records_req <- .calculate_dpird_request_records(start_date, end_date, checked_interval)
 
   # TODO: When Phil gets lat/lon values added to the summary results from the
   # API, remove this bit here and add lat/lon to the list of queried values
-  if (Sys.info()['sysname'] == "Windows") {
-    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "\\")
-
-    if (!file.exists(metadata_file)) {
-      saveRDS(
-        get_stations_metadata(which_api = "dpird", api_key = api_key),
-        file = metadata_file,
-        compress = FALSE
-      )
-    }
-
-  } else {
-    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
-
-    if (!file.exists(metadata_file)) {
-      saveRDS(
-        get_stations_metadata(which_api = "dpird", api_key = api_key),
-        file = metadata_file,
-        compress = FALSE
-      )
-    }
-  }
-
+  metadata_file <- .load_dpird_metadata_file(api_key)
   # END chunk to remove
 
   query_list <- .build_query(
@@ -581,7 +431,6 @@ get_dpird_summaries <- function(station_code,
     by.x = c("station_code", "station_name"),
     by.y = c("station_code", "station_name")
   )
-  # END chunk to remove
 
   data.table::setcolorder(out, order(names(out)))
 
@@ -591,31 +440,9 @@ get_dpird_summaries <- function(station_code,
   out <-
     .set_col_orders(.out = out, .checked_interval = checked_interval)
 
-  # Determine where wind max times include a time-of-day component before parsing.
-  wind_max_has_time <- NULL
-  if ("wind_max_time" %in% names(out)) {
-    wind_max_has_time <- grepl(":", out$wind_max_time)
-  }
-
-  # Parse all time-like columns using a robust helper that handles mixed formats.
-  time_cols <- grep("time", colnames(out), value = TRUE)
-  if (length(time_cols) > 0L) {
-    out[, (time_cols) := suppressMessages(lapply(
-      .SD,
-      .parse_dpird_time_col
-    )), .SDcols = time_cols]
-  }
-
-  # Derive date and time-of-day components for wind maxima per row; these will be
-  # widened later to per-height columns.
-  if (!is.null(wind_max_has_time) && "wind_max_time" %in% names(out)) {
-    out[, wind_max_date := as.Date(wind_max_time, tz = "Australia/West")]
-    out[, wind_max_time_of_day := ifelse(
-      wind_max_has_time & !is.na(wind_max_time),
-      format(wind_max_time, "%H:%M:%S", tz = "Australia/West"),
-      NA_character_
-    )]
-  }
+  # this function handles parsing time columns and deriving date/time-of-day
+  # components for wind maxima - see internal_functions.R
+  out <- .prepare_wind_time_columns(out)
 
   # Reshape wind variables from long format (one row per height) to wide format
   # (one row per period with separate _3m and _10m columns).
@@ -904,10 +731,12 @@ get_dpird_summaries <- function(station_code,
 
     .out[, period_minute := NULL]
     .out[, period_hour := NULL]
-    data.table::setorder(x = .out,
-                         cols = "period_year",
-                         "period_month",
-                         "period_day")
+    data.table::setorder(
+      x = .out,
+      cols = "period_year",
+      "period_month",
+      "period_day"
+    )
   } else if (.checked_interval == "hourly") {
     .out[, date := lubridate::ymd_h(
       sprintf(
@@ -936,14 +765,15 @@ get_dpird_summaries <- function(station_code,
     )
 
     .out[, period_minute := NULL]
-    data.table::setorder(x = .out,
-                         cols = "period_year",
-                         "period_month",
-                         "period_day",
-                         "period_hour")
-
+    data.table::setorder(
+      x = .out,
+      cols = "period_year",
+      "period_month",
+      "period_day",
+      "period_hour"
+    )
   } else if (.checked_interval == "30min" ||
-             .checked_interval == "15min") {
+    .checked_interval == "15min") {
     .out[, date := lubridate::ymd_hm(
       sprintf(
         "%s-%s-%s-%s-%s",
@@ -980,14 +810,16 @@ get_dpird_summaries <- function(station_code,
       "period_minute"
     )
   } else {
-    data.table::setcolorder(.out,
-                            c(
-                              "station_code",
-                              "station_name",
-                              "longitude",
-                              "latitude",
-                              "period_year"
-                            ))
+    data.table::setcolorder(
+      .out,
+      c(
+        "station_code",
+        "station_name",
+        "longitude",
+        "latitude",
+        "period_year"
+      )
+    )
     .out[, period_month := NULL]
     .out[, period_day := NULL]
     .out[, period_hour := NULL]

@@ -1,4 +1,3 @@
-
 #' Check User Input Dates for Validity
 #'
 #' @param x User entered date value
@@ -12,22 +11,25 @@
 .check_date <- function(x) {
   tryCatch(
     x <- lubridate::parse_date_time(x,
-                                    c(
-                                      "Ymd",
-                                      "dmY",
-                                      "mdY",
-                                      "BdY",
-                                      "Bdy",
-                                      "bdY",
-                                      "bdy"
-                                    ),
-                                    tz = Sys.timezone()),
+      c(
+        "Ymd",
+        "dmY",
+        "mdY",
+        "BdY",
+        "Bdy",
+        "bdY",
+        "bdy"
+      ),
+      tz = Sys.timezone()
+    ),
     warning = function(c) {
-      stop(call. = FALSE,
-           "\n",
-           x,
-           " is not in a valid date format. Please enter a valid date format.",
-           "\n")
+      stop(
+        call. = FALSE,
+        "\n",
+        x,
+        " is not in a valid date format. Please enter a valid date format.",
+        "\n"
+      )
     }
   )
   return(x)
@@ -45,8 +47,10 @@
 
 .check_date_order <- function(.start_date, .end_date) {
   if (.end_date < .start_date) {
-    stop(call. = FALSE,
-         "The start and end dates appear to be reversed.")
+    stop(
+      call. = FALSE,
+      "The start and end dates appear to be reversed."
+    )
   }
   if (.start_date > Sys.Date() || .end_date > Sys.Date()) {
     stop(
@@ -70,8 +74,10 @@
 #'
 .check_earliest_available_silo <- function(start_date) {
   if (start_date < lubridate::date("1889-01-01")) {
-    stop(call. = FALSE,
-         "The start date requested exceeds the earliest available data.")
+    stop(
+      call. = FALSE,
+      "The start date requested exceeds the earliest available data."
+    )
   }
 }
 
@@ -87,7 +93,7 @@
 .check_location_params <-
   function(.latitude, .longitude, .station_code) {
     if (((is.null(.latitude)) ||
-         (is.null(.longitude))) && (is.null(.station_code))) {
+      (is.null(.longitude))) && (is.null(.station_code))) {
       stop(
         call. = FALSE,
         "Provide valid `latitude` and `longitude` coordinates\n",
@@ -139,7 +145,8 @@
          An API key may be requested from DPIRD or for SILO/METNO you must use
          your e-mail address as an API key. See the help for the respective
          functions for more.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   return(invisible(NULL))
 }
@@ -153,17 +160,17 @@
 #' @noRd
 
 .is_valid_email_silo_api_key <- function(.api_key) {
-
   # regular expression to check
   pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
 
   if (grepl(pattern, as.character(.api_key), ignore.case = TRUE) &&
-      !is.null(.api_key)) {
+    !is.null(.api_key)) {
     return(invisible(NULL))
   } else {
     stop("For SILO requests you must use your e-mail address as an API key.
          You have not provided a valid email address.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 }
 
@@ -176,17 +183,17 @@
 #' @noRd
 
 .is_valid_email_metno_api_key <- function(.api_key) {
-
   # regular expression to check
   pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
 
   if (grepl(pattern, as.character(.api_key), ignore.case = TRUE) &&
-      !is.null(.api_key)) {
+    !is.null(.api_key)) {
     return(invisible(NULL))
   } else {
     stop("For METNO requests you must use your e-mail address as an API key.
          You have not provided a valid email address.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
 }
 
@@ -200,16 +207,16 @@
 #' @noRd
 
 .is_valid_dpird_api_key <- function(.api_key) {
-
   # regular expression to check
   pattern <- "\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>"
 
   if (grepl(pattern, as.character(.api_key), ignore.case = TRUE) &&
-      is.null(.api_key)) {
+    is.null(.api_key)) {
     stop("For DPIRD requests you must use your DPIRD provided API key.
          You (may) have provided your e-mail address, which is used
          for the SILO API instead.",
-         call. = FALSE)
+      call. = FALSE
+    )
   } else {
     return(invisible(NULL))
   }
@@ -253,9 +260,11 @@
     the_state <- state
     return(the_state)
   } else {
-    likely_states <- agrep(pattern = state,
-                           x = states,
-                           value = TRUE)
+    likely_states <- agrep(
+      pattern = state,
+      x = states,
+      value = TRUE
+    )
 
     if (length(likely_states) == 1) {
       the_state <- toupper(likely_states)
@@ -299,9 +308,11 @@
 
 .check_silo_values <- function(.values = values) {
   if (any(.values != "all") &&
-      any(.values %notin% names(weatherOz::silo_daily_values))) {
-    stop(call. = FALSE,
-         "You have specified invalid weather values.")
+    any(.values %notin% names(weatherOz::silo_daily_values))) {
+    stop(
+      call. = FALSE,
+      "You have specified invalid weather values."
+    )
   }
 
   if (any(.values == "all")) {
@@ -309,7 +320,7 @@
   } else {
     .v <-
       weatherOz::silo_daily_values[names(weatherOz::silo_daily_values) %in%
-                                     .values]
+        .values]
   }
   return(.v)
 }
@@ -396,9 +407,11 @@
   )
   state <- state_code[pmatch(state, state_names)]
 
-  if (anyNA(state))
+  if (anyNA(state)) {
     stop("Unable to determine state",
-         call. = FALSE)
+      call. = FALSE
+    )
+  }
 
   return(state)
 }
@@ -467,24 +480,27 @@
 #' @noRd
 
 .get_url <- function(remote_file) {
-
   op <- options(timeout = 600L)
   on.exit(options(op))
 
   bom_file <- file.path(tempdir(), "BOM_file.xml")
 
   try_GET <- function(x, ...) {
-    tryCatch({
-      utils::download.file(
-        destfile = bom_file,
-        url = x,
-        mode = "wb"
-      )
-    },
-    error = function(e)
-      conditionMessage(e),
-    warning = function(w)
-      conditionMessage(w))
+    tryCatch(
+      {
+        utils::download.file(
+          destfile = bom_file,
+          url = x,
+          mode = "wb"
+        )
+      },
+      error = function(e) {
+        conditionMessage(e)
+      },
+      warning = function(w) {
+        conditionMessage(w)
+      }
+    )
   }
 
   # a proper response will return a list class object
@@ -495,8 +511,10 @@
 
   # First check Internet connection
   if (!curl::has_internet()) {
-    stop(call. = FALSE,
-         "No Internet connection.")
+    stop(
+      call. = FALSE,
+      "No Internet connection."
+    )
   }
 
   resp <- try_GET(x = remote_file)
@@ -535,8 +553,8 @@
 
   # radius of earth
   12742 * asin(sqrt(`+`(
-    (sin(delta_lat / 2)) ^ 2,
-    cos(lat1) * cos(lat2) * (sin(delta_lon / 2)) ^ 2
+    (sin(delta_lat / 2))^2,
+    cos(lat1) * cos(lat2) * (sin(delta_lon / 2))^2
   )))
 }
 
@@ -553,17 +571,22 @@
 
 .set_snake_case_names <- function(x) {
   if (isFALSE(inherits(x, "data.table"))) {
-    stop(call. = FALSE,
-         "This function only works on `data.tables`.")
+    stop(
+      call. = FALSE,
+      "This function only works on `data.tables`."
+    )
   }
-  data.table::setnames(x, old = names(x),
-                       new = gsub(" ", "_", tolower(gsub(
-                         "(.)([A-Z])", "\\1 \\2",
-                         names(x)
-                       ))))
   data.table::setnames(x,
-                       old = names(x),
-                       new = gsub(".", "_", names(x), fixed = TRUE))
+    old = names(x),
+    new = gsub(" ", "_", tolower(gsub(
+      "(.)([A-Z])", "\\1 \\2",
+      names(x)
+    )))
+  )
+  data.table::setnames(x,
+    old = names(x),
+    new = gsub(".", "_", names(x), fixed = TRUE)
+  )
 }
 
 #' Splits Time Cols and Removes Extra Chars for Forecast XML Objects
@@ -577,33 +600,49 @@
 #' @noRd
 
 .split_time_cols <- function(x) {
-  x[, c("start_time_local",
-        "UTC_offset_drop") := data.table::tstrsplit(start_time_local,
-                                                    "+",
-                                                    fixed = TRUE)]
+  x[, c(
+    "start_time_local",
+    "UTC_offset_drop"
+  ) := data.table::tstrsplit(start_time_local,
+    "+",
+    fixed = TRUE
+  )]
 
-  x[, c("end_time_local",
-        "utc_offset") := data.table::tstrsplit(end_time_local,
-                                               "+",
-                                               fixed = TRUE)]
+  x[, c(
+    "end_time_local",
+    "utc_offset"
+  ) := data.table::tstrsplit(end_time_local,
+    "+",
+    fixed = TRUE
+  )]
 
   x[, "UTC_offset_drop" := NULL]
 
   # remove the "T" from time cols
-  x[, c("start_time_local",
-        "end_time_local",
-        "start_time_utc",
-        "end_time_utc") := lapply(.SD, gsub, pattern = "T",
-                                  replacement = " "),
-    .SDcols = c("start_time_local",
-                "end_time_local",
-                "start_time_utc",
-                "end_time_utc")]
+  x[, c(
+    "start_time_local",
+    "end_time_local",
+    "start_time_utc",
+    "end_time_utc"
+  ) := lapply(.SD, gsub,
+    pattern = "T",
+    replacement = " "
+  ),
+  .SDcols = c(
+    "start_time_local",
+    "end_time_local",
+    "start_time_utc",
+    "end_time_utc"
+  )
+  ]
 
   # remove the "Z" from UTC cols
-  x[, c("start_time_utc", "end_time_utc") := lapply(.SD, gsub, pattern = "Z",
-                                                    replacement = ""),
-    .SDcols = c("start_time_utc", "end_time_utc")]
+  x[, c("start_time_utc", "end_time_utc") := lapply(.SD, gsub,
+    pattern = "Z",
+    replacement = ""
+  ),
+  .SDcols = c("start_time_utc", "end_time_utc")
+  ]
   return(x)
 }
 
@@ -622,7 +661,7 @@
 
 .strcap <- function(x) {
   .cap <- function(x) {
-    capped <- grep('^[^A-Z]*', x, perl = TRUE)
+    capped <- grep("^[^A-Z]*", x, perl = TRUE)
     substr(x[capped], 1, 1) <-
       toupper(tolower(substr(x[capped], 1, 1)))
     x <- gsub("(?<=\\b)([a-z])", "\\U\\1", tolower(x), perl = TRUE)
@@ -635,10 +674,13 @@
   # station names in the BOM data when merging BOM metadata with SILO station
   # lists
   res <-
-    unlist(lapply(lapply(
-      strsplit(as.character(x), split = "\\b\\W+\\b"), .cap
-    ),
-    paste, collapse = " "))
+    unlist(lapply(
+      lapply(
+        strsplit(as.character(x), split = "\\b\\W+\\b"), .cap
+      ),
+      paste,
+      collapse = " "
+    ))
 
   # correct station names that should have all caps in them or where words
   # should be lower case, e.g., "at" or "on".
@@ -682,10 +724,12 @@
     location <- trimws(filepath)
     if (!file.exists(location)) {
       stop("\nDirectory does not exist: ", filepath,
-           call. = FALSE)
+        call. = FALSE
+      )
     } else if (tolower(tools::file_ext(location)) == "xml") {
       stop("\nYou have provided a file, not a directory containing a file.",
-           call. = FALSE)
+        call. = FALSE
+      )
     }
     return(location)
   }
@@ -703,4 +747,269 @@
 
 `%||%` <- function(x, y) {
   if (is.null(x)) y else x
+}
+
+#' Load or Create DPIRD Metadata Cache File
+#'
+#' Checks for cached DPIRD metadata file and creates it if missing.
+#' Handles OS-specific path construction (Windows vs Unix).
+#'
+#' @param api_key DPIRD API key for fetching metadata if cache missing
+#' @return Character string path to metadata RDS file
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.load_dpird_metadata_file <- function(api_key) {
+  if (Sys.info()["sysname"] == "Windows") {
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda", fsep = "\\")
+
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_stations_metadata(
+          which_api = "dpird",
+          api_key = api_key,
+          include_closed = TRUE
+        ),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
+  } else {
+    metadata_file <- file.path(tempdir(), "dpird_metadata.Rda")
+
+    if (!file.exists(metadata_file)) {
+      saveRDS(
+        get_stations_metadata(
+          which_api = "dpird",
+          api_key = api_key,
+          include_closed = TRUE
+        ),
+        file = metadata_file,
+        compress = FALSE
+      )
+    }
+  }
+
+  return(metadata_file)
+}
+
+#' Validate and Expand DPIRD Values Parameter
+#'
+#' Expands "all" to complete list of DPIRD summary values, validates
+#' custom values, and prepends standard columns.
+#'
+#' @param values Character vector of requested values or "all"
+#' @return Character vector of validated and expanded values
+#' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.validate_and_expand_dpird_values <- function(values) {
+  if (any(values == "all")) {
+    values <-
+      c(
+        "stationCode",
+        "stationName",
+        "period",
+        weatherOz::dpird_summary_values
+      )
+  } else {
+    if (any(values %notin% weatherOz::dpird_summary_values)) {
+      stop(call. = FALSE, "You have specified invalid weather values.")
+    }
+    values <-
+      c("stationCode", "stationName", "period", values)
+  }
+  return(values)
+}
+
+#' Validate and Normalise DPIRD Time Interval
+#'
+#' Validates user-provided interval against approved values using fuzzy
+#' matching. Modifies values vector based on interval-specific constraints.
+#' @param interval User-provided interval string
+#' @param values Character vector of requested values to be modified
+#'
+#' @return List with two elements:
+#'   \describe{
+#'     \item{interval}{Validated interval string}
+#'     \item{values}{Modified values vector with deprecated values removed}
+#'   }
+#'
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.validate_dpird_interval <- function(interval, values) {
+  # if interval is not set, default to "daily", else check input to be sure
+  approved_intervals <- c(
+    "daily",
+    "15min",
+    "30min",
+    "hourly",
+    "monthly",
+    "yearly"
+  )
+
+  if (identical(interval, approved_intervals)) {
+    interval <- "daily"
+  }
+
+  likely_interval <- agrep(pattern = interval, x = approved_intervals)
+
+  # Match time interval query to user requests
+  checked_interval <-
+    try(
+      match.arg(approved_intervals[likely_interval],
+        approved_intervals,
+        several.ok = FALSE
+      ),
+      silent = TRUE
+    )
+
+  # TODO
+  # Remove this once Phil fix the daily values names
+  # Check if the interval is "daily" and modify values accordingly
+  if (checked_interval == "daily") {
+    values <-
+      setdiff(
+        values,
+        c(
+          "etoShortCrop",
+          "etoTallCrop"
+        )
+      )
+  } else {
+    values <-
+      setdiff(
+        values,
+        c(
+          "evapotranspirationShortCrop",
+          "evapotranspirationTallCrop",
+          "panEvaporation12AM"
+        )
+      )
+  }
+
+  # Error if summary interval is not available. API only allows for daily,
+  # 15 min, 30 min, hourly, monthly or yearly
+  if (methods::is(checked_interval, "try-error")) {
+    stop(call. = FALSE, "\"", interval, "\" is not a supported time interval")
+  }
+
+  return(list(interval = checked_interval, values = values))
+}
+
+#' Calculate Total Records for DPIRD API Request
+#'
+#' Calculates expected number of records based on date range and interval.
+#' Validates that 15/30min requests don't exceed 1-year limit.
+#'
+#' @param start_date Start date (Date or POSIXct)
+#' @param end_date End date (Date or POSIXct)
+#' @param interval Time interval string (validated)
+#' @return Integer count of expected records
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.calculate_dpird_request_records <- function(start_date, end_date, interval) {
+  request_interval <- lubridate::interval(start_date,
+    end_date,
+    tzone = "Australia/Perth"
+  )
+
+  # Stop if query is for 15 and 30 min intervals and date is more than one
+  # year in the past
+  this_year <- lubridate::year(lubridate::today())
+
+  if (interval %in% c("15min", "30min") &
+    lubridate::year(start_date) <
+      this_year - 1 |
+    interval %in% c("15min", "30min") &
+      lubridate::year(end_date) <
+        this_year - 1) {
+    stop(
+      call. = FALSE,
+      "Start date is too early. Data in 15 and 30 min intervals are only ",
+      "available from the the 1st day of ", this_year - 1, "."
+    )
+  }
+
+  # determine how many records are being requested. Default here is 'daily' as
+  # with default user arguments
+  total_records_req <- data.table::fcase(
+    interval == "yearly",
+    floor(lubridate::time_length(request_interval, unit = "year") + 1),
+    interval == "monthly",
+    floor(lubridate::time_length(request_interval, unit = "month") + 1),
+    interval == "hourly",
+    floor(lubridate::time_length(request_interval, unit = "hour") + 1),
+    interval == "30min",
+    floor((
+      lubridate::time_length(request_interval, unit = "hour")
+    ) + 1) * 2,
+    interval == "15min",
+    floor((
+      lubridate::time_length(request_interval, unit = "hour")
+    ) + 1) * 4,
+    default = floor(lubridate::time_length(request_interval, unit = "day") + 1)
+  )
+
+  if (total_records_req < 1) {
+    stop(
+      call. = FALSE,
+      "You have submitted a query with 0 total records.\n",
+      "Please extend the dates requested."
+    )
+  }
+
+  return(total_records_req)
+}
+
+#' Prepare Wind Maximum Time Columns
+#'
+#' Detects time components in wind_max_time, parses time columns,
+#' and derives date and time-of-day columns for wind maxima.
+#'
+#' @param out data.table with DPIRD summary data
+#' @return Modified data.table with parsed wind time columns
+#' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
+#' @keywords Internal
+#' @autoglobal
+#' @noRd
+
+.prepare_wind_time_columns <- function(out) {
+  # Determine where wind max times include a time-of-day component before parsing.
+  wind_max_has_time <- NULL
+  if ("wind_max_time" %in% names(out)) {
+    wind_max_has_time <- grepl(":", out$wind_max_time)
+  }
+
+  # Parse all time-like columns using a robust helper that handles mixed formats.
+  time_cols <- grep("time", colnames(out), value = TRUE)
+  if (length(time_cols) > 0L) {
+    out[, (time_cols) := suppressMessages(lapply(
+      .SD,
+      .parse_dpird_time_col
+    )), .SDcols = time_cols]
+  }
+
+  # Derive date and time-of-day components for wind maxima per row; these will be
+  # widened later to per-height columns.
+  if (!is.null(wind_max_has_time) && "wind_max_time" %in% names(out)) {
+    out[, wind_max_date := as.Date(wind_max_time, tz = "Australia/West")]
+    out[, wind_max_time_of_day := ifelse(
+      wind_max_has_time & !is.na(wind_max_time),
+      format(wind_max_time, "%H:%M:%S", tz = "Australia/West"),
+      NA_character_
+    )]
+  }
+
+  return(out)
 }
