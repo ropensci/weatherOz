@@ -39,6 +39,7 @@ GeoTIFF
 Geospatial
 Geospatially
 Indooroopilly
+Institutt
 JSON
 Kirnbrae
 Licence
@@ -46,6 +47,7 @@ Lifecycle
 Locationforecast
 METNO
 Maroondah
+Meteorologisk
 Modelling
 Moodie
 NSW
@@ -127,6 +129,7 @@ colour
 config
 cron
 dateTime
+datetime
 deltaT
 deltaTAvg
 deltaTMax

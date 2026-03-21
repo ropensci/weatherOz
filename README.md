@@ -141,27 +141,35 @@ wd
 #>    station_code station_name longitude latitude  year month   day       date
 #>          <fctr>       <char>     <num>    <num> <int> <int> <int>     <Date>
 #> 1:           BI        Binnu  114.6958  -28.051  2022     5     1 2022-05-01
-#> 2:           BI        Binnu  114.6958  -28.051  2022     5     1 2022-05-01
-#> 3:           BI        Binnu  114.6958  -28.051  2022     5     2 2022-05-02
-#> 4:           BI        Binnu  114.6958  -28.051  2022     5     2 2022-05-02
-#>    erosion_condition_minutes erosion_condition_start_time wind_avg_speed
-#>                        <int>                       <POSc>          <num>
-#> 1:                         0                         <NA>          10.85
-#> 2:                         0                         <NA>          13.06
-#> 3:                         7          2022-05-02 15:01:00          15.57
-#> 4:                         7          2022-05-02 15:01:00          17.70
-#>    wind_height wind_max_direction_compass_point wind_max_direction_degrees
-#>          <int>                           <char>                      <int>
-#> 1:           3                              SSW                        200
-#> 2:           3                              SSW                        205
-#> 3:          10                              SSW                        194
-#> 4:          10                              SSW                        193
-#>    wind_max_speed       wind_max_time
-#>             <num>              <POSc>
-#> 1:          31.82 2022-05-01 17:28:00
-#> 2:          38.52 2022-05-02 16:07:00
-#> 3:          34.88 2022-05-01 17:34:00
-#> 4:          40.10 2022-05-02 16:31:00
+#> 2:           BI        Binnu  114.6958  -28.051  2022     5     2 2022-05-02
+#>    erosion_condition_minutes erosion_condition_start_time wind_avg_speed_3m
+#>                        <int>                       <POSc>             <num>
+#> 1:                         0                         <NA>             10.85
+#> 2:                         7          2022-05-02 15:01:00             13.06
+#>    wind_max_direction_compass_point_3m wind_max_direction_degrees_3m
+#>                                 <char>                         <int>
+#> 1:                                 SSW                           200
+#> 2:                                 SSW                           205
+#>    wind_max_speed_3m    wind_max_time_3m wind_max_date_3m
+#>                <num>              <POSc>           <Date>
+#> 1:             31.82 2022-05-01 17:28:00       2022-05-01
+#> 2:             38.52 2022-05-02 16:07:00       2022-05-02
+#>    wind_max_time_of_day_3m wind_avg_speed_10m
+#>                     <char>              <num>
+#> 1:                17:28:00              15.57
+#> 2:                16:07:00              17.70
+#>    wind_max_direction_compass_point_10m wind_max_direction_degrees_10m
+#>                                  <char>                          <int>
+#> 1:                                  SSW                            194
+#> 2:                                  SSW                            193
+#>    wind_max_speed_10m   wind_max_time_10m wind_max_date_10m
+#>                 <num>              <POSc>            <Date>
+#> 1:              34.88 2022-05-01 17:34:00        2022-05-01
+#> 2:              40.10 2022-05-02 16:31:00        2022-05-02
+#>    wind_max_time_of_day_10m
+#>                      <char>
+#> 1:                 17:34:00
+#> 2:                 16:31:00
 ```
 
 ## Example 2
@@ -196,12 +204,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2025-11-05      0.9              25
-#> 2:     11.7              25 254.5 m 2025-11-05      0.0              25
-#> 3:      7.8              25 254.5 m 2025-11-05      0.0              25
-#> 4:     10.6              25 254.5 m 2025-11-05      0.0              25
-#> 5:     13.3              25 254.5 m 2025-11-05      0.0              25
-#> 6:     14.7              25 254.5 m 2025-11-05      1.7              25
+#> 1:      9.8              25 254.5 m 2026-02-05      0.9              25
+#> 2:     11.7              25 254.5 m 2026-02-05      0.0              25
+#> 3:      7.8              25 254.5 m 2026-02-05      0.0              25
+#> 4:     10.6              25 254.5 m 2026-02-05      0.0              25
+#> 5:     13.3              25 254.5 m 2026-02-05      0.0              25
+#> 6:     14.7              25 254.5 m 2026-02-05      1.7              25
 ```
 
 ## Example 3
@@ -226,28 +234,28 @@ names(perth_forecast)
 head(perth_forecast$data)
 #>                   time air_temperature relative_humidity wind_speed
 #>                 <POSc>           <num>             <num>      <num>
-#> 1: 2025-11-05 17:00:00            22.0              51.0        2.6
-#> 2: 2025-11-05 18:00:00            23.4              49.0        1.3
-#> 3: 2025-11-05 19:00:00            23.8              48.9        1.9
-#> 4: 2025-11-05 20:00:00            23.9              47.8        2.7
-#> 5: 2025-11-05 21:00:00            24.7              47.1        3.8
-#> 6: 2025-11-05 22:00:00            22.4              54.6        4.2
+#> 1: 2026-02-05 19:00:00            27.2              31.0        3.2
+#> 2: 2026-02-05 20:00:00            29.6              26.4        2.9
+#> 3: 2026-02-05 21:00:00            31.7              22.2        2.8
+#> 4: 2026-02-05 22:00:00            33.3              18.9        3.3
+#> 5: 2026-02-05 23:00:00            34.3              16.8        4.6
+#> 6: 2026-02-06 00:00:00            34.0              17.6        5.5
 #>    wind_from_direction cloud_area_fraction air_pressure_at_sea_level
 #>                  <num>               <num>                     <num>
-#> 1:                63.1                10.9                    1004.8
-#> 2:               347.0                38.3                    1004.4
-#> 3:               305.7                26.6                    1003.8
-#> 4:               267.8                19.5                    1003.1
-#> 5:               251.8                63.3                    1002.6
-#> 6:               183.4               100.0                    1003.0
-#>    precipitation_amount      symbol_code
-#>                   <num>           <char>
-#> 1:                  0.0     clearsky_day
-#> 2:                  0.0 partlycloudy_day
-#> 3:                  0.0         fair_day
-#> 4:                  0.0         fair_day
-#> 5:                  0.4  rainshowers_day
-#> 6:                  0.0           cloudy
+#> 1:               107.3                   0                    1019.4
+#> 2:               116.3                   0                    1018.4
+#> 3:               121.9                   0                    1017.2
+#> 4:               133.0                   0                    1016.1
+#> 5:               153.8                   0                    1015.2
+#> 6:               183.7                   0                    1014.4
+#>    precipitation_amount  symbol_code
+#>                   <num>       <char>
+#> 1:                    0 clearsky_day
+#> 2:                    0 clearsky_day
+#> 3:                    0 clearsky_day
+#> 4:                    0 clearsky_day
+#> 5:                    0 clearsky_day
+#> 6:                    0 clearsky_day
 
 # Check metadata
 perth_forecast$metadata$request$longitude
@@ -263,7 +271,7 @@ perth_forecast$metadata$status_code
 #> [1] 200
 
 perth_forecast$metadata$expires
-#> [1] "2025-11-05 09:46:08 AWST"
+#> [1] "2026-02-05 11:54:09 AWST"
 ```
 
 ## Notes on Data and API Endpoints

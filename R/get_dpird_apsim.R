@@ -74,6 +74,30 @@ get_dpird_apsim <- function(station_code,
     api_key = api_key
   )
 
+  wind_3m_col <- c("wind_avg_speed_3m", "wind_avg_3m")
+  wind_10m_col <- c("wind_avg_speed_10m", "wind_avg_10m")
+  wind_3m_col <- wind_3m_col[wind_3m_col %in% names(apsim)]
+  wind_10m_col <- wind_10m_col[wind_10m_col %in% names(apsim)]
+
+  if (length(wind_3m_col) > 0L || length(wind_10m_col) > 0L) {
+    wind_3m_col <- wind_3m_col[1]
+    wind_10m_col <- wind_10m_col[1]
+
+    if (!is.na(wind_3m_col) && !is.na(wind_10m_col)) {
+      apsim[, wind_avg := data.table::fifelse(
+        !is.na(.SD[[wind_3m_col]]),
+        .SD[[wind_3m_col]],
+        .SD[[wind_10m_col]]
+      )]
+    } else if (!is.na(wind_3m_col)) {
+      apsim[, wind_avg := .SD[[wind_3m_col]]]
+    } else {
+      apsim[, wind_avg := .SD[[wind_10m_col]]]
+    }
+  } else {
+    apsim[, wind_avg := as.numeric(NA)]
+  }
+
   site <- apsim$station_name[1]
   latitude <- apsim$latitude[1]
   longitude <- apsim$longitude[1]

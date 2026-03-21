@@ -1,6 +1,6 @@
 Package: weatherOz
 Title: An API Client for Australian Weather and Climate Data Resources
-Version: 2.0.2
+Version: 3.0.0
 Authors@R: c(
     person("Rodrigo", "Pires", email = "rodrigo.pires@dpird.wa.gov.au", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-7384-6849")),
@@ -25,6 +25,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-2815-0399", "Contributed to debugging a nasty little bug with CI where timezones caused tests to fail due to vcr not recognising the URL when run outside of Australia-Perth TZ! Suggested the use of local_timzeone().")),
     person("Max", "Moldovan", email = "max.moldovan@adelaide.edu.au", role = "ctb",
            comment = c(ORCID = "0000-0001-9680-8474", "Contributed valuable feedback on package usage leading to improvements in the package structure and functionality.")),
+    person("Stephen", "Bradshaw", email = "stephen.bradshaw@dpird.wa.gov.au", role = "ctb",
+           comment = c(ORCID = "0000-0003-3096-8787", "Identified data structure issues and provided insights that improved package data quality and usability.")),
     person("Jimmy", "Ng", email = "jimmy.ng@dpird.wa.gov.au", role = "ctb"),
     person("Steve", "Collins", email = "steve.collins@dpird.wa.gov.au", role = "ctb",
            comment = "Designed the hex logo for 'weatherOz' hex logo."),
@@ -63,9 +65,9 @@ License: GPL (>= 3)
 URL: https://github.com/ropensci/weatherOz/,
     https://docs.ropensci.org/weatherOz/
 BugReports: https://github.com/ropensci/weatherOz/issues
-Depends: 
+Depends:
     R (>= 4.1.0)
-Imports: 
+Imports:
     apsimx,
     clock,
     crayon,
@@ -103,7 +105,7 @@ Suggests:
     vcr (>= 2.0.0),
     vdiffr,
     withr
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/roxyglobals/filename: globals.R
 Config/roxyglobals/unique: FALSE
