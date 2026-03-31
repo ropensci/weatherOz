@@ -11,7 +11,10 @@ get_metno_forecast(
   api_key = get_key(service = "METNO"),
   timeout = 30,
   max_retries = 3,
-  retry_delay = 1
+  retry_delay = 1,
+  use_cache = TRUE,
+  cache_dir = NULL,
+  allow_stale_on_error = TRUE
 )
 }
 \arguments{
@@ -32,6 +35,16 @@ in accordance with MET Weather API terms of service.}
 \item{max_retries}{Integer. Maximum number of retry attempts on transient failures (default: 3).}
 
 \item{retry_delay}{Numeric. Base delay between retries in seconds for exponential backoff (default: 1).}
+
+\item{use_cache}{Logical. Use session-scoped cache and conditional
+revalidation for MET.NO responses. Defaults to \code{TRUE}.}
+
+\item{cache_dir}{Character. Optional directory path for cache files. If
+\code{NULL} (default), uses \code{file.path(tempdir(), "metno_cache")}.}
+
+\item{allow_stale_on_error}{Logical. If \code{TRUE} (default), return stale cached
+data when MET.NO returns HTTP 429 (rate limit exceeded) and stale cache is
+available.}
 }
 \value{
 A named list with elements:
@@ -39,7 +52,8 @@ A named list with elements:
 \item{\code{data}}{Hourly forecast as a \code{data.table}.}
 \item{\code{raw}}{The full parsed GeoJSON response (list).}
 \item{\code{metadata}}{A list containing request parameters, status code, retrieval timestamp,
-and header information (\code{expires_raw}, \code{expires}, \code{last_modified_raw}, \code{last_modified}).}
+header information (\code{expires_raw}, \code{expires}, \code{last_modified_raw},
+\code{last_modified}), and cache provenance in \code{metadata$cache}.}
 }
 }
 \description{

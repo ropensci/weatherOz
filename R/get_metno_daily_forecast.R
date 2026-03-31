@@ -14,6 +14,13 @@
 #' @param timeout Numeric. Request timeout in seconds (default: 30).
 #' @param max_retries Numeric. Maximum number of retry attempts for failed requests (default: 3).
 #' @param retry_delay Numeric. Base delay between retries in seconds (default: 1.0).
+#' @param use_cache Logical. Use session-scoped cache and conditional
+#'   revalidation for MET.NO responses. Defaults to `TRUE`.
+#' @param cache_dir Character. Optional directory path for cache files. If
+#'   `NULL` (default), uses `file.path(tempdir(), "metno_cache")`.
+#' @param allow_stale_on_error Logical. If `TRUE` (default), return stale cached
+#'   data when MET.NO returns HTTP 429 (rate limit exceeded) and stale cache is
+#'   available.
 #'
 #' @return A `data.table` with daily aggregated weather forecasts, including:
 #'   `date`, `min_temperature`, `max_temperature`, `total_precipitation`,
@@ -54,7 +61,10 @@ get_metno_daily_forecast <- function(
     api_key,
     timeout = 30,
     max_retries = 3,
-    retry_delay = 1.0
+    retry_delay = 1.0,
+    use_cache = TRUE,
+    cache_dir = NULL,
+    allow_stale_on_error = TRUE
 ) {
   # Validate days
   if (days < 1 || days > 9) {
@@ -69,7 +79,10 @@ get_metno_daily_forecast <- function(
     api_key = api_key,
     timeout = timeout,
     max_retries = max_retries,
-    retry_delay = retry_delay
+    retry_delay = retry_delay,
+    use_cache = use_cache,
+    cache_dir = cache_dir,
+    allow_stale_on_error = allow_stale_on_error
   )
 
   dt_hourly <- raw_forecast$data

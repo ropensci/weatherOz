@@ -11,7 +11,10 @@ get_metno_daily_forecast(
   api_key,
   timeout = 30,
   max_retries = 3,
-  retry_delay = 1
+  retry_delay = 1,
+  use_cache = TRUE,
+  cache_dir = NULL,
+  allow_stale_on_error = TRUE
 )
 }
 \arguments{
@@ -31,6 +34,16 @@ as per MET Weather API terms of service.}
 \item{max_retries}{Numeric. Maximum number of retry attempts for failed requests (default: 3).}
 
 \item{retry_delay}{Numeric. Base delay between retries in seconds (default: 1.0).}
+
+\item{use_cache}{Logical. Use session-scoped cache and conditional
+revalidation for MET.NO responses. Defaults to \code{TRUE}.}
+
+\item{cache_dir}{Character. Optional directory path for cache files. If
+\code{NULL} (default), uses \code{file.path(tempdir(), "metno_cache")}.}
+
+\item{allow_stale_on_error}{Logical. If \code{TRUE} (default), return stale cached
+data when MET.NO returns HTTP 429 (rate limit exceeded) and stale cache is
+available.}
 }
 \value{
 A \code{data.table} with daily aggregated weather forecasts, including:

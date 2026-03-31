@@ -16,13 +16,21 @@
 #' @param timeout Numeric. Request timeout in seconds (default: 30).
 #' @param max_retries Integer. Maximum number of retry attempts on transient failures (default: 3).
 #' @param retry_delay Numeric. Base delay between retries in seconds for exponential backoff (default: 1).
+#' @param use_cache Logical. Use session-scoped cache and conditional
+#'   revalidation for MET.NO responses. Defaults to `TRUE`.
+#' @param cache_dir Character. Optional directory path for cache files. If
+#'   `NULL` (default), uses `file.path(tempdir(), "metno_cache")`.
+#' @param allow_stale_on_error Logical. If `TRUE` (default), return stale cached
+#'   data when MET.NO returns HTTP 429 (rate limit exceeded) and stale cache is
+#'   available.
 #'
 #' @return A named list with elements:
 #' \describe{
 #'   \item{`data`}{Hourly forecast as a `data.table`.}
 #'   \item{`raw`}{The full parsed GeoJSON response (list).}
 #'   \item{`metadata`}{A list containing request parameters, status code, retrieval timestamp,
-#'   and header information (`expires_raw`, `expires`, `last_modified_raw`, `last_modified`).}
+#'   header information (`expires_raw`, `expires`, `last_modified_raw`,
+#'   `last_modified`), and cache provenance in `metadata$cache`.}
 #' }
 #'
 #' @author Rodrigo Pires, \email{rodrigo.pires@@dpird.wa.gov.au}
@@ -54,7 +62,10 @@ get_metno_forecast <- function(
     api_key = get_key(service = "METNO"),
     timeout = 30,
     max_retries = 3,
-    retry_delay = 1
+    retry_delay = 1,
+    use_cache = TRUE,
+    cache_dir = NULL,
+    allow_stale_on_error = TRUE
 ) {
   format <- match.arg(format)
 
@@ -87,6 +98,51 @@ get_metno_forecast <- function(
     lon = round(longitude, 4)
   )
 
+  cache_schema_version <- "metno-v1"
+  cache_signature <- list(
+    format = format,
+    params = params
+  )
+  cache_path <- NULL
+  cached <- NULL
+  conditional_headers <- NULL
+  used_if_modified_since <- FALSE
+
+  if (isTRUE(use_cache)) {
+    cache_dir <- .metno_resolve_cache_dir(cache_dir)
+    cache_path <- .metno_cache_path(
+      cache_dir = cache_dir,
+      cache_signature = cache_signature,
+      cache_schema_version = cache_schema_version
+    )
+    cached <- .metno_cache_read(
+      cache_path = cache_path,
+      cache_signature = cache_signature,
+      cache_schema_version = cache_schema_version
+    )
+
+    if (!is.null(cached) && .metno_cache_is_fresh(cached)) {
+      metadata <- cached$metadata
+      metadata$cache <- .metno_cache_metadata(
+        source = "cache",
+        cache_path = cache_path,
+        used_if_modified_since = FALSE
+      )
+      return(list(
+        data = cached$data,
+        raw = cached$raw,
+        metadata = metadata
+      ))
+    }
+
+    if (!is.null(cached) && !is.null(cached$metadata$last_modified_raw)) {
+      conditional_headers <- list(
+        `If-Modified-Since` = cached$metadata$last_modified_raw
+      )
+      used_if_modified_since <- TRUE
+    }
+  }
+
   client <- .metno_http_client(endpoint = endpoint,
                                user_agent = user_agent,
                                timeout = timeout)
@@ -94,7 +150,11 @@ get_metno_forecast <- function(
   last_error <- NULL
   for (attempt in seq_len(max_retries)) {
     response <- tryCatch(
-      client$get(query = params),
+      if (!is.null(conditional_headers)) {
+        client$get(query = params, headers = conditional_headers)
+      } else {
+        client$get(query = params)
+      },
       error = function(e) {
         last_error <<- e
         NULL
@@ -131,8 +191,26 @@ get_metno_forecast <- function(
           expires_raw = expires_raw,
           expires = .parse_metno_http_date(expires_raw),
           last_modified_raw = last_modified_raw,
-          last_modified = .parse_metno_http_date(last_modified_raw)
+          last_modified = .parse_metno_http_date(last_modified_raw),
+          cache = .metno_cache_metadata(
+            source = if (isTRUE(used_if_modified_since)) "revalidated" else "network",
+            cache_path = cache_path,
+            used_if_modified_since = used_if_modified_since
+          )
         )
+
+        if (isTRUE(use_cache) && !is.null(cache_path)) {
+          .metno_cache_write(
+            cache_path = cache_path,
+            cache_payload = list(
+              cache_schema_version = cache_schema_version,
+              cache_signature = cache_signature,
+              raw = raw_json,
+              data = data_tbl,
+              metadata = metadata
+            )
+          )
+        }
 
         return(list(
           data = data_tbl,
@@ -149,7 +227,48 @@ get_metno_forecast <- function(
       }
 
       if (status_code == 304) {
-        stop("MET Weather API returned 304 Not Modified but no cached data is stored.", call. = FALSE)
+        if (!isTRUE(use_cache) || is.null(cached)) {
+          stop(
+            "MET Weather API returned 304 Not Modified but no cached data is stored.",
+            call. = FALSE
+          )
+        }
+
+        expires_raw <- response_headers[["expires"]] %||% cached$metadata$expires_raw
+        last_modified_raw <- response_headers[["last-modified"]] %||%
+          cached$metadata$last_modified_raw
+
+        metadata <- cached$metadata
+        metadata$status_code <- status_code
+        metadata$retrieved_at <- lubridate::now(tzone = "Australia/Perth")
+        metadata$expires_raw <- expires_raw
+        metadata$expires <- .parse_metno_http_date(expires_raw)
+        metadata$last_modified_raw <- last_modified_raw
+        metadata$last_modified <- .parse_metno_http_date(last_modified_raw)
+        metadata$cache <- .metno_cache_metadata(
+          source = "revalidated",
+          cache_path = cache_path,
+          used_if_modified_since = TRUE
+        )
+
+        if (!is.null(cache_path)) {
+          .metno_cache_write(
+            cache_path = cache_path,
+            cache_payload = list(
+              cache_schema_version = cache_schema_version,
+              cache_signature = cache_signature,
+              raw = cached$raw,
+              data = cached$data,
+              metadata = metadata
+            )
+          )
+        }
+
+        return(list(
+          data = cached$data,
+          raw = cached$raw,
+          metadata = metadata
+        ))
       }
 
       if (status_code == 403) {
@@ -161,6 +280,27 @@ get_metno_forecast <- function(
       }
 
       if (status_code == 429) {
+        if (isTRUE(use_cache) &&
+            isTRUE(allow_stale_on_error) &&
+            !is.null(cached)) {
+          metadata <- cached$metadata
+          metadata$status_code <- status_code
+          metadata$retrieved_at <- lubridate::now(tzone = "Australia/Perth")
+          metadata$cache <- .metno_cache_metadata(
+            source = "stale",
+            cache_path = cache_path,
+            used_if_modified_since = used_if_modified_since
+          )
+          warning(
+            "MET Weather API rate limit exceeded; returning stale cached forecast.",
+            call. = FALSE
+          )
+          return(list(
+            data = cached$data,
+            raw = cached$raw,
+            metadata = metadata
+          ))
+        }
         stop("MET Weather API rate limit exceeded. Please wait before making more requests.", call. = FALSE)
       }
 
@@ -195,6 +335,154 @@ get_metno_forecast <- function(
       if (!is.null(last_error)) last_error$message else "Unknown error"
     ),
     call. = FALSE
+  )
+}
+
+#' Resolve MET Norway Cache Directory
+#' Internal helper that resolves cache directory for MET.NO responses.
+#' Uses a session-local default under `tempdir()` when `cache_dir` is `NULL`.
+#' @param cache_dir Optional user-provided cache directory path.
+#' @return Character path for cache directory.
+#' @keywords internal
+#' @noRd
+.metno_resolve_cache_dir <- function(cache_dir) {
+  cache_dir %||% file.path(tempdir(), "metno_cache")
+}
+
+#' Build MET Norway Cache Path
+#' Internal helper that computes a deterministic cache path for a request.
+#' @param cache_dir Cache directory path.
+#' @param cache_signature List with request signature values.
+#' @param cache_schema_version Character schema version.
+#' @return Character path to cache file.
+#' @keywords internal
+#' @noRd
+.metno_cache_path <- function(cache_dir, cache_signature, cache_schema_version) {
+  cache_key <- .metno_cache_key(
+    cache_signature = cache_signature,
+    cache_schema_version = cache_schema_version
+  )
+  file.path(
+    cache_dir,
+    sprintf("metno_%s_%s.rds", cache_schema_version, cache_key)
+  )
+}
+
+#' Build MET Norway Cache Key
+#' Internal helper that creates an md5 cache key from request signature.
+#' @param cache_signature List with request signature values.
+#' @param cache_schema_version Character schema version.
+#' @return Character md5 key.
+#' @keywords internal
+#' @noRd
+.metno_cache_key <- function(cache_signature, cache_schema_version) {
+  param_names <- sort(names(cache_signature$params))
+  param_parts <- vapply(
+    param_names,
+    function(nm) {
+      sprintf("%s=%s", nm, as.character(cache_signature$params[[nm]]))
+    },
+    character(1)
+  )
+  key_text <- paste(
+    c(
+      sprintf("schema=%s", cache_schema_version),
+      sprintf("format=%s", cache_signature$format),
+      param_parts
+    ),
+    collapse = "|"
+  )
+  key_file <- tempfile(fileext = ".txt")
+  on.exit(unlink(key_file), add = TRUE)
+  writeLines(text = key_text, con = key_file, useBytes = TRUE)
+  unname(tools::md5sum(key_file))
+}
+
+#' Read MET Norway Cache
+#' Internal helper for reading and validating cache payload files.
+#' @param cache_path Character cache file path.
+#' @param cache_signature Expected request signature.
+#' @param cache_schema_version Expected schema version.
+#' @return Cached payload list or `NULL` when unavailable/invalid.
+#' @keywords internal
+#' @noRd
+.metno_cache_read <- function(cache_path, cache_signature, cache_schema_version) {
+  if (!file.exists(cache_path)) {
+    return(NULL)
+  }
+
+  cached <- tryCatch(readRDS(cache_path), error = function(e) NULL)
+  if (is.null(cached) || !is.list(cached)) {
+    return(NULL)
+  }
+
+  if (!identical(cached$cache_schema_version, cache_schema_version)) {
+    return(NULL)
+  }
+
+  if (is.null(cached$cache_signature) ||
+      !isTRUE(all.equal(cached$cache_signature,
+                        cache_signature,
+                        check.attributes = FALSE))) {
+    return(NULL)
+  }
+
+  if (is.null(cached$data) ||
+      is.null(cached$raw) ||
+      is.null(cached$metadata)) {
+    return(NULL)
+  }
+
+  cached
+}
+
+#' Write MET Norway Cache
+#' Internal helper for writing cache payload files.
+#' @param cache_path Character cache file path.
+#' @param cache_payload List payload to save.
+#' @return Invisible logical indicating write success.
+#' @keywords internal
+#' @noRd
+.metno_cache_write <- function(cache_path, cache_payload) {
+  ok <- tryCatch(
+    {
+      dir.create(dirname(cache_path), recursive = TRUE, showWarnings = FALSE)
+      saveRDS(cache_payload, file = cache_path)
+      TRUE
+    },
+    error = function(e) FALSE
+  )
+  invisible(ok)
+}
+
+#' Check if MET Norway Cache is Fresh
+#' Internal helper that checks freshness based on `metadata$expires`.
+#' @param cached A cached payload list.
+#' @return Logical. `TRUE` when cache has a valid future expiry timestamp.
+#' @keywords internal
+#' @noRd
+.metno_cache_is_fresh <- function(cached) {
+  expires <- cached$metadata$expires %||% NULL
+  if (is.null(expires) || !inherits(expires, "POSIXct") || is.na(expires)) {
+    return(FALSE)
+  }
+  now <- lubridate::now(tzone = "Australia/Perth")
+  now < expires
+}
+
+#' Build MET Norway Cache Metadata
+#' Internal helper to construct standard cache provenance metadata.
+#' @param source Character cache source label.
+#' @param cache_path Character cache file path.
+#' @param used_if_modified_since Logical flag.
+#' @return Named list with cache provenance metadata.
+#' @keywords internal
+#' @noRd
+.metno_cache_metadata <- function(source, cache_path, used_if_modified_since) {
+  list(
+    source = source,
+    cache_path = cache_path,
+    used_if_modified_since = isTRUE(used_if_modified_since)
   )
 }
 
