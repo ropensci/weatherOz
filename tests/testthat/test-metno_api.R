@@ -24,7 +24,7 @@ mock_metno_call <- function(latitude = -27.5, longitude = 153.0, format = "compa
   )
 
   temp_client <- list(
-    get = function(query) temp_response
+    get = function(query, headers = NULL) temp_response
   )
 
   # create a fake factory that returns our fake client
@@ -34,11 +34,18 @@ mock_metno_call <- function(latitude = -27.5, longitude = 153.0, format = "compa
 
   # mock the package-internal factory so we don't bind into crul
   testthat::with_mocked_bindings(
-    get_metno_forecast(latitude = latitude, longitude = longitude, format = format, api_key = dummy_email),
+    get_metno_forecast(
+      latitude = latitude,
+      longitude = longitude,
+      format = format,
+      api_key = dummy_email,
+      use_cache = FALSE
+    ),
     `.metno_http_client` = temp_factory,
     .package = "weatherOz"
   )
 }
+
 
 test_that("get_metno_forecast returns structured forecast with metadata (AWST)", {
   forecast <- mock_metno_call()
@@ -163,6 +170,96 @@ test_that("get_metno_daily_forecast aggregates daily data", {
     get_metno_forecast = function(...) mock_result,
     .package = "weatherOz"
   )
+})
+
+test_that("get_metno_forecast reuses cached forecast when fresh", {
+  cache_dir <- withr::local_tempdir()
+  vcr::use_cassette("metno_cache_reuse_compact", {
+    skip_if_offline()
+    first <- get_metno_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+    second <- get_metno_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+  })
+  expect_identical(first$metadata$cache$source, "network")
+  expect_identical(second$metadata$cache$source, "cache")
+  expect_identical(second$metadata$cache$used_if_modified_since, FALSE)
+})
+
+test_that("get_metno_forecast sends conditional revalidation for stale cache", {
+  cache_dir <- withr::local_tempdir()
+
+  vcr::use_cassette("metno_cache_revalidate_compact", {
+    skip_if_offline()
+    first <- get_metno_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+
+    cache_path <- first$metadata$cache$cache_path
+    expect_true(file.exists(cache_path))
+
+    cached <- readRDS(cache_path)
+    cached$metadata$expires <- lubridate::now(tzone = "Australia/Perth") - lubridate::minutes(1)
+    saveRDS(cached, file = cache_path)
+
+    second <- get_metno_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+  })
+  expect_identical(second$metadata$cache$source, "revalidated")
+  expect_identical(second$metadata$cache$used_if_modified_since, TRUE)
+})
+
+test_that("get_metno_daily_forecast reuses hourly session cache", {
+  cache_dir <- withr::local_tempdir()
+  vcr::use_cassette("metno_daily_cache_reuse_compact", {
+    skip_if_offline()
+    get_metno_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+    first <- get_metno_daily_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      days = 3,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+    second <- get_metno_daily_forecast(
+      latitude = -27.5,
+      longitude = 153.0,
+      days = 3,
+      api_key = dummy_email,
+      use_cache = TRUE,
+      cache_dir = cache_dir
+    )
+  })
+  expect_s3_class(first, "data.table")
+  expect_s3_class(second, "data.table")
+  expect_equal(nrow(first), 3)
+  expect_equal(nrow(second), 3)
 })
 
 test_that(".parse and .format metno http dates round trip", {

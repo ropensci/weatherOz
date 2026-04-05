@@ -8,9 +8,9 @@
 
 Wind data is now returned in wide format with separate columns for each measurement height instead of long format with a `wind_height` column.
 
-- Update code accessing wind columns to use the new `_3m` or `_10m` suffixed names
-- Remove references to the `wind_height` column (no longer exists)
-- Wind data now provides one row per period instead of multiple rows per height
+* Update code accessing wind columns to use the new `_3m` or `_10m` suffixed names
+* Remove references to the `wind_height` column (no longer exists)
+* Wind data now provides one row per period instead of multiple rows per height
 
 **Before (v2.0.2 and earlier):**
 ```r
@@ -46,13 +46,13 @@ wind_max_direction_compass_point_10m
 
 ### MET Norway forecast support
 
-- Added `get_metno_forecast()` - Retrieves hourly weather forecasts for any Australian location from the Norwegian Meteorological Institute (MET Norway) Locationforecast 2.0 API
-- Added `get_metno_daily_forecast()` - Wrapper function that aggregates hourly forecasts into daily summaries (min/max temperature, total precipitation, average wind speed, etc.)
-- Added helper functions for advanced users:
-  - `metno_timeseries_to_data_table()` - Converts raw JSON timeseries to tidy data.table
-  - `metno_resample_data_table()` - Aggregates hourly data to daily, weekly, or monthly frequencies
-  - `metno_get_dominant_symbol()` - Determines most representative weather symbol for a period
-- New vignette: "weatherOz for the Locationforecast 2.0 (Norwegian Meteorologisk Institutt)" demonstrating forecast usage and combining historical + forecast data
+* Added `get_metno_forecast()` - Retrieves hourly weather forecasts for any Australian location from the Norwegian Meteorological Institute (MET Norway) Locationforecast 2.0 API
+* Added `get_metno_daily_forecast()` - Wrapper function that aggregates hourly forecasts into daily summaries (min/max temperature, total precipitation, average wind speed, etc.)
+* Added helper functions for advanced users:
+  * `metno_timeseries_to_data_table()` - Converts raw JSON timeseries to tidy data.table
+  * `metno_resample_data_table()` - Aggregates hourly data to daily, weekly, or monthly frequencies
+  * `metno_get_dominant_symbol()` - Determines most representative weather symbol for a period
+* New vignette: "weatherOz for the Locationforecast 2.0 (Norwegian Meteorologisk Institutt)" demonstrating forecast usage and combining historical + forecast data
 
 ## Bug fixes
 
@@ -60,15 +60,24 @@ wind_max_direction_compass_point_10m
 
 When combining historical data (SILO/DPIRD) with MET Norway forecast data, there was a missing day causing a discontinuous timeline due to a timezone double-conversion bug in `metno_resample_data_table()`.
 
-- Modified `metno_resample_data_table()` to check timezone before conversion
-- Forecast now correctly starts from today instead of tomorrow
+* Modified `metno_resample_data_table()` to check timezone before conversion
+* Forecast now correctly starts from today instead of tomorrow
+
+### MET.NO cache and fix
+
+* Added caching in `get_metno_forecast()` to reduce repeat calls to MET.NO (session-scoped)
+* Added conditional revalidation using `If-Modified-Since` when cached entries are stale and `Last-Modified` is available
+* Added support for using cached payloads on HTTP 304 responses
+* Added optional stale-cache fallback for HTTP 429 responses
+* `get_metno_daily_forecast()` benefits from hourly cache reuse (built on `get_metno_forecast()`)
 
 ### Wind data parsing improvements
 
-- Fixed parsing of wind time columns with mixed date/time formats
-- Added `.parse_dpird_time_col()` internal helper for robust time parsing
-- Added `.widen_wind_height_cols()` internal helper for reshaping wind data from long to wide format
-- Wind max time now correctly parsed for both date-only and datetime values
+* Fixed parsing of wind time columns with mixed date/time formats
+* Added `.parse_dpird_time_col()` internal helper for robust time parsing
+* Added `.widen_wind_height_cols()` internal helper for reshaping wind data from long to wide format
+* Wind max time now correctly parsed for both date-only and datetime values
+* Fixed `.parse_summary()` to combine paginated `get_dpird_summaries()` responses when DPIRD returns mixed schemas across pages (old and new mixed). Any missing fields are now filled with `NA` instead of erroring during row binding
 
 ## Code improvements
 
@@ -76,27 +85,27 @@ When combining historical data (SILO/DPIRD) with MET Norway forecast data, there
 
 Extracted helper functions from `get_dpird_summaries()` to improve maintainability and reduce code duplication (no user-facing changes):
 
-- `.load_dpird_metadata_file()` - Eliminated 60 lines of duplicated metadata cache loading code
-- `.validate_and_expand_dpird_values()` - Validates and expands "all" to complete value lists
-- `.validate_dpird_interval()` - Fuzzy matches intervals and modifies values based on interval constraints
-- `.calculate_dpird_request_records()` - Calculates expected records and validates date ranges
-- `.prepare_wind_time_columns()` - Parses wind time columns and derives date/time components
+* `.load_dpird_metadata_file()` - Eliminated 60 lines of duplicated metadata cache loading code
+* `.validate_and_expand_dpird_values()` - Validates and expands "all" to complete value lists
+* `.validate_dpird_interval()` - Fuzzy matches intervals and modifies values based on interval constraints
+* `.calculate_dpird_request_records()` - Calculates expected records and validates date ranges
+* `.prepare_wind_time_columns()` - Parses wind time columns and derives date/time components
 
 ## Documentation
 
-- Added vignette for MET Norway forecast functionality with examples of:
-  - Hourly and daily forecasts
-  - Combining historical and forecast data
-  - Agricultural heat stress event planning
-  - Custom temporal aggregations
-- Updated all vignettes to reflect new forecast capabilities
-- Improve docs for wind data structure changes
+* Added vignette for MET Norway forecast functionality with examples of:
+  * Hourly and daily forecasts
+  * Combining historical and forecast data
+  * Agricultural heat stress event planning
+  * Custom temporal aggregations
+* Updated all vignettes to reflect new forecast capabilities
+* Improve docs for wind data structure changes
 
 ## Testing
 
-- All 457 tests pass with new functionality
-- Added tests for MET Norway forecast functions
-- Updated wind data tests to reflect new structure
+* All 457 tests pass with new functionality
+* Added tests for MET Norway forecast functions
+* Updated wind data tests to reflect new structure
 
 # weatherOz 2.0.2
 

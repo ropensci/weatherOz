@@ -488,7 +488,7 @@ get_dpird_summaries <- function(station_code,
     }
   }
 
-  nested_list_objects <- data.table::rbindlist(x)
+  nested_list_objects <- data.table::rbindlist(x, use.names = TRUE, fill = TRUE)
 
   # get the nested list columns and convert them to data.table objects
   col_classes <-

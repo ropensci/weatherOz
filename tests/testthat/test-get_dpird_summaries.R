@@ -337,6 +337,25 @@ test_that("padding missing wind heights preserves integer columns", {
   expect_type(out$wind_max_direction_degrees_10m, "integer")
 })
 
+test_that("get_dpird_summaries() handles mixed schema pages for ME003", {
+  vcr::use_cassette("dpird_summaries_mixed_schema_me003", {
+    skip_if_offline()
+    out <- get_dpird_summaries(
+      station_code = "ME003",
+      start_date = "2016-04-08",
+      end_date = "2025-12-31",
+      interval = "daily",
+      values = "all",
+      api_key = Sys.getenv("DPIRD_API_KEY")
+    )
+  })
+  expect_s3_class(out, "data.table")
+  expect_gt(nrow(out), 0)
+  expect_true(all(
+    c("soil_temperature", "soil_temperature_avg") %in% names(out)
+  ))
+})
+
 ## 30min ----
 
 test_that("get_dpird_summaries() returns 30min values",
