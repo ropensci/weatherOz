@@ -42,6 +42,14 @@ wind_max_direction_compass_point_3m
 wind_max_direction_compass_point_10m
 ```
 
+### Agricultural bulletin functions removed
+
+`get_ag_bulletin()` and `parse_ag_bulletin()` have now been removed from the package in v3.0.0.
+
+* These functions were already defunct in v2.x after the BOM agricultural bulletin service was discontinued
+* Removal completes the lifecycle transition from defunct to removed
+* Documentation and vignette references also updated
+
 ## New features
 
 ### MET Norway forecast support
@@ -61,7 +69,6 @@ wind_max_direction_compass_point_10m
 When combining historical data (SILO/DPIRD) with MET Norway forecast data, there was a missing day causing a discontinuous timeline due to a timezone double-conversion bug in `metno_resample_data_table()`.
 
 * Modified `metno_resample_data_table()` to check timezone before conversion
-* Forecast now correctly starts from today instead of tomorrow
 
 ### MET.NO cache and fix
 
@@ -83,9 +90,9 @@ When combining historical data (SILO/DPIRD) with MET Norway forecast data, there
 
 ### Internal function refactoring
 
-Extracted helper functions from `get_dpird_summaries()` to improve maintainability and reduce code duplication (no user-facing changes):
+Extracted helper functions from `get_dpird_summaries()` (no user-facing changes):
 
-* `.load_dpird_metadata_file()` - Eliminated 60 lines of duplicated metadata cache loading code
+* `.load_dpird_metadata_file()` - Removed 60 lines of duplicated metadata cache loading code
 * `.validate_and_expand_dpird_values()` - Validates and expands "all" to complete value lists
 * `.validate_dpird_interval()` - Fuzzy matches intervals and modifies values based on interval constraints
 * `.calculate_dpird_request_records()` - Calculates expected records and validates date ranges
@@ -98,14 +105,8 @@ Extracted helper functions from `get_dpird_summaries()` to improve maintainabili
   * Combining historical and forecast data
   * Agricultural heat stress event planning
   * Custom temporal aggregations
-* Updated all vignettes to reflect new forecast capabilities
+* Updated all vignettes to reflect forecast capabilities
 * Improve docs for wind data structure changes
-
-## Testing
-
-* All 457 tests pass with new functionality
-* Added tests for MET Norway forecast functions
-* Updated wind data tests to reflect new structure
 
 # weatherOz 2.0.2
 

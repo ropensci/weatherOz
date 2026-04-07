@@ -73,21 +73,18 @@ the \acronym{BOM} anonymous \acronym{FTP} server with spatial data \cr
 
 Other BOM: 
 \code{\link{find_forecast_towns}()},
-\code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
 \code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
-\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()}
 
 Other parse: 
 \code{\link{metno_get_dominant_symbol}()},
 \code{\link{metno_resample_data_table}()},
 \code{\link{metno_timeseries_to_data_table}()},
-\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()}
 }
 \author{

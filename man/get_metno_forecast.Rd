@@ -82,7 +82,6 @@ Other METNO:
 \code{\link{metno_timeseries_to_data_table}()}
 
 Other data fetching: 
-\code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},

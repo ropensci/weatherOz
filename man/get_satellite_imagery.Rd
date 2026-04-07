@@ -94,18 +94,15 @@ images \cr \url{http://www.bom.gov.au/australia/satellite/index.shtml}.
 
 Other BOM: 
 \code{\link{find_forecast_towns}()},
-\code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_available_radar}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
 \code{\link{get_radar_imagery}()},
-\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()}
 
 Other data fetching: 
-\code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},

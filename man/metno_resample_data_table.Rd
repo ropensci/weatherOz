@@ -27,7 +27,6 @@ Other METNO:
 Other parse: 
 \code{\link{metno_get_dominant_symbol}()},
 \code{\link{metno_timeseries_to_data_table}()},
-\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()}
 }

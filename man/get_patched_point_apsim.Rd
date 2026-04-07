@@ -144,7 +144,6 @@ Other APSIM:
 \code{\link{reexports}}
 
 Other data fetching: 
-\code{\link{get_ag_bulletin}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_data_drill}()},
 \code{\link{get_data_drill_apsim}()},

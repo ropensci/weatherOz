@@ -12,11 +12,6 @@ utils::globalVariables(c(
   "start", # <.get_silo_stations>
   "end", # <.get_silo_stations>
   "wmo", # <.get_silo_stations>
-  "obs_time_local", # <.parse_bulletin>
-  "obs_time_utc", # <.parse_bulletin>
-  "r", # <.parse_bulletin>
-  "state", # <.parse_bulletin>
-  "product_id", # <.parse_bulletin>
   "station_code", # <.get_bom_metadata>
   "station_name", # <.get_bom_metadata>
   "start", # <.get_bom_metadata>

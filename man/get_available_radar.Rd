@@ -41,13 +41,11 @@ Australian Bureau of Meteorology (BOM) radar image
 \seealso{
 Other BOM: 
 \code{\link{find_forecast_towns}()},
-\code{\link{get_ag_bulletin}()},
 \code{\link{get_available_imagery}()},
 \code{\link{get_coastal_forecast}()},
 \code{\link{get_precis_forecast}()},
 \code{\link{get_radar_imagery}()},
 \code{\link{get_satellite_imagery}()},
-\code{\link{parse_ag_bulletin}()},
 \code{\link{parse_coastal_forecast}()},
 \code{\link{parse_precis_forecast}()}
 

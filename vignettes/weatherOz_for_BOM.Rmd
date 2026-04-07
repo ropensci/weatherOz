@@ -18,7 +18,7 @@ Several functions are provided by {weatherOz} to retrieve Australian Bureau of M
 A family of functions retrieve data files from BOM or parse local files from BOM and return data frames;
 
  * `get_precis_forecast()` and `parse_precis_forecast()`, which return the précis (short) forecast;
- * `get_ag_bulletin()` and `parse_ag_bulletin()`, which return the agriculture bulletin (defunct as of version v2.0.0);
+ * agricultural bulletin functions `get_ag_bulletin()` and `parse_ag_bulletin()` were defunct in v2.x and removed in v3.0.0 after BOM discontinued the service;
  * `get_coastal_forecast()` and `parse_coastal_forecast()`, which return coastal waters forecasts for each state.
 
 ## Using get_precis_forecast()
