@@ -35,7 +35,7 @@
 #' @references
 #' Forecast data come from Australian Bureau of Meteorology (\acronym{BOM})
 #' Weather Data Services \cr
-#' <http://www.bom.gov.au/catalogue/data-feeds.shtml>
+#' <https://www.bom.gov.au/catalogue/data-feeds.shtml>
 #'
 #' Location data and other metadata for towns come from the \acronym{BOM}
 #'   anonymous \acronym{FTP} server with spatial data \cr

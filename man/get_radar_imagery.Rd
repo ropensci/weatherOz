@@ -45,7 +45,7 @@ imagery
 }
 \references{
 Australian Bureau of Meteorology (\acronym{BOM}) radar images\cr
-\url{http://www.bom.gov.au/australia/radar/}
+\url{https://www.bom.gov.au/weather-and-climate/rain-radar-and-weather-maps}
 }
 \seealso{
 \code{\link[=get_available_radar]{get_available_radar()}}

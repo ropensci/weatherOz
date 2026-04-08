@@ -19,7 +19,7 @@
 #'
 #' @references
 #' Australian Bureau of Meteorology (BOM) radar image
-#'   <http://www.bom.gov.au/australia/radar/>.
+#'   <https://www.bom.gov.au/weather-and-climate/rain-radar-and-weather-maps>.
 #'
 #' @examplesIf interactive()
 #'
@@ -140,7 +140,7 @@ get_available_radar <- function(radar_id = "all") {
 #'
 #' @references
 #' Australian Bureau of Meteorology (\acronym{BOM}) radar images\cr
-#'   <http://www.bom.gov.au/australia/radar/>
+#'   <https://www.bom.gov.au/weather-and-climate/rain-radar-and-weather-maps>
 #'
 #' @examplesIf interactive()
 #'

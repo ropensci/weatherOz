@@ -116,8 +116,8 @@ A second family of functions retrieve information pertaining to satellite and ra
 
 ### Using {weatherOz} to retrieve BOM satellite imagery
 
-{weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](http://www.bom.gov.au/australia/satellite/about_images.shtml#ir), ii.)
-[Visible images](http://www.bom.gov.au/australia/satellite/about_images.shtml#vis) and iii.) [Clouds/surface composite](http://www.bom.gov.au/australia/satellite/about_images.shtml#cloud).
+{weatherOz} provides functionality to retrieve high-definition GeoTIFF satellite imagery provided by BOM through public FTP with the following types of imagery being available: i.) [Infrared images](https://www.bom.gov.au/resources/learn-and-explore/radar-and-equipment-knowledge-centre), ii.)
+[Visible images](https://www.bom.gov.au/resources/learn-and-explore/radar-and-equipment-knowledge-centre) and iii.) [Clouds/surface composite](https://www.bom.gov.au/resources/learn-and-explore/radar-and-equipment-knowledge-centre).
 
 #### Working with Satellite Imagery
 
@@ -236,13 +236,13 @@ plot(y)
 
 ## References
 
-[Australian Bureau of Meteorology (BOM) Weather Data Services](http://www.bom.gov.au/catalogue/data-feeds.shtml)
+[Australian Bureau of Meteorology (BOM) Weather Data Services](https://www.bom.gov.au/catalogue/data-feeds.shtml)
 
-[Australian Bureau of Meteorology (BOM) FTP Public Products](http://www.bom.gov.au/catalogue/anon-ftp.shtml)
+[Australian Bureau of Meteorology (BOM) FTP Public Products](https://www.bom.gov.au/catalogue/anon-ftp.shtml)
 
-[Australian Bureau of Meteorology (BOM) Weather Data Services Observation of Rainfall](http://www.bom.gov.au/climate/how/observations/rain-measure.shtml)
+[Australian Bureau of Meteorology (BOM) Weather Data Services Observation of Rainfall](https://www.bom.gov.au/climate/how/observations/rain-measure.shtml)
 
-[Australian Bureau of Meteorology (BOM) High-definition satellite images](http://www.bom.gov.au/australia/satellite/index.shtml)
+[Australian Bureau of Meteorology (BOM) High-definition satellite images](https://www.bom.gov.au/australia/satellite/index.shtml)
 
 ## Appendix 1 - Output From get_precis_forecast()
 

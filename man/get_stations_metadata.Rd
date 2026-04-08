@@ -124,8 +124,8 @@ get_stations_metadata(api_key = "your_api_key")
 \references{
 Station location and other metadata are sourced from the Australian Bureau of
 Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
-\url{http://www.bom.gov.au/climate/cdo/about/site-num.shtml} and
-\url{http://www.bom.gov.au/climate/data/lists_by_element/stations.txt} and the
+\url{https://www.bom.gov.au/climate/cdo/about/site-num.shtml} and
+\url{https://www.bom.gov.au/climate/data/lists_by_element/stations.txt} and the
 \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \seealso{

@@ -37,7 +37,7 @@ print.weatherOz_tbl <- function(x,
     )
     .stylecat("  Please note information at the foot of\n")
     for (i in product_id) {
-      .stylecat("  <http://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
+      .stylecat("  <https://www.bom.gov.au/cgi-bin/wrap_fwo.pl?",
                 i,
                 ".html>,\n")
     }
@@ -50,7 +50,7 @@ print.weatherOz_tbl <- function(x,
     )
     .stylecat(
       "  Also see \n",
-      "  <http://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>",
+      "  <https://www.bom.gov.au/catalogue/observations/about-coastal-observations.shtml>",
       ".\n"
     )
     .stylecat("  ",
@@ -75,14 +75,14 @@ print.weatherOz_tbl <- function(x,
       " can be found at:\n"
     )
     for (s in state) {
-      .stylecat("  <http://www.bom.gov.au/",
+      .stylecat("  <https://www.bom.gov.au/",
 
                 tolower(s),
                 "/forecasts/state.shtml>\n")
     }
     .stylecat(
       "  Please note information at the page \n",
-      "  <http://www.bom.gov.au/catalogue/data-feeds.shtml#precis>.\n",
+      "  <https://www.bom.gov.au/catalogue/data-feeds.shtml#precis>.\n",
       "  ",
       strrep("-", 80),
       "  \n"

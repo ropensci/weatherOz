@@ -57,7 +57,7 @@ parse_coastal_forecast(state = "QLD", filepath = tempdir())
 }
 \references{
 Forecast data come from Australian Bureau of Meteorology (BOM) Weather Data
-Services\cr \url{http://www.bom.gov.au/catalogue/data-feeds.shtml}.
+Services\cr \url{https://www.bom.gov.au/catalogue/data-feeds.shtml}.
 
 Location data and other metadata come from the \acronym{BOM} anonymous
 \acronym{FTP} server with spatial data \cr

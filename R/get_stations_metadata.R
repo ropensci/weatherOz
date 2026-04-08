@@ -101,8 +101,8 @@
 #' @references
 #' Station location and other metadata are sourced from the Australian Bureau of
 #'   Meteorology (\acronym{BOM}) webpage, Bureau of Meteorology Site Numbers:\cr
-#'   <http://www.bom.gov.au/climate/cdo/about/site-num.shtml> and
-#'   <http://www.bom.gov.au/climate/data/lists_by_element/stations.txt> and the
+#'   <https://www.bom.gov.au/climate/cdo/about/site-num.shtml> and
+#'   <https://www.bom.gov.au/climate/data/lists_by_element/stations.txt> and the
 #'   \acronym{DPIRD} Weather 2.0 \acronym{API}.
 #'
 #' @author Adam H. Sparks, \email{adamhsparks@@gmail.com}

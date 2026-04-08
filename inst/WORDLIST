@@ -157,6 +157,7 @@ erosionConditionYearToDate
 erosionConditionYearToDateDays
 erosionConditionYearToDateMinutes
 erosionConditionYearToDateStartTime
+erroring
 et
 etoShortCrop
 etoTallCrop
@@ -200,6 +201,7 @@ hh
 kilometres
 licence
 licenced
+lifecycle
 locationforecast
 magick
 mailR
@@ -228,7 +230,9 @@ relativeHumidityMax
 relativeHumidityMaxTime
 relativeHumidityMin
 relativeHumidityMinTime
+revalidation
 richardsonUnits
+schemas
 soilTemperature
 soilTemperatureAvg
 soilTemperatureMax

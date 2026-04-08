@@ -32,7 +32,7 @@
 #'
 #' @references
 #' Forecast data come from Australian Bureau of Meteorology (BOM) Weather Data
-#'   Services \cr <http://www.bom.gov.au/catalogue/data-feeds.shtml>.
+#'   Services \cr <https://www.bom.gov.au/catalogue/data-feeds.shtml>.
 #'
 #' And also,
 #'

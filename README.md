@@ -29,7 +29,7 @@ and Regional Development
 API](https://www.longpaddock.qld.gov.au/silo/), the [Norwegian
 Meteorological Institute](https://www.met.no/) and the Australian
 Government Bureau of Meteorology’s (BOM) [FTP
-server](http://www.bom.gov.au/catalogue/anon-ftp.shtml).
+server](https://www.bom.gov.au/catalogue/anon-ftp.shtml).
 
 The package queries the APIs or an FTP server and returns data as a data
 frame or radar and satellite imagery in your R session. Observation data
@@ -204,12 +204,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2026-02-05      0.9              25
-#> 2:     11.7              25 254.5 m 2026-02-05      0.0              25
-#> 3:      7.8              25 254.5 m 2026-02-05      0.0              25
-#> 4:     10.6              25 254.5 m 2026-02-05      0.0              25
-#> 5:     13.3              25 254.5 m 2026-02-05      0.0              25
-#> 6:     14.7              25 254.5 m 2026-02-05      1.7              25
+#> 1:      9.8              25 254.5 m 2026-04-08      0.9              25
+#> 2:     11.7              25 254.5 m 2026-04-08      0.0              25
+#> 3:      7.8              25 254.5 m 2026-04-08      0.0              25
+#> 4:     10.6              25 254.5 m 2026-04-08      0.0              25
+#> 5:     13.3              25 254.5 m 2026-04-08      0.0              25
+#> 6:     14.7              25 254.5 m 2026-04-08      1.7              25
 ```
 
 ## Example 3
@@ -234,28 +234,28 @@ names(perth_forecast)
 head(perth_forecast$data)
 #>                   time air_temperature relative_humidity wind_speed
 #>                 <POSc>           <num>             <num>      <num>
-#> 1: 2026-02-05 19:00:00            27.2              31.0        3.2
-#> 2: 2026-02-05 20:00:00            29.6              26.4        2.9
-#> 3: 2026-02-05 21:00:00            31.7              22.2        2.8
-#> 4: 2026-02-05 22:00:00            33.3              18.9        3.3
-#> 5: 2026-02-05 23:00:00            34.3              16.8        4.6
-#> 6: 2026-02-06 00:00:00            34.0              17.6        5.5
+#> 1: 2026-04-08 17:00:00            16.7              68.6        1.9
+#> 2: 2026-04-08 18:00:00            18.6              61.8        2.6
+#> 3: 2026-04-08 19:00:00            19.8              57.2        3.3
+#> 4: 2026-04-08 20:00:00            20.5              52.4        3.3
+#> 5: 2026-04-08 21:00:00            20.5              53.3        3.6
+#> 6: 2026-04-08 22:00:00            20.6              52.8        4.0
 #>    wind_from_direction cloud_area_fraction air_pressure_at_sea_level
 #>                  <num>               <num>                     <num>
-#> 1:               107.3                   0                    1019.4
-#> 2:               116.3                   0                    1018.4
-#> 3:               121.9                   0                    1017.2
-#> 4:               133.0                   0                    1016.1
-#> 5:               153.8                   0                    1015.2
-#> 6:               183.7                   0                    1014.4
-#>    precipitation_amount  symbol_code
-#>                   <num>       <char>
-#> 1:                    0 clearsky_day
-#> 2:                    0 clearsky_day
-#> 3:                    0 clearsky_day
-#> 4:                    0 clearsky_day
-#> 5:                    0 clearsky_day
-#> 6:                    0 clearsky_day
+#> 1:               141.6                 6.2                    1017.2
+#> 2:               184.1                 4.7                    1017.2
+#> 3:               217.1                53.9                    1016.8
+#> 4:               229.0                51.6                    1016.5
+#> 5:               236.9                41.4                    1015.8
+#> 6:               233.6                37.5                    1015.3
+#>    precipitation_amount      symbol_code
+#>                   <num>           <char>
+#> 1:                    0     clearsky_day
+#> 2:                    0     clearsky_day
+#> 3:                    0 partlycloudy_day
+#> 4:                    0 partlycloudy_day
+#> 5:                    0 partlycloudy_day
+#> 6:                    0         fair_day
 
 # Check metadata
 perth_forecast$metadata$request$longitude
@@ -271,7 +271,7 @@ perth_forecast$metadata$status_code
 #> [1] 200
 
 perth_forecast$metadata$expires
-#> [1] "2026-02-05 11:54:09 AWST"
+#> [1] "2026-04-08 09:31:00 AWST"
 ```
 
 ## Notes on Data and API Endpoints

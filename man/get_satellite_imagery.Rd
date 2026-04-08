@@ -87,7 +87,7 @@ plot(imagery)
 }
 \references{
 Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
-images \cr \url{http://www.bom.gov.au/australia/satellite/index.shtml}.
+images \cr \url{https://www.bom.gov.au/australia/satellite/index.shtml}.
 }
 \seealso{
 \code{\link[=get_available_imagery]{get_available_imagery()}}

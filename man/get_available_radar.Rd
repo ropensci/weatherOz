@@ -36,7 +36,7 @@ imagery
 }
 \references{
 Australian Bureau of Meteorology (BOM) radar image
-\url{http://www.bom.gov.au/australia/radar/}.
+\url{https://www.bom.gov.au/weather-and-climate/rain-radar-and-weather-maps}.
 }
 \seealso{
 Other BOM: 

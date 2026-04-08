@@ -41,7 +41,7 @@
 #'
 #' @references
 #' Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
-#'   images <http://www.bom.gov.au/australia/satellite/index.shtml>
+#'   images <https://www.bom.gov.au/australia/satellite/index.shtml>
 #'
 #' @examplesIf interactive()
 #' # Check availability of AHI VIS (true colour) / IR (Ch13 greyscale) composite
@@ -130,7 +130,7 @@ get_available_imagery <- function(product_id = "all") {
 #'
 #' @references
 #' Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
-#'   images \cr <http://www.bom.gov.au/australia/satellite/index.shtml>.
+#'   images \cr <https://www.bom.gov.au/australia/satellite/index.shtml>.
 #'
 #' @examplesIf interactive()
 #' # Fetch AHI VIS (true colour) / IR (Ch13 greyscale) composite 1km FD
