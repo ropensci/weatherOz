@@ -111,6 +111,7 @@ test_that("get_stations_metadata() functions properly for which_api = 'DPIRD'
 })
 
 test_that("get_station_metata() functions properly for which_api = 'all'", {
+  skip_on_cran()
   vcr::use_cassette("metadata_all_cassette", {
     skip_if_offline()
     x <-
@@ -122,7 +123,12 @@ test_that("get_station_metata() functions properly for which_api = 'all'", {
 
   expect_s3_class(x, "data.table")
   expect_identical(ncol(x), 11L)
-  expect_true(nrow(x) >= 3800L && nrow(x) <= 3900L) # Allow some flexibility for station changes
+  # The count depends on the live BOM station list (not in the cassette) and
+  # drifts over time, so check behaviour rather than a fixed count.
+  expect_gt(nrow(x), 3000L)
+  expect_true(all(x$status == "open"))
+  expect_true(any(grepl("Bureau of Meteorology", x$source, fixed = TRUE)))
+  expect_true(any(grepl("DPIRD", x$source, fixed = TRUE)))
   expect_named(
     x,
     c(
@@ -142,6 +148,7 @@ test_that("get_station_metata() functions properly for which_api = 'all'", {
 })
 
 test_that("get_stations_metadata() fuzzy matches station names", {
+  skip_on_cran()
   vcr::use_cassette("metadata_all_cassette", {
     skip_if_offline()
     x <-
@@ -176,6 +183,7 @@ test_that("get_stations_metadata() fuzzy matches station names", {
 })
 
 test_that("get_stations_metadata() matches station_codes", {
+  skip_on_cran()
   vcr::use_cassette("metadata_all_cassette", {
     skip_if_offline()
     x <-
