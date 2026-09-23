@@ -19,6 +19,15 @@
   from the BOM FTP server, now `skip_on_cran()` so an unreachable FTP server
   cannot fail the CRAN check.
 
+## Documentation
+
+* The README no longer lists agriculture bulletins among the BOM data
+  available. `get_ag_bulletin()` and `parse_ag_bulletin()` were removed in
+  3.0.0.
+* The package website provides an `llms.txt` for LLM-based agents, with a
+  Markdown version of every page:
+  <https://docs.ropensci.org/weatherOz/llms.txt>.
+
 # weatherOz 3.0.0
 
 **Major release** - New forecast functionality, breaking changes to wind data structure, and critical bug fixes

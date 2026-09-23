@@ -45,9 +45,9 @@ about how the data is prepared and which climate data are available.
 Forecast data with up to 9 days ahead are available from the [MET
 Weather API Locationforecast
 endpoint](https://api.met.no/weatherapi/locationforecast/2.0/documentation)
-for any location in Australia. Agriculture bulletins, radar imagery,
-satellite imagery and seven-day forecasts are available from the Bureau
-of Meteorology (BOM) via an anonymous FTP server.
+for any location in Australia. Radar imagery, satellite imagery and
+seven-day forecasts are available from the Bureau of Meteorology (BOM)
+via an anonymous FTP server.
 
 Access to DPIRD API requires an API key. Apply for an API key by
 submitting the [DPIRD API registration
@@ -204,12 +204,12 @@ head(wd)
 #> 6:    150.05   -27.85  2022    10     6 2022-10-06     24.4              25
 #>    air_tmin air_tmin_source  elev_m  extracted rainfall rainfall_source
 #>       <num>           <int>  <char>     <Date>    <num>           <int>
-#> 1:      9.8              25 254.5 m 2026-04-08      0.9              25
-#> 2:     11.7              25 254.5 m 2026-04-08      0.0              25
-#> 3:      7.8              25 254.5 m 2026-04-08      0.0              25
-#> 4:     10.6              25 254.5 m 2026-04-08      0.0              25
-#> 5:     13.3              25 254.5 m 2026-04-08      0.0              25
-#> 6:     14.7              25 254.5 m 2026-04-08      1.7              25
+#> 1:      9.8              25 254.5 m 2026-09-23      0.9              25
+#> 2:     11.7              25 254.5 m 2026-09-23      0.0              25
+#> 3:      7.8              25 254.5 m 2026-09-23      0.0              25
+#> 4:     10.6              25 254.5 m 2026-09-23      0.0              25
+#> 5:     13.3              25 254.5 m 2026-09-23      0.0              25
+#> 6:     14.7              25 254.5 m 2026-09-23      1.7              25
 ```
 
 ## Example 3
@@ -234,28 +234,28 @@ names(perth_forecast)
 head(perth_forecast$data)
 #>                   time air_temperature relative_humidity wind_speed
 #>                 <POSc>           <num>             <num>      <num>
-#> 1: 2026-04-08 17:00:00            16.7              68.6        1.9
-#> 2: 2026-04-08 18:00:00            18.6              61.8        2.6
-#> 3: 2026-04-08 19:00:00            19.8              57.2        3.3
-#> 4: 2026-04-08 20:00:00            20.5              52.4        3.3
-#> 5: 2026-04-08 21:00:00            20.5              53.3        3.6
-#> 6: 2026-04-08 22:00:00            20.6              52.8        4.0
+#> 1: 2026-09-23 21:00:00            19.4              59.9        4.2
+#> 2: 2026-09-23 22:00:00            19.4              59.7        4.2
+#> 3: 2026-09-23 23:00:00            19.3              59.3        4.1
+#> 4: 2026-09-24 00:00:00            18.8              59.9        4.0
+#> 5: 2026-09-24 01:00:00            18.1              61.4        3.7
+#> 6: 2026-09-24 02:00:00            17.3              67.3        3.0
 #>    wind_from_direction cloud_area_fraction air_pressure_at_sea_level
 #>                  <num>               <num>                     <num>
-#> 1:               141.6                 6.2                    1017.2
-#> 2:               184.1                 4.7                    1017.2
-#> 3:               217.1                53.9                    1016.8
-#> 4:               229.0                51.6                    1016.5
-#> 5:               236.9                41.4                    1015.8
-#> 6:               233.6                37.5                    1015.3
+#> 1:               251.1                27.3                    1019.8
+#> 2:               250.1                25.8                    1019.5
+#> 3:               246.9                28.9                    1019.3
+#> 4:               242.5                53.1                    1019.6
+#> 5:               237.0                50.8                    1020.2
+#> 6:               232.7                32.8                    1020.8
 #>    precipitation_amount      symbol_code
 #>                   <num>           <char>
-#> 1:                    0     clearsky_day
-#> 2:                    0     clearsky_day
-#> 3:                    0 partlycloudy_day
+#> 1:                    0         fair_day
+#> 2:                    0         fair_day
+#> 3:                    0         fair_day
 #> 4:                    0 partlycloudy_day
 #> 5:                    0 partlycloudy_day
-#> 6:                    0         fair_day
+#> 6:                    0       fair_night
 
 # Check metadata
 perth_forecast$metadata$request$longitude
@@ -271,7 +271,7 @@ perth_forecast$metadata$status_code
 #> [1] 200
 
 perth_forecast$metadata$expires
-#> [1] "2026-04-08 09:31:00 AWST"
+#> [1] "2026-09-23 13:40:11 AWST"
 ```
 
 ## Notes on Data and API Endpoints
