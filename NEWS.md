@@ -1,3 +1,33 @@
+# weatherOz 3.0.1
+
+## Bug fixes
+
+* Fixed CRAN check ERRORs in `test-find_stations_in.R`. The test asserted a fixed
+  station count (650 to 700) for the South West Agricultural Region, but the count
+  depends on the live BOM station list, which is fetched with
+  `utils::download.file()` and is not captured by the `vcr` cassette. The test now
+  checks that every returned station lies inside the polygon and that a
+  substantial number is returned, instead of a fixed count. The same change is
+  applied to the bounding-box test.
+* The `get_stations_metadata(which_api = "all")` test had the same fixed-count
+  assertion (3800 to 3900) and now checks behaviour as well.
+* Tests for `find_stations_in()`, `find_forecast_towns()` and the
+  `get_stations_metadata()` tests that reach the BOM station list now
+  `skip_on_cran()` and `skip_if_offline()`, in line with the other tests that
+  reach the BOM servers.
+* The `get_available_imagery()` and `get_satellite_imagery()` tests, which read
+  from the BOM FTP server, now `skip_on_cran()` so an unreachable FTP server
+  cannot fail the CRAN check.
+
+## Documentation
+
+* The README no longer lists agriculture bulletins among the BOM data
+  available. `get_ag_bulletin()` and `parse_ag_bulletin()` were removed in
+  3.0.0.
+* The package website provides an `llms.txt` for LLM-based agents, with a
+  Markdown version of every page:
+  <https://docs.ropensci.org/weatherOz/llms.txt>.
+
 # weatherOz 3.0.0
 
 **Major release** - New forecast functionality, breaking changes to wind data structure, and critical bug fixes

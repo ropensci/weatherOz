@@ -1,43 +1,45 @@
-# CRAN Submission - weatherOz 3.0.0
+# CRAN Submission - weatherOz 3.0.1
 
-This is a major release with new weather forecast functionality and breaking changes to wind data structure.
+This is a patch release to fix the check ERRORs reported for 3.0.0 on
+r-devel (Linux and Windows), r-patched Linux, r-release Linux and r-oldrel
+Windows.
 
-## Major changes
-### New features
-* Added MET Norway (Norwegian Meteorological Institute) forecast support with `get_metno_forecast()` and `get_metno_daily_forecast()`
-* New vignette documenting forecast functionality and combining historical and forecast data
-* Three new helper functions for forecast data manipulation
+## What was wrong
 
-### Breaking changes
-* Wind data structure in `get_dpird_summaries()` changed from long to wide format
-* Wind column names now include `_3m` and `_10m` suffixes (e.g., `wind_max_speed_3m`, `wind_max_speed_10m`)
-* Removed `wind_height` column
-* Added new wind columns: `wind_max_date` and `wind_max_time_of_day` for each height
-* Removed `get_ag_bulletin()` and `parse_ag_bulletin()` from the package in v3.0.0 after being defunct in v2.x because BOM discontinued the agricultural bulletin service
+`test-find_stations_in.R` asserted a fixed station count for a test polygon.
+The count depends on the live BOM station list, which the package downloads
+with `utils::download.file()` and is not recorded by the `vcr` cassette used
+in that test. The list changed and the count moved outside the asserted range.
 
-### Bug fixes
-* Fixed critical timezone bug causing one-day gap when combining historical and forecast data
-* Fixed wind time column parsing for mixed date/time formats
+## What changed
+
+* The tests now check behaviour (every returned station lies inside the
+  polygon; a substantial number is returned) instead of a fixed count.
+* The `get_stations_metadata(which_api = "all")` test carried the same kind
+  of fixed-count assertion and is changed the same way.
+* The `find_stations_in()`, `find_forecast_towns()` and BOM-reaching
+  `get_stations_metadata()` tests now `skip_on_cran()` and `skip_if_offline()`,
+  in line with the other tests in the package that reach the BOM servers.
+* The satellite imagery tests, which read from the BOM FTP server, now
+  `skip_on_cran()` as well. No test that reaches the BOM servers runs on
+  CRAN.
+* README: removed a reference to the agriculture bulletins, which were
+  removed in 3.0.0.
+* No changes to package code.
 
 ## Test environments
-* local macOS Sequoia 15.2, R 4.4.3
-* GitHub Actions (ubuntu-latest, windows-latest, macOS-latest), R release and devel
+
+* local macOS, R release
+* win-builder: R-devel, R-release and R-oldrelease
+* R-hub: Linux R-devel, Windows R-devel
+* GitHub Actions: macOS release, Windows release, Ubuntu devel, release
+  and oldrel-1
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs.
 
-## Breaking changes justification
-The wind data structure change is a breaking change but necessary:
-1. Previous long format with mixed heights per row caused data interpretation issues
-2. Aligns with expectations i.e., one row per observation with consistent column names
+0 errors | 0 warnings | 0 notes on win-builder R-devel and R-release.
 
-The agricultural bulletin function removal is also a breaking change because:
-1. The BOM service has been discontinued and URLs now return HTTP 403
-2. Functions were already defunct in v2.0.2, so v3.0.0 completes the lifecycle transition to removal
-3. Removing these endpoints eliminates a CRAN URL feasibility issue
-
-## Additional notes
-* All tests pass successfully
-* New vignette provides examples for forecast functionality
-* Migration guide included in NEWS.md for users upgrading from v2.x
-* `vignettes/weatherOz_for_BOM.Rmd` now includes a short historical note about agricultural bulletin function removal
+On win-builder R-oldrelease, the incoming URL check reported
+www.bom.gov.au URLs as 403 Forbidden. These URLs are valid and open in a
+browser; the Bureau of Meteorology website rejects automated requests.
+The same URLs passed the check on R-devel and R-release.
