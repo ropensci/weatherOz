@@ -20,8 +20,9 @@ asserted range.
   of fixed-count assertion and is changed the same way.
 * The `find_stations_in()`, `find_forecast_towns()` and BOM-reaching
   `get_stations_metadata()` tests now `skip_on_cran()` and `skip_if_offline()`,
-  in line with the other tests in the package that reach the BOM servers. No
-  test requires internet access on CRAN.
+  in line with the other tests in the package that reach the BOM servers.
+* The satellite imagery tests, which read from the BOM FTP server, now
+  `skip_on_cran()` as well. No test requires internet access on CRAN.
 * No changes to package code.
 
 ## Test environments

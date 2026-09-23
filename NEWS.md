@@ -15,6 +15,9 @@
   `get_stations_metadata()` tests that reach the BOM station list now
   `skip_on_cran()` and `skip_if_offline()`, in line with the other tests that
   reach the BOM servers.
+* The `get_available_imagery()` and `get_satellite_imagery()` tests, which read
+  from the BOM FTP server, now `skip_on_cran()` so an unreachable FTP server
+  cannot fail the CRAN check.
 
 # weatherOz 3.0.0
 
