@@ -109,34 +109,34 @@ wagga_stn <- find_nearby_stations(
 
 }
 \seealso{
-Other DPIRD: 
+Other DPIRD:
 \code{\link{dpird_extreme_weather_values}},
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
-\code{\link{find_stations_in}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_availability}()},
-\code{\link{get_dpird_extremes}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_stations_metadata}()}
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_availability]{get_dpird_availability()}},
+\code{\link[=get_dpird_extremes]{get_dpird_extremes()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}}
 
-Other SILO: 
-\code{\link{find_stations_in}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_patched_point}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_stations_metadata}()},
+Other SILO:
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_patched_point]{get_patched_point()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}},
 \code{\link{silo_daily_values}}
 
-Other metadata: 
-\code{\link{find_forecast_towns}()},
-\code{\link{find_stations_in}()},
-\code{\link{get_available_imagery}()},
-\code{\link{get_available_radar}()},
-\code{\link{get_dpird_availability}()},
-\code{\link{get_stations_metadata}()}
+Other metadata:
+\code{\link[=find_forecast_towns]{find_forecast_towns()}},
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_available_imagery]{get_available_imagery()}},
+\code{\link[=get_available_radar]{get_available_radar()}},
+\code{\link[=get_dpird_availability]{get_dpird_availability()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam H.

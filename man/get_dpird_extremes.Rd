@@ -116,32 +116,32 @@ xtreme <- get_dpird_extremes(
 
 }
 \seealso{
-Other DPIRD: 
+Other DPIRD:
 \code{\link{dpird_extreme_weather_values}},
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}},
-\code{\link{find_nearby_stations}()},
-\code{\link{find_stations_in}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_availability}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_stations_metadata}()}
+\code{\link[=find_nearby_stations]{find_nearby_stations()}},
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_availability]{get_dpird_availability()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}}
 
-Other data fetching: 
-\code{\link{get_coastal_forecast}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_metno_daily_forecast}()},
-\code{\link{get_metno_forecast}()},
-\code{\link{get_patched_point}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_precis_forecast}()},
-\code{\link{get_radar_imagery}()},
-\code{\link{get_satellite_imagery}()}
+Other data fetching:
+\code{\link[=get_coastal_forecast]{get_coastal_forecast()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_metno_daily_forecast]{get_metno_daily_forecast()}},
+\code{\link[=get_metno_forecast]{get_metno_forecast()}},
+\code{\link[=get_patched_point]{get_patched_point()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_precis_forecast]{get_precis_forecast()}},
+\code{\link[=get_radar_imagery]{get_radar_imagery()}},
+\code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam

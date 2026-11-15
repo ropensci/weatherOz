@@ -16,17 +16,17 @@ A data.table with hourly forecast data
 Convert MET Weather API timeseries to data.table
 }
 \seealso{
-Other METNO: 
-\code{\link{get_metno_daily_forecast}()},
-\code{\link{get_metno_forecast}()},
-\code{\link{metno_get_dominant_symbol}()},
-\code{\link{metno_resample_data_table}()}
+Other METNO:
+\code{\link[=get_metno_daily_forecast]{get_metno_daily_forecast()}},
+\code{\link[=get_metno_forecast]{get_metno_forecast()}},
+\code{\link[=metno_get_dominant_symbol]{metno_get_dominant_symbol()}},
+\code{\link[=metno_resample_data_table]{metno_resample_data_table()}}
 
-Other parse: 
-\code{\link{metno_get_dominant_symbol}()},
-\code{\link{metno_resample_data_table}()},
-\code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()}
+Other parse:
+\code{\link[=metno_get_dominant_symbol]{metno_get_dominant_symbol()}},
+\code{\link[=metno_resample_data_table]{metno_resample_data_table()}},
+\code{\link[=parse_coastal_forecast]{parse_coastal_forecast()}},
+\code{\link[=parse_precis_forecast]{parse_precis_forecast()}}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}
