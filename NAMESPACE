@@ -32,20 +32,24 @@ export(plot)
 export(write_apsim_met)
 importFrom(apsimx,write_apsim_met)
 importFrom(crul,HttpClient)
-importFrom(curl,curl)
-importFrom(curl,handle_setopt)
-importFrom(curl,has_internet)
-importFrom(curl,new_handle)
-importFrom(data.table,"%notin%")
-importFrom(data.table,":=")
-importFrom(data.table,.BY)
-importFrom(data.table,.EACHI)
-importFrom(data.table,.GRP)
-importFrom(data.table,.I)
-importFrom(data.table,.N)
-importFrom(data.table,.NGRP)
-importFrom(data.table,.SD)
-importFrom(data.table,data.table)
+importFrom(curl,
+  curl,
+  handle_setopt,
+  has_internet,
+  new_handle
+)
+importFrom(data.table,
+  "%notin%",
+  ":=",
+  .BY,
+  .EACHI,
+  .GRP,
+  .I,
+  .N,
+  .NGRP,
+  .SD,
+  data.table
+)
 importFrom(jsonlite,fromJSON)
 importFrom(lubridate,now)
 importFrom(terra,plot)

@@ -19,19 +19,19 @@ to \code{get_dpird_minute()}'s \var{values} argument taken from the
 documentation for the \acronym{DPIRD} Weather 2.0 \acronym{API}.
 }
 \seealso{
-Other DPIRD: 
+Other DPIRD:
 \code{\link{dpird_extreme_weather_values}},
 \code{\link{dpird_summary_values}},
-\code{\link{find_nearby_stations}()},
-\code{\link{find_stations_in}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_availability}()},
-\code{\link{get_dpird_extremes}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_stations_metadata}()}
+\code{\link[=find_nearby_stations]{find_nearby_stations()}},
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_availability]{get_dpird_availability()}},
+\code{\link[=get_dpird_extremes]{get_dpird_extremes()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}}
 
-Other data: 
+Other data:
 \code{\link{dpird_extreme_weather_values}},
 \code{\link{dpird_summary_values}},
 \code{\link{silo_daily_values}}

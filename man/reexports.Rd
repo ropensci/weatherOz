@@ -7,10 +7,10 @@
 \alias{plot}
 \title{Objects exported from other packages}
 \seealso{
-Other APSIM: 
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_patched_point_apsim}()}
+Other APSIM:
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}}
 }
 \concept{APSIM}
 \keyword{internal}
@@ -19,8 +19,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{apsimx}{\code{\link[apsimx]{write_apsim_met}}}
+  \item{apsimx}{\code{\link[apsimx:write_apsim_met]{write_apsim_met()}}}
 
-  \item{terra}{\code{\link[terra]{plot}}}
+  \item{terra}{\code{\link[terra:plot]{plot()}}}
 }}
 

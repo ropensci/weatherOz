@@ -50,30 +50,30 @@ Australian Bureau of Meteorology (\acronym{BOM}) radar images\cr
 \seealso{
 \code{\link[=get_available_radar]{get_available_radar()}}
 
-Other BOM: 
-\code{\link{find_forecast_towns}()},
-\code{\link{get_available_imagery}()},
-\code{\link{get_available_radar}()},
-\code{\link{get_coastal_forecast}()},
-\code{\link{get_precis_forecast}()},
-\code{\link{get_satellite_imagery}()},
-\code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()}
+Other BOM:
+\code{\link[=find_forecast_towns]{find_forecast_towns()}},
+\code{\link[=get_available_imagery]{get_available_imagery()}},
+\code{\link[=get_available_radar]{get_available_radar()}},
+\code{\link[=get_coastal_forecast]{get_coastal_forecast()}},
+\code{\link[=get_precis_forecast]{get_precis_forecast()}},
+\code{\link[=get_satellite_imagery]{get_satellite_imagery()}},
+\code{\link[=parse_coastal_forecast]{parse_coastal_forecast()}},
+\code{\link[=parse_precis_forecast]{parse_precis_forecast()}}
 
-Other data fetching: 
-\code{\link{get_coastal_forecast}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_extremes}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_metno_daily_forecast}()},
-\code{\link{get_metno_forecast}()},
-\code{\link{get_patched_point}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_precis_forecast}()},
-\code{\link{get_satellite_imagery}()}
+Other data fetching:
+\code{\link[=get_coastal_forecast]{get_coastal_forecast()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_extremes]{get_dpird_extremes()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_metno_daily_forecast]{get_metno_daily_forecast()}},
+\code{\link[=get_metno_forecast]{get_metno_forecast()}},
+\code{\link[=get_patched_point]{get_patched_point()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_precis_forecast]{get_precis_forecast()}},
+\code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
 }
 \author{
 Dean Marchiori, \email{deanmarchiori@gmail.com}

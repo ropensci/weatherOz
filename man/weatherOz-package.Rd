@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Rodrigo Pires \email{rodrigo.pires@dpird.wa.gov.au} (\href{https://orcid.org/0000-0001-7384-6849}{ORCID})
   \item Anna Hepworth \email{anna.hepworth@gmail.com} (\href{https://orcid.org/0000-0003-0204-6347}{ORCID})
   \item Rebecca O'Leary \email{bec.oleary@curtin.edu.au}
   \item Jonathan Carroll \email{rpkg@jcarroll.com.au} (\href{https://orcid.org/0000-0002-1404-5264}{ORCID})

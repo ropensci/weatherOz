@@ -61,23 +61,23 @@ Australian Bureau of Meteorology (\acronym{BOM}) high-definition satellite
 images \url{https://www.bom.gov.au/australia/satellite/index.shtml}
 }
 \seealso{
-Other BOM: 
-\code{\link{find_forecast_towns}()},
-\code{\link{get_available_radar}()},
-\code{\link{get_coastal_forecast}()},
-\code{\link{get_precis_forecast}()},
-\code{\link{get_radar_imagery}()},
-\code{\link{get_satellite_imagery}()},
-\code{\link{parse_coastal_forecast}()},
-\code{\link{parse_precis_forecast}()}
+Other BOM:
+\code{\link[=find_forecast_towns]{find_forecast_towns()}},
+\code{\link[=get_available_radar]{get_available_radar()}},
+\code{\link[=get_coastal_forecast]{get_coastal_forecast()}},
+\code{\link[=get_precis_forecast]{get_precis_forecast()}},
+\code{\link[=get_radar_imagery]{get_radar_imagery()}},
+\code{\link[=get_satellite_imagery]{get_satellite_imagery()}},
+\code{\link[=parse_coastal_forecast]{parse_coastal_forecast()}},
+\code{\link[=parse_precis_forecast]{parse_precis_forecast()}}
 
-Other metadata: 
-\code{\link{find_forecast_towns}()},
-\code{\link{find_nearby_stations}()},
-\code{\link{find_stations_in}()},
-\code{\link{get_available_radar}()},
-\code{\link{get_dpird_availability}()},
-\code{\link{get_stations_metadata}()}
+Other metadata:
+\code{\link[=find_forecast_towns]{find_forecast_towns()}},
+\code{\link[=find_nearby_stations]{find_nearby_stations()}},
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_available_radar]{get_available_radar()}},
+\code{\link[=get_dpird_availability]{get_dpird_availability()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}}
 }
 \author{
 Adam H. Sparks, \email{adamhsparks@gmail.com}

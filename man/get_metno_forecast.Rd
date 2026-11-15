@@ -75,26 +75,26 @@ utils::head(forecast$data)
 
 }
 \seealso{
-Other METNO: 
-\code{\link{get_metno_daily_forecast}()},
-\code{\link{metno_get_dominant_symbol}()},
-\code{\link{metno_resample_data_table}()},
-\code{\link{metno_timeseries_to_data_table}()}
+Other METNO:
+\code{\link[=get_metno_daily_forecast]{get_metno_daily_forecast()}},
+\code{\link[=metno_get_dominant_symbol]{metno_get_dominant_symbol()}},
+\code{\link[=metno_resample_data_table]{metno_resample_data_table()}},
+\code{\link[=metno_timeseries_to_data_table]{metno_timeseries_to_data_table()}}
 
-Other data fetching: 
-\code{\link{get_coastal_forecast}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_extremes}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_metno_daily_forecast}()},
-\code{\link{get_patched_point}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_precis_forecast}()},
-\code{\link{get_radar_imagery}()},
-\code{\link{get_satellite_imagery}()}
+Other data fetching:
+\code{\link[=get_coastal_forecast]{get_coastal_forecast()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_extremes]{get_dpird_extremes()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_metno_daily_forecast]{get_metno_daily_forecast()}},
+\code{\link[=get_patched_point]{get_patched_point()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_precis_forecast]{get_precis_forecast()}},
+\code{\link[=get_radar_imagery]{get_radar_imagery()}},
+\code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}

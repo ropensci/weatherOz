@@ -19,16 +19,16 @@ to \code{get_patched_point()} and \code{get_data_drill()}'s \var{values} argumen
 taken from the documentation for the \acronym{SILO} \acronym{API}.
 }
 \seealso{
-Other SILO: 
-\code{\link{find_nearby_stations}()},
-\code{\link{find_stations_in}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_patched_point}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_stations_metadata}()}
+Other SILO:
+\code{\link[=find_nearby_stations]{find_nearby_stations()}},
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_patched_point]{get_patched_point()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}}
 
-Other data: 
+Other data:
 \code{\link{dpird_extreme_weather_values}},
 \code{\link{dpird_minute_values}},
 \code{\link{dpird_summary_values}}

@@ -184,29 +184,29 @@ and Software}, Volume 16/4, 309-330. DOI:
 }
 }
 \seealso{
-Other SILO: 
-\code{\link{find_nearby_stations}()},
-\code{\link{find_stations_in}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_stations_metadata}()},
+Other SILO:
+\code{\link[=find_nearby_stations]{find_nearby_stations()}},
+\code{\link[=find_stations_in]{find_stations_in()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_stations_metadata]{get_stations_metadata()}},
 \code{\link{silo_daily_values}}
 
-Other data fetching: 
-\code{\link{get_coastal_forecast}()},
-\code{\link{get_data_drill}()},
-\code{\link{get_data_drill_apsim}()},
-\code{\link{get_dpird_apsim}()},
-\code{\link{get_dpird_extremes}()},
-\code{\link{get_dpird_minute}()},
-\code{\link{get_dpird_summaries}()},
-\code{\link{get_metno_daily_forecast}()},
-\code{\link{get_metno_forecast}()},
-\code{\link{get_patched_point_apsim}()},
-\code{\link{get_precis_forecast}()},
-\code{\link{get_radar_imagery}()},
-\code{\link{get_satellite_imagery}()}
+Other data fetching:
+\code{\link[=get_coastal_forecast]{get_coastal_forecast()}},
+\code{\link[=get_data_drill]{get_data_drill()}},
+\code{\link[=get_data_drill_apsim]{get_data_drill_apsim()}},
+\code{\link[=get_dpird_apsim]{get_dpird_apsim()}},
+\code{\link[=get_dpird_extremes]{get_dpird_extremes()}},
+\code{\link[=get_dpird_minute]{get_dpird_minute()}},
+\code{\link[=get_dpird_summaries]{get_dpird_summaries()}},
+\code{\link[=get_metno_daily_forecast]{get_metno_daily_forecast()}},
+\code{\link[=get_metno_forecast]{get_metno_forecast()}},
+\code{\link[=get_patched_point_apsim]{get_patched_point_apsim()}},
+\code{\link[=get_precis_forecast]{get_precis_forecast()}},
+\code{\link[=get_radar_imagery]{get_radar_imagery()}},
+\code{\link[=get_satellite_imagery]{get_satellite_imagery()}}
 }
 \author{
 Rodrigo Pires, \email{rodrigo.pires@dpird.wa.gov.au}, and Adam
